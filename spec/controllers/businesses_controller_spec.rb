@@ -9,13 +9,6 @@ describe BusinessesController do
     { :name => "Test Business"}
   end
 
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # BusinesssController. Be sure to keep this updated too.
-  def valid_session
-    {}
-  end
-
   before(:each) do
     @user = FactoryGirl.create(:user)
     sign_in @user
