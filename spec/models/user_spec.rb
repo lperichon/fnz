@@ -100,4 +100,19 @@ describe User do
 
   end
 
+  describe "businesses" do
+    before(:each) do
+      @user = User.create!(@attr)
+      @user.businesses.create(:name => "Test Business")
+    end
+
+    it "should have businesses" do
+      @user.should respond_to(:encrypted_password)
+    end
+
+    it "should return a list of businesses" do
+      @user.businesses.should_not be_empty
+    end
+  end
+
 end
