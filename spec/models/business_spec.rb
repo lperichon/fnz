@@ -9,7 +9,7 @@ describe Business do
       :owner_id => @user.id
     }
   end
-  
+
   it "should create a new instance given a valid attribute" do
     Business.create!(@attr)
   end

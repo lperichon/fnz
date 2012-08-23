@@ -1,6 +1,13 @@
 <h3>Business</h3>
 <p>Name: <%= @business.name %></p>
+<p>Accounts:
+<ul>
+  <% @business.accounts.each do |account| %>
+  <li><%= account.name %></li>
+  <% end %>
+</ul>
+</p>
 
-
+<%= link_to 'Manage Accounts', business_accounts_path(@business) %> |
 <%= link_to 'Edit', edit_business_path(@business) %> |
 <%= link_to 'Back', businesses_path %>
