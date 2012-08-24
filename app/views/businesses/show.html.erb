@@ -8,6 +8,27 @@
 </ul>
 </p>
 
+<table>Transactions:
+  <thead>
+    <td>Type</td>
+    <td>Description</td>
+    <td>Amount</td>
+    <td>Source</td>
+    <td></td>
+  </thead>
+
+  <% @business.transactions.each do |transaction| %>
+    <tr>
+      <td><%= transaction.type %></td>
+      <td><%= transaction.description %></td>
+      <td><%= transaction.amount %></td>
+      <td><%= transaction.source.name %></td>
+      <td><%= link_to "Show", transaction_path(transaction) %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to "Add Transaction", new_transaction_path %> |
 <%= link_to 'Manage Accounts', business_accounts_path(@business) %> |
 <%= link_to 'Edit', edit_business_path(@business) %> |
 <%= link_to 'Back', businesses_path %>

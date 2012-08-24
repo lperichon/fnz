@@ -1,6 +1,8 @@
 class Account < ActiveRecord::Base
   belongs_to :business
 
+  has_many :transactions, :foreign_key => :source_id
+
   validates :name, :presence => true
   validates :business, :presence => true
 

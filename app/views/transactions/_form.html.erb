@@ -1,0 +1,31 @@
+<%= form_for(@transaction) do |f| %>
+    <% if @transaction.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
+
+          <ul>
+            <% @transaction.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <p><%= f.label :type %><br />
+      <%= f.radio_button :type, "Debit" %><%= label_tag(:type_debit, "Debit") %><%= f.radio_button :type, "Credit" %><%= label_tag(:type_credit, "Credit") %><%= f.radio_button :type, "Transfer" %><%= label_tag(:type_transfer, "Transfer") %></p>
+
+    <p><%= f.label :description %><br />
+      <%= f.text_field :description %></p>
+
+    <p><%= f.label :amount %><br />
+      <%= f.text_field :amount %></p>
+
+    <p><%= f.label :business %><br />
+      <%= f.collection_select(:business_id, current_user.businesses, :id, :name, :prompt => 'Please select business') %></p>
+
+    <p><%= f.label :source %><br />
+      <%= f.collection_select(:source_id, Account.all, :id, :name, :prompt => 'Please select source account') %></p>
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>

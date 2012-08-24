@@ -1,6 +1,7 @@
 class Business < ActiveRecord::Base
   belongs_to :owner, :class_name => "User"
   has_many :accounts
+  has_many :transactions
 
   validates :name, :presence => true
   validates :owner, :presence => true

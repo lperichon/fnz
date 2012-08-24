@@ -1,0 +1,12 @@
+<h3>Transactions</h3>
+<ul class="transactions">
+  <% @transactions.each do |transaction| %>
+    <li>
+      <%= link_to transaction.description, transaction_path(transaction) %>
+    </li>
+  <% end %>
+</ul>
+
+<br />
+
+<%= link_to 'New transaction', new_transaction_path %>
