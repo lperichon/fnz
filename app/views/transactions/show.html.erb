@@ -4,7 +4,7 @@
 <p>Source: <%= @transaction.source.name %></p>
 <p>Description: <%= @transaction.description %></p>
 <p>Amount: <%= @transaction.amount %></p>
-
+<p>Date: <%= @transaction.transaction_at %></p>
 
 <%= link_to 'Edit', edit_transaction_path(@transaction) %> |
 <%= link_to 'Back',:back %>

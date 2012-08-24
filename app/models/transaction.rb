@@ -8,5 +8,5 @@ class Transaction < ActiveRecord::Base
   validates :amount, :presence => true, :numericality => {:greater_than => 0}
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :description, :business_id, :source_id, :amount, :type
+  attr_accessible :description, :business_id, :source_id, :amount, :type, :transaction_at
 end

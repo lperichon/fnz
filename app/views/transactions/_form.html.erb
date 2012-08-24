@@ -1,4 +1,4 @@
-<%= form_for(@transaction) do |f| %>
+<%= form_for(@transaction, :as => :transaction) do |f| %>
     <% if @transaction.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(@transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
@@ -24,6 +24,9 @@
 
     <p><%= f.label :source %><br />
       <%= f.collection_select(:source_id, Account.all, :id, :name, :prompt => 'Please select source account') %></p>
+
+    <p><%= f.label :transaction_at %><br />
+      <%= f.datetime_select :transaction_at %></p>
 
     <div class="actions">
       <%= f.submit %>
