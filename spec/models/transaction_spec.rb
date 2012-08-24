@@ -47,7 +47,7 @@ describe Transaction do
   end
 
   it "should require a source account" do
-    no_business_account = Account.new(@attr.merge(:business_id => nil))
+    no_business_account = Transaction.new(@attr.merge(:business_id => nil))
     no_business_account.should_not be_valid
   end
 
