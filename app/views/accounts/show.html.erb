@@ -1,6 +1,8 @@
 <h3>Account</h3>
 <p>Name: <%= @account.name %></p>
 
+<%= render :partial => 'transactions/transactions', :locals => {:context => @account} %>
 
+<%= link_to "Add Transaction", new_transaction_path %> |
 <%= link_to 'Edit', edit_business_account_path(@business, @account) %> |
 <%= link_to 'Back', business_accounts_path(@business) %>

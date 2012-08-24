@@ -3,32 +3,12 @@
 <p>Accounts:
 <ul>
   <% @business.accounts.each do |account| %>
-  <li><%= account.name %></li>
+  <li><%= link_to account.name, business_account_path(@business, account) %></li>
   <% end %>
 </ul>
 </p>
 
-<table>Transactions:
-  <thead>
-    <td>Type</td>
-    <td>Description</td>
-    <td>Amount</td>
-    <td>Source</td>
-    <td>Date</td>
-    <td></td>
-  </thead>
-
-  <% @business.transactions.each do |transaction| %>
-    <tr>
-      <td><%= transaction.type %></td>
-      <td><%= transaction.description %></td>
-      <td><%= transaction.amount %></td>
-      <td><%= transaction.source.name %></td>
-      <td><%= transaction.transaction_at %></td>
-      <td><%= link_to "Show", transaction_path(transaction) %></td>
-    </tr>
-  <% end %>
-</table>
+<%= render :partial => 'transactions/transactions', :locals => {:context => @business} %>
 
 <%= link_to "Add Transaction", new_transaction_path %> |
 <%= link_to 'Manage Accounts', business_accounts_path(@business) %> |
