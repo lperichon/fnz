@@ -2,7 +2,7 @@
 <ul class="accounts">
   <% @accounts.each do |account| %>
     <li>
-      <%= link_to account.name, business_account_path(@business, account) %>
+      <%= link_to account.name, business_account_path(@business, account) %> $<%= account.balance %>
     </li>
   <% end %>
 </ul>

@@ -41,6 +41,7 @@ class TransactionsController < ApplicationController
   # PUT /accounts/1.json
   def update
     @transaction = @context.find(params[:id])
+    @transaction.creator = current_user
     @business = @transaction.business
 
     respond_to do |format|
