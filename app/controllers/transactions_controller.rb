@@ -25,6 +25,7 @@ class TransactionsController < ApplicationController
   # POST /accounts.json
   def create
     @transaction = @context.new(params[:transaction])
+    @transaction.creator = current_user
     @business = @transaction.business
 
     respond_to do |format|

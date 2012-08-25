@@ -77,6 +77,11 @@ describe TransactionsController do
         assigns(:transaction).should be_persisted
       end
 
+      it "assigns the current user to the created transaction as creator" do
+        post :create, {:transaction => valid_attributes}
+        assigns(:transaction).creator.should eq(@account.business.owner)
+      end
+
       it "redirects to the created transaction" do
         post :create, {:transaction => valid_attributes}
         response.should redirect_to(transaction_url(Transaction.last))
