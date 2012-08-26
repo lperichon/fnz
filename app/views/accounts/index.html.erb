@@ -2,7 +2,7 @@
 <ul class="accounts">
   <% @accounts.each do |account| %>
     <li>
-      <%= link_to account.name, business_account_path(@business, account) %> $<%= account.balance %>
+      <%= link_to account.name, business_account_path(@business, account) %> <%= number_to_currency(account.balance, :unit => account.currency.symbol) %>
     </li>
   <% end %>
 </ul>
