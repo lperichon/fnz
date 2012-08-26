@@ -25,8 +25,14 @@
     <p><%= f.label :source %><br />
       <%= f.collection_select(:source_id, Account.all, :id, :name, :prompt => 'Please select source account') %></p>
 
+    <p><%= f.label :target %><br />
+      <%= f.collection_select(:target_id, Account.all, :id, :name, :prompt => 'Please select target account') %></p>
+
     <p><%= f.label :transaction_at %><br />
       <%= f.datetime_select :transaction_at %></p>
+
+    <p><%= f.label :conversion_rate %><br />
+      <%= f.text_field :conversion_rate %></p>
 
     <div class="actions">
       <%= f.submit %>

@@ -1,5 +1,5 @@
 class Transaction < ActiveRecord::Base
-  after_save :update_source_balance
+  after_save :update_balances
 
   belongs_to :business
   belongs_to :source, :class_name => "Account"
@@ -12,9 +12,10 @@ class Transaction < ActiveRecord::Base
   validates :creator, :presence => true
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :description, :business_id, :source_id, :amount, :type, :transaction_at, :creator_id
+  attr_accessible :description, :business_id, :source_id, :amount, :type, :transaction_at, :creator_id, :target_id, :conversion_rate
 
-  def update_source_balance
+  def update_balances
     source.update_balance
+    target.update_balance
   end
 end

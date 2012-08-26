@@ -1,5 +1,5 @@
 class Credit < Transaction
-  def sign
+  def sign account
     return 1
   end
 end

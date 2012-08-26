@@ -11,6 +11,7 @@ describe TransactionsController do
       :amount => 3.5,
       :source_id => @account.id,
       :business_id => @business.id,
+      :creator_id => @user.id,
       :type => "Debit"
     }
   end
@@ -20,7 +21,8 @@ describe TransactionsController do
     end
     @account =  FactoryGirl.create(:account)
     @business = @account.business
-    sign_in @account.business.owner
+    @user = @account.business.owner
+    sign_in @user
   end
 
   describe "GET business transactions index" do

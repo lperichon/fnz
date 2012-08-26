@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120825220137) do
+ActiveRecord::Schema.define(:version => 20120826175412) do
 
   create_table "accounts", :force => true do |t|
     t.string  "name",                                      :default => "",  :null => false
@@ -39,13 +39,15 @@ ActiveRecord::Schema.define(:version => 20120825220137) do
   add_index "roles", ["name"], :name => "index_roles_on_name"
 
   create_table "transactions", :force => true do |t|
-    t.string   "type",                                                         :null => false
-    t.string   "description",                                  :default => "", :null => false
+    t.string   "type",                                                           :null => false
+    t.string   "description",                                   :default => "",  :null => false
     t.integer  "business_id"
-    t.integer  "source_id",                                                    :null => false
-    t.decimal  "amount",         :precision => 8, :scale => 2,                 :null => false
+    t.integer  "source_id",                                                      :null => false
+    t.decimal  "amount",          :precision => 8, :scale => 2,                  :null => false
     t.datetime "transaction_at"
     t.integer  "creator_id"
+    t.integer  "target_id"
+    t.decimal  "conversion_rate", :precision => 8, :scale => 2, :default => 1.0, :null => false
   end
 
   create_table "users", :force => true do |t|
