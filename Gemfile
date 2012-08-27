@@ -19,3 +19,5 @@ gem "devise", ">= 2.1.2"
 gem "cancan", ">= 1.6.8"
 gem "rolify", ">= 3.2.0"
 gem "hub", ">= 1.10.2", :require => nil, :group => [:development]
+gem "transitions", :require => ["transitions", "active_model/transitions"]
+

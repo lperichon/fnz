@@ -25,14 +25,20 @@
     <p><%= f.label :source %><br />
       <%= f.collection_select(:source_id, Account.all, :id, :name, :prompt => 'Please select source account') %></p>
 
-    <p><%= f.label :target %><br />
-      <%= f.collection_select(:target_id, Account.all, :id, :name, :prompt => 'Please select target account') %></p>
+    <p class="transfer_field" style="display:none;"><%= f.label :target %><br />
+      <%= f.collection_select(:target_id, Account.all, :id, :name, :prompt => 'Please select target account', :disabled => true) %></p>
 
     <p><%= f.label :transaction_at %><br />
       <%= f.datetime_select :transaction_at %></p>
 
-    <p><%= f.label :conversion_rate %><br />
+    <p class="transfer_field" style="display:none;"><%= f.label :conversion_rate %><br />
       <%= f.text_field :conversion_rate %></p>
+
+    <p><%= f.label :state %><br />
+      <%= f.select :state, Transaction.available_states %></p>
+
+    <p class="pending_field" style="display:none;"><%= f.label :reconciled_at %><br />
+      <%= f.datetime_select :reconciled_at %></p>
 
     <div class="actions">
       <%= f.submit %>

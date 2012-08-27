@@ -13,4 +13,9 @@ class Transfer < Transaction
     end
     return sign
   end
+
+  def update_balances
+    super
+    target.update_balance
+  end
 end

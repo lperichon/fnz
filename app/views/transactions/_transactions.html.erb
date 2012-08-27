@@ -1,6 +1,7 @@
 <table>Transactions:
   <thead>
   <td>Type</td>
+  <td>State</td>
   <td>Description</td>
   <td>Amount</td>
   <td>Source</td>
@@ -12,6 +13,7 @@
   <% context.transactions.each do |transaction| %>
       <tr>
         <td><%= transaction.type %></td>
+        <td><%= transaction.state %></td>
         <td><%= transaction.description %></td>
         <td><%= number_to_currency(transaction.amount, :unit => transaction.source.currency.symbol) %></td>
         <td><%= transaction.source.name %></td>
