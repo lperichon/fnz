@@ -11,6 +11,7 @@
 <%= render :partial => 'transactions/transactions', :locals => {:context => @business} %>
 
 <%= link_to "Add Transaction", new_transaction_path %> |
+<%= link_to 'Manage Tags', business_tags_path(@business) %> |
 <%= link_to 'Manage Accounts', business_accounts_path(@business) %> |
 <%= link_to 'Edit', edit_business_path(@business) %> |
 <%= link_to 'Back', businesses_path %>

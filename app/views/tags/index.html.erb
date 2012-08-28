@@ -1,0 +1,12 @@
+<h3>Tags</h3>
+<ul class="tags">
+  <% @tags.each do |tag| %>
+    <li>
+      <%= link_to tag.keyword, business_tag_path(@business, tag) %>
+    </li>
+  <% end %>
+</ul>
+
+<br />
+
+<%= link_to 'New Tag', new_business_tag_path(@business) %>

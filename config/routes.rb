@@ -16,6 +16,7 @@ Fnz::Application.routes.draw do
     resources :debits, :controller => 'transactions', :only => [:index]
     resources :credits, :controller => 'transactions', :only => [:index]
     resources :transfers, :controller => 'transactions', :only => [:index]
+    resources :tags
   end
   resources :transactions, :except => [:index]
   resources :debits, :controller => 'transactions', :except => [:index]
