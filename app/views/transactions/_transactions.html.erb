@@ -7,6 +7,7 @@
   <td>Source</td>
   <td>Target</td>
   <td>Date</td>
+  <td>Tags</td>
   <td></td>
   </thead>
 
@@ -19,6 +20,7 @@
         <td><%= transaction.source.name %></td>
         <td><%= transaction.target.name if transaction.is_a? Transfer%></td>
         <td><%= transaction.transaction_at %></td>
+        <td><%= transaction.tags.join(",") %></td>
         <td><%= link_to "Show", transaction_path(transaction) %></td>
       </tr>
   <% end %>

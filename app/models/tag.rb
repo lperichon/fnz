@@ -1,9 +1,19 @@
 class Tag < ActiveRecord::Base
   belongs_to :business
 
-  validates :keyword, :presence => true
+  has_many :taggings, :dependent => :destroy
+
+  validates :name, :presence => true
   validates :business, :presence => true
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :keyword, :business_id
+  attr_accessible :name, :business_id
+
+  validates_uniqueness_of :name
+  validates_length_of :name, :maximum => 255
+
+  def to_s
+    name
+  end
+
 end

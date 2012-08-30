@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120828173709) do
+ActiveRecord::Schema.define(:version => 20120830143701) do
 
   create_table "accounts", :force => true do |t|
     t.string  "name",                                      :default => "",  :null => false
@@ -38,8 +38,13 @@ ActiveRecord::Schema.define(:version => 20120828173709) do
   add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], :name => "index_roles_on_name"
 
+  create_table "taggings", :force => true do |t|
+    t.integer "transaction_id"
+    t.integer "tag_id"
+  end
+
   create_table "tags", :force => true do |t|
-    t.string  "keyword",     :default => "", :null => false
+    t.string  "name",        :default => "", :null => false
     t.integer "business_id"
   end
 

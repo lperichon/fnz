@@ -40,6 +40,9 @@
     <p class="pending_field" style="display:none;"><%= f.label :reconciled_at %><br />
       <%= f.datetime_select :reconciled_at %></p>
 
+    <p><%=  f.label :tag_ids %>
+      <%= f.collection_select :tag_ids, Tag.all, :id, :name, {}, {:multiple => true} %></p>
+
     <div class="actions">
       <%= f.submit %>
     </div>

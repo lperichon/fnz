@@ -7,6 +7,9 @@ class Transaction < ActiveRecord::Base
   belongs_to :source, :class_name => "Account"
   belongs_to :creator, :class_name => "User"
 
+  has_many :taggings
+  has_many :tags, :through => :taggings
+
   validates :description, :presence => true
   validates :business, :presence => true
   validates :source, :presence => true
@@ -14,7 +17,7 @@ class Transaction < ActiveRecord::Base
   validates :creator, :presence => true
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :description, :business_id, :source_id, :amount, :type, :transaction_at, :creator_id, :target_id, :conversion_rate, :state, :reconciled_at
+  attr_accessible :tag_ids, :description, :business_id, :source_id, :amount, :type, :transaction_at, :creator_id, :target_id, :conversion_rate, :state, :reconciled_at
 
   def update_balances
     source.update_balance
