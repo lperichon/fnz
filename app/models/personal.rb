@@ -1,0 +1,3 @@
+class Personal < Business
+
+end

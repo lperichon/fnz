@@ -8,5 +8,5 @@ class Business < ActiveRecord::Base
   validates :owner, :presence => true
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :owner_id
+  attr_accessible :type, :name, :owner_id
 end
