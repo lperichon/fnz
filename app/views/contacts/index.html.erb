@@ -1,0 +1,12 @@
+<h3>Contacts</h3>
+<ul class="contacts">
+  <% @contacts.each do |contact| %>
+    <li>
+      <%= link_to contact.name, business_contact_path(@business, contact) %>
+    </li>
+  <% end %>
+</ul>
+
+<br />
+
+<%= link_to 'New Contact', new_business_contact_path(@business) %>

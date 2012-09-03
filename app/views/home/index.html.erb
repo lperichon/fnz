@@ -1,4 +1,4 @@
 <h3>Home</h3>
 <% current_user.businesses.each do |business| %>
-  <p>Business: <%=link_to business.name, business %></p>
+  <p>Business: <%=link_to business.name, business_path(business) %></p>
 <% end %>

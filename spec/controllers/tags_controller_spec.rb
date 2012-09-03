@@ -7,7 +7,7 @@ describe TagsController do
   # update the return value of this method accordingly.
   def valid_attributes
     {
-      :keyword => "Test Tag"
+      :name => "Test Tag"
     }
   end
 

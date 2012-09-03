@@ -3,6 +3,7 @@ class Business < ActiveRecord::Base
   has_many :accounts
   has_many :transactions
   has_many :tags
+  has_many :contacts
 
   validates :name, :presence => true
   validates :owner, :presence => true

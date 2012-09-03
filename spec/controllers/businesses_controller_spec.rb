@@ -6,7 +6,8 @@ describe BusinessesController do
   # Business. As you add validations to Business, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    { :name => "Test Business"}
+    { :name => "Test Business",
+      :type => "Personal"}
   end
 
   before(:each) do
@@ -16,7 +17,9 @@ describe BusinessesController do
 
   describe "GET index" do
     it "assigns all businesses as @businesses" do
-      business = @user.businesses.create! valid_attributes
+      @user.businesses.create! valid_attributes
+      business = Business.last
+
       get :index, {}
       assigns(:businesses).should eq([business])
     end
@@ -30,7 +33,8 @@ describe BusinessesController do
     end
 
     it "assigns the requested business as @business" do
-      business = @user.businesses.create! valid_attributes
+      @user.businesses.create! valid_attributes
+      business = Business.last
       get :show, {:id => business.to_param}
       assigns(:business).should == business
     end
@@ -45,7 +49,9 @@ describe BusinessesController do
 
   describe "GET edit" do
     it "assigns the requested business as @business" do
-      business = @user.businesses.create! valid_attributes
+      @user.businesses.create! valid_attributes
+      business = Business.last
+
       get :edit, {:id => business.to_param}
       assigns(:business).should eq(business)
     end
@@ -67,7 +73,7 @@ describe BusinessesController do
 
       it "redirects to the created business" do
         post :create, {:business => valid_attributes}
-        response.should redirect_to(Business.last)
+        response.should redirect_to(business_path(Business.last))
       end
     end
 
@@ -101,7 +107,8 @@ describe BusinessesController do
       end
 
       it "assigns the requested business as @business" do
-        business = @user.businesses.create! valid_attributes
+        @user.businesses.create! valid_attributes
+        business = Business.last
         put :update, {:id => business.to_param, :business => valid_attributes}
         assigns(:business).should eq(business)
       end
@@ -109,14 +116,15 @@ describe BusinessesController do
       it "redirects to the business" do
         business = @user.businesses.create! valid_attributes
         put :update, {:id => business.to_param, :business => valid_attributes}
-        response.should redirect_to(business)
+        response.should redirect_to(business_path(business))
       end
     end
 
     describe "with invalid params" do
       it "assigns the business as @business" do
-        business = @user.businesses.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
+        @user.businesses.create! valid_attributes
+        business = Business.last
+            # Trigger the behavior that occurs when invalid params are submitted
         Business.any_instance.stub(:save).and_return(false)
         put :update, {:id => business.to_param, :business => {}}
         assigns(:business).should eq(business)
