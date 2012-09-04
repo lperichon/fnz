@@ -5,4 +5,10 @@ FactoryGirl.define do
     name 'Test Business'
     owner
   end
+
+  factory :school do
+    name 'Test School'
+    type 'School'
+    owner
+  end
 end

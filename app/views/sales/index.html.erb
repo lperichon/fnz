@@ -1,0 +1,12 @@
+<h3>Sales</h3>
+<ul class="sales">
+  <% @sales.each do |sale| %>
+    <li>
+      <%= link_to sale.id, sale_path(sale) %>
+    </li>
+  <% end %>
+</ul>
+
+<br />
+
+<%= link_to 'New sale', new_sale_path %>

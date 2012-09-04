@@ -1,0 +1,34 @@
+<%= form_for(@sale) do |f| %>
+    <% if @sale.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@sale.errors.count, "error") %> prohibited this sale from being saved:</h2>
+
+          <ul>
+            <% @sale.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <p><%= f.label :business %><br />
+      <%= f.collection_select(:business_id, current_user.businesses, :id, :name, :prompt => 'Please select business') %></p>
+    <p><%= f.label :contact %><br />
+      <%= f.collection_select(:contact_id, Contact.all, :id, :name, :prompt => 'Please select contact') %></p>
+
+    <h2>Transactions</h2>
+    <div class="items">
+    <%= f.nested_fields_for :transactions do |transaction_f| %>
+
+      <%= render :partial => 'transactions/fields', :locals => {:f => transaction_f} %>
+
+      <a href="#" class="remove">remove</a>
+      <%= transaction_f.hidden_field :id %>
+      <%= transaction_f.hidden_field :_destroy %>
+    <% end %>
+    </div>
+    <a href="#" class="add">add transaction</a>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>

@@ -1,0 +1,32 @@
+<p><%= f.label :type %><br />
+  <%= f.radio_button :type, "Debit" %><%= label_tag(:type_debit, "Debit") %><%= f.radio_button :type, "Credit" %><%= label_tag(:type_credit, "Credit") %><%= f.radio_button :type, "Transfer" %><%= label_tag(:type_transfer, "Transfer") %></p>
+
+<p><%= f.label :description %><br />
+  <%= f.text_field :description %></p>
+
+<p><%= f.label :amount %><br />
+  <%= f.text_field :amount %></p>
+
+<p><%= f.label :business %><br />
+  <%= f.collection_select(:business_id, current_user.businesses, :id, :name, :prompt => 'Please select business') %></p>
+
+<p><%= f.label :source %><br />
+  <%= f.collection_select(:source_id, Account.all, :id, :name, :prompt => 'Please select source account') %></p>
+
+<p class="transfer_field" style="display:none;"><%= f.label :target %><br />
+  <%= f.collection_select(:target_id, Account.all, :id, :name, :prompt => 'Please select target account', :disabled => true) %></p>
+
+<p><%= f.label :transaction_at %><br />
+  <%= f.datetime_select :transaction_at %></p>
+
+<p class="transfer_field" style="display:none;"><%= f.label :conversion_rate %><br />
+  <%= f.text_field :conversion_rate %></p>
+
+<p><%= f.label :state %><br />
+  <%= f.select :state, Transaction.available_states %></p>
+
+<p class="pending_field" style="display:none;"><%= f.label :reconciled_at %><br />
+  <%= f.datetime_select :reconciled_at %></p>
+
+<p><%=  f.label :tag_ids %>
+  <%= f.collection_select :tag_ids, Tag.all, :id, :name, {}, {:multiple => true} %></p>

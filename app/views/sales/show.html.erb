@@ -1,0 +1,8 @@
+<h3>Sale</h3>
+<p>Business: <%= @sale.business.name %></p>
+<p>Contact: <%= @sale.contact.name %></p>
+
+<%= render :partial => 'transactions/transactions', :locals => {:context => @sale} %>
+
+<%= link_to 'Edit', edit_sale_path(@sale) %> |
+<%= link_to 'Back',:back %>
