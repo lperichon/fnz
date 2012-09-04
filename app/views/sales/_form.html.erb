@@ -17,6 +17,8 @@
       <%= f.collection_select(:contact_id, Contact.all, :id, :name, :prompt => 'Please select contact') %></p>
     <p><%= f.label :agent %><br />
       <%= f.collection_select(:agent_id, Agent.all, :id, :name, :prompt => 'Please select agent') %></p>
+    <p><%= f.label :product %><br />
+      <%= f.collection_select(:product_id, Product.all, :id, :name, :prompt => 'Please select product') %></p>
 
     <h2>Transactions</h2>
     <div class="items">

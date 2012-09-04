@@ -2,6 +2,7 @@ class Sale < ActiveRecord::Base
   belongs_to :business
   belongs_to :contact
   belongs_to :agent
+  belongs_to :product
 
   has_and_belongs_to_many :transactions
 

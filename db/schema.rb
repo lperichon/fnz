@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120904195101) do
+ActiveRecord::Schema.define(:version => 20120904225546) do
 
   create_table "accounts", :force => true do |t|
     t.string  "name",                                      :default => "",  :null => false
@@ -38,6 +38,13 @@ ActiveRecord::Schema.define(:version => 20120904195101) do
     t.integer "business_id"
   end
 
+  create_table "products", :force => true do |t|
+    t.string  "name",                                      :default => "Unknown", :null => false
+    t.decimal "price",       :precision => 8, :scale => 2, :default => 0.0,       :null => false
+    t.string  "currency"
+    t.integer "business_id"
+  end
+
   create_table "roles", :force => true do |t|
     t.string   "name"
     t.integer  "resource_id"
@@ -52,6 +59,8 @@ ActiveRecord::Schema.define(:version => 20120904195101) do
   create_table "sales", :force => true do |t|
     t.integer "business_id"
     t.integer "contact_id"
+    t.integer "agent_id"
+    t.integer "product_id"
   end
 
   create_table "sales_transactions", :force => true do |t|

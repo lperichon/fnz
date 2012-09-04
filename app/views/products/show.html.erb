@@ -1,0 +1,6 @@
+<h3>Product</h3>
+<p>Name: <%= @product.name %></p>
+<p>Price: <%= number_to_currency(@product.price, :unit => @product.currency.symbol) %></p>
+
+<%= link_to 'Edit', edit_business_product_path(@business, @product) %> |
+<%= link_to 'Back', business_products_path(@business) %>

@@ -1,7 +1,8 @@
 <h3>Sale</h3>
 <p>Business: <%= @sale.business.name %></p>
-<p>Contact: <%= @sale.contact.name %></p>
+<p>Contact: <%= @sale.contact.try(:name) %></p>
 <p>Agent: <%= @sale.agent.name %></p>
+<p>Product: <%= @sale.product.try(:name) %></p>
 
 <%= render :partial => 'transactions/transactions', :locals => {:context => @sale} %>
 

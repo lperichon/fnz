@@ -8,13 +8,15 @@ describe SalesController do
   def valid_attributes
     {
         :business_id => @business.id,
-        :contact_id => @contact.id
+        :contact_id => @contact.id,
+        :agent_id => @agent.id
     }
   end
 
   before(:each) do
     @business = FactoryGirl.create(:school)
     @contact = FactoryGirl.create(:contact, :business => @business)
+    @agent = FactoryGirl.create(:agent, :business => @business)
     @user = @business.owner
     sign_in @user
   end

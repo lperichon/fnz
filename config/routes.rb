@@ -19,6 +19,7 @@ Fnz::Application.routes.draw do
     resources :tags
     resources :contacts
     resources :agents
+    resources :products
     resources :sales, :only => [:index]
   end
   resources :transactions, :except => [:index]

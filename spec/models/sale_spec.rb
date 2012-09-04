@@ -5,9 +5,11 @@ describe Sale do
   before(:each) do
     @business = FactoryGirl.create(:business)
     @contact = FactoryGirl.create(:contact, :business => @business)
+    @agent = FactoryGirl.create(:agent, :business => @business)
     @attr = { 
       :contact_id => @contact.id,
-      :business_id => @business.id
+      :business_id => @business.id,
+      :agent_id => @agent.id
     }
   end
   
