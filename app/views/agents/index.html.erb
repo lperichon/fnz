@@ -1,0 +1,12 @@
+<h3>Agents</h3>
+<ul class="agents">
+  <% @agents.each do |agent| %>
+    <li>
+      <%= link_to agent.name, business_agent_path(@business, agent) %>
+    </li>
+  <% end %>
+</ul>
+
+<br />
+
+<%= link_to 'New Agent', new_business_agent_path(@business) %>

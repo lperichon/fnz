@@ -4,6 +4,7 @@ class Business < ActiveRecord::Base
   has_many :transactions
   has_many :tags
   has_many :contacts
+  has_many :agents
 
   validates :name, :presence => true
   validates :owner, :presence => true
