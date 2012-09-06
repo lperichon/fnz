@@ -1,5 +1,5 @@
 <h2>Edit Business</h2>
 
-<%= render :partial => 'form' %>
+<%= render :partial => 'form', :locals => {:form_url => businesses_path}  %>
 
 <%= link_to 'Back', businesses_path %>

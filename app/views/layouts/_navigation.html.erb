@@ -29,3 +29,13 @@
     </li>
   <% end %>
 </ul>
+<% if user_signed_in? %>
+<ul id="nav-businesses" class="nav">
+  <% current_user.businesses.each do |business| %>
+    <% unless business.new_record? %>
+    <li class="<%='active' if @business.present? && @business.id == business.id %>"><%= link_to business.name, business_path(business) %></li>
+    <% end %>
+  <% end %>
+    <li class="action"><a href="<%= new_business_path %>"><i class="icon-plus-sign"></i></a></li>
+</ul>
+<% end %>

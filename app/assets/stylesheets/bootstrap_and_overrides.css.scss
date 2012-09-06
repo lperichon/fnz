@@ -1,3 +1,6 @@
 @import "bootstrap";
-body { padding-top: 60px; }
+body { padding-top: 90px; }
+[class^="icon-"], [class*=" icon-"] {
+  background-image: none;
+}
 @import "bootstrap-responsive";

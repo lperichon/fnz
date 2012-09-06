@@ -1,0 +1,20 @@
+#nav-businesses {
+  clear: both;
+}
+
+#nav-businesses .active {
+  top: 3px;
+  position: relative;
+}
+
+#nav-businesses .active a{
+  background: #FFF;
+  padding-top:6px;
+  padding-bottom:14px;
+  border-radius: 4px 4px 0px 0px;
+  color: #999;
+}
+
+#nav-businesses .action {
+  font-size: 19px;
+}
