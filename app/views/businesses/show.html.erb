@@ -1,21 +1,3 @@
-<h3>Business</h3>
-<p>Name: <%= @business.name %></p>
-<p>Accounts:
-<ul>
-  <% @business.accounts.each do |account| %>
-  <li><%= link_to account.name, business_account_path(@business, account) %>  <%= number_to_currency(account.balance, :unit => account.currency.symbol) %></li>
-  <% end %>
-</ul>
-</p>
-
 <%= render :partial => 'transactions/transactions', :locals => {:context => @business} %>
 
-<%= link_to "Add Transaction", new_transaction_path %> |
-<%= link_to 'Manage Contacts', business_contacts_path(@business) %> |
-<%= link_to 'Manage Agents', business_agents_path(@business) %> |
-<%= link_to 'Manage Products', business_products_path(@business) %> |
-<%= link_to 'Manage Tags', business_tags_path(@business) %> |
-<%= link_to 'Manage Accounts', business_accounts_path(@business) %> |
-<%= link_to 'Manage Sales', business_sales_path(@business) %> |
-<%= link_to 'Edit', edit_business_path(@business) %> |
 <%= link_to 'Back', businesses_path %>

@@ -7,11 +7,15 @@
   position: relative;
 }
 
-#nav-businesses .active a{
+#nav-businesses .active{
   background: #FFF;
   padding-top:6px;
-  padding-bottom:14px;
+  padding-bottom:15px;
+  padding-left: 10px;
+  padding-right: 10px;
   border-radius: 4px 4px 0px 0px;
+  -webkit-border-radius: 4px 4px 0px 0px;
+  -moz-border-radius: 4px 4px 0px 0px;
   color: #999;
 }
 
