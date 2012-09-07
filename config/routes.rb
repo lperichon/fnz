@@ -12,7 +12,7 @@ Fnz::Application.routes.draw do
       resources :credits, :controller => 'transactions', :only => [:index]
       resources :transfers, :controller => 'transactions', :only => [:index]
     end
-    resources :transactions, :only => [:index]
+    resources :transactions
     resources :debits, :controller => 'transactions', :only => [:index]
     resources :credits, :controller => 'transactions', :only => [:index]
     resources :transfers, :controller => 'transactions', :only => [:index]
@@ -22,7 +22,6 @@ Fnz::Application.routes.draw do
     resources :products
     resources :sales, :only => [:index]
   end
-  resources :transactions, :except => [:index]
   resources :debits, :controller => 'transactions', :except => [:index]
   resources :credits, :controller => 'transactions', :except => [:index]
   resources :transfers, :controller => 'transactions', :except => [:index]

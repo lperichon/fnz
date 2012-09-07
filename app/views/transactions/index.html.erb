@@ -2,11 +2,11 @@
 <ul class="transactions">
   <% @transactions.each do |transaction| %>
     <li>
-      <%= link_to transaction.description, transaction_path(transaction) %>
+      <%= link_to transaction.description, business_transaction_path(transaction.business, transaction) %>
     </li>
   <% end %>
 </ul>
 
 <br />
 
-<%= link_to 'New transaction', new_transaction_path %>
+<%= link_to 'New transaction', new_business_transaction_path(@business) %>

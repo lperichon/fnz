@@ -7,14 +7,11 @@
 <p><%= f.label :amount %><br />
   <%= f.text_field :amount %></p>
 
-<p><%= f.label :business %><br />
-  <%= f.collection_select(:business_id, current_user.businesses, :id, :name, :prompt => 'Please select business') %></p>
-
 <p><%= f.label :source %><br />
-  <%= f.collection_select(:source_id, Account.all, :id, :name, :prompt => 'Please select source account') %></p>
+  <%= f.collection_select(:source_id, @business.accounts, :id, :name, :prompt => 'Please select source account') %></p>
 
 <p class="transfer_field" style="display:none;"><%= f.label :target %><br />
-  <%= f.collection_select(:target_id, Account.all, :id, :name, :prompt => 'Please select target account', :disabled => true) %></p>
+  <%= f.collection_select(:target_id, @business.accounts, :id, :name, :prompt => 'Please select target account', :disabled => true) %></p>
 
 <p><%= f.label :transaction_at %><br />
   <%= f.datetime_select :transaction_at %></p>
@@ -29,4 +26,4 @@
   <%= f.datetime_select :reconciled_at %></p>
 
 <p><%=  f.label :tag_ids %>
-  <%= f.collection_select :tag_ids, Tag.all, :id, :name, {}, {:multiple => true} %></p>
+  <%= f.collection_select :tag_ids, @business.tags, :id, :name, {}, {:multiple => true} %></p>

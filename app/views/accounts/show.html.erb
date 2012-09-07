@@ -4,6 +4,6 @@
 
 <%= render :partial => 'transactions/transactions', :locals => {:context => @account} %>
 
-<%= link_to "Add Transaction", new_transaction_path %> |
+<%= link_to "Add Transaction", new_business_transaction_path(@business) %> |
 <%= link_to 'Edit', edit_business_account_path(@business, @account) %> |
 <%= link_to 'Back', business_accounts_path(@business) %>

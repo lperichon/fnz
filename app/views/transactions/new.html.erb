@@ -1,5 +1,5 @@
 <h2>Edit Transaction</h2>
 
-<%= render :partial => 'form' %>
+<%= render :partial => 'form', :locals => {:form_url => business_transactions_path(@business)} %>
 
 <%= link_to 'Back', :back %>

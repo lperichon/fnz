@@ -21,7 +21,7 @@
         <td><%= transaction.target.name if transaction.is_a? Transfer%></td>
         <td><%= transaction.transaction_at %></td>
         <td><%= transaction.tags.join(",") %></td>
-        <td><%= link_to "Show", transaction_path(transaction) %></td>
+        <td><%= link_to "Show", business_transaction_path(transaction.business, transaction) %></td>
       </tr>
   <% end %>
 </table>

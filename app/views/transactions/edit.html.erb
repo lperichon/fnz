@@ -1,6 +1,6 @@
 <h2>Edit Transaction</h2>
 
-<%= render :partial => 'form' %>
+<%= render :partial => 'form', :locals => {:form_url => business_transaction_path(@transaction.business, @transaction)} %>
 
-<%= link_to 'Show', transaction_path(@transaction) %> |
+<%= link_to 'Show', business_transaction_path(@transaction.business, @transaction) %> |
 <%= link_to 'Back', :back %>

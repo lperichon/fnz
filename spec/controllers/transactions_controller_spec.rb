@@ -86,7 +86,7 @@ describe TransactionsController do
 
       it "redirects to the created transaction" do
         post :create, {:transaction => valid_attributes}
-        response.should redirect_to(transaction_url(Transaction.last))
+        response.should redirect_to(business_transaction_url(@business, Transaction.last))
       end
     end
 
@@ -129,7 +129,7 @@ describe TransactionsController do
       it "redirects to the transaction" do
         transaction = @business.transactions.create! valid_attributes
         put :update, {:id => transaction.to_param, :transaction => valid_attributes}
-        response.should redirect_to(transaction_url(transaction))
+        response.should redirect_to(business_transaction_url(@business, transaction))
       end
     end
 
