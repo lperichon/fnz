@@ -1,29 +1,25 @@
-<p><%= f.label :type %><br />
-  <%= f.radio_button :type, "Debit" %><%= label_tag(:type_debit, "Debit") %><%= f.radio_button :type, "Credit" %><%= label_tag(:type_credit, "Credit") %><%= f.radio_button :type, "Transfer" %><%= label_tag(:type_transfer, "Transfer") %></p>
+<%= f.input :type, :collection => ["Debit", "Credit", "Transfer"], :as => :radio_buttons, :item_wrapper_class => 'inline' %>
 
-<p><%= f.label :description %><br />
-  <%= f.text_field :description %></p>
+<%= f.input :description %>
 
-<p><%= f.label :amount %><br />
-  <%= f.text_field :amount %></p>
+<%= f.input :amount %>
 
-<p><%= f.label :source %><br />
-  <%= f.collection_select(:source_id, @business.accounts, :id, :name, :prompt => 'Please select source account') %></p>
+<%= f.association :source, :collection => @business.accounts, :prompt => "Please select source account" %>
 
-<p class="transfer_field" style="display:none;"><%= f.label :target %><br />
-  <%= f.collection_select(:target_id, @business.accounts, :id, :name, :prompt => 'Please select target account', :disabled => true) %></p>
+<span class="transfer_field" style="display:none;">
+  <%= f.input :target_id, :as => :select, :collection => @business.accounts, :prompt => "Please select target account" %>
+</span>
 
-<p><%= f.label :transaction_at %><br />
-  <%= f.datetime_select :transaction_at %></p>
+<%= f.input :transaction_at, :as => :date_time_picker %>
 
-<p class="transfer_field" style="display:none;"><%= f.label :conversion_rate %><br />
-  <%= f.text_field :conversion_rate %></p>
+<span class="transfer_field" style="display:none;">
+  <%= f.input :conversion_rate %>
+</span>
 
-<p><%= f.label :state %><br />
-  <%= f.select :state, Transaction.available_states %></p>
+<%= f.input :state, :as => :select, :collection => Transaction.available_states %>
 
-<p class="pending_field" style="display:none;"><%= f.label :reconciled_at %><br />
-  <%= f.datetime_select :reconciled_at %></p>
+<span class="pending_field" style="display:none;">
+  <%= f.input :reconciled_at, :as => :date_time_picker %>
+</span>
 
-<p><%=  f.label :tag_ids %>
-  <%= f.collection_select :tag_ids, @business.tags, :id, :name, {}, {:multiple => true} %></p>
+<%=  f.input :tag_ids, :as => :select, :collection => @business.tags, :input_html => {:multiple => true} %>

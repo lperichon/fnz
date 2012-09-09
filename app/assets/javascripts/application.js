@@ -13,5 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
+//= require bootstrap-datepicker
 //= require jquery.nested-fields
+//= require rails.validations
+//= require rails.validations.simple_form
 //= require_tree .
