@@ -25,3 +25,4 @@ gem "simple_form"
 gem "client_side_validations"
 gem 'client_side_validations-simple_form', '2.0.0.beta.2'
 gem 'bootstrap-datepicker-rails'
+gem 'validates_timeliness', '~> 3.0'
