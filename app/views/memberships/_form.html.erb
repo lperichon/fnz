@@ -1,0 +1,25 @@
+<%= form_for(@membership, :url => form_url) do |f| %>
+    <% if @membership.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@membership.errors.count, "error") %> prohibited this membership from being saved:</h2>
+
+          <ul>
+            <% @membership.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <p><%= f.label :contact %><br />
+      <%= f.collection_select(:contact_id, Contact.all, :id, :name, :prompt => 'Please select contact') %></p>
+
+    <p><%= f.label :begins_on %><br />
+      <%= f.text_field :begins_on, :class => "datepicker_input" %></p>
+    <p><%= f.label :ends_on %><br />
+      <%= f.text_field :ends_on, :class => "datepicker_input" %></p>
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>

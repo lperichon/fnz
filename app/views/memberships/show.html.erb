@@ -1,0 +1,8 @@
+<h3>Membership</h3>
+<p>Business: <%= @membership.business.name %></p>
+<p>Contact: <%= @membership.contact.try(:name) %></p>
+<p>Begins on: <%= @membership.begins_on %></p>
+<p>Ends on: <%= @membership.ends_on %></p>
+
+<%= link_to 'Edit', edit_business_membership_path(@business, @membership) %> |
+<%= link_to 'Back',:back %>

@@ -21,6 +21,7 @@ Fnz::Application.routes.draw do
     resources :agents
     resources :products
     resources :sales, :only => [:index]
+    resources :memberships
   end
   resources :debits, :controller => 'transactions', :except => [:index]
   resources :credits, :controller => 'transactions', :except => [:index]

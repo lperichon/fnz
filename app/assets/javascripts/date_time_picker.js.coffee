@@ -6,5 +6,4 @@ $(document).ready ->
 
   $('.datepicker_input, .timepicker_input').on "change", (event) ->
     value = $(this).parent().children(".datepicker_input").val() + " " +  $(this).parent().children(".timepicker_input").val()
-    console.log(value)
     $(this).siblings(":hidden").val(value)
