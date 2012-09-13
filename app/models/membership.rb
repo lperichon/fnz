@@ -1,6 +1,7 @@
 class Membership < ActiveRecord::Base
   belongs_to :business
   belongs_to :contact
+  has_many :installments
 
   validates :business, :presence => true
   validates :contact, :presence => true
