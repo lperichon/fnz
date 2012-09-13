@@ -22,7 +22,6 @@ class TransactionsController < UserApplicationController
   # POST /accounts.json
   def create
     @transaction = @context.new(params[:transaction])
-    @transaction.creator = current_user
 
     respond_to do |format|
       if @transaction.save
@@ -39,7 +38,6 @@ class TransactionsController < UserApplicationController
   # PUT /accounts/1.json
   def update
     @transaction = @context.find(params[:id])
-    @transaction.creator = current_user
 
     respond_to do |format|
       if @transaction.update_attributes(params[:transaction])

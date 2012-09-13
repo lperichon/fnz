@@ -11,7 +11,6 @@ describe Transaction do
     @attr = {
       :description => "Example Transaction",
       :business_id => @account.business.id,
-      :creator_id => @account.business.owner.id,
       :source_id => @account.id,
       :amount => 3.5
     }
@@ -49,10 +48,5 @@ describe Transaction do
   it "should require a source account" do
     no_business_transaction = Transaction.new(@attr.merge(:business_id => nil))
     no_business_transaction.should_not be_valid
-  end
-
-  it "should require a creator" do
-    no_creator_transaction = Transaction.new(@attr.merge(:creator_id => nil))
-    no_creator_transaction.should_not be_valid
   end
 end

@@ -1,6 +1,7 @@
 class Transaction < ActiveRecord::Base
   include ActiveModel::Transitions
 
+  before_validation :set_creator
   after_save :update_balances
 
   belongs_to :business
@@ -17,10 +18,14 @@ class Transaction < ActiveRecord::Base
   validates :creator, :presence => true
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :tag_ids, :description, :business_id, :source_id, :amount, :type, :transaction_at, :creator_id, :target_id, :conversion_rate, :state, :reconciled_at
+  attr_accessible :tag_ids, :description, :business_id, :source_id, :amount, :type, :transaction_at, :target_id, :conversion_rate, :state, :reconciled_at
 
   def update_balances
     source.update_balance
+  end
+
+  def set_creator
+    self.creator = User.current_user unless creator
   end
 
   state_machine do

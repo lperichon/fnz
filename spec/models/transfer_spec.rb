@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Transaction do
+describe Transfer do
   
   before(:each) do
     @account = FactoryGirl.create(:account)
@@ -8,7 +8,6 @@ describe Transaction do
     @attr = {
       :description => "Example Transaction",
       :business_id => @account.business.id,
-      :creator_id => @account.business.owner.id,
       :source_id => @account.id,
       :target_id => @account2.id,
       :amount => 3.5
