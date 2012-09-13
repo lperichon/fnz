@@ -22,4 +22,4 @@
   <%= f.input :reconciled_at, :as => :date_time_picker %>
 </span>
 
-<%=  f.input :tag_ids, :as => :select, :collection => @business.tags, :input_html => {:multiple => true} %>
+<%=  f.input :tag_ids, :as => :select, :collection => @business.tags, :input_html => {:class => "chosen", :multiple => true} %>

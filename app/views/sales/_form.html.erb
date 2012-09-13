@@ -1,24 +1,11 @@
-<%= simple_form_for(@sale, :url => form_url) do |f| %>
-    <% if @sale.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@sale.errors.count, "error") %> prohibited this sale from being saved:</h2>
+<%= simple_form_for(@sale, :url => form_url, :validate => true, :html => {:class => "form-horizontal"}) do |f| %>
+    <%= f.association :contact, :as => :select, :collection => @business.contacts, :prompt => 'Please select contact' %>
 
-          <ul>
-            <% @sale.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
+    <%= f.association :agent, :as => :select, :collection => @business.agents, :prompt => 'Please select agent' %>
 
-    <p><%= f.label :contact %><br />
-      <%= f.collection_select(:contact_id, Contact.all, :id, :name, :prompt => 'Please select contact') %></p>
-    <p><%= f.label :agent %><br />
-      <%= f.collection_select(:agent_id, Agent.all, :id, :name, :prompt => 'Please select agent') %></p>
-    <p><%= f.label :product %><br />
-      <%= f.collection_select(:product_id, Product.all, :id, :name, :prompt => 'Please select product') %></p>
+    <%= f.association :product, :as => :select, :collection => @business.products, :prompt => 'Please select product' %>
 
-    <h2>Transactions</h2>
+    <h3>Transactions</h3>
     <div class="items">
     <%= f.nested_fields_for :transactions do |transaction_f| %>
 
