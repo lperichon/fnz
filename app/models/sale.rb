@@ -10,6 +10,6 @@ class Sale < ActiveRecord::Base
   validates :agent, :presence => true
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :contact_id, :business_id, :agent_id, :transactions_attributes
+  attr_accessible :contact_id, :business_id, :agent_id, :product_id, :transactions_attributes
   accepts_nested_attributes_for :transactions, allow_destroy: true
 end

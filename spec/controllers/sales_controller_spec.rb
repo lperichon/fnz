@@ -32,20 +32,20 @@ describe SalesController do
   describe "GET show" do
     it "should be successful" do
       sale = @business.sales.create! valid_attributes
-      get :show, :id => sale.to_param
+      get :show, :business_id => @business.to_param, :id => sale.to_param
       response.should be_success
     end
 
     it "assigns the requested sale as @sale" do
       sale = @business.sales.create! valid_attributes
-      get :show, :id => sale.to_param
+      get :show, :business_id => @business.to_param, :id => sale.to_param
       assigns(:sale).should == sale
     end
   end
 
   describe "GET new" do
     it "assigns a new sale as @sale" do
-      get :new
+      get :new, :business_id => @business.to_param
       assigns(:sale).should be_a_new(Sale)
     end
   end
@@ -53,7 +53,7 @@ describe SalesController do
   describe "GET edit" do
     it "assigns the requested sale as @sale" do
       sale = @business.sales.create! valid_attributes
-      get :edit, :id => sale.to_param
+      get :edit, :business_id => @business.to_param, :id => sale.to_param
       assigns(:sale).should eq(sale)
     end
   end
@@ -62,23 +62,23 @@ describe SalesController do
     describe "with valid params" do
       it "creates a new Sale" do
         expect {
-          post :create, {:sale => valid_attributes}
+          post :create, {:business_id => @business.to_param, :sale => valid_attributes}
         }.to change(Sale, :count).by(1)
       end
 
       it "assigns a newly created sale as @sale" do
-        post :create, {:sale => valid_attributes}
+        post :create, {:business_id => @business.to_param, :sale => valid_attributes}
         assigns(:sale).should be_a(Sale)
         assigns(:sale).should be_persisted
       end
 
       it "assigns the current user to the created sale as creator" do
-        post :create, {:sale => valid_attributes}
+        post :create, {:business_id => @business.to_param, :sale => valid_attributes}
       end
 
       it "redirects to the created sale" do
-        post :create, {:sale => valid_attributes}
-        response.should redirect_to(sale_url(Sale.last))
+        post :create, {:business_id => @business.to_param, :sale => valid_attributes}
+        response.should redirect_to(business_sale_url(@business, Sale.last))
       end
     end
 
@@ -86,14 +86,14 @@ describe SalesController do
       it "assigns a newly created but unsaved sale as @sale" do
         # Trigger the behavior that occurs when invalid params are submitted
         Sale.any_instance.stub(:save).and_return(false)
-        post :create, {:sale => {}}
+        post :create, {:business_id => @business.to_param, :sale => {}}
         assigns(:sale).should be_a_new(Sale)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Sale.any_instance.stub(:save).and_return(false)
-        post :create, {:sale => {}}
+        post :create, {:business_id => @business.to_param, :sale => {}}
         response.should render_template("new")
       end
     end
@@ -108,19 +108,19 @@ describe SalesController do
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         Sale.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:id => sale.to_param, :sale => {'these' => 'params'}}
+        put :update, {:business_id => @business.to_param, :id => sale.to_param, :sale => {'these' => 'params'}}
       end
 
       it "assigns the requested sale as @sale" do
         sale = @business.sales.create! valid_attributes
-        put :update, {:id => sale.to_param, :sale => valid_attributes}
+        put :update, {:business_id => @business.to_param, :id => sale.to_param, :sale => valid_attributes}
         assigns(:sale).should eq(sale)
       end
 
       it "redirects to the sale" do
         sale = @business.sales.create! valid_attributes
-        put :update, {:id => sale.to_param, :sale => valid_attributes}
-        response.should redirect_to(sale_url(sale))
+        put :update, {:business_id => @business.to_param, :id => sale.to_param, :sale => valid_attributes}
+        response.should redirect_to(business_sale_url(@business, sale))
       end
     end
 
@@ -129,7 +129,7 @@ describe SalesController do
         sale = @business.sales.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Sale.any_instance.stub(:save).and_return(false)
-        put :update, {:id => sale.to_param, :sale => {}}
+        put :update, {:business_id => @business.to_param, :id => sale.to_param, :sale => {}}
         assigns(:sale).should eq(sale)
       end
 
@@ -137,7 +137,7 @@ describe SalesController do
         sale = @business.sales.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Sale.any_instance.stub(:save).and_return(false)
-        put :update, {:id => sale.to_param, :sale => {}}
+        put :update, {:business_id => @business.to_param, :id => sale.to_param, :sale => {}}
         response.should render_template("edit")
       end
     end
@@ -147,13 +147,13 @@ describe SalesController do
     it "destroys the requested sale" do
       sale = @business.sales.create! valid_attributes
       expect {
-        delete :destroy, {:id => sale.to_param}
+        delete :destroy, {:business_id => @business.to_param, :id => sale.to_param}
       }.to change(Sale, :count).by(-1)
     end
 
     it "redirects to the businesses list" do
       sale = @business.sales.create! valid_attributes
-      delete :destroy, {:id => sale.to_param}
+      delete :destroy, {:business_id => @business.to_param, :id => sale.to_param}
       response.should redirect_to(business_sales_url(@business))
     end
   end

@@ -20,11 +20,10 @@ Fnz::Application.routes.draw do
     resources :contacts
     resources :agents
     resources :products
-    resources :sales, :only => [:index]
+    resources :sales
     resources :memberships
   end
   resources :debits, :controller => 'transactions', :except => [:index]
   resources :credits, :controller => 'transactions', :except => [:index]
   resources :transfers, :controller => 'transactions', :except => [:index]
-  resources :sales, :except => [:index]
 end

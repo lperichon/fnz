@@ -29,7 +29,7 @@ class SalesController < ApplicationController
 
     respond_to do |format|
       if @sale.save
-        format.html { redirect_to sale_path(@sale), notice: 'Sale was successfully created.' }
+        format.html { redirect_to business_sale_path(@business, @sale), notice: 'Sale was successfully created.' }
       else
         format.html { render action: "new" }
       end
@@ -44,7 +44,7 @@ class SalesController < ApplicationController
 
     respond_to do |format|
       if @sale.update_attributes(params[:sale])
-        format.html { redirect_to sale_path(@sale), notice: 'Sale was successfully updated.' }
+        format.html { redirect_to business_sale_path(@business, @sale), notice: 'Sale was successfully updated.' }
       else
         format.html { render action: "edit" }
       end
@@ -67,7 +67,6 @@ class SalesController < ApplicationController
 
   def get_context
     business_id = params[:business_id]
-    business_id = params[:sale][:business_id] unless business_id || params[:sale].blank?
     @context = Sale
     if business_id
       @business = current_user.businesses.find(business_id)

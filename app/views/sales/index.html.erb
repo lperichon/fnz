@@ -2,11 +2,11 @@
 <ul class="sales">
   <% @sales.each do |sale| %>
     <li>
-      <%= link_to sale.id, sale_path(sale) %>
+      <%= link_to sale.id, business_sale_path(@business, sale) %>
     </li>
   <% end %>
 </ul>
 
 <br />
 
-<%= link_to 'New sale', new_sale_path %>
+<%= link_to 'New sale', new_business_sale_path(@business) %>
