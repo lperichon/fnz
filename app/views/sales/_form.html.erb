@@ -16,8 +16,6 @@
       <%= transaction_f.hidden_field :_destroy %>
     <% end %>
     </div>
-    <a href="#" class="add">add transaction</a>
-    <div class="actions">
-      <%= f.submit %>
-    </div>
+    <div><a href="#" class="add">add transaction</a></div>
+    <%= f.button :submit, :class => "btn btn-primary" %>
 <% end %>
