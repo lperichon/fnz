@@ -1,6 +1,4 @@
-class BusinessesController < ApplicationController
-  before_filter :authenticate_user!
-
+class BusinessesController < UserApplicationController
   def index
     @businesses = current_user.businesses
   end

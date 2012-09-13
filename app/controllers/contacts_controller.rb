@@ -1,6 +1,4 @@
-class ContactsController < ApplicationController
-  before_filter :authenticate_user!
-
+class ContactsController < UserApplicationController
   before_filter :get_business
 
   def index

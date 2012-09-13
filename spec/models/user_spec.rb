@@ -115,4 +115,15 @@ describe User do
     end
   end
 
+  describe "current_user" do
+    before(:each) do
+      @user = User.create!(@attr)
+      User.current_user = @user
+    end
+
+    it "should return the current_user" do
+      User.current_user.should eq(@user)
+    end
+  end
+
 end

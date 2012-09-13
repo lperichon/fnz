@@ -1,6 +1,4 @@
-class TagsController < ApplicationController
-  before_filter :authenticate_user!
-
+class TagsController < UserApplicationController
   before_filter :get_business
 
   def index

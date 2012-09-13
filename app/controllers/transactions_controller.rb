@@ -1,5 +1,4 @@
-class TransactionsController < ApplicationController
-  before_filter :authenticate_user!
+class TransactionsController < UserApplicationController
 
   before_filter :get_context
 

@@ -1,5 +1,4 @@
-class SalesController < ApplicationController
-  before_filter :authenticate_user!
+class SalesController < UserApplicationController
 
   before_filter :get_context
 

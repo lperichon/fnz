@@ -1,6 +1,4 @@
-class MembershipsController < ApplicationController
-  before_filter :authenticate_user!
-
+class MembershipsController < UserApplicationController
   before_filter :get_context
 
   def index

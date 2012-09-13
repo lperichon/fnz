@@ -1,6 +1,4 @@
-class AgentsController < ApplicationController
-  before_filter :authenticate_user!
-
+class AgentsController < UserApplicationController
   before_filter :get_business
 
   def index

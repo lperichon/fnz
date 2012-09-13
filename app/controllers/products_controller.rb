@@ -1,6 +1,4 @@
-class ProductsController < ApplicationController
-  before_filter :authenticate_user!
-
+class ProductsController < UserApplicationController
   before_filter :get_business
 
   def index

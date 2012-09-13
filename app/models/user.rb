@@ -11,4 +11,13 @@ class User < ActiveRecord::Base
 
   has_many :businesses, :foreign_key => :owner_id
 
+  class << self
+    def current_user=(user)
+      Thread.current[:current_user] = user
+    end
+
+    def current_user
+      Thread.current[:current_user]
+    end
+  end
 end
