@@ -2,6 +2,7 @@ class Transaction < ActiveRecord::Base
   include ActiveModel::Transitions
 
   before_validation :set_creator
+  before_validation :set_business
   after_save :update_balances
 
   belongs_to :business
@@ -26,6 +27,10 @@ class Transaction < ActiveRecord::Base
 
   def set_creator
     self.creator = User.current_user unless creator
+  end
+
+  def set_business
+    self.business = source.business unless business
   end
 
   state_machine do
