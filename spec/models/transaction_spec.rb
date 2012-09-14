@@ -14,6 +14,8 @@ describe Transaction do
       :source_id => @account.id,
       :amount => 3.5
     }
+
+    User.current_user = @account.business.owner
   end
 
   it "should create a new instance given a valid attribute" do
@@ -35,18 +37,13 @@ describe Transaction do
     negative_amount_transaction.should_not be_valid
   end
 
-  it "should require a business" do
+  it "should set the business based on the source account" do
     no_business_transaction = Transaction.new(@attr.merge(:business_id => nil))
-    no_business_transaction.should_not be_valid
+    no_business_transaction.should be_valid
   end
 
   it "should require a source account" do
     no_source_transaction = Transaction.new(@attr.merge(:source_id => nil))
     no_source_transaction.should_not be_valid
-  end
-
-  it "should require a source account" do
-    no_business_transaction = Transaction.new(@attr.merge(:business_id => nil))
-    no_business_transaction.should_not be_valid
   end
 end
