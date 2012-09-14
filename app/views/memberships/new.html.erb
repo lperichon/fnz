@@ -1,3 +1,7 @@
+<% content_for :sidebar do %>
+    <%= render :partial => 'businesses/sidebar' %>
+<% end %>
+
 <h2>New Membership</h2>
 
 <%= render :partial => 'form', :locals => {:form_url => business_memberships_url(@business)} %>

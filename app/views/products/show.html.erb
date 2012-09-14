@@ -1,3 +1,7 @@
+<% content_for :sidebar do %>
+    <%= render :partial => 'businesses/edit_sidebar' %>
+<% end %>
+
 <h3>Product</h3>
 <p>Name: <%= @product.name %></p>
 <p>Price: <%= number_to_currency(@product.price, :unit => @product.currency.symbol) %></p>

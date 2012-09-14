@@ -1,3 +1,7 @@
+<% content_for :sidebar do %>
+    <%= render :partial => 'businesses/sidebar' %>
+<% end %>
+
 <h3>Memberships</h3>
 <ul class="memberships">
   <% @memberships.each do |membership| %>

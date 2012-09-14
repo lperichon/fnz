@@ -1,3 +1,7 @@
+<% content_for :sidebar do %>
+    <%= render :partial => 'sidebar' %>
+<% end %>
+
 <%= render :partial => 'transactions/transactions', :locals => {:context => @business} %>
 
 <%= link_to 'Back', businesses_path %>

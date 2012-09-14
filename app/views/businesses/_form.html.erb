@@ -1,22 +1,7 @@
-<%= form_for(@business, :as => :business, :url => form_url) do |f| %>
-    <% if @business.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@business.errors.count, "error") %> prohibited this business from being saved:</h2>
+<%= simple_form_for(@business, :as => :business, :validate => true, :url => form_url, :html => {:class => "form-horizontal"}) do |f| %>
+    <%= f.input :type, :collection => ["Personal", "School"], :as => :radio_buttons, :item_wrapper_class => 'inline' %>
 
-          <ul>
-            <% @business.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
-    <p><%= f.label :type %><br />
-      <%= f.radio_button :type, "Personal" %><%= label_tag(:type_personal, "Personal") %><%= f.radio_button :type, "School" %><%= label_tag(:type_school, "School") %></p>
+    <%= f.input :name %>
 
-    <p><%= f.label :name %><br />
-      <%= f.text_field :name %></p>
-
-    <div class="actions">
-      <%= f.submit %>
-    </div>
+    <%= f.button :submit, :class => "btn btn-primary" %>
 <% end %>

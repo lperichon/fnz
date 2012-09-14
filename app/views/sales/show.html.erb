@@ -1,3 +1,7 @@
+<% content_for :sidebar do %>
+    <%= render :partial => 'businesses/sidebar' %>
+<% end %>
+
 <h3>Sale</h3>
 <p>Business: <%= @sale.business.name %></p>
 <p>Contact: <%= @sale.contact.try(:name) %></p>

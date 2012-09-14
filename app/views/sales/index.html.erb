@@ -1,3 +1,7 @@
+<% content_for :sidebar do %>
+    <%= render :partial => 'businesses/sidebar' %>
+<% end %>
+
 <h3>Sales</h3>
 <ul class="sales">
   <% @sales.each do |sale| %>

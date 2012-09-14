@@ -1,16 +1,21 @@
 <% if @business.present? && @business.persisted? %>
 <ul class="nav nav-pills">
-  <li><%= link_to "Edit", edit_business_path(@business) %></li>
+  <li class="<%= 'active' if (controller.controller_name == "businesses" && controller.action_name == "edit") ||
+                              controller.controller_name == "agents" ||
+                              controller.controller_name == "contacts" ||
+                              controller.controller_name == "products" ||
+                              controller.controller_name == "tags" ||
+                              controller.controller_name == "accounts" %>">
+    <%= link_to "Edit", edit_business_path(@business) %>
+  </li>
   <li><%= link_to "Add Transaction", "#new-transaction-modal", 'data-toggle' => 'modal' %></li>
-  <li><%= link_to 'Manage Contacts', business_contacts_path(@business) %></li>
-  <li><%= link_to 'Manage Agents', business_agents_path(@business) %></li>
-  <li><%= link_to 'Manage Products', business_products_path(@business) %></li>
-  <li><%= link_to 'Manage Tags', business_tags_path(@business) %></li>
-  <li><%= link_to 'Manage Sales', business_sales_path(@business) %></li>
-  <li><%= link_to 'Manage Memberships', business_memberships_path(@business) %></li>
+  <% if @business.is_a? School %>
+      <li class="<%= 'active' if controller.controller_name == "sales" %>"><%= link_to 'Manage Sales', business_sales_path(@business) %></li>
+      <li class="<%= 'active' if controller.controller_name == "memberships" %>"><%= link_to 'Manage Memberships', business_memberships_path(@business) %></li>
+  <% end %>
 </ul>
 <% end %>
-
+<% if @business.present? && @business.persisted? %>
 <div id="new-transaction-modal" class = "modal hide fade">
   <div class="modal-header">Add Transaction</div>
   <%= simple_form_for(@business.transactions.build, :as => :transaction, :url => business_transactions_path(@business), :validate => true, :remote => true, :html => {"data-type" => :json, :class => 'form-horizontal'}) do |f| %>
@@ -18,3 +23,4 @@
       <div class="modal-footer"><%= f.button :submit, :class => "btn btn-primary" %></div>
   <% end %>
 </div>
+<% end %>

@@ -1,3 +1,7 @@
+<% content_for :sidebar do %>
+    <%= render :partial => 'businesses/edit_sidebar' %>
+<% end %>
+
 <h3>Contacts</h3>
 <ul class="contacts">
   <% @contacts.each do |contact| %>
