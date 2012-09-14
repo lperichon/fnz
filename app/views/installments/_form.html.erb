@@ -1,0 +1,5 @@
+<%= simple_form_for(@installment, :url => form_url) do |f| %>
+    <%= f.input :due_on, :as => "string", :input_html => {:class => "datepicker_input"} %></p>
+
+    <%= f.button :submit, :class => "btn btn-primary" %>
+<% end %>

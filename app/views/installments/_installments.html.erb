@@ -1,0 +1,7 @@
+<ul class="installments">
+  <% installments.each do |installment| %>
+      <li>
+        <%= link_to installment.due_on, business_membership_installment_path(@business, @membership, installment) %>
+      </li>
+  <% end %>
+</ul>

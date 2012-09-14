@@ -1,0 +1,5 @@
+<h3>Installments</h3>
+
+<%= render :partial => 'installments', :locals => {:installments => @installments} %>
+
+<%= link_to 'New Installment', new_business_membership_installment_path(@business, @membership) %>

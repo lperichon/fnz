@@ -1,0 +1,5 @@
+<h2>New Installment</h2>
+
+<%= render :partial => 'form', :locals => {:form_url => business_membership_installments_path(@business, @membership)}  %>
+
+<%= link_to 'Back', business_memberships_path(@business) %>
