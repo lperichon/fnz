@@ -1,3 +1,7 @@
+<% content_for :sidebar do %>
+    <%= render :partial => 'businesses/sidebar' %>
+<% end %>
+
 <h3>Installment</h3>
 <p>Due on: <%= @installment.due_on %></p>
 

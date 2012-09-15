@@ -1,3 +1,7 @@
+<% content_for :sidebar do %>
+    <%= render :partial => 'businesses/sidebar' %>
+<% end %>
+
 <h3>Installments</h3>
 
 <%= render :partial => 'installments', :locals => {:installments => @installments} %>
