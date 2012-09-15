@@ -9,6 +9,7 @@
     <%= link_to content_tag(:i, "", :class => "icon-cogs") + "Edit Business", edit_business_path(@business) %>
   </li>
   <li><%= link_to "Add Transaction", "#new-transaction-modal", 'data-toggle' => 'modal' %></li>
+  <li class="<%= 'active' if controller.controller_name == "transactions" %>"><%= link_to 'Manage Transactions', business_transactions_path(@business) %></li>
   <% if @business.is_a? School %>
       <li class="<%= 'active' if controller.controller_name == "sales" %>"><%= link_to 'Manage Sales', business_sales_path(@business) %></li>
       <li class="<%= 'active' if controller.controller_name == "memberships" %>"><%= link_to 'Manage Memberships', business_memberships_path(@business) %></li>
