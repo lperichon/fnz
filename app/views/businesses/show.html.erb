@@ -2,6 +2,6 @@
     <%= render :partial => 'sidebar' %>
 <% end %>
 
-<%= render :partial => 'transactions/transactions', :locals => {:context => @business} %>
+<%= render :partial => 'transactions/transactions', :locals => {:transactions => @business.transactions} %>
 
 <%= link_to 'Back', businesses_path %>

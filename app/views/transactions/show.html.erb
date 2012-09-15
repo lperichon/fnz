@@ -1,3 +1,8 @@
+<% content_for :sidebar do %>
+    <%= render :partial => 'businesses/sidebar' %>
+<% end %>
+
+
 <h3>Transaction</h3>
 <p>Type: <%= @transaction.type %></p>
 <p>Business: <%= @transaction.business.name %></p>
