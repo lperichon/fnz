@@ -1,12 +1,12 @@
 <% if @business.present? && @business.persisted? %>
-<ul class="nav nav-pills">
+<ul class="nav nav-pills" id="secondary-navigation">
   <li class="<%= 'active' if (controller.controller_name == "businesses" && controller.action_name == "edit") ||
                               controller.controller_name == "agents" ||
                               controller.controller_name == "contacts" ||
                               controller.controller_name == "products" ||
                               controller.controller_name == "tags" ||
                               controller.controller_name == "accounts" %>">
-    <%= link_to "Edit", edit_business_path(@business) %>
+    <%= link_to content_tag(:i, "", :class => "icon-cogs") + "Edit Business", edit_business_path(@business) %>
   </li>
   <li><%= link_to "Add Transaction", "#new-transaction-modal", 'data-toggle' => 'modal' %></li>
   <% if @business.is_a? School %>

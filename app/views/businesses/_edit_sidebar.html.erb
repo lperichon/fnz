@@ -1,9 +1,9 @@
-<ul class="nav nav-pills nav-stacked">
+<ul class="nav nav-pills nav-stacked" id="edit-sidebar">
   <% if @business.is_a? School %>
-  <li class="<%= 'active' if controller.controller_name == "contacts" %>"><%= link_to 'Manage Contacts', business_contacts_path(@business) %></li>
-  <li class="<%= 'active' if controller.controller_name == "agents" %>"><%= link_to 'Manage Agents', business_agents_path(@business) %></li>
-  <li class="<%= 'active' if controller.controller_name == "products" %>"><%= link_to 'Manage Products', business_products_path(@business) %></li>
+  <li class="<%= 'active' if controller.controller_name == "contacts" %>"><%= link_to content_tag(:i, "", :class => "icon-group") + 'Manage Contacts', business_contacts_path(@business) %></li>
+  <li class="<%= 'active' if controller.controller_name == "agents" %>"><%= link_to content_tag(:i, "", :class => "icon-sitemap") + 'Manage Agents', business_agents_path(@business) %></li>
+  <li class="<%= 'active' if controller.controller_name == "products" %>"><%= link_to content_tag(:i, "", :class => "icon-shopping-cart") + 'Manage Products', business_products_path(@business) %></li>
   <% end %>
-  <li class="<%= 'active' if controller.controller_name == "tags" %>"><%= link_to 'Manage Tags', business_tags_path(@business) %></li>
-  <li class="<%= 'active' if controller.controller_name == "accounts" %>"><%= link_to 'Manage Accounts', business_accounts_path(@business) %></li>
+  <li class="<%= 'active' if controller.controller_name == "tags" %>"><%= link_to content_tag(:i, "", :class => "icon-tags") + 'Manage Tags', business_tags_path(@business) %></li>
+  <li class="<%= 'active' if controller.controller_name == "accounts" %>"><%= link_to content_tag(:i, "", :class => "icon-folder-open") + 'Manage Accounts', business_accounts_path(@business) %></li>
 </ul>
