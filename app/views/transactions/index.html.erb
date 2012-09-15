@@ -1,12 +1,7 @@
+<% content_for :sidebar do %>
+    <%= render :partial => 'businesses/sidebar' %>
+<% end %>
+
+
 <h3>Transactions</h3>
-<ul class="transactions">
-  <% @transactions.each do |transaction| %>
-    <li>
-      <%= link_to transaction.description, business_transaction_path(transaction.business, transaction) %>
-    </li>
-  <% end %>
-</ul>
-
-<br />
-
-<%= link_to 'New transaction', new_business_transaction_path(@business) %>
+<%= render :partial => 'transactions', :locals => {:transactions => @transactions} %>
