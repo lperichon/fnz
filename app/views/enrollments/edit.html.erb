@@ -4,7 +4,7 @@
 
 <h2>Edit Enrollment</h2>
 
-<%= render :partial => 'form', :locals => {:form_url => business_membership_enrollment_path(@business, @membership, @enrollment)} %>
+<%= render :partial => 'form', :locals => {:form_url => business_membership_enrollment_path(@business, @membership)} %>
 
-<%= link_to 'Show', business_membership_enrollment_path(@business, @membership, @enrollment) %> |
-<%= link_to 'Back', business_membership_path %>
+<%= link_to 'Show', business_membership_enrollment_path(@business, @membership) %> |
+<%= link_to 'Back', business_membership_path(@business, @membership) %>
