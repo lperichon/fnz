@@ -5,3 +5,7 @@
 .icon-transfer:before        { content: "\f021"; }
 .icon-credit:before          { content: "\f060"; color: green;}
 .icon-debit:before           { content: "\f061"; color: red;}
+
+.icon-created:before        { content: " "; }
+.icon-pending:before        { content: "\f024"; }
+.icon-reconciled:before     { content: "\f00c"; }
