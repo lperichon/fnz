@@ -1,3 +1,7 @@
 #new_transaction {
   margin: 0;
 }
+
+.icon-transfer:before        { content: "\f021"; }
+.icon-credit:before          { content: "\f060"; color: green;}
+.icon-debit:before           { content: "\f061"; color: red;}
