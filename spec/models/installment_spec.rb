@@ -7,7 +7,8 @@ describe Installment do
 
     @attr = {
       :membership_id => @membership.id,
-      :due_on => Date.today.beginning_of_month
+      :due_on => Date.today.beginning_of_month,
+      :value => 3.2
     }
   end
   
@@ -24,5 +25,10 @@ describe Installment do
   it "should require a due date" do
     no_due_installment = Installment.new(@attr.merge(:due_on => nil))
     no_due_installment.should_not be_valid
+  end
+
+  it "should require a value" do
+    no_value_installment = Installment.new(@attr.merge(:value => nil))
+    no_value_installment.should_not be_valid
   end
 end

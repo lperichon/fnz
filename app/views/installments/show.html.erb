@@ -4,6 +4,7 @@
 
 <h2>Installment</h2>
 <p>Due on: <%= @installment.due_on %></p>
+<p>value: <%= @installment.value %></p>
 
 <h3>Transactions</h3>
 <%= render :partial => 'transactions/transactions', :locals => {:transactions => @installment.transactions} %>

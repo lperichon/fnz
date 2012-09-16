@@ -1,5 +1,6 @@
-<%= simple_form_for(@installment, :url => form_url) do |f| %>
-    <%= f.input :due_on, :as => "string", :input_html => {:class => "datepicker_input"} %></p>
+<%= simple_form_for(@installment, :validate => true, :url => form_url) do |f| %>
+    <%= f.input :due_on, :as => "string", :input_html => {:class => "datepicker_input"} %>
+    <%= f.input :value %>
 
     <h3>Transactions</h3>
     <%= render :partial => 'transactions/transaction_fields', :locals => {:f => f} %>
