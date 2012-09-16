@@ -2,6 +2,7 @@ class Membership < ActiveRecord::Base
   belongs_to :business
   belongs_to :contact
   has_many :installments
+  has_one :enrollment
 
   validates :business, :presence => true
   validates :contact, :presence => true

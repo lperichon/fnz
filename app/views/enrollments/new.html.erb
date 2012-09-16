@@ -1,0 +1,9 @@
+<% content_for :sidebar do %>
+    <%= render :partial => 'businesses/sidebar' %>
+<% end %>
+
+<h2>New Enrollment</h2>
+
+<%= render :partial => 'form', :locals => {:form_url => business_membership_enrollment_path(@business, @membership)}  %>
+
+<%= link_to 'Back', business_membership_path(@business, @membership) %>

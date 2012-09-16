@@ -1,0 +1,12 @@
+<% content_for :sidebar do %>
+    <%= render :partial => 'businesses/sidebar' %>
+<% end %>
+
+<h2>Enrollment</h2>
+<%= render :partial => 'enrollment' %>
+
+<h3>Transactions</h3>
+<%= render :partial => 'transactions/transactions', :locals => {:transactions => @enrollment.transactions} %>
+
+<%= link_to 'Edit', edit_business_membership_enrollment_path(@business, @membership, @enrollment) %> |
+<%= link_to 'Back', business_membership_path(@business, @membership) %>

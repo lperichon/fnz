@@ -1,0 +1,8 @@
+<%= simple_form_for(@enrollment, :validate => true, :url => form_url) do |f| %>
+    <%= f.input :value %>
+
+    <h3>Transactions</h3>
+    <%= render :partial => 'transactions/transaction_fields', :locals => {:f => f} %>
+
+    <%= f.button :submit, :class => "btn btn-primary" %>
+<% end %>
