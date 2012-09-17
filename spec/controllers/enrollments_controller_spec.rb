@@ -8,6 +8,7 @@ describe EnrollmentsController do
   def valid_attributes
     {
         :membership_id => @membership.id,
+        :agent_id => @agent.id,
         :value => 3.2
     }
   end
@@ -15,6 +16,8 @@ describe EnrollmentsController do
   before(:each) do
     @business = FactoryGirl.create(:school)
     @membership = FactoryGirl.create(:membership, :business => @business)
+    @agent = FactoryGirl.create(:agent, :business => @business)
+
     @user = @business.owner
     sign_in @user
   end

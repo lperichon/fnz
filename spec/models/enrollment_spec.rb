@@ -4,9 +4,11 @@ describe Enrollment do
   
   before(:each) do
     @membership = FactoryGirl.create(:membership)
+    @agent = FactoryGirl.create(:agent, :business => @membership.business)
 
     @attr = {
       :membership_id => @membership.id,
+      :agent_id => @agent.id,
       :value => 3.2
     }
   end
@@ -14,11 +16,15 @@ describe Enrollment do
   it "should create a new instance given a valid attribute" do
     Enrollment.create!(@attr)
   end
-  
 
   it "should require a membership" do
     no_membership_enrollment = Enrollment.new(@attr.merge(:membership_id => nil))
     no_membership_enrollment.should_not be_valid
+  end
+
+  it "should require an agent" do
+    no_agent_enrollment = Enrollment.new(@attr.merge(:agent_id => nil))
+    no_agent_enrollment.should_not be_valid
   end
 
   it "should require a value" do
