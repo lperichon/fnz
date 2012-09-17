@@ -8,6 +8,7 @@ describe InstallmentsController do
   def valid_attributes
     {
         :membership_id => @membership.id,
+        :agent_id => @agent.id,
         :due_on => Date.today
     }
   end
@@ -15,6 +16,7 @@ describe InstallmentsController do
   before(:each) do
     @business = FactoryGirl.create(:school)
     @membership = FactoryGirl.create(:membership, :business => @business)
+    @agent = FactoryGirl.create(:agent, :business => @business)
     @user = @business.owner
     sign_in @user
   end
