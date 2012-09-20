@@ -1,0 +1,29 @@
+<table class="transactions table table-striped table-hover table-condensed table-bordered">
+  <%= render :partial => 'transactions_table_header' %>
+
+  <%= f.fields_for :transactions do |transaction_f| %>
+      <tr>
+        <%= render :partial => 'transactions_table_item', :locals => {:transaction => transaction_f.object} %>
+        <td>
+          <%= link_to "remove", "#" %>
+          <%= transaction_f.hidden_field :id %>
+          <%= transaction_f.hidden_field :_destroy %>
+        </td>
+      </tr>
+  <% end %>
+</table>
+<div><%= link_to "List transactions", "#list-transactions-modal", 'data-toggle' => 'modal' %></div>
+<div><%= link_to 'Add transaction', "#" %></div>
+
+<div id="list-transactions-modal" class = "modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Link Transaction</h3>
+  </div>
+  <div class="modal-body">
+    <%= render :partial => "transactions_table", :locals => {:transactions => @business.transactions} %>
+  </div>
+  <div class="modal-footer">
+    <%= link_to "Close", "#", :class => "btn", "data-dismiss" => "modal" %>
+  </div>
+</div>

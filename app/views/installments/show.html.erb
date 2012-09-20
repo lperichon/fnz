@@ -8,7 +8,7 @@
 <p>value: <%= @installment.value %></p>
 
 <h3>Transactions</h3>
-<%= render :partial => 'transactions/transactions', :locals => {:transactions => @installment.transactions} %>
+<%= render :partial => 'transactions_table', :locals => {:transactions => @installment.transactions} %>
 
 <%= link_to 'Edit', edit_business_membership_installment_path(@business, @membership, @installment) %> |
 <%= link_to 'Back', business_memberships_path(@business) %>

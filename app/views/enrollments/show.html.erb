@@ -6,7 +6,7 @@
 <%= render :partial => 'enrollment', :locals => {:enrollment => @enrollment} %>
 
 <h3>Transactions</h3>
-<%= render :partial => 'transactions/transactions', :locals => {:transactions => @enrollment.transactions} %>
+<%= render :partial => 'transactions_table', :locals => {:transactions => @enrollment.transactions} %>
 
 <%= link_to 'Edit', edit_business_membership_enrollment_path(@business, @membership) %> |
 <%= link_to 'Back', business_membership_path(@business, @membership) %>

@@ -6,7 +6,7 @@
     <%= f.association :product, :as => :select, :collection => @business.products, :prompt => 'Please select product' %>
 
     <h3>Transactions</h3>
-    <%= render :partial => 'transactions/transaction_fields', :locals => {:f => f} %>
+    <%= render :partial => 'nested_transactions_table', :locals => {:f => f} %>
 
     <%= f.button :submit, :class => "btn btn-primary" %>
 

@@ -8,7 +8,7 @@
 <p>Agent: <%= @sale.agent.name %></p>
 <p>Product: <%= @sale.product.try(:name) %></p>
 
-<%= render :partial => 'transactions/transactions', :locals => {:transactions => @sale.transactions} %>
+<%= render :partial => 'transactions_table', :locals => {:transactions => @sale.transactions} %>
 
 <%= link_to 'Edit', edit_business_sale_path(@business, @sale) %> |
 <%= link_to 'Back',:back %>

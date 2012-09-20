@@ -1,0 +1,13 @@
+<table class="transactions table table-striped table-hover table-condensed table-bordered">
+  <%= render :partial => 'transactions_table_header' %>
+
+  <% transactions.each do |transaction| %>
+    <tr>
+      <%= render :partial => 'transactions_table_item', :locals => {:transaction => transaction} %>
+      <td>
+        <%= link_to content_tag(:i, "", :class => "icon-edit"), business_transaction_path(transaction.business, transaction) %>
+        <%= link_to content_tag(:i, "", :class => "icon-trash"), business_transaction_path(transaction.business, transaction), :confirm => 'Are you sure you want to delete this item?', :method => 'delete' %>
+      </td>
+    </tr>
+  <% end %>
+</table>

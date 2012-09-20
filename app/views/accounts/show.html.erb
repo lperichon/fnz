@@ -6,8 +6,7 @@
 <p>Name: <%= @account.name %></p>
 <p>Balance: <%= number_to_currency(@account.balance, :unit => @account.currency.symbol) %></p>
 
-<%= render :partial => 'transactions/transactions', :locals => {:transactions => @account.transactions} %>
+<%= render :partial => 'transactions_table', :locals => {:transactions => @account.transactions} %>
 
-<%= link_to "Add Transaction", new_business_transaction_path(@business) %> |
 <%= link_to 'Edit', edit_business_account_path(@business, @account) %> |
 <%= link_to 'Back', business_accounts_path(@business) %>
