@@ -5,9 +5,9 @@
       <tr>
         <%= render :partial => 'transactions_table_item', :locals => {:transaction => transaction_f.object} %>
         <td>
-          <%= link_to "remove", "#", :class => "remove-nested-transaction" %>
+          <%= link_to  content_tag(:i, "", :class => "icon-remove"), "#", :class => "remove-nested-transaction" %>
           <%= transaction_f.hidden_field :id %>
-          <%= transaction_f.hidden_field :_destroy %>
+          <%= transaction_f.hidden_field :_destroy, :class => "destroy-value" %>
         </td>
       </tr>
   <% end %>
