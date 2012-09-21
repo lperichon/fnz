@@ -11,9 +11,13 @@
         </td>
       </tr>
   <% end %>
+  <tfoot>
+    <td colspan="9">
+      <%= link_to 'Add transaction', "#new-transaction-modal", 'data-toggle' => 'modal', :id => "add_nested", 'data-parent-type' => f.object.class.to_s.downcase, 'data-parent-id' => f.object.id.to_s %>
+      <%= link_to "List transactions", "#list-transactions-modal", 'data-toggle' => 'modal' %>
+    </td>
+  </tfoot>
 </table>
-<div><%= link_to "List transactions", "#list-transactions-modal", 'data-toggle' => 'modal' %></div>
-<div><%= link_to 'Add transaction', "#" %></div>
 
 <div id="list-transactions-modal" class = "modal hide fade">
   <div class="modal-header">
