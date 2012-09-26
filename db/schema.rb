@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(:version => 20120917193738) do
     t.integer "agent_id"
   end
 
-  create_table "enrollments_transactions", :id => false, :force => true do |t|
+  create_table "enrollments_transactions", :force => true do |t|
     t.integer "enrollment_id"
     t.integer "transaction_id"
   end
@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(:version => 20120917193738) do
     t.integer "agent_id"
   end
 
-  create_table "installments_transactions", :id => false, :force => true do |t|
+  create_table "installments_transactions", :force => true do |t|
     t.integer "installment_id"
     t.integer "transaction_id"
   end

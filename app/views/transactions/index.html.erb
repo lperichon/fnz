@@ -4,4 +4,7 @@
 
 
 <h3>Transactions</h3>
-<%= render :partial => 'transactions_table', :locals => {:transactions => @transactions} %>
+<%= render :layout => 'transactions_table', :locals => {:transactions => @transactions} do |transaction| %>
+  <%= link_to content_tag(:i, "", :class => "icon-edit"), business_transaction_path(transaction.business, transaction) %>
+  <%= link_to content_tag(:i, "", :class => "icon-trash"), business_transaction_path(transaction.business, transaction), :confirm => 'Are you sure you want to delete this item?', :method => 'delete' %>
+<% end %>

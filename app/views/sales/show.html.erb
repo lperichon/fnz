@@ -8,7 +8,9 @@
 <p>Agent: <%= @sale.agent.name %></p>
 <p>Product: <%= @sale.product.try(:name) %></p>
 
-<%= render :partial => 'transactions_table', :locals => {:transactions => @sale.transactions} %>
+<%= render :layout => 'transactions_table', :locals => {:transactions => @sale.transactions} do |transaction| %>
+  <%= link_to content_tag(:i, "", :class => "icon-edit"), business_transaction_path(transaction.business, transaction) %>
+<% end %>
 
 <%= link_to 'Edit', edit_business_sale_path(@business, @sale) %> |
 <%= link_to 'Back',:back %>

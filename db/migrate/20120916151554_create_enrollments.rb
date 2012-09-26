@@ -5,7 +5,7 @@ class CreateEnrollments < ActiveRecord::Migration
       t.decimal :value, :null => false, :precision => 8, :scale => 2, :default => 0
     end
 
-    create_table :enrollments_transactions, :id => false do |t|
+    create_table :enrollments_transactions do |t|
       t.references :enrollment
       t.references :transaction
     end
