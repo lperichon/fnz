@@ -9,6 +9,9 @@ class Installment < ActiveRecord::Base
   validates :due_on, :presence => true
   validates :value, :presence => true
 
+  scope :due, where("due_on BETWEEN '#{Date.today}' AND '#{15.days.from_now}'")
+  scope :overdue, where("due_on < '#{Date.today}'")
+
   # Setup accessible (or protected) attributes for your model
   attr_accessible :membership_id, :agent_id, :due_on, :value, :transactions_attributes, :installment_transactions_attributes
   accepts_nested_attributes_for :transactions, allow_destroy: true
