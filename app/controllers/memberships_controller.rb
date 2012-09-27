@@ -3,6 +3,8 @@ class MembershipsController < UserApplicationController
 
   def index
     @memberships = @context.all
+    @overdue_installments = Installment.joins(:membership).where("memberships.business_id = #{@business.id}").overdue.incomplete
+    @due_installments = Installment.joins(:membership).where("memberships.business_id = #{@business.id}").due.incomplete
   end
 
   def show

@@ -13,4 +13,26 @@
 
 <br />
 
+<h3>Overdue Installments</h3>
+<ul class="overdue-installments">
+  <% @overdue_installments.each do |installment| %>
+      <li>
+        <%= link_to installment.due_on, business_membership_installment_path(@business, installment.membership, installment) %>
+      </li>
+  <% end %>
+</ul>
+
+<br />
+
+<h3>Due Installments</h3>
+<ul class="overdue-installments">
+  <% @due_installments.each do |installment| %>
+      <li>
+        <%= link_to installment.due_on, business_membership_installment_path(@business, installment.membership, installment) %>
+      </li>
+  <% end %>
+</ul>
+
+<br />
+
 <%= link_to 'New membership', new_business_membership_path(@business) %>

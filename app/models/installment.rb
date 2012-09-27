@@ -11,6 +11,7 @@ class Installment < ActiveRecord::Base
 
   scope :due, where("due_on BETWEEN '#{Date.today}' AND '#{15.days.from_now}'")
   scope :overdue, where("due_on < '#{Date.today}'")
+  scope :incomplete, where("installments.value > installments.balance")
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :membership_id, :agent_id, :due_on, :value, :transactions_attributes, :installment_transactions_attributes
