@@ -13,26 +13,29 @@
 
 <br />
 
+<% unless @overdue_installments.empty? %>
 <h3>Overdue Installments</h3>
 <ul class="overdue-installments">
   <% @overdue_installments.each do |installment| %>
       <li>
-        <%= link_to installment.due_on, business_membership_installment_path(@business, installment.membership, installment) %>
+        <%= link_to "#{installment.due_on} #{installment.membership.contact.name} #{installment.value}", business_membership_installment_path(@business, installment.membership, installment) %>
       </li>
   <% end %>
 </ul>
 
 <br />
+<% end %>
 
+<% unless @due_installments.empty? %>
 <h3>Due Installments</h3>
 <ul class="overdue-installments">
   <% @due_installments.each do |installment| %>
       <li>
-        <%= link_to installment.due_on, business_membership_installment_path(@business, installment.membership, installment) %>
+        <%= installment.membership.contact.name %> <%= link_to installment.due_on, business_membership_installment_path(@business, installment.membership, installment) %>
       </li>
   <% end %>
 </ul>
 
 <br />
-
+<% end %>
 <%= link_to 'New membership', new_business_membership_path(@business) %>
