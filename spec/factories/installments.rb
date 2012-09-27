@@ -1,8 +1,10 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :sale do
-    contact
-    business
+  factory :installment do
+    membership
+    agent
+    due_on 1.week.from_now
+    value 100
   end
 end

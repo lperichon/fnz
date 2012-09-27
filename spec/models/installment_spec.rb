@@ -37,4 +37,57 @@ describe Installment do
     no_value_installment = Installment.new(@attr.merge(:value => nil))
     no_value_installment.should_not be_valid
   end
+
+
+  describe "#overdue" do
+    before do
+      @installment = FactoryGirl.create(:installment, :membership => @membership, :agent => @agent)
+    end
+    it "should be due" do
+      Installment.due.should include(@installment)
+    end
+  end
+
+  describe "#overdue" do
+    before do
+      @installment = FactoryGirl.create(:installment, :membership => @membership, :agent => @agent, :due_on => 1.week.ago)
+    end
+    it "should be overdue" do
+      Installment.overdue.should include(@installment)
+    end
+  end
+
+  describe "#balance" do
+    before do
+      @installment = FactoryGirl.create(:installment, :membership => @membership, :agent => @agent)
+    end
+    it "should be 0 to begin" do
+      @installment.balance.should eq(0)
+    end
+
+    describe "when there is one completed transaction" do
+      before do
+        source_account = FactoryGirl.create(:account, :business => @membership.business)
+        @transaction = FactoryGirl.create(:transaction, :type => "Credit", :business => @membership.business, :source => source_account, :creator => @membership.business.owner)
+        @installment.transactions << @transaction
+        @installment.reload
+      end
+
+      it "should calculate the balance" do
+        @installment.balance.should eq(@transaction.amount)
+      end
+
+      describe "and it is updated" do
+        before do
+          @transaction.amount = 123
+          @transaction.save
+          @installment.reload
+        end
+
+        it "should recalculate the installment's balance" do
+          @installment.balance.should eq(@transaction.amount)
+        end
+      end
+    end
+  end
 end

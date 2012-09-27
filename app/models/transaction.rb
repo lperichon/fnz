@@ -27,6 +27,7 @@ class Transaction < ActiveRecord::Base
 
   def update_balances
     source.update_balance
+    installments.each { |installment| installment.update_balance } if installments.count > 0
   end
 
   def set_creator

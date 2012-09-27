@@ -16,4 +16,14 @@ class Installment < ActiveRecord::Base
   attr_accessible :membership_id, :agent_id, :due_on, :value, :transactions_attributes, :installment_transactions_attributes
   accepts_nested_attributes_for :transactions, allow_destroy: true
   accepts_nested_attributes_for :installment_transactions, :reject_if => proc { |s| s['transaction_id'].blank? }
+
+  def update_balance
+    self.update_attribute(:balance, calculate_balance)
+  end
+
+  private
+
+  def calculate_balance
+    transactions.where(:state => [:created, :reconciled]).inject(0) {|balance, transaction| balance+transaction.sign(self)*transaction.amount}
+  end
 end
