@@ -3,9 +3,10 @@
 <ul class="nav nav-pills nav-stacked">
   <% @business.contacts.each do |contact| %>
       <% if contact.membership.present? %>
-        <li class="<%= 'active' if @membership.present? && contact.id == @membership.contact.id %>"><%= link_to contact.name.html_safe, business_membership_path(@business, contact.membership) %></li>
+        <% str = contact.name.html_safe + ( content_tag(:span, contact.membership.ends_on.to_s.html_safe, :class => "pull-right") + content_tag(:i, "", :class => "#{contact.membership.due? ? 'due' : 'overdue'}-membership pull-right icon-fire") if contact.membership.due? || contact.membership.overdue? ) %>
+        <li class="<%= 'active' if @membership.present? && contact.id == @membership.contact.id %>"><%= link_to str, business_membership_path(@business, contact.membership) %></li>
       <% else %>
-          <li><%= link_to contact.name.html_safe + content_tag(:i, "", :class => "pull-right icon-fire", :title => "Assign membership"), new_business_membership_path(@business, :membership => {:contact_id => contact.id}) %></li>
+          <li><%= link_to contact.name.html_safe + content_tag(:i, "", :class => "no-membership pull-right icon-fire", :title => "Assign membership"), new_business_membership_path(@business, :membership => {:contact_id => contact.id}) %></li>
       <% end %>
   <% end %>
 </ul>

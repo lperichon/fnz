@@ -12,4 +12,12 @@ class Membership < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :contact_id, :business_id, :begins_on, :ends_on, :value
+
+  def overdue?
+    ends_on < Date.today
+  end
+
+  def due?
+    (Date.today..Date.today.end_of_month).include? ends_on
+  end
 end
