@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120926221008) do
+ActiveRecord::Schema.define(:version => 20120928144611) do
 
   create_table "accounts", :force => true do |t|
     t.string  "name",                                      :default => "",  :null => false
@@ -47,6 +47,16 @@ ActiveRecord::Schema.define(:version => 20120926221008) do
   create_table "enrollments_transactions", :force => true do |t|
     t.integer "enrollment_id"
     t.integer "transaction_id"
+  end
+
+  create_table "imports", :force => true do |t|
+    t.integer  "business_id"
+    t.string   "upload_file_name"
+    t.string   "upload_content_type"
+    t.integer  "upload_file_size"
+    t.datetime "upload_updated_at"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   create_table "installments", :force => true do |t|
