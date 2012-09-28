@@ -1,0 +1,9 @@
+<% content_for :sidebar do %>
+    <%= render :partial => 'businesses/edit_sidebar' %>
+<% end %>
+
+<h3>Import</h3>
+<p>Id: <%= @import.id %></p>
+
+<%= link_to 'Edit', edit_business_import_path(@business, @import) %> |
+<%= link_to 'Back', business_imports_path(@business) %>

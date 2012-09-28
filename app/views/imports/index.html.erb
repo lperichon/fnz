@@ -1,0 +1,16 @@
+<% content_for :sidebar do %>
+    <%= render :partial => 'businesses/edit_sidebar' %>
+<% end %>
+
+<h3>Imports</h3>
+<ul class="imports">
+  <% @imports.each do |import| %>
+    <li>
+      <%= link_to import.id, business_import_path(@business, import) %>
+    </li>
+  <% end %>
+</ul>
+
+<br />
+
+<%= link_to 'New Import', new_business_import_path(@business) %>

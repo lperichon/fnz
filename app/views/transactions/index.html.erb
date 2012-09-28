@@ -2,6 +2,9 @@
     <%= render :partial => 'businesses/sidebar' %>
 <% end %>
 
+<div class="actions">
+  <%= link_to content_tag(:i, "", :class => "icon-upload") + "Import CSV", new_business_import_path(@business), :class => "btn" %>
+</div>
 
 <h3>Transactions</h3>
 <%= render :layout => 'transactions_table', :locals => {:transactions => @transactions} do |transaction| %>

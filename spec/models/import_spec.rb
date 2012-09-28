@@ -5,7 +5,7 @@ describe Import do
   before(:each) do
     @business = FactoryGirl.create(:business)
     @attr = {
-      :upload => Rack::Test::UploadedFile.new('spec/support/transactions.csv', 'text/csv'),
+      :upload => Rack::Test::UploadedFile.new('spec/fixtures/transactions.csv', 'text/csv'),
       :business_id => @business.id
     }
   end

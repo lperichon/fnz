@@ -6,6 +6,7 @@ class Business < ActiveRecord::Base
   has_many :contacts
   has_many :agents
   has_many :products
+  has_many :imports
 
   validates :name, :presence => true
   validates :owner, :presence => true

@@ -14,3 +14,14 @@
 .icon-created:before        { content: " "; }
 .icon-pending:before        { content: "\f024"; }
 .icon-reconciled:before     { content: "\f00c"; }
+
+.btn-top-icon i {
+  display: block;
+  margin: 5px auto;
+  font-size: 1.5em;
+}
+
+.actions .btn i {
+  font-size: 1.5em;
+  margin-right: 5px;
+}

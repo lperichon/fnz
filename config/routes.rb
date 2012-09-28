@@ -25,6 +25,7 @@ Fnz::Application.routes.draw do
       resources :installments
       resource :enrollment
     end
+    resources :imports
   end
   resources :debits, :controller => 'transactions', :except => [:index]
   resources :credits, :controller => 'transactions', :except => [:index]
