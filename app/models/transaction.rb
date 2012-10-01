@@ -62,4 +62,8 @@ class Transaction < ActiveRecord::Base
     }
     return transaction
   end
+
+  def self.csv_header
+    "Account,Date,Amount,Description".split(',')
+  end
 end

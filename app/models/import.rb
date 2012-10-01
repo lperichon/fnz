@@ -28,11 +28,13 @@ class Import < ActiveRecord::Base
       end
     end
 
-    errCSV = CSV.generate do |csv|
-      errs.each {|row| csv << row}
+    unless errs.empty?
+      errs.insert(0, Transaction.csv_header)
+      errCSV = CSV.generate do |csv|
+        errs.each {|row| csv << row}
+      end
+      self.update_attribute(:errors_csv, errCSV)
     end
-    self.update_attribute(:errors_csv, errCSV)
-
     return errs.empty?
   end
 end
