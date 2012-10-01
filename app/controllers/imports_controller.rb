@@ -73,6 +73,19 @@ class ImportsController < UserApplicationController
     end
   end
 
+  def errors
+    @import = @business.imports.find(params[:id])
+
+    # Export Error file for later upload upon correction
+    if @import.errors_csv.empty?
+      flash[:notice] = I18n.t('transaction.import.success')
+      redirect_to business_import_url(@business, @import) #GET
+    else
+      errFile ="errors_#{Date.today.strftime('%d%b%y')}.csv"
+      send_data @import.errors_csv, :type => 'text/csv; charset=iso-8859-1; header=present', :disposition => "attachment; filename=#{errFile}"
+    end
+  end
+
   private
 
   def get_business

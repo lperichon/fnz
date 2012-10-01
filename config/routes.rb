@@ -27,6 +27,7 @@ Fnz::Application.routes.draw do
     end
     resources :imports do
       put :process_csv, :on => :member
+      get :errors, :on => :member
     end
   end
   resources :debits, :controller => 'transactions', :except => [:index]
