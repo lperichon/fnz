@@ -46,4 +46,9 @@ describe Transaction do
     no_source_transaction = Transaction.new(@attr.merge(:source_id => nil))
     no_source_transaction.should_not be_valid
   end
+
+  it "should import from csv row" do
+    transaction = Transaction.build_from_csv(@account.business, [@account.name, Date.today, 2.1, "Test import transaction"])
+    transaction.should be_valid
+  end
 end

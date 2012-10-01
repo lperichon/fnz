@@ -47,4 +47,19 @@ class Transaction < ActiveRecord::Base
       transitions :to => :reconciled, :from => :pending
     end
   end
+
+  def self.build_from_csv(business, row)
+    transaction = Transaction.new
+    amount = BigDecimal.new(row[2])
+    type = amount > 0 ? "Credit" : "Debit"
+    transaction.attributes = {
+        :business_id => business.id,
+        :type => type,
+        :source_id => business.accounts.find_or_create_by_name(row[0]),
+        :transaction_at => row[1],
+        :amount => amount,
+        :description => row[3]
+    }
+    return transaction
+  end
 end

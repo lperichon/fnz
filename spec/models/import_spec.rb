@@ -5,9 +5,11 @@ describe Import do
   before(:each) do
     @business = FactoryGirl.create(:business)
     @attr = {
-      :upload => Rack::Test::UploadedFile.new('spec/fixtures/transactions.csv', 'text/csv'),
+      :upload => Rack::Test::UploadedFile.new('spec/fixtures/empty_transactions.csv', 'text/csv'),
       :business_id => @business.id
     }
+
+    User.current_user = @business.owner
   end
   
   it "should create a new instance given a valid attribute" do
@@ -25,4 +27,11 @@ describe Import do
                   allowing('text/csv').
                   rejecting('image/png', 'image/gif') }
 
+  it "should process a csv file" do
+    import = @business.imports.create
+    import.upload.stub!(:url).and_return("#{Rails.root}/spec/fixtures/transactions.csv")
+    expect {
+      import.process
+    }.to change(Transaction, :count).by(1)
+  end
 end

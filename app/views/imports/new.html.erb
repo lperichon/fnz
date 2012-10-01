@@ -4,6 +4,6 @@
 
 <h2>New Import</h2>
 
-<%= render :partial => 'form' %>
+<%= render :partial => 'form', :locals => {:form_url => business_imports_url(@business)} %>
 
 <%= link_to 'Back', business_imports_path(@business) %>

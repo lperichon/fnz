@@ -7,7 +7,7 @@ describe ImportsController do
   # update the return value of this method accordingly.
   def valid_attributes
     {
-      :upload => fixture_file_upload('/transactions.csv', 'text/csv')
+      :upload => fixture_file_upload('/empty_transactions.csv', 'text/csv')
     }
   end
 

@@ -6,4 +6,5 @@
   <% end %>
   <li class="<%= 'active' if controller.controller_name == "tags" %>"><%= link_to content_tag(:i, "", :class => "icon-tags") + 'Manage Tags', business_tags_path(@business) %></li>
   <li class="<%= 'active' if controller.controller_name == "accounts" %>"><%= link_to content_tag(:i, "", :class => "icon-folder-open") + 'Manage Accounts', business_accounts_path(@business) %></li>
+  <li class="<%= 'active' if controller.controller_name == "imports" %>"><%= link_to content_tag(:i, "", :class => "icon-upload") + 'Manage Imports', business_imports_path(@business) %></li>
 </ul>

@@ -61,6 +61,18 @@ class ImportsController < UserApplicationController
     end
   end
 
+  def process_csv
+    @import = @business.imports.find(params[:id])
+
+    respond_to do |format|
+      if @import.process
+        format.html { redirect_to business_import_path(@business, @import), notice: 'Import was successfully processed.' }
+      else
+        format.html { redirect_to business_import_path(@business, @import), notice: 'Import process failed.' }
+      end
+    end
+  end
+
   private
 
   def get_business
