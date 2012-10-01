@@ -5,5 +5,8 @@
 <h3>Import</h3>
 <p>Id: <%= @import.id %></p>
 
+<h3>Transactions</h3>
+<%= render :partial => 'transactions_table', :locals => {:transactions => @import.transactions} %>
+
 <%= link_to 'Edit', edit_business_import_path(@business, @import) %> |
 <%= link_to 'Back', business_imports_path(@business) %>

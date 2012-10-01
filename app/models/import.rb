@@ -2,6 +2,7 @@ class Import < ActiveRecord::Base
   require 'csv'
   belongs_to :business
   has_attached_file :upload
+  has_and_belongs_to_many :transactions
 
   validates :business, :presence => true
   validates_attachment :upload, :presence => true, :content_type => { :content_type => "text/csv" }
@@ -21,9 +22,8 @@ class Import < ActiveRecord::Base
       # Save upon valid
       # otherwise collect error records to export
       if transaction.save
-        #TODO: transactions << transaction
+        transactions << transaction
       else
-        puts transaction.errors.full_messages
         #TODO: persist errs on DB as text
         errs << row
       end
