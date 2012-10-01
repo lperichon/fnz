@@ -1,12 +1,13 @@
 $(document).ready ->
   $("select.chosen").chosen({no_results_text: "No results matched"});
 
-  $('#new-transaction-modal').on 'hidden', () ->
+  $('[data-dismiss="modal"]').on 'click', () ->
     $('#new-transaction-modal form')[0].reset()
 
 
   $("#new_transaction").on "ajax:success", (event, data, status, xhr) ->
     $('#new-transaction-modal').modal('hide')
+    $('#new-transaction-modal form')[0].reset()
     $('table tbody').append('<tr><td>' + "test" + '</td><td>' + "test" + '</td></tr>')
 
   $(".remove-nested-transaction").on "click", (e) ->
