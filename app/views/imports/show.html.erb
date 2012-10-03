@@ -9,7 +9,7 @@
 <%= render :partial => 'transactions_table', :locals => {:transactions => @import.transactions} %>
 
 
-<% unless @import.errors_csv.empty? %>
+<% if @import.errors_csv.present? && !@import.errors_csv.empty? %>
 <h3>Errors</h3>
 <p>Some rows could not be imported! Download the failed rows to correct them and re-upload them. <%= link_to "Download", errors_business_import_path(@business, @import) %></p>
 <p>Hint: You can use this same import, just upload the new file</p>

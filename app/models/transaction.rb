@@ -55,7 +55,7 @@ class Transaction < ActiveRecord::Base
     transaction.attributes = {
         :business_id => business.id,
         :type => type,
-        :source_id => business.accounts.find_or_create_by_name(row[0]),
+        :source_id => business.accounts.find_or_create_by_name(row[0]).id,
         :transaction_at => row[1],
         :amount => amount,
         :description => row[3]
