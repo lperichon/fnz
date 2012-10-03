@@ -4,12 +4,6 @@ $(document).ready ->
   $('[data-dismiss="modal"]').on 'click', () ->
     $('#new-transaction-modal form')[0].reset()
 
-
-  $("#new_transaction").on "ajax:success", (event, data, status, xhr) ->
-    $('#new-transaction-modal').modal('hide')
-    $('#new-transaction-modal form')[0].reset()
-    $('table tbody').append('<tr><td>' + "test" + '</td><td>' + "test" + '</td></tr>')
-
   $(".remove-nested-transaction").on "click", (e) ->
     $(this).siblings(".destroy-value").val(true)
     $(this).parents("tr").hide()

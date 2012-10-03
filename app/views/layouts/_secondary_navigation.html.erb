@@ -22,7 +22,7 @@
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     <h3>Add Transaction</h3>
   </div>
-  <%= simple_form_for(@business.transactions.build, :as => :transaction, :url => business_transactions_path(@business), :validate => true, :remote => true, :html => {"data-type" => :json, :class => 'form-horizontal'}) do |f| %>
+  <%= simple_form_for(@business.transactions.build, :as => :transaction, :url => business_transactions_path(@business), :validate => true, :remote => true, :html => {:class => 'form-horizontal'}) do |f| %>
       <%= render :partial => 'transactions/fields', :locals => {:f => f} %>
       <%= f.hidden_field :sale_ids, :value => "" %>
       <%= f.hidden_field :installment_ids, :value => "" %>

@@ -27,9 +27,11 @@ class TransactionsController < UserApplicationController
       if @transaction.save
         format.html { redirect_to business_transaction_path(@business, @transaction), notice: 'Transaction was successfully created.' }
         format.json { render json: @transaction, status: :created, location: business_transaction_path(@business, @transaction) }
+        format.js {}
       else
         format.html { render action: "new" }
         format.json { render json: @transaction.errors, status: :unprocessable_entity }
+        format.js {}
       end
     end
   end
