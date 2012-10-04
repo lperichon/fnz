@@ -6,7 +6,7 @@
 <ul class="memberships">
   <% @memberships.each do |membership| %>
     <li>
-      <%= link_to membership.id, business_membership_path(membership.business, membership) %>
+      <%= link_to "#{membership.contact.name}", business_membership_path(membership.business, membership) %>
     </li>
   <% end %>
 </ul>
