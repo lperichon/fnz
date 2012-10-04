@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 gem 'rails', '3.2.8'
-gem 'sqlite3'
+gem 'sqlite3', :group => [:development, :test]
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
@@ -20,10 +20,10 @@ gem "cancan", ">= 1.6.8"
 gem "rolify", ">= 3.2.0"
 gem "hub", ">= 1.10.2", :require => nil, :group => [:development]
 gem "transitions", :require => ["transitions", "active_model/transitions"]
-gem "awesome_nested_fields"
-gem "simple_form"
-gem "client_side_validations"
+gem "awesome_nested_fields", "0.6.0"
+gem "simple_form", "2.0.2"
+gem "client_side_validations", "3.2.0.beta.6"
 gem 'client_side_validations-simple_form', '2.0.0.beta.2'
-gem 'bootstrap-datepicker-rails'
+gem 'bootstrap-datepicker-rails', "0.6.17"
 gem 'validates_timeliness', '~> 3.0'
 gem "paperclip", "~> 3.0"
