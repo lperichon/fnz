@@ -1,12 +1,12 @@
 <% content_for :sidebar do %>
-    <%= render :partial => 'businesses/sidebar' %>
+    <%= render :partial => 'sidebar' %>
 <% end %>
 
 <h3>Sales</h3>
 <ul class="sales">
   <% @sales.each do |sale| %>
     <li>
-      <%= link_to sale.id, business_sale_path(@business, sale) %>
+      <%= link_to "#{sale.agent.name} - #{sale.contact.try(:name)}: #{sale.product.name} @ #{number_to_currency(sale.product.price, :unit => sale.product.currency.symbol)}", business_sale_path(@business, sale) %>
     </li>
   <% end %>
 </ul>

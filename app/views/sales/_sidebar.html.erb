@@ -1,0 +1,9 @@
+<% if @business.present? && @business.persisted? %>
+<p>Products:
+<ul class="nav nav-pills nav-stacked">
+  <% @business.products.each do |product| %>
+      <li><%= link_to product.name.html_safe + content_tag(:span, number_to_currency(product.price, :unit => product.currency.symbol), :class => "pull-right"), new_business_sale_path(@business, :sale => {:product_id => product.id}), :title => "New Sale" %></li>
+  <% end %>
+</ul>
+</p>
+<% end %>
