@@ -13,6 +13,10 @@ class Membership < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :contact_id, :business_id, :begins_on, :ends_on, :value
 
+  def closed?
+    closed_on.present?
+  end
+
   def overdue?
     ends_on < Date.today
   end

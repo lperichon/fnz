@@ -10,6 +10,7 @@ class Contact < ActiveRecord::Base
   attr_accessible :name, :business_id
 
   def membership
-    memberships.first
+    membership = memberships.first
+    membership unless membership.try(:closed_on)
   end
 end
