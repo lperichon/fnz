@@ -1,8 +1,23 @@
 $(document).ready ->
-  $("select.chosen").chosen({no_results_text: "No results matched"});
+  $("#edit_transaction #transaction_tag_ids").chosen({no_results_text: "No results matched"});
 
-  $('[data-dismiss="modal"]').on 'click', () ->
-    $('#new-transaction-modal form')[0].reset()
+  $('[data-dismiss="modal"]').live 'click', () ->
+    $(this).parents('.modal').remove();
+
+  $("#transaction_type_transfer").live "change", ->
+    $(".transfer_field").children().removeAttr("disabled");
+    $(".transfer_field").show();
+  $("#transaction_type_debit, #transaction_type_credit").live "change", ->
+    $(".transfer_field").children().attr("disabled",true);
+    $(".transfer_field").hide();
+
+  $("#transaction_state").live "change", ->
+    if $("#transaction_state").val() == "reconciled"
+      $(".pending_field").children().removeAttr("disabled");
+      $(".pending_field").show();
+    else
+      $(".pending_field").children().attr("disabled",true);
+      $(".pending_field").hide();
 
   $(".remove-nested-transaction").on "click", (e) ->
     $(this).siblings(".destroy-value").val(true)

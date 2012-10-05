@@ -1,0 +1,3 @@
+$('body').append("<%= escape_javascript(render(:partial => "transactions/new_modal"))%>");
+$('#new-transaction-modal').modal();
+$("#new_transaction #transaction_tag_ids").chosen({no_results_text: "No results matched"});

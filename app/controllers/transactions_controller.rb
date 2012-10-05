@@ -44,8 +44,10 @@ class TransactionsController < UserApplicationController
     respond_to do |format|
       if @transaction.update_attributes(params[:transaction])
         format.html { redirect_to business_transaction_path(@business, @transaction), notice: 'Transaction was successfully updated.' }
+        format.js {}
       else
         format.html { render action: "edit" }
+        format.js {}
       end
     end
   end
