@@ -11,7 +11,7 @@ class Membership < ActiveRecord::Base
   validates_datetime :ends_on, :after => :begins_on
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :contact_id, :business_id, :begins_on, :ends_on, :value
+  attr_accessible :contact_id, :business_id, :begins_on, :ends_on, :value, :closed_on
 
   def closed?
     closed_on.present?
