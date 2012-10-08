@@ -13,4 +13,12 @@ class Business < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :type, :name, :owner_id
+
+  after_save :link_to_owner
+
+  def link_to_owner
+    unless(self.owner.business_ids.include?(self.id))
+      self.owner.businesses << self
+    end
+  end
 end

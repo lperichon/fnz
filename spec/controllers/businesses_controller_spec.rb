@@ -17,7 +17,7 @@ describe BusinessesController do
 
   describe "GET index" do
     it "assigns all businesses as @businesses" do
-      @user.businesses.create! valid_attributes
+      @user.owned_businesses.create! valid_attributes
       business = Business.last
 
       get :index, {}
@@ -27,13 +27,13 @@ describe BusinessesController do
 
   describe "GET show" do
     it "should be successful" do
-      business = @user.businesses.create! valid_attributes
+      business = @user.owned_businesses.create! valid_attributes
       get :show, :id => business.id
       response.should be_success
     end
 
     it "assigns the requested business as @business" do
-      @user.businesses.create! valid_attributes
+      @user.owned_businesses.create! valid_attributes
       business = Business.last
       get :show, {:id => business.to_param}
       assigns(:business).should == business
@@ -49,7 +49,7 @@ describe BusinessesController do
 
   describe "GET edit" do
     it "assigns the requested business as @business" do
-      @user.businesses.create! valid_attributes
+      @user.owned_businesses.create! valid_attributes
       business = Business.last
 
       get :edit, {:id => business.to_param}
@@ -97,7 +97,7 @@ describe BusinessesController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested business" do
-        business = @user.businesses.create! valid_attributes
+        business = @user.owned_businesses.create! valid_attributes
         # Assuming there are no other businesses in the database, this
         # specifies that the Business created on the previous line
         # receives the :update_attributes message with whatever params are
@@ -107,14 +107,14 @@ describe BusinessesController do
       end
 
       it "assigns the requested business as @business" do
-        @user.businesses.create! valid_attributes
+        @user.owned_businesses.create! valid_attributes
         business = Business.last
         put :update, {:id => business.to_param, :business => valid_attributes}
         assigns(:business).should eq(business)
       end
 
       it "redirects to the business" do
-        business = @user.businesses.create! valid_attributes
+        business = @user.owned_businesses.create! valid_attributes
         put :update, {:id => business.to_param, :business => valid_attributes}
         response.should redirect_to(business_path(business))
       end
@@ -122,7 +122,7 @@ describe BusinessesController do
 
     describe "with invalid params" do
       it "assigns the business as @business" do
-        @user.businesses.create! valid_attributes
+        @user.owned_businesses.create! valid_attributes
         business = Business.last
             # Trigger the behavior that occurs when invalid params are submitted
         Business.any_instance.stub(:save).and_return(false)
@@ -131,7 +131,7 @@ describe BusinessesController do
       end
 
       it "re-renders the 'edit' template" do
-        business = @user.businesses.create! valid_attributes
+        business = @user.owned_businesses.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Business.any_instance.stub(:save).and_return(false)
         put :update, {:id => business.to_param, :business => {}}
@@ -142,14 +142,14 @@ describe BusinessesController do
 
   describe "DELETE destroy" do
     it "destroys the requested business" do
-      business = @user.businesses.create! valid_attributes
+      business = @user.owned_businesses.create! valid_attributes
       expect {
         delete :destroy, {:id => business.to_param}
       }.to change(Business, :count).by(-1)
     end
 
     it "redirects to the businesses list" do
-      business = @user.businesses.create! valid_attributes
+      business = @user.owned_businesses.create! valid_attributes
       delete :destroy, {:id => business.to_param}
       response.should redirect_to(businesses_url)
     end
