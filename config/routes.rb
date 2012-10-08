@@ -4,7 +4,6 @@ Fnz::Application.routes.draw do
   end
   root :to => "home#index"
   devise_for :users
-  resources :users, :only => [:show, :index]
   resources :businesses do
     resources :accounts do
       resources :transactions, :only => [:index]
@@ -29,6 +28,7 @@ Fnz::Application.routes.draw do
       put :process_csv, :on => :member
       get :errors, :on => :member
     end
+    resources :users
   end
   resources :debits, :controller => 'transactions', :except => [:index]
   resources :credits, :controller => 'transactions', :except => [:index]

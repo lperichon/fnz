@@ -7,6 +7,7 @@ class Business < ActiveRecord::Base
   has_many :agents
   has_many :products
   has_many :imports
+  has_and_belongs_to_many :users
 
   validates :name, :presence => true
   validates :owner, :presence => true
