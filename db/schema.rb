@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121007213219) do
+ActiveRecord::Schema.define(:version => 20121009230815) do
 
   create_table "accounts", :force => true do |t|
     t.string  "name",                                      :default => "",  :null => false
@@ -141,7 +141,7 @@ ActiveRecord::Schema.define(:version => 20121007213219) do
     t.datetime "transaction_at"
     t.integer  "creator_id"
     t.integer  "target_id"
-    t.decimal  "conversion_rate", :precision => 8, :scale => 2, :default => 1.0, :null => false
+    t.decimal  "conversion_rate", :precision => 8, :scale => 5, :default => 1.0, :null => false
     t.string   "state"
     t.datetime "reconciled_at"
   end
