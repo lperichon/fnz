@@ -1,13 +1,17 @@
 <% if @business.present? && @business.persisted? %>
 <ul class="nav nav-pills" id="secondary-navigation">
+  <% if @business.owner == current_user %>
   <li class="<%= 'active' if (controller.controller_name == "businesses" && controller.action_name == "edit") ||
                               controller.controller_name == "agents" ||
                               controller.controller_name == "contacts" ||
                               controller.controller_name == "products" ||
                               controller.controller_name == "tags" ||
-                              controller.controller_name == "accounts" %>">
+                              controller.controller_name == "accounts" ||
+                              controller.controller_name == "imports" ||
+                              controller.controller_name == "users" %>">
     <%= link_to content_tag(:i, "", :class => "icon-cogs") + "Edit Business", edit_business_path(@business) %>
   </li>
+  <% end %>
   <li class="<%= 'active' if controller.controller_name == "transactions" %>"><%= link_to 'Manage Transactions', business_transactions_path(@business) %></li>
   <% if @business.is_a? School %>
       <li class="<%= 'active' if controller.controller_name == "sales" %>"><%= link_to 'Manage Sales', business_sales_path(@business) %></li>
