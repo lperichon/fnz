@@ -57,7 +57,7 @@ class Transaction < ActiveRecord::Base
         :type => type,
         :source_id => business.accounts.find_or_create_by_name(row[0]).id,
         :transaction_at => row[1],
-        :amount => amount,
+        :amount => amount.abs(),
         :description => row[3]
     }
     return transaction
