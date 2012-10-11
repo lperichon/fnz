@@ -3,7 +3,7 @@ class TransactionsController < UserApplicationController
   before_filter :get_context
 
   def index
-    @transactions = @context.all
+    @transactions = @context.order("transaction_at DESC").all
   end
 
   def show
