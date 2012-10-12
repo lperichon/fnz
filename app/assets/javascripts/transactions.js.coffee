@@ -1,6 +1,4 @@
 $(document).ready ->
-  $("#edit_transaction #transaction_tag_ids").chosen({no_results_text: "No results matched"});
-
   $('[data-dismiss="modal"]').live 'click', () ->
     $(this).parents('.modal').remove();
 

@@ -25,7 +25,7 @@ class TagsController < UserApplicationController
     respond_to do |format|
       if @tag.save
         format.html { redirect_to business_tag_path(@business, @tag), notice: 'Tag was successfully created.' }
-        format.json { render json: @tag, status: :created, location: @tag }
+        format.json { render json: @tag, status: :created, location: business_tag_path(@business, @tag) }
       else
         format.html { render action: "new" }
         format.json { render json: @tag.errors, status: :unprocessable_entity }

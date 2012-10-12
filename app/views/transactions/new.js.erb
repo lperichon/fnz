@@ -1,3 +1,15 @@
 $('body').append("<%= escape_javascript(render(:partial => "transactions/new_modal"))%>");
 $('#new-transaction-modal').modal();
-$("#new_transaction #transaction_tag_ids").chosen({no_results_text: "No results matched"});
+$("#new_transaction #transaction_tag_ids").chosen({
+    no_results_text: "No results matched",
+    create_option: function(term){
+        var chosen = this;
+        $.post('<%= business_tags_path(@business, :format => :json) %>', {tag: { name: term}}, function(data){
+            chosen.append_option({
+                value: data.id,
+                text: data.name
+            });
+        });
+    },
+    persistent_create_option: true
+});
