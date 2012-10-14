@@ -18,7 +18,7 @@
 <ul class="overdue-installments">
   <% @overdue_installments.each do |installment| %>
       <li>
-        <%= link_to "#{installment.due_on} #{installment.membership.contact.name} #{installment.value}", business_membership_installment_path(@business, installment.membership, installment) %>
+        <%= link_to "#{installment.due_on} #{installment.membership.contact.name} #{installment.value}", business_membership_installment_path(@business, installment.membership, installment) %>  <%= content_tag(:span, "Pending", :class => "label label-warning") if installment.pending? %>
       </li>
   <% end %>
 </ul>
