@@ -83,13 +83,13 @@ describe User do
     end
     
   end
-  
+
   describe "password encryption" do
-    
+
     before(:each) do
       @user = User.create!(@attr)
     end
-    
+
     it "should have an encrypted password attribute" do
       @user.should respond_to(:encrypted_password)
     end
@@ -123,6 +123,21 @@ describe User do
 
     it "should return the current_user" do
       User.current_user.should eq(@user)
+    end
+  end
+
+  describe "#time_zone" do
+
+    before(:each) do
+      @user = User.create!(@attr)
+    end
+
+    it "should have a time_zone" do
+      @user.should respond_to(:time_zone)
+    end
+
+    it "should have UTC as default" do
+      @user.time_zone.should eq("UTC")
     end
   end
 
