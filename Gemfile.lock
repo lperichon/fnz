@@ -182,6 +182,8 @@ GEM
     treetop (1.4.10)
       polyglot
       polyglot (>= 0.3.1)
+    tz_magic (0.0.1)
+      rails (~> 3.2.8)
     tzinfo (0.3.33)
     uglifier (1.2.7)
       execjs (>= 0.3.0)
@@ -222,5 +224,6 @@ DEPENDENCIES
   simple_form (= 2.0.2)
   sqlite3
   transitions
+  tz_magic
   uglifier (>= 1.0.3)
   validates_timeliness (~> 3.0)

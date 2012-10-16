@@ -17,4 +17,5 @@
 //= require jquery.nested-fields
 //= require rails.validations
 //= require rails.validations.simple_form
+//= require tz_magic/application
 //= require_tree .

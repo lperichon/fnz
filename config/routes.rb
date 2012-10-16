@@ -1,9 +1,11 @@
 Fnz::Application.routes.draw do
+  mount TzMagic::Engine => "/tz_magic"
+
   authenticated :user do
     root :to => 'home#index'
   end
   root :to => "home#index"
-  devise_for :users
+  devise_for :users, :controllers => { :registrations => "registrations" }
   resources :businesses do
     resources :accounts do
       resources :transactions, :only => [:index]
