@@ -1,5 +1,4 @@
 class Transfer < Transaction
-  belongs_to :target, :class_name => "Account"
 
   validates :target, :presence => true
   validates :conversion_rate, :presence => true, :numericality => {:greater_than => 0}
@@ -12,10 +11,5 @@ class Transfer < Transaction
       sign = conversion_rate
     end
     return sign
-  end
-
-  def update_balances
-    super
-    target.update_balance
   end
 end

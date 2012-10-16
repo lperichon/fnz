@@ -51,4 +51,35 @@ describe Transaction do
     transaction = Transaction.build_from_csv(@account.business, [@account.name, Date.today, "2.1", "Test import transaction"])
     transaction.should be_valid
   end
+
+  context "updating an existing transaction" do
+    before(:each) do
+      @credit = Credit.create!(@attr)
+    end
+
+    it "should calculate account balance on create" do
+      @account.reload
+      @account.balance.should eq(@credit.amount)
+    end
+
+    it "should re calculate account balances on update" do
+      @credit.amount = 5
+      @credit.save
+      @account.reload
+      @account.balance.should eq(@credit.amount)
+    end
+  end
+
+  context "updating an existing transaction to a transfer" do
+    before(:each) do
+      @target = FactoryGirl.create(:account, :business => @account.business)
+      @credit = Credit.create!(@attr)
+    end
+
+    it "should re calculate account balances on update" do
+      @credit.update_attributes(type: "Transfer", target_id: @target.id)
+      @target.reload
+      @target.balance.should eq(@credit.amount)
+    end
+  end
 end

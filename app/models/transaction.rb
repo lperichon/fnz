@@ -7,6 +7,7 @@ class Transaction < ActiveRecord::Base
 
   belongs_to :business
   belongs_to :source, :class_name => "Account"
+  belongs_to :target, :class_name => "Account"
   belongs_to :creator, :class_name => "User"
 
   has_many :taggings
@@ -27,6 +28,7 @@ class Transaction < ActiveRecord::Base
 
   def update_balances
     source.update_balance
+    target.update_balance if target.present?
     installments.each { |installment| installment.update_balance } if installments.count > 0
   end
 
