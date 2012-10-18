@@ -24,9 +24,6 @@ $(document).ready ->
   $(".remove-unsaved-nested-transaction").live "click", (e) ->
     $(this).parents("tr").remove()
 
-  $("#add_nested").on "click", (e) ->
-    $('#new-transaction-modal #transaction_' + $(this).attr('data-parent-type') + '_ids').val($(this).attr('data-parent-id'))
-
   $(".link-transaction-button").on "click", (e) ->
     tr = $(this).parents('tr')
     random = $.now()

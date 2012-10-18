@@ -13,7 +13,7 @@
   <% end %>
   <tfoot>
     <td colspan="9">
-      <%= link_to 'Add transaction', "#new-transaction-modal", 'data-toggle' => 'modal', :id => "add_nested", 'data-parent-type' => f.object.class.to_s.downcase, 'data-parent-id' => f.object.id.to_s %>
+      <%= link_to 'Add transaction', new_business_transaction_path(@business, :transaction => {"#{f.object.class.to_s.downcase}_ids" => [f.object.id]}), :remote => true %>
       <%= link_to "List transactions", "#list-transactions-modal", 'data-toggle' => 'modal' %>
     </td>
   </tfoot>
