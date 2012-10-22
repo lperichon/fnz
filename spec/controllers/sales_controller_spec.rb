@@ -9,7 +9,8 @@ describe SalesController do
     {
         :business_id => @business.id,
         :contact_id => @contact.id,
-        :agent_id => @agent.id
+        :agent_id => @agent.id,
+        :sold_on => Date.today
     }
   end
 

@@ -9,9 +9,10 @@ class Sale < ActiveRecord::Base
 
   validates :business, :presence => true
   validates :agent, :presence => true
+  validates :sold_on, :presence => true
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :contact_id, :business_id, :agent_id, :product_id, :transactions_attributes, :sale_transactions_attributes
+  attr_accessible :contact_id, :business_id, :agent_id, :product_id, :transactions_attributes, :sale_transactions_attributes, :sold_on
   accepts_nested_attributes_for :transactions, allow_destroy: true
   accepts_nested_attributes_for :sale_transactions, :reject_if => proc { |s| s['transaction_id'].blank? }
 

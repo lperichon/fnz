@@ -7,6 +7,7 @@
 <p>Contact: <%= @sale.contact.try(:name) %></p>
 <p>Agent: <%= @sale.agent.name %></p>
 <p>Product: <%= @sale.product.try(:name) %></p>
+<p>Sold on: <%= @sale.sold_on %></p>
 
 <%= render :layout => 'transactions_table', :locals => {:transactions => @sale.transactions} do |transaction| %>
   <%= link_to content_tag(:i, "", :class => "icon-edit"), edit_business_transaction_path(transaction.business, transaction), :remote => true %>
