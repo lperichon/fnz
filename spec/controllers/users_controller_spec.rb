@@ -23,7 +23,7 @@ describe UsersController do
 
     it "should be successful" do
       post :create, :business_id => @business.to_param, :user => {:email => @user2.email}
-      response.should be_success
+      response.should be_redirect
     end
 
     it "should add the user to the business" do
@@ -42,7 +42,7 @@ describe UsersController do
 
     it "should be successful" do
       delete :destroy, :business_id => @business.to_param, :id => @user2.to_param
-      response.should be_success
+      response.should be_redirect
     end
 
     it "should remove the user from the business" do
