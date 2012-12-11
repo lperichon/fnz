@@ -1,5 +1,4 @@
-$('#new-transaction-modal').modal('hide')
-$('#new-transaction-modal form')[0].reset()
+$('#new-transaction-modal').modal('hide').remove();
 if ($(".nested.transactions.table").length > 0) {
   $('.nested.transactions.table tbody').append("<tr data-id=<%= @transaction.id %>><%= escape_javascript render(:partial => 'application/transactions_table_item', :locals => {:transaction => @transaction}) %><td><%= escape_javascript link_to(content_tag(:i, '', :class => 'icon-remove'), '#', :class => 'remove-nested-transaction') %></td></tr>")
 } else if($(".transactions.table").length > 0) {
