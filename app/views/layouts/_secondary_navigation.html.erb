@@ -17,6 +17,6 @@
       <li class="<%= 'active' if controller.controller_name == "sales" %>"><%= link_to 'Manage Sales', business_sales_path(@business) %></li>
       <li class="<%= 'active' if controller.controller_name == "memberships" %>"><%= link_to 'Manage Memberships', business_memberships_path(@business) %></li>
   <% end %>
-  <li class="pull-right"><%= link_to content_tag(:i, "", :class => "icon-plus") + "Add Transaction", new_business_transaction_path(@business), :remote => true %></li>
+  <%= yield(:secondary_navigation) %>
 </ul>
 <% end %>

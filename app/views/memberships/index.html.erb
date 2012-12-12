@@ -2,6 +2,10 @@
     <%= render :partial => 'sidebar' %>
 <% end %>
 
+<% content_for :secondary_navigation do %>
+    <%= render :partial => 'secondary_navigation' %>
+<% end %>
+
 <div class="span2">
 <h3>This month's stats</h3>
 <ul>
@@ -44,5 +48,3 @@
 
 <% end %>
 </div>
-
-<%= link_to 'New membership', new_business_membership_path(@business) %>

@@ -2,6 +2,10 @@
     <%= render :partial => 'sidebar' %>
 <% end %>
 
+<% content_for :secondary_navigation do %>
+    <%= render :partial => 'secondary_navigation' %>
+<% end %>
+
 <h2>Edit Membership</h2>
 
 <%= render :partial => 'form', :locals => {:form_url => business_membership_url(@business, @membership)} %>

@@ -2,6 +2,10 @@
     <%= render :partial => 'businesses/sidebar' %>
 <% end %>
 
+<% content_for :secondary_navigation do %>
+    <%= render :partial => 'secondary_navigation' %>
+<% end %>
+
 <div class="actions">
   <%= link_to content_tag(:i, "", :class => "icon-upload") + "Import CSV", new_business_import_path(@business), :class => "btn" %>
 </div>

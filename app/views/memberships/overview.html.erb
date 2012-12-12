@@ -2,6 +2,10 @@
     <%= render :partial => 'sidebar' %>
 <% end %>
 
+<% content_for :secondary_navigation do %>
+    <%= render :partial => 'secondary_navigation' %>
+<% end %>
+
 <table class="memberships table table-striped table-hover table-condensed table-bordered">
   <thead>
   <% (1..5).each do |n| %>
