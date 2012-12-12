@@ -7,6 +7,7 @@ class Enrollment < ActiveRecord::Base
   validates :membership, :presence => true
   validates :agent, :presence => true
   validates :value, :presence => true
+  validates :enrolled_on, :presence => true
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :membership_id, :agent_id, :value, :transactions_attributes, :enrollment_transactions_attributes

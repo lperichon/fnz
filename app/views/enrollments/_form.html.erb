@@ -1,7 +1,7 @@
 <%= simple_form_for(@enrollment, :validate => true, :url => form_url) do |f| %>
     <%= f.association :agent, :as => :select, :collection => @business.agents %>
     <%= f.input :value %>
-
+    <%= f.input :enrolled_on, :as => "string", :input_html => {:class => "datepicker_input"} %>
     <h3>Transactions</h3>
     <%= render :partial => 'nested_transactions_table', :locals => {:f => f} %>
 
