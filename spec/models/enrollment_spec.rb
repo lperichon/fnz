@@ -9,7 +9,8 @@ describe Enrollment do
     @attr = {
       :membership_id => @membership.id,
       :agent_id => @agent.id,
-      :value => 3.2
+      :value => 3.2,
+      :enrolled_on => Date.today
     }
   end
   

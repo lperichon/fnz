@@ -10,7 +10,7 @@ class Enrollment < ActiveRecord::Base
   validates :enrolled_on, :presence => true
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :membership_id, :agent_id, :value, :transactions_attributes, :enrollment_transactions_attributes
+  attr_accessible :membership_id, :agent_id, :value, :enrolled_on, :transactions_attributes, :enrollment_transactions_attributes
   accepts_nested_attributes_for :transactions, allow_destroy: true
   accepts_nested_attributes_for :enrollment_transactions, :reject_if => proc { |s| s['transaction_id'].blank? }
 end
