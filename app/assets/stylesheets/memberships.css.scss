@@ -13,6 +13,11 @@
   border-right:4px solid #DDDDDD;
 }
 
+.memberships td {
+  text-align: center;
+  vertical-align: middle;
+}
+
 
 .icon-installment-complete:before        { content: "\f00c"; color: green;}
 .icon-installment-pending:before        { content: "\f024"; color: yellow;}

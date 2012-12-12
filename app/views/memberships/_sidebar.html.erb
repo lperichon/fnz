@@ -1,10 +1,10 @@
 <% if @business.present? && @business.persisted? %>
 <p>Students:
 <ul class="nav nav-pills nav-stacked">
-  <% @business.contacts.each do |contact| %>
-      <% if contact.membership.present? && contact.membership.persisted? %>
-        <% str = contact.name.html_safe + ( content_tag(:i, "", :class => "#{contact.membership.due? ? 'due' : 'overdue'}-membership pull-right icon-fire") + content_tag(:span, contact.membership.try(:ends_on), :class => "pull-right") if contact.membership.due? || contact.membership.overdue? )  %>
-        <li class="<%= 'active' if @membership.present? && @membership.persisted? && contact.id == @membership.contact.id %>"><%= link_to str, business_membership_path(@business, contact.membership) %></li>
+  <% @business.memberships.each do |membership| %>
+      <% if membership.persisted? %>
+        <% str = membership.contact.name.html_safe + ( content_tag(:i, "", :class => "#{membership.due? ? 'due' : 'overdue'}-membership pull-right icon-fire") + content_tag(:span, membership.try(:ends_on), :class => "pull-right") if membership.due? || membership.overdue? )  %>
+        <li class="<%= 'active' if @membership.present? && @membership.persisted? && membership.contact.id == @membership.contact.id %>"><%= link_to str, business_membership_path(@business, membership) %></li>
       <% end %>
   <% end %>
 </ul>
