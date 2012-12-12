@@ -1,0 +1,40 @@
+<% content_for :sidebar do %>
+    <%= render :partial => 'sidebar' %>
+<% end %>
+
+<table class="memberships table table-striped table-hover table-condensed table-bordered">
+  <thead>
+  <% (1..5).each do |n| %>
+      <td><%= Date::ABBR_MONTHNAMES[(6-n).months.ago.month] %> <%= link_to content_tag(:i, "", :class => "icon-bar-chart", :title => "View #{Date::MONTHNAMES[(6-n).months.ago.month]} stats"), "#" %></td>
+  <% end %>
+  <td class="current"><%= Date::ABBR_MONTHNAMES[Date.today.month] %> <%= link_to content_tag(:i, "", :class => "icon-bar-chart", :title => "View #{Date::MONTHNAMES[Date.today.month]} stats"), "#" %></td>
+  <% (1..6).each do |n| %>
+      <td><%= Date::ABBR_MONTHNAMES[n.months.from_now.month] %> <%= link_to content_tag(:i, "", :class => "icon-bar-chart", :title => "View #{Date::MONTHNAMES[n.months.from_now.month]} stats"), "#" %></td>
+  <% end %>
+  </thead>
+  <tbody>
+  <% @memberships.each do |membership| %>
+      <tr>
+        <% (1..5).each do |n| %>
+            <% installment = membership.installment_for((6-n).months.ago) %>
+            <td><%= number_to_currency(installment.try(:value)) %>  <%= content_tag(:i, "", :class => "icon-installment-#{installment.status}") if installment %></td>
+        <% end %>
+        <% installment = membership.installment_for(Date.today) %>
+        <td class="current"><%= number_to_currency(installment.try(:value)) %>  <%= content_tag(:i, "", :class => "icon-installment-#{installment.status}") if installment %></td>
+        <% (1..6).each do |n| %>
+            <% installment = membership.installment_for(n.months.from_now) %>
+            <td><%= number_to_currency(installment.try(:value)) %> <%= content_tag(:i, "", :class => "icon-installment-#{installment.status}") if installment %></td>
+        <% end %>
+      </tr>
+  <% end %>
+  </tbody>
+  <tfoot>
+  <% (1..5).each do |n| %>
+      <td><%= Date::ABBR_MONTHNAMES[(6-n).months.ago.month] %> <%= link_to content_tag(:i, "", :class => "icon-bar-chart", :title => "View #{Date::MONTHNAMES[(6-n).months.ago.month]} stats"), "#" %></td>
+  <% end %>
+  <td class="current"><%= Date::ABBR_MONTHNAMES[Date.today.month] %> <%= link_to content_tag(:i, "", :class => "icon-bar-chart", :title => "View #{Date::MONTHNAMES[Date.today.month]} stats"), "#" %></td>
+  <% (1..6).each do |n| %>
+      <td><%= Date::ABBR_MONTHNAMES[n.months.from_now.month] %> <%= link_to content_tag(:i, "", :class => "icon-bar-chart", :title => "View #{Date::MONTHNAMES[n.months.from_now.month]} stats"), "#" %></td>
+  <% end %>
+  </tfoot>
+</table>

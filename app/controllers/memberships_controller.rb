@@ -63,6 +63,11 @@ class MembershipsController < UserApplicationController
     end
   end
 
+
+  def overview
+    @memberships = @context.all
+  end
+
   private
 
   def get_context

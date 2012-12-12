@@ -20,7 +20,24 @@ class Installment < ActiveRecord::Base
 
   def pending?
     transactions_sum = transactions.sum(:amount)
-    transactions_sum >= self.balance && transactions_sum >= self.value
+    transactions_sum != self.balance && transactions_sum >= self.value
+  end
+
+  def complete?
+    transactions_sum = transactions.sum(:amount)
+    transactions_sum == self.balance && transactions_sum >= self.value
+  end
+
+  def status
+    if pending?
+      :pending
+    elsif complete?
+      :complete
+    elsif Date.today >= due_on
+      :overdue
+    else
+      :incomplete
+    end
   end
 
   def update_balance

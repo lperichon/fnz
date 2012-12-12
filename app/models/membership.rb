@@ -24,4 +24,8 @@ class Membership < ActiveRecord::Base
   def due?
     (Date.today..Date.today.end_of_month).include? ends_on
   end
+
+  def installment_for(date)
+    installments.where("due_on >= '#{date.beginning_of_month}' AND due_on <= '#{date.end_of_month}'").first
+  end
 end

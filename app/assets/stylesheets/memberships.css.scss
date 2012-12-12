@@ -4,3 +4,23 @@
 .due-membership {
   color: yellow;
 }
+
+.memberships tbody td {
+  height: 24px;
+}
+.memberships td.current {
+  border-left:4px solid #DDDDDD;
+  border-right:4px solid #DDDDDD;
+}
+
+
+.icon-installment-complete:before        { content: "\f00c"; color: green;}
+.icon-installment-pending:before        { content: "\f024"; color: yellow;}
+.icon-installment-overdue:before         { content: "\f071"; color: red;}
+
+//.memberships thead tr:first-child td.current {
+//  border-top:2px solid #DDDDDD;
+//}
+//.memberships tbody tr:last-child td.current {
+//  border-bottom:2px solid #DDDDDD;
+//}
