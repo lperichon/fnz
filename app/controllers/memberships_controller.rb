@@ -5,6 +5,7 @@ class MembershipsController < UserApplicationController
     @memberships = @context.all
     @overdue_installments = Installment.joins(:membership).where("memberships.business_id = #{@business.id}").overdue.incomplete
     @due_installments = Installment.joins(:membership).where("memberships.business_id = #{@business.id}").due.incomplete
+    @stats = MembershipStats.new(:business => @business, :year => Date.today.year, :month => Date.today.month)
   end
 
   def show
@@ -63,9 +64,12 @@ class MembershipsController < UserApplicationController
     end
   end
 
-
   def overview
     @memberships = @context.all
+  end
+
+  def stats
+    @stats = MembershipStats.new(:business => @business, :year => params[:year].to_i, :month => params[:month].to_i)
   end
 
   private

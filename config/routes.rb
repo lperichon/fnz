@@ -26,6 +26,7 @@ Fnz::Application.routes.draw do
       resources :installments
       resource :enrollment
       get :overview, :on => :collection
+      get :stats, :on => :collection
     end
     resources :imports do
       put :process_csv, :on => :member
