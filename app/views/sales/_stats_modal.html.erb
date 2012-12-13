@@ -1,0 +1,23 @@
+<div id="sale-stats-modal" class = "modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Sale Stats</h3>
+  </div>
+  <ul>
+    <h4>Global</h4>
+    <li>Credited sales: $ <%= @stats.credited_sales.inject(0) {|sum, sale| sum + sale.product.price} %></li>
+    <li>Reconciled enrollments: $ <%= @stats.reconciled_sales.inject(0) {|sum, sale| sum + sale.product.price} %></li>
+    <li>Pending enrollments: $ <%= @stats.pending_sales.inject(0) {|sum, sale| sum + sale.product.price} %></li>
+  </ul>
+  <% @business.agents.each do |agent| %>
+      <ul>
+        <h4><%= agent.name %></h4>
+        <li>Credited sales: $ <%= @stats.credited_sales.where('sales.agent_id' => agent.id).inject(0) {|sum, sale| sum + sale.product.price} %></li>
+        <li>Reconciled sales: $ <%= @stats.reconciled_sales.where('sales.agent_id' => agent.id).inject(0) {|sum, sale| sum + sale.product.price} %></li>
+        <li>Pending sales: $ <%= @stats.pending_sales.where('sales.agent_id' => agent.id).inject(0) {|sum, sale| sum + sale.product.price} %></li>
+      </ul>
+  <% end %>
+  <div class="modal-footer">
+    <%= link_to "Close", "#", :class => "btn", "data-dismiss" => "modal" %>
+  </div>
+</div>

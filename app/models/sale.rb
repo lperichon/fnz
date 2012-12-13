@@ -16,4 +16,5 @@ class Sale < ActiveRecord::Base
   accepts_nested_attributes_for :transactions, allow_destroy: true
   accepts_nested_attributes_for :sale_transactions, :reject_if => proc { |s| s['transaction_id'].blank? }
 
+  default_scope order("sold_on DESC")
 end

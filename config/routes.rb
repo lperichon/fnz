@@ -21,7 +21,9 @@ Fnz::Application.routes.draw do
     resources :contacts
     resources :agents
     resources :products
-    resources :sales
+    resources :sales do
+      get :stats, :on => :collection
+    end
     resources :memberships do
       resources :installments
       resource :enrollment

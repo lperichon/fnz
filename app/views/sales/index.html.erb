@@ -2,15 +2,18 @@
     <%= render :partial => 'sidebar' %>
 <% end %>
 
+<% content_for :secondary_navigation do %>
+    <%= render :partial => 'secondary_navigation' %>
+<% end %>
+
 <h3>Sales</h3>
+<% @sales.group_by{ |s| s.sold_on.beginning_of_month }.each do |date, sales| %>
 <ul class="sales">
-  <% @sales.each do |sale| %>
+    <h4><%= Date::MONTHNAMES[date.month] %> <%= link_to content_tag(:i, "", :class => "icon-bar-chart", :title => "View #{Date::MONTHNAMES[date.month]} stats"), stats_business_sales_path(@business, :year => date.year, :month => date.month), :remote => true %></h4>
+    <% sales.each do |sale| %>
     <li>
       <%= link_to "#{sale.sold_on} - #{sale.agent.name} - #{sale.contact.try(:name)}: #{sale.product.try(:name)} @ #{number_to_currency(sale.product.price, :unit => sale.product.currency.symbol) if sale.product}", business_sale_path(@business, sale) %>
     </li>
-  <% end %>
+    <% end %>
 </ul>
-
-<br />
-
-<%= link_to 'New sale', new_business_sale_path(@business) %>
+<% end %>

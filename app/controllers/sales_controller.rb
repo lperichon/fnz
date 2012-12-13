@@ -62,6 +62,10 @@ class SalesController < UserApplicationController
     end
   end
 
+  def stats
+    @stats = SaleStats.new(:business => @business, :year => params[:year].to_i, :month => params[:month].to_i)
+  end
+
   private
 
   def get_context
