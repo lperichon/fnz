@@ -29,3 +29,4 @@ gem 'bootstrap-datepicker-rails', "0.6.17"
 gem 'validates_timeliness', '~> 3.0'
 gem "paperclip", "~> 3.0"
 gem 'tz_magic'
+gem "squeel"
