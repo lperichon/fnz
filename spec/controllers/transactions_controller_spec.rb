@@ -11,6 +11,7 @@ describe TransactionsController do
       :amount => 3.5,
       :source_id => @account.id,
       :business_id => @business.id,
+      :transaction_at => Date.today,
       :type => "Debit"
     }
   end
