@@ -25,6 +25,6 @@ class Account < ActiveRecord::Base
   private
 
   def calculate_balance
-    transactions.where(:state => [:created, :reconciled]).inject(0) {|balance, transaction| balance+transaction.sign(self)*transaction.amount}
+    transactions.where(:state => ['created', 'reconciled']).inject(0) {|balance, transaction| balance+transaction.sign(self)*transaction.amount}
   end
 end
