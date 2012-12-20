@@ -8,12 +8,16 @@ Fnz::Application.routes.draw do
   devise_for :users, :controllers => { :registrations => "registrations" }
   resources :businesses do
     resources :accounts do
-      resources :transactions, :only => [:index]
+      resources :transactions, :only => [:index] do
+        get :stats, :on => :collection
+      end
       resources :debits, :controller => 'transactions', :only => [:index]
       resources :credits, :controller => 'transactions', :only => [:index]
       resources :transfers, :controller => 'transactions', :only => [:index]
     end
-    resources :transactions
+    resources :transactions do
+      get :stats, :on => :collection
+    end
     resources :debits, :controller => 'transactions', :only => [:index]
     resources :credits, :controller => 'transactions', :only => [:index]
     resources :transfers, :controller => 'transactions', :only => [:index]

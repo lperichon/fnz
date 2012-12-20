@@ -1,0 +1,91 @@
+$('body').append("<%= escape_javascript(render(:partial => "transactions/stats_modal"))%>");
+$('#transaction-stats-modal').modal({
+    keyboard: false
+});
+
+debitsChart = new Highcharts.Chart({
+    chart: {
+        renderTo: 'debits_chart',
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false
+    },
+    title: {
+        text: "Debit"
+    },
+    tooltip: {
+        pointFormat: '<b>{point.y}</b>',
+        valueDecimals: 2,
+        valuePrefix: '$'
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                color: '#000000',
+                connectorColor: '#000000',
+                formatter: function() {
+                    return '<b>'+ this.point.name +'</b>: $'+ this.y;
+                }
+            }
+        }
+    },
+    series: [{
+        type: 'pie',
+        name: 'Debits',
+        data: [
+            <% @debits.each do |tag, sum| %>
+              ['<%= tag %>', <%= sum.to_f.round(2) %>],
+            <% end %>
+            <%if @untagged_debits > 0 %>
+              ['Untagged', <%= @untagged_debits.to_f.round(2) %>],
+            <% end %>
+        ]
+    }]
+});
+
+
+creditsChart = new Highcharts.Chart({
+    chart: {
+        renderTo: 'credits_chart',
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false
+    },
+    title: {
+        text: "Credit"
+    },
+    tooltip: {
+        pointFormat: '<b>{point.y}</b>',
+        valueDecimals: 2,
+        valuePrefix: '$'
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                color: '#000000',
+                connectorColor: '#000000',
+                formatter: function() {
+                    return '<b>'+ this.point.name +'</b>: $'+ this.y;
+                }
+            }
+        }
+    },
+    series: [{
+        type: 'pie',
+        name: 'Debits',
+        data: [
+            <% @credits.each do |tag, sum| %>
+            ['<%= tag %>', <%= sum.to_f.round(2) %>],
+            <% end %>
+            <%if @untagged_credits > 0 %>
+            ['Untagged', <%= @untagged_credits.to_f.round(2) %>],
+            <% end %>
+        ]
+    }]
+});

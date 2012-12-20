@@ -26,6 +26,8 @@ class Transaction < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :tag_ids, :description, :business_id, :source_id, :amount, :type, :transaction_at, :target_id, :conversion_rate, :state, :reconciled_at, :sale_ids, :installment_ids, :enrollment_ids
 
+  scope :untagged, includes(:taggings).where("taggings.tag_id is null")
+
   def update_balances
     source.update_balance
     target.update_balance if target.present?

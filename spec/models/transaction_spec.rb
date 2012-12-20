@@ -82,4 +82,13 @@ describe Transaction do
       @target.balance.should eq(@credit.amount)
     end
   end
+
+  context "untagged" do
+    before(:each) do
+      @untagged_credit = Credit.create!(@attr)
+    end
+    it "should scope untagged transactions" do
+      Credit.untagged.count.should == 1
+    end
+  end
 end

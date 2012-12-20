@@ -72,6 +72,23 @@ class TransactionsController < UserApplicationController
     end
   end
 
+  def stats
+    @context = @context.order("transaction_at DESC")
+    # List transactions on this month or the year/month solicited
+    start_date = Date.new(params[:year].present? ? params[:year].to_i : Date.today.year, params[:month].present? ? params[:month].to_i : (params[:year].present? ? 1 : Date.today.month), 1).beginning_of_month.beginning_of_day
+    end_date = Date.new(params[:year].present? ? params[:year].to_i : Date.today.year, params[:month].present? ? params[:month].to_i : (params[:year].present? ? 12 : Date.today.month), 30).end_of_month.end_of_day
+
+    # List transactions that ocurred on that month or that are pending and ocurred before or that are reconciled on that month
+    @context = @context.where {(transaction_at.gteq start_date) & (transaction_at.lteq end_date) |
+        ((state.eq 'pending') & (transaction_at.lt start_date)) |
+        ((state.eq 'reconciled') & (reconciled_at.gteq start_date) & (reconciled_at.lteq end_date))}
+
+    @debits = @context.where(:type => "Debit").joins(:tags).group('tags.name').sum(:amount)
+    @untagged_debits = @context.where(:type => "Debit").untagged.sum(:amount)
+    @credits = @context.where(:type => "Credit").joins(:tags).group('tags.name').sum(:amount)
+    @untagged_credits = @context.where(:type => "Credit").untagged.sum(:amount)
+  end
+
   private
 
   def get_context
