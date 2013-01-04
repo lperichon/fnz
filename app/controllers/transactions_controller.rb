@@ -73,7 +73,7 @@ class TransactionsController < UserApplicationController
   end
 
   def stats
-    @context = @context.order("transaction_at DESC")
+    @context = @context
     # List transactions on this month or the year/month solicited
     start_date = Date.new(params[:year].present? ? params[:year].to_i : Date.today.year, params[:month].present? ? params[:month].to_i : (params[:year].present? ? 1 : Date.today.month), 1).beginning_of_month.beginning_of_day
     end_date = Date.new(params[:year].present? ? params[:year].to_i : Date.today.year, params[:month].present? ? params[:month].to_i : (params[:year].present? ? 12 : Date.today.month), 30).end_of_month.end_of_day
