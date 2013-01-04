@@ -18,26 +18,26 @@ class MembershipStats
   end
 
   def credited_enrollments
-    business.memberships.joins(:enrollment).joins(:enrollment => :transactions).where('transactions.state' => :created).where("transaction_at >= '#{Date.new(year, month, 1).to_date.beginning_of_month}' AND transaction_at <= '#{Date.new(year, month, 1).end_of_month}'")
+    business.memberships.joins(:enrollment).joins(:enrollment => :transactions).where('transactions.state' => 'created').where("transaction_at >= '#{Date.new(year, month, 1).to_date.beginning_of_month}' AND transaction_at <= '#{Date.new(year, month, 1).end_of_month}'")
   end
 
   def reconciled_enrollments
-    business.memberships.joins(:enrollment).joins(:enrollment => :transactions).where('transactions.state' => :reconciled).where("reconciled_at >= '#{Date.new(year, month, 1).to_date.beginning_of_month}' AND reconciled_at <= '#{Date.new(year, month, 1).end_of_month}'")
+    business.memberships.joins(:enrollment).joins(:enrollment => :transactions).where('transactions.state' => 'reconciled').where("reconciled_at >= '#{Date.new(year, month, 1).to_date.beginning_of_month}' AND reconciled_at <= '#{Date.new(year, month, 1).end_of_month}'")
   end
 
   def pending_enrollments
-    business.memberships.joins(:enrollment).joins(:enrollment => :transactions).where('transactions.state' => :pending).where("transaction_at >= '#{Date.new(year, month, 1).to_date.beginning_of_month}' AND transaction_at <= '#{Date.new(year, month, 1).end_of_month}'")
+    business.memberships.joins(:enrollment).joins(:enrollment => :transactions).where('transactions.state' => 'pending').where("transaction_at >= '#{Date.new(year, month, 1).to_date.beginning_of_month}' AND transaction_at <= '#{Date.new(year, month, 1).end_of_month}'")
   end
 
   def credited_installments
-    business.memberships.joins(:installments).joins(:installments => :transactions).where('transactions.state' => :created).where("transaction_at >= '#{Date.new(year, month, 1).to_date.beginning_of_month}' AND transaction_at <= '#{Date.new(year, month, 1).end_of_month}'")
+    business.memberships.joins(:installments).joins(:installments => :transactions).where('transactions.state' => 'created').where("transaction_at >= '#{Date.new(year, month, 1).to_date.beginning_of_month}' AND transaction_at <= '#{Date.new(year, month, 1).end_of_month}'")
   end
 
   def reconciled_installments
-    business.memberships.joins(:installments).joins(:installments => :transactions).where('transactions.state' => :reconciled).where("reconciled_at >= '#{Date.new(year, month, 1).to_date.beginning_of_month}' AND reconciled_at <= '#{Date.new(year, month, 1).end_of_month}'")
+    business.memberships.joins(:installments).joins(:installments => :transactions).where('transactions.state' => 'reconciled').where("reconciled_at >= '#{Date.new(year, month, 1).to_date.beginning_of_month}' AND reconciled_at <= '#{Date.new(year, month, 1).end_of_month}'")
   end
 
   def pending_installments
-    business.memberships.joins(:installments).joins(:installments => :transactions).where('transactions.state' => :pending).where("transaction_at >= '#{Date.new(year, month, 1).to_date.beginning_of_month}' AND transaction_at <= '#{Date.new(year, month, 1).end_of_month}'")
+    business.memberships.joins(:installments).joins(:installments => :transactions).where('transactions.state' => 'pending').where("transaction_at >= '#{Date.new(year, month, 1).to_date.beginning_of_month}' AND transaction_at <= '#{Date.new(year, month, 1).end_of_month}'")
   end
 end
