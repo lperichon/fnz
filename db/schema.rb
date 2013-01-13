@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121212190105) do
+ActiveRecord::Schema.define(:version => 20130113150721) do
 
   create_table "accounts", :force => true do |t|
     t.string  "name",        :default => "",  :null => false
@@ -163,6 +163,7 @@ ActiveRecord::Schema.define(:version => 20121212190105) do
     t.timestamp "updated_at",                                :null => false
     t.string    "name"
     t.string    "time_zone",              :default => "UTC"
+    t.string    "drc_uid"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

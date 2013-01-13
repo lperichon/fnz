@@ -28,6 +28,11 @@
     <%= link_to 'Sign up', new_user_registration_path %>
     </li>
   <% end %>
+  <% unless user_signed_in? && current_user.drc_uid.present? %>
+    <li>
+      <%= link_to "Sign in with DeRose Connect", user_omniauth_authorize_path(:cas) %>
+    </li>
+  <% end %>
 </ul>
 <% if user_signed_in? %>
 <ul id="nav-businesses" class="nav">
