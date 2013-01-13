@@ -210,7 +210,7 @@ Devise.setup do |config|
   config.omniauth :cas,
                   host: 'metododerose.org:8443',
                   login_url: '/',
-                  client_options: {ssl: {verify: false}}
+                  ca_path: '/usr/lib/ssl/certs/'
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
