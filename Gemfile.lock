@@ -229,8 +229,8 @@ DEPENDENCIES
   hub (>= 1.10.2)
   jquery-rails
   launchy (>= 2.1.2)
-  omniauth
-  omniauth-cas
+  omniauth (= 1.1.1)
+  omniauth-cas (= 1.0.1)
   paperclip (~> 3.0)
   pg
   rails (= 3.2.8)
@@ -239,8 +239,8 @@ DEPENDENCIES
   sass-rails (~> 3.2.3)
   simple_form (= 2.0.2)
   sqlite3
-  squeel
+  squeel (= 1.0.14)
   transitions
-  tz_magic
+  tz_magic (= 0.0.1)
   uglifier (>= 1.0.3)
   validates_timeliness (~> 3.0)
