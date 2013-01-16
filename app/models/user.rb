@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
          :omniauthable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :time_zone
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :time_zone, :drc_uid
 
   has_many :owned_businesses, :foreign_key => :owner_id, :class_name => 'Business'
   has_and_belongs_to_many :businesses, :join_table => 'businesses_users'
