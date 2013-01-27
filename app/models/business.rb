@@ -22,4 +22,8 @@ class Business < ActiveRecord::Base
       self.owner.businesses << self
     end
   end
+
+  def padma
+    PadmaAccount.find(padma_id) if padma_id
+  end
 end
