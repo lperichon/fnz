@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130127200658) do
+ActiveRecord::Schema.define(:version => 20130127203050) do
 
   create_table "accounts", :force => true do |t|
     t.string  "name",        :default => "",  :null => false
@@ -26,12 +26,13 @@ ActiveRecord::Schema.define(:version => 20130127200658) do
   end
 
   create_table "businesses", :force => true do |t|
-    t.string    "name",       :default => "",         :null => false
-    t.integer   "owner_id",                           :null => false
-    t.timestamp "created_at",                         :null => false
-    t.timestamp "updated_at",                         :null => false
-    t.string    "type",       :default => "Personal"
-    t.string    "padma_id"
+    t.string   "name",            :default => "",         :null => false
+    t.integer  "owner_id",                                :null => false
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
+    t.string   "type",            :default => "Personal"
+    t.string   "padma_id"
+    t.datetime "synchronized_at"
   end
 
   create_table "businesses_users", :force => true do |t|

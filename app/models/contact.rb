@@ -7,7 +7,7 @@ class Contact < ActiveRecord::Base
   has_many :memberships
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :business_id
+  attr_accessible :name, :business_id, :padma_id
 
   def membership
     membership = memberships.first

@@ -13,7 +13,7 @@ class Business < ActiveRecord::Base
   validates :owner, :presence => true
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :type, :name, :owner_id
+  attr_accessible :type, :name, :owner_id, :padma_id, :synchronized_at
 
   after_save :link_to_owner
 
