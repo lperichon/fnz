@@ -13,4 +13,16 @@ class Contact < ActiveRecord::Base
     membership = memberships.first
     membership unless membership.try(:closed_on)
   end
+
+  def padma
+    PadmaContact.find(padma_id) if padma_id
+  end
+
+  def email
+    padma.emails.find(:primary => true)
+  end
+
+  def status
+    padma.status
+  end
 end
