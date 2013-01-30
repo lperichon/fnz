@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 gem 'rails', '3.2.8'
 gem 'sqlite3', :group => [:development, :test]
-gem 'pg', :group => [:production]
+gem 'pg', :group => [:staging, :production]
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
@@ -34,4 +34,4 @@ gem 'omniauth', '1.1.1'
 gem 'omniauth-cas', '1.0.1'
 gem 'accounts_client', '0.0.9'
 gem 'contacts_client', '0.0.7'
-gem 'newrelic_rpm', :group => [:production]
+gem 'newrelic_rpm', :group => [:staging, :production]
