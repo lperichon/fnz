@@ -16,5 +16,7 @@ class PadmaContactsSynchronizer
       #  contact.update_attributes
       #end
     end
+
+    business.update_attribute(:synchronized_at, Date.today)
   end
 end
