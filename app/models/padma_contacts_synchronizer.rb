@@ -15,11 +15,14 @@ class PadmaContactsSynchronizer
                         :page => page).each do |padma_contact|
         contact = Contact.find_or_create_by_padma_id(:padma_id => padma_contact.id,
                                                    :business_id => business.id,
-                                                   :name => "#{padma_contact.first_name} #{padma_contact.last_name}".strip)
-        #TODO: update cached values on existing contacts
-        #unless contact.created_at < 10.seconds.ago
-        #  contact.update_attributes
-        #end
+                                                   :name => "#{padma_contact.first_name} #{padma_contact.last_name}".strip,
+                                                   :padma_status => padma_contact.status)
+        unless contact.created_at && contact.created_at < 10.seconds.ago
+          contact.update_attributes(
+            :name => "#{padma_contact.first_name} #{padma_contact.last_name}".strip,
+            :padma_status => padma_contact.status
+          )
+        end
       end
       more_contacts = !padma_contacts.empty?
       page = page + 1
