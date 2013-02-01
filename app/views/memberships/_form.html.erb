@@ -1,5 +1,5 @@
 <%= simple_form_for(@membership, :url => form_url, :validate => true, :html => {:class => "form-horizontal"}) do |f| %>
-    <%= f.association :contact, :as => :select, :collection => @business.contacts, :input_html => {'data-placeholder' => 'Please select contact',:class => "chosen"} %>
+    <%= f.association :contact, :as => :select, :collection => @business.contacts, :input_html => {'data-business-id' => @business.id, 'data-placeholder' => 'Please select contact',:class => "chosen"} %>
     <%= f.input :value %>
     <%= f.input :begins_on, :as => "string", :input_html => {:class => "datepicker_input"} %></p>
     <%= f.input :ends_on, :as => "string", :input_html => {:class => "datepicker_input"} %></p>

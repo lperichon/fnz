@@ -25,7 +25,7 @@ class ProductsController < UserApplicationController
     respond_to do |format|
       if @product.save
         format.html { redirect_to business_product_path(@business, @product), notice: 'Product was successfully created.' }
-        format.json { render json: @product, status: :created, location: @product }
+        format.json { render json: @product, status: :created, location: business_product_path(@business, @product) }
       else
         format.html { render action: "new" }
         format.json { render json: @product.errors, status: :unprocessable_entity }

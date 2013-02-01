@@ -25,7 +25,7 @@ class ContactsController < UserApplicationController
     respond_to do |format|
       if @contact.save
         format.html { redirect_to business_contact_path(@business, @contact), notice: 'Contact was successfully created.' }
-        format.json { render json: @contact, status: :created, location: @contact }
+        format.json { render json: @contact, status: :created, location: business_contact_path(@business,@contact) }
       else
         format.html { render action: "new" }
         format.json { render json: @contact.errors, status: :unprocessable_entity }

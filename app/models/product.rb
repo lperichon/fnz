@@ -2,7 +2,7 @@ class Product < ActiveRecord::Base
   belongs_to :business
 
   validates :name, :presence => true
-  validates :price, :presence => true, :numericality => {:greater_than => 0}
+  validates :price, :presence => true, :numericality => {:greater_than_or_equal_to => 0}
   validates :business, :presence => true
 
   # Setup accessible (or protected) attributes for your model
