@@ -1,5 +1,5 @@
 <%= simple_form_for(@installment, :validate => true, :url => form_url) do |f| %>
-    <%= f.association :agent, :as => :select, :collection => @business.agents %>
+    <%= f.association :agent, :as => :select, :collection => @business.agents, :input_html => {'data-placeholder' => 'Please select agent',:class => "chosen"} %>
     <%= f.input :due_on, :as => "string", :input_html => {:class => "datepicker_input"} %>
     <%= f.input :value %>
 

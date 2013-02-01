@@ -1,9 +1,9 @@
 <%= simple_form_for(@sale, :url => form_url, :validate => true, :html => {:class => "form-horizontal"}) do |f| %>
-    <%= f.association :contact, :as => :select, :collection => @business.contacts, :prompt => 'Please select contact' %>
+    <%= f.association :contact, :as => :select, :collection => @business.contacts, :input_html => {'data-placeholder' => 'Please select contact',:class => "chosen"} %>
 
-    <%= f.association :agent, :as => :select, :collection => @business.agents, :prompt => 'Please select agent' %>
+    <%= f.association :agent, :as => :select, :collection => @business.agents, :input_html => {'data-placeholder' => 'Please select agent',:class => "chosen"} %>
 
-    <%= f.association :product, :as => :select, :collection => @business.products, :prompt => 'Please select product' %>
+    <%= f.association :product, :as => :select, :collection => @business.products, :input_html => {'data-placeholder' => 'Please select product',:class => "chosen"} %>
 
     <%= f.input :sold_on, :as => :date_picker %>
 
