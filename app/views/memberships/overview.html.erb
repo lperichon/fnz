@@ -17,16 +17,16 @@
   <% end %>
   </thead>
   <tbody>
-  <% @memberships.each do |membership| %>
+  <% @business.contacts.students.each do |contact| %>
       <tr>
         <% (1..5).each do |n| %>
-            <% installment = membership.installment_for((6-n).months.ago) %>
+            <% installment = contact.installment_for((6-n).months.ago) %>
             <td><%= number_to_currency(installment.try(:value)) %>  <%= content_tag(:i, "", :class => "icon-installment-#{installment.status}") if installment %></td>
         <% end %>
-        <% installment = membership.installment_for(Date.today) %>
+        <% installment = contact.installment_for(Date.today) %>
         <td class="current"><%= number_to_currency(installment.try(:value)) %>  <%= content_tag(:i, "", :class => "icon-installment-#{installment.status}") if installment %></td>
         <% (1..6).each do |n| %>
-            <% installment = membership.installment_for(n.months.from_now) %>
+            <% installment = contact.installment_for(n.months.from_now) %>
             <td><%= number_to_currency(installment.try(:value)) %> <%= content_tag(:i, "", :class => "icon-installment-#{installment.status}") if installment %></td>
         <% end %>
       </tr>

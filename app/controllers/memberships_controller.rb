@@ -65,7 +65,6 @@ class MembershipsController < UserApplicationController
   end
 
   def overview
-    @memberships = @context.all
   end
 
   def stats

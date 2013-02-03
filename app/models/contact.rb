@@ -5,6 +5,9 @@ class Contact < ActiveRecord::Base
   validates :business, :presence => true
 
   has_many :memberships
+  has_many :installments, :through => :memberships
+
+  scope :students, where(:padma_status => 'student')
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :business_id, :padma_id, :padma_status, :padma_teacher
@@ -22,7 +25,7 @@ class Contact < ActiveRecord::Base
     padma.emails.find(:primary => true)
   end
 
-  def status
-    padma_status.present? ? padma_status : padma.status
+  def installment_for(date)
+    installments.where("due_on >= '#{date.beginning_of_month}' AND due_on <= '#{date.end_of_month}'").first
   end
 end
