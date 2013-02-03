@@ -13,7 +13,7 @@ class Contact < ActiveRecord::Base
   attr_accessible :name, :business_id, :padma_id, :padma_status, :padma_teacher
 
   def membership
-    membership = memberships.first
+    membership = memberships.last
     membership unless membership.try(:closed_on)
   end
 
