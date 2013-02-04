@@ -8,7 +8,7 @@ task :synchronize  => :environment do
 end
 
 desc "This task is called by the Heroku scheduler add-on it creates monthly installments for all open memberships"
-task :synchronize  => :environment do
+task :create_monthly_installments  => :environment do
   # Only run the first day of the month
   return unless Date.today.day == 1
 
