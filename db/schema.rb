@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130201195338) do
+ActiveRecord::Schema.define(:version => 20130203215914) do
 
   create_table "accounts", :force => true do |t|
     t.string  "name",        :default => "",  :null => false
@@ -23,16 +23,17 @@ ActiveRecord::Schema.define(:version => 20130201195338) do
   create_table "agents", :force => true do |t|
     t.string  "name",        :default => "Unknown", :null => false
     t.integer "business_id"
+    t.string  "padma_id"
   end
 
   create_table "businesses", :force => true do |t|
-    t.string   "name",            :default => "",         :null => false
-    t.integer  "owner_id",                                :null => false
-    t.datetime "created_at",                              :null => false
-    t.datetime "updated_at",                              :null => false
-    t.string   "type",            :default => "Personal"
-    t.string   "padma_id"
-    t.datetime "synchronized_at"
+    t.string    "name",            :default => "",         :null => false
+    t.integer   "owner_id",                                :null => false
+    t.timestamp "created_at",                              :null => false
+    t.timestamp "updated_at",                              :null => false
+    t.string    "type",            :default => "Personal"
+    t.string    "padma_id"
+    t.timestamp "synchronized_at"
   end
 
   create_table "businesses_users", :force => true do |t|
@@ -41,13 +42,13 @@ ActiveRecord::Schema.define(:version => 20130201195338) do
   end
 
   create_table "contacts", :force => true do |t|
-    t.string   "name",          :default => "Unknown", :null => false
-    t.integer  "business_id"
-    t.string   "padma_id"
-    t.string   "padma_status"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "padma_teacher"
+    t.string    "name",          :default => "Unknown", :null => false
+    t.integer   "business_id"
+    t.string    "padma_id"
+    t.string    "padma_status"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.string    "padma_teacher"
   end
 
   create_table "enrollments", :force => true do |t|
