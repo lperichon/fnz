@@ -6,10 +6,12 @@ class MonthlyInstallmentsCreator
   end
 
   def run
-    business.students.each do |student|
-      unless student.installment_for(Date.today)
-        # TODO: get Agent for new installment using padma teacher
-        # student.membership.installments.create(:)
+    business.contacts.students.each do |student|
+      unless student.padma_teacher.blank? || student.installment_for(Date.today).present? || student.membership.blank?
+        agent = business.agents.where(:padma_id => student.padma_teacher).first
+        student.membership.installments.create(:agent_id => agent.id,
+                                               :due_on => Date.today.end_of_month,
+                                               :value => student.membership.value) if agent
       end
     end
   end
