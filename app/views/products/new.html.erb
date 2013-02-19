@@ -4,6 +4,6 @@
 
 <h2>Edit Product</h2>
 
-<%= render :partial => 'form' %>
+<%= render :partial => 'form', :locals => {:form_url => business_products_path(@business)} %>
 
 <%= link_to 'Back', business_products_path(@business) %>
