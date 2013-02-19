@@ -18,7 +18,7 @@ class PadmaContactsSynchronizer
                                                    :name => "#{padma_contact.first_name} #{padma_contact.last_name}".strip,
                                                    :padma_status => padma_contact.status,
                                                    :padma_teacher => padma_contact.global_teacher_username)
-        unless contact.created_at && contact.created_at > 10.seconds.ago
+        unless contact.created_at && contact.created_at < 10.seconds.ago
           contact.update_attributes(
             :name => "#{padma_contact.first_name} #{padma_contact.last_name}".strip,
             :padma_status => padma_contact.status,
