@@ -1,6 +1,6 @@
 <% if @business.present? && @business.persisted? %>
 <p>Students:
-<ul class="nav nav-pills nav-stacked">
+<ul class="nav nav-pills nav-stacked students">
   <% @business.contacts.students.each do |contact| %>
         <% str = contact.name.html_safe + ( content_tag(:i, "", :class => "#{contact.membership.present? ? (contact.membership.due? ? 'due' : 'overdue') : 'missing'}-membership pull-right icon-fire") + content_tag(:span, contact.try(:membership).try(:ends_on), :class => "pull-right") if contact.membership.blank? || contact.membership.due? || contact.membership.overdue? )  %>
         <li class="<%= 'active' if @membership.present? && @membership.persisted? && contact.id == @membership.contact.id %>"><%= link_to str, contact.membership.present? ? business_membership_path(@business, contact.membership) : new_business_membership_path(@business, :membership => {:contact_id => contact.id}) %></li>
