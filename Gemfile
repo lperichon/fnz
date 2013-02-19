@@ -32,6 +32,6 @@ gem 'tz_magic', '0.0.1'
 gem "squeel", '1.0.14'
 gem 'omniauth', '1.1.1'
 gem 'omniauth-cas', '1.0.1'
-gem 'accounts_client', '0.0.9'
-gem 'contacts_client', '0.0.7'
+gem 'accounts_client', '0.0.12'
+gem 'contacts_client', '0.0.10'
 gem 'newrelic_rpm', :group => [:staging, :production]

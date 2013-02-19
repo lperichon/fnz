@@ -1,9 +1,9 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    accounts_client (0.0.9)
+    accounts_client (0.0.12)
       gravtastic
-      logical_model (~> 0.4.0)
+      logical_model (~> 0.4.5)
       railties (~> 3.1)
     actionmailer (3.2.8)
       actionpack (= 3.2.8)
@@ -54,7 +54,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.3.3)
-    contacts_client (0.0.7)
+    contacts_client (0.0.10)
       logical_model (~> 0.4.1)
       railties (~> 3.1)
     database_cleaner (0.8.0)
@@ -95,7 +95,7 @@ GEM
       railties (>= 3.0.0)
     launchy (2.1.2)
       addressable (~> 2.3)
-    logical_model (0.4.4)
+    logical_model (0.4.5)
       activemodel
       activesupport
       ethon (= 0.4.2)
@@ -207,7 +207,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  accounts_client (= 0.0.9)
+  accounts_client (= 0.0.12)
   awesome_nested_fields (= 0.6.0)
   bootstrap-datepicker-rails (= 0.6.17)
   bootstrap-sass (>= 2.0.4.0)
@@ -215,7 +215,7 @@ DEPENDENCIES
   client_side_validations (= 3.2.0.beta.6)
   client_side_validations-simple_form (= 2.0.0.beta.2)
   coffee-rails (~> 3.2.1)
-  contacts_client (= 0.0.7)
+  contacts_client (= 0.0.10)
   database_cleaner (>= 0.8.0)
   devise (>= 2.1.2)
   email_spec (>= 1.2.1)
