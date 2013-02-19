@@ -6,7 +6,8 @@
 }
 
 .memberships tbody td {
-  height: 24px;
+  height: 36px;
+  width: 63px;
 }
 .memberships td.current {
   border-left:4px solid #DDDDDD;
@@ -16,6 +17,11 @@
 .memberships td {
   text-align: center;
   vertical-align: middle;
+}
+
+nav.li {
+  height: 43px;
+  padding-top: 2.1px;
 }
 
 
