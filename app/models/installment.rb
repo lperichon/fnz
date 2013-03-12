@@ -9,7 +9,7 @@ class Installment < ActiveRecord::Base
   validates :due_on, :presence => true
   validates :value, :presence => true
 
-  scope :due, where("due_on BETWEEN '#{Date.today}' AND '#{15.days.from_now}'")
+  scope :due, where("due_on BETWEEN '#{Date.today}' AND '#{Date.today.end_of_month}'")
   scope :overdue, where("due_on < '#{Date.today}'")
   scope :incomplete, where("installments.value > installments.balance")
 
