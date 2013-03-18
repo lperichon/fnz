@@ -4,5 +4,5 @@
 <td><%= number_to_currency(transaction.amount, :unit => transaction.source.currency.symbol) %></td>
 <td><%= transaction.source.name %></td>
 <td><%= transaction.target.name if transaction.is_a? Transfer%></td>
-<td><%= transaction.transaction_at.to_s(:short) %></td>
+<td><%= transaction.transaction_at.to_s(:short) if transaction.transaction_at.present? %></td>
 <td><%= transaction.tags.join(",") %></td>
