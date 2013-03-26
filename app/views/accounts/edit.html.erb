@@ -4,7 +4,7 @@
 
 <h2>Edit Account</h2>
 
-<%= render :partial => 'form' %>
+<%= render :partial => 'form', :locals => {:form_url => business_account_path(@business, @account)} %>
 
 <%= link_to 'Show', business_account_path(@business,@account) %> |
 <%= link_to 'Back', business_accounts_path(@business) %>
