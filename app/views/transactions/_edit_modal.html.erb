@@ -5,9 +5,11 @@
   </div>
   <%= simple_form_for(@transaction, :as => :transaction, :url => business_transaction_path(@business, @transaction), :validate => true, :remote => true, :html => {:class => 'form-horizontal'}) do |f| %>
       <%= render :partial => 'transactions/fields', :locals => {:f => f} %>
-      <%= f.hidden_field :sale_ids, :value => "" %>
-      <%= f.hidden_field :installment_ids, :value => "" %>
-      <%= f.hidden_field :enrollment_ids, :value => "" %>
+      <% %w(sale installment enrollment).each do |nested_resource_type| %>
+          <% f.object.send("#{nested_resource_type}_ids").each_with_index do |nested_resource_id, index| %>
+            <%= f.input "#{nested_resource_type}_ids", :as => :hidden, :input_html => {:id => "#{nested_resource_type}_ids_#{index}", :name => "transaction[#{nested_resource_type}_ids][]", :value => nested_resource_id} %>
+          <% end %>
+      <% end %>
       <div class="modal-footer">
         <%= link_to "Close", "#", :class => "btn", "data-dismiss" => "modal" %>
         <%= f.button :submit, :class => "btn btn-primary" %>
