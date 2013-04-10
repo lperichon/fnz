@@ -1,8 +1,8 @@
 <%= simple_form_for(@agent, :validate => true, :url => business_agents_path(@business), :html => {:class => "form-horizontal"}) do |f| %>
 
     <%= f.input :name %>
-
-    <%= f.input :padma_id, :as => :select, :collection => @business.padma.users.collect(&:username), :input_html => {'data-business-id' => @business.id, 'data-placeholder' => 'Please select Padma user',:class => "chosen"} %>
-    
+    <% if @business.padma_id %>
+    <%= f.input :padma_id, :as => :select, :collection => @business.padma.users.collect(&:username), :input_html => {'data-placeholder' => 'Please select Padma user', :class => "chosen"} %>
+    <% end %>    
     <%= f.button :submit, :class => "btn btn-primary" %>
 <% end %>
