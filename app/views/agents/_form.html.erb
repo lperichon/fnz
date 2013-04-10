@@ -1,20 +1,8 @@
-<%= form_for(@agent, :url => business_agents_path(@business)) do |f| %>
-    <% if @agent.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@agent.errors.count, "error") %> prohibited this agent from being saved:</h2>
+<%= simple_form_for(@agent, :validate => true, :url => business_agents_path(@business), :html => {:class => "form-horizontal"}) do |f| %>
 
-          <ul>
-            <% @agent.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
+    <%= f.input :name %>
 
-    <p><%= f.label :name %><br />
-      <%= f.text_field :name %></p>
-
-    <div class="actions">
-      <%= f.submit %>
-    </div>
+    <%= f.input :padma_id, :as => :select, :collection => @business.padma.users.collect(&:username), :input_html => {'data-business-id' => @business.id, 'data-placeholder' => 'Please select Padma user',:class => "chosen"} %>
+    
+    <%= f.button :submit, :class => "btn btn-primary" %>
 <% end %>
