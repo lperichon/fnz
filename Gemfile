@@ -35,3 +35,5 @@ gem 'omniauth-cas', '1.0.1'
 gem 'accounts_client', '0.0.12'
 gem 'contacts_client', '0.0.10'
 gem 'newrelic_rpm', :group => [:staging, :production]
+gem 'unicorn'
+gem 'resque'
