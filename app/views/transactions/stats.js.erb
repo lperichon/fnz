@@ -11,7 +11,7 @@ debitsChart = new Highcharts.Chart({
         plotShadow: false
     },
     title: {
-        text: "Debit"
+        text: "Debits: $<%= @debits.values.sum.to_f.round(2) %>"
     },
     tooltip: {
         pointFormat: '<b>{point.y}</b>',
@@ -55,7 +55,7 @@ creditsChart = new Highcharts.Chart({
         plotShadow: false
     },
     title: {
-        text: "Credit"
+        text: "Credits: $<%= @credits.values.sum.to_f.round(2) %>"
     },
     tooltip: {
         pointFormat: '<b>{point.y}</b>',
@@ -78,7 +78,7 @@ creditsChart = new Highcharts.Chart({
     },
     series: [{
         type: 'pie',
-        name: 'Debits',
+        name: 'Credits',
         data: [
             <% @credits.each do |tag, sum| %>
             ['<%= tag %>', <%= sum.to_f.round(2) %>],
