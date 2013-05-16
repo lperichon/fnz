@@ -1,5 +1,5 @@
 $(document).ready ->
-  $("#membership_contact_id").chosen
+  $("#membership_contact_id, #membership_payment_type_id").chosen
     no_results_text: "No results matched"
     create_option: (name) ->
       chosen = this

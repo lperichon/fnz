@@ -20,7 +20,7 @@ describe Membership do
       membership = FactoryGirl.create(:membership, business: @business, payment_type: pt)
       membership.payment_type.should == pt
       pt.destroy
-      membership.payment_type.should be_nil
+      membership.reload.payment_type.should be_nil
     end
   end
 
