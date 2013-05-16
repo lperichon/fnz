@@ -12,7 +12,9 @@ describe Membership do
       :ends_on => 11.months.from_now.end_of_month
     }
   end
-  
+
+  it "has a payment type"
+
   it "should create a new instance given a valid attribute" do
     Membership.create!(@attr)
   end

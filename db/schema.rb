@@ -11,12 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130203215914) do
+ActiveRecord::Schema.define(:version => 20130516142545) do
 
   create_table "accounts", :force => true do |t|
-    t.string  "name",        :default => "",  :null => false
+    t.string  "name",                                      :default => "",  :null => false
     t.integer "business_id"
-    t.decimal "balance",     :default => 0.0, :null => false
+    t.decimal "balance",     :precision => 8, :scale => 2, :default => 0.0, :null => false
     t.string  "currency"
   end
 
@@ -27,13 +27,13 @@ ActiveRecord::Schema.define(:version => 20130203215914) do
   end
 
   create_table "businesses", :force => true do |t|
-    t.string    "name",            :default => "",         :null => false
-    t.integer   "owner_id",                                :null => false
-    t.timestamp "created_at",                              :null => false
-    t.timestamp "updated_at",                              :null => false
-    t.string    "type",            :default => "Personal"
-    t.string    "padma_id"
-    t.timestamp "synchronized_at"
+    t.string   "name",            :default => "",         :null => false
+    t.integer  "owner_id",                                :null => false
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
+    t.string   "type",            :default => "Personal"
+    t.string   "padma_id"
+    t.datetime "synchronized_at"
   end
 
   create_table "businesses_users", :force => true do |t|
@@ -42,18 +42,18 @@ ActiveRecord::Schema.define(:version => 20130203215914) do
   end
 
   create_table "contacts", :force => true do |t|
-    t.string    "name",          :default => "Unknown", :null => false
-    t.integer   "business_id"
-    t.string    "padma_id"
-    t.string    "padma_status"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.string    "padma_teacher"
+    t.string   "name",          :default => "Unknown", :null => false
+    t.integer  "business_id"
+    t.string   "padma_id"
+    t.string   "padma_status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "padma_teacher"
   end
 
   create_table "enrollments", :force => true do |t|
     t.integer "membership_id"
-    t.decimal "value",         :default => 0.0, :null => false
+    t.decimal "value",         :precision => 8, :scale => 2, :default => 0.0, :null => false
     t.integer "agent_id"
     t.date    "enrolled_on"
   end
@@ -64,14 +64,14 @@ ActiveRecord::Schema.define(:version => 20130203215914) do
   end
 
   create_table "imports", :force => true do |t|
-    t.integer   "business_id"
-    t.string    "upload_file_name"
-    t.string    "upload_content_type"
-    t.integer   "upload_file_size"
-    t.timestamp "upload_updated_at"
-    t.timestamp "created_at",          :null => false
-    t.timestamp "updated_at",          :null => false
-    t.text      "errors_csv"
+    t.integer  "business_id"
+    t.string   "upload_file_name"
+    t.string   "upload_content_type"
+    t.integer  "upload_file_size"
+    t.datetime "upload_updated_at"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.text     "errors_csv"
   end
 
   create_table "imports_transactions", :force => true do |t|
@@ -82,9 +82,9 @@ ActiveRecord::Schema.define(:version => 20130203215914) do
   create_table "installments", :force => true do |t|
     t.integer "membership_id"
     t.date    "due_on"
-    t.decimal "value",         :default => 0.0, :null => false
+    t.decimal "value",         :precision => 8, :scale => 2, :default => 0.0, :null => false
     t.integer "agent_id"
-    t.decimal "balance",       :default => 0.0, :null => false
+    t.decimal "balance",       :precision => 8, :scale => 2, :default => 0.0, :null => false
   end
 
   create_table "installments_transactions", :force => true do |t|
@@ -97,23 +97,31 @@ ActiveRecord::Schema.define(:version => 20130203215914) do
     t.integer "contact_id"
     t.date    "begins_on"
     t.date    "ends_on"
-    t.decimal "value",       :default => 0.0, :null => false
+    t.decimal "value",       :precision => 8, :scale => 2, :default => 0.0, :null => false
     t.date    "closed_on"
   end
 
+  create_table "payment_types", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "business_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "products", :force => true do |t|
-    t.string  "name",        :default => "Unknown", :null => false
-    t.decimal "price",       :default => 0.0,       :null => false
+    t.string  "name",                                      :default => "Unknown", :null => false
+    t.decimal "price",       :precision => 8, :scale => 2, :default => 0.0,       :null => false
     t.string  "currency"
     t.integer "business_id"
   end
 
   create_table "roles", :force => true do |t|
-    t.string    "name"
-    t.integer   "resource_id"
-    t.string    "resource_type"
-    t.timestamp "created_at",    :null => false
-    t.timestamp "updated_at",    :null => false
+    t.string   "name"
+    t.integer  "resource_id"
+    t.string   "resource_type"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
@@ -143,35 +151,35 @@ ActiveRecord::Schema.define(:version => 20130203215914) do
   end
 
   create_table "transactions", :force => true do |t|
-    t.string    "type",                             :null => false
-    t.string    "description",     :default => "",  :null => false
-    t.integer   "business_id"
-    t.integer   "source_id",                        :null => false
-    t.decimal   "amount",                           :null => false
-    t.timestamp "transaction_at"
-    t.integer   "creator_id"
-    t.integer   "target_id"
-    t.decimal   "conversion_rate", :default => 1.0, :null => false
-    t.string    "state"
-    t.timestamp "reconciled_at"
+    t.string   "type",                                                           :null => false
+    t.string   "description",                                   :default => "",  :null => false
+    t.integer  "business_id"
+    t.integer  "source_id",                                                      :null => false
+    t.decimal  "amount",          :precision => 8, :scale => 2,                  :null => false
+    t.datetime "transaction_at"
+    t.integer  "creator_id"
+    t.integer  "target_id"
+    t.decimal  "conversion_rate", :precision => 8, :scale => 5, :default => 1.0, :null => false
+    t.string   "state"
+    t.datetime "reconciled_at"
   end
 
   create_table "users", :force => true do |t|
-    t.string    "email",                  :default => "",    :null => false
-    t.string    "encrypted_password",     :default => "",    :null => false
-    t.string    "reset_password_token"
-    t.timestamp "reset_password_sent_at"
-    t.timestamp "remember_created_at"
-    t.integer   "sign_in_count",          :default => 0
-    t.timestamp "current_sign_in_at"
-    t.timestamp "last_sign_in_at"
-    t.string    "current_sign_in_ip"
-    t.string    "last_sign_in_ip"
-    t.timestamp "created_at",                                :null => false
-    t.timestamp "updated_at",                                :null => false
-    t.string    "name"
-    t.string    "time_zone",              :default => "UTC"
-    t.string    "drc_uid"
+    t.string   "email",                  :default => "",    :null => false
+    t.string   "encrypted_password",     :default => "",    :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
+    t.string   "name"
+    t.string   "time_zone",              :default => "UTC"
+    t.string   "drc_uid"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
