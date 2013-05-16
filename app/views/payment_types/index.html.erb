@@ -1,0 +1,16 @@
+<% content_for :sidebar do %>
+  <%= render :partial => 'businesses/edit_sidebar' %>
+<% end %>
+
+<h3>Payment Types</h3>
+<ul class="payment_types">
+  <% @payment_types.each do |payment_type| %>
+    <li>
+      <%= link_to payment_type.name, business_payment_type_path(@business, payment_type) %>
+    </li>
+  <% end %>
+</ul>
+
+<br />
+
+<%= link_to 'New Payment Type', new_business_payment_type_path(@business) %>
