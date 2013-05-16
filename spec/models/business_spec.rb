@@ -24,4 +24,8 @@ describe Business do
     no_owner_business.should_not be_valid
   end
 
+  describe "has payment types" do
+    it { should have_many :payment_types }
+  end
+
 end

@@ -9,6 +9,7 @@ group :assets do
 end
 gem 'jquery-rails'
 gem "rspec-rails", ">= 2.11.0", :group => [:development, :test]
+gem "shoulda-matchers", :group => [:development, :test]
 #gem "capybara", ">= 1.1.2", :group => :test
 gem "email_spec", ">= 1.2.1", :group => :test
 #gem "cucumber-rails", ">= 1.3.0", :group => :test, :require => false
@@ -32,8 +33,8 @@ gem 'tz_magic', '0.0.1'
 gem "squeel", '1.0.14'
 gem 'omniauth', '1.1.1'
 gem 'omniauth-cas', '1.0.1'
-gem 'accounts_client', '0.0.12'
-gem 'contacts_client', '0.0.10'
+gem 'accounts_client', '0.0.18'
+gem 'contacts_client', '0.0.14'
 gem 'newrelic_rpm', :group => [:staging, :production]
 gem 'unicorn'
 gem 'resque'

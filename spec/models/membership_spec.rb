@@ -12,7 +12,18 @@ describe Membership do
       :ends_on => 11.months.from_now.end_of_month
     }
   end
-  
+
+  describe "has a payment type" do
+    it {should belong_to :payment_type }
+    it "nullify association if payment is destroyed" do
+      pt = FactoryGirl.create(:payment_type, business: @business)
+      membership = FactoryGirl.create(:membership, business: @business, payment_type: pt)
+      membership.payment_type.should == pt
+      pt.destroy
+      membership.payment_type.should be_nil
+    end
+  end
+
   it "should create a new instance given a valid attribute" do
     Membership.create!(@attr)
   end
