@@ -68,9 +68,9 @@ describe PaymentTypesController do
         assigns(:payment_type).should be_persisted
       end
 
-      it "redirects to the created payment_type" do
+      it "redirects to payment_types index" do
         post :create, {:business_id => @business.to_param, :payment_type => valid_attributes}
-        response.should redirect_to(business_payment_type_url(@business,PaymentType.last))
+        response.should redirect_to(business_payment_types_url(@business))
       end
     end
 
@@ -109,10 +109,10 @@ describe PaymentTypesController do
         assigns(:payment_type).should eq(payment_type)
       end
 
-      it "redirects to the payment_type" do
+      it "redirects to the payment_types index" do
         payment_type = @business.payment_types.create! valid_attributes
         put :update, {:business_id => @business.to_param, :id => payment_type.to_param, :payment_type => valid_attributes}
-        response.should redirect_to(business_payment_type_url(@business, payment_type))
+        response.should redirect_to(business_payment_types_url(@business))
       end
     end
 

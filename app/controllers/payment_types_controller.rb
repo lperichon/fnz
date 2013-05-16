@@ -24,7 +24,7 @@ class PaymentTypesController < UserApplicationController
 
     respond_to do |format|
       if @payment_type.save
-        format.html { redirect_to business_payment_type_path(@business, @payment_type), notice: 'Payment type was successfully created.' }
+        format.html { redirect_to business_payment_types_path(@business), notice: 'Payment type was successfully created.' }
         format.json { render json: @payment_type, status: :created, location: @payment_type }
       else
         format.html { render action: "new" }
@@ -40,7 +40,7 @@ class PaymentTypesController < UserApplicationController
 
     respond_to do |format|
       if @payment_type.update_attributes(params[:payment_type])
-        format.html { redirect_to business_payment_type_path(@business, @payment_type), notice: 'Payment type was successfully updated.' }
+        format.html { redirect_to business_payment_types_path(@business), notice: 'Payment type was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
