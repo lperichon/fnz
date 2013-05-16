@@ -10,6 +10,7 @@
       (<i><%= payment_type.description %></i>)
       -
       <%= link_to 'Edit', edit_business_payment_type_path(@business, payment_type) %>
+      <%= link_to 'Remove', business_payment_type_path(@business,payment_type), method: :delete, confirm: 'Are you sure?' %>
     </li>
   <% end %>
 </ul>
