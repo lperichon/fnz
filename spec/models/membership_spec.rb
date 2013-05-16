@@ -13,7 +13,9 @@ describe Membership do
     }
   end
 
-  it "has a payment type"
+  it "has a payment type" do
+    should belong_to :payment_type
+  end
 
   it "should create a new instance given a valid attribute" do
     Membership.create!(@attr)
