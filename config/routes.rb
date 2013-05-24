@@ -28,6 +28,7 @@ Fnz::Application.routes.draw do
     resources :sales do
       get :stats, :on => :collection
     end
+    resources :payment_types
     resources :memberships do
       resources :installments
       resource :enrollment

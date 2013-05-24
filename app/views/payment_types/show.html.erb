@@ -1,0 +1,11 @@
+<% content_for :sidebar do %>
+  <%= render :partial => 'businesses/edit_sidebar' %>
+<% end %>
+
+<h3>Payment Type</h3>
+<p>Name: <%= @payment_type.name %></p>
+<p>Description: <%= @payment_type.description %></p>
+
+
+<%= link_to 'Edit', edit_business_payment_type_path(@business, @payment_type) %> |
+<%= link_to 'Back', business_payment_types_path(@business) %>
