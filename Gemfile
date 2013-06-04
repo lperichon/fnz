@@ -38,3 +38,5 @@ gem 'contacts_client', '0.0.14'
 gem 'newrelic_rpm', :group => [:staging, :production]
 gem 'unicorn'
 gem 'resque'
+gem 'execjs'
+gem 'therubyracer'

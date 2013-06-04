@@ -74,3 +74,7 @@ pickle-email-*.html
 
 # vim artifacts
 **.swp
+
+# rvm
+.ruby-version
+.ruby-gemset
