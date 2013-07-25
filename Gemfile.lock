@@ -109,6 +109,9 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    messaging_client (0.0.3)
+      logical_model (~> 0.5.0)
+      railties (>= 3.1)
     metaclass (0.0.1)
     mime-types (1.19)
     mocha (0.10.5)
@@ -261,6 +264,7 @@ DEPENDENCIES
   hub (>= 1.10.2)
   jquery-rails
   launchy (>= 2.1.2)
+  messaging_client (~> 0.0.2)
   newrelic_rpm
   omniauth (= 1.1.1)
   omniauth-cas (= 1.0.1)
