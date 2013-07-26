@@ -20,11 +20,12 @@ class Contact < ActiveRecord::Base
   end
 
   def padma
-    PadmaContact.find(padma_id) if padma_id
+    PadmaContact.find(padma_id, select: [:email]) if padma_id
   end
-
+  
+  # TODO: cache email
   def email
-    padma.emails.find(:primary => true)
+    padma.email
   end
 
   def installment_for(date)

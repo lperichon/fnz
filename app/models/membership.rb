@@ -26,5 +26,13 @@ class Membership < ActiveRecord::Base
     (Date.today..Date.today.end_of_month).include? ends_on
   end
 
-
+  def as_json_for_messaging
+    json = as_json
+    json["ends_on"] = ends_on
+    json["contact_id"] = contact.padma_id
+    json["recipient_email"] = contact.email
+    json["username"] = contact.padma_teacher
+    json["account_name"] = business.padma_id
+    json
+  end
 end

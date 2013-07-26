@@ -18,3 +18,15 @@ task :create_monthly_installments  => :environment do
     puts "done."
   end
 end
+
+desc "This task is called by the Heroku scheduler add-on it broadcasts end of membership 1 month before"
+task :broadcast_end_of_memberships => :environment do
+  # Only run the first day of the month
+  return unless Date.today.day == 1
+
+  Business.where("padma_id IS NOT NULL").each do |business|
+    puts "Broadcasting end of memberships for #{business.name}..."
+    MonthlyMembershipEndsBroadcaster.new(business).run
+    puts "done."
+  end
+end
