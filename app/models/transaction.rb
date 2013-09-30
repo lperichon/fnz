@@ -64,10 +64,17 @@ class Transaction < ActiveRecord::Base
         :amount => amount.abs(),
         :description => row[3]
     }
+
+    tags_str = row[4]
+    tags_str.split(';').each do |tag_name|
+      tag = Tag.find_or_create_by_business_id_and_name(business_id: business.id, name: tag_name)
+      transaction.tags << tag
+    end
+
     return transaction
   end
 
   def self.csv_header
-    "Account,Date,Amount,Description".split(',')
+    "Account,Date,Amount,Description,Tags".split(',')
   end
 end
