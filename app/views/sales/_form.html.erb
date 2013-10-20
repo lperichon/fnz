@@ -1,5 +1,5 @@
 <%= simple_form_for(@sale, :url => form_url, :validate => true, :html => {:class => "form-horizontal"}) do |f| %>
-    <%= f.association :contact, :as => :select, :collection => @business.contacts, :input_html => {'data-business-id' => @business.id, 'data-placeholder' => 'Please select contact',:class => "chosen"} %>
+    <%= f.input :padma_contact_id, :as => :padma_contact %>
 
     <%= f.association :agent, :as => :select, :collection => @business.agents, :input_html => {'data-placeholder' => 'Please select agent',:class => "chosen"} %>
 
@@ -11,5 +11,64 @@
     <%= render :partial => 'nested_transactions_table', :locals => {:f => f} %>
 
     <%= f.button :submit, :class => "btn btn-primary" %>
+
+<% end %>
+
+<%= javascript_tag do %>
+
+    function contactFormatResult(contact) {
+    var markup = "<div>" + contact.name + "</div>";
+    return markup;
+    }
+
+    function contactFormatSelection(contact) {
+    return contact.name;
+    }
+
+    $("#sale_padma_contact_id").select2({
+    placeholder: "Search contact",
+    minimumInputLength: 3,
+    ajax: {
+    url: "http://<%= Contacts::HOST %>/v0/contacts/search_for_select",
+    type: 'POST',
+    dataType: 'jsonp',
+    quietMillis: 100,
+    data: function (term, page) { // page is the one-based page number tracked by Select2
+    return {
+    page: page,
+    per_page: 10,
+    sort: {
+    first_name: "asc",
+    last_name: "asc"
+    },
+    username: "<%= current_user.username %>",
+    account_name: "<%= current_user.businesses.find(params[:business_id]).padma_id %>",
+    only_name: true,
+    full_text: term,
+    app_key: "844d8c2d20a9cf9e97086df94f01e7bdd3d9afaa716055315706f2e31f40dc097c632af53e74ce3d5a1f23811b4e32e7a1e2b7fa5c128c8b28f1fc6e5a392015"
+    };
+    },
+    results: function (data, page) {
+    var more = (page * 10) < data.total; // whether or not there are more results available
+
+    // notice we return the value of more so Select2 knows if more results can be loaded
+    return {results: data.collection, more: more};
+    }
+    },
+    initSelection: function(element, callback) {
+    // the input tag has a value attribute preloaded that points to a preselected movie's id
+    // this function resolves that id attribute to an object that select2 can render
+    // using its formatResult renderer - that way the movie name is shown preselected
+    var id=$(element).val();
+    var name=$(element).attr("data-name");
+    if (id!=="") {
+    callback({"id": id, "name": name});
+    }
+    },
+    formatResult: contactFormatResult, // omitted for brevity, see the source of this page
+    formatSelection: contactFormatSelection, // omitted for brevity, see the source of this page
+    dropdownCssClass: "bigdrop", // apply css that makes the dropdown taller
+    escapeMarkup: function (m) { return m; } // we do not want to escape markup since we are displaying html in results
+    });
 
 <% end %>

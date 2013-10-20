@@ -23,8 +23,12 @@ class SalesController < UserApplicationController
   # POST /accounts
   # POST /accounts.json
   def create
+    padma_contact_id = params[:sale].delete(:padma_contact_id)
     @sale = @context.new(params[:sale])
     @business = @sale.business
+
+    # Setting padma_contact_id is performed last as it depends on business_id being already set
+    @sale.padma_contact_id = padma_contact_id
 
     respond_to do |format|
       if @sale.save

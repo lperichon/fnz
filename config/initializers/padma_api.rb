@@ -17,4 +17,5 @@ end
 module Messaging
   HYDRA = ::HYDRA
   API_KEY = ENV['messaging_key'] || CONFIG['messaging_key']
+  API_SECRET = ENV['messaging_secret'] || CONFIG['messaging_secret']
 end

@@ -44,4 +44,6 @@ Fnz::Application.routes.draw do
   resources :debits, :controller => 'transactions', :except => [:index]
   resources :credits, :controller => 'transactions', :except => [:index]
   resources :transfers, :controller => 'transactions', :except => [:index]
+
+  match 'messages', to: 'messages#catch'
 end

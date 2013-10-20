@@ -41,3 +41,4 @@ gem 'unicorn'
 gem 'resque'
 gem 'execjs'
 gem 'therubyracer'
+gem "select2-rails"

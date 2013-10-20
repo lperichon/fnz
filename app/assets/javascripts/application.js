@@ -18,4 +18,5 @@
 //= require rails.validations
 //= require rails.validations.simple_form
 //= require tz_magic/application
+//= require select2
 //= require_tree .
