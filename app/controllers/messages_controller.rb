@@ -9,7 +9,7 @@ class MessagesController < ApplicationController
   # @argument key_name [String]
   # @argument data [String] JSON encoded
   # @argument secret_key [String]
-  def catch
+  def catch_message
     if params[:secret_key] == Messaging::API_SECRET
       MessageProcessor.catch_message(params[:key_name],ActiveSupport::JSON.decode(params[:data]).symbolize_keys)
       render text: 'received', status: 200
