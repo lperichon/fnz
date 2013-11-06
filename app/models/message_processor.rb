@@ -1,5 +1,6 @@
 class MessageProcessor
   def self.catch_message(key_name, data)
+    Rails.logger.debug "catch"
     return unless key_name == 'subscription_change'
     Rails.logger.debug "message 'subscription_change'"
     business = Business.find_by_padma_id(data[:account_name])
