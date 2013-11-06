@@ -18,6 +18,12 @@ class MessageProcessor
                                                      :name => "#{padma_contact.first_name} #{padma_contact.last_name}".strip,
                                                      :padma_status => padma_contact.status,
                                                      :padma_teacher => padma_contact.global_teacher_username)
+      unless contact.created_at && contact.created_at > 10.seconds.ago
+        contact.update_attributes(
+            :name => "#{padma_contact.first_name} #{padma_contact.last_name}".strip,
+            :padma_status => padma_contact.status,
+            :padma_teacher => padma_contact.global_teacher_username)
+      end
       Rails.logger.debug "local contact ##{contact.id} #{contact.created_at >= 1.minute.ago ? "created" : "found"}"
       # TODO: Create Membership using data from message
     elsif data[:type] == 'DropOut'
