@@ -6,7 +6,7 @@ class MessageProcessor
     return if business.nil?
     Rails.logger.debug "for Business #{business.name}"
     if data[:type] == 'Enrollment'
-      Rails.logger 'Enrollment'
+      Rails.logger.debug 'Enrollment'
       #Create local contact
       padma_contact = PadmaContact.find(data[:contact_id],
                                         :select => [:first_name, :last_name, :status, :global_teacher_username],
