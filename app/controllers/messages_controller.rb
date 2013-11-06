@@ -10,7 +10,9 @@ class MessagesController < ApplicationController
   # @argument data [String] JSON encoded
   # @argument secret_key [String]
   def catch_message
+    Rails.logger.debug "Entering messages controller"
     if params[:secret_key] == Messaging::API_SECRET
+      Rails.logger.debug "Secret key OK, catching message"
       MessageProcessor.catch_message(params[:key_name],ActiveSupport::JSON.decode(params[:data]).symbolize_keys)
       render text: 'received', status: 200
     else
