@@ -29,7 +29,7 @@ describe Import do
 
   it "should process a csv file" do
     import = @business.imports.create
-    import.upload.stub!(:path).and_return("#{Rails.root}/spec/fixtures/transactions.csv")
+    import.upload.stub(:path).and_return("#{Rails.root}/spec/fixtures/transactions.csv")
     expect {
       import.process
     }.to change(Transaction, :count).by(1)

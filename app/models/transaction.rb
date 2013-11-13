@@ -66,11 +66,12 @@ class Transaction < ActiveRecord::Base
     }
 
     tags_str = row[4]
-    tags_str.split(';').each do |tag_name|
-      tag = Tag.find_or_create_by_business_id_and_name(business_id: business.id, name: tag_name)
-      transaction.tags << tag
+    unless tags_str.blank?
+      tags_str.split(';').each do |tag_name|
+        tag = Tag.find_or_create_by_business_id_and_name(business_id: business.id, name: tag_name)
+        transaction.tags << tag
+      end
     end
-
     return transaction
   end
 
