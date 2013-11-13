@@ -41,4 +41,8 @@ RSpec.configure do |config|
   config.order = "random"
 
   config.include Paperclip::Shoulda::Matchers
+
+  config.before(:each) do
+    User.any_instance.stub(:padma).and_return(PadmaUser.new)
+  end
 end
