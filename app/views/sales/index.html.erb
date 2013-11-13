@@ -12,7 +12,7 @@
     <h4><%= Date::MONTHNAMES[date.month] %> <%= link_to content_tag(:i, "", :class => "icon-bar-chart", :title => "View #{Date::MONTHNAMES[date.month]} stats"), stats_business_sales_path(@business, :year => date.year, :month => date.month), :remote => true %></h4>
     <% sales.each do |sale| %>
     <li>
-      <%= link_to "#{sale.sold_on} - #{sale.agent.name} - #{sale.contact.try(:name)}: #{sale.product.try(:name)} @ #{number_to_currency(sale.product.price, :unit => sale.product.currency.symbol) if sale.product}", business_sale_path(@business, sale) %>
+      <%= link_to "#{sale.sold_on} - #{sale.agent.name} - #{sale.contact.try(:name)}: #{sale.product.try(:name)} @ #{number_to_currency(sale.product.price, :unit => sale.product.price_currency.symbol) if sale.product}", business_sale_path(@business, sale) %>
     </li>
     <% end %>
 </ul>

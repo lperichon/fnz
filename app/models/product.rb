@@ -3,15 +3,17 @@ class Product < ActiveRecord::Base
 
   validates :name, :presence => true
   validates :price, :presence => true, :numericality => {:greater_than_or_equal_to => 0}
+  validates :cost, :presence => true, :numericality => {:greater_than_or_equal_to => 0}
   validates :business, :presence => true
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :business_id, :price, :currency
+  attr_accessible :name, :business_id, :price, :price_currency, :cost, :cost_currency
 
-  def currency=(currency_code)
-    self[:currency] = currency_code
+  def price_currency
+    Currency.find(self[:price_currency]) || Currency.find(:usd)
   end
-  def currency
-    Currency.find(self[:currency]) || Currency.find(:usd)
+
+  def cost_currency
+    Currency.find(self[:cost_currency]) || Currency.find(:usd)
   end
 end

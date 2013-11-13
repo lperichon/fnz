@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130516150700) do
+ActiveRecord::Schema.define(:version => 20131113155436) do
 
   create_table "accounts", :force => true do |t|
     t.string  "name",        :default => "",  :null => false
@@ -103,18 +103,20 @@ ActiveRecord::Schema.define(:version => 20130516150700) do
   end
 
   create_table "payment_types", :force => true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.integer  "business_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.string    "name"
+    t.text      "description"
+    t.integer   "business_id"
+    t.timestamp "created_at",  :null => false
+    t.timestamp "updated_at",  :null => false
   end
 
   create_table "products", :force => true do |t|
-    t.string  "name",        :default => "Unknown", :null => false
-    t.decimal "price",       :default => 0.0,       :null => false
-    t.string  "currency"
+    t.string  "name",                                         :default => "Unknown", :null => false
+    t.decimal "price",                                        :default => 0.0,       :null => false
+    t.string  "price_currency"
     t.integer "business_id"
+    t.decimal "cost",           :precision => 8, :scale => 2, :default => 0.0,       :null => false
+    t.string  "cost_currency"
   end
 
   create_table "roles", :force => true do |t|
