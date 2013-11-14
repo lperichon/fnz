@@ -6,6 +6,7 @@
 <p>Name: <%= @product.name %></p>
 <p>Price: <%= number_to_currency(@product.price, :unit => @product.price_currency.symbol) %></p>
 <p>Cost: <%= number_to_currency(@product.cost, :unit => @product.cost_currency.symbol) %></p>
+<p>Stock: <%=  @product.stock %></p>
 
 <%= link_to 'Edit', edit_business_product_path(@business, @product) %> |
 <%= link_to 'Back', business_products_path(@business) %>
