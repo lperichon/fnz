@@ -47,4 +47,9 @@ describe Product do
     no_stock_product.should be_valid
   end
 
+  it "should scope hidden products" do
+    FactoryGirl.create(:product, :business_id => @business.id, :hidden => true)
+    Product.hidden.count.should equal(1)
+  end
+
 end

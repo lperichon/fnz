@@ -9,7 +9,9 @@ class Product < ActiveRecord::Base
 
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :business_id, :price, :price_currency, :cost, :cost_currency, :stock
+  attr_accessible :name, :business_id, :price, :price_currency, :cost, :cost_currency, :stock, :hidden
+
+  scope :hidden, where(:hidden => true)
 
   def price_currency
     Currency.find(self[:price_currency]) || Currency.find(:usd)
