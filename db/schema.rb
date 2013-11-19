@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131114201010) do
+ActiveRecord::Schema.define(:version => 20131119130140) do
 
   create_table "accounts", :force => true do |t|
     t.string  "name",        :default => "",  :null => false
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(:version => 20131114201010) do
     t.timestamp "created_at",          :null => false
     t.timestamp "updated_at",          :null => false
     t.text      "errors_csv"
+    t.string    "status"
   end
 
   create_table "imports_transactions", :force => true do |t|

@@ -34,4 +34,12 @@ describe Import do
       import.process
     }.to change(Transaction, :count).by(1)
   end
+
+  it "defaults status to ready" do
+    i = Import.new(@attr.merge(:status => nil))
+    i.save
+    i.status.should == :ready
+  end
+
+
 end
