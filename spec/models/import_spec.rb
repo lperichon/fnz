@@ -28,16 +28,16 @@ describe Import do
                   rejecting('image/png', 'image/gif') }
 
   it "should process a csv file" do
-    import = @business.imports.create
+    import = TransactionImport.create(@attr)
     import.upload.stub(:path).and_return("#{Rails.root}/spec/fixtures/transactions.csv")
     expect {
       import.process
     }.to change(Transaction, :count).by(1)
+    import.status.should == :finished
   end
 
   it "defaults status to ready" do
-    i = Import.new(@attr.merge(:status => nil))
-    i.save
+    i = Import.create(@attr.merge(:status => nil))
     i.status.should == :ready
   end
 
