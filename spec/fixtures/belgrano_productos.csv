@@ -1,0 +1,163 @@
+id,nombre,idioma,precio_in_cents,costo_in_cents,stock,observaciones,deleted,foto_file_name,foto_content_type,foto_file_size,foto_updated_at,created_at,updated_at,precio_updated_at,school_id,costo_currency,precio_currency,code,author,owner
+50001,alimentacion vegetariana/DeRose,portugues,5500,100,4,<p>esta es una observacion de prueba</p>,true,,,,,2009-03-22 00:05:13 UTC,2011-02-01 12:41:02 UTC,,1,ARS,ARS,,,
+50002,Alternativas/DeRose,portugues,3900,100,4,"",true,,,,,2009-03-22 00:05:13 UTC,2011-02-01 12:41:10 UTC,,1,ARS,ARS,,,
+50003,boas maneiras/De Rose,portugues,4300,100,1,,true,,,,,2009-03-22 00:05:13 UTC,2011-02-01 12:41:16 UTC,,1,ARS,ARS,,,
+50004,Chakras y Kundaliní­,Castellano,6500,4000,0,"",false,promo.jpg,image/jpeg,10197,2011-09-21 00:06:30 UTC,2009-03-22 00:05:13 UTC,2012-12-18 12:29:22 UTC,2012-08-03 13:53:39 UTC,1,ARS,ARS,543,"",""
+50005,Encontro com o Mestre,Portugués,3800,2400,1,"",true,,,,,2009-03-22 00:05:13 UTC,2011-09-05 20:55:34 UTC,2011-02-02 20:41:50 UTC,1,ARS,ARS,,,
+50006,Encuentro con el Maestro,Castellano,6500,4000,1,"",false,,,,,2009-03-22 00:05:13 UTC,2012-10-12 18:25:50 UTC,2012-08-03 13:54:15 UTC,1,ARS,ARS,178,"",""
+50007,Karma e Dharma,portugues,5000,100,3,,true,,,,,2009-03-22 00:05:13 UTC,2011-02-02 20:18:12 UTC,,1,ARS,ARS,,,
+50008,Orí­genes del Yôga Antiguo,castellano,3800,2500,1,"",false,,,,,2009-03-22 00:05:13 UTC,2011-02-02 20:47:11 UTC,2011-02-02 20:46:51 UTC,1,ARS,ARS,,,
+50009,Escala evolutiva,portugues,6200,100,1,,true,,,,,2009-03-22 00:05:13 UTC,2011-02-02 20:18:20 UTC,,1,ARS,ARS,,,
+50010,Sútras/De Rose,portugues,6000,100,0,"",true,,,,,2009-03-22 00:05:13 UTC,2011-02-02 20:18:23 UTC,,1,ARS,ARS,,,
+50011,"Tantra, la sexualidad sacralizada",Castellano,9800,5000,1,"",false,,,,,2009-03-22 00:05:13 UTC,2012-10-12 18:28:24 UTC,2012-08-03 13:57:21 UTC,1,ARS,ARS,67,DeRose,""
+50012,Todo sobre Yôga,Castellano,3900,2500,1,"",false,,,,,2009-03-22 00:05:13 UTC,2012-10-12 18:28:51 UTC,2012-10-12 18:28:51 UTC,1,ARS,ARS,89,DeRose,""
+50013,Tratado de Yôga ,Portugués,47500,30300,0,"",false,,,,,2009-03-22 00:05:13 UTC,2012-10-12 18:45:40 UTC,2012-10-12 18:45:40 UTC,1,ARS,ARS,87,DeRose,""
+50014,Yo Recuerdo,Castellano,5900,3500,0,"",false,,,,,2009-03-22 00:05:13 UTC,2012-10-12 18:30:49 UTC,2012-10-12 18:30:49 UTC,1,ARS,ARS,867,DeRose,""
+50015,Yôga Avanzado,Castellano,17900,9000,3134,"",false,,,,,2009-03-22 00:05:13 UTC,2012-10-12 18:31:22 UTC,2012-10-12 18:31:22 UTC,1,ARS,ARS,435,DeRose,""
+50016,Quando e preciso Ser Forte,portugues,12900,100,0,,true,,,,,2009-03-22 00:05:13 UTC,2011-02-02 20:18:47 UTC,,1,ARS,ARS,,,
+50017,Técnicas corporais do Yôga Antigo,Castellano/Portugués,11900,7500,0,"",false,,,,,2009-03-22 00:05:13 UTC,2012-10-12 18:56:26 UTC,2012-10-12 18:56:26 UTC,1,ARS,ARS,25,Melina Flores,""
+50018,Complementación Pedagógica,Castellano,5500,3000,1,"",false,,,,,2009-03-22 00:05:13 UTC,2012-10-12 18:56:45 UTC,2012-10-12 18:56:45 UTC,1,ARS,ARS,29,Yael Barcesat,""
+50019,Coreografías do SwáSthya Yôga (2da Ed.),Portugués,8300,7000,1,"",false,,,,,2009-03-22 00:05:13 UTC,2012-10-12 19:03:32 UTC,2012-10-12 19:03:32 UTC,1,ARS,ARS,56,Anahí Flores,""
+50020,Inspire y al exhalar escriba/Anahi Flores,castellano/portugues,3500,100,0,,true,,,,,2009-03-22 00:05:13 UTC,2011-02-02 20:19:53 UTC,,1,ARS,ARS,,,
+50021,La dieta del Yôga,Castellano,7500,6000,1,"",true,,,,,2009-03-22 00:05:13 UTC,2011-04-15 20:06:01 UTC,2011-02-02 20:55:38 UTC,1,ARS,ARS,,,
+50022,A parábola do croissant,Portugués,5900,4000,1,"",false,,,,,2009-03-22 00:05:13 UTC,2012-10-12 19:02:21 UTC,2012-10-12 19:02:21 UTC,1,ARS,ARS,26,Rodrigo De Bona,""
+50023,Léxico de Yôga Antiguo,Castellano,5500,3200,1,"",false,,,,,2009-03-22 00:05:13 UTC,2012-03-29 02:24:43 UTC,2012-03-29 02:24:43 UTC,1,ARS,ARS,24,Lucila Silva,""
+50024,"Yôga, Sámkhya e Tantra (2da. Ed.)",Portugués,7900,6000,0,"",false,,,,,2009-03-22 00:05:13 UTC,2012-10-12 19:10:37 UTC,2012-10-12 19:10:37 UTC,1,ARS,ARS,6,Sergio Santos,""
+50025,Pújá ,Portugués,8500,7000,0,"",false,,,,,2009-03-22 00:05:13 UTC,2012-10-12 19:04:32 UTC,2012-10-12 19:04:32 UTC,1,ARS,ARS,28,Sergio Santos,""
+50026,Yôga Art Book,Castellano/Portugués,4800,4000,1,"",false,,,,,2009-03-22 00:05:13 UTC,2011-04-15 20:04:39 UTC,2011-02-02 21:01:03 UTC,1,ARS,ARS,32,Anahí Flores,""
+50027,Kálí­-Danda,"",12500,9000,0,"",false,,,,,2009-03-22 00:05:13 UTC,2012-11-07 20:08:38 UTC,2012-11-07 20:08:38 UTC,1,ARS,ARS,200,"",""
+50028,Lôta,"",100,100,1,"",true,,,,,2009-03-22 00:05:13 UTC,2011-02-02 20:20:19 UTC,,1,ARS,ARS,,,
+50029,"Mudrá, el juego  de la memoria",Castellano,5000,3000,1,"",false,,,,,2009-03-22 00:05:13 UTC,2011-02-02 21:02:18 UTC,2011-02-02 21:02:18 UTC,1,ARS,ARS,,,
+50030,pines varios colores,sanscrito,1800,100,1,,true,,,,,2009-03-22 00:05:13 UTC,2011-02-02 20:20:26 UTC,,1,ARS,ARS,,,
+50031,Postales AnahÃ¬,portugues/castellano,1000,100,1,,true,,,,,2009-03-22 00:05:13 UTC,2011-02-02 20:20:32 UTC,,1,ARS,ARS,,,
+50032,Póster ÔM  ,"",2200,500,1,"",false,,,,,2009-03-22 00:05:13 UTC,2012-03-29 02:27:16 UTC,2012-03-29 02:27:16 UTC,1,ARS,ARS,62,"",""
+50033,Póster Práctica Básica,"",4500,1800,1,"",false,,,,,2009-03-22 00:05:13 UTC,2011-04-15 20:57:15 UTC,2011-04-15 20:57:15 UTC,1,ARS,ARS,63,"",""
+50034,Póster Maestro DeRose,"",4500,1800,1,"",false,,,,,2009-03-22 00:05:13 UTC,2011-04-15 20:57:51 UTC,2011-04-15 20:57:51 UTC,1,ARS,ARS,64,"",""
+50035,Póster Súrya Namaskára,"",5000,3000,1,"",false,,,,,2009-03-22 00:05:13 UTC,2012-03-29 02:33:47 UTC,2012-03-29 02:33:47 UTC,1,ARS,ARS,523,"",""
+50036,Revistas,portugues,1000,100,1,,true,,,,,2009-03-22 00:05:13 UTC,2011-02-02 20:20:49 UTC,,1,ARS,ARS,,,
+50037,Yantra Ã”m ,sanscrito,15000,100,1,,true,,,,,2009-03-22 00:05:13 UTC,2011-02-02 20:20:53 UTC,,1,ARS,ARS,,,
+50038,esculturas de mudrÃ s,sÃ¡nscrito,15000,100,1,,true,,,,,2009-03-22 00:05:13 UTC,2011-02-04 18:51:59 UTC,,1,ARS,ARS,,,
+50039,Anillos Ashtánga Yantra,"",36100,0,1,"",false,,,,,2009-03-22 00:05:13 UTC,2011-09-09 19:26:22 UTC,2011-09-09 19:26:22 UTC,1,ARS,ARS,1,"",""
+50040,Anillos del Om de plata,sÃ¡nscrito,9800,100,1,,true,,,,,2009-03-22 00:05:13 UTC,2011-02-04 18:54:19 UTC,,1,ARS,ARS,,,
+50041,Calzas San bernardo Larga,"",17000,13800,0,"",true,,,,,2009-03-22 00:05:13 UTC,2011-02-04 18:54:25 UTC,,1,ARS,ARS,"","",San Bernardo
+50042,Promo Noviembe,"",5000,3500,8,"<p>Cd Pr&aacute;ctica b&aacute;sica</p>
+<p>+</p>
+<p>Libro de la pr&aacute;ctica b&aacute;sica</p>
+<p>+</p>
+<p>poster del &ocirc;m</p>",true,,,,,2009-03-22 00:05:13 UTC,2011-02-04 18:54:45 UTC,,1,ARS,ARS,,,
+50043,Calzas San bernardo hombre,brasil,12500,9500,0,<p>Consignaci&oacute;n San Bernardo</p>,true,,,,,2009-03-22 00:05:13 UTC,2011-02-04 18:54:55 UTC,,1,ARS,ARS,,,
+50044,Calzas San bernardo mujer ,brasi,13000,10000,0,<p>Consignaci&oacute;n san bernardo</p>,true,,,,,2009-03-22 00:05:13 UTC,2011-02-02 20:21:00 UTC,,1,ARS,ARS,,,
+50045,Kámala,"",26400,20500,7,"",false,,,,,2009-03-22 00:05:13 UTC,2012-07-17 13:00:52 UTC,2012-03-29 02:34:44 UTC,1,ARS,ARS,2,"",""
+50046,CD Práctica Básica,Castellano,5000,3600,0,"",false,,,,,2009-03-22 00:05:14 UTC,2012-03-29 02:35:33 UTC,2012-03-29 02:35:33 UTC,1,ARS,ARS,3,DeRose,""
+50047,Cd NÃ¡danta,SÃ¡nscrito,3200,2300,1,"",true,,,,,2009-03-22 00:05:14 UTC,2011-02-02 20:21:18 UTC,,1,ARS,ARS,,,
+50048,La dieta del Yôga,Castellano,12000,9000,0,"",false,,,,,2009-03-22 00:05:14 UTC,2012-10-12 18:56:00 UTC,2012-10-12 18:56:00 UTC,1,ARS,ARS,4,Edgardo Caramella,""
+50049,Top rosa,"universal, jaja",2000,1000,2,"",true,,,,,2009-03-22 00:05:14 UTC,2011-02-02 20:30:41 UTC,,1,ARS,ARS,,,
+50050,Remeras MÃ©todo de la veci,"universal, jaja",7500,5000,3,"",true,,,,,2009-03-22 00:05:14 UTC,2011-02-02 20:30:47 UTC,,1,ARS,ARS,,,
+50051,Cd Ã”m contÃ­nuo,Universal,5200,3000,0,<p>No quedan m&aacute;s.</p>,true,,,,,2009-03-22 00:05:14 UTC,2011-02-02 20:30:55 UTC,,1,ARS,ARS,,,
+50052,cd sanscrito,portugues,3200,0,0,"",true,,,,,2009-03-22 00:05:14 UTC,2011-02-02 20:31:02 UTC,,1,ARS,ARS,,,
+1652079,Medalla del Ôm,"",6500,4000,0,<p>Bronce/Peque&ntilde;a</p>,false,,,,,2011-02-02 20:17:00 UTC,2011-09-06 21:43:32 UTC,2011-09-06 21:43:32 UTC,1,ARS,ARS,5,"",""
+1652089,El sonido del Universo ,Castellano,5000,2500,0,"",false,,,,,2011-02-04 19:06:21 UTC,2012-10-12 19:35:07 UTC,2012-03-29 03:23:53 UTC,1,ARS,ARS,7,DeRose,""
+1652090,Enterito ,"",36000,0,1,<p>Varios colores</p>,true,,,,,2011-02-04 20:16:02 UTC,2011-09-06 21:49:16 UTC,2011-02-04 20:16:02 UTC,1,ARS,ARS,8,"",""
+1652136,"Método DeRose, calidad de vida",Castellano,1800,900,1,<p>Pocket</p>,true,,,,,2011-02-10 21:22:21 UTC,2011-09-09 20:26:19 UTC,2011-02-10 21:22:21 UTC,1,ARS,ARS,9,DeRose,""
+1652137,Insignia Imán,"",0,0,0,<p>Amarillo/Naranja/Celeste</p>,true,,,,,2011-02-10 21:24:30 UTC,2011-09-06 21:45:14 UTC,2011-02-10 21:24:30 UTC,1,ARS,ARS,10,"",""
+1652138,Enteritp Teletubbie,"",25000,0,0,"",false,,,,,2011-02-10 21:25:58 UTC,2011-02-14 18:29:37 UTC,2011-02-10 21:25:58 UTC,1,ARS,ARS,11,"",Sede Palermo
+1652149,CD Desenvuelva su mente,Castellano,5000,2000,341,"",false,,,,,2011-02-25 19:13:46 UTC,2012-11-10 16:53:06 UTC,2012-03-29 02:38:35 UTC,1,ARS,ARS,234,Rosángela,""
+1652150,Medalla del Ôm,"",11500,9000,1,<p>Plata/Peque&ntilde;a</p>,false,,,,,2011-02-25 19:15:59 UTC,2011-02-25 19:15:59 UTC,2011-02-25 19:15:59 UTC,1,ARS,ARS,235,"",""
+1652151,Yôga en serio,Castellano,2900,1000,44,"",false,,,,,2011-02-25 19:20:14 UTC,2012-10-12 18:34:29 UTC,2012-10-12 18:34:29 UTC,1,ARS,ARS,456,"",""
+1652310,Yôga tem acento,Portugués,1900,1400,92834,"",false,,,,,2011-04-04 01:16:23 UTC,2011-04-15 19:53:36 UTC,2011-04-15 19:53:36 UTC,1,ARS,ARS,1923,DeRose,""
+1652311,Práctica Básica ,"",3000,1400,19843,"<p>Pocket</p>
+<p>&nbsp;</p>",true,,,,,2011-04-04 01:17:30 UTC,2012-01-20 00:56:18 UTC,2011-04-15 19:44:52 UTC,1,ARS,ARS,1345,DeRose,""
+1652312,Orígenes del Yôga Antiguo,Español,5900,4000,840929,"",false,,,,,2011-04-04 01:19:08 UTC,2012-10-12 18:27:59 UTC,2012-08-03 13:54:54 UTC,1,ARS,ARS,432970,DeRose,""
+1652358,Quando é preciso ser forte,Portugués,21000,14500,321,"",false,,,,,2011-04-08 18:16:45 UTC,2012-10-12 18:41:39 UTC,2012-10-12 18:41:39 UTC,1,ARS,ARS,0154,DeRose,""
+1652359,Cuaderno Yôgin,"",3500,0,343,"",false,,,,,2011-04-08 18:20:34 UTC,2012-01-11 20:20:38 UTC,2011-09-06 21:41:57 UTC,1,ARS,ARS,1324,"",""
+1652367,Lôta,"",17000,10000,1,"",false,,,,,2011-04-11 19:02:20 UTC,2012-01-06 17:01:28 UTC,2012-01-06 17:01:28 UTC,1,ARS,ARS,7277,"",""
+1652428,A medalha com o Ôm ,Portugués,3500,1500,345,"",false,,,,,2011-04-15 19:34:38 UTC,2012-10-12 18:34:53 UTC,2012-10-12 18:34:53 UTC,1,ARS,ARS,345,DeRose,""
+1652429,Código de Ética do Yôga ,Portugués,3500,2500,345,"",false,,,,,2011-04-15 19:36:21 UTC,2012-10-12 18:51:08 UTC,2012-10-12 18:51:08 UTC,1,ARS,ARS,3245,DeRose,""
+1652430,Curso Básico do Método DeRose ,Portugués,7500,4700,442,"",false,,,,,2011-04-15 19:37:38 UTC,2012-03-29 03:36:28 UTC,2012-03-29 03:36:28 UTC,1,ARS,ARS,436,DeRose,""
+1652431,Encontro com o Mestre ,Portugués,4500,2400,56,"",false,,,,,2011-04-15 19:38:23 UTC,2011-04-15 19:38:23 UTC,2011-04-15 19:38:23 UTC,1,ARS,ARS,34,DeRose,""
+1652432,Encuentro con el Maestro ,Portugués,4200,2400,43,"",true,,,,,2011-04-15 19:39:37 UTC,2011-09-05 20:56:05 UTC,2011-04-15 19:39:37 UTC,1,ARS,ARS,909,DeRose,""
+1652433,Eu me lembro (3ra Ed.) ,Portugués,6000,4500,76,"",false,,,,,2011-04-15 19:40:27 UTC,2012-03-15 23:46:35 UTC,2011-04-15 19:40:27 UTC,1,ARS,ARS,98,DeRose,""
+1652434,Método de boas maneiras ,Portugués,10900,8000,454,"",false,,,,,2011-04-15 19:41:09 UTC,2012-10-12 18:38:23 UTC,2012-10-12 18:38:23 UTC,1,ARS,ARS,987,DeRose,""
+1652435,Regulamentação dos Profissionais de Yôga ,Portugués,1800,1800,465,"",false,,,,,2011-04-15 19:46:19 UTC,2011-04-15 19:46:19 UTC,2011-04-15 19:46:19 UTC,1,ARS,ARS,567,DeRose,""
+1652436,Viagens a India dos yôgis ,Portugués,6900,5500,65,"",false,,,,,2011-04-15 19:49:39 UTC,2012-10-12 18:50:12 UTC,2012-10-12 18:50:12 UTC,1,ARS,ARS,99,DeRose,""
+1652437,Yôga Sútra de Pátañjali ,Portugués,24500,14500,4,"",false,,,,,2011-04-15 19:53:08 UTC,2012-10-12 18:55:02 UTC,2012-10-12 18:55:02 UTC,1,ARS,ARS,690,DeRose,""
+1652438,"Inspire y al exhalar, escriba… ",Español,6500,3900,1,"",false,,,,,2011-04-15 20:04:07 UTC,2012-10-12 18:55:25 UTC,2012-10-12 18:55:25 UTC,1,ARS,ARS,86,Anahí Flores,""
+1652439,Bienvenido Yôga,Español,6900,6900,1,"",false,,,,,2011-04-15 20:05:31 UTC,2012-10-12 19:11:24 UTC,2012-10-12 19:11:24 UTC,1,ARS,ARS,54,Edgardo Caramella,""
+1652440,Yôga em dupla,Portugués,9400,9000,1,"",false,,,,,2011-04-15 20:07:04 UTC,2012-12-17 17:00:01 UTC,2012-12-17 17:00:01 UTC,1,ARS,ARS,44,Fábio Euksuzian,""
+1652441,El éxito organizado,Español,5500,2500,1,"",false,,,,,2011-04-15 20:08:02 UTC,2012-01-20 01:02:32 UTC,2012-01-20 01:02:32 UTC,1,ARS,ARS,765,Gabriela Santermer,""
+1652442,SwáSthya Yôga em dupla ,Portugués,10800,7000,0,"",false,,,,,2011-04-15 20:08:56 UTC,2013-02-04 15:10:49 UTC,2013-02-04 15:10:49 UTC,1,ARS,ARS,23,Gustavo Marson,""
+1652443,Quadros sinóticos do Yôga Antigo ,Castellano/Portugués,5500,3500,1,"",false,,,,,2011-04-15 20:11:57 UTC,2012-03-29 03:22:37 UTC,2012-03-29 03:22:37 UTC,1,ARS,ARS,27,Rodrigo De Bona,""
+1652444,"Mantra, vibración infinita ",Español,6500,4000,0,"",false,,,,,2011-04-15 20:14:23 UTC,2012-10-12 19:01:26 UTC,2012-10-12 19:01:26 UTC,1,ARS,ARS,30,Yael Barcesat,""
+1652445,Gáyatrí Mantra ,Sánscrito,6500,3600,0,"",false,,,,,2011-04-15 20:16:26 UTC,2012-10-12 19:24:28 UTC,2012-10-12 19:24:28 UTC,1,ARS,ARS,31,"",""
+1652446,"Mantra, SwáSthya culture ","",5000,1600,1,<p>CD</p>,false,,,,,2011-04-15 20:17:23 UTC,2012-03-29 03:23:38 UTC,2012-03-29 03:23:38 UTC,1,ARS,ARS,33,"",""
+1652447,Medite!,Portugués,5000,3600,1,"<p>CD</p>
+<p>&nbsp;</p>",false,,,,,2011-04-15 20:18:25 UTC,2012-03-29 03:25:01 UTC,2012-03-29 03:25:01 UTC,1,ARS,ARS,35,Rosana Ortega,""
+1652448,Mensagens ,Portugués,5000,3600,1,<p>CD</p>,false,,,,,2011-04-15 20:19:21 UTC,2011-04-15 20:19:21 UTC,2011-04-15 20:19:21 UTC,1,ARS,ARS,36,DeRose,""
+1652449,Música para Descontrair ,"",5000,3600,1,<p>CD</p>,false,,,,,2011-04-15 20:20:16 UTC,2011-04-15 20:21:00 UTC,2011-04-15 20:20:16 UTC,1,ARS,ARS,37,António Pereira,""
+1652450,"Ôm, o mais poderoso dos mantras ","",5000,3600,1,"",false,,,,,2011-04-15 20:21:43 UTC,2012-10-12 19:23:04 UTC,2012-10-12 19:23:04 UTC,1,ARS,ARS,39,"",""
+1652451,Prática Básica,Portugués,5000,3600,0,"",false,,,,,2011-04-15 20:24:28 UTC,2012-03-29 03:28:00 UTC,2012-03-29 03:28:00 UTC,1,ARS,ARS,40,DeRose,""
+1652452,Relax - Reprogramación emocional ,Español,5000,2000,0,"",false,,,,,2011-04-15 20:36:47 UTC,2012-03-29 03:32:36 UTC,2012-03-29 03:32:36 UTC,1,ARS,ARS,42,DeRose,""
+1652453,Relax e controle do stress ,Portugués,5000,3600,0,"",false,,,,,2011-04-15 20:37:33 UTC,2012-03-29 03:29:23 UTC,2012-03-29 03:29:23 UTC,1,ARS,ARS,43,Roberto L. & Rosana O. ,""
+1652454,Relaxe e desperte! ,Portugués,5000,3600,1,"<p>CD</p>
+<p>&nbsp;</p>",false,,,,,2011-04-15 20:38:21 UTC,2011-04-15 20:38:21 UTC,2011-04-15 20:38:21 UTC,1,ARS,ARS,45,Fábio Euksuzian,""
+1652455,Sádhana,"",7200,4000,0,<p>CD</p>,false,,,,,2011-04-15 20:39:10 UTC,2012-07-18 00:55:56 UTC,2012-03-29 03:33:04 UTC,1,ARS,ARS,46,Raj Rangayan,""
+1652456,Sat Chakra,Portugués,5000,3600,1,<p>CD</p>,false,,,,,2011-04-15 20:39:54 UTC,2012-03-29 03:33:22 UTC,2012-03-29 03:33:22 UTC,1,ARS,ARS,47,DeRose,""
+1652457,Sânscrito - Treinamento de pronúncia ,Sánscrito,5000,3600,0,<p>CD</p>,false,,,,,2011-04-15 20:40:50 UTC,2012-03-29 03:33:40 UTC,2012-03-29 03:33:40 UTC,1,ARS,ARS,48,"",""
+1652458,Shivaratri,"",6500,4000,1,<p>CD</p>,false,,,,,2011-04-15 20:41:30 UTC,2012-10-12 19:24:48 UTC,2012-10-12 19:24:48 UTC,1,ARS,ARS,49,"",""
+1652459,Vibrations,"",6500,4000,1,<p>CD</p>,false,,,,,2011-04-15 20:42:13 UTC,2012-10-12 19:24:04 UTC,2012-10-12 19:24:04 UTC,1,ARS,ARS,450,"",""
+1652460,Yôganidrá,"",5000,3600,1,<p>CD</p>,false,,,,,2011-04-15 20:43:04 UTC,2011-04-15 20:43:04 UTC,2011-04-15 20:43:04 UTC,1,ARS,ARS,51,António Pereira,""
+1652461,Entrevista,"",18000,16300,1,<p>DVD</p>,false,,,,,2011-04-15 20:46:10 UTC,2011-12-20 02:33:07 UTC,2011-12-20 02:32:44 UTC,1,ARS,ARS,55,DeRose,""
+1652462,Curso Básico,Portugués,10000,7000,1,<p>DVD</p>,false,,,,,2011-04-15 20:49:15 UTC,2011-04-15 20:49:15 UTC,2011-04-15 20:49:15 UTC,1,ARS,ARS,57,DeRose,""
+1652463,Estereogramas del ÔM,"",2500,600,1,"",false,,,,,2011-04-15 20:51:35 UTC,2012-06-05 17:36:46 UTC,2012-06-05 17:36:46 UTC,1,ARS,ARS,58,"",""
+1652464,Cuadros Chakras,"",6000,4300,1,"",false,,,,,2011-04-15 20:52:44 UTC,2011-04-15 20:52:44 UTC,2011-04-15 20:52:44 UTC,1,ARS,ARS,59,"",""
+1652465,Goma EVA,"",18000,11600,1,"",false,,,,,2011-04-15 20:54:33 UTC,2011-04-15 20:54:33 UTC,2011-04-15 20:54:33 UTC,1,ARS,ARS,60,"",""
+1652466,Medalla del ÔM,"",26800,20000,0,<p>Ba&ntilde;ada en oro/Mediana</p>,false,,,,,2011-04-15 20:58:50 UTC,2012-01-06 19:22:19 UTC,2012-01-06 19:22:19 UTC,1,ARS,ARS,65,"",""
+1652467,Insignias,"",6500,4700,0,<p>Pincho</p>,false,,,,,2011-04-15 21:00:15 UTC,2012-10-12 19:35:27 UTC,2012-10-12 19:35:27 UTC,1,ARS,ARS,66,"",""
+1652468,Insignias,"",8500,7100,1,<p>Im&aacute;n</p>,false,,,,,2011-04-15 21:00:58 UTC,2012-10-12 19:35:50 UTC,2012-10-12 19:35:50 UTC,1,ARS,ARS,68,"",""
+1652469,Aro Ashtánga Yantra ,"",12300,0,1,<p>Gancho&nbsp;</p>,true,,,,,2011-04-15 21:02:09 UTC,2011-04-15 21:04:40 UTC,2011-04-15 21:02:09 UTC,1,ARS,ARS,69,"",""
+1652470,Aro Yôgin ,"",14300,0,1,<p>Pincho</p>,false,,,,,2011-04-15 21:02:14 UTC,2011-09-09 19:26:51 UTC,2011-09-09 19:26:51 UTC,1,ARS,ARS,70,"",""
+1652471,Aro Ashtánga Yantra ,"",12300,0,0,<p>Gancho&nbsp;</p>,false,,,,,2011-04-15 21:02:21 UTC,2011-08-16 19:23:22 UTC,2011-04-15 21:02:21 UTC,1,ARS,ARS,71,"",""
+1652472,Aro Yôgin ,"",14300,0,1,<p>Gancho</p>,false,,,,,2011-04-15 21:03:27 UTC,2011-09-09 19:27:12 UTC,2011-09-09 19:27:12 UTC,1,ARS,ARS,73,"",""
+1652473,Bombachas Yôgin,"",2500,0,0,"",false,,,,,2011-04-15 21:06:11 UTC,2011-05-30 18:57:56 UTC,2011-04-15 21:06:11 UTC,1,ARS,ARS,74,"",""
+1652474,Casaco ,"",29000,0,0,<p>Lila</p>,false,,,,,2011-04-15 21:06:58 UTC,2011-08-16 19:20:27 UTC,2011-04-15 21:06:58 UTC,1,ARS,ARS,75,"",""
+1652475,Calza Mujer,"",22500,0,1,"<p>Vecina</p>
+<p>&nbsp;</p>",true,,,,,2011-04-15 21:08:01 UTC,2011-09-09 20:26:24 UTC,2011-04-15 21:08:01 UTC,1,ARS,ARS,76,"",""
+1652476,Calza Hombre,"",17500,0,0,<p>Corta Gris</p>,true,,,,,2011-04-15 21:09:05 UTC,2011-09-09 20:26:27 UTC,2011-04-15 21:09:05 UTC,1,ARS,ARS,77,"",""
+1652477,Remera Mujer,"",24500,0,1,<p>Verde/Fuccia</p>,true,,,,,2011-04-15 21:11:11 UTC,2011-09-09 20:25:59 UTC,2011-04-15 21:11:11 UTC,1,ARS,ARS,78,"",""
+1652514,Calza Mujer,"",29500,0,0,<p>Negra</p>,true,,,,,2011-05-04 01:50:43 UTC,2011-09-09 20:26:31 UTC,2011-05-04 01:50:43 UTC,1,ARS,ARS,7654,Río Branco,""
+1652515,Top,"",22000,0,1,<p>Blanco y negro</p>,false,,,,,2011-05-04 01:51:16 UTC,2011-05-04 01:51:16 UTC,2011-05-04 01:51:16 UTC,1,ARS,ARS,433,Río Branco,""
+1652516,Calza Mujer,"",24500,0,1,<p>Celeste</p>,true,,,,,2011-05-04 01:52:15 UTC,2011-09-09 20:26:35 UTC,2011-05-04 01:52:15 UTC,1,ARS,ARS,983,Río Branco,""
+1653071,Pensamentos,Portugués,3500,2500,5,"",false,,,,,2011-09-05 21:02:12 UTC,2012-10-12 18:49:34 UTC,2012-10-12 18:49:34 UTC,1,ARS,ARS,41,DeRose,""
+1653072,Relax ,Castellano,3500,2500,2,<p>Pocket</p>,false,,,,,2011-09-05 21:15:21 UTC,2012-12-18 12:30:08 UTC,2012-06-01 14:06:30 UTC,1,ARS,ARS,4314,Anahí Flores,""
+1653083,Anillo Ôm con relieve,"",32300,0,0,"",false,,,,,2011-09-09 20:18:52 UTC,2012-01-20 01:31:42 UTC,2012-01-20 01:31:42 UTC,1,ARS,ARS,1234,"",""
+1653084,Anillo Ôm chato,"",30300,0,0,"",false,,,,,2011-09-09 20:19:28 UTC,2011-09-09 20:19:28 UTC,2011-09-09 20:19:28 UTC,1,ARS,ARS,12,"",""
+1653085,Anillo SwáSthya ancho,"",30300,0,0,"",false,,,,,2011-09-09 20:20:21 UTC,2011-09-09 20:20:21 UTC,2011-09-09 20:20:21 UTC,1,ARS,ARS,876,"",""
+1653086,Anillo SwáSthya fino,"",25900,0,0,"",false,,,,,2011-09-09 20:22:47 UTC,2011-09-09 20:22:47 UTC,2011-09-09 20:22:47 UTC,1,ARS,ARS,72,"",""
+1653087,Anillo SwáSthya y ÔM,"",47900,0,0,"",false,,,,,2011-09-09 20:24:04 UTC,2011-09-09 20:24:04 UTC,2011-09-09 20:24:04 UTC,1,ARS,ARS,79,"",""
+1653088,Aros Ashtánga Yantra,"",21500,0,0,"",false,,,,,2011-09-09 20:24:52 UTC,2011-09-09 20:24:52 UTC,2011-09-09 20:24:52 UTC,1,ARS,ARS,61,"",""
+1653188,Karma e dharma,Portugués,7900,6000,0,"",false,,,,,2011-10-04 14:41:11 UTC,2012-10-12 18:40:59 UTC,2012-10-12 18:40:59 UTC,1,ARS,ARS,52,DeRose,""
+1653189,CD Grupo SwáSthya,"",4500,0,0,"",false,,,,,2011-10-04 14:43:20 UTC,2011-10-04 14:43:20 UTC,2011-10-04 14:43:20 UTC,1,ARS,ARS,111,"",""
+1653190,Poder do Mantra,Portugués,9500,0,0,"",false,,,,,2011-10-04 14:45:02 UTC,2011-10-04 14:45:02 UTC,2011-10-04 14:45:02 UTC,1,ARS,ARS,112,Caio Melo,""
+1653226,Cintos ,"",25500,19500,3,"",false,,,,,2011-10-21 12:12:03 UTC,2011-10-21 12:12:03 UTC,2011-10-21 12:12:03 UTC,1,ARS,ARS,146,Belén Abraham,""
+1653393,Remera,"",0,0,0,"",false,,,,,2011-11-04 18:32:59 UTC,2011-11-04 18:32:59 UTC,2011-11-04 18:32:59 UTC,1,ARS,ARS,613,"",""
+1653398,Joyas,"",0,0,0,"",true,,,,,2011-11-21 20:14:59 UTC,2012-03-29 03:40:04 UTC,2011-11-21 20:14:59 UTC,1,ARS,ARS,478,"",""
+1653420,Medalla del Ôm	,"",46500,0,0,<p>Plata/Mediana</p>,false,,,,,2011-12-02 20:27:34 UTC,2011-12-02 20:27:34 UTC,2011-12-02 20:27:34 UTC,1,ARS,ARS,536,"",""
+1653558,Calza,"",0,0,0,"",false,,,,,2012-01-19 23:15:15 UTC,2012-01-19 23:15:15 UTC,2012-01-19 23:15:15 UTC,1,ARS,ARS,512,"",""
+1653559,Enterito,"",0,0,0,"",false,,,,,2012-01-19 23:16:29 UTC,2012-01-19 23:16:29 UTC,2012-01-19 23:16:29 UTC,1,ARS,ARS,513,"",""
+1653560,Pantalón,"",0,0,0,"",false,,,,,2012-01-19 23:17:01 UTC,2012-01-19 23:17:01 UTC,2012-01-19 23:17:01 UTC,1,ARS,ARS,514,"",""
+1653561,Vestido,"",0,0,0,"",false,,,,,2012-01-19 23:18:04 UTC,2012-01-19 23:18:04 UTC,2012-01-19 23:18:04 UTC,1,ARS,ARS,515,"",""
+1653562,Medias,"",0,0,0,"",false,,,,,2012-01-19 23:18:35 UTC,2012-01-19 23:18:35 UTC,2012-01-19 23:18:35 UTC,1,ARS,ARS,516,"",""
+1653563,Buzo,"",0,0,0,"",false,,,,,2012-01-19 23:19:27 UTC,2012-01-19 23:19:27 UTC,2012-01-19 23:19:27 UTC,1,ARS,ARS,517,"",""
+1653564,Camperita,"",0,0,0,"",false,,,,,2012-01-19 23:19:50 UTC,2012-01-19 23:19:50 UTC,2012-01-19 23:19:50 UTC,1,ARS,ARS,518,"",""
+1653565,Método DeRose ,"",2900,1200,0,<p>pocket</p>,false,,,,,2012-01-20 00:52:27 UTC,2012-12-12 22:02:02 UTC,2012-08-03 14:05:44 UTC,1,ARS,ARS,519,"",""
+1653566,Práctica Básica,Castellano,2900,1250,0,<p>pocket</p>,false,,,,,2012-01-20 00:55:41 UTC,2012-10-12 18:24:54 UTC,2012-10-12 18:24:54 UTC,1,ARS,ARS,520,DeRose,""
+1653998,aros pincho ôm,"",19900,0,0,"",false,,,,,2012-07-16 19:35:22 UTC,2012-07-16 19:35:22 UTC,2012-07-16 19:35:22 UTC,1,ARS,ARS,01,Higienopolis,""
+1654002,Anjos peludos,"",11000,9000,10,"",false,,,,,2012-07-18 23:51:16 UTC,2012-07-18 23:51:16 UTC,2012-07-18 23:51:16 UTC,1,ARS,ARS,023,DeRose,""
+1654136,Alternativa de relacionamiento afetivo,Portugués,6500,4250,0,"",false,,,,,2012-10-12 18:37:20 UTC,2012-10-12 18:37:20 UTC,2012-10-12 18:37:20 UTC,1,ARS,ARS,93837,DeRose,""
+1654137,Sútras Máximas de Lucidez e Êxtase,Portugués,8000,0,0,"",false,,,,,2012-10-12 18:44:52 UTC,2012-12-13 22:30:55 UTC,2012-12-13 22:30:55 UTC,1,ARS,ARS,8230,DeRose,""
+1654138,DeRose Art Company: padma y shaktí,"",6500,0,0,"",false,,,,,2012-10-12 19:34:33 UTC,2012-10-12 19:34:33 UTC,2012-10-12 19:34:33 UTC,1,ARS,ARS,83839,"",""
+1654139,Mensagens,Portugués,10500,8200,0,"",false,,,,,2012-10-12 19:57:56 UTC,2012-10-12 19:57:56 UTC,2012-10-12 19:57:56 UTC,1,ARS,ARS,0976,DeRose,""
+1654256,O gourmet vegetariano,Portugués,0,0,10,"",false,,,,,2012-11-07 20:08:21 UTC,2012-11-07 20:08:21 UTC,2012-11-07 20:08:21 UTC,1,ARS,ARS,064,Rosángela de Castro,""
+1654257,Meditação e autoconocimiento,Portugués,10900,0,0,"",false,,,,,2012-11-07 20:12:30 UTC,2013-02-21 20:23:51 UTC,2013-02-21 20:23:51 UTC,1,ARS,ARS,863,DeRose,""
+1654442,Alternativas do relaconamento afetivo,Portugués,5700,4250,0,"",false,,,,,2013-01-08 20:41:46 UTC,2013-01-08 20:41:46 UTC,2013-01-08 20:41:46 UTC,1,ARS,ARS,680,DeRose,""
+1654459,Histórico e Trajetória,Portugués,0,0,0,"",false,,,,,2013-02-21 19:46:13 UTC,2013-02-21 19:46:13 UTC,2013-02-21 19:46:13 UTC,1,ARS,ARS,762,DeRose,""

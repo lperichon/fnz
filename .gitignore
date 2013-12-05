@@ -29,6 +29,7 @@ db/*.sqlite3
 /config/config.yml
 /config/database.yml
 /config/padma_api.yml
+/config/application.yml
 /coverage.data
 /coverage/
 /db/*.javadb/

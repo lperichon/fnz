@@ -4,4 +4,9 @@ FactoryGirl.define do
   factory :import do
     business
   end
+
+  factory :product_import do
+    business
+    type "ProductImport"
+  end
 end

@@ -20,4 +20,29 @@ class Product < ActiveRecord::Base
   def cost_currency
     Currency.find(self[:cost_currency]) || Currency.find(:usd)
   end
+
+  def self.build_from_csv(business, row)
+    product = Product.new
+    price = row[3].to_f/100
+    price_currency = Currency.find(row[17])
+    cost = row[3].to_f/100
+    cost_currency = Currency.find(row[16])
+
+    product.attributes = {
+        :business_id => business.id,
+        :price => price,
+        :price_currency => price_currency,
+        :cost => cost,
+        :cost_currency => cost_currency,
+        :name => row[1],
+        :stock => row[5].to_i,
+        :hidden => row[7] == "true"
+    }
+
+    return product
+  end
+
+  def self.csv_header
+    "id,nombre,idioma,precio_in_cents,costo_in_cents,stock,observaciones,deleted,foto_file_name,foto_content_type,foto_file_size,foto_updated_at,created_at,updated_at,precio_updated_at,school_id,costo_currency,precio_currency,code,author,owner".split(',')
+  end
 end

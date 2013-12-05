@@ -46,4 +46,14 @@ Fnz::Application.routes.draw do
   resources :transfers, :controller => 'transactions', :except => [:index]
 
   match 'messages', to: 'messages#catch_message'
+
+  namespace 'api' do
+    namespace 'v0' do
+      resources :imports, only: [:create, :show] do
+        member do
+          get :failed_rows # GET /api/v0/imports/:id/failed_rows
+        end
+      end
+    end
+  end
 end
