@@ -9,7 +9,7 @@ class Product < ActiveRecord::Base
 
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :business_id, :price, :price_currency, :cost, :cost_currency, :stock, :hidden
+  attr_accessible :name, :business_id, :price, :price_currency, :cost, :cost_currency, :stock, :hidden, :external_id
 
   scope :hidden, where(:hidden => true)
 
@@ -36,7 +36,8 @@ class Product < ActiveRecord::Base
         :cost_currency => cost_currency,
         :name => row[1],
         :stock => row[5].to_i,
-        :hidden => row[7] == "true"
+        :hidden => row[7] == "true",
+        :external_id => row[0].to_i
     }
 
     return product
