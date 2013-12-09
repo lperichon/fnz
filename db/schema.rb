@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131209165936) do
+ActiveRecord::Schema.define(:version => 20131209215058) do
 
   create_table "accounts", :force => true do |t|
     t.string  "name",        :default => "",  :null => false
@@ -118,6 +118,7 @@ ActiveRecord::Schema.define(:version => 20131209165936) do
     t.decimal "value",           :default => 0.0, :null => false
     t.date    "closed_on"
     t.integer "payment_type_id"
+    t.boolean "vip"
   end
 
   create_table "payment_types", :force => true do |t|
