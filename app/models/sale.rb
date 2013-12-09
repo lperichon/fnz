@@ -35,4 +35,37 @@ class Sale < ActiveRecord::Base
   def padma_contact_id
     self.contact.try(:padma_id)
   end
+
+  def self.build_from_csv(business, row)
+    sale = Sale.new
+
+    product = business.products.find_by_external_id(row[1].to_i)
+    agent_id = row[2].gsub!(' ','')
+    agent = business.agents.find_by_padma_id(agent_id) # some ids have spaces between
+    unless agent
+      agent = business.agents.create(:padma_id => agent_id)
+    end
+    padma_contact = PadmaContact.find_by_kshema_id(row[3])
+    contact = Contact.find_by_padma_id(padma_contact.id)
+
+    sale.attributes = {
+        :business_id => business.id,
+        :agent_id => agent.id,
+        :sold_on => DateTime.parse(row[5])
+    }
+
+    if contact
+      sale.contact = contact
+    end
+
+    if product
+      sale.product = product
+    end
+
+    return sale
+  end
+
+  def self.csv_header
+    "id,producto_id,instructor_id,persona_id,notes,fecha,created_at,updated_at,precio_in_cents,fecha_pago,pago,school_id,currency,forma_id".split(',')
+  end
 end

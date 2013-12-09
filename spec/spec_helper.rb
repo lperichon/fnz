@@ -44,5 +44,6 @@ RSpec.configure do |config|
 
   config.before(:each) do
     User.any_instance.stub(:padma).and_return(PadmaUser.new)
+    PadmaContact.stub(:find_by_kshema_id).and_return(PadmaContact.new(:id => "123"))
   end
 end
