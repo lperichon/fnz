@@ -46,7 +46,7 @@ class Membership < ActiveRecord::Base
                                                  :name => "#{padma_contact.first_name} #{padma_contact.last_name}".strip,
                                                  :padma_status => padma_contact.status,
                                                  :padma_teacher => padma_contact.global_teacher_username)
-    puts fnz_contact.errors.full_messages
+
     membership.attributes = {
         :business_id => business.id,
         :begins_on => Date.parse(row[2]),
@@ -58,10 +58,6 @@ class Membership < ActiveRecord::Base
     if row[8] == 'true' # if cancelled
       membership.closed_on = membership.ends_on # Kshêma doesnt store cancellation date
     end
-
-    membership.valid?
-
-    puts membership.errors.full_messages
 
     return membership
   end
