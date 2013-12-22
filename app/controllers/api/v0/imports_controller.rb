@@ -107,7 +107,7 @@ class Api::V0::ImportsController < Api::V0::ApiController
   def initialize_import
     ot = params[:import].delete(:object)
     scope = case ot
-    when 'Product', 'Sale', 'Membership' #TODO:, 'Installment'
+    when 'Product', 'Sale', 'Membership', 'Installment'
       @business.send("#{ot.underscore}_imports")
     else
       @business.imports

@@ -12,7 +12,7 @@ class Membership < ActiveRecord::Base
   validates_datetime :ends_on, :after => :begins_on
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :contact_id, :business_id, :payment_type_id, :begins_on, :ends_on, :value, :closed_on, :vip
+  attr_accessible :contact_id, :business_id, :payment_type_id, :begins_on, :ends_on, :value, :closed_on, :vip, :external_id
 
   def closed?
     closed_on.present?
@@ -40,7 +40,7 @@ class Membership < ActiveRecord::Base
     membership = Membership.new
 
     padma_contact = PadmaContact.find_by_kshema_id(row[4])
-    puts padma_contact.id
+
     fnz_contact = Contact.find_or_create_by_padma_id(:padma_id => padma_contact.id,
                                                  :business_id => business.id,
                                                  :name => "#{padma_contact.first_name} #{padma_contact.last_name}".strip,
@@ -52,7 +52,8 @@ class Membership < ActiveRecord::Base
         :begins_on => Date.parse(row[2]),
         :ends_on => Date.parse(row[3]),
         :vip => row[4] == 'true',
-        :contact_id => fnz_contact.id
+        :contact_id => fnz_contact.id,
+        :external_id => row[0].to_i
     }
 
     if row[8] == 'true' # if cancelled

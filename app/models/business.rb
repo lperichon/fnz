@@ -8,6 +8,9 @@ class Business < ActiveRecord::Base
   has_many :products
   has_many :imports
   has_many :product_imports
+  has_many :sale_imports
+  has_many :membership_imports
+  has_many :installment_imports
   has_many :payment_types
   has_and_belongs_to_many :users
 

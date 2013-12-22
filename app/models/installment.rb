@@ -44,6 +44,27 @@ class Installment < ActiveRecord::Base
     self.update_attribute(:balance, calculate_balance)
   end
 
+  def self.build_from_csv(business, row)
+    installment = Installment.new
+
+    membership = business.memberships.find_by_external_id(row[4].to_i)
+
+    agent = business.agents.find_by_padma_id(membership.contact.padma_teacher)
+
+    installment.attributes = {
+        :due_on => Date.parse(row[2]),
+        :value => row[1].to_f,
+        :membership_id => membership.id,
+        :agent_id => agent.id
+    }
+
+    return installment
+  end
+
+  def self.csv_header
+    "id,monto,vto,pago,plan_id,fecha_pago,notes,comprobante,accounting_date,created_at,updated_at,school_id,forma_id".split(',')
+  end
+
   private
 
   def calculate_balance
