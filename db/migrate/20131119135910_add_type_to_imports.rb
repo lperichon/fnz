@@ -3,4 +3,3 @@ class AddTypeToImports < ActiveRecord::Migration
     add_column :imports, :type, :string
   end
 end
-|
