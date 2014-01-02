@@ -1,9 +1,9 @@
 $(document).ready ->
-  $('.datepicker_input').live "focus", (event) ->
+  $(document.body).on "focus", '.datepicker_input', (event) ->
     $(this).datepicker({"format": "yyyy-mm-dd", "weekStart": 1, "autoclose": true});
-  $('.timepicker_input').live "focus", (event) ->
+  $(document.body).on "focus", '.timepicker_input', (event) ->
     $(this).timepicker();
 
-  $('.datepicker_input, .timepicker_input').live "change", (event) ->
+  $(document.body).on "change", '.datepicker_input, .timepicker_input', (event) ->
     value = $(this).parent().children(".datepicker_input").val() + " " +  $(this).parent().children(".timepicker_input").val()
     $(this).siblings(":hidden").val(value)

@@ -1,15 +1,15 @@
 $(document).ready ->
-  $('[data-dismiss="modal"]').live 'click', () ->
+  $(document.body).on 'click', '[data-dismiss="modal"]', () ->
     $(this).parents('.modal').remove();
 
-  $("#transaction_type_transfer").live "change", ->
+  $(document.body).on "change", "#transaction_type_transfer", ->
     $(".transfer_field").children().removeAttr("disabled");
     $(".transfer_field").show();
-  $("#transaction_type_debit, #transaction_type_credit").live "change", ->
+  $(document.body).on "change", "#transaction_type_debit, #transaction_type_credit", ->
     $(".transfer_field").children().attr("disabled",true);
     $(".transfer_field").hide();
 
-  $("#transaction_state").live "change", ->
+  $(document.body).on "change", "#transaction_state", ->
     if $("#transaction_state").val() == "reconciled"
       $(".pending_field").children().removeAttr("disabled");
       $(".pending_field").show();
@@ -17,14 +17,14 @@ $(document).ready ->
       $(".pending_field").children().attr("disabled",true);
       $(".pending_field").hide();
 
-  $(".remove-nested-transaction").on "click", (e) ->
+  $(document.body).on "click", ".remove-nested-transaction", (e) ->
     $(this).siblings(".destroy-value").val(true)
     $(this).parents("tr").hide()
 
-  $(".remove-unsaved-nested-transaction").live "click", (e) ->
+  $(document.body).on "click", ".remove-unsaved-nested-transaction", (e) ->
     $(this).parents("tr").remove()
 
-  $(".link-transaction-button").on "click", (e) ->
+  $(document.body).on "click", ".link-transaction-button", (e) ->
     tr = $(this).parents('tr')
     random = $.now()
     parent_type = $(".nested.transactions.table").attr('data-type')
