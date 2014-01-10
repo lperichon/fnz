@@ -120,6 +120,10 @@ class Api::V0::ImportsController < Api::V0::ApiController
     if params[:import]
       padma_id = params[:import].delete(:padma_id)
       @business = Business.find_by_padma_id(padma_id)
+      unless @business
+        @business = Business.create(padma_id: padma_id)
+      end
+      @business
     end
   end
 
