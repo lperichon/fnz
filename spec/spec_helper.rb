@@ -45,5 +45,7 @@ RSpec.configure do |config|
   config.before(:each) do
     User.any_instance.stub(:padma).and_return(PadmaUser.new)
     PadmaContact.stub(:find_by_kshema_id).and_return(PadmaContact.new(:id => "123", :first_name => "Bart", :last_name => "Simpson"))
+    PadmaAccount.stub(:find).and_return(PadmaAccount.new)
+    PadmaAccount.any_instance.stub(:admin).and_return(PadmaUser.new(:username => "homer.simpson"))
   end
 end

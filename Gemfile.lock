@@ -1,10 +1,15 @@
+GIT
+  remote: git://github.com/lperichon/accounts_client.git
+  revision: 36cb6f814fc618359f0008eb188d9673340f9730
+  specs:
+    accounts_client (0.0.19)
+      gravtastic
+      logical_model (~> 0.5.0)
+      railties (>= 3.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
-    accounts_client (0.0.20)
-      gravtastic
-      logical_model (~> 0.5.8)
-      railties (>= 3.1)
     actionmailer (3.2.8)
       actionpack (= 3.2.8)
       mail (~> 2.4.4)
@@ -253,7 +258,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  accounts_client (>= 0.0.19)
+  accounts_client!
   awesome_nested_fields (= 0.6.0)
   bootstrap-datepicker-rails (~> 1.1.1.11)
   bootstrap-sass (= 2.0.4.0)

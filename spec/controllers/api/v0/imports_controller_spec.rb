@@ -11,11 +11,6 @@ describe Api::V0::ImportsController do
     }
   end
 
-  before do
-    unless @belgrano = Business.find_by_name('belgrano')
-      @belgrano = FactoryGirl.create(:business, name: 'Belgrano', padma_id: 'belgrano')
-    end
-  end
 
   describe "#show" do
     before do
@@ -31,7 +26,7 @@ describe Api::V0::ImportsController do
     describe "with a valid id" do
       before do
         get :show, id: @import_id,
-                   app_key: ENV['app_key']
+            app_key: ENV['app_key']
       end
       let(:json){ActiveSupport::JSON.decode(response.body)}
       it { should respond_with 200 }
@@ -47,12 +42,30 @@ describe Api::V0::ImportsController do
     end
   end
 
-  describe "#create" do
+  describe "with an existing business" do
+    before do
+      unless @belgrano = Business.find_by_name('belgrano')
+        @belgrano = FactoryGirl.create(:business, name: 'Belgrano', padma_id: 'belgrano')
+      end
+    end
 
-    it "queues import in delayed_job" do
-      expect{
-        post :create, valid_attributes
-      }.to change{Delayed::Job.count}.by 1
+    describe "#create" do
+
+      it "queues import in delayed_job" do
+        expect{
+          post :create, valid_attributes
+        }.to change{Delayed::Job.count}.by 1
+      end
+    end
+  end
+
+  describe "whithout an existing business" do
+    describe "#create" do
+      it "creates a new business" do
+        expect{
+          post :create, valid_attributes
+        }.to change{Business.count}.by 1
+      end
     end
   end
 end

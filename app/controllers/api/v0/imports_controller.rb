@@ -1,7 +1,7 @@
 # @restful_api v0
 class Api::V0::ImportsController < Api::V0::ApiController
 
-  before_filter :get_business
+  before_filter :get_business, :only => :create
   
   ##
   # Returns status of an import
@@ -121,7 +121,10 @@ class Api::V0::ImportsController < Api::V0::ApiController
       padma_id = params[:import].delete(:padma_id)
       @business = Business.find_by_padma_id(padma_id)
       unless @business
-        @business = Business.create(padma_id: padma_id)
+        padma_account = PadmaAccount.find(padma_id)
+        padma_user = padma_account.admin
+        owner = User.create!(drc_uid: padma_user.username, :email => padma_user.username + "@metododerose.org", :password => Devise.friendly_token[0,20])
+        @business = owner.owned_businesses.create!(padma_id: padma_id, name: padma_id.titleize)
       end
       @business
     end
