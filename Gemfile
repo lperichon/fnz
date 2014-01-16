@@ -43,3 +43,4 @@ gem 'execjs'
 gem 'therubyracer'
 gem "select2-rails"
 gem 'delayed_job_active_record' # must be declared after 'protected_attributes' gem
+gem "workless", "~> 1.1.3"
