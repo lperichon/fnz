@@ -5,7 +5,7 @@ class MembershipStats
 
   attr_accessor :business, :month, :year
 
-  validate :business, :month, :year, :presence => true
+  validates_presence_of :business, :month, :year
 
   def initialize(attributes = {})
     attributes.each do |name, value|
