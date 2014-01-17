@@ -68,4 +68,23 @@ class Sale < ActiveRecord::Base
   def self.csv_header
     "id,producto_id,instructor_id,persona_id,notes,fecha,created_at,updated_at,precio_in_cents,fecha_pago,pago,school_id,currency,forma_id".split(',')
   end
+
+  def pending?
+    transactions.any? { |t| t.pending? }
+  end
+
+  def complete?
+    transactions.all? { |t| t.created? || t.reconciled? }
+  end
+
+  def status
+    if pending?
+      :pending
+    elsif complete?
+      :complete
+    else
+      :incomplete
+    end
+  end
+
 end

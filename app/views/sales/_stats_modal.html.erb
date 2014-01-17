@@ -5,18 +5,14 @@
   </div>
   <ul>
     <h4>Global</h4>
-    <li>Credited sales: $ <%= @stats.credited_sales.inject(0) {|sum, sale| sum + sale.product.price} %></li>
-    <li>Reconciled enrollments: $ <%= @stats.reconciled_sales.inject(0) {|sum, sale| sum + sale.product.price} %></li>
-    <li>Pending enrollments: $ <%= @stats.pending_sales.inject(0) {|sum, sale| sum + sale.product.price} %></li>
+    <li>Total sales: $ <%= @stats.sales.inject(0) {|sum, sale| sum + sale.product.price} %></li>
   </ul>
+  <ul>
   <% @business.agents.each do |agent| %>
-      <ul>
-        <h4><%= agent.name %></h4>
-        <li>Credited sales: $ <%= @stats.credited_sales.where('sales.agent_id' => agent.id).inject(0) {|sum, sale| sum + sale.product.price} %></li>
-        <li>Reconciled sales: $ <%= @stats.reconciled_sales.where('sales.agent_id' => agent.id).inject(0) {|sum, sale| sum + sale.product.price} %></li>
-        <li>Pending sales: $ <%= @stats.pending_sales.where('sales.agent_id' => agent.id).inject(0) {|sum, sale| sum + sale.product.price} %></li>
-      </ul>
+    <li><%= agent.name %>: $ <%= @stats.sales.where('sales.agent_id' => agent.id).inject(0) {|sum, sale| sum + sale.product.try(:price)} %></li>
+
   <% end %>
+  </ul>
   <div class="modal-footer">
     <%= link_to "Close", "#", :class => "btn", "data-dismiss" => "modal" %>
   </div>
