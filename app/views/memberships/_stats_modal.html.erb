@@ -5,22 +5,14 @@
   </div>
   <ul>
     <h4>Global</h4>
-    <li>Credited enrollments: $ <%= @stats.credited_enrollments.first["sum"]  %></li>
-    <li>Reconciled enrollments: $ <%= @stats.reconciled_enrollments.first["sum"]  %></li>
-    <li>Pending enrollments: $ <%= @stats.pending_enrollments.first["sum"]  %></li>
-    <li>Credited installments: $ <%= @stats.credited_installments.first["sum"]  %></li>
-    <li>Reconciled installments: $ <%= @stats.reconciled_installments.first["sum"]  %></li>
-    <li>Pending installments: $ <%= @stats.pending_installments.first["sum"]  %></li>
+    <li>Enrollments: $ <%= @stats.enrollments.first["sum"] %></li>
+    <li>Installments: $ <%= @stats.installments.first["sum"]  %></li>
   </ul>
   <% @business.agents.each do |agent| %>
       <ul>
         <h4><%= agent.name %></h4>
-        <li>Credited enrollments: $ <%= @stats.credited_enrollments.where('enrollments.agent_id' => agent.id).first["sum"] %></li>
-        <li>Reconciled enrollments: $ <%= @stats.reconciled_enrollments.where('enrollments.agent_id' => agent.id).first["sum"] %></li>
-        <li>Pending enrollments: $ <%= @stats.pending_enrollments.where('enrollments.agent_id' => agent.id).first["sum"] %></li>
-        <li>Credited installments: $ <%= @stats.credited_installments.where('installments.agent_id' => agent.id).first["sum"] %></li>
-        <li>Reconciled installments: $ <%= @stats.reconciled_installments.where('installments.agent_id' => agent.id).first["sum"] %></li>
-        <li>Pending installments: $ <%= @stats.pending_installments.where('installments.agent_id' => agent.id).first["sum"] %></li>
+        <li>Enrollments: $ <%= @stats.enrollments.where('enrollments.agent_id' => agent.id).first["sum"] %></li>
+        <li>Installments: $ <%= @stats.installments.where('installments.agent_id' => agent.id).first["sum"] %></li>
       </ul>
   <% end %>
   <div class="modal-footer">
