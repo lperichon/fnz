@@ -11,6 +11,8 @@ class Contact < ActiveRecord::Base
   scope :students_without_membership, joins("left outer join memberships on contacts.id = memberships.contact_id").where(:padma_status => 'student').where('memberships.id' => nil)
   scope :former_students_with_open_membership, joins(:memberships).where('memberships.closed_on' => nil).where(:padma_status => 'former_student')
 
+  scope :all_students, joins(:memberships).where("padma_status == 'former_student' OR padma_status == 'student'").uniq 
+
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :business_id, :padma_id, :padma_status, :padma_teacher
 

@@ -1,0 +1,18 @@
+<tr>
+<% (1..5).each do |n| %>
+    <% installment = contact.installment_for((6-n).months.ago) %>
+    <td><%= number_to_currency(installment.try(:value)) %>  <%= content_tag(:i, "", :class => "icon-installment-#{installment.status}") if installment %></td>
+<% end %>
+<% installment = contact.installment_for(Date.today) %>
+<td class="current"><%= number_to_currency(installment.try(:value)) %>  <%= content_tag(:i, "", :class => "icon-installment-#{installment.status}") if installment %></td>
+<% (1..6).each do |n| %>
+    <% installment = contact.installment_for(n.months.from_now) %>
+    <td>
+    <% if installment %>
+      <%= number_to_currency(installment.try(:value)) %> <%= content_tag(:i, "", :class => "icon-installment-#{installment.status}") %>
+    <% elsif contact.membership && n.months.from_now < contact.membership.ends_on %>
+      <%= number_to_currency(contact.membership.try(:value)) %>
+    <% end %>
+    </td>
+<% end %>
+</tr>

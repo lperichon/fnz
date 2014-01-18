@@ -9,33 +9,22 @@
 <table class="memberships table table-striped table-hover table-condensed table-bordered">
   <thead>
   <% (1..5).each do |n| %>
-      <td><%= Date::ABBR_MONTHNAMES[(6-n).months.ago.month] %> <%= link_to content_tag(:i, "", :class => "icon-bar-chart", :title => "View #{Date::MONTHNAMES[(6-n).months.ago.month]} stats"), stats_business_memberships_path(@business, :year => (6-n).months.ago.year, :month => (6-n).months.ago.month ), :remote => true %></td>
+      <td><div><%= Date::ABBR_MONTHNAMES[(6-n).months.ago.month] %></div><div><%= link_to content_tag(:i, "", :class => "icon-bar-chart", :title => "View #{Date::MONTHNAMES[(6-n).months.ago.month]} stats"), stats_business_memberships_path(@business, :year => (6-n).months.ago.year, :month => (6-n).months.ago.month ), :remote => true %></div></td>
   <% end %>
-  <td class="current"><%= Date::ABBR_MONTHNAMES[Date.today.month] %> <%= link_to content_tag(:i, "", :class => "icon-bar-chart", :title => "View #{Date::MONTHNAMES[Date.today.month]} stats"), stats_business_memberships_path(@business, :year => Date.today.year, :month => Date.today.month ), :remote => true  %></td>
+  <td class="current"><div><%= Date::ABBR_MONTHNAMES[Date.today.month] %></div><div><%= link_to content_tag(:i, "", :class => "icon-bar-chart", :title => "View #{Date::MONTHNAMES[Date.today.month]} stats"), stats_business_memberships_path(@business, :year => Date.today.year, :month => Date.today.month ), :remote => true  %></div></td>
   <% (1..6).each do |n| %>
-      <td><%= Date::ABBR_MONTHNAMES[n.months.from_now.month] %> <%= link_to content_tag(:i, "", :class => "icon-bar-chart", :title => "View #{Date::MONTHNAMES[n.months.from_now.month]} stats"), stats_business_memberships_path(@business, :year => n.months.from_now.year, :month => n.months.from_now.month ), :remote => true %></td>
+      <td><div><%= Date::ABBR_MONTHNAMES[n.months.from_now.month] %></div><div><%= link_to content_tag(:i, "", :class => "icon-bar-chart", :title => "View #{Date::MONTHNAMES[n.months.from_now.month]} stats"), stats_business_memberships_path(@business, :year => n.months.from_now.year, :month => n.months.from_now.month ), :remote => true %></div></td>
   <% end %>
   </thead>
   <tbody>
-  <% @business.contacts.students.each do |contact| %>
-      <tr>
-        <% (1..5).each do |n| %>
-            <% installment = contact.installment_for((6-n).months.ago) %>
-            <td><%= number_to_currency(installment.try(:value)) %>  <%= content_tag(:i, "", :class => "icon-installment-#{installment.status}") if installment %></td>
-        <% end %>
-        <% installment = contact.installment_for(Date.today) %>
-        <td class="current"><%= number_to_currency(installment.try(:value)) %>  <%= content_tag(:i, "", :class => "icon-installment-#{installment.status}") if installment %></td>
-        <% (1..6).each do |n| %>
-            <% installment = contact.installment_for(n.months.from_now) %>
-            <td>
-            <% if installment %>
-              <%= number_to_currency(installment.try(:value)) %> <%= content_tag(:i, "", :class => "icon-installment-#{installment.status}") %>
-            <% elsif contact.membership && n.months.from_now < contact.membership.ends_on %>
-              <%= number_to_currency(contact.membership.try(:value)) %>
-            <% end %>
-            </td>
-        <% end %>
-      </tr>
+  <% @business.contacts.all_students.each do |contact| %>
+      <% if contact.membership && !contact.membership.closed? %>
+      	<%= render :partial => 'membership_table_row', :locals => {:contact => contact} %>
+      <% else %>
+      	<tr>
+      		<td colspan="12"><%= table_contact_membership_link(contact) %></td>
+      	</tr>
+      <% end %>
   <% end %>
   </tbody>
   <tfoot>
