@@ -1,9 +1,20 @@
-<ul class="installments">
+<table class="installments table table-striped table-hover table-condensed table-bordered">
+  <thead>
+  	<td>Month</td>
+  	<td>Amount</td>
+  	<td>Status</td>
+  	<td></td>
+  </thead>
+  <tbody>
   <% installments.each do |installment| %>
-      <li>
-        <%= installment.due_on %>
-        (<%= installment.status %>)
-        <%= link_to "Show", business_membership_installment_path(@business, @membership, installment) %> | <%= link_to "Edit", edit_business_membership_installment_path(@business, @membership, installment) %> | <%= link_to 'Delete', business_membership_installment_path(@business, @membership, installment), :confirm => 'Are you sure you want to delete this item?', :method => 'delete' %>
-      </li>
+      <tr>
+        <td><%= installment.due_on.strftime("%B %Y") %></td>
+        <td class="amount"><%= number_to_currency(installment.value)%></td> 
+        <td class="status"><%= content_tag(:i, "", :class => "icon-installment-#{installment.status}") %></td>
+        <td>
+        	<%= link_to content_tag(:i, "", :class => "icon-eye-open"), business_membership_installment_path(@business, @membership, installment) %>
+        	<%= link_to content_tag(:i, "", :class => "icon-edit"), edit_business_membership_installment_path(@business, @membership, installment), :remote => true %>
+  			<%= link_to content_tag(:i, "", :class => "icon-trash"), business_membership_installment_path(@business, @membership, installment), :confirm => 'Are you sure you want to delete this item?', :method => 'delete' %>
+      </tr>
   <% end %>
-</ul>
+</table>

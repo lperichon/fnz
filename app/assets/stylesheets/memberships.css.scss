@@ -1,8 +1,20 @@
 .overdue-membership {
-  color: red;
+  color: #d9534f;
 }
 .due-membership {
-  color: yellow;
+  color: #f0ad4e;
+}
+
+.label-complete {
+  background-color: #5cb85c;
+}
+
+.label-due {
+	background-color: #f0ad4e;
+}
+
+.label-overdue {
+	background-color: #d9534f;
 }
 
 .memberships tbody td {
@@ -49,9 +61,10 @@
 	background-color: whitesmoke;
 }
 
-//.memberships thead tr:first-child td.current {
-//  border-top:2px solid #DDDDDD;
-//}
-//.memberships tbody tr:last-child td.current {
-//  border-bottom:2px solid #DDDDDD;
-//}
+.installments.table thead td {
+	text-align: center;
+}
+
+.installments.table td.amount, .installments.table td.status {
+	text-align: center;
+}
