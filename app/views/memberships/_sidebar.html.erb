@@ -1,23 +1,13 @@
 <% if @business.present? && @business.persisted? %>
-<p>Students:
 <ul class="nav nav-pills nav-stacked students">
-  <% @business.contacts.students.each do |contact| %>
+  <li>
+    <div class="btn-group contact-filter-buttons">
+  	  <button type="button" class="btn btn-default" id="toggle-students">Students</button>
+  	  <button type="button" class="btn btn-default" id="toggle-former-students">Former students</button>
+    </div>
+  </li>
+  <% @business.contacts.all_students.each do |contact| %>
     <%= sidebar_contact_membership_link(contact) %>
   <% end %>
 </ul>
-</p>
-<p>
-<ul class="nav nav-pills nav-stacked students">
-  <% @business.contacts.former_students_with_open_membership.each do |contact| %>
-    <%= sidebar_contact_membership_link(contact) %>
-  <% end %>
-</ul>
-</p>
-<p>
-<ul class="nav nav-pills nav-stacked students">
-  <% @business.contacts.students_without_membership.each do |contact| %>
-    <%= sidebar_contact_membership_link(contact) %>
-  <% end %>
-</ul>
-</p>
 <% end %>

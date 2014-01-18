@@ -24,10 +24,22 @@
   padding-top: 2.1px;
 }
 
+.students.nav li .contact-filter-buttons {
+	margin: 0 auto;
+	width: 190px;
+}
+
+.students.nav li.former_student {
+}
+
 
 .icon-installment-complete:before        { content: "\f00c"; color: green;}
 .icon-installment-pending:before        { content: "\f024"; color: yellow;}
 .icon-installment-overdue:before         { content: "\f071"; color: red;}
+
+
+.table.memberships tr.former_student {
+}
 
 //.memberships thead tr:first-child td.current {
 //  border-top:2px solid #DDDDDD;

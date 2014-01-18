@@ -12,3 +12,17 @@ $(document).ready ->
           text: data.name
 
     persistent_create_option: true
+
+  $('#toggle-students').addClass('active')
+  $('.students.nav li.former_student').hide()
+  $('.table.memberships tr.former_student').hide()
+
+  $("#toggle-students").on "click", ->
+  	$(this).toggleClass("active")
+  	$('.students.nav li.student').toggle()
+  	$('.table.memberships tr.student').toggle()
+
+  $("#toggle-former-students").on "click", ->
+  	$(this).toggleClass("active")
+  	$('.students.nav li.former_student').toggle()
+  	$('.table.memberships tr.former_student').toggle()
