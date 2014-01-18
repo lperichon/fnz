@@ -13,6 +13,8 @@ class Contact < ActiveRecord::Base
 
   scope :all_students, joins(:memberships).where("padma_status == 'former_student' OR padma_status == 'student'").uniq 
 
+  default_scope order('name ASC')
+
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :business_id, :padma_id, :padma_status, :padma_teacher
 
