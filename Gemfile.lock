@@ -37,6 +37,10 @@ GEM
     atomic (1.1.14)
     awesome_nested_fields (0.6.0)
       rails (>= 3.0.0)
+    aws-sdk (1.32.0)
+      json (~> 1.4)
+      nokogiri (>= 1.4.4)
+      uuidtools (~> 2.1)
     bcrypt-ruby (3.1.2)
     bootstrap-datepicker-rails (1.1.1.11)
       railties (>= 3.0)
@@ -251,6 +255,7 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
+    uuidtools (2.1.4)
     validates_timeliness (3.0.14)
       timeliness (~> 0.3.6)
     vegas (0.1.11)
@@ -269,6 +274,7 @@ PLATFORMS
 DEPENDENCIES
   accounts_client (= 0.0.21)
   awesome_nested_fields (= 0.6.0)
+  aws-sdk
   bootstrap-datepicker-rails (~> 1.1.1.11)
   bootstrap-sass (= 2.0.4.0)
   cancan (>= 1.6.8)
