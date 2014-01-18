@@ -12,7 +12,7 @@
   </thead>
   <tbody>
   <% @business.contacts.all_students.each do |contact| %>
-    <tr class="<%=contact.padma_status%>">
+    <tr class="<%=contact.padma_status%>" data-contact-id=<%= contact.id %>>
       <% if contact.membership && !contact.membership.closed? %>
       	<%= render :partial => 'membership_table_row', :locals => {:contact => contact} %>
       <% else %>
