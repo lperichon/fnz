@@ -17,6 +17,7 @@ class Import < ActiveRecord::Base
   def process
     return unless status.to_sym == :ready
 
+    self.update_attribute(:status, :working)
     n, errs = 0, []
     CSV.parse(open(upload.path)) do |row|
       n += 1
