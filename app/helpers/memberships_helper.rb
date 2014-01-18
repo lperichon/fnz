@@ -7,7 +7,7 @@ module MembershipsHelper
     str << membership_end_date(contact)
     content_tag(:li,
                 link_to(str, contact.membership.present? ? business_membership_path(@business, contact.membership) : new_business_membership_path(@business, :membership => {:contact_id => contact.id})),
-                :class => link_is_active?(contact)? 'active' : ''
+                :class => [link_is_active?(contact)? 'active' : '',  contact.padma_status].join(" ")
     )
   end
 
