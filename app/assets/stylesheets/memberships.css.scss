@@ -24,8 +24,12 @@
   padding-top: 2.1px;
 }
 
+.students.nav li .contact-filter-buttons {
+	margin: 0 auto;
+	width: 190px;
+}
+
 .students.nav li.former_student {
-  display:none;
 }
 
 
@@ -35,7 +39,6 @@
 
 
 .table.memberships tr.former_student {
-	display:none;
 }
 
 //.memberships thead tr:first-child td.current {
