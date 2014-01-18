@@ -26,3 +26,5 @@ $(document).ready ->
   	$(this).toggleClass("active")
   	$('.students.nav li.former_student').toggle()
   	$('.table.memberships tr.former_student').toggle()
+
+  $(".students.nav li").popover()
