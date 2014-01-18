@@ -28,3 +28,19 @@ $(document).ready ->
   	$('.table.memberships tr.former_student').toggle()
 
   $(".students.nav li").popover()
+
+  $(".table.memberships tr").hover (->
+    contact_id = $(this).attr("data-contact-id")
+    $(".students.nav li[data-contact-id='" + contact_id + "'] a").addClass "contact-hover"
+  ), (->
+    contact_id = $(this).attr("data-contact-id")
+    $(".students.nav li[data-contact-id='" + contact_id + "'] a").removeClass "contact-hover"
+  )
+
+  $(".students.nav li").hover (->
+    contact_id = $(this).attr("data-contact-id")
+    $(".table.memberships tr[data-contact-id='" + contact_id + "']").addClass "contact-hover"
+  ), (->
+    contact_id = $(this).attr("data-contact-id")
+    $(".table.memberships tr[data-contact-id='" + contact_id + "']").removeClass "contact-hover"
+  )
