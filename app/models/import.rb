@@ -19,7 +19,14 @@ class Import < ActiveRecord::Base
 
     self.update_attribute(:status, :working)
     n, errs = 0, []
-    CSV.parse(open(upload.path)) do |row|
+
+    path = if Rails.env == "development" || Rails.env == "testing"
+    	upload.path
+    else
+    	upload.url
+    end
+
+    CSV.parse(open(path)) do |row|
       n += 1
       # SKIP: header i.e. first row OR blank row
       next if n == 1 or row.join.blank?
