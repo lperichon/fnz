@@ -67,7 +67,7 @@ class ImportsController < UserApplicationController
 
     respond_to do |format|
       if @import.delay.process
-        format.html { redirect_to business_import_path(@business, @import), notice: 'Import was successfully processed.' }
+        format.html { redirect_to business_import_path(@business, @import), notice: 'Import was successfully queued. Please refresh to see results.' }
       else
         format.html { redirect_to business_import_path(@business, @import), notice: 'Import process failed.' }
       end

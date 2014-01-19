@@ -4,7 +4,7 @@
 
 <h3>Import</h3>
 <p>Id: <%= @import.id %></p>
-
+<p>Status: <%= content_tag :span, @import.status, :class => "label label-#{@import.status}"  %></p>
 <h3>Transactions</h3>
 <%= render :partial => 'transactions_table', :locals => {:transactions => @import.transactions} %>
 
