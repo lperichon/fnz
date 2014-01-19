@@ -36,7 +36,7 @@ class Import < ActiveRecord::Base
       new_record = handle_row(business, row)
       # Save upon valid
       # otherwise collect error records to export
-      if new_record.save
+      if new_record && new_record.save
         imported_records << new_record
       else
         errs << row
