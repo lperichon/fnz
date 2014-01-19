@@ -49,6 +49,8 @@ class Installment < ActiveRecord::Base
 
     membership = business.memberships.find_by_external_id(row[4].to_i)
 
+    return unless membership
+
     agent_id = membership.contact.padma_teacher
     agent = business.agents.find_by_padma_id(agent_id)
     unless agent
