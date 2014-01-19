@@ -41,6 +41,8 @@ class Membership < ActiveRecord::Base
 
     padma_contact = PadmaContact.find_by_kshema_id(row[4])
 
+    return unless padma_contact
+
     fnz_contact = Contact.find_or_create_by_padma_id(:padma_id => padma_contact.id,
                                                  :business_id => business.id,
                                                  :name => "#{padma_contact.first_name} #{padma_contact.last_name}".strip,
