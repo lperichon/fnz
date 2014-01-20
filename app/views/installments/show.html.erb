@@ -3,7 +3,7 @@
 <% end %>
 
 <h2>Installment</h2>
-<p>Agent: <%= @installment.agent.name %></p>
+<p>Agent: <%= @installment.agent.try(:name) %></p>
 <p>Due on: <%= @installment.due_on %></p>
 <p>value: <%= @installment.value %></p>
 

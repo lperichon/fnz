@@ -5,7 +5,6 @@ class Installment < ActiveRecord::Base
   has_many :transactions, :through => :installment_transactions
 
   validates :membership, :presence => true
-  validates :agent, :presence => true
   validates :due_on, :presence => true
   validates :value, :presence => true
 
