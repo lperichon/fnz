@@ -23,9 +23,9 @@ describe Installment do
     no_membership_installment.should_not be_valid
   end
 
-  it "should require an agent" do
+  it "should NOT require an agent" do
     no_agent_installment = Installment.new(@attr.merge(:agent_id => nil))
-    no_agent_installment.should_not be_valid
+    no_agent_installment.should be_valid
   end
 
   it "should require a due date" do

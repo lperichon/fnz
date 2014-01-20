@@ -3,7 +3,6 @@
 FactoryGirl.define do
   factory :installment do
     membership
-    agent
     due_on 1.week.from_now
     value 100
   end

@@ -5,7 +5,7 @@ module MembershipsHelper
     str << overdue_fire_warning(contact)
     content_tag(:li,
                 link_to(str, contact.membership.present? ? business_membership_path(@business, contact.membership) : new_business_membership_path(@business, :membership => {:contact_id => contact.id})),
-                'data-contact-id' => contact.id, 'data-html' => true, 'data-content' => "#{render(:partial => 'contact_popover', :locals => {:contact => contact})}", :rel => "popover", 'data-placement' => "right", 'data-original-title' => contact.name, 'data-triggr' => "hover",
+                'data-contact-id' => contact.id, 'data-html' => true, 'data-content' => "#{render(:partial => 'memberships/contact_popover', :locals => {:contact => contact})}", :rel => "popover", 'data-placement' => "right", 'data-original-title' => contact.name, 'data-triggr' => "hover",
                 :class => [link_is_active?(contact)? 'active' : '',  contact.padma_status].join(" ")
     )
   end

@@ -47,7 +47,7 @@ GEM
     bootstrap-sass (2.0.4.0)
     builder (3.0.4)
     cancan (1.6.10)
-    client_side_validations (3.2.0.beta.6)
+    client_side_validations (3.2.6)
     client_side_validations-simple_form (2.0.0.beta.2)
       client_side_validations (~> 3.2.0.beta.6)
       simple_form (~> 2.0.0)
@@ -278,7 +278,7 @@ DEPENDENCIES
   bootstrap-datepicker-rails (~> 1.1.1.11)
   bootstrap-sass (= 2.0.4.0)
   cancan (>= 1.6.8)
-  client_side_validations (= 3.2.0.beta.6)
+  client_side_validations
   client_side_validations-simple_form (= 2.0.0.beta.2)
   coffee-rails (~> 3.2.1)
   contacts_client (~> 0.0.21)

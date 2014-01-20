@@ -5,8 +5,9 @@ describe SaleImport do
   before(:each) do
     @business = FactoryGirl.create(:business)
     @attr = {
-      :upload => Rack::Test::UploadedFile.new('spec/fixtures/empty_ventas.csv', 'text/csv'),
-      :business_id => @business.id
+      :upload => Rack::Test::UploadedFile.new(Rails.root.join('spec','fixtures', 'empty_ventas.csv'), 'text/csv'),
+      :business_id => @business.id,
+      :status => :ready
     }
 
     User.current_user = @business.owner
