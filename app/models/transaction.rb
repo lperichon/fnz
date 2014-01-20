@@ -24,7 +24,7 @@ class Transaction < ActiveRecord::Base
   validates :creator, :presence => true
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :tag_ids, :description, :business_id, :source_id, :amount, :type, :transaction_at, :target_id, :conversion_rate, :state, :reconciled_at, :sale_ids, :installment_ids, :enrollment_ids
+  attr_accessible :tag_ids, :description, :business_id, :source_id, :amount, :type, :transaction_at, :target_id, :conversion_rate, :state, :reconciled_at, :sale_ids, :installment_ids, :enrollment_ids, :creator_id
 
   scope :untagged, includes(:taggings).where("taggings.tag_id is null")
 
@@ -62,7 +62,8 @@ class Transaction < ActiveRecord::Base
         :source_id => business.accounts.find_or_create_by_name(row[0]).id,
         :transaction_at => row[1],
         :amount => amount.abs(),
-        :description => row[3]
+        :description => row[3],
+        :creator_id => business.owner_id
     }
 
     tags_str = row[4]
