@@ -68,3 +68,16 @@
 .installments.table td.amount, .installments.table td.status {
 	text-align: center;
 }
+
+.memberships.table td:hover .installment-value {
+	display:none;
+}
+
+
+.memberships.table td .action-link {
+	display: none;
+}
+
+.memberships.table td:hover .action-link {
+	display: block;
+}
