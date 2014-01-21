@@ -1,6 +1,6 @@
 <div class="action-link">
-	<% if installment %>
-	  <%= link_to "Mark as paid", "#" %>
+	<% if installment && installment.pending? %>
+	  <%= link_to "Mark as paid", new_business_membership_installment_payment_path(@business, installment.membership, installment), :remote => true %>
 	<% else  %>
 	  <%= link_to "Create", new_business_membership_installment_path(contact.business, contact.membership, :installment => {:due_on => date.end_of_month.to_date, :value => contact.membership.value}) %>
 	<% end %>

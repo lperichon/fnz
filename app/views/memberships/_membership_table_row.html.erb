@@ -1,16 +1,16 @@
 <% (1..5).each do |n| %>
     <% installment = contact.installment_for((6-n).months.ago) %>
-    <td>
+    <td class="<%= installment.try(:status) %>">
     	<%= render :partial => 'membership_table_cell', :locals => {:installment => installment, :contact => contact, :date => (6-n).months.ago} %>
     </td>
 <% end %>
 <% installment = contact.installment_for(Date.today) %>
-<td class="current">
+<td class="current <%= installment.try(:status) %>">
 	<%= render :partial => 'membership_table_cell', :locals => {:installment => installment, :contact => contact, :date => Date.today} %>
 </td>
 <% (1..6).each do |n| %>
     <% installment = contact.installment_for(n.months.from_now) %>
-    <td>
+    <td class="<%= installment.try(:status) %>">
       <%= render :partial => 'membership_table_cell', :locals => {:installment => installment, :contact => contact, :date => n.months.from_now} %>
     </td>
 <% end %>
