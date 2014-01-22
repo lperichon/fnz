@@ -20,7 +20,8 @@ class MessageProcessor
         contact.update_attributes(
             :name => "#{padma_contact.first_name} #{padma_contact.last_name}".strip,
             :padma_status => padma_contact.status,
-            :padma_teacher => padma_contact.global_teacher_username)
+            :padma_teacher => padma_contact.global_teacher_username,
+            :business_id => business.id)
       end
       # TODO: Create Membership using data from message
     elsif data[:type] == 'DropOut'
