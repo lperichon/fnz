@@ -6,27 +6,17 @@ class PadmaContactsSynchronizer
   end
 
   def sync
-    page = 1
-    more_contacts = true
-    while(more_contacts)
-      padma_contacts = PadmaContact.search(:select => [:first_name, :last_name, :status, :global_teacher_username], :where => {:updated_at =>  business.synchronized_at},
-                        :account_name => business.padma_id,
-                        :per_page => 100,
-                        :page => page).each do |padma_contact|
-        contact = Contact.find_or_create_by_padma_id(:padma_id => padma_contact.id,
-                                                   :business_id => business.id,
-                                                   :name => "#{padma_contact.first_name} #{padma_contact.last_name}".strip,
-                                                   :padma_status => padma_contact.status,
-                                                   :padma_teacher => padma_contact.global_teacher_username)
-        unless contact.created_at && contact.created_at > 10.seconds.ago
-          contact.update_attributes(
-            :name => "#{padma_contact.first_name} #{padma_contact.last_name}".strip,
-            :padma_status => padma_contact.status,
-            :padma_teacher => padma_contact.global_teacher_username)
-        end
-      end
-      more_contacts = !padma_contacts.empty?
-      page = page + 1
+    contacts = @business.contacts
+    padma_contact_ids = contacts.map(&:padma_id).uniq
+    padma_contacts = PadmaContact.search(select: [:first_name, :last_name, :status, :global_teacher_username], ids: padma_contact_ids, :where => {:updated_at =>  @business.synchronized_at}, per_page: padma_contact_ids.size, username: @business.owner.username, account_name: @business.padma_id)
+
+    padma_contacts.each do |padma_contact|
+        contact = contacts.detect {|c| c.padma_id == padma_contact.id} 
+
+        contact.update_attributes(
+	        :name => "#{padma_contact.first_name} #{padma_contact.last_name}".strip,
+	        :padma_status => padma_contact.status,
+	        :padma_teacher => padma_contact.global_teacher_username)
     end
     business.update_attribute(:synchronized_at, Date.today)
   end
