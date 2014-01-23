@@ -11,7 +11,7 @@ class Contact < ActiveRecord::Base
   scope :students_without_membership, joins("left outer join memberships on contacts.id = memberships.contact_id").where(:padma_status => 'student').where('memberships.id' => nil)
   scope :former_students_with_open_membership, joins(:memberships).where('memberships.closed_on' => nil).where(:padma_status => 'former_student')
 
-  scope :all_students, joins("left outer join memberships on contacts.id = memberships.contact_id").where("(padma_status = 'former_student' OR padma_status = 'student') OR (padma_status IS NULL AND memberships.id)").uniq 
+  scope :all_students, joins("left outer join memberships on contacts.id = memberships.contact_id").where("(padma_status = 'former_student' OR padma_status = 'student') OR (padma_status IS NULL AND memberships.id NOT NULL)").uniq 
 
   default_scope order('name ASC')
 
