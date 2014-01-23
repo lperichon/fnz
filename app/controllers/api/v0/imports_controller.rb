@@ -123,7 +123,7 @@ class Api::V0::ImportsController < Api::V0::ApiController
       unless @business
         padma_account = PadmaAccount.find(padma_id)
         padma_user = padma_account.admin
-        owner = User.create!(drc_uid: padma_user.username, :email => padma_user.username + "@metododerose.org", :password => Devise.friendly_token[0,20])
+        owner = User.find_or_create_by_drc_uid(drc_uid: padma_user.username, :email => padma_user.username + "@metododerose.org", :password => Devise.friendly_token[0,20])
         @business = School.create!(owner_id: owner.id, padma_id: padma_id, name: padma_id.titleize)
       end
       @business
