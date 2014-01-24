@@ -70,11 +70,11 @@ class Sale < ActiveRecord::Base
   end
 
   def pending?
-    transactions.any? { |t| t.pending? }
+    !transactions.empty? && transactions.any? { |t| t.pending? }
   end
 
   def complete?
-    transactions.all? { |t| t.created? || t.reconciled? }
+    !transactions.empty? && transactions.all? { |t| t.created? || t.reconciled? }
   end
 
   def status
