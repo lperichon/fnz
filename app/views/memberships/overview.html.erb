@@ -13,11 +13,11 @@
   <tbody>
   <% @contacts.each do |contact| %>
     <tr class="<%=contact.padma_status%>" data-contact-id=<%= contact.id %>>
-      <% membership = contact.membership %>
+      <% membership = @memberships[contact] %>
       <% if membership && !membership.closed? %>
-      	<%= render :partial => 'membership_table_row', :locals => {:contact => contact, :membership => contact.membership} %>
+      	<%= render :partial => 'membership_table_row', :locals => {:contact => contact, :membership => membership} %>
       <% else %>
-      	<td colspan="12"><%= table_contact_membership_link(contact) %></td>
+      	<td colspan="12"><%= table_contact_membership_link(contact, membership) %></td>
       <% end %>
     </tr>
   <% end %>

@@ -67,8 +67,12 @@ class MembershipsController < UserApplicationController
   def overview
   	@contacts = @business.contacts.all_students
   	@installments = {}
+  	@memberships = {}
   	@contacts.each do |c|
-  		installments = (c.membership && !c.membership.closed?) ? c.membership.installments.all : []
+  		membership = c.membership
+  		@memberships.merge!({c => membership})
+  		
+  		installments = (membership && !membership.closed?) ? membership.installments.all : []
   		@installments.merge!({c => installments})
   	end
   end

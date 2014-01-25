@@ -6,8 +6,8 @@
   	  <button type="button" class="btn btn-default" id="toggle-former-students">Former students</button>
     </div>
   </li>
-  <% @business.contacts.all_students.each do |contact| %>
-    <%= sidebar_contact_membership_link(contact) %>
+  <% @contacts.each do |contact| %>
+    <%= sidebar_contact_membership_link(contact, @memberships[contact]) %>
   <% end %>
 </ul>
 <% end %>

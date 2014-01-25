@@ -18,13 +18,13 @@ class Installment < ActiveRecord::Base
   accepts_nested_attributes_for :installment_transactions, :reject_if => proc { |s| s['transaction_id'].blank? }
 
   def pending?
-    transactions_sum = transactions.sum(:amount)
-    transactions_sum != self.balance && transactions_sum >= self.value
+  	false
+    # comment out this state due to performance
+    # !transactions.empty? && transactions.any? { |t| t.pending? }
   end
 
   def complete?
-    transactions_sum = transactions.sum(:amount)
-    transactions_sum == self.balance && transactions_sum >= self.value
+    balance >= value
   end
 
   def status

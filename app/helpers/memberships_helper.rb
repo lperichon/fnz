@@ -1,9 +1,8 @@
 module MembershipsHelper
 
-  def sidebar_contact_membership_link(contact)
+  def sidebar_contact_membership_link(contact, membership)
     str = contact.name.html_safe
-    str << overdue_fire_warning(contact)
-    membership = contact.membership
+    str << overdue_fire_warning(membership)
     content_tag(:li,
                 link_to(str, membership.present? ? business_membership_path(@business, membership) : new_business_membership_path(@business, :membership => {:contact_id => contact.id})),
                 'data-contact-id' => contact.id, 'data-html' => true, 'data-content' => "#{render(:partial => 'memberships/contact_popover', :locals => {:membership => membership})}", :rel => "popover", 'data-placement' => "right", 'data-original-title' => contact.name, 'data-triggr' => "hover",
@@ -11,8 +10,7 @@ module MembershipsHelper
     )
   end
 
-  def table_contact_membership_link(contact)
-  	membership = contact.membership
+  def table_contact_membership_link(contact, membership)
   	link_to(membership.present? ? "Close membership" : "New membership" , membership.present? ? business_membership_path(@business, membership) : new_business_membership_path(@business, :membership => {:contact_id => contact.id}))
   end	
 
@@ -24,9 +22,9 @@ module MembershipsHelper
 
   # Renders a fire warning icon if membership is missing, due or overdue (color varies)
   # @return [String]
-  def overdue_fire_warning(contact)
-    if contact.membership.blank? || contact.membership.due? || contact.membership.overdue?
-      content_tag(:i, "", :class => "#{contact.membership.present? ? (contact.membership.due? ? 'due' : 'overdue') : 'missing'}-membership pull-right icon-fire")
+  def overdue_fire_warning(membership)
+    if membership.blank? || membership.due? || membership.overdue?
+      content_tag(:i, "", :class => "#{membership.present? ? (membership.due? ? 'due' : 'overdue') : 'missing'}-membership pull-right icon-fire")
     end
   end
 
