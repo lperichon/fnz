@@ -1,14 +1,14 @@
 <div class="action-link">
 	<% if installment && installment.status.in?([:pending, :overdue, :incomplete]) %>
-	  <%= link_to "Mark as paid", new_business_membership_installment_payment_path(@business, installment.membership, installment), :remote => true %>
+	  <%= link_to "Mark as paid", new_business_membership_installment_payment_path(@business, membership, installment), :remote => true %>
 	<% else  %>
-	  <%= link_to "Create", new_business_membership_installment_path(contact.business, contact.membership, :installment => {:due_on => date.end_of_month.to_date, :value => contact.membership.value}) %>
+	  <%= link_to "Create", new_business_membership_installment_path(@business, membership, :installment => {:due_on => date.end_of_month.to_date, :value => membership.value}) %>
 	<% end %>
 </div>
 <div class="installment-value">
 	<% if installment %>
 	  <%= number_to_currency(installment.try(:value)) %> <%= content_tag(:i, "", :class => "icon-installment-#{installment.status}") %>
-	<% elsif contact.membership && date >= Date.today.beginning_of_month && date < contact.membership.ends_on %>
-	  <%= number_to_currency(contact.membership.try(:value)) %>
+	<% elsif membership && date >= Date.today.beginning_of_month && date < membership.ends_on %>
+	  <%= number_to_currency(membership.try(:value)) %>
 	<% end %>
 </div>

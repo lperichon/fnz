@@ -1,16 +1,16 @@
 <% (1..5).each do |n| %>
-    <% installment = contact.installment_for((6-n).months.ago) %>
+    <% installment = installment_for((6-n).months.ago, @installments[contact]) %>
     <td class="<%= installment.try(:status) %>">
-    	<%= render :partial => 'membership_table_cell', :locals => {:installment => installment, :contact => contact, :date => (6-n).months.ago} %>
+    	<%= render :partial => 'membership_table_cell', :locals => {:installment => installment, :contact => contact, :membership => membership, :date => (6-n).months.ago} %>
     </td>
 <% end %>
-<% installment = contact.installment_for(Date.today) %>
+<% installment = installment_for(Date.today, @installments[contact]) %>
 <td class="current <%= installment.try(:status) %>">
-	<%= render :partial => 'membership_table_cell', :locals => {:installment => installment, :contact => contact, :date => Date.today} %>
+	<%= render :partial => 'membership_table_cell', :locals => {:installment => installment, :contact => contact, :membership => membership, :date => Date.today} %>
 </td>
 <% (1..6).each do |n| %>
-    <% installment = contact.installment_for(n.months.from_now) %>
+    <% installment = installment_for(n.months.from_now, @installments[contact]) %>
     <td class="<%= installment.try(:status) %>">
-      <%= render :partial => 'membership_table_cell', :locals => {:installment => installment, :contact => contact, :date => n.months.from_now} %>
+      <%= render :partial => 'membership_table_cell', :locals => {:installment => installment, :contact => contact, :membership => membership, :date => n.months.from_now} %>
     </td>
 <% end %>

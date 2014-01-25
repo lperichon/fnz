@@ -11,10 +11,11 @@
   	<%= render :partial => 'table_header' %>
   </thead>
   <tbody>
-  <% @business.contacts.all_students.each do |contact| %>
+  <% @contacts.each do |contact| %>
     <tr class="<%=contact.padma_status%>" data-contact-id=<%= contact.id %>>
-      <% if contact.membership && !contact.membership.closed? %>
-      	<%= render :partial => 'membership_table_row', :locals => {:contact => contact} %>
+      <% membership = contact.membership %>
+      <% if membership && !membership.closed? %>
+      	<%= render :partial => 'membership_table_row', :locals => {:contact => contact, :membership => contact.membership} %>
       <% else %>
       	<td colspan="12"><%= table_contact_membership_link(contact) %></td>
       <% end %>

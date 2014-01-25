@@ -1,2 +1,2 @@
-<p>Payment type: <%= memberships_payment_type_name(contact) %></p>
-<p>Next membership renewal: <%= contact.try(:membership).try(:ends_on).try(:strftime, "%B %Y") %></p>
+<p>Payment type: <%= memberships_payment_type_name(membership) %></p>
+<p>Next membership renewal: <%= membership.try(:ends_on).try(:strftime, "%B %Y") %></p>
