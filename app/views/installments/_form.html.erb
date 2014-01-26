@@ -4,7 +4,7 @@
     <%= f.input :value %>
 
     <h3>Transactions</h3>
-    <%= render :partial => 'nested_transactions_table', :locals => {:f => f} %>
+    <%= render :partial => 'nested_transactions_table', :locals => {:f => f, :transactions => @transactions} %>
 
     <%= f.button :submit, :class => "btn btn-primary" %>
 <% end %>

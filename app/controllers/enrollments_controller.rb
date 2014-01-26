@@ -2,13 +2,35 @@ class EnrollmentsController < UserApplicationController
   before_filter :get_context
 
   def show
+  	@contacts = @business.contacts.all_students
+  	@memberships = {}
+  	@contacts.each do |c|
+  		membership = c.membership
+  		@memberships.merge!({c => membership})
+  	end
   end
 
   def edit
+  	@contacts = @business.contacts.all_students
+  	@memberships = {}
+  	@contacts.each do |c|
+  		membership = c.membership
+  		@memberships.merge!({c => membership})
+  	end
+  	date = @enrollment.enrolled_on || Date.today
+  	@transactions = @business.transactions.credits.where {(transaction_at.gteq date - 1.month) & (transaction_at.lteq  date + 1.month)}
   end
 
   def new
     @enrollment = @membership.build_enrollment(params[:enrollment])
+    @contacts = @business.contacts.all_students
+  	@memberships = {}
+  	@contacts.each do |c|
+  		membership = c.membership
+  		@memberships.merge!({c => membership})
+  	end
+  	date = @enrollment.enrolled_on || Date.today
+  	@transactions = @business.transactions.credits.where {(transaction_at.gteq date - 1.month) & (transaction_at.lteq  date + 1.month)}
   end
 
   # POST /enrollments

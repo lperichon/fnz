@@ -28,6 +28,8 @@ class Transaction < ActiveRecord::Base
 
   scope :untagged, includes(:taggings).where("taggings.tag_id is null")
 
+  scope :credits, where(:type => "Credit")
+
   def update_balances
     source.update_balance
     target.update_balance if target.present?

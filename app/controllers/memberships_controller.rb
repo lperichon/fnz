@@ -6,11 +6,23 @@ class MembershipsController < UserApplicationController
     @overdue_installments = Installment.joins(:membership).where("memberships.business_id = #{@business.id}").overdue.incomplete
     @due_installments = Installment.joins(:membership).where("memberships.business_id = #{@business.id}").due.incomplete
     @stats = MembershipStats.new(:business => @business, :year => Date.today.year, :month => Date.today.month)
+    @contacts = @business.contacts.all_students
+  	@memberships = {}
+  	@contacts.each do |c|
+  		membership = c.membership
+  		@memberships.merge!({c => membership})
+  	end
   end
 
   def show
     @membership = @context.find(params[:id])
     @business = @membership.business
+    @contacts = @business.contacts.all_students
+  	@memberships = {}
+  	@contacts.each do |c|
+  		membership = c.membership
+  		@memberships.merge!({c => membership})
+  	end
   end
 
   def edit
@@ -20,6 +32,13 @@ class MembershipsController < UserApplicationController
 
   def new
     @membership = @context.new(params[:membership])
+    @contacts = @business.contacts.all_students
+  	@installments = {}
+  	@memberships = {}
+  	@contacts.each do |c|
+  		membership = c.membership
+  		@memberships.merge!({c => membership})
+  	end
   end
 
   # POST /accounts
@@ -71,7 +90,7 @@ class MembershipsController < UserApplicationController
   	@contacts.each do |c|
   		membership = c.membership
   		@memberships.merge!({c => membership})
-  		
+
   		installments = (membership && !membership.closed?) ? membership.installments.all : []
   		@installments.merge!({c => installments})
   	end

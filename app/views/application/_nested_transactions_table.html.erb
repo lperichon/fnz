@@ -25,7 +25,7 @@
     <h3>Link Transaction</h3>
   </div>
   <div class="modal-body">
-    <%= render :layout => "transactions_table", :locals => {:transactions => @business.transactions} do |transaction| %>
+    <%= render :layout => "transactions_table", :locals => {:transactions => transactions} do |transaction| %>
         <%= link_to content_tag(:i, "", :class => "icon-link"), "#", :class => "link-transaction-button" %>
     <% end %>
   </div>

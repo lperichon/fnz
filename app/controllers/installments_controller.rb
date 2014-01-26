@@ -7,14 +7,39 @@ class InstallmentsController < UserApplicationController
 
   def show
     @installment = @context.find(params[:id])
+    @contacts = @business.contacts.all_students
+  	@installments = {}
+  	@memberships = {}
+  	@contacts.each do |c|
+  		membership = c.membership
+  		@memberships.merge!({c => membership})
+  	end
   end
 
   def edit
     @installment = @context.find(params[:id])
+    @contacts = @business.contacts.all_students
+  	@installments = {}
+  	@memberships = {}
+  	@contacts.each do |c|
+  		membership = c.membership
+  		@memberships.merge!({c => membership})
+  	end
+  	date = @installment.due_on
+  	@transactions = @business.transactions.credits.where {(transaction_at.gteq(date - 1.month)) & (transaction_at.lteq(date + 1.month))}.order("transaction_at DESC")
   end
 
   def new
     @installment = @context.new(params[:installment])
+    @contacts = @business.contacts.all_students
+  	@installments = {}
+  	@memberships = {}
+  	@contacts.each do |c|
+  		membership = c.membership
+  		@memberships.merge!({c => membership})
+  	end
+  	date = @installment.due_on || Date.today
+  	@transactions = @business.transactions.credits.where {(transaction_at.gteq(date - 1.month)) & (transaction_at.lteq(date + 1.month))}.order("transaction_at DESC")
   end
 
   # POST /accounts
