@@ -32,7 +32,6 @@ class InstallmentsController < UserApplicationController
   def new
     @installment = @context.new(params[:installment])
     @contacts = @business.contacts.all_students
-  	@installments = {}
   	@memberships = {}
   	@contacts.each do |c|
   		membership = c.membership

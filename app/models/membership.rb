@@ -14,6 +14,8 @@ class Membership < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :contact_id, :business_id, :payment_type_id, :begins_on, :ends_on, :value, :closed_on, :vip, :external_id
 
+  after_save :update_contacts_current_membership
+
   def closed?
     closed_on.present?
   end
@@ -67,5 +69,11 @@ class Membership < ActiveRecord::Base
 
   def self.csv_header
     "id,nombre,ini,fin,alumno_id,vip,obs,forma_id,canceled,school_id,person_name,created_at,updated_at".split(',')
+  end
+
+  def update_contacts_current_membership
+  	if closed_on
+  		contact.update_attribute(:current_membership_id, nil)
+  	end
   end
 end

@@ -15,7 +15,41 @@
     <tr class="<%=contact.padma_status%>" data-contact-id=<%= contact.id %>>
       <% membership = @memberships[contact] %>
       <% if membership && !membership.closed? %>
-      	<%= render :partial => 'membership_table_row', :locals => {:contact => contact, :membership => membership} %>
+		<% monthly_iterator = [] %>
+		<% (1..5).each do |n| %>
+			<% date = (6-n).months.ago %>
+		    <% installment = installment_for(date , @installments[contact]) %>
+		    <% monthly_iterator << {:date => date, :installment => installment } %>    
+		<% end %>
+		<% date = Date.today %>
+		<% installment = installment_for(date, @installments[contact]) %>
+		<% monthly_iterator << {:date => date, :installment => installment } %>    
+		<% (1..6).each do |n| %>
+			<% date = n.months.from_now %>
+		    <% installment = installment_for(date , @installments[contact]) %>
+		    <% monthly_iterator << {:date => date, :installment => installment } %>    
+		<% end %>
+
+		<% monthly_iterator.each do |monthly_values| %>
+			<% installment = monthly_values[:installment] %>
+			<% date = monthly_values[:date] %>
+			<td class="<%= 'current' if(date == Date.today) %> <%= installment.try(:status) %>">
+		    	<div class="action-link">
+					<% if installment && installment.status.in?([:pending, :overdue, :incomplete]) %>
+					  <%= link_to "Mark as paid", new_business_membership_installment_payment_path(@business, membership, installment), :remote => true %>
+					<% else  %>
+					  <%= link_to "Create", new_business_membership_installment_path(@business, membership, :installment => {:due_on => date.end_of_month.to_date, :value => membership.value}) %>
+					<% end %>
+				</div>
+				<div class="installment-value">
+					<% if installment %>
+					  <%= number_to_currency(installment.try(:value)) %> <%= content_tag(:i, "", :class => "icon-installment-#{installment.status}") %>
+					<% elsif membership && date >= Date.today.beginning_of_month && date < membership.ends_on %>
+					  <%= number_to_currency(membership.try(:value)) %>
+					<% end %>
+				</div>
+			</td>
+		<% end %>
       <% else %>
       	<td colspan="12"><%= table_contact_membership_link(contact, membership) %></td>
       <% end %>

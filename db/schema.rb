@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131221160946) do
+ActiveRecord::Schema.define(:version => 20140127134957) do
 
   create_table "accounts", :force => true do |t|
     t.string  "name",        :default => "",  :null => false
@@ -42,27 +42,28 @@ ActiveRecord::Schema.define(:version => 20131221160946) do
   end
 
   create_table "contacts", :force => true do |t|
-    t.string    "name",          :default => "Unknown", :null => false
-    t.integer   "business_id"
-    t.string    "padma_id"
-    t.string    "padma_status"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.string    "padma_teacher"
+    t.string   "name",                  :default => "Unknown", :null => false
+    t.integer  "business_id"
+    t.string   "padma_id"
+    t.string   "padma_status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "padma_teacher"
+    t.integer  "current_membership_id"
   end
 
   create_table "delayed_jobs", :force => true do |t|
-    t.integer  "priority",   :default => 0, :null => false
-    t.integer  "attempts",   :default => 0, :null => false
-    t.text     "handler",                   :null => false
-    t.text     "last_error"
-    t.datetime "run_at"
-    t.datetime "locked_at"
-    t.datetime "failed_at"
-    t.string   "locked_by"
-    t.string   "queue"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.integer   "priority",   :default => 0, :null => false
+    t.integer   "attempts",   :default => 0, :null => false
+    t.text      "handler",                   :null => false
+    t.text      "last_error"
+    t.timestamp "run_at"
+    t.timestamp "locked_at"
+    t.timestamp "failed_at"
+    t.string    "locked_by"
+    t.string    "queue"
+    t.timestamp "created_at",                :null => false
+    t.timestamp "updated_at",                :null => false
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
@@ -146,14 +147,14 @@ ActiveRecord::Schema.define(:version => 20131221160946) do
   end
 
   create_table "products", :force => true do |t|
-    t.string  "name",                                         :default => "Unknown", :null => false
-    t.decimal "price",                                        :default => 0.0,       :null => false
+    t.string  "name",           :default => "Unknown", :null => false
+    t.decimal "price",          :default => 0.0,       :null => false
     t.string  "price_currency"
     t.integer "business_id"
-    t.decimal "cost",           :precision => 8, :scale => 2, :default => 0.0,       :null => false
+    t.decimal "cost",           :default => 0.0,       :null => false
     t.string  "cost_currency"
-    t.integer "stock",                                        :default => 0
-    t.boolean "hidden",                                       :default => false
+    t.integer "stock",          :default => 0
+    t.boolean "hidden",         :default => false
     t.integer "external_id"
   end
 
