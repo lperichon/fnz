@@ -5,7 +5,7 @@ describe InstallmentImport do
   before(:each) do
     @business = FactoryGirl.create(:school)
     @attr = {
-      :upload => Rack::Test::UploadedFile.new('spec/fixtures/empty_tickets.csv', 'text/csv'),
+      :upload => Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/belgrano_tickets.csv'), 'text/csv'),
       :business_id => @business.id
     }
     membership = FactoryGirl.create(:membership, :business => @business)
@@ -17,7 +17,6 @@ describe InstallmentImport do
 
   it "should process a csv file" do
     import = InstallmentImport.create(@attr)
-    import.upload.stub(:path).and_return("#{Rails.root}/spec/fixtures/belgrano_tickets.csv")
     expect {
       import.process
     }.to change(Installment, :count).by(6254)

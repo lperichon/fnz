@@ -20,7 +20,7 @@ class Import < ActiveRecord::Base
     self.update_attribute(:status, :working)
     n, errs = 0, []
 
-    path = if Rails.env == "development" || Rails.env == "testing"
+    path = if Rails.env == "development" || Rails.env == "test"
     	upload.path
     else
     	upload.url

@@ -5,7 +5,7 @@ describe Import do
   before(:each) do
     @business = FactoryGirl.create(:business)
     @attr = {
-      :upload => Rack::Test::UploadedFile.new('spec/fixtures/empty_productos.csv', 'text/csv'),
+      :upload => Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/belgrano_productos.csv'), 'text/csv'),
       :business_id => @business.id
     }
 
@@ -14,7 +14,6 @@ describe Import do
 
   it "should process a csv file" do
     import = ProductImport.create(@attr)
-    import.upload.stub(:path).and_return("#{Rails.root}/spec/fixtures/belgrano_productos.csv")
     expect {
       import.process
     }.to change(Product, :count).by(154)
