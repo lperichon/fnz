@@ -43,7 +43,7 @@ class Sale < ActiveRecord::Base
     agent_id = row[2].gsub!(' ','')
     agent = business.agents.find_by_padma_id(agent_id) # some ids have spaces between
     unless agent
-      agent = business.agents.create(:padma_id => agent_id)
+      agent = business.agents.create(:padma_id => agent_id, :name => agent_id)
     end
     padma_contact = PadmaContact.find_by_kshema_id(row[3])
     contact = Contact.find_by_padma_id(padma_contact.id)

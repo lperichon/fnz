@@ -26,7 +26,7 @@ describe MembershipsController do
     it "assigns all memberships as @memberships" do
       membership = @business.memberships.create! valid_attributes
       get :index, {:business_id => @business.to_param}
-      assigns(:memberships).should eq([membership])
+      assigns(:memberships).should eq({@contact => membership})
     end
   end
 

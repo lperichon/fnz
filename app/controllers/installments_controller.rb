@@ -8,10 +8,9 @@ class InstallmentsController < UserApplicationController
   def show
     @installment = @context.find(params[:id])
     @contacts = @business.contacts.all_students
-  	@installments = {}
   	@memberships = {}
   	@contacts.each do |c|
-  		membership = c.membership
+  		membership = c.current_membership
   		@memberships.merge!({c => membership})
   	end
   end
@@ -19,10 +18,9 @@ class InstallmentsController < UserApplicationController
   def edit
     @installment = @context.find(params[:id])
     @contacts = @business.contacts.all_students
-  	@installments = {}
   	@memberships = {}
   	@contacts.each do |c|
-  		membership = c.membership
+  		membership = c.current_membership
   		@memberships.merge!({c => membership})
   	end
   	date = @installment.due_on
@@ -34,7 +32,7 @@ class InstallmentsController < UserApplicationController
     @contacts = @business.contacts.all_students
   	@memberships = {}
   	@contacts.each do |c|
-  		membership = c.membership
+  		membership = c.current_membership
   		@memberships.merge!({c => membership})
   	end
   	date = @installment.due_on || Date.today

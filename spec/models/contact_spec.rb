@@ -23,11 +23,4 @@ describe Contact do
     no_business_contact = Contact.new(@attr.merge(:business_id => nil))
     no_business_contact.should_not be_valid
   end
-
-  it "should not consider closed membership" do
-    membership = FactoryGirl.create(:membership, :business => @business,  :closed_on => Date.today)
-    contact = membership.contact
-    contact.membership.should be_nil
-  end
-
 end

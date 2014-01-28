@@ -5,7 +5,7 @@ class EnrollmentsController < UserApplicationController
   	@contacts = @business.contacts.all_students
   	@memberships = {}
   	@contacts.each do |c|
-  		membership = c.membership
+  		membership = c.current_membership
   		@memberships.merge!({c => membership})
   	end
   end
@@ -14,7 +14,7 @@ class EnrollmentsController < UserApplicationController
   	@contacts = @business.contacts.all_students
   	@memberships = {}
   	@contacts.each do |c|
-  		membership = c.membership
+  		membership = c.current_membership
   		@memberships.merge!({c => membership})
   	end
   	date = @enrollment.enrolled_on || Date.today
@@ -26,7 +26,7 @@ class EnrollmentsController < UserApplicationController
     @contacts = @business.contacts.all_students
   	@memberships = {}
   	@contacts.each do |c|
-  		membership = c.membership
+  		membership = c.current_membership
   		@memberships.merge!({c => membership})
   	end
   	date = @enrollment.enrolled_on || Date.today

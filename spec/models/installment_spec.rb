@@ -39,9 +39,9 @@ describe Installment do
   end
 
 
-  describe "#overdue" do
+  describe "#due" do
     before do
-      @installment = FactoryGirl.create(:installment, :membership => @membership, :agent => @agent)
+      @installment = FactoryGirl.create(:installment, :membership => @membership, :agent => @agent, :due_on => Date.today.end_of_month)
     end
     it "should be due" do
       Installment.due.should include(@installment)
@@ -50,7 +50,7 @@ describe Installment do
 
   describe "#overdue" do
     before do
-      @installment = FactoryGirl.create(:installment, :membership => @membership, :agent => @agent, :due_on => 1.week.ago)
+      @installment = FactoryGirl.create(:installment, :membership => @membership, :agent => @agent, :due_on => 1.month.ago)
     end
     it "should be overdue" do
       Installment.overdue.should include(@installment)

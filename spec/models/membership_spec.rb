@@ -54,4 +54,24 @@ describe Membership do
     date_conflict_membership = Membership.new(@attr.merge(:ends_on => 10.years.ago))
     date_conflict_membership.should_not be_valid
   end
+
+  it "should set the contacts current_membership after create" do
+  	@membership = Membership.create(@attr)
+  	@contact.reload
+  	@contact.current_membership.should eq(@membership)
+  end
+
+
+  describe "closing a membership" do
+  	before do
+  		@membership = Membership.create(@attr)
+  		@membership.closed_on = Date.today
+  		@membership.save
+  		@contact.reload
+  	end
+
+  	it "should set the contacts current_membership to nil" do
+  		@contact.current_membership.should be_nil
+  	end
+  end
 end

@@ -53,7 +53,7 @@ class Installment < ActiveRecord::Base
     agent_id = membership.contact.padma_teacher
     agent = business.agents.find_by_padma_id(agent_id)
     unless agent
-      agent = business.agents.create(:padma_id => agent_id)
+      agent = business.agents.create(:padma_id => agent_id, :name => agent_id)
     end
 
     installment.attributes = {
