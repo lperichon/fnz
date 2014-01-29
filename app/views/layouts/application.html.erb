@@ -30,6 +30,11 @@
             </div>
           </div>
           <div class="row">
+            <div class="span12">
+		  		<%= yield(:top) %>
+		  	</div>
+          </div>
+          <div class="row">
             <div class="span3">
               <%= yield :sidebar %>
             </div>
@@ -37,6 +42,7 @@
               <%= yield %>
             </div>
           </div>
+		  <%= yield(:bottom) %>
           <footer>
           </footer>
         </div>

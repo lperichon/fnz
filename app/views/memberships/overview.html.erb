@@ -6,6 +6,10 @@
     <%= render :partial => 'secondary_navigation' %>
 <% end %>
 
+<% content_for :top do %>
+    <%= paginate @contacts, :theme => 'twitter-bootstrap' %>
+<% end %>
+
 <table class="memberships table table-striped table-hover table-condensed table-bordered">
   <thead>
   	<%= render :partial => 'table_header' %>

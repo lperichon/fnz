@@ -82,7 +82,7 @@ class MembershipsController < UserApplicationController
   end
 
   def overview
-  	@contacts = @business.contacts.all_students
+  	@contacts = @business.contacts.all_students.page(params[:page]).per(100)
   	@installments = {}
   	@memberships = {}
   	@contacts.each do |c|
