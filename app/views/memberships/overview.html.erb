@@ -7,7 +7,7 @@
 <% end %>
 
 <% content_for :top do %>
-    <%= paginate @contacts %>
+    <%= paginate @contacts, :theme => 'twitter-bootstrap' %>
 <% end %>
 
 <table class="memberships table table-striped table-hover table-condensed table-bordered">
