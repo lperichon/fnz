@@ -44,9 +44,6 @@ GEM
     bcrypt-ruby (3.1.2)
     bootstrap-datepicker-rails (1.1.1.11)
       railties (>= 3.0)
-    bootstrap-kaminari-views (0.0.3)
-      kaminari (>= 0.13)
-      rails (>= 3.1)
     bootstrap-sass (2.0.4.0)
     builder (3.0.4)
     cancan (1.6.10)
@@ -279,7 +276,6 @@ DEPENDENCIES
   awesome_nested_fields (= 0.6.0)
   aws-sdk
   bootstrap-datepicker-rails (~> 1.1.1.11)
-  bootstrap-kaminari-views
   bootstrap-sass (= 2.0.4.0)
   cancan (>= 1.6.8)
   client_side_validations
