@@ -60,8 +60,8 @@ class Membership < ActiveRecord::Base
         :external_id => row[0].to_i
     }
 
-    if row[8] == 'true' # if cancelled
-      membership.closed_on = membership.ends_on # Kshêma doesnt store cancellation date
+    unless row[8].blank? # if cancelled
+      membership.closed_on = Date.parse(row[8]) # Kshêma doesnt store cancellation date
     end
 
     return membership
