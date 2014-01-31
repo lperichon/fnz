@@ -6,7 +6,7 @@
 <ul class="tags">
   <% @tags.each do |tag| %>
     <li>
-      <%= link_to tag.name, business_tag_path(@business, tag) %>
+      <%= link_to tag.name, business_tag_path(@business, tag) %> <%= link_to content_tag(:i, "", :class => "icon-remove"), business_tag_path(@business, tag), :confirm => 'Are you sure you want to delete this item?', :method => 'delete' %>
     </li>
   <% end %>
 </ul>

@@ -4,7 +4,7 @@
 
 <h2>Edit Tag</h2>
 
-<%= render :partial => 'form' %>
+<%= render :partial => 'form', :locals => {:form_url => business_tag_path(@business, @tag)} %>
 
 <%= link_to 'Show', business_tag_path(@business,@tag) %> |
 <%= link_to 'Back', business_tags_path(@business) %>
