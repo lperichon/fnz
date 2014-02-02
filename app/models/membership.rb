@@ -16,6 +16,8 @@ class Membership < ActiveRecord::Base
 
   after_save :update_contacts_current_membership
 
+  include BelongsToPadmaContact
+
   def closed?
     closed_on.present?
   end
