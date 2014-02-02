@@ -11,10 +11,12 @@ class AgentsController < UserApplicationController
 
   def edit
     @agent = @business.agents.find(params[:id])
+    @padma_users = @business.try(:padma).try(:users) || []
   end
 
   def new
     @agent = @business.agents.new(params[:agent])
+    @padma_users = @business.try(:padma).try(:users) || []
   end
 
   # POST /agents
@@ -27,7 +29,10 @@ class AgentsController < UserApplicationController
         format.html { redirect_to business_agent_path(@business, @agent), notice: 'Agent was successfully created.' }
         format.json { render json: @agent, status: :created, location: @agent }
       else
-        format.html { render action: "new" }
+        format.html {
+        	@padma_users = @business.try(:padma).try(:users) 
+        	render action: "new" 
+        }
         format.json { render json: @agent.errors, status: :unprocessable_entity }
       end
     end
