@@ -82,5 +82,7 @@ module Fnz
 
     # Font assets
     config.assets.paths << "#{Rails.root}/app/assets/fonts"
+
+    config.i18n.enforce_available_locales = true
   end
 end
