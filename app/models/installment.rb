@@ -18,9 +18,7 @@ class Installment < ActiveRecord::Base
   accepts_nested_attributes_for :installment_transactions, :reject_if => proc { |s| s['transaction_id'].blank? }
 
   def pending?
-  	false
-    # comment out this state due to performance
-    # !transactions.empty? && transactions.any? { |t| t.pending? }
+    !transactions.empty? && transactions.any? { |t| t.pending? }
   end
 
   def complete?
