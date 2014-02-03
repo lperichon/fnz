@@ -27,6 +27,12 @@ class MembershipsController < UserApplicationController
   def edit
     @membership = @context.find(params[:id])
     @business = @membership.business
+	@contacts = @business.contacts.all_students
+  	@memberships = {}
+    @contacts.each do |c|
+  		membership = c.current_membership
+  		@memberships.merge!({c => membership})
+  	end
   end
 
   def new
