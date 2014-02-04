@@ -49,4 +49,6 @@ RSpec.configure do |config|
     PadmaAccount.any_instance.stub(:admin).and_return(PadmaUser.new(:username => "homer.simpson", :id => "homer.simpson", :email => "homer@simpsons.com"))
     PadmaAccount.any_instance.stub(:users).and_return([PadmaUser.new(:id => "bart.simpson", :email => "bart@simpsons.com"), PadmaUser.new(:id => "lisa.simpson", :email => "lisa@simpsons.com") ])
   end
+
+  config.fail_fast = true
 end

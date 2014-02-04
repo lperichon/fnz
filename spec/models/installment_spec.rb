@@ -65,7 +65,7 @@ describe Installment do
       @installment.balance.should eq(0)
     end
 
-    describe "when there is one completed transaction" do
+    describe "when there is one comple@ted transaction" do
       before do
         source_account = FactoryGirl.create(:account, :business => @membership.business)
         @transaction = FactoryGirl.create(:transaction, :type => "Credit", :business => @membership.business, :source => source_account, :creator => @membership.business.owner)
@@ -89,5 +89,45 @@ describe Installment do
         end
       end
     end
+  end
+
+  describe "#build_from_csv" do
+  	describe "with a paid ticket" do
+  		before do
+  			row = ['50025','175.0','2009-04-01','true','50276','2009-04-25','','excel','2009-04-25','','','1','50002']
+  			@business = FactoryGirl.create(:school)
+  			@membership = FactoryGirl.create(:membership, :business => @business, :external_id => row[4].to_i)
+  			@installment = Installment.build_from_csv(@business, row)
+  		end
+
+  		it "should create a valid installment" do
+  			@installment.should be_valid
+  		end
+
+  		it "should create a payment transaction" do
+  			expect {
+				@installment.save		       
+		      }.to change{Transaction.count}.by(1)
+  		end
+  	end
+
+  	describe "with an unpaid ticket" do
+  		before do
+  			row = ['50190','180.0','2009-05-10','false','50360','','','','','','','1','50002']
+  			@business = FactoryGirl.create(:school)
+  			@membership = FactoryGirl.create(:membership, :business => @business, :external_id => row[4].to_i)
+  			@installment = Installment.build_from_csv(@business, row)
+  		end
+
+  		it "should create a valid installment" do
+  			@installment.should be_valid
+  		end
+
+  		it "should not create a payment transaction" do
+  			expect {
+				@installment.save		       
+		    }.to_not change{Transaction.count}.by(0)
+  		end
+  	end
   end
 end

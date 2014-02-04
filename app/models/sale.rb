@@ -21,7 +21,6 @@ class Sale < ActiveRecord::Base
   include BelongsToPadmaContact
 
   def self.build_from_csv(business, row)
-    sale = Sale.new
 
     product = business.products.find_by_external_id(row[1].to_i)
     agent_id = row[2].gsub!(' ','')
@@ -33,19 +32,39 @@ class Sale < ActiveRecord::Base
     padma_contact = PadmaContact.find_by_kshema_id(row[3])
     contact = Contact.find_by_padma_id(padma_contact.id)
 
-    sale.attributes = {
+    sale_date = DateTime.parse(row[5])
+
+    sale_attributes = {
         :business_id => business.id,
         :agent_id => agent.id,
-        :sold_on => DateTime.parse(row[5])
+        :sold_on => sale_date
     }
 
     if contact
-      sale.contact = contact
+      sale_attributes[:contact_id] = contact.id
     end
 
     if product
-      sale.product = product
+      sale_attributes[:product_id] = product.id
     end
+
+    unless row[10].blank? || row[8].to_i <= 0
+    	#paid installment, create correspondig transaction
+    	transaction_date = row[9].present? ? Date.parse(row[9]) : sale_date
+    	transaction_attrs = {
+    		:transaction_at => transaction_date,
+    		:amount => row[8].to_f/100.0,
+    		:source_id => business.accounts.first.id,
+    		:business_id => business.id,
+    		:description => "Payment - #{contact.try(:name)} - #{product.try(:name)}",
+      		:type => "Credit",
+      		:creator_id => business.owner_id
+      	}
+
+      	sale_attributes[:transactions_attributes] = [transaction_attrs]
+    end
+
+    sale = Sale.new(sale_attributes)
 
     return sale
   end

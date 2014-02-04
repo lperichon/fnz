@@ -42,7 +42,6 @@ class Installment < ActiveRecord::Base
   end
 
   def self.build_from_csv(business, row)
-    installment = Installment.new
 
     membership = business.memberships.find_by_external_id(row[4].to_i)
 
@@ -55,13 +54,32 @@ class Installment < ActiveRecord::Base
       agent = business.agents.create(:padma_id => agent_id, :name => agent_name)
     end
 
-    installment.attributes = {
-        :due_on => Date.parse(row[2]),
+    due_on_date = Date.parse(row[2])
+
+    installment_attributes = {
+        :due_on => due_on_date,
         :value => row[1].to_f,
         :membership_id => membership.id,
         :agent_id => agent.id
     }
 
+    unless row[3].blank?
+    	#paid installment, create correspondig transaction
+    	transaction_date = row[5].present? ? Date.parse(row[5]) : due_on_date
+    	transaction_attrs = {
+    		:transaction_at => transaction_date,
+    		:amount => row[1].to_f,
+    		:source_id => business.accounts.first.id,
+    		:business_id => business.id,
+    		:description => "Payment - #{membership.contact.name} - #{due_on_date.strftime('%B %Y')}",
+      		:type => "Credit",
+      		:creator_id => business.owner_id
+      	}
+
+      	installment_attributes[:transactions_attributes] = [transaction_attrs]
+    end	
+    
+    installment = Installment.new(installment_attributes)
     return installment
   end
 
