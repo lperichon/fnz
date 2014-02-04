@@ -63,7 +63,7 @@ class Installment < ActiveRecord::Base
         :agent_id => agent.id
     }
 
-    unless row[3].blank?
+    unless row[3].blank? || row[3] == "false"
     	#paid installment, create correspondig transaction
     	transaction_date = row[5].present? ? Date.parse(row[5]) : due_on_date
     	transaction_attrs = {

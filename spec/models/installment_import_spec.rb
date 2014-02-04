@@ -19,9 +19,17 @@ describe InstallmentImport do
     import = InstallmentImport.create(@attr)
     expect {
       import.process
-    }.to change(Installment, :count).by(6254)
+    }.to change(Installment, :count).by(237)
     import.status.should == :finished
   end
 
+
+  it "creates transactions" do
+    import = InstallmentImport.create(@attr)
+    expect {
+      import.process
+    }.to change(Transaction, :count).by(127)
+    import.status.should == :finished
+  end
 
 end

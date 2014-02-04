@@ -67,7 +67,7 @@ describe Sale do
   		it "should not create a payment transaction" do
   			expect {
 				@sale.save		       
-		    }.to_not change{Transaction.count}.by(0)
+		    }.to_not change{Transaction.count}
   		end
   	end
   end

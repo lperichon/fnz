@@ -48,7 +48,7 @@ class Sale < ActiveRecord::Base
       sale_attributes[:product_id] = product.id
     end
 
-    unless row[10].blank? || row[8].to_i <= 0
+    unless row[10].blank? || row[10] == 'false' || row[8].to_i <= 0
     	#paid installment, create correspondig transaction
     	transaction_date = row[9].present? ? Date.parse(row[9]) : sale_date
     	transaction_attrs = {
