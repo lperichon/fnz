@@ -25,7 +25,7 @@ class PaymentTypesController < UserApplicationController
     respond_to do |format|
       if @payment_type.save
         format.html { redirect_to business_payment_types_path(@business), notice: 'Payment type was successfully created.' }
-        format.json { render json: @payment_type, status: :created, location: @payment_type }
+        format.json { render json: @payment_type, status: :created, location: business_payment_type_path(@business,@payment_type) }
       else
         format.html { render action: "new" }
         format.json { render json: @payment_type.errors, status: :unprocessable_entity }

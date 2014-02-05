@@ -3,8 +3,8 @@ $(document).ready ->
     no_results_text: "No results matched"
     create_option: (name) ->
       chosen = this
-      $.post "/businesses/" + $("#membership_contact_id").attr('data-business-id') + "/contacts.json",
-        contact:
+      $.post "/businesses/" + $("#membership_payment_type_id").attr('data-business-id') + "/payment_types.json",
+        payment_type:
           name: name
       , (data) ->
         chosen.append_option
