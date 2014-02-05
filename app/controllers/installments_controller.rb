@@ -74,7 +74,7 @@ class InstallmentsController < UserApplicationController
     @installment.destroy
 
     respond_to do |format|
-      format.html { redirect_to business_membership_installments_url(@business, @membership) }
+      format.html { redirect_to business_membership_url(@business, @membership) }
     end
   end
 
