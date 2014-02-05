@@ -18,6 +18,6 @@ class PadmaContactsSynchronizer
 	        :padma_status => padma_contact.status,
 	        :padma_teacher => padma_contact.global_teacher_username)
     end
-    business.update_attribute(:synchronized_at, Date.today)
+    business.update_attribute(:synchronized_at, DateTime.now)
   end
 end
