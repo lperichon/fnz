@@ -8,10 +8,10 @@
 <h3>Membership</h3>
 <ul>
 <% @contact.memberships.each do |membership| %>
-  <p><%= @contact.membership.begins_on %> - <%= @contact.membership.ends_on %> <%= link_to "Show", business_membership_path(@business, @contact.membership) %></p>
+  <p><%= membership.begins_on %> - <%= membership.ends_on %> <%= link_to "Show", business_membership_path(@business, membership) %></p>
 <% end %>
 </ul>
-<% unless @contact.membership.present? %>
+<% unless @contact.current_membership.present? %>
   <%= link_to "Assign membership", new_business_membership_path(@business, :membership => {:contact_id => @contact.membership}) %>
 <% end %>
 
