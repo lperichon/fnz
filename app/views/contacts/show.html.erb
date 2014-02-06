@@ -5,10 +5,20 @@
 <h2>Contact</h2>
 <p>Name: <%= @contact.name %></p>
 
-<h3>Membership</h3>
+<h3>Memberships</h3>
 <ul>
 <% @contact.memberships.each do |membership| %>
-  <p><%= membership.begins_on %> - <%= membership.ends_on %> <%= link_to "Show", business_membership_path(@business, membership) %></p>
+  <p><%= membership.begins_on %> - <%= membership.ends_on %> <%= content_tag(:span, "Current", :class => "label label-primary") if membership == @contact.current_membership %> <%= link_to "Show", business_membership_path(@business, membership) %></p>
+<% end %>
+</ul>
+<% unless @contact.current_membership.present? %>
+  <%= link_to "Assign membership", new_business_membership_path(@business, :membership => {:contact_id => @contact.membership}) %>
+<% end %>
+
+<h3>Sales</h3>
+<ul>
+<% @contact.sales.each do |sale| %>
+  <p><%= sale.sold_on %> - <%= sale.try(:product).try(:name) %> <%= link_to "Show", business_sale_path(@business, sale) %></p>
 <% end %>
 </ul>
 <% unless @contact.current_membership.present? %>
