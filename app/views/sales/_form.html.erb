@@ -1,5 +1,9 @@
 <%= simple_form_for(@sale, :url => form_url, :validate => true, :html => {:class => "form-horizontal"}) do |f| %>
-    <%= f.input :padma_contact_id, :as => :padma_contact %>
+	<% if @business.padma_id.blank? %>
+    	<%= f.association :contact, :as => :select, :collection => @business.contacts, :input_html => {'data-business-id' => @business.id, 'data-placeholder' => 'Please select contact',:class => "chosen"} %>
+    <% else %>
+        <%= f.input :padma_contact_id, :as => :padma_contact %>
+    <% end %>
 
     <%= f.association :agent, :as => :select, :collection => @business.agents, :input_html => {'data-placeholder' => 'Please select agent',:class => "chosen"} %>
 
@@ -45,7 +49,7 @@
     account_name: "<%= current_user.businesses.find(params[:business_id]).padma_id %>",
     only_name: true,
     full_text: term,
-    app_key: "844d8c2d20a9cf9e97086df94f01e7bdd3d9afaa716055315706f2e31f40dc097c632af53e74ce3d5a1f23811b4e32e7a1e2b7fa5c128c8b28f1fc6e5a392015"
+    app_key: "<%= ENV['contacts_key'] %>"
     };
     },
     results: function (data, page) {
