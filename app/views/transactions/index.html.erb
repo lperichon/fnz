@@ -15,4 +15,5 @@
 <%= render :layout => 'transactions_table', :locals => {:transactions => @transactions} do |transaction| %>
   <%= link_to content_tag(:i, "", :class => "icon-edit"), edit_business_transaction_path(transaction.business, transaction), :remote => true %>
   <%= link_to content_tag(:i, "", :class => "icon-trash"), business_transaction_path(transaction.business, transaction), :confirm => 'Are you sure you want to delete this item?', :method => 'delete' %>
+  <%= link_to content_tag(:i, "", :class => "icon-link"), "#", :class => "link-transaction", 'data-html' => true, 'data-content' => "#{render(:partial => 'link_popover', :locals => {:transaction => transaction})}", 'data-placement' => "bottom", 'data-trigger' => 'click', 'data-template' => '<div class="popover"><div class="arrow"></div><div class="popover-inner"><div class="popover-content"><p></p></div></div></div>' %>
 <% end %>

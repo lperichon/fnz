@@ -31,3 +31,7 @@ $(document).ready ->
     id = tr.attr('data-id')
     tr.children('td:last').html('<a href="#" class="remove-unsaved-nested-transaction"><i class="icon-remove"></i></a><input id="' + parent_type + '_transactions_attributes_' + random + '_transaction_id" name="' + parent_type + '[' + parent_type + '_transactions_attributes][' + random + '][transaction_id]" value="' + id + '" type="hidden">')
     $(".nested.transactions.table").append(tr)
+
+  $(".link-transaction").popover().click (e) -> 
+    e.preventDefault() 
+    $(this).focus()
