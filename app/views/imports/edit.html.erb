@@ -5,6 +5,5 @@
 <h2>Edit Import</h2>
 
 <%= render :partial => 'form', :locals => {:form_url => business_import_url(@business, @import)} %>
-<%= link_to "Process", process_csv_business_import_path(@business, @import), :class => "btn", :method => :put %>
 <%= link_to 'Show', business_import_path(@business,@import) %> |
 <%= link_to 'Back', business_imports_path(@business) %>
