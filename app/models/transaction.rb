@@ -58,6 +58,12 @@ class Transaction < ActiveRecord::Base
     transaction = Transaction.new
     amount = BigDecimal.new(row[2])
     type = amount > 0 ? "Credit" : "Debit"
+
+    state = row[5]
+    unless state.blank?
+    	state = state.downcase
+    end
+
     transaction.attributes = {
         :business_id => business.id,
         :type => type,
@@ -65,7 +71,8 @@ class Transaction < ActiveRecord::Base
         :transaction_at => row[1],
         :amount => amount.abs(),
         :description => row[3],
-        :creator_id => business.owner_id
+        :creator_id => business.owner_id,
+        :state => ['created', 'pending', 'reconciled'].include?(state) ? state : 'created'
     }
 
     tags_str = row[4]
