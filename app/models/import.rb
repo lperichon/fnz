@@ -15,7 +15,7 @@ class Import < ActiveRecord::Base
   VALID_STATUS = [:ready, :working, :finished]
 
   def process
-    return unless status.to_sym == :ready
+    return unless status.to_sym.in? [:ready, :queued]
 
     self.update_attribute(:status, :working)
     n, errs = 0, []

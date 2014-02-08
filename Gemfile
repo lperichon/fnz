@@ -47,3 +47,4 @@ gem 'delayed_job_active_record' # must be declared after 'protected_attributes' 
 gem "workless", "~> 1.1.3"
 gem "kaminari"
 gem 'bootstrap-kaminari-views'
+gem 'daemons', :group => [:development]

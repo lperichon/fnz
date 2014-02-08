@@ -66,7 +66,7 @@ class ImportsController < UserApplicationController
     @import = @business.imports.find(params[:id])
 
     respond_to do |format|
-      if @import.delay.process
+      if @import.status.to_sym == :ready && @import.delay.process && @import.update_attribute(:status, :queued)
         format.html { redirect_to business_import_path(@business, @import), notice: 'Import was successfully queued. Please refresh to see results.' }
       else
         format.html { redirect_to business_import_path(@business, @import), notice: 'Import process failed.' }
