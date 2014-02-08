@@ -1,6 +1,6 @@
 $(document).ready ->
   $(document.body).on "focus", '.datepicker_input', (event) ->
-    $(this).datepicker({"format": "yyyy-mm-dd", "weekStart": 1, "autoclose": true});
+    $(this).datepicker({"format": "yyyy-mm-dd", "weekStart": 1, "autoclose": true, "todayBtn": "linked"});
   $(document.body).on "focus", '.timepicker_input', (event) ->
     $(this).timepicker();
 
