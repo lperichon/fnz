@@ -147,10 +147,10 @@ describe InstallmentsController do
       }.to change(Installment, :count).by(-1)
     end
 
-    it "redirects to the installments list" do
+    it "redirects to the membership page" do
       installment = @membership.installments.create! valid_attributes
       delete :destroy, {:business_id => @business.to_param, :membership_id => @membership.to_param, :id => installment.to_param}
-      response.should redirect_to(business_membership_installments_url(@business, @membership))
+      response.should redirect_to(business_membership_url(@business, @membership))
     end
   end
 end

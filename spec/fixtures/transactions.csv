@@ -1,2 +1,2 @@
-Account, Date, Amount, Description
-test,1983-03-03, 2.3, Testing
+Account, Date, Amount, Description, Tags, Status
+test,1983-03-03, 2.3, Testing, tag, Pending
