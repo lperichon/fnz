@@ -3,7 +3,9 @@
 
     <%= f.input :name %>
 
-	<%= f.input :padma_id %>
+	<%= f.input :padma_id if @business.is_a? School %>
+
+	<%= f.input :send_weekly_reports %>
 
     <%= f.button :submit, :class => "btn btn-primary" %>
 <% end %>
