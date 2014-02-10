@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '1.9.3'
 gem 'rails', '3.2.8'
 gem 'sqlite3', :group => [:development, :test]
 gem 'pg', :group => [:staging, :production]
@@ -49,3 +50,4 @@ gem "kaminari"
 gem 'bootstrap-kaminari-views'
 gem 'daemons', :group => [:development]
 gem 'mandrill_mailer'
+gem 'httparty'
