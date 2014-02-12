@@ -1,3 +1,12 @@
+GIT
+  remote: git://github.com/lperichon/mandrill_mailer.git
+  revision: b54cfb83baf9f113cca28fa59682a0ee9572e9d4
+  specs:
+    mandrill_mailer (0.4.3)
+      actionpack
+      activesupport
+      mandrill-api (~> 1.0.9)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -135,10 +144,6 @@ GEM
     mandrill-api (1.0.51)
       excon (>= 0.16.0, < 1.0)
       json (>= 1.7.7, < 2.0)
-    mandrill_mailer (0.4.3)
-      actionpack
-      activesupport
-      mandrill-api (~> 1.0.9)
     messaging_client (0.0.3)
       logical_model (~> 0.5.0)
       railties (>= 3.1)
@@ -310,7 +315,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   launchy (>= 2.1.2)
-  mandrill_mailer
+  mandrill_mailer!
   messaging_client (~> 0.0.2)
   newrelic_rpm
   omniauth (= 1.1.1)
