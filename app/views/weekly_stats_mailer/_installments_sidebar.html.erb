@@ -1,0 +1,6 @@
+<ul style="padding: 0;">
+<% contacts.each do |contact| %>
+	<% installment = contact.installment_for(Date.today) %>
+	<li><%= contact.name %> - <%= installment.present? ? "$#{installment.value}" : "!" %></li>
+<% end %>
+</ul>
