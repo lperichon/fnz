@@ -31,6 +31,9 @@ end
 
 desc "This task is called by the Heroku scheduler add-on it sends the weekly stats email"
 task :deliver_weekly_stats => :environment do
+  # only send these mails on sunday
+  return unless Date.today.sunday?
+
   School.where(:send_weekly_reports => true).each do |business|
     puts "Sending weekly stats mail for #{business.name}..."
     WeeklyStatsMailer.stats(business).deliver
