@@ -1,6 +1,14 @@
-<ul style="padding: 0;">
+<ul style="padding: 0; list-style-type: none;">
 <% contacts.each do |contact| %>
 	<% installment = contact.installment_for(Date.today) %>
-	<li><%= contact.name %> - <%= installment.present? ? "$#{installment.value}" : "!" %></li>
+	<li style="margin: 0"><%= truncate(contact.name, length: 20) %> -
+		<% if installment.present? && installment.complete? %>
+			&#10004;
+		<% elsif installment.present? %>
+			$<%= installment.value %>
+		<% else %>
+			!
+		<% end %>
+	</li>
 <% end %>
 </ul>
