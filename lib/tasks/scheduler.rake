@@ -27,3 +27,13 @@ task :broadcast_end_of_memberships => :environment do
     puts "done."
   end
 end
+
+
+desc "This task is called by the Heroku scheduler add-on it sends the weekly stats email"
+task :deliver_weekly_stats => :environment do
+  School.where(:send_weekly_reports => true).each do |business|
+    puts "Sending weekly stats mail for #{business.name}..."
+    WeeklyStatsMailer.stats(business).deliver
+    puts "done."
+  end
+end
