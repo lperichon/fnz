@@ -18,6 +18,8 @@ class WeeklyStatsMailer < MandrillMailer::TemplateMailer
     debits_image.rewind
 
     contacts = business.contacts.all_students
+    enrollments = business.enrollments.this_month
+    sales = business.sales.this_month
 
     mandrill_mail template: 'weekly-stats',
                   subject: "Weekly Stats",
@@ -26,7 +28,9 @@ class WeeklyStatsMailer < MandrillMailer::TemplateMailer
                     'business_name' => business.name,
                     'debits_content' => '',
                     'credits_content' => '',
-                    'installments_content' => ac.render_to_string(:partial => 'weekly_stats_mailer/installments_sidebar', :locals => {:contacts => contacts})
+                    'installments_content' => ac.render_to_string(:partial => 'weekly_stats_mailer/installments_sidebar', :locals => {:contacts => contacts}),
+                    'enrollments_content' => ac.render_to_string(:partial => 'weekly_stats_mailer/enrollments_content', :locals => {:enrollments => enrollments}),
+                    'sales_content' => ac.render_to_string(:partial => 'weekly_stats_mailer/sales_content', :locals => {:sales => sales})
                   },
                   important: true,
                   inline_css: true,

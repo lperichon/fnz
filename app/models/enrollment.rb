@@ -13,4 +13,6 @@ class Enrollment < ActiveRecord::Base
   attr_accessible :membership_id, :agent_id, :value, :enrolled_on, :transactions_attributes, :enrollment_transactions_attributes
   accepts_nested_attributes_for :transactions, allow_destroy: true
   accepts_nested_attributes_for :enrollment_transactions, :reject_if => proc { |s| s['transaction_id'].blank? }
+
+  scope :this_month, where {(enrolled_on.gteq Date.today.beginning_of_month.beginning_of_day) & (enrolled_on.lteq Date.today.end_of_month.end_of_day)}
 end

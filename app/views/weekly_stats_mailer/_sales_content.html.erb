@@ -1,0 +1,5 @@
+<ul>
+<% sales.each do |sale| %>
+	<li><%= sale.try(:agent).try(:name) %> - <%= sale.try(:contact).try(:name) %> - $<%= sale.try(:product).try(:price) %></li>
+<% end %>
+</ul>
