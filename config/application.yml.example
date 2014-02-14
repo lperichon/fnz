@@ -5,4 +5,10 @@
 # PUSHER_SECRET: abdc3b896a0ffb85d373
 # STRIPE_API_KEY: EdAvEPVEC3LuaTg5Q3z6WbDVqZlcBQ8Z
 # STRIPE_PUBLIC_KEY: pk_BRgD57O8fHja9HxduJUszhef6jCyS
-app_key: zzz
+app_key: "1234"
+accounts_key: "1234"
+contacts_key: "1234"
+messaging_key: "fnz_key"
+messaging_secret: "fnz_secret"
+MANDRILL_APIKEY: "1234"
+MANDRILL_USERNAME: "1234"

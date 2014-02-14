@@ -1,0 +1,5 @@
+<ul>
+<% enrollments.each do |enrollment| %>
+	<li><%= enrollment.agent.name %> - <%= enrollment.membership.contact.name %> - $<%= enrollment.value %></li>
+<% end %>
+</ul>
