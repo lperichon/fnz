@@ -27,15 +27,16 @@ ActiveRecord::Schema.define(:version => 20140224123105) do
   end
 
   create_table "businesses", :force => true do |t|
-    t.string    "name",                 :default => "",         :null => false
-    t.integer   "owner_id",                                     :null => false
-    t.timestamp "created_at",                                   :null => false
-    t.timestamp "updated_at",                                   :null => false
-    t.string    "type",                 :default => "Personal"
-    t.string    "padma_id"
-    t.timestamp "synchronized_at"
-    t.boolean   "send_weekly_reports",  :default => true
-    t.boolean   "transactions_enabled"
+    t.string   "name",                 :default => "",         :null => false
+    t.integer  "owner_id",                                     :null => false
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
+    t.string   "type",                 :default => "Personal"
+    t.string   "padma_id"
+    t.datetime "synchronized_at"
+    t.boolean  "send_weekly_reports",  :default => true
+    t.boolean  "transactions_enabled"
+    t.boolean  "share_enabled"
   end
 
   create_table "businesses_users", :force => true do |t|

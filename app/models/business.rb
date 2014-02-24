@@ -18,7 +18,7 @@ class Business < ActiveRecord::Base
   validates :owner, :presence => true
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :type, :name, :owner_id, :padma_id, :synchronized_at, :send_weekly_reports
+  attr_accessible :type, :name, :owner_id, :padma_id, :synchronized_at, :send_weekly_reports, :transactions_enabled, :share_enabled
   
   after_create :initialize_feature_flags
   after_save :link_to_owner
@@ -35,9 +35,15 @@ class Business < ActiveRecord::Base
 
   def initialize_feature_flags
     if type == "School"
-      update_attribute(:transactions_enabled,false)
+      update_attributes({
+        :transactions_enabled => false,
+        :share_enabled => true
+      })
     else
-      update_attribute(:transactions_enabled,true)
+      update_attributes({
+        :transactions_enabled => true,
+        :share_enabled => false
+      })
     end
   end
 end
