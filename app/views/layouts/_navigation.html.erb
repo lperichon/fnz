@@ -38,7 +38,7 @@
 <ul id="nav-businesses" class="nav">
   <% current_user.businesses.each do |business| %>
     <% unless business.new_record? %>
-      <li class="<%= 'active' if @business.present? && @business.id == business.id %>"><%= link_to business.name, business_transactions_path(business) %></li>
+      <li class="<%= 'active' if @business.present? && @business.id == business.id %>"><%= link_to business.name, business.is_a?(School) ? overview_business_memberships_path(business) : business_transactions_path(business) %></li>
     <% end %>
   <% end %>
     <li class="action"><a href="<%= new_business_path %>"><i class="icon-plus-sign"></i></a></li>

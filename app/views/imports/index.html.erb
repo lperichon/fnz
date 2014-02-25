@@ -5,9 +5,11 @@
 <h3>Imports</h3>
 <ul class="imports">
   <% @imports.each do |import| %>
+  	<% unless import.new_record? %>
     <li>
       <%= link_to import.id, business_import_path(@business, import) %>
     </li>
+    <% end %>
   <% end %>
 </ul>
 
