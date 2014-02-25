@@ -21,7 +21,8 @@
     <%= link_to "Mark as paid", new_business_membership_installment_payment_path(@business, f.object.membership, f.object), :remote => true %>
     <% elsif f.object.class == Enrollment && !f.object.new_record? #TODO: && !f.object.complete? %>
     <%= link_to "Mark as paid", new_business_membership_enrollment_payment_path(@business, f.object.membership, f.object), :remote => true %>
-    
+    <% elsif f.object.class == Sale && !f.object.new_record? && !f.object.complete? %>
+    <%= link_to "Mark as paid", new_business_sale_payment_path(@business, f.object), :remote => true %>
     <% end %>
     </td>
   </tfoot>
