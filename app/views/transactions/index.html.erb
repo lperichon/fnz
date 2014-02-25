@@ -7,12 +7,16 @@
 <% end %>
 
 <div class="actions">
+<% if can? :create, @business.imports.build %>
   <%= link_to content_tag(:i, "", :class => "icon-upload") + "Import CSV", new_business_import_path(@business), :class => "btn" %>
+<% end %>
   <%= link_to content_tag(:i, "", :class => "icon-bar-chart") + "Stats", stats_business_transactions_path(@business, :year => params[:year], :month => params[:month]), :remote => true, :class => "btn" %>
 </div>
 
 <h3>Transactions</h3>
 <%= render :layout => 'transactions_table', :locals => {:transactions => @transactions} do |transaction| %>
+  <% if can? :manage, @business.transactions.build %>
   <%= link_to content_tag(:i, "", :class => "icon-edit"), edit_business_transaction_path(transaction.business, transaction), :remote => true %>
   <%= link_to content_tag(:i, "", :class => "icon-trash"), business_transaction_path(transaction.business, transaction), :confirm => 'Are you sure you want to delete this item?', :method => 'delete' %>
+  <% end %>
 <% end %>

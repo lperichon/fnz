@@ -27,13 +27,16 @@ Fnz::Application.routes.draw do
     resources :products
     resources :sales do
       get :stats, :on => :collection
+      resource :payment, :only => [:new, :create]
     end
     resources :payment_types
     resources :memberships do
       resources :installments do
       	resource :payment, :only => [:new, :create]
       end
-      resource :enrollment
+      resource :enrollment do
+        resource :payment, :only => [:new, :create]
+      end
       get :overview, :on => :collection
       get :stats, :on => :collection
     end

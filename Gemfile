@@ -51,3 +51,4 @@ gem 'bootstrap-kaminari-views'
 gem 'daemons', :group => [:development]
 gem 'mandrill_mailer', :git => "git://github.com/lperichon/mandrill_mailer.git"
 gem 'httparty'
+gem 'quiet_assets', :group => :development
