@@ -13,8 +13,16 @@
   <% end %>
   <tfoot>
     <td colspan="9">
+    <% if can? :manage, @business.transactions.build %>
       <%= link_to 'Add transaction', new_business_transaction_path(@business, :transaction => {"#{f.object.class.to_s.downcase}_ids" => [f.object.id]}), :remote => true %>
       <%= link_to "List transactions", "#list-transactions-modal", 'data-toggle' => 'modal' %>
+    <% end %>
+    <% if f.object.class == Installment && !f.object.new_record? && !f.object.complete? %>
+    <%= link_to "Mark as paid", new_business_membership_installment_payment_path(@business, f.object.membership, f.object), :remote => true %>
+    <% elsif f.object.class == Enrollment && !f.object.new_record? #TODO: && !f.object.complete? %>
+    <%= link_to "Mark as paid", new_business_membership_enrollment_payment_path(@business, f.object.membership, f.object), :remote => true %>
+    
+    <% end %>
     </td>
   </tfoot>
 </table>
