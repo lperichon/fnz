@@ -1,1 +1,3 @@
+<% if can? :create, @business.transactions.build %>
 <li class="pull-right"><%= link_to content_tag(:i, "", :class => "icon-plus") + "Add Transaction", new_business_transaction_path(@business), :remote => true %></li>
+<% end %>

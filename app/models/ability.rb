@@ -6,6 +6,12 @@ class Ability
     if user.has_role? :admin
       can :manage, :all
     end
+
+    can :manage, Transaction, :business => {:transactions_enabled => true}
+    can :manage, Account, :business => {:transactions_enabled => true}
+    can :manage, Tag, :business => {:transactions_enabled => true}
+    can :manage, Import, :business => {:transactions_enabled => true}
+    can :manage, User, :business => {:share_enabled => true}
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)

@@ -7,7 +7,9 @@
 <% end %>
 
 <div class="actions">
+<% if can? :create, @business.imports.build %>
   <%= link_to content_tag(:i, "", :class => "icon-upload") + "Import CSV", new_business_import_path(@business), :class => "btn" %>
+<% end %>
   <%= link_to content_tag(:i, "", :class => "icon-bar-chart") + "Stats", stats_business_transactions_path(@business, :year => params[:year], :month => params[:month]), :remote => true, :class => "btn" %>
 </div>
 
