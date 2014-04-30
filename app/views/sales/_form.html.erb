@@ -16,7 +16,7 @@
     <% if can? :manage, @business.transactions.build %>
     <h3>Transactions</h3>
     <%= render :partial => 'nested_transactions_table', :locals => {:f => f, :transactions => @transactions} %>
-    <% else %>
+    <% elsif !@sale.complete?  %>
         <%= link_to "Mark as paid", new_business_sale_payment_path(@business, f.object), :remote => true %>
     <% end %>
     <%= f.button :submit, :class => "btn btn-primary" %>

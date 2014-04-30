@@ -15,4 +15,22 @@ class Enrollment < ActiveRecord::Base
   accepts_nested_attributes_for :enrollment_transactions, :reject_if => proc { |s| s['transaction_id'].blank? }
 
   scope :this_month, where {(enrolled_on.gteq Date.today.beginning_of_month.beginning_of_day) & (enrolled_on.lteq Date.today.end_of_month.end_of_day)}
+
+  def pending?
+    !transactions.empty? && transactions.any? { |t| t.pending? }
+  end
+
+  def complete?
+    !transactions.empty? && transactions.all? { |t| t.created? || t.reconciled? }
+  end
+
+  def status
+    if pending?
+      :pending
+    elsif complete?
+      :complete
+    else
+      :incomplete
+    end
+  end
 end

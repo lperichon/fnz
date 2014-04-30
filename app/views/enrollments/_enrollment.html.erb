@@ -1,2 +1,3 @@
 <p>agent: <%= enrollment.agent.name %></p>
 <p>value: <%= enrollment.value %></p>
+<p>Status: <%= content_tag(:span, enrollment.status, :class => "label label-#{enrollment.status}") %></p>

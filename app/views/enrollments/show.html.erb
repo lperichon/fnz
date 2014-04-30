@@ -5,12 +5,15 @@
 <h2>Enrollment</h2>
 <%= render :partial => 'enrollment', :locals => {:enrollment => @enrollment} %>
 
+
+<% if can? :manage, @business.transactions.build %>
 <h3>Transactions</h3>
 <%= render :layout => 'transactions_table', :locals => {:transactions => @enrollment.transactions} do |transaction| %>
   <% if can? :manage, @business.transactions.build %>
     <%= link_to content_tag(:i, "", :class => "icon-edit"), edit_business_transaction_path(transaction.business, transaction), :remote => true %>
     <%= link_to content_tag(:i, "", :class => "icon-trash"), business_transaction_path(transaction.business, transaction), :confirm => 'Are you sure you want to delete this item?', :method => 'delete' %>
   <% end %>
+<% end %>
 <% end %>
 
 <%= link_to 'Edit', edit_business_membership_enrollment_path(@business, @membership) %> |
