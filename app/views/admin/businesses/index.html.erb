@@ -1,0 +1,9 @@
+<h3>Businesses</h3>
+<ul class="businesses">
+  <% @businesses.each do |business| %>
+    <li>
+      <%= link_to business.name, admin_business_path(business) %>
+      <%= link_to content_tag(:i, "", :class => "icon-trash"), admin_business_path(business), :confirm => 'Are you sure you want to delete this item?', :method => 'delete' %>
+    </li>
+  <% end %>
+</ul>

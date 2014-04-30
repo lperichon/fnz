@@ -1,0 +1,10 @@
+<% content_for :sidebar do %>
+  <%= render :partial => 'edit_sidebar' %>
+<% end %>
+
+<h2>Edit Business</h2>
+
+<%= render :partial => 'form', :locals => {:form_url => admin_business_path(@business)} %>
+
+<%= link_to 'Show', admin_business_path(@business) %> |
+<%= link_to 'Back', admin_businesses_path %>

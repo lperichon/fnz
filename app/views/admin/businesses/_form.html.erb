@@ -1,0 +1,15 @@
+<%= simple_form_for(@business, :as => :business, :validate => true, :url => form_url, :html => {:class => "form-horizontal"}) do |f| %>
+    <%= f.input :type, :collection => ["Personal", "School"], :as => :radio_buttons, :item_wrapper_class => 'inline' %>
+
+    <%= f.input :name %>
+
+	<%= f.input :padma_id if @business.is_a? School %>
+
+	<%= f.input :send_weekly_reports %>
+
+	<%= f.input :transactions_enabled %>
+
+	<%= f.input :share_enabled %>
+
+    <%= f.button :submit, :class => "btn btn-primary" %>
+<% end %>

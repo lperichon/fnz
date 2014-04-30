@@ -20,7 +20,7 @@
     </li>
     <% if current_user.has_role? :admin %>
       <li>
-      <%= link_to 'Admin', users_path %>
+      <%= link_to 'Businesses Admin', admin_businesses_path %>
       </li>
     <% end %>
   <% else %>

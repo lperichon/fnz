@@ -52,6 +52,10 @@ Fnz::Application.routes.draw do
 
   match 'messages', to: 'messages#catch_message'
 
+  namespace 'admin' do
+    resources :businesses, only: [:index, :show, :edit, :update, :destroy]
+  end
+
   namespace 'api' do
     namespace 'v0' do
       resources :imports, only: [:create, :show] do
