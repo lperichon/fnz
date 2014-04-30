@@ -3,6 +3,7 @@
   <% @businesses.each do |business| %>
     <li>
       <%= link_to business.name, business_path(business) %>
+      <%= link_to content_tag(:i, "", :class => "icon-trash"), business_path(business), :confirm => 'Are you sure you want to delete this item?', :method => 'delete' %>
     </li>
   <% end %>
 </ul>
