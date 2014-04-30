@@ -8,12 +8,13 @@
 <p>Agent: <%= @sale.agent.name %></p>
 <p>Product: <%= @sale.product.try(:name) %></p>
 <p>Sold on: <%= @sale.sold_on %></p>
+<p>Status: <%= content_tag(:span, @sale.status, :class => "label label-#{@sale.status}") %></p>
 
+<% if can? :manage, @business.transactions.build %>
 <%= render :layout => 'transactions_table', :locals => {:transactions => @sale.transactions} do |transaction| %>
-  <% if can? :manage, @business.transactions.build %>
   <%= link_to content_tag(:i, "", :class => "icon-edit"), edit_business_transaction_path(transaction.business, transaction), :remote => true %>
   <%= link_to content_tag(:i, "", :class => "icon-trash"), business_transaction_path(transaction.business, transaction), :confirm => 'Are you sure you want to delete this item?', :method => 'delete' %>
-  <% end %>
+<% end %>
 <% end %>
 
 <%= link_to 'Edit', edit_business_sale_path(@business, @sale) %> |
