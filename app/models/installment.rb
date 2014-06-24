@@ -6,7 +6,7 @@ class Installment < ActiveRecord::Base
 
   validates :membership, :presence => true
   validates :due_on, :presence => true
-  validates_datetime :due_on, :after => Date.parse("0000-01-01")
+  validates_datetime :due_on, :after => Date.parse("0001-01-01")
   validates :value, :presence => true
 
   scope :due, where("due_on BETWEEN '#{Date.today}' AND '#{Date.today.end_of_month}'")
