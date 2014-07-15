@@ -2,12 +2,14 @@
     <%= f.association :agent, :as => :select, :collection => @business.agents, :input_html => {'data-placeholder' => 'Please select agent',:class => "chosen"} %>
     <%= f.input :due_on, :as => "string", :input_html => {:class => "datepicker_input"} %>
     <%= f.input :value %>
-    <%= f.input :status, :as => :payment_status %>
+    <% unless @installment.new_record? %>
+        <%= f.input :status, :as => :payment_status %>
+    <% end %>
 
     <% if can? :manage, @business.transactions.build %>
     <h3>Transactions</h3>
     <%= render :partial => 'nested_transactions_table', :locals => {:f => f, :transactions => @transactions} %>
-    <% elsif !@installment.complete?  %>
+    <% elsif !@installment.new_record? && !@installment.complete?  %>
         <%= link_to "Mark as paid", new_business_membership_installment_payment_path(@business, f.object.membership, f.object), :remote => true %>
     <% end %>
     <%= f.button :submit, :class => "btn btn-primary" %>

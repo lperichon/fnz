@@ -1,4 +1,4 @@
-<%= simple_form_for(@agent, :validate => true, :url => business_agents_path(@business), :html => {:class => "form-horizontal"}) do |f| %>
+<%= simple_form_for(@agent, :validate => true, :url => form_url, :html => {:class => "form-horizontal"}) do |f| %>
 
     <%= f.input :name %>
     <% if @business.padma_id %>

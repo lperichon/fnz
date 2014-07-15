@@ -1,7 +1,13 @@
-<%= f.association :source, :collection => @business.accounts, :prompt => "Please select source account" %>
+<% if @business.accounts.count == 1 %>
+	<%= f.input :source_id, :as => :hidden, :input_html => { :value => @business.accounts.first.id } %>
+<% else %>
+	<%= f.association :source, :collection => @business.accounts, :prompt => "Please select source account" %>
+<% end %>
 
 <%= f.input :transaction_at, :as => :date_time_picker %>
 
+<% if @business.transactions_enabled? %>
 <%= f.input :state, :as => :select, :collection => Transaction.available_states %>
+<% end %>
 
 <%=  f.input :tag_ids, :as => :select, :collection => @business.tags, :input_html => {:class => "chosen", :multiple => true} %>

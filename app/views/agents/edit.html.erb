@@ -4,7 +4,7 @@
 
 <h2>Edit Agent</h2>
 
-<%= render :partial => 'form' %>
+<%= render :partial => 'form', :locals => {:form_url => business_agent_path(@business, @agent)} %>
 
 <%= link_to 'Show', business_agent_path(@business,@agent) %> |
 <%= link_to 'Back', business_agents_path(@business) %>

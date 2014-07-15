@@ -12,7 +12,7 @@
 <% end %>
 </ul>
 <% unless @contact.current_membership.present? %>
-  <%= link_to "Assign membership", new_business_membership_path(@business, :membership => {:contact_id => @contact.membership}) %>
+  <%= link_to "Assign membership", new_business_membership_path(@business, :membership => {:contact_id => @contact.id}) %>
 <% end %>
 
 <h3>Sales</h3>
@@ -21,9 +21,6 @@
   <p><%= sale.sold_on %> - <%= sale.try(:product).try(:name) %> <%= link_to "Show", business_sale_path(@business, sale) %></p>
 <% end %>
 </ul>
-<% unless @contact.current_membership.present? %>
-  <%= link_to "Assign membership", new_business_membership_path(@business, :membership => {:contact_id => @contact.membership}) %>
-<% end %>
 
 <%= link_to 'Edit', edit_business_contact_path(@business, @contact) %> |
 <%= link_to 'Back', business_contacts_path(@business) %>

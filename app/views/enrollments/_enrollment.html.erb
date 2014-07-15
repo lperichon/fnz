@@ -1,3 +1,7 @@
 <p>agent: <%= enrollment.agent.name %></p>
 <p>value: <%= enrollment.value %></p>
-<p>Status: <%= content_tag(:span, enrollment.status, :class => "label label-#{enrollment.status}") %></p>
+<p>Status: <%= content_tag(:span, enrollment.status, :class => "label label-#{enrollment.status}") %>
+	<% if !enrollment.new_record? && !enrollment.complete? %>
+        <%= link_to "Mark as paid", new_business_membership_enrollment_payment_path(@business, enrollment.membership, enrollment), :remote => true %>
+    <% end %>
+</p>

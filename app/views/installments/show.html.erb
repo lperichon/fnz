@@ -6,7 +6,14 @@
 <p>Agent: <%= @installment.agent.try(:name) %></p>
 <p>Due on: <%= @installment.due_on %></p>
 <p>value: <%= @installment.value %></p>
-<p>Status: <%= content_tag(:span, @installment.status, :class => "label label-#{@installment.status}") %></p>
+
+<% unless @installment.new_record? %>
+	<p>Status: <%= content_tag(:span, @installment.status, :class => "label label-#{@installment.status}") %>
+	<%if !@installment.complete?  %>
+        <%= link_to "Mark as paid", new_business_membership_installment_payment_path(@business, @installment.membership, @installment), :remote => true %>
+    <% end %>
+	</p>
+<% end %>
 
 <% if can? :manage, @business.transactions.build %>
 <h3>Transactions</h3>

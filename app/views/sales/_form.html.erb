@@ -11,12 +11,14 @@
 
     <%= f.input :sold_on, :as => :date_picker %>
 
-    <%= f.input :status, :as => :payment_status %>
-
+    <% if !@sale.new_record? %>
+        <%= f.input :status, :as => :payment_status %>
+    <% end %>
+    
     <% if can? :manage, @business.transactions.build %>
     <h3>Transactions</h3>
     <%= render :partial => 'nested_transactions_table', :locals => {:f => f, :transactions => @transactions} %>
-    <% elsif !@sale.complete?  %>
+    <% elsif !@sale.new_record? && !@sale.complete?  %>
         <%= link_to "Mark as paid", new_business_sale_payment_path(@business, f.object), :remote => true %>
     <% end %>
     <%= f.button :submit, :class => "btn btn-primary" %>

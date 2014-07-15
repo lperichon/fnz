@@ -8,7 +8,11 @@
 <p>Agent: <%= @sale.agent.name %></p>
 <p>Product: <%= @sale.product.try(:name) %></p>
 <p>Sold on: <%= @sale.sold_on %></p>
-<p>Status: <%= content_tag(:span, @sale.status, :class => "label label-#{@sale.status}") %></p>
+<p>Status: <%= content_tag(:span, @sale.status, :class => "label label-#{@sale.status}") %>
+	<% if !@sale.complete?  %>
+        <%= link_to "Mark as paid", new_business_sale_payment_path(@business, @sale), :remote => true %>
+    <% end %>
+</p>
 
 <% if can? :manage, @business.transactions.build %>
 <%= render :layout => 'transactions_table', :locals => {:transactions => @sale.transactions} do |transaction| %>

@@ -8,7 +8,7 @@
     <% if can? :manage, @business.transactions.build %>
     <h3>Transactions</h3>
     <%= render :partial => 'nested_transactions_table', :locals => {:f => f, :transactions => @transactions} %>
-    <% elsif !@enrollment.complete? %>
+    <% elsif !@enrollment.new_record? && !@enrollment.complete? %>
         <%= link_to "Mark as paid", new_business_membership_enrollment_payment_path(@business, f.object.membership, f.object), :remote => true %>
     <% end %>
     <%= f.button :submit, :class => "btn btn-primary" %>
