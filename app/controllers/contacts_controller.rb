@@ -6,7 +6,12 @@ class ContactsController < UserApplicationController
   end
 
   def show
-    @contact = @business.contacts.find(params[:id])
+    param_is_padma_id = (false if Float(params[:id]) rescue true)
+    if param_is_padma_id
+      @contact = @business.contacts.find_by_padma_id(params[:id])
+    else
+      @contact = @business.contacts.find(params[:id])
+    end
   end
 
   def edit
@@ -64,7 +69,13 @@ class ContactsController < UserApplicationController
   private
 
   def get_business
-    @business = current_user.businesses.find(params[:business_id])
+    Rails.logger.debug params[:business_id]
+    param_is_padma_id = (false if Float(params[:business_id]) rescue true)
+    if param_is_padma_id
+      @business = current_user.businesses.find_by_padma_id(params[:business_id])
+    else
+      @business = current_user.businesses.find(params[:business_id])
+    end
   end
 
 end
