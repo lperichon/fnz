@@ -10,9 +10,10 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    accounts_client (0.0.5)
-      logical_model
-      railties (~> 3.1)
+    accounts_client (0.0.21)
+      gravtastic
+      logical_model (~> 0.5.8)
+      railties (>= 3.1)
     actionmailer (3.2.8)
       actionpack (= 3.2.8)
       mail (~> 2.4.4)
@@ -108,6 +109,7 @@ GEM
       railties (>= 3.0.0)
     fattr (2.2.1)
     ffi (1.0.11)
+    gravtastic (3.2.6)
     hashie (1.2.0)
     heroku-api (0.3.16)
       excon (~> 0.27)
@@ -131,7 +133,7 @@ GEM
     launchy (2.4.0)
       addressable (~> 2.3)
     libv8 (3.16.14.3)
-    logical_model (0.5.11)
+    logical_model (0.5.10)
       activemodel
       activesupport
       ethon (= 0.4.2)
@@ -294,7 +296,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  accounts_client (= 0.0.5)
+  accounts_client (= 0.0.21)
   active_model_serializers
   awesome_nested_fields (= 0.6.0)
   aws-sdk
@@ -305,7 +307,7 @@ DEPENDENCIES
   client_side_validations
   client_side_validations-simple_form (= 2.0.0.beta.2)
   coffee-rails (~> 3.2.1)
-  contacts_client (~> 0.0.25)
+  contacts_client (~> 0.0.21)
   daemons
   database_cleaner (>= 0.8.0)
   delayed_job_active_record
@@ -318,7 +320,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   launchy (>= 2.1.2)
-  logical_model (= 0.5.11)
+  logical_model (= 0.5.10)
   mandrill_mailer!
   messaging_client (~> 0.0.2)
   newrelic_rpm
