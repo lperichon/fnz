@@ -63,6 +63,11 @@ Fnz::Application.routes.draw do
           get :failed_rows # GET /api/v0/imports/:id/failed_rows
         end
       end
+      resources :businesses do
+        resources :contacts do
+          resource :current_membership
+        end
+      end
     end
   end
 end
