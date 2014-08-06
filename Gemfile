@@ -52,3 +52,4 @@ gem 'mandrill_mailer', :git => "git://github.com/lperichon/mandrill_mailer.git"
 gem 'httparty'
 gem 'quiet_assets', :group => :development
 gem "active_model_serializers"
+gem 'localeapp'

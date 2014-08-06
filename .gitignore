@@ -80,3 +80,6 @@ pickle-email-*.html
 # rvm
 .ruby-version
 .ruby-gemset
+
+# LocaleApp
+.localeapp
