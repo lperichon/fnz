@@ -207,10 +207,8 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
 
-  config.omniauth :cas,
-                  host: 'metododerose.org:8443',
-                  login_url: '/',
-                  disable_ssl_verification: true
+  config.cas_base_url = "https://metododerose.org:8443"
+  config.cas_username_column = "drc_uid"
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
