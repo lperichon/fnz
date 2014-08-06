@@ -69,7 +69,6 @@ class ContactsController < UserApplicationController
   private
 
   def get_business
-    Rails.logger.debug params[:business_id]
     param_is_padma_id = (false if Float(params[:business_id]) rescue true)
     if param_is_padma_id
       @business = current_user.businesses.find_by_padma_id(params[:business_id])
