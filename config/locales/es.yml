@@ -2,15 +2,42 @@ es:
   activerecord:
     attributes:
       user:
-        current_password: Current password
+        current_password: Contraseña actual
         email: Email
         name: Nombre
-        password: Password
-        password_confirmation: Password confirmation
-        time_zone: Time zone
+        password: Contraseña
+        password_confirmation: Confirmación
+        time_zone: Zona horaria
+      account:
+        currency: Moneda
+        name: Nombre
+        business: Negocio
+      school:
+        name: 
+        owner: 
+        padma_id: 
+        send_weekly_reports: 
+        type: 
+    errors:
+      models:
+        school:
+          attributes:
+            name:
+              blank: 
+            owner:
+              blank: 
+        account:
+          attributes:
+            business:
+              blank: 
+            name:
+              blank: 
+    models:
+      account: Cuenta
+      school: 
   devise:
     confirmations:
-      confirmed: 
+      confirmed: Su cuenta fue confirmada exitosamente. Ya esta logueado.
       send_instructions: 
       send_paranoid_instructions: 
     failure:
@@ -75,6 +102,19 @@ es:
       user:
         edit:
           time_zone: 
+      business:
+        edit:
+          name: 
+          padma_id: 
+          send_weekly_reports: 
+          type: 
+      account:
+        new:
+          currency: 
+          name: 
+        edit:
+          currency: 
+          name: 
     labels:
       user:
         edit:
@@ -84,13 +124,69 @@ es:
           password: 
           password_confirmation: 
           time_zone: 
-    'no': 
+      business:
+        edit:
+          name: 
+          padma_id: 
+          send_weekly_reports: 
+          type: 
+      account:
+        new:
+          currency: 
+          name: 
+        edit:
+          currency: 
+          name: 
+    'no': 'No'
     required:
       mark: 
       text: 
-    'yes': 
+      html: 
+    'yes': Si
+    placeholders:
+      business:
+        edit:
+          name: 
+          padma_id: 
+      account:
+        new:
+          name: 
+        edit:
+          name: 
   validates_timeliness:
     error_value_formats:
       date: 
       datetime: 
       time: 
+  helpers:
+    label:
+      account:
+        currency: 
+        name: 
+    submit:
+      create: Crear %{model}
+      update: Actualizar %{model}
+      account:
+        create: 
+        update: 
+      business:
+        update: 
+  accounts:
+    edit:
+      title: Editar cuenta
+    new:
+      title: Nueva cuenta
+  actions:
+    back: Atrás
+    show: 
+    login: Entrar
+    logout: Salir
+  layouts:
+    navigation:
+      businesses: Negocios
+      edit_account: Editar cuenta
+    secondary_navigation:
+      edit_business: Editar negocio
+      manage_sales: Administrar ventas
+      manage_transactions: Administrar transacciones
+      manage_memberships: Administrar membresías

@@ -8,6 +8,33 @@ en:
         password: Password
         password_confirmation: Password confirmation
         time_zone: Time zone
+      account:
+        currency: Currency
+        name: Name
+        business: Business
+      school:
+        name: 
+        owner: 
+        padma_id: 
+        send_weekly_reports: 
+        type: 
+    errors:
+      models:
+        school:
+          attributes:
+            name:
+              blank: 
+            owner:
+              blank: 
+        account:
+          attributes:
+            business:
+              blank: 
+            name:
+              blank: 
+    models:
+      account: Account
+      school: 
   devise:
     confirmations:
       confirmed: Your account was successfully confirmed. You are now signed in.
@@ -77,6 +104,19 @@ en:
       user:
         edit:
           time_zone: 
+      business:
+        edit:
+          name: 
+          padma_id: 
+          send_weekly_reports: 
+          type: 
+      account:
+        new:
+          currency: 
+          name: 
+        edit:
+          currency: 
+          name: 
     labels:
       user:
         edit:
@@ -86,13 +126,69 @@ en:
           password: 
           password_confirmation: 
           time_zone: 
+      business:
+        edit:
+          name: 
+          padma_id: 
+          send_weekly_reports: 
+          type: 
+      account:
+        new:
+          currency: 
+          name: 
+        edit:
+          currency: 
+          name: 
     'no': 'No'
     required:
       mark: ! '*'
       text: required
+      html: 
     'yes': 'Yes'
+    placeholders:
+      business:
+        edit:
+          name: 
+          padma_id: 
+      account:
+        new:
+          name: 
+        edit:
+          name: 
   validates_timeliness:
     error_value_formats:
       date: ! '%Y-%m-%d'
       datetime: ! '%Y-%m-%d %H:%M:%S'
       time: ! '%H:%M:%S'
+  helpers:
+    label:
+      account:
+        currency: 
+        name: 
+    submit:
+      create: Create %{model}
+      update: Update %{model}
+      account:
+        create: 
+        update: 
+      business:
+        update: 
+  accounts:
+    edit:
+      title: Edit Account
+    new:
+      title: New Account
+  actions:
+    back: Back
+    show: Show
+    login: Login
+    logout: Logout
+  layouts:
+    navigation:
+      businesses: Businesses
+      edit_account: Edit Account
+    secondary_navigation:
+      edit_business: Edit Business
+      manage_sales: Manage Sales
+      manage_transactions: Manage Transactions
+      manage_memberships: Manage Memberships

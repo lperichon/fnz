@@ -8,6 +8,33 @@ pt:
         password: 
         password_confirmation: 
         time_zone: 
+      account:
+        currency: 
+        name: 
+        business: 
+      school:
+        name: 
+        owner: 
+        padma_id: 
+        send_weekly_reports: 
+        type: 
+    errors:
+      models:
+        school:
+          attributes:
+            name:
+              blank: 
+            owner:
+              blank: 
+        account:
+          attributes:
+            business:
+              blank: 
+            name:
+              blank: 
+    models:
+      account: 
+      school: 
   devise:
     confirmations:
       confirmed: 
@@ -75,6 +102,19 @@ pt:
       user:
         edit:
           time_zone: 
+      business:
+        edit:
+          name: 
+          padma_id: 
+          send_weekly_reports: 
+          type: 
+      account:
+        new:
+          currency: 
+          name: 
+        edit:
+          currency: 
+          name: 
     labels:
       user:
         edit:
@@ -84,13 +124,69 @@ pt:
           password: 
           password_confirmation: 
           time_zone: 
+      business:
+        edit:
+          name: 
+          padma_id: 
+          send_weekly_reports: 
+          type: 
+      account:
+        new:
+          currency: 
+          name: 
+        edit:
+          currency: 
+          name: 
     'no': 
     required:
       mark: 
       text: 
+      html: 
     'yes': 
+    placeholders:
+      business:
+        edit:
+          name: 
+          padma_id: 
+      account:
+        new:
+          name: 
+        edit:
+          name: 
   validates_timeliness:
     error_value_formats:
       date: 
       datetime: 
       time: 
+  helpers:
+    label:
+      account:
+        currency: 
+        name: 
+    submit:
+      create: 
+      update: 
+      account:
+        create: 
+        update: 
+      business:
+        update: 
+  accounts:
+    edit:
+      title: 
+    new:
+      title: 
+  actions:
+    back: 
+    show: 
+    login: 
+    logout: 
+  layouts:
+    navigation:
+      businesses: 
+      edit_account: 
+    secondary_navigation:
+      edit_business: 
+      manage_sales: 
+      manage_transactions: 
+      manage_memberships: 

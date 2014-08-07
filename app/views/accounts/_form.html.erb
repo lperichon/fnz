@@ -1,23 +1,5 @@
-<%= form_for(@account, :url => form_url) do |f| %>
-    <% if @account.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@account.errors.count, "error") %> prohibited this account from being saved:</h2>
-
-          <ul>
-            <% @account.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
-
-    <p><%= f.label :name %><br />
-      <%= f.text_field :name %></p>
-
-    <p><%= f.label :currency %><br />
-      <%= f.collection_select :currency, SUPPORTED_CURRENCIES, :id, :name %></p>
-
-    <div class="actions">
-      <%= f.submit %>
-    </div>
+<%= simple_form_for(@account, :url => form_url, :validate => true, :html => {:class => "form-horizontal"}) do |f| %>
+  <%= f.input :name %>
+  <%= f.input :currency, :as => :select, :collection => SUPPORTED_CURRENCIES %>  
+  <%= f.button :submit, :class => "btn btn-primary" %>
 <% end %>

@@ -2,36 +2,27 @@
 <ul class="nav pull-right">
   <% if user_signed_in? %>
     <li>
-      <%= link_to 'Businesses', businesses_path %>
+      <%= link_to t('layouts.navigation.businesses'), businesses_path %>
     </li>
   <% end %>
   <% if user_signed_in? %>
     <li>
-    <%= link_to content_tag(:i, "", :class => "icon-off", :title => "Logout", :rel => "tooltip"), destroy_user_session_path, :method=>'delete' %>
+    <%= link_to content_tag(:i, "", :class => "icon-off", :title => t("actions.logout"), :rel => "tooltip"), destroy_user_session_path, :method=>'delete' %>
     </li>
   <% else %>
     <li>
-    <%= link_to content_tag(:i, "", :class => "icon-signin", :title => "Login", :rel => "tooltip"), new_user_session_path %>
+    <%= link_to content_tag(:i, "", :class => "icon-signin", :title => t("actions.login"), :rel => "tooltip"), new_user_session_path %>
     </li>
   <% end %>
   <% if user_signed_in? %>
     <li>
-    <%= link_to content_tag(:i, "", :class => "icon-user"), edit_user_registration_path, :title => "Edit account", :rel => "tooltip" %>
+    <%= link_to content_tag(:i, "", :class => "icon-user"), edit_user_registration_path, :title => t("layouts.navigation.edit_account"), :rel => "tooltip" %>
     </li>
     <% if current_user.has_role? :admin %>
       <li>
-      <%= link_to 'Businesses Admin', admin_businesses_path %>
+      <%= link_to 'Admin', admin_businesses_path %>
       </li>
     <% end %>
-  <% else %>
-    <li>
-    <%= link_to 'Sign up', new_user_registration_path %>
-    </li>
-  <% end %>
-  <% unless user_signed_in? && current_user.drc_uid.present? %>
-    <li>
-      <%= link_to "Sign in with DeRose Connect", user_omniauth_authorize_path(:cas) %>
-    </li>
   <% end %>
 </ul>
 <% if user_signed_in? %>
