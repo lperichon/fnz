@@ -1,5 +1,5 @@
 require 'localeapp/rails'
 
 Localeapp.configure do |config|
-	config.api_key = 'dNVpqmPqBPL4oMz7I148dxdXlHeloQ2av8XWwaWXxZCzg5rss3'
+	config.api_key = 'yQOyREvKVbRCPHtDFv2AiSxyJ4OUkkET9Mrsj0l14u9gNs6y0o'
 end

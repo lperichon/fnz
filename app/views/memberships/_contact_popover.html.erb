@@ -1,2 +1,4 @@
-<p>Payment type: <%= memberships_payment_type_name(membership) %></p>
-<p>Next membership renewal: <%= membership.try(:ends_on).try(:strftime, "%B %Y") %></p>
+<% if membership %>
+  <p><%= Membership.human_attribute_name(:payment_type) %>: <%= memberships_payment_type_name(membership) %></p>
+  <p><%= Membership.human_attribute_name(:ends_on) %>: <%= l(membership.ends_on, :format => "%B %Y") %></p>
+<% end %>

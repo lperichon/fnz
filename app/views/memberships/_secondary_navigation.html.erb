@@ -3,4 +3,4 @@
 <% else %>
   <li class="pull-right"><%= link_to content_tag(:i, "", :class => "icon-table"), overview_business_memberships_path(@business) %></li>
 <% end %>
-<li class="pull-right"><%= link_to content_tag(:i, "", :class => "icon-plus") + "New membership", new_business_membership_path(@business) %></li>
+<li class="pull-right"><%= link_to content_tag(:i, "", :class => "icon-plus") + t('memberships.secondary_navigation.new_membership'), new_business_membership_path(@business) %></li>

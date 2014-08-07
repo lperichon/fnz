@@ -31,7 +31,7 @@ module MembershipsHelper
   # Renders membership's paymet type
   # @return [String]
   def memberships_payment_type_name(membership)
-    (" (" + content_tag(:span, membership.try(:payment_type).try(:name)) + ") ").html_safe
+    content_tag(:span, membership.try(:payment_type).try(:name)).html_safe
   end
 
   # @return [Boolean]

@@ -1,6 +1,28 @@
 es:
+  accounts:
+    edit:
+      title: Editar cuenta
+    new:
+      title: Nueva cuenta
+  actions:
+    back: Atrás
+    login: Entrar
+    logout: Salir
+    show: 
+    create: Crear
+    mark_as_paid: Registrar pago
   activerecord:
     attributes:
+      account:
+        business: Negocio
+        currency: Moneda
+        name: Nombre
+      school:
+        name: 
+        owner: 
+        padma_id: 
+        send_weekly_reports: 
+        type: 
       user:
         current_password: Contraseña actual
         email: Email
@@ -8,114 +30,343 @@ es:
         password: Contraseña
         password_confirmation: Confirmación
         time_zone: Zona horaria
-      account:
-        currency: Moneda
-        name: Nombre
-        business: Negocio
-      school:
-        name: 
-        owner: 
-        padma_id: 
-        send_weekly_reports: 
-        type: 
+      membership:
+        ends_on: Fecha de finalización
+        payment_type: Forma de pago
+      installment:
+        agent: 
+        due_on: 
+        value: 
+        membership: 
     errors:
       models:
-        school:
-          attributes:
-            name:
-              blank: 
-            owner:
-              blank: 
         account:
           attributes:
             business:
               blank: 
             name:
               blank: 
+        school:
+          attributes:
+            name:
+              blank: 
+            owner:
+              blank: 
+        installment:
+          attributes:
+            due_on:
+              timeliness: 
     models:
       account: Cuenta
+      payment_type: Forma de pago
       school: 
+      installment: 
+  date:
+    abbr_day_names:
+    - dom
+    - lun
+    - mar
+    - mié
+    - jue
+    - vie
+    - sáb
+    abbr_month_names:
+    - 
+    - ene
+    - feb
+    - mar
+    - abr
+    - may
+    - jun
+    - jul
+    - ago
+    - sep
+    - oct
+    - nov
+    - dic
+    day_names:
+    - domingo
+    - lunes
+    - martes
+    - miércoles
+    - jueves
+    - viernes
+    - sábado
+    formats:
+      default: ! '%d/%m/%Y'
+      long: ! '%d de %B de %Y'
+      short: ! '%d de %b'
+    month_names:
+    - 
+    - enero
+    - febrero
+    - marzo
+    - abril
+    - mayo
+    - junio
+    - julio
+    - agosto
+    - septiembre
+    - octubre
+    - noviembre
+    - diciembre
+    order:
+    - :day
+    - :month
+    - :year
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: alrededor de 1 hora
+        other: alrededor de %{count} horas
+      about_x_months:
+        one: alrededor de 1 mes
+        other: alrededor de %{count} meses
+      about_x_years:
+        one: alrededor de 1 año
+        other: alrededor de %{count} años
+      almost_x_years:
+        one: casi 1 año
+        other: casi %{count} años
+      half_a_minute: medio minuto
+      less_than_x_minutes:
+        one: menos de 1 minuto
+        other: menos de %{count} minutos
+      less_than_x_seconds:
+        one: menos de 1 segundo
+        other: menos de %{count} segundos
+      over_x_years:
+        one: más de 1 año
+        other: más de %{count} años
+      x_days:
+        one: 1 día
+        other: ! '%{count} días'
+      x_minutes:
+        one: 1 minuto
+        other: ! '%{count} minutos'
+      x_months:
+        one: 1 mes
+        other: ! '%{count} meses'
+      x_seconds:
+        one: 1 segundo
+        other: ! '%{count} segundos'
+    prompts:
+      day: Día
+      hour: Hora
+      minute: Minutos
+      month: Mes
+      second: Segundos
+      year: Año
   devise:
     confirmations:
       confirmed: Su cuenta fue confirmada exitosamente. Ya esta logueado.
-      send_instructions: 
-      send_paranoid_instructions: 
+      send_instructions: Vas a recibir un correo con instrucciones sobre cómo confirmar tu cuenta en unos minutos.
+      send_paranoid_instructions: Si tu correo existe en nuestra base de datos, en unos minutos recibirás un correo con instrucciones sobre cómo confirmar tu cuenta.
     failure:
-      already_authenticated: 
-      inactive: 
-      invalid: 
+      already_authenticated: Ya has iniciado sesión.
+      inactive: Tu cuenta aún no ha sido activada.
+      invalid: Email o contraseña no válidos.
       invalid_token: 
-      locked: 
-      timeout: 
-      unauthenticated: 
-      unconfirmed: 
+      last_attempt: Tienes un intento más antes de que tu cuenta sea bloqueada.
+      locked: Tu cuenta está bloqueada.
+      not_found_in_database: Email o contraseña no válidos.
+      timeout: Tu sesión expiró. Por favor, inicia sesión nuevamente para continuar.
+      unauthenticated: Tienes que iniciar sesión o registrarte para poder continuar.
+      unconfirmed: Tienes que confirmar tu cuenta para poder continuar.
     mailer:
       confirmation_instructions:
-        subject: 
+        subject: Instrucciones de confirmación
       reset_password_instructions:
-        subject: 
+        subject: Instrucciones de recuperación de contraseña
       unlock_instructions:
-        subject: 
+        subject: Instrucciones para desbloquear
     omniauth_callbacks:
-      failure: 
-      success: 
+      failure: No has sido autorizado en la cuenta %{kind} porque "%{reason}".
+      success: Has sido autorizado satisfactoriamente en la cuenta %{kind}.
     passwords:
-      no_token: 
-      send_instructions: 
-      send_paranoid_instructions: 
-      updated: 
-      updated_not_active: 
+      no_token: No puedes acceder a esta página si no es a través de un enlace para resetear tu contraseña. Si has llegado hasta aquí desde el email para resetear tu contraseña, por favor asegúrate de que la URL introducida está completa.
+      send_instructions: Recibirás un correo con instrucciones sobre cómo resetear tu contraseña en unos pocos minutos.
+      send_paranoid_instructions: Si tu correo existe en nuestra base de datos, recibirás un correo con instrucciones sobre cómo resetear tu contraseña en tu bandeja de entrada.
+      updated: Se ha cambiado tu contraseña. Ya iniciaste sesión.
+      updated_not_active: Tu contraseña fue cambiada.
     registrations:
-      destroyed: 
-      signed_up: 
-      signed_up_but_inactive: 
-      signed_up_but_locked: 
-      signed_up_but_unconfirmed: 
-      update_needs_confirmation: 
-      updated: 
+      destroyed: Fue grato tenerte con nosotros. Tu cuenta fue cancelada.
+      signed_up: Bienvenido. Tu cuenta fue creada.
+      signed_up_but_inactive: Tu cuenta ha sido creada correctamente. Sin embargo, no hemos podido iniciar la sesión porque tu cuenta aún no está activada.
+      signed_up_but_locked: Tu cuenta ha sido creada correctamente. Sin embargo, no hemos podido iniciar la sesión porque que tu cuenta está bloqueada.
+      signed_up_but_unconfirmed: Se ha enviado un mensaje con un enlace de confirmación a tu correo electrónico. Abre el enlace para activar tu cuenta.
+      update_needs_confirmation: Has actualizado tu cuenta correctamente, pero es necesario confirmar tu nuevo correo electrónico. Por favor, comprueba tu correo y sigue el enlace de confirmación para finalizar la comprobación del nuevo correo eletrónico.
+      updated: Tu cuenta se ha actualizada.
     sessions:
-      signed_in: 
-      signed_out: 
+      signed_in: Sesión iniciada.
+      signed_out: Sesión finalizada.
     unlocks:
-      send_instructions: 
-      send_paranoid_instructions: 
-      unlocked: 
+      send_instructions: Vas a recibir instrucciones para desbloquear tu cuenta en unos pocos minutos.
+      send_paranoid_instructions: Si tu cuenta existe, vas a recibir instrucciones para desbloquear tu cuenta en unos pocos minutos.
+      unlocked: Tu cuenta ha sido desbloqueada. Ya puedes iniciar sesión.
   errors:
+    format: ! '%{attribute} %{message}'
     messages:
+      accepted: debe ser aceptado
       after: 
-      already_confirmed: 
+      already_confirmed: ya ha sido confirmada, por favor intenta iniciar sesión
       before: 
-      expired: 
+      blank: no puede estar en blanco
+      confirmation: no coincide con la confirmación
+      confirmation_period_expired: necesita confirmarse dentro de %{period}, por favor solicita una nueva
+      empty: no puede estar vacío
+      equal_to: debe ser igual a %{count}
+      even: debe ser par
+      exclusion: está reservado
+      expired: ha expirado, por favor solicita una nueva
+      greater_than: debe ser mayor que %{count}
+      greater_than_or_equal_to: debe ser mayor que o igual a %{count}
+      inclusion: no está incluido en la lista
+      invalid: no es válido
       invalid_date: 
       invalid_datetime: 
       invalid_time: 
       is_at: 
-      not_found: 
-      not_locked: 
-      not_saved: 
+      less_than: debe ser menor que %{count}
+      less_than_or_equal_to: debe ser menor que o igual a %{count}
+      not_a_number: no es un número
+      not_an_integer: debe ser un entero
+      not_found: no se ha encontrado
+      not_locked: no estaba bloqueada
+      not_saved:
+        one: ! 'Ocurrió un error al tratar de guardar %{resource}:'
+        other: ! 'Ocurrieron %{count} errores al tratar de guardar %{resource}:'
+      odd: debe ser impar
       on_or_after: 
       on_or_before: 
+      record_invalid: ! 'La validación falló: %{errors}'
+      taken: ya está en uso
+      too_long: es demasiado largo (%{count} caracteres máximo)
+      too_short: es demasiado corto (%{count} caracteres mínimo)
+      wrong_length: no tiene la longitud correcta (%{count} caracteres exactos)
+    template:
+      body: ! 'Se encontraron problemas con los siguientes campos:'
+      header:
+        one: No se pudo guardar este/a %{model} porque se encontró 1 error
+        other: No se pudo guardar este/a %{model} porque se encontraron %{count} errores
+  helpers:
+    label:
+      account:
+        currency: 
+        name: 
+    select:
+      prompt: Por favor seleccione
+    submit:
+      account:
+        create: 
+        update: 
+      business:
+        update: 
+      create: Crear %{model}
+      submit: Guardar %{model}
+      update: Actualizar %{model}
+      installment:
+        create: 
+  layouts:
+    navigation:
+      businesses: Negocios
+      edit_account: Editar cuenta
+    secondary_navigation:
+      edit_business: Editar negocio
+      manage_memberships: Administrar membresías
+      manage_sales: Administrar ventas
+      manage_transactions: Administrar transacciones
+  memberships:
+    secondary_navigation:
+      new_membership: Nueva membresía
+    table_header:
+      view_month_stats: Ver las estadísticas de %{month}
+  number:
+    currency:
+      format:
+        delimiter: .
+        format: ! '%u%n'
+        precision: 2
+        separator: ! ','
+        significant: false
+        strip_insignificant_zeros: false
+        unit: $
+    format:
+      delimiter: .
+      precision: 3
+      separator: ! ','
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: ! '%n %u'
+        units:
+          billion: mil millones
+          million: millón
+          quadrillion: mil billones
+          thousand: mil
+          trillion: billón
+          unit: ''
+      format:
+        delimiter: ''
+        precision: 1
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: ! '%n %u'
+        units:
+          byte:
+            one: Byte
+            other: Bytes
+          gb: GB
+          kb: KB
+          mb: MB
+          tb: TB
+    percentage:
+      format:
+        delimiter: ''
+    precision:
+      format:
+        delimiter: ''
   simple_form:
     error_notification:
       default_message: 
     hints:
-      user:
+      account:
         edit:
-          time_zone: 
+          currency: 
+          name: 
+        new:
+          currency: 
+          name: 
       business:
         edit:
           name: 
           padma_id: 
           send_weekly_reports: 
           type: 
-      account:
+      user:
+        edit:
+          time_zone: 
+      installment:
         new:
-          currency: 
-          name: 
+          agent: 
+          due_on: 
+          value: 
+    labels:
+      account:
         edit:
           currency: 
           name: 
-    labels:
+        new:
+          currency: 
+          name: 
+      business:
+        edit:
+          name: 
+          padma_id: 
+          send_weekly_reports: 
+          type: 
       user:
         edit:
           current_password: 
@@ -124,69 +375,45 @@ es:
           password: 
           password_confirmation: 
           time_zone: 
+      installment:
+        new:
+          agent: 
+          due_on: 
+          value: 
+    'no': 'No'
+    placeholders:
+      account:
+        edit:
+          name: 
+        new:
+          name: 
       business:
         edit:
           name: 
           padma_id: 
-          send_weekly_reports: 
-          type: 
-      account:
+      installment:
         new:
-          currency: 
-          name: 
-        edit:
-          currency: 
-          name: 
-    'no': 'No'
+          due_on: 
+          value: 
     required:
+      html: 
       mark: 
       text: 
-      html: 
     'yes': Si
-    placeholders:
-      business:
-        edit:
-          name: 
-          padma_id: 
-      account:
-        new:
-          name: 
-        edit:
-          name: 
+  support:
+    array:
+      last_word_connector: ! ', y '
+      two_words_connector: ! ' y '
+      words_connector: ! ', '
+  time:
+    am: am
+    formats:
+      default: ! '%A, %d de %B de %Y %H:%M:%S %z'
+      long: ! '%d de %B de %Y %H:%M'
+      short: ! '%d de %b %H:%M'
+    pm: pm
   validates_timeliness:
     error_value_formats:
       date: 
       datetime: 
       time: 
-  helpers:
-    label:
-      account:
-        currency: 
-        name: 
-    submit:
-      create: Crear %{model}
-      update: Actualizar %{model}
-      account:
-        create: 
-        update: 
-      business:
-        update: 
-  accounts:
-    edit:
-      title: Editar cuenta
-    new:
-      title: Nueva cuenta
-  actions:
-    back: Atrás
-    show: 
-    login: Entrar
-    logout: Salir
-  layouts:
-    navigation:
-      businesses: Negocios
-      edit_account: Editar cuenta
-    secondary_navigation:
-      edit_business: Editar negocio
-      manage_sales: Administrar ventas
-      manage_transactions: Administrar transacciones
-      manage_memberships: Administrar membresías
