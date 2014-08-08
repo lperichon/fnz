@@ -567,3 +567,9 @@ pt:
       actions:
         add_transaction: 
         select_transactions: 
+  payments:
+    new_modal:
+      title: 
+  transactions:
+    fields:
+      source_prompt: 

@@ -57,7 +57,7 @@ es:
         description: Descripción
         source: Cuenta orígen
         state: Estado
-        tag_ids: 
+        tag_ids: Etiquetas
         transaction_at: Fecha
         conversion_rate: 
         reconciled_at: 
@@ -561,3 +561,9 @@ es:
       actions:
         add_transaction: Crear transacción
         select_transactions: Seleccionar transacciones
+  payments:
+    new_modal:
+      title: Registrar pago
+  transactions:
+    fields:
+      source_prompt: Seleccione una cuenta

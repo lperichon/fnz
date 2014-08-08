@@ -57,7 +57,7 @@ en:
         description: Description
         source: Source account
         state: Status
-        tag_ids: 
+        tag_ids: Tags
         transaction_at: Date
         conversion_rate: 
         reconciled_at: 
@@ -567,3 +567,9 @@ en:
       actions:
         add_transaction: Add transaction
         select_transactions: Select transactions
+  payments:
+    new_modal:
+      title: Create Payment
+  transactions:
+    fields:
+      source_prompt: Please select source account

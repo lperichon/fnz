@@ -1,7 +1,7 @@
 <% if @business.accounts.count == 1 %>
 	<%= f.input :source_id, :as => :hidden, :input_html => { :value => @business.accounts.first.id } %>
 <% else %>
-	<%= f.association :source, :collection => @business.accounts, :prompt => "Please select source account" %>
+	<%= f.association :source, :collection => @business.accounts, :prompt => t('transactions.fields.source_prompt') %>
 <% end %>
 
 <%= f.input :transaction_at, :as => :date_time_picker %>

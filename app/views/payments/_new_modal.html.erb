@@ -1,7 +1,7 @@
 <div id="new-payment-modal" class = "modal hide fade">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>Create Payment</h3>
+    <h3><%= t('payments.new_modal.title') %></h3>
   </div>
 
   <% 
@@ -21,8 +21,8 @@
           <% end %>
       <% end %>
       <div class="modal-footer">
-        <%= link_to "Close", "#", :class => "btn", "data-dismiss" => "modal" %>
-        <%= f.button :submit, "Create Payment", :class => "btn btn-primary" %>
+        <%= link_to t('actions.close'), "#", :class => "btn", "data-dismiss" => "modal" %>
+        <%= f.button :submit, t('payments.new_modal.title'), :class => "btn btn-primary" %>
       </div>
   <% end %>
 </div>
