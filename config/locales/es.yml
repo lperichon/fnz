@@ -8,7 +8,7 @@ es:
     back: Atrás
     login: Entrar
     logout: Salir
-    show: 
+    show: Ver
     create: Crear
     mark_as_paid: Registrar pago
     confirm_delete: ¿Está seguro que desea eliminar este elemento?
@@ -41,6 +41,9 @@ es:
         contact: Contacto
         enrollment: Matrícula
         value: Valor
+        business: 
+        closed_on: Fecha de cierre
+        padma_contact_id: Contacto
       installment:
         agent: 
         due_on: 
@@ -72,6 +75,10 @@ es:
         installment:
           attributes:
             due_on:
+              timeliness: 
+        membership:
+          attributes:
+            ends_on:
               timeliness: 
     models:
       account: Cuenta
@@ -286,6 +293,8 @@ es:
       update: Actualizar %{model}
       installment:
         create: 
+      membership:
+        update: 
   layouts:
     navigation:
       businesses: Negocios
@@ -303,6 +312,11 @@ es:
     show:
       new_installment: Nueva mensualidad
       create_enrollment: Crear matrícula
+    form:
+      contact_placeholder: Seleccione un contacto
+      payment_type_placeholder: Seleccione una forma de pago
+    edit:
+      title: Editar membresía
   number:
     currency:
       format:
@@ -381,6 +395,14 @@ es:
           state: 
           tag_ids: 
           transaction_at: 
+      membership:
+        edit:
+          begins_on: 
+          closed_on: 
+          ends_on: 
+          padma_contact_id: 
+          payment_type: 
+          value: 
     labels:
       account:
         edit:
@@ -414,6 +436,14 @@ es:
           state: 
           tag_ids: 
           transaction_at: 
+      membership:
+        edit:
+          begins_on: 
+          closed_on: 
+          ends_on: 
+          padma_contact_id: 
+          payment_type: 
+          value: 
     'no': 'No'
     placeholders:
       account:
@@ -428,6 +458,12 @@ es:
       installment:
         new:
           due_on: 
+          value: 
+      membership:
+        edit:
+          begins_on: 
+          closed_on: 
+          ends_on: 
           value: 
     required:
       html: 
@@ -455,3 +491,9 @@ es:
       date: 
       datetime: 
       time: 
+  installments:
+    installments_table:
+      header:
+        amount: Monto
+        month: Mes
+        status: Estado

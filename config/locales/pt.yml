@@ -41,6 +41,9 @@ pt:
         contact: 
         enrollment: 
         value: 
+        business: 
+        closed_on: 
+        padma_contact_id: 
       installment:
         agent: 
         due_on: 
@@ -72,6 +75,10 @@ pt:
         installment:
           attributes:
             due_on:
+              timeliness: 
+        membership:
+          attributes:
+            ends_on:
               timeliness: 
     models:
       account: 
@@ -284,6 +291,8 @@ pt:
       update: Actualizar %{model}
       installment:
         create: 
+      membership:
+        update: 
   layouts:
     navigation:
       businesses: 
@@ -301,6 +310,11 @@ pt:
     show:
       new_installment: 
       create_enrollment: 
+    form:
+      contact_placeholder: 
+      payment_type_placeholder: 
+    edit:
+      title: 
   number:
     currency:
       format:
@@ -387,6 +401,14 @@ pt:
           state: 
           tag_ids: 
           transaction_at: 
+      membership:
+        edit:
+          begins_on: 
+          closed_on: 
+          ends_on: 
+          padma_contact_id: 
+          payment_type: 
+          value: 
     labels:
       account:
         edit:
@@ -420,6 +442,14 @@ pt:
           state: 
           tag_ids: 
           transaction_at: 
+      membership:
+        edit:
+          begins_on: 
+          closed_on: 
+          ends_on: 
+          padma_contact_id: 
+          payment_type: 
+          value: 
     'no': 
     placeholders:
       account:
@@ -434,6 +464,12 @@ pt:
       installment:
         new:
           due_on: 
+          value: 
+      membership:
+        edit:
+          begins_on: 
+          closed_on: 
+          ends_on: 
           value: 
     required:
       html: 
@@ -461,3 +497,9 @@ pt:
       date: 
       datetime: 
       time: 
+  installments:
+    installments_table:
+      header:
+        amount: 
+        month: 
+        status: 

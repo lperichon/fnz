@@ -1,14 +1,14 @@
 <table class="installments table table-striped table-hover table-condensed table-bordered">
   <thead>
-  	<td>Month</td>
-  	<td>Amount</td>
-  	<td>Status</td>
+  	<td><%= t('installments.installments_table.header.month') %></td>
+  	<td><%= t('installments.installments_table.header.amount') %></td>
+  	<td><%= t('installments.installments_table.header.status') %></td>
   	<td></td>
   </thead>
   <tbody>
   <% installments.each do |installment| %>
       <tr>
-        <td><%= installment.due_on.strftime("%B %Y") %></td>
+        <td><%= l(installment.due_on, format: "%B %Y") %></td>
         <td class="amount"><%= number_to_currency(installment.value)%></td> 
         <td class="status"><%= content_tag(:i, "", :class => "icon-installment-#{installment.status}") %></td>
         <td>

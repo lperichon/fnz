@@ -6,9 +6,9 @@
     <%= render :partial => 'secondary_navigation' %>
 <% end %>
 
-<h2>Edit Membership</h2>
+<h2><%= t('memberships.edit.title') %></h2>
 
 <%= render :partial => 'form', :locals => {:form_url => business_membership_url(@business, @membership)} %>
 
-<%= link_to 'Show', business_membership_path(@business, @membership) %> |
-<%= link_to 'Back', :back %>
+<%= link_to t('actions.show'), business_membership_path(@business, @membership) %> |
+<%= link_to t('actions.back'), :back %>

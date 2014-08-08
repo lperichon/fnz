@@ -41,6 +41,9 @@ en:
         contact: Contact
         enrollment: Enrollment
         value: Value
+        business: 
+        closed_on: Closed on
+        padma_contact_id: Contact
       installment:
         agent: 
         due_on: 
@@ -72,6 +75,10 @@ en:
         installment:
           attributes:
             due_on:
+              timeliness: 
+        membership:
+          attributes:
+            ends_on:
               timeliness: 
     models:
       account: Account
@@ -292,6 +299,8 @@ en:
       update: Update %{model}
       installment:
         create: 
+      membership:
+        update: 
   layouts:
     navigation:
       businesses: Businesses
@@ -309,6 +318,11 @@ en:
     show:
       new_installment: New Installment
       create_enrollment: Create enrollment
+    form:
+      contact_placeholder: Please select contact
+      payment_type_placeholder: Please select payment type
+    edit:
+      title: Edit Membership
   number:
     currency:
       format:
@@ -387,6 +401,14 @@ en:
           state: 
           tag_ids: 
           transaction_at: 
+      membership:
+        edit:
+          begins_on: 
+          closed_on: 
+          ends_on: 
+          padma_contact_id: 
+          payment_type: 
+          value: 
     labels:
       account:
         edit:
@@ -420,6 +442,14 @@ en:
           state: 
           tag_ids: 
           transaction_at: 
+      membership:
+        edit:
+          begins_on: 
+          closed_on: 
+          ends_on: 
+          padma_contact_id: 
+          payment_type: 
+          value: 
     'no': 'No'
     placeholders:
       account:
@@ -434,6 +464,12 @@ en:
       installment:
         new:
           due_on: 
+          value: 
+      membership:
+        edit:
+          begins_on: 
+          closed_on: 
+          ends_on: 
           value: 
     required:
       html: 
@@ -461,3 +497,9 @@ en:
       date: ! '%Y-%m-%d'
       datetime: ! '%Y-%m-%d %H:%M:%S'
       time: ! '%H:%M:%S'
+  installments:
+    installments_table:
+      header:
+        amount: Amount
+        month: Month
+        status: Status
