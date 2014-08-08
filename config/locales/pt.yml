@@ -14,6 +14,7 @@ pt:
     confirm_delete: 
     mark_as_paid): 
     edit: 
+    close: 
   activerecord:
     attributes:
       account:
@@ -58,6 +59,20 @@ pt:
         state: 
         tag_ids: 
         transaction_at: 
+        conversion_rate: 
+        reconciled_at: 
+        target_id: 
+        type: 
+        date: 
+        target: 
+        tags: 
+      enrollment:
+        agent: 
+        enrolled_on: 
+        membership: 
+        status: 
+        value: 
+        transactions: 
     errors:
       models:
         account:
@@ -87,6 +102,7 @@ pt:
       installment: 
       transaction: 
       membership: 
+      enrollment: 
   date:
     abbr_day_names:
     - Dom
@@ -293,6 +309,10 @@ pt:
         create: 
       membership:
         update: 
+      enrollment:
+        create: 
+      transaction:
+        create: 
   layouts:
     navigation:
       businesses: 
@@ -401,6 +421,12 @@ pt:
           state: 
           tag_ids: 
           transaction_at: 
+          amount: 
+          conversion_rate: 
+          description: 
+          reconciled_at: 
+          target_id: 
+          type: 
       membership:
         edit:
           begins_on: 
@@ -408,6 +434,12 @@ pt:
           ends_on: 
           padma_contact_id: 
           payment_type: 
+          value: 
+      enrollment:
+        new:
+          agent: 
+          enrolled_on: 
+          status: 
           value: 
     labels:
       account:
@@ -442,6 +474,12 @@ pt:
           state: 
           tag_ids: 
           transaction_at: 
+          amount: 
+          conversion_rate: 
+          description: 
+          reconciled_at: 
+          target_id: 
+          type: 
       membership:
         edit:
           begins_on: 
@@ -449,6 +487,12 @@ pt:
           ends_on: 
           padma_contact_id: 
           payment_type: 
+          value: 
+      enrollment:
+        new:
+          agent: 
+          enrolled_on: 
+          status: 
           value: 
     'no': 
     placeholders:
@@ -471,6 +515,15 @@ pt:
           closed_on: 
           ends_on: 
           value: 
+      enrollment:
+        new:
+          enrolled_on: 
+          value: 
+      transaction:
+        new:
+          amount: 
+          conversion_rate: 
+          description: 
     required:
       html: 
       mark: 
@@ -503,3 +556,14 @@ pt:
         amount: 
         month: 
         status: 
+  enrollments:
+    new:
+      title: 
+  application:
+    list_transactions_modal:
+      close: 
+      title: 
+    nested_transactions_table:
+      actions:
+        add_transaction: 
+        select_transactions: 

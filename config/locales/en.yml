@@ -14,6 +14,7 @@ en:
     confirm_delete: Are you sure you want to delete this item?
     mark_as_paid): 
     edit: Edit
+    close: Close
   activerecord:
     attributes:
       account:
@@ -50,14 +51,28 @@ en:
         value: 
         membership: 
       transaction:
-        amount: 
+        amount: Amount
         business: 
         creator: 
-        description: 
-        source: 
-        state: 
+        description: Description
+        source: Source account
+        state: Status
         tag_ids: 
-        transaction_at: 
+        transaction_at: Date
+        conversion_rate: 
+        reconciled_at: 
+        target_id: 
+        type: Type
+        date: Fecha
+        target: Target account
+        tags: Tags
+      enrollment:
+        agent: Instructor
+        enrolled_on: Enrolled On
+        membership: 
+        status: Status
+        value: Value
+        transactions: Transactions
     errors:
       models:
         account:
@@ -87,6 +102,7 @@ en:
       installment: 
       transaction: 
       membership: Membership
+      enrollment: Enrollment
   date:
     abbr_day_names:
     - Sun
@@ -301,6 +317,10 @@ en:
         create: 
       membership:
         update: 
+      enrollment:
+        create: 
+      transaction:
+        create: 
   layouts:
     navigation:
       businesses: Businesses
@@ -401,6 +421,12 @@ en:
           state: 
           tag_ids: 
           transaction_at: 
+          amount: 
+          conversion_rate: 
+          description: 
+          reconciled_at: 
+          target_id: 
+          type: 
       membership:
         edit:
           begins_on: 
@@ -408,6 +434,12 @@ en:
           ends_on: 
           padma_contact_id: 
           payment_type: 
+          value: 
+      enrollment:
+        new:
+          agent: 
+          enrolled_on: 
+          status: 
           value: 
     labels:
       account:
@@ -442,6 +474,12 @@ en:
           state: 
           tag_ids: 
           transaction_at: 
+          amount: 
+          conversion_rate: 
+          description: 
+          reconciled_at: 
+          target_id: 
+          type: 
       membership:
         edit:
           begins_on: 
@@ -449,6 +487,12 @@ en:
           ends_on: 
           padma_contact_id: 
           payment_type: 
+          value: 
+      enrollment:
+        new:
+          agent: 
+          enrolled_on: 
+          status: 
           value: 
     'no': 'No'
     placeholders:
@@ -471,6 +515,15 @@ en:
           closed_on: 
           ends_on: 
           value: 
+      enrollment:
+        new:
+          enrolled_on: 
+          value: 
+      transaction:
+        new:
+          amount: 
+          conversion_rate: 
+          description: 
     required:
       html: 
       mark: ! '*'
@@ -503,3 +556,14 @@ en:
         amount: Amount
         month: Month
         status: Status
+  enrollments:
+    new:
+      title: New Enrollment
+  application:
+    list_transactions_modal:
+      close: Close
+      title: Select transactions
+    nested_transactions_table:
+      actions:
+        add_transaction: Add transaction
+        select_transactions: Select transactions

@@ -1,4 +1,4 @@
-<%= simple_form_for(@enrollment, :validate => true, :url => form_url) do |f| %>
+<%= simple_form_for(@enrollment, :validate => true, :url => form_url, :html => {:class => "form-horizontal"}) do |f| %>
     <%= f.association :agent, :as => :select, :collection => @business.agents, :input_html => {'data-placeholder' => 'Please select agent',:class => "chosen"} %>
     <%= f.input :value %>
     <%= f.input :enrolled_on, :as => "string", :input_html => {:class => "datepicker_input"} %>
@@ -6,10 +6,10 @@
     <%= f.input :status, :as => :payment_status %>
 
     <% if can? :manage, @business.transactions.build %>
-    <h3>Transactions</h3>
+    <h3><%= Enrollment.human_attribute_name(:transactions) %></h3>
     <%= render :partial => 'nested_transactions_table', :locals => {:f => f, :transactions => @transactions} %>
     <% elsif !@enrollment.new_record? && !@enrollment.complete? %>
-        <%= link_to "Mark as paid", new_business_membership_enrollment_payment_path(@business, f.object.membership, f.object), :remote => true %>
+        <%= link_to t('actions.mark_as_paid'), new_business_membership_enrollment_payment_path(@business, f.object.membership, f.object), :remote => true %>
     <% end %>
     <%= f.button :submit, :class => "btn btn-primary" %>
 <% end %>

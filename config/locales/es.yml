@@ -14,6 +14,7 @@ es:
     confirm_delete: ¿Está seguro que desea eliminar este elemento?
     mark_as_paid): 
     edit: Editar
+    close: Cerrar
   activerecord:
     attributes:
       account:
@@ -50,14 +51,28 @@ es:
         value: 
         membership: 
       transaction:
-        amount: 
+        amount: Monto
         business: 
         creator: 
-        description: 
-        source: 
-        state: 
+        description: Descripción
+        source: Cuenta orígen
+        state: Estado
         tag_ids: 
-        transaction_at: 
+        transaction_at: Fecha
+        conversion_rate: 
+        reconciled_at: 
+        target_id: 
+        type: Tipo
+        date: Date
+        target: Cuenta destino
+        tags: Etiquetas
+      enrollment:
+        agent: Instructor
+        enrolled_on: Fecha de matrícula
+        membership: 
+        status: Estado
+        value: Monto
+        transactions: Transacciones
     errors:
       models:
         account:
@@ -87,6 +102,7 @@ es:
       installment: 
       transaction: 
       membership: Membresía
+      enrollment: Matrícula
   date:
     abbr_day_names:
     - dom
@@ -295,6 +311,10 @@ es:
         create: 
       membership:
         update: 
+      enrollment:
+        create: 
+      transaction:
+        create: 
   layouts:
     navigation:
       businesses: Negocios
@@ -395,6 +415,12 @@ es:
           state: 
           tag_ids: 
           transaction_at: 
+          amount: 
+          conversion_rate: 
+          description: 
+          reconciled_at: 
+          target_id: 
+          type: 
       membership:
         edit:
           begins_on: 
@@ -402,6 +428,12 @@ es:
           ends_on: 
           padma_contact_id: 
           payment_type: 
+          value: 
+      enrollment:
+        new:
+          agent: 
+          enrolled_on: 
+          status: 
           value: 
     labels:
       account:
@@ -436,6 +468,12 @@ es:
           state: 
           tag_ids: 
           transaction_at: 
+          amount: 
+          conversion_rate: 
+          description: 
+          reconciled_at: 
+          target_id: 
+          type: 
       membership:
         edit:
           begins_on: 
@@ -443,6 +481,12 @@ es:
           ends_on: 
           padma_contact_id: 
           payment_type: 
+          value: 
+      enrollment:
+        new:
+          agent: 
+          enrolled_on: 
+          status: 
           value: 
     'no': 'No'
     placeholders:
@@ -465,6 +509,15 @@ es:
           closed_on: 
           ends_on: 
           value: 
+      enrollment:
+        new:
+          enrolled_on: 
+          value: 
+      transaction:
+        new:
+          amount: 
+          conversion_rate: 
+          description: 
     required:
       html: 
       mark: 
@@ -497,3 +550,14 @@ es:
         amount: Monto
         month: Mes
         status: Estado
+  enrollments:
+    new:
+      title: Nueva matrícula
+  application:
+    list_transactions_modal:
+      close: Cerrar
+      title: Seleccionar transacciones
+    nested_transactions_table:
+      actions:
+        add_transaction: Crear transacción
+        select_transactions: Seleccionar transacciones

@@ -14,15 +14,15 @@
   <tfoot>
     <td colspan="9">
     <% if can? :manage, @business.transactions.build %>
-      <%= link_to 'Add transaction', new_business_transaction_path(@business, :transaction => {"#{f.object.class.to_s.downcase}_ids" => [f.object.id]}), :remote => true %>
-      <%= link_to "List transactions", "#list-transactions-modal", 'data-toggle' => 'modal' %>
+      <%= link_to t('application.nested_transactions_table.actions.add_transaction'), new_business_transaction_path(@business, :transaction => {"#{f.object.class.to_s.downcase}_ids" => [f.object.id]}), :remote => true %>
+      <%= link_to t('application.nested_transactions_table.actions.select_transactions'), "#list-transactions-modal", 'data-toggle' => 'modal' %>
     <% end %>
     <% if f.object.class == Installment && !f.object.new_record? && !f.object.complete? %>
-    <%= link_to "Mark as paid", new_business_membership_installment_payment_path(@business, f.object.membership, f.object), :remote => true %>
+    <%= link_to t('actions.mark_as_paid'), new_business_membership_installment_payment_path(@business, f.object.membership, f.object), :remote => true %>
     <% elsif f.object.class == Enrollment && !f.object.new_record? #TODO: && !f.object.complete? %>
-    <%= link_to "Mark as paid", new_business_membership_enrollment_payment_path(@business, f.object.membership, f.object), :remote => true %>
+    <%= link_to t('actions.mark_as_paid'), new_business_membership_enrollment_payment_path(@business, f.object.membership, f.object), :remote => true %>
     <% elsif f.object.class == Sale && !f.object.new_record? && !f.object.complete? %>
-    <%= link_to "Mark as paid", new_business_sale_payment_path(@business, f.object), :remote => true %>
+    <%= link_to t('actions.mark_as_paid'), new_business_sale_payment_path(@business, f.object), :remote => true %>
     <% end %>
     </td>
   </tfoot>
@@ -31,7 +31,7 @@
 <div id="list-transactions-modal" class = "modal hide fade">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>Link Transaction</h3>
+    <h3><%= t('application.list_transactions_modal.title') %></h3>
   </div>
   <div class="modal-body">
     <%= render :layout => "transactions_table", :locals => {:transactions => transactions} do |transaction| %>
@@ -39,6 +39,6 @@
     <% end %>
   </div>
   <div class="modal-footer">
-    <%= link_to "Close", "#", :class => "btn", "data-dismiss" => "modal" %>
+    <%= link_to t('actions.close'), "#", :class => "btn", "data-dismiss" => "modal" %>
   </div>
 </div>
