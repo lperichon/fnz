@@ -11,6 +11,9 @@ es:
     show: 
     create: Crear
     mark_as_paid: Registrar pago
+    confirm_delete: ¿Está seguro que desea eliminar este elemento?
+    mark_as_paid): 
+    edit: Editar
   activerecord:
     attributes:
       account:
@@ -33,11 +36,25 @@ es:
       membership:
         ends_on: Fecha de finalización
         payment_type: Forma de pago
+        installments: Mensualidades
+        begins_on: Fecha de inicio
+        contact: Contacto
+        enrollment: Matrícula
+        value: Valor
       installment:
         agent: 
         due_on: 
         value: 
         membership: 
+      transaction:
+        amount: 
+        business: 
+        creator: 
+        description: 
+        source: 
+        state: 
+        tag_ids: 
+        transaction_at: 
     errors:
       models:
         account:
@@ -61,6 +78,8 @@ es:
       payment_type: Forma de pago
       school: 
       installment: 
+      transaction: 
+      membership: Membresía
   date:
     abbr_day_names:
     - dom
@@ -281,6 +300,9 @@ es:
       new_membership: Nueva membresía
     table_header:
       view_month_stats: Ver las estadísticas de %{month}
+    show:
+      new_installment: Nueva mensualidad
+      create_enrollment: Crear matrícula
   number:
     currency:
       format:
@@ -353,6 +375,12 @@ es:
           agent: 
           due_on: 
           value: 
+      transaction:
+        new:
+          source: 
+          state: 
+          tag_ids: 
+          transaction_at: 
     labels:
       account:
         edit:
@@ -380,6 +408,12 @@ es:
           agent: 
           due_on: 
           value: 
+      transaction:
+        new:
+          source: 
+          state: 
+          tag_ids: 
+          transaction_at: 
     'no': 'No'
     placeholders:
       account:
@@ -400,6 +434,10 @@ es:
       mark: 
       text: 
     'yes': Si
+    options:
+      transaction:
+        new:
+          state: 
   support:
     array:
       last_word_connector: ! ', y '

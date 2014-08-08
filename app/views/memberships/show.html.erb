@@ -6,26 +6,26 @@
     <%= render :partial => 'secondary_navigation' %>
 <% end %>
 
-<h2>Membership</h2>
-<p>Business: <%= @membership.business.name %></p>
-<p>Contact: <%= @membership.contact.try(:name) %></p>
-<p>Value: <%= @membership.value %></p>
-<p>Payment Type: <%= @membership.payment_type.try(:name) %></p>
-<p>Begins on: <%= @membership.begins_on %></p>
-<p>Ends on: <%= @membership.ends_on %></p>
-<h3>Enrollment</h3>
+<h2><%= Membership.model_name.human %></h2>
+<p><b><%= Membership.human_attribute_name(:contact) %>:</b> <%= @membership.contact.try(:name) %></p>
+<p><b><%= Membership.human_attribute_name(:value) %>:</b> <%= @membership.value %></p>
+<p><b><%= Membership.human_attribute_name(:payment_type) %>:</b> <%= @membership.payment_type.try(:name) %></p>
+<p><b><%= Membership.human_attribute_name(:begins_on) %>:</b> <%= @membership.begins_on %></p>
+<p><b><%= Membership.human_attribute_name(:ends_on) %>:</b> <%= @membership.ends_on %></p>
+
+<h3><%= Membership.human_attribute_name(:enrollment) %></h3>
 <% if @membership.enrollment %>
   <%= render :partial => 'enrollments/enrollment', :locals => {:enrollment => @membership.enrollment} %>
-    <%= link_to 'Show', business_membership_enrollment_path(@business, @membership) %> |
-    <%= link_to 'Edit', edit_business_membership_enrollment_path(@business, @membership) %> |
-    <%= link_to 'Delete', business_membership_enrollment_path(@business, @membership), :confirm => 'Are you sure you want to delete this item?', :method => 'delete' %>
+    <%= link_to t('actions.show'), business_membership_enrollment_path(@business, @membership) %> |
+    <%= link_to t('actions.edit'), edit_business_membership_enrollment_path(@business, @membership) %> |
+    <%= link_to t('actions.delete'), business_membership_enrollment_path(@business, @membership), :confirm => t('actions.confirm_delete'), :method => 'delete' %>
 <% else %>
-  <%= link_to "Create enrollment", new_business_membership_enrollment_path(@business, @membership) %>
+  <%= link_to t('memberships.show.create_enrollment'), new_business_membership_enrollment_path(@business, @membership) %>
 <% end %>
 
-<h3>Installments</h3>
+<h3><%= Membership.human_attribute_name('installments') %></h3>
 <%= render :partial => 'installments/installments', :locals => {:installments => @membership.installments} %>
 
-<%= link_to 'New Installment', new_business_membership_installment_path(@business, @membership) %> |
-<%= link_to 'Edit', edit_business_membership_path(@business, @membership) %> |
-<%= link_to 'Back',:back %>
+<%= link_to t('memberships.show.new_installment'), new_business_membership_installment_path(@business, @membership) %> |
+<%= link_to t('actions.edit'), edit_business_membership_path(@business, @membership) %> |
+<%= link_to t('actions.back'),:back %>

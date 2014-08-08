@@ -11,6 +11,9 @@ pt:
     show: 
     create: 
     mark_as_paid: 
+    confirm_delete: 
+    mark_as_paid): 
+    edit: 
   activerecord:
     attributes:
       account:
@@ -33,11 +36,25 @@ pt:
       membership:
         ends_on: 
         payment_type: 
+        installments: 
+        begins_on: 
+        contact: 
+        enrollment: 
+        value: 
       installment:
         agent: 
         due_on: 
         value: 
         membership: 
+      transaction:
+        amount: 
+        business: 
+        creator: 
+        description: 
+        source: 
+        state: 
+        tag_ids: 
+        transaction_at: 
     errors:
       models:
         account:
@@ -61,6 +78,8 @@ pt:
       payment_type: 
       school: 
       installment: 
+      transaction: 
+      membership: 
   date:
     abbr_day_names:
     - Dom
@@ -279,6 +298,9 @@ pt:
       new_membership: 
     table_header:
       view_month_stats: 
+    show:
+      new_installment: 
+      create_enrollment: 
   number:
     currency:
       format:
@@ -359,6 +381,12 @@ pt:
           agent: 
           due_on: 
           value: 
+      transaction:
+        new:
+          source: 
+          state: 
+          tag_ids: 
+          transaction_at: 
     labels:
       account:
         edit:
@@ -386,6 +414,12 @@ pt:
           agent: 
           due_on: 
           value: 
+      transaction:
+        new:
+          source: 
+          state: 
+          tag_ids: 
+          transaction_at: 
     'no': 
     placeholders:
       account:
@@ -406,6 +440,10 @@ pt:
       mark: 
       text: 
     'yes': 
+    options:
+      transaction:
+        new:
+          state: 
   support:
     array:
       last_word_connector: ! ', e'

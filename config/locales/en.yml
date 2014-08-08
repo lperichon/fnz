@@ -11,6 +11,9 @@ en:
     show: Show
     create: Create
     mark_as_paid: Mark as paid
+    confirm_delete: Are you sure you want to delete this item?
+    mark_as_paid): 
+    edit: Edit
   activerecord:
     attributes:
       account:
@@ -33,11 +36,25 @@ en:
       membership:
         ends_on: Ends on
         payment_type: Payment type
+        installments: Installments
+        begins_on: Begins on
+        contact: Contact
+        enrollment: Enrollment
+        value: Value
       installment:
         agent: 
         due_on: 
         value: 
         membership: 
+      transaction:
+        amount: 
+        business: 
+        creator: 
+        description: 
+        source: 
+        state: 
+        tag_ids: 
+        transaction_at: 
     errors:
       models:
         account:
@@ -61,6 +78,8 @@ en:
       payment_type: 
       school: 
       installment: 
+      transaction: 
+      membership: Membership
   date:
     abbr_day_names:
     - Sun
@@ -287,6 +306,9 @@ en:
       new_membership: New membership
     table_header:
       view_month_stats: View %{month} stats
+    show:
+      new_installment: New Installment
+      create_enrollment: Create enrollment
   number:
     currency:
       format:
@@ -359,6 +381,12 @@ en:
           agent: 
           due_on: 
           value: 
+      transaction:
+        new:
+          source: 
+          state: 
+          tag_ids: 
+          transaction_at: 
     labels:
       account:
         edit:
@@ -386,6 +414,12 @@ en:
           agent: 
           due_on: 
           value: 
+      transaction:
+        new:
+          source: 
+          state: 
+          tag_ids: 
+          transaction_at: 
     'no': 'No'
     placeholders:
       account:
@@ -406,6 +440,10 @@ en:
       mark: ! '*'
       text: required
     'yes': 'Yes'
+    options:
+      transaction:
+        new:
+          state: 
   support:
     array:
       last_word_connector: ! ', and '
