@@ -46,10 +46,11 @@ en:
         closed_on: Closed on
         padma_contact_id: Contact
       installment:
-        agent: 
-        due_on: 
-        value: 
+        agent: Instructor
+        due_on: Due on
+        value: Value
         membership: 
+        status: Status
       transaction:
         amount: Amount
         business: 
@@ -99,10 +100,13 @@ en:
       account: Account
       payment_type: 
       school: 
-      installment: 
-      transaction: 
+      installment: Installment
+      transaction: Transaction
       membership: Membership
       enrollment: Enrollment
+      credit: Income
+      debit: Expense
+      transfer: Transfer
   date:
     abbr_day_names:
     - Sun
@@ -343,6 +347,8 @@ en:
       payment_type_placeholder: Please select payment type
     edit:
       title: Edit Membership
+    overview:
+      close_membership: Close membership
   number:
     currency:
       format:
@@ -556,6 +562,10 @@ en:
         amount: Amount
         month: Month
         status: Status
+    form:
+      agent_placeholder: Please select agent
+    new:
+      title: New Installment
   enrollments:
     new:
       title: New Enrollment
@@ -573,3 +583,8 @@ en:
   transactions:
     fields:
       source_prompt: Please select source account
+      target_prompt: Please select target account
+    field:
+      tags_placeholder: Please select some tags
+    new_modal:
+      title: Add Transaction

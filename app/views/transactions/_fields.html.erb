@@ -1,13 +1,13 @@
-<%= f.input :type, :collection => ["Debit", "Credit", "Transfer"], :as => :radio_buttons, :item_wrapper_class => 'inline' %>
+<%= f.input :type, :collection => [[Debit.model_name.human, "Debit"], [Credit.model_name.human, "Credit"], [Transfer.model_name.human, "Transfer"]], :as => :radio_buttons, :item_wrapper_class => 'inline' %>
 
 <%= f.input :description %>
 
 <%= f.input :amount %>
 
-<%= f.association :source, :collection => @business.accounts, :prompt => "Please select source account" %>
+<%= f.association :source, :collection => @business.accounts, :prompt => t('transactions.fields.source_prompt') %>
 
 <span class="transfer_field" style="display:none;">
-  <%= f.input :target_id, :as => :select, :collection => @business.accounts, :prompt => "Please select target account" %>
+  <%= f.input :target_id, :as => :select, :collection => @business.accounts, :prompt => t('transactions.fields.target_prompt') %>
 </span>
 
 <%= f.input :transaction_at, :as => :date_time_picker %>
@@ -22,4 +22,4 @@
   <%= f.input :reconciled_at, :as => :date_time_picker %>
 </span>
 
-<%=  f.input :tag_ids, :as => :select, :collection => @business.tags, :input_html => {:class => "chosen", :multiple => true} %>
+<%=  f.input :tag_ids, :as => :select, :collection => @business.tags, :input_html => {:class => "chosen", :multiple => true, 'data-placeholder' => t('transactions.field.tags_placeholder')} %>

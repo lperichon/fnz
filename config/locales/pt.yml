@@ -50,6 +50,7 @@ pt:
         due_on: 
         value: 
         membership: 
+        status: 
       transaction:
         amount: 
         business: 
@@ -103,6 +104,9 @@ pt:
       transaction: 
       membership: 
       enrollment: 
+      credit: 
+      debit: 
+      transfer: 
   date:
     abbr_day_names:
     - Dom
@@ -335,6 +339,8 @@ pt:
       payment_type_placeholder: 
     edit:
       title: 
+    overview:
+      close_membership: 
   number:
     currency:
       format:
@@ -556,6 +562,10 @@ pt:
         amount: 
         month: 
         status: 
+    form:
+      agent_placeholder: 
+    new:
+      title: 
   enrollments:
     new:
       title: 
@@ -573,3 +583,8 @@ pt:
   transactions:
     fields:
       source_prompt: 
+      target_prompt: 
+    field:
+      tags_placeholder: 
+    new_modal:
+      title: 
