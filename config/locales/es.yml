@@ -75,6 +75,19 @@ es:
         status: Estado
         value: Monto
         transactions: Transacciones
+      credit:
+        amount: 
+        business: 
+        conversion_rate: 
+        creator: 
+        description: 
+        reconciled_at: 
+        source: 
+        state: 
+        tag_ids: 
+        target_id: 
+        transaction_at: 
+        type: 
     errors:
       models:
         account:
@@ -314,12 +327,14 @@ es:
       update: Actualizar %{model}
       installment:
         create: 
+        update: 
       membership:
         update: 
       enrollment:
         create: 
       transaction:
         create: 
+        update: 
   layouts:
     navigation:
       businesses: Negocios
@@ -416,6 +431,11 @@ es:
           agent: 
           due_on: 
           value: 
+        edit:
+          agent: 
+          due_on: 
+          status: 
+          value: 
       transaction:
         new:
           source: 
@@ -427,6 +447,18 @@ es:
           description: 
           reconciled_at: 
           target_id: 
+          type: 
+        edit:
+          amount: 
+          conversion_rate: 
+          description: 
+          installment_ids: 
+          reconciled_at: 
+          source: 
+          state: 
+          tag_ids: 
+          target_id: 
+          transaction_at: 
           type: 
       membership:
         edit:
@@ -469,6 +501,11 @@ es:
           agent: 
           due_on: 
           value: 
+        edit:
+          agent: 
+          due_on: 
+          status: 
+          value: 
       transaction:
         new:
           source: 
@@ -480,6 +517,17 @@ es:
           description: 
           reconciled_at: 
           target_id: 
+          type: 
+        edit:
+          amount: 
+          conversion_rate: 
+          description: 
+          reconciled_at: 
+          source: 
+          state: 
+          tag_ids: 
+          target_id: 
+          transaction_at: 
           type: 
       membership:
         edit:
@@ -510,6 +558,9 @@ es:
         new:
           due_on: 
           value: 
+        edit:
+          due_on: 
+          value: 
       membership:
         edit:
           begins_on: 
@@ -525,6 +576,10 @@ es:
           amount: 
           conversion_rate: 
           description: 
+        edit:
+          amount: 
+          conversion_rate: 
+          description: 
     required:
       html: 
       mark: 
@@ -533,6 +588,8 @@ es:
     options:
       transaction:
         new:
+          state: 
+        edit:
           state: 
   support:
     array:
@@ -561,6 +618,8 @@ es:
       agent_placeholder: Seleccione un instructor
     new:
       title: Nueva mensualidad
+    edit:
+      title: Editar Mensualidad
   enrollments:
     new:
       title: Nueva matrícula

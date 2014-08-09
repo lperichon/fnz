@@ -75,6 +75,19 @@ en:
         status: Status
         value: Value
         transactions: Transactions
+      credit:
+        amount: 
+        business: 
+        conversion_rate: 
+        creator: 
+        description: 
+        reconciled_at: 
+        source: 
+        state: 
+        tag_ids: 
+        target_id: 
+        transaction_at: 
+        type: 
     errors:
       models:
         account:
@@ -320,12 +333,14 @@ en:
       update: Update %{model}
       installment:
         create: 
+        update: 
       membership:
         update: 
       enrollment:
         create: 
       transaction:
         create: 
+        update: 
   layouts:
     navigation:
       businesses: Businesses
@@ -422,6 +437,11 @@ en:
           agent: 
           due_on: 
           value: 
+        edit:
+          agent: 
+          due_on: 
+          status: 
+          value: 
       transaction:
         new:
           source: 
@@ -433,6 +453,18 @@ en:
           description: 
           reconciled_at: 
           target_id: 
+          type: 
+        edit:
+          amount: 
+          conversion_rate: 
+          description: 
+          installment_ids: 
+          reconciled_at: 
+          source: 
+          state: 
+          tag_ids: 
+          target_id: 
+          transaction_at: 
           type: 
       membership:
         edit:
@@ -475,6 +507,11 @@ en:
           agent: 
           due_on: 
           value: 
+        edit:
+          agent: 
+          due_on: 
+          status: 
+          value: 
       transaction:
         new:
           source: 
@@ -486,6 +523,17 @@ en:
           description: 
           reconciled_at: 
           target_id: 
+          type: 
+        edit:
+          amount: 
+          conversion_rate: 
+          description: 
+          reconciled_at: 
+          source: 
+          state: 
+          tag_ids: 
+          target_id: 
+          transaction_at: 
           type: 
       membership:
         edit:
@@ -516,6 +564,9 @@ en:
         new:
           due_on: 
           value: 
+        edit:
+          due_on: 
+          value: 
       membership:
         edit:
           begins_on: 
@@ -531,6 +582,10 @@ en:
           amount: 
           conversion_rate: 
           description: 
+        edit:
+          amount: 
+          conversion_rate: 
+          description: 
     required:
       html: 
       mark: ! '*'
@@ -539,6 +594,8 @@ en:
     options:
       transaction:
         new:
+          state: 
+        edit:
           state: 
   support:
     array:
@@ -567,6 +624,8 @@ en:
       agent_placeholder: Please select agent
     new:
       title: New Installment
+    edit:
+      title: Edit Installment
   enrollments:
     new:
       title: New Enrollment

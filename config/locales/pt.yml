@@ -75,6 +75,19 @@ pt:
         status: 
         value: 
         transactions: 
+      credit:
+        amount: 
+        business: 
+        conversion_rate: 
+        creator: 
+        description: 
+        reconciled_at: 
+        source: 
+        state: 
+        tag_ids: 
+        target_id: 
+        transaction_at: 
+        type: 
     errors:
       models:
         account:
@@ -312,12 +325,14 @@ pt:
       update: Actualizar %{model}
       installment:
         create: 
+        update: 
       membership:
         update: 
       enrollment:
         create: 
       transaction:
         create: 
+        update: 
   layouts:
     navigation:
       businesses: 
@@ -422,6 +437,11 @@ pt:
           agent: 
           due_on: 
           value: 
+        edit:
+          agent: 
+          due_on: 
+          status: 
+          value: 
       transaction:
         new:
           source: 
@@ -433,6 +453,18 @@ pt:
           description: 
           reconciled_at: 
           target_id: 
+          type: 
+        edit:
+          amount: 
+          conversion_rate: 
+          description: 
+          installment_ids: 
+          reconciled_at: 
+          source: 
+          state: 
+          tag_ids: 
+          target_id: 
+          transaction_at: 
           type: 
       membership:
         edit:
@@ -475,6 +507,11 @@ pt:
           agent: 
           due_on: 
           value: 
+        edit:
+          agent: 
+          due_on: 
+          status: 
+          value: 
       transaction:
         new:
           source: 
@@ -486,6 +523,17 @@ pt:
           description: 
           reconciled_at: 
           target_id: 
+          type: 
+        edit:
+          amount: 
+          conversion_rate: 
+          description: 
+          reconciled_at: 
+          source: 
+          state: 
+          tag_ids: 
+          target_id: 
+          transaction_at: 
           type: 
       membership:
         edit:
@@ -516,6 +564,9 @@ pt:
         new:
           due_on: 
           value: 
+        edit:
+          due_on: 
+          value: 
       membership:
         edit:
           begins_on: 
@@ -531,6 +582,10 @@ pt:
           amount: 
           conversion_rate: 
           description: 
+        edit:
+          amount: 
+          conversion_rate: 
+          description: 
     required:
       html: 
       mark: 
@@ -539,6 +594,8 @@ pt:
     options:
       transaction:
         new:
+          state: 
+        edit:
           state: 
   support:
     array:
@@ -566,6 +623,8 @@ pt:
     form:
       agent_placeholder: 
     new:
+      title: 
+    edit:
       title: 
   enrollments:
     new:
