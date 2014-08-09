@@ -89,6 +89,13 @@ pt:
         target_id: 
         transaction_at: 
         type: 
+      sale:
+        agent: 
+        amount: 
+        contact: 
+        product: 
+        sold_on: 
+        status: 
     errors:
       models:
         account:
@@ -122,6 +129,7 @@ pt:
       credit: 
       debit: 
       transfer: 
+      sale: 
   date:
     abbr_day_names:
     - Dom
@@ -627,6 +635,8 @@ pt:
       title: 
     edit:
       title: 
+    index:
+      view_month_stats: 
   enrollments:
     new:
       title: 
@@ -649,3 +659,8 @@ pt:
       tags_placeholder: 
     new_modal:
       title: 
+  sales:
+    index:
+      view_month_stats: 
+    secondary_navigation:
+      new_sale: 

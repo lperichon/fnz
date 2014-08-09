@@ -6,24 +6,24 @@
     <%= render :partial => 'secondary_navigation' %>
 <% end %>
 
-<h3>Sales</h3>
+<h3><%= Sale.model_name.human.pluralize %></h3>
 <% @sales.group_by{ |s| s.sold_on.beginning_of_month }.each do |date, sales| %>
   <h4>
-  	<%= Date::MONTHNAMES[date.month] %> <%= link_to content_tag(:i, "", :class => "icon-bar-chart", :title => "View #{Date::MONTHNAMES[date.month]} stats"), stats_business_sales_path(@business, :year => date.year, :month => date.month), :remote => true %>
+  	<%= l(date, :format => '%B') %> <%= link_to content_tag(:i, "", :class => "icon-bar-chart", :title => t('sales.index.view_month_stats', :month => l(date, :format => "%B"))), stats_business_sales_path(@business, :year => date.year, :month => date.month), :remote => true %>
   </h4>
 <table class="sales table table-striped table-hover table-condensed table-bordered">
   <thead>
-  	<td>Day</td>
-	<td>Contact</td>
-	<td>Agent</td>
-	<td>Product</td>
-	<td>Amount</td>
-	<td>Status</td>
+  	<td><%= Sale.human_attribute_name(:sold_on) %></td>
+  	<td><%= Sale.human_attribute_name(:contact) %></td>
+  	<td><%= Sale.human_attribute_name(:agent) %></td>
+  	<td><%= Sale.human_attribute_name(:product) %></td>
+  	<td><%= Sale.human_attribute_name(:amount) %></td>
+  	<td><%= Sale.human_attribute_name(:status) %></td>
   	<td></td>
   </thead>
   <% sales.each do |sale| %>
     <tr>
-      <td><%= sale.sold_on %></td>
+      <td><%= l(sale.sold_on, :format => :short) %></td>
       <td><%= sale.contact.try(:name) %></td>
       <td><%= sale.agent.name %></td>
       <td><%= sale.product.try(:name) %></td>
@@ -32,7 +32,7 @@
       <td>
       	<%= link_to content_tag(:i, "", :class => "icon-eye-open"), business_sale_path(@business, sale) %>
       	<%= link_to content_tag(:i, "", :class => "icon-edit"), edit_business_sale_path(@business, sale) %>
-  		<%= link_to content_tag(:i, "", :class => "icon-trash"), business_sale_path(@business, sale), :confirm => 'Are you sure you want to delete this item?', :method => 'delete' %>
+  		<%= link_to content_tag(:i, "", :class => "icon-trash"), business_sale_path(@business, sale), :confirm => t('actions.confirm_delete'), :method => 'delete' %>
       </td>
     </tr>
   <% end %>

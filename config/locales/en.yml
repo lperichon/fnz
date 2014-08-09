@@ -89,6 +89,13 @@ en:
         target_id: 
         transaction_at: 
         type: 
+      sale:
+        agent: Instructor
+        amount: Amount
+        contact: Contact
+        product: Product
+        sold_on: Sold on
+        status: Status
     errors:
       models:
         account:
@@ -122,6 +129,7 @@ en:
       credit: Income
       debit: Expense
       transfer: Transfer
+      sale: Sales
   date:
     abbr_day_names:
     - Sun
@@ -627,6 +635,8 @@ en:
       title: New Installment
     edit:
       title: Edit Installment
+    index:
+      view_month_stats: 
   enrollments:
     new:
       title: New Enrollment
@@ -649,3 +659,8 @@ en:
       tags_placeholder: Please select some tags
     new_modal:
       title: Add Transaction
+  sales:
+    index:
+      view_month_stats: View %{month} stats
+    secondary_navigation:
+      new_sale: New Sale

@@ -89,6 +89,13 @@ es:
         target_id: 
         transaction_at: 
         type: 
+      sale:
+        agent: Instructor
+        amount: Monto
+        contact: Contacto
+        product: Producto
+        sold_on: Fecha de venta
+        status: Estado
     errors:
       models:
         account:
@@ -122,6 +129,7 @@ es:
       credit: Entrada
       debit: Salida
       transfer: Transferencia
+      sale: Ventas
   date:
     abbr_day_names:
     - dom
@@ -621,6 +629,8 @@ es:
       title: Nueva mensualidad
     edit:
       title: Editar Mensualidad
+    index:
+      view_month_stats: 
   enrollments:
     new:
       title: Nueva matrícula
@@ -643,3 +653,8 @@ es:
       tags_placeholder: Seleccione las etiquetas
     new_modal:
       title: Crear Transacción
+  sales:
+    index:
+      view_month_stats: Ver las estadísticas de %{month}
+    secondary_navigation:
+      new_sale: Nueva venta
