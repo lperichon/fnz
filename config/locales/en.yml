@@ -15,6 +15,7 @@ en:
     mark_as_paid): 
     edit: Edit
     close: Close
+    delete: Delete
   activerecord:
     attributes:
       account:
