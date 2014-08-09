@@ -96,6 +96,10 @@ pt:
         product: 
         sold_on: 
         status: 
+        business: 
+        padma_contact: 
+        padma_contact_id: 
+        transactions: 
     errors:
       models:
         account:
@@ -342,6 +346,9 @@ pt:
       transaction:
         create: 
         update: 
+      sale:
+        create: 
+        update: 
   layouts:
     navigation:
       businesses: 
@@ -489,6 +496,18 @@ pt:
           enrolled_on: 
           status: 
           value: 
+      sale:
+        new:
+          agent: 
+          padma_contact_id: 
+          product: 
+          sold_on: 
+        edit:
+          agent: 
+          padma_contact_id: 
+          product: 
+          sold_on: 
+          status: 
     labels:
       account:
         edit:
@@ -558,6 +577,18 @@ pt:
           enrolled_on: 
           status: 
           value: 
+      sale:
+        new:
+          agent: 
+          padma_contact_id: 
+          product: 
+          sold_on: 
+        edit:
+          agent: 
+          padma_contact_id: 
+          product: 
+          sold_on: 
+          status: 
     'no': 
     placeholders:
       account:
@@ -664,3 +695,11 @@ pt:
       view_month_stats: 
     secondary_navigation:
       new_sale: 
+    form:
+      contact_placeholder: 
+      agent_placeholder: 
+      product_placeholder: 
+    new:
+      title: 
+    edit:
+      title: 

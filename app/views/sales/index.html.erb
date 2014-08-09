@@ -6,7 +6,7 @@
     <%= render :partial => 'secondary_navigation' %>
 <% end %>
 
-<h3><%= Sale.model_name.human.pluralize %></h3>
+<h3><%= Sale.model_name.human(:count => 2) %></h3>
 <% @sales.group_by{ |s| s.sold_on.beginning_of_month }.each do |date, sales| %>
   <h4>
   	<%= l(date, :format => '%B') %> <%= link_to content_tag(:i, "", :class => "icon-bar-chart", :title => t('sales.index.view_month_stats', :month => l(date, :format => "%B"))), stats_business_sales_path(@business, :year => date.year, :month => date.month), :remote => true %>

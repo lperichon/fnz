@@ -96,6 +96,10 @@ es:
         product: Producto
         sold_on: Fecha de venta
         status: Estado
+        business: 
+        padma_contact: Contacto
+        padma_contact_id: 
+        transactions: Transacciones
     errors:
       models:
         account:
@@ -129,7 +133,10 @@ es:
       credit: Entrada
       debit: Salida
       transfer: Transferencia
-      sale: Ventas
+      sale:
+        many: Ventas
+        one: Venta
+        other: Ventas
   date:
     abbr_day_names:
     - dom
@@ -344,6 +351,9 @@ es:
       transaction:
         create: 
         update: 
+      sale:
+        create: 
+        update: 
   layouts:
     navigation:
       businesses: Negocios
@@ -483,6 +493,18 @@ es:
           enrolled_on: 
           status: 
           value: 
+      sale:
+        new:
+          agent: 
+          padma_contact_id: 
+          product: 
+          sold_on: 
+        edit:
+          agent: 
+          padma_contact_id: 
+          product: 
+          sold_on: 
+          status: 
     labels:
       account:
         edit:
@@ -552,6 +574,18 @@ es:
           enrolled_on: 
           status: 
           value: 
+      sale:
+        new:
+          agent: 
+          padma_contact_id: 
+          product: 
+          sold_on: 
+        edit:
+          agent: 
+          padma_contact_id: 
+          product: 
+          sold_on: 
+          status: 
     'no': 'No'
     placeholders:
       account:
@@ -658,3 +692,11 @@ es:
       view_month_stats: Ver las estadísticas de %{month}
     secondary_navigation:
       new_sale: Nueva venta
+    form:
+      contact_placeholder: Seleccione un contacto
+      agent_placeholder: Seleccione un instructor
+      product_placeholder: Seleccione un producto
+    new:
+      title: Nueva venta
+    edit:
+      title: Editar venta

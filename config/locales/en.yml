@@ -96,6 +96,10 @@ en:
         product: Product
         sold_on: Sold on
         status: Status
+        business: 
+        padma_contact: Contact
+        padma_contact_id: Contact
+        transactions: Transactions
     errors:
       models:
         account:
@@ -129,7 +133,10 @@ en:
       credit: Income
       debit: Expense
       transfer: Transfer
-      sale: Sales
+      sale:
+        many: Sales
+        one: Sale
+        other: Sales
   date:
     abbr_day_names:
     - Sun
@@ -350,6 +357,9 @@ en:
       transaction:
         create: 
         update: 
+      sale:
+        create: 
+        update: 
   layouts:
     navigation:
       businesses: Businesses
@@ -489,6 +499,18 @@ en:
           enrolled_on: 
           status: 
           value: 
+      sale:
+        new:
+          agent: 
+          padma_contact_id: 
+          product: 
+          sold_on: 
+        edit:
+          agent: 
+          padma_contact_id: 
+          product: 
+          sold_on: 
+          status: 
     labels:
       account:
         edit:
@@ -558,6 +580,18 @@ en:
           enrolled_on: 
           status: 
           value: 
+      sale:
+        new:
+          agent: 
+          padma_contact_id: 
+          product: 
+          sold_on: 
+        edit:
+          agent: 
+          padma_contact_id: 
+          product: 
+          sold_on: 
+          status: 
     'no': 'No'
     placeholders:
       account:
@@ -664,3 +698,11 @@ en:
       view_month_stats: View %{month} stats
     secondary_navigation:
       new_sale: New Sale
+    form:
+      contact_placeholder: Please select contact
+      agent_placeholder: Please select instructor
+      product_placeholder: Please select product
+    new:
+      title: New Sale
+    edit:
+      title: Edit Sale
