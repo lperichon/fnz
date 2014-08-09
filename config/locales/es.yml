@@ -51,6 +51,7 @@ es:
         value: Monto
         membership: 
         status: Estado
+        transactions: Transacciones
       transaction:
         amount: Monto
         business: 

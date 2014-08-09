@@ -2,28 +2,28 @@
     <%= render :partial => 'memberships/sidebar' %>
 <% end %>
 
-<h2>Installment</h2>
-<p>Agent: <%= @installment.agent.try(:name) %></p>
-<p>Due on: <%= @installment.due_on %></p>
-<p>value: <%= @installment.value %></p>
+<h2><%= Installment.model_name.human %></h2>
+<p><b><%= Installment.human_attribute_name(:agent) %>:</b> <%= @installment.agent.try(:name) %></p>
+<p><b><%= Installment.human_attribute_name(:due_on) %>:</b> <%= @installment.due_on %></p>
+<p><b><%= Installment.human_attribute_name(:value) %>:</b> <%= @installment.value %></p>
 
 <% unless @installment.new_record? %>
-	<p>Status: <%= content_tag(:span, @installment.status, :class => "label label-#{@installment.status}") %>
+	<p><b><%= Installment.human_attribute_name(:status) %>:</b> <%= content_tag(:span, @installment.status, :class => "label label-#{@installment.status}") %>
 	<%if !@installment.complete?  %>
-        <%= link_to "Mark as paid", new_business_membership_installment_payment_path(@business, @installment.membership, @installment), :remote => true %>
+        <%= link_to t('actions.mark_as_paid'), new_business_membership_installment_payment_path(@business, @installment.membership, @installment), :remote => true %>
     <% end %>
 	</p>
 <% end %>
 
 <% if can? :manage, @business.transactions.build %>
-<h3>Transactions</h3>
+<h3><%= Installment.human_attribute_name(:transactions) %></h3>
 <%= render :layout => 'transactions_table', :locals => {:transactions => @installment.transactions} do |transaction| %>
   <% if can? :manage, @business.transactions.build %>
    <%= link_to content_tag(:i, "", :class => "icon-edit"), edit_business_transaction_path(transaction.business, transaction), :remote => true %>
-   <%= link_to content_tag(:i, "", :class => "icon-trash"), business_transaction_path(transaction.business, transaction), :confirm => 'Are you sure you want to delete this item?', :method => 'delete' %>
+   <%= link_to content_tag(:i, "", :class => "icon-trash"), business_transaction_path(transaction.business, transaction), :confirm => t('actions.confirm_delete'), :method => 'delete' %>
   <% end %>   
 <% end %>
 <% end %>
 
-<%= link_to 'Edit', edit_business_membership_installment_path(@business, @membership, @installment) %> |
-<%= link_to 'Back', business_membership_path(@business, @membership) %>
+<%= link_to t('actions.edit'), edit_business_membership_installment_path(@business, @membership, @installment) %> |
+<%= link_to t('actions.back'), business_membership_path(@business, @membership) %>

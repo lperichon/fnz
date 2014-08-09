@@ -51,6 +51,7 @@ en:
         value: Value
         membership: 
         status: Status
+        transactions: Transactions
       transaction:
         amount: Amount
         business: 

@@ -51,6 +51,7 @@ pt:
         value: 
         membership: 
         status: 
+        transactions: 
       transaction:
         amount: 
         business: 
