@@ -1,0 +1,709 @@
+pt-BR:
+  accounts:
+    edit:
+      title: 
+    new:
+      title: 
+  actions:
+    back: 
+    close: 
+    confirm_delete: 
+    create: 
+    delete: 
+    edit: 
+    login: 
+    logout: 
+    mark_as_paid: 
+    mark_as_paid): 
+    show: 
+  activerecord:
+    attributes:
+      account:
+        business: 
+        currency: 
+        name: 
+      credit:
+        amount: 
+        business: 
+        conversion_rate: 
+        creator: 
+        description: 
+        reconciled_at: 
+        source: 
+        state: 
+        tag_ids: 
+        target_id: 
+        transaction_at: 
+        type: 
+      enrollment:
+        agent: 
+        enrolled_on: 
+        membership: 
+        status: 
+        transactions: 
+        value: 
+      installment:
+        agent: 
+        due_on: 
+        membership: 
+        status: 
+        transactions: 
+        value: 
+      membership:
+        begins_on: 
+        business: 
+        closed_on: 
+        contact: 
+        ends_on: 
+        enrollment: 
+        installments: 
+        padma_contact_id: 
+        payment_type: 
+        value: 
+      sale:
+        agent: 
+        amount: 
+        business: 
+        contact: 
+        padma_contact: 
+        padma_contact_id: 
+        product: 
+        sold_on: 
+        status: 
+        transactions: 
+      school:
+        name: 
+        owner: 
+        padma_id: 
+        send_weekly_reports: 
+        type: 
+      transaction:
+        amount: 
+        business: 
+        conversion_rate: 
+        creator: 
+        date: 
+        description: 
+        reconciled_at: 
+        source: 
+        state: 
+        tag_ids: 
+        tags: 
+        target: 
+        target_id: 
+        transaction_at: 
+        type: 
+      user:
+        current_password: 
+        email: 
+        name: 
+        password: 
+        password_confirmation: 
+        time_zone: 
+    errors:
+      models:
+        account:
+          attributes:
+            business:
+              blank: 
+            name:
+              blank: 
+        installment:
+          attributes:
+            due_on:
+              timeliness: 
+        membership:
+          attributes:
+            ends_on:
+              timeliness: 
+        school:
+          attributes:
+            name:
+              blank: 
+            owner:
+              blank: 
+    models:
+      account: 
+      credit: 
+      debit: 
+      enrollment: 
+      installment: 
+      membership: 
+      payment_type: 
+      sale: 
+      school: 
+      transaction: 
+      transfer: 
+  application:
+    list_transactions_modal:
+      close: 
+      title: 
+    nested_transactions_table:
+      actions:
+        add_transaction: 
+        select_transactions: 
+  date:
+    abbr_day_names:
+    - Dom
+    - Seg
+    - Ter
+    - Qua
+    - Qui
+    - Sex
+    - Sáb
+    abbr_month_names:
+    - 
+    - Jan
+    - Fev
+    - Mar
+    - Abr
+    - Mai
+    - Jun
+    - Jul
+    - Ago
+    - Set
+    - Out
+    - Nov
+    - Dez
+    day_names:
+    - Domingo
+    - Segunda
+    - Terça
+    - Quarta
+    - Quinta
+    - Sexta
+    - Sábado
+    formats:
+      default: ! '%d/%m/%Y'
+      long: ! '%d de %B de %Y'
+      short: ! '%d de %B'
+    month_names:
+    - 
+    - Janeiro
+    - Fevereiro
+    - Março
+    - Abril
+    - Maio
+    - Junho
+    - Julho
+    - Agosto
+    - Setembro
+    - Outubro
+    - Novembro
+    - Dezembro
+    order:
+    - :day
+    - :month
+    - :year
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: aproximadamente 1 hora
+        other: aproximadamente %{count} horas
+      about_x_months:
+        one: aproximadamente 1 mês
+        other: aproximadamente %{count} meses
+      about_x_years:
+        one: aproximadamente 1 ano
+        other: aproximadamente %{count} anos
+      almost_x_years:
+        one: quase 1 ano
+        other: quase %{count} anos
+      half_a_minute: meio minuto
+      less_than_x_minutes:
+        one: menos de um minuto
+        other: menos de %{count} minutos
+      less_than_x_seconds:
+        one: menos de 1 segundo
+        other: menos de %{count} segundos
+      over_x_years:
+        one: mais de 1 ano
+        other: mais de %{count} anos
+      x_days:
+        one: 1 dia
+        other: ! '%{count} dias'
+      x_minutes:
+        one: 1 minuto
+        other: ! '%{count} minutos'
+      x_months:
+        one: 1 mês
+        other: ! '%{count} meses'
+      x_seconds:
+        one: 1 segundo
+        other: ! '%{count} segundos'
+    prompts:
+      day: Dia
+      hour: Hora
+      minute: Minuto
+      month: Mês
+      second: Segundo
+      year: Ano
+  devise:
+    confirmations:
+      confirmed: A sua conta foi confirmada com sucesso.
+      send_instructions: Dentro de minutos, você receberá um email com as instruções de confirmação da sua conta.
+      send_paranoid_instructions: Se o seu email existir em nosso banco de dados, você receberá um email com instruções sobre como confirmar sua conta em alguns minutos.
+    failure:
+      already_authenticated: Você já está autenticado.
+      inactive: A sua conta ainda não foi ativada.
+      invalid: Email ou senha inválidos.
+      invalid_token: 
+      last_attempt: Você tem mais uma única tentativa antes de sua conta ser bloqueada.
+      locked: A sua conta está bloqueada.
+      not_found_in_database: Email ou senha inválidos.
+      timeout: A sua sessão expirou, por favor, faça login novamente para continuar.
+      unauthenticated: Para continuar, faça login ou registre-se.
+      unconfirmed: Antes de continuar, confirme a sua conta.
+    mailer:
+      confirmation_instructions:
+        subject: Instruções de confirmação
+      reset_password_instructions:
+        subject: Instruções de reinicialização de senha
+      unlock_instructions:
+        subject: Instruções de desbloqueio
+    omniauth_callbacks:
+      failure: Não foi possível autorizar de uma conta de %{kind} porque "%{reason}".
+      success: Autorizado com sucesso de uma conta de %{kind}.
+    passwords:
+      no_token: Você não pode acessar esta página sem estar logado. Se você veio de um email de lembre de senha, por favor certifique-se de ter  digitado a URL corretamente.
+      send_instructions: Dentro de minutos, você receberá um email com as instruções de reinicialização da sua senha.
+      send_paranoid_instructions: Se o seu email existir em nosso banco de dados, você receberá um email com um link para recuperação da senha.
+      updated: A sua senha foi alterada com sucesso. Você está autenticado.
+      updated_not_active: Sua senha foi alterada com sucesso.
+    registrations:
+      destroyed: Adeus! A sua conta foi cancelada com sucesso. Esperamos vê-lo novamente em breve.
+      signed_up: Bem vindo! Você realizou seu registro com sucesso.
+      signed_up_but_inactive: Você se inscreveu com sucesso, porém nós não podemos autenticá-lo porque sua conta ainda não foi ativada.
+      signed_up_but_locked: Você se inscreveu com sucesso. Porém nós não podemos autenticá-lo porque sua conta está bloqueada.
+      signed_up_but_unconfirmed: Uma mensagem com um link de confirmação foi enviada para o seu e-mail. Por favor, acesse o link para ativar sua conta.
+      updated: A sua conta foi atualizada com sucesso.
+      update_needs_confirmation: Sua conta foi atualizada com sucesso, mas nós precisamos verificar o novo endereço de email. Por favor, verifique seu email e clique no link de confirmação para finalizar confirmando o seu novo email.
+    sessions:
+      signed_in: Login efetuado com sucesso.
+      signed_out: Logout efetuado com sucesso.
+    unlocks:
+      send_instructions: Dentro de minutos, você receberá um email com instruções de desbloqueio da sua conta.
+      send_paranoid_instructions: Se sua conta existir em nosso banco de dados, você receberá em breve um email com instruções para desbloquear ela.
+      unlocked: A sua conta foi desbloqueada com sucesso. Você está autenticado.
+  enrollments:
+    new:
+      title: 
+  errors:
+    format: ! '%{attribute} %{message}'
+    messages:
+      accepted: deve ser aceito
+      after: 
+      already_confirmed: já foi confirmado
+      before: 
+      blank: não pode ficar em branco
+      confirmation: não está de acordo com a confirmação
+      confirmation_period_expired: É necessário ser confirmado dentro do período %{period}, por favor requisite um novo usuário.
+      empty: não pode ficar vazio
+      equal_to: deve ser igual a %{count}
+      even: deve ser par
+      exclusion: não está disponível
+      expired: expirou, por favor solicite uma nova
+      greater_than: deve ser maior que %{count}
+      greater_than_or_equal_to: deve ser maior ou igual a %{count}
+      inclusion: não está incluído na lista
+      invalid: não é válido
+      invalid_date: 
+      invalid_datetime: 
+      invalid_time: 
+      is_at: 
+      less_than: deve ser menor que %{count}
+      less_than_or_equal_to: deve ser menor ou igual a %{count}
+      not_an_integer: não é um número inteiro
+      not_a_number: não é um número
+      not_found: não encontrado
+      not_locked: não foi bloqueado
+      not_saved:
+        one: ! 'Não foi possível salvar %{resource}: 1 erro'
+        other: ! 'Não foi possível salvar %{resource}: %{count} erros.'
+      odd: deve ser ímpar
+      on_or_after: 
+      on_or_before: 
+      record_invalid: ! 'A validação falhou: %{errors}'
+      taken: já está em uso
+      too_long: ! 'é muito longo (máximo: %{count} caracteres)'
+      too_short: ! 'é muito curto (mínimo: %{count} caracteres)'
+      wrong_length: não possui o tamanho esperado (%{count} caracteres)
+    template:
+      body: ! 'Por favor, verifique o(s) seguinte(s) campo(s):'
+      header:
+        one: ! 'Não foi possível gravar %{model}: 1 erro'
+        other: ! 'Não foi possível gravar %{model}: %{count} erros.'
+  helpers:
+    label:
+      account:
+        currency: 
+        name: 
+    select:
+      prompt: Por favor selecione
+    submit:
+      account:
+        create: 
+        update: 
+      business:
+        update: 
+      create: Criar %{model}
+      enrollment:
+        create: 
+      installment:
+        create: 
+        update: 
+      membership:
+        update: 
+      sale:
+        create: 
+        update: 
+      submit: Salvar %{model}
+      transaction:
+        create: 
+        update: 
+      update: Atualizar %{model}
+  installments:
+    edit:
+      title: 
+    form:
+      agent_placeholder: 
+    index:
+      view_month_stats: 
+    installments_table:
+      header:
+        amount: 
+        month: 
+        status: 
+    new:
+      title: 
+  layouts:
+    navigation:
+      businesses: 
+      edit_account: 
+    secondary_navigation:
+      edit_business: 
+      manage_memberships: 
+      manage_sales: 
+      manage_transactions: 
+  memberships:
+    edit:
+      title: 
+    form:
+      contact_placeholder: 
+      payment_type_placeholder: 
+    overview:
+      close_membership: 
+    secondary_navigation:
+      new_membership: 
+    show:
+      create_enrollment: 
+      new_installment: 
+    table_header:
+      view_month_stats: 
+  number:
+    currency:
+      format:
+        delimiter: .
+        format: ! '%u %n'
+        precision: 2
+        separator: ! ','
+        significant: false
+        strip_insignificant_zeros: false
+        unit: R$
+    format:
+      delimiter: .
+      precision: 3
+      separator: ! ','
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: ! '%n %u'
+        units:
+          billion:
+            one: bilhão
+            other: bilhões
+          million:
+            one: milhão
+            other: milhões
+          quadrillion:
+            one: quatrilhão
+            other: quatrilhões
+          thousand: mil
+          trillion:
+            one: trilhão
+            other: trilhões
+          unit: ''
+      format:
+        delimiter: .
+        precision: 2
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: ! '%n %u'
+        units:
+          byte:
+            one: Byte
+            other: Bytes
+          gb: GB
+          kb: KB
+          mb: MB
+          tb: TB
+    percentage:
+      format:
+        delimiter: .
+    precision:
+      format:
+        delimiter: .
+  payments:
+    new_modal:
+      title: 
+  sales:
+    edit:
+      title: 
+    form:
+      agent_placeholder: 
+      contact_placeholder: 
+      product_placeholder: 
+    index:
+      view_month_stats: 
+    new:
+      title: 
+    secondary_navigation:
+      new_sale: 
+  simple_form:
+    error_notification:
+      default_message: 
+    hints:
+      account:
+        edit:
+          currency: 
+          name: 
+        new:
+          currency: 
+          name: 
+      business:
+        edit:
+          name: 
+          padma_id: 
+          send_weekly_reports: 
+          type: 
+      enrollment:
+        new:
+          agent: 
+          enrolled_on: 
+          status: 
+          value: 
+      installment:
+        edit:
+          agent: 
+          due_on: 
+          status: 
+          value: 
+        new:
+          agent: 
+          due_on: 
+          value: 
+      membership:
+        edit:
+          begins_on: 
+          closed_on: 
+          ends_on: 
+          padma_contact_id: 
+          payment_type: 
+          value: 
+      sale:
+        edit:
+          agent: 
+          padma_contact_id: 
+          product: 
+          sold_on: 
+          status: 
+        new:
+          agent: 
+          padma_contact_id: 
+          product: 
+          sold_on: 
+      transaction:
+        edit:
+          amount: 
+          conversion_rate: 
+          description: 
+          installment_ids: 
+          reconciled_at: 
+          source: 
+          state: 
+          tag_ids: 
+          target_id: 
+          transaction_at: 
+          type: 
+        new:
+          amount: 
+          conversion_rate: 
+          description: 
+          reconciled_at: 
+          source: 
+          state: 
+          tag_ids: 
+          target_id: 
+          transaction_at: 
+          type: 
+      user:
+        edit:
+          time_zone: 
+    labels:
+      account:
+        edit:
+          currency: 
+          name: 
+        new:
+          currency: 
+          name: 
+      business:
+        edit:
+          name: 
+          padma_id: 
+          send_weekly_reports: 
+          type: 
+      enrollment:
+        new:
+          agent: 
+          enrolled_on: 
+          status: 
+          value: 
+      installment:
+        edit:
+          agent: 
+          due_on: 
+          status: 
+          value: 
+        new:
+          agent: 
+          due_on: 
+          value: 
+      membership:
+        edit:
+          begins_on: 
+          closed_on: 
+          ends_on: 
+          padma_contact_id: 
+          payment_type: 
+          value: 
+      sale:
+        edit:
+          agent: 
+          padma_contact_id: 
+          product: 
+          sold_on: 
+          status: 
+        new:
+          agent: 
+          padma_contact_id: 
+          product: 
+          sold_on: 
+      transaction:
+        edit:
+          amount: 
+          conversion_rate: 
+          description: 
+          reconciled_at: 
+          source: 
+          state: 
+          tag_ids: 
+          target_id: 
+          transaction_at: 
+          type: 
+        new:
+          amount: 
+          conversion_rate: 
+          description: 
+          reconciled_at: 
+          source: 
+          state: 
+          tag_ids: 
+          target_id: 
+          transaction_at: 
+          type: 
+      user:
+        edit:
+          current_password: 
+          email: 
+          name: 
+          password: 
+          password_confirmation: 
+          time_zone: 
+    'no': 
+    options:
+      transaction:
+        edit:
+          state: 
+        new:
+          state: 
+    placeholders:
+      account:
+        edit:
+          name: 
+        new:
+          name: 
+      business:
+        edit:
+          name: 
+          padma_id: 
+      enrollment:
+        new:
+          enrolled_on: 
+          value: 
+      installment:
+        edit:
+          due_on: 
+          value: 
+        new:
+          due_on: 
+          value: 
+      membership:
+        edit:
+          begins_on: 
+          closed_on: 
+          ends_on: 
+          value: 
+      transaction:
+        edit:
+          amount: 
+          conversion_rate: 
+          description: 
+        new:
+          amount: 
+          conversion_rate: 
+          description: 
+    required:
+      html: 
+      mark: 
+      text: 
+    'yes': 
+  support:
+    array:
+      last_word_connector: ! ' e '
+      two_words_connector: ! ' e '
+      words_connector: ! ', '
+  time:
+    am: ''
+    formats:
+      default: ! '%A, %d de %B de %Y, %H:%M h'
+      long: ! '%A, %d de %B de %Y, %H:%M h'
+      short: ! '%d/%m, %H:%M h'
+    pm: ''
+  transactions:
+    edit:
+      title: 
+    fields:
+      source_prompt: 
+      target_prompt: 
+    field:
+      tags_placeholder: 
+    new_modal:
+      title: 
+  validates_timeliness:
+    error_value_formats:
+      date: 
+      datetime: 
+      time: 

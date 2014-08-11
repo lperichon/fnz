@@ -693,6 +693,8 @@ en:
       tags_placeholder: Please select some tags
     new_modal:
       title: Add Transaction
+    edit:
+      title: 
   sales:
     index:
       view_month_stats: View %{month} stats

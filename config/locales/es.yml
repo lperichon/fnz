@@ -687,6 +687,8 @@ es:
       tags_placeholder: Seleccione las etiquetas
     new_modal:
       title: Crear Transacción
+    edit:
+      title: 
   sales:
     index:
       view_month_stats: Ver las estadísticas de %{month}
