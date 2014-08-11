@@ -77,6 +77,8 @@ pt-BR:
         padma_id: 
         send_weekly_reports: 
         type: 
+        share_enabled: 
+        transactions_enabled: 
       transaction:
         amount: 
         business: 
@@ -103,6 +105,10 @@ pt-BR:
       business:
         type: 
         name: 
+      agent:
+        business: 
+        name: 
+        padma_id: 
     errors:
       models:
         account:
@@ -138,6 +144,7 @@ pt-BR:
       transaction: 
       transfer: 
       personal: 
+      agent: 
   application:
     list_transactions_modal:
       close: 
@@ -342,6 +349,8 @@ pt-BR:
       account:
         currency: 
         name: 
+      user:
+        email: 
     select:
       prompt: Por favor selecione
     submit:
@@ -366,6 +375,8 @@ pt-BR:
         create: 
         update: 
       update: Atualizar %{model}
+      agent:
+        create: 
   installments:
     edit:
       title: 
@@ -492,6 +503,8 @@ pt-BR:
           padma_id: 
           send_weekly_reports: 
           type: 
+          share_enabled: 
+          transactions_enabled: 
       enrollment:
         new:
           agent: 
@@ -555,6 +568,10 @@ pt-BR:
       user:
         edit:
           time_zone: 
+      agent:
+        new:
+          name: 
+          padma_id: 
     labels:
       account:
         edit:
@@ -569,6 +586,8 @@ pt-BR:
           padma_id: 
           send_weekly_reports: 
           type: 
+          share_enabled: 
+          transactions_enabled: 
       enrollment:
         new:
           agent: 
@@ -636,6 +655,10 @@ pt-BR:
           password: 
           password_confirmation: 
           time_zone: 
+      agent:
+        new:
+          name: 
+          padma_id: 
     'no': 
     options:
       transaction:
@@ -679,6 +702,9 @@ pt-BR:
           amount: 
           conversion_rate: 
           description: 
+      agent:
+        new:
+          name: 
     required:
       html: 
       mark: 
@@ -723,3 +749,13 @@ pt-BR:
       manage_products: 
       manage_tags: 
       manage_users: 
+  agents:
+    edit:
+      title: 
+    index:
+      new_agent: 
+    new:
+      title: 
+    form:
+      padma_placeholder: 
+    new_agent: 

@@ -2,7 +2,7 @@
 
     <%= f.input :name %>
     <% if @business.padma_id %>
-    <%= f.input :padma_id, :as => :select, :collection => @padma_users.collect(&:username), :input_html => {'data-placeholder' => 'Please select Padma user', :class => "chosen"} %>
+    <%= f.input :padma_id, :as => :select, :collection => @padma_users.collect(&:username), :input_html => {'data-placeholder' => t('agents.form.padma_placeholder'), :class => "chosen"} %>
     <% end %>    
     <%= f.button :submit, :class => "btn btn-primary" %>
 <% end %>

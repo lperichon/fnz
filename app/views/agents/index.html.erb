@@ -2,7 +2,6 @@
     <%= render :partial => 'businesses/edit_sidebar' %>
 <% end %>
 
-<h3>Agents</h3>
 <ul class="agents">
   <% @agents.each do |agent| %>
     <li>
@@ -13,4 +12,4 @@
 
 <br />
 
-<%= link_to 'New Agent', new_business_agent_path(@business) %>
+<%= link_to t('agents.new_agent'), new_business_agent_path(@business) %>

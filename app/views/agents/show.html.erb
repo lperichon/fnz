@@ -2,8 +2,8 @@
     <%= render :partial => 'businesses/edit_sidebar' %>
 <% end %>
 
-<h3>Agent</h3>
-<p>Name: <%= @agent.name %></p>
+<h3><%= Agent.model_name.human %></h3>
+<p><b><%= Agent.human_attribute_name(:name) %>:</b> <%= @agent.name %></p>
 
-<%= link_to 'Edit', edit_business_agent_path(@business, @agent) %> |
-<%= link_to 'Back', business_agents_path(@business) %>
+<%= link_to t('actions.edit'), edit_business_agent_path(@business, @agent) %> |
+<%= link_to t('actions.back'), business_agents_path(@business) %>
