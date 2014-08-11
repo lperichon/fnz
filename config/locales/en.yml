@@ -23,11 +23,11 @@ en:
         currency: Currency
         name: Name
       school:
-        name: 
+        name: Name
         owner: 
         padma_id: 
-        send_weekly_reports: 
-        type: 
+        send_weekly_reports: Send weekly reports
+        type: Type
       user:
         current_password: Current password
         email: Email
@@ -100,6 +100,9 @@ en:
         padma_contact: Contact
         padma_contact_id: Contact
         transactions: Transactions
+      business:
+        type: Type
+        name: Name
     errors:
       models:
         account:
@@ -125,7 +128,7 @@ en:
     models:
       account: Account
       payment_type: 
-      school: 
+      school: School
       installment: Installment
       transaction: Transaction
       membership: Membership
@@ -137,6 +140,7 @@ en:
         many: Sales
         one: Sale
         other: Sales
+      personal: Personal
   date:
     abbr_day_names:
     - Sun
@@ -708,3 +712,6 @@ en:
       title: New Sale
     edit:
       title: Edit Sale
+  businesses:
+    edit:
+      title: Edit Business

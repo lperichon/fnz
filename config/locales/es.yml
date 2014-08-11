@@ -26,7 +26,7 @@ es:
         name: 
         owner: 
         padma_id: 
-        send_weekly_reports: 
+        send_weekly_reports: Enviar reportes semanales
         type: 
       user:
         current_password: Contraseña actual
@@ -100,6 +100,9 @@ es:
         padma_contact: Contacto
         padma_contact_id: 
         transactions: Transacciones
+      business:
+        type: Tipo
+        name: Nombre
     errors:
       models:
         account:
@@ -125,7 +128,7 @@ es:
     models:
       account: Cuenta
       payment_type: Forma de pago
-      school: 
+      school: Escuela
       installment: Mensualidad
       transaction: Transacción
       membership: Membresía
@@ -137,6 +140,7 @@ es:
         many: Ventas
         one: Venta
         other: Ventas
+      personal: 
   date:
     abbr_day_names:
     - dom
@@ -702,3 +706,6 @@ es:
       title: Nueva venta
     edit:
       title: Editar venta
+  businesses:
+    edit:
+      title: Editar Negocio
