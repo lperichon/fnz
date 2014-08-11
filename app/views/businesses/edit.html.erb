@@ -5,6 +5,3 @@
 <h2><%= t('businesses.edit.title') %></h2>
 
 <%= render :partial => 'form', :locals => {:form_url => business_path(@business)} %>
-
-<%= link_to t('actions.show'), business_path(@business) %> |
-<%= link_to t('actions.back'), businesses_path %>

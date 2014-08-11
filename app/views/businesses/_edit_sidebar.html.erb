@@ -1,20 +1,20 @@
 <ul class="nav nav-pills nav-stacked" id="edit-sidebar">
   <% if @business.is_a? School %>
-  <li class="<%= 'active' if controller.controller_name == "contacts" %>"><%= link_to content_tag(:i, "", :class => "icon-group") + 'Manage Contacts', business_contacts_path(@business) %></li>
-  <li class="<%= 'active' if controller.controller_name == "agents" %>"><%= link_to content_tag(:i, "", :class => "icon-sitemap") + 'Manage Agents', business_agents_path(@business) %></li>
-  <li class="<%= 'active' if controller.controller_name == "products" %>"><%= link_to content_tag(:i, "", :class => "icon-shopping-cart") + 'Manage Products', business_products_path(@business) %></li>
-  <li class="<%= 'active' if controller.controller_name == "payment_types" %>"><%= link_to content_tag(:i, "", :class => "icon-money") + 'Manage Payment Types', business_payment_types_path(@business) %></li>
+  <li class="<%= 'active' if controller.controller_name == "contacts" %>"><%= link_to content_tag(:i, "", :class => "icon-group") + t('businesses.edit_sidebar.manage_contacts'), business_contacts_path(@business) %></li>
+  <li class="<%= 'active' if controller.controller_name == "agents" %>"><%= link_to content_tag(:i, "", :class => "icon-sitemap") + t('businesses.edit_sidebar.manage_agents'), business_agents_path(@business) %></li>
+  <li class="<%= 'active' if controller.controller_name == "products" %>"><%= link_to content_tag(:i, "", :class => "icon-shopping-cart") + t('businesses.edit_sidebar.manage_products'), business_products_path(@business) %></li>
+  <li class="<%= 'active' if controller.controller_name == "payment_types" %>"><%= link_to content_tag(:i, "", :class => "icon-money") + t('businesses.edit_sidebar.manage_payment_types'), business_payment_types_path(@business) %></li>
   <% end %>
   <% if can? :manage, @business.tags.build %>
-  <li class="<%= 'active' if controller.controller_name == "tags" %>"><%= link_to content_tag(:i, "", :class => "icon-tags") + 'Manage Tags', business_tags_path(@business) %></li>
+  <li class="<%= 'active' if controller.controller_name == "tags" %>"><%= link_to content_tag(:i, "", :class => "icon-tags") + t('businesses.edit_sidebar.manage_tags'), business_tags_path(@business) %></li>
   <% end %>
   <% if can? :manage, @business.accounts.build %>
-  <li class="<%= 'active' if controller.controller_name == "accounts" %>"><%= link_to content_tag(:i, "", :class => "icon-folder-open") + 'Manage Accounts', business_accounts_path(@business) %></li>
+  <li class="<%= 'active' if controller.controller_name == "accounts" %>"><%= link_to content_tag(:i, "", :class => "icon-folder-open") + t('businesses.edit_sidebar.manage_accounts'), business_accounts_path(@business) %></li>
   <% end %>
   <% if can? :manage, @business.imports.build %>
-  <li class="<%= 'active' if controller.controller_name == "imports" %>"><%= link_to content_tag(:i, "", :class => "icon-upload") + 'Manage Imports', business_imports_path(@business) %></li>
+  <li class="<%= 'active' if controller.controller_name == "imports" %>"><%= link_to content_tag(:i, "", :class => "icon-upload") + t('businesses.edit_sidebar.manage_imports'), business_imports_path(@business) %></li>
   <% end %>
   <% if @business.share_enabled? %>
-  <li class="<%= 'active' if controller.controller_name == "users" %>"><%= link_to content_tag(:i, "", :class => "icon-globe") + 'Manage Users', business_users_path(@business) %></li>
+  <li class="<%= 'active' if controller.controller_name == "users" %>"><%= link_to content_tag(:i, "", :class => "icon-globe") + t('businesses.edit_sidebar.manage_users'), business_users_path(@business) %></li>
   <% end %>
 </ul>

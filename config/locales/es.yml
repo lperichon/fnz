@@ -363,10 +363,10 @@ es:
       businesses: Negocios
       edit_account: Editar cuenta
     secondary_navigation:
-      edit_business: Editar negocio
-      manage_memberships: Administrar membresías
-      manage_sales: Administrar ventas
-      manage_transactions: Administrar transacciones
+      edit_business: Editar
+      manage_memberships: Membresías
+      manage_sales: Ventas
+      manage_transactions: Transacciones
   memberships:
     secondary_navigation:
       new_membership: Nueva membresía
@@ -708,4 +708,13 @@ es:
       title: Editar venta
   businesses:
     edit:
-      title: Editar Negocio
+      title: Editar
+    edit_sidebar:
+      manage_accounts: Cuentas
+      manage_agents: Instructores
+      manage_contacts: Contactos
+      manage_imports: Importaciones
+      manage_payment_types: Formas de pago
+      manage_products: Productos
+      manage_tags: Etiquetas
+      manage_users: Permisos

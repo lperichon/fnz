@@ -714,3 +714,12 @@ pt-BR:
   businesses:
     edit:
       title: 
+    edit_sidebar:
+      manage_accounts: 
+      manage_agents: 
+      manage_contacts: 
+      manage_imports: 
+      manage_payment_types: 
+      manage_products: 
+      manage_tags: 
+      manage_users: 
