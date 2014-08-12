@@ -407,38 +407,38 @@ pt-BR:
     edit:
       title: 
     form:
-      agent_placeholder: Por favor, escolha um agente
+      agent_placeholder: Por favor, escolha um instrutor
     index:
       view_month_stats: 
     installments_table:
       header:
-        amount: Quantidade
+        amount: Valor
         month: Mes
         status: Estado
     new:
-      title: Matrícula nova
+      title: Nova mensalidade
   layouts:
     navigation:
       businesses: Negócios
       edit_account: Editar conta
     secondary_navigation:
       edit_business: Editar negócios
-      manage_memberships: Mensalidades
+      manage_memberships: Planos
       manage_sales: Vendas
       manage_transactions: Transações
   memberships:
     edit:
-      title: Editar mensalidade
+      title: Editar plano
     form:
       contact_placeholder: Por favor, escolha um contato
       payment_type_placeholder: Por favor, escolha um tipo de pagamento
     overview:
-      close_membership: Fechar mensalidade
+      close_membership: Fechar plano
     secondary_navigation:
-      new_membership: Nova mensalidade
+      new_membership: Novo plano
     show:
       create_enrollment: Criar matrícula
-      new_installment: Nova matrícula
+      new_installment: Nova mensalidade
     table_header:
       view_month_stats: Ver estatísticas de %{month}
   number:
