@@ -120,6 +120,10 @@ en:
         price: Price
         price_currency: Price Currency
         stock: Quantity
+      payment_type:
+        business: 
+        description: Description
+        name: Name
     errors:
       models:
         account:
@@ -144,7 +148,7 @@ en:
               timeliness: 
     models:
       account: Account
-      payment_type: 
+      payment_type: Payment Type
       school: School
       installment: Installment
       transaction: Transaction
@@ -389,6 +393,9 @@ en:
         create: 
       product:
         update: 
+      payment_type:
+        update: 
+        create: 
   layouts:
     navigation:
       businesses: Businesses
@@ -555,6 +562,13 @@ en:
           price: 
           price_currency: 
           stock: 
+      payment_type:
+        edit:
+          description: 
+          name: 
+        new:
+          description: 
+          name: 
     labels:
       account:
         edit:
@@ -651,6 +665,13 @@ en:
           price: 
           price_currency: 
           stock: 
+      payment_type:
+        edit:
+          description: 
+          name: 
+        new:
+          description: 
+          name: 
     'no': 'No'
     placeholders:
       account:
@@ -697,6 +718,13 @@ en:
           name: 
           price: 
           stock: 
+      payment_type:
+        edit:
+          description: 
+          name: 
+        new:
+          description: 
+          name: 
     required:
       html: 
       mark: ! '*'
@@ -804,3 +832,11 @@ en:
       title: Products
     edit:
       title: Edit Product
+  payment_types:
+    index:
+      new_payment_type: New Payment Type
+      title: Payment Types
+    edit:
+      title: Edit Payment Type
+    new:
+      title: New Payment Type

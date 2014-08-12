@@ -2,24 +2,26 @@
   <%= render :partial => 'businesses/edit_sidebar' %>
 <% end %>
 
-<h3>Payment Types</h3>
-<table class="payment_types">
+<h3><%= t('payment_types.index.title') %></h3>
+
+<table class="payment_types table table-striped table-hover table-condensed table-bordered">
+  <thead>
+    <td><%= PaymentType.human_attribute_name(:name) %></td>
+    <td><%= PaymentType.human_attribute_name(:description) %></td>
+    <td></td>
+  </thead>
   <% @payment_types.each do |payment_type| %>
     <tr>
+      <td><%= payment_type.name %></td>
+      <td><%= payment_type.description %></td>
       <td>
-        <b><%= payment_type.name %></b>
-      </td>
-      <td>
-        (<i><%= payment_type.description %></i>)
-      </td>
-      <td>
-        <%= link_to 'Edit', edit_business_payment_type_path(@business, payment_type), class: 'btn btn-mini' %>
-        <%= link_to 'Remove', business_payment_type_path(@business,payment_type), method: :delete, confirm: 'Are you sure?', class: 'btn btn-mini btn-danger' %>
+        <%= link_to content_tag(:i, "", :class => "icon-eye-open"), business_payment_type_path(@business, payment_type) %>
+        <%= link_to content_tag(:i, "", :class => "icon-edit"), edit_business_payment_type_path(@business, payment_type) %>
+        <%= link_to content_tag(:i, "", :class => "icon-trash"), business_payment_type_path(@business, payment_type), :confirm => t('actions.confirm_delete'), :method => 'delete' %>
       </td>
     </tr>
   <% end %>
 </table>
-
 <br />
 
-<%= link_to 'New Payment Type', new_business_payment_type_path(@business) %>
+<%= link_to t('payment_types.index.new_payment_type'), new_business_payment_type_path(@business) %>

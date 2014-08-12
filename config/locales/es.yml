@@ -120,6 +120,10 @@ es:
         price: Precio
         price_currency: Moneda de precio
         stock: Cantidad
+      payment_type:
+        business: 
+        description: Descripción
+        name: Nombre
     errors:
       models:
         account:
@@ -383,6 +387,9 @@ es:
         create: 
       product:
         update: 
+      payment_type:
+        update: 
+        create: 
   layouts:
     navigation:
       businesses: Negocios
@@ -549,6 +556,13 @@ es:
           price: 
           price_currency: 
           stock: 
+      payment_type:
+        edit:
+          description: 
+          name: 
+        new:
+          description: 
+          name: 
     labels:
       account:
         edit:
@@ -645,6 +659,13 @@ es:
           price: 
           price_currency: 
           stock: 
+      payment_type:
+        edit:
+          description: 
+          name: 
+        new:
+          description: 
+          name: 
     'no': 'No'
     placeholders:
       account:
@@ -691,6 +712,13 @@ es:
           name: 
           price: 
           stock: 
+      payment_type:
+        edit:
+          description: 
+          name: 
+        new:
+          description: 
+          name: 
     required:
       html: 
       mark: 
@@ -798,3 +826,11 @@ es:
       title: Productos
     edit:
       title: Editar producto
+  payment_types:
+    index:
+      new_payment_type: Nueva forma de pago
+      title: Formas de pago
+    edit:
+      title: Editar forma de pago
+    new:
+      title: Nueva forma de pago

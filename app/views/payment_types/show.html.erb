@@ -2,10 +2,10 @@
   <%= render :partial => 'businesses/edit_sidebar' %>
 <% end %>
 
-<h3>Payment Type</h3>
-<p>Name: <%= @payment_type.name %></p>
-<p>Description: <%= @payment_type.description %></p>
+<h3><%= PaymentType.model_name.human %></h3>
+<p><b><%= PaymentType.human_attribute_name(:name) %>:</b> <%= @payment_type.name %></p>
+<p><b><%= PaymentType.human_attribute_name(:description) %>:</b> <%= @payment_type.description %></p>
 
 
-<%= link_to 'Edit', edit_business_payment_type_path(@business, @payment_type) %> |
-<%= link_to 'Back', business_payment_types_path(@business) %>
+<%= link_to t('actions.edit'), edit_business_payment_type_path(@business, @payment_type) %> |
+<%= link_to t('actions.back'), business_payment_types_path(@business) %>

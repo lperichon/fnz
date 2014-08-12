@@ -120,6 +120,10 @@ pt-BR:
         price: 
         price_currency: 
         stock: 
+      payment_type:
+        business: 
+        description: 
+        name: 
     errors:
       models:
         account:
@@ -391,6 +395,9 @@ pt-BR:
         create: 
       product:
         update: 
+      payment_type:
+        update: 
+        create: 
   installments:
     edit:
       title: 
@@ -595,6 +602,13 @@ pt-BR:
           price: 
           price_currency: 
           stock: 
+      payment_type:
+        edit:
+          description: 
+          name: 
+        new:
+          description: 
+          name: 
     labels:
       account:
         edit:
@@ -691,6 +705,13 @@ pt-BR:
           price: 
           price_currency: 
           stock: 
+      payment_type:
+        edit:
+          description: 
+          name: 
+        new:
+          description: 
+          name: 
     'no': 
     options:
       transaction:
@@ -743,6 +764,13 @@ pt-BR:
           name: 
           price: 
           stock: 
+      payment_type:
+        edit:
+          description: 
+          name: 
+        new:
+          description: 
+          name: 
     required:
       html: 
       mark: 
@@ -802,4 +830,12 @@ pt-BR:
       new_product: 
       title: 
     edit:
+      title: 
+  payment_types:
+    index:
+      new_payment_type: 
+      title: 
+    edit:
+      title: 
+    new:
       title: 

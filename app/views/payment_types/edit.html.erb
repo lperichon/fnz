@@ -2,12 +2,12 @@
   <%= render :partial => 'businesses/edit_sidebar' %>
 <% end %>
 
-<h2>Edit Payment Type</h2>
+<h2><%= t('payment_types.edit.title') %></h2>
 
 <%= simple_form_for(@payment_type, :validate => true, :url => business_payment_type_path(@business,@payment_type), :html => {:class => "form-horizontal"}) do |f| %>
   <%= render :partial => 'form', :locals => { :f => f} %>
 <% end %>
 
 
-<%= link_to 'Show', business_payment_type_path(@business,@payment_type) %> |
-<%= link_to 'Back', business_payment_types_path(@business) %>
+<%= link_to t('actions.show'), business_payment_type_path(@business,@payment_type) %> |
+<%= link_to t('actions.back'), business_payment_types_path(@business) %>
