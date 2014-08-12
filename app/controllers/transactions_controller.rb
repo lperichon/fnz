@@ -92,9 +92,16 @@ class TransactionsController < UserApplicationController
   def get_context
     business_id = params[:business_id]
     source_id = params[:account_id]
+
+    if current_user.admin?
+      @business_context = Business
+    else
+      @business_context = current_user.businesses
+    end
+
     @context = Transaction
     if business_id
-      @business = current_user.businesses.find(business_id)
+      @business = @business_context.find(business_id)
       @context = @business.transactions
       if source_id
         @account = @business.accounts.find(source_id)

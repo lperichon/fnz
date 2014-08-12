@@ -44,4 +44,8 @@ class User < ActiveRecord::Base
     self.drc_uid
   end
 
+  def admin?
+    self.has_role? :admin
+  end
+  
 end

@@ -24,12 +24,12 @@ en:
         name: Name
       school:
         name: Name
-        owner: 
-        padma_id: 
+        owner: Owner
+        padma_id: Padma
         send_weekly_reports: Send weekly reports
         type: Type
-        share_enabled: 
-        transactions_enabled: 
+        share_enabled: Share enabled
+        transactions_enabled: Transactions enabled
       user:
         current_password: Current password
         email: Email
@@ -373,7 +373,7 @@ en:
         create: 
         update: 
       business:
-        update: 
+        update: Update School
       create: Create %{model}
       submit: Save %{model}
       update: Update %{model}
@@ -736,7 +736,7 @@ en:
         index:
           email: 
     required:
-      html: 
+      html: <abbr title="required">*</abbr>
       mark: ! '*'
       text: required
     'yes': 'Yes'

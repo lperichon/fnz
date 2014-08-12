@@ -27,7 +27,7 @@ class MembershipsController < UserApplicationController
   def edit
     @membership = @context.find(params[:id])
     @business = @membership.business
-	@contacts = @business.contacts.all_students
+	  @contacts = @business.contacts.all_students
   	@memberships = {}
     @contacts.each do |c|
   		membership = c.current_membership
@@ -110,12 +110,18 @@ class MembershipsController < UserApplicationController
     business_id = params[:business_id]
     business_id = params[:membership][:business_id] unless business_id || params[:membership].blank?
     param_is_padma_id = (false if Float(business_id) rescue true)
-    @context = Membership
+    
+    if current_user.admin?
+      @business_context = Business
+    else
+      @business_context = current_user.businesses
+    end
+
     if business_id
       if param_is_padma_id
-        @business = current_user.businesses.find_by_padma_id(params[:business_id])
+        @business = @business_context.find_by_padma_id(params[:business_id])
       else
-        @business = current_user.businesses.find(params[:business_id])
+        @business = @business_context.find(params[:business_id])
       end
       @context = @business.memberships
     end

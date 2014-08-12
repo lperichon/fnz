@@ -26,7 +26,14 @@ class UsersController < UserApplicationController
 
   def get_context
     business_id = params[:business_id]
-    @business = current_user.businesses.find(business_id)
+  
+    if current_user.admin?
+      @business_context = Business
+    else
+      @business_context = current_user.businesses
+    end
+
+    @business = @business_context.find(business_id)
   end
 
 end

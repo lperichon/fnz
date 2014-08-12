@@ -81,7 +81,13 @@ class InstallmentsController < UserApplicationController
   private
 
   def get_context
-    @business = current_user.businesses.find(params[:business_id])
+    if current_user.admin?
+      @context = Business
+    else
+      @context = current_user.businesses
+    end
+
+    @business = @context.find(params[:business_id])
     @membership = @business.memberships.find(params[:membership_id])
     @context = @membership.installments
   end

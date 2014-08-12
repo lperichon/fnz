@@ -90,7 +90,17 @@ class ImportsController < UserApplicationController
   private
 
   def get_business
-    @business = current_user.businesses.find(params[:business_id])
+    @business = get_context.find(params[:business_id])
+  end
+
+  def get_context
+    @context = nil
+    if current_user.admin?
+      @context = Business
+    else
+      @context = current_user.businesses
+    end
+    @context
   end
 
 end
