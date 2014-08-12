@@ -1,27 +1,27 @@
 pt-BR:
   accounts:
     edit:
-      title: 
+      title: Editar conta
     new:
-      title: 
+      title: Nova conta
   actions:
-    back: 
-    close: 
-    confirm_delete: 
-    create: 
-    delete: 
-    edit: 
-    login: 
-    logout: 
-    mark_as_paid: 
+    back: Voltar
+    close: Fechar
+    confirm_delete: Tem certeza de apagar esse item?
+    create: Crear
+    delete: Apagar
+    edit: Editar
+    login: Entrar
+    logout: Sair
+    mark_as_paid: Marcar como já pago
     mark_as_paid): 
-    show: 
+    show: Mostrar
   activerecord:
     attributes:
       account:
-        business: 
-        currency: 
-        name: 
+        business: Negócio
+        currency: Moeda
+        name: Nome
       credit:
         amount: 
         business: 
@@ -36,94 +36,94 @@ pt-BR:
         transaction_at: 
         type: 
       enrollment:
-        agent: 
+        agent: Instrutor
         enrolled_on: 
         membership: 
-        status: 
-        transactions: 
-        value: 
+        status: Estado
+        transactions: Transações
+        value: Valor
       installment:
-        agent: 
-        due_on: 
+        agent: Instrutor
+        due_on: Data de validade
         membership: 
-        status: 
-        transactions: 
-        value: 
+        status: Estado
+        transactions: Transações
+        value: Valor
       membership:
-        begins_on: 
+        begins_on: Inicia em
         business: 
-        closed_on: 
-        contact: 
-        ends_on: 
-        enrollment: 
-        installments: 
-        padma_contact_id: 
-        payment_type: 
-        value: 
+        closed_on: Data de fechamento
+        contact: Contato
+        ends_on: Finaliza em
+        enrollment: Matrícula
+        installments: Mensalidades
+        padma_contact_id: Contato
+        payment_type: Forma de pagamento
+        value: Valor
       sale:
-        agent: 
-        amount: 
+        agent: Instrutor
+        amount: Quantidade
         business: 
-        contact: 
-        padma_contact: 
-        padma_contact_id: 
-        product: 
-        sold_on: 
-        status: 
-        transactions: 
+        contact: Contato
+        padma_contact: Contato
+        padma_contact_id: Contato
+        product: Produto
+        sold_on: Data de venda
+        status: Estado
+        transactions: Transações
         cost: 
         price: 
         stock: 
       school:
-        name: 
-        owner: 
-        padma_id: 
-        send_weekly_reports: 
-        type: 
-        share_enabled: 
-        transactions_enabled: 
+        name: Nome
+        owner: Dono
+        padma_id: Padma
+        send_weekly_reports: Enviar relatórios semanais
+        type: Tipo
+        share_enabled: Compartir ativado
+        transactions_enabled: Transações ativadas
       transaction:
-        amount: 
+        amount: Quantidade
         business: 
         conversion_rate: 
         creator: 
-        date: 
-        description: 
+        date: Data
+        description: Descrição
         reconciled_at: 
-        source: 
-        state: 
-        tag_ids: 
-        tags: 
+        source: Conta de origem
+        state: Estado
+        tag_ids: Rótulos
+        tags: Rótulos
         target: 
         target_id: 
-        transaction_at: 
-        type: 
+        transaction_at: Data
+        type: Tipo
       user:
-        current_password: 
-        email: 
-        name: 
-        password: 
-        password_confirmation: 
+        current_password: Senha atual
+        email: E-mail
+        name: Nome
+        password: Senha
+        password_confirmation: Confirmação de senha
         time_zone: 
       business:
-        type: 
-        name: 
+        type: Tipo
+        name: Nome
       agent:
         business: 
-        name: 
+        name: Nome
         padma_id: 
       product:
-        name: 
-        cost: 
-        cost_currency: 
-        hidden: 
-        price: 
-        price_currency: 
-        stock: 
+        name: Nome
+        cost: Custo
+        cost_currency: Moeda de custo
+        hidden: Oculto
+        price: Preço
+        price_currency: Moeda de preço
+        stock: Qantidade
       payment_type:
         business: 
-        description: 
-        name: 
+        description: Descrição
+        name: Nome
     errors:
       models:
         account:
@@ -147,29 +147,31 @@ pt-BR:
             owner:
               blank: 
     models:
-      account: 
-      credit: 
-      debit: 
-      enrollment: 
-      installment: 
-      membership: 
-      payment_type: 
-      sale: 
-      school: 
-      transaction: 
-      transfer: 
+      account: Conta
+      credit: Entrada
+      debit: Despesa
+      enrollment: Matrícula
+      installment: Mensalidade
+      membership: Plano
+      payment_type: Tipo de pagamento
+      sale:
+        one: Venda
+        other: Vendas
+      school: Escola
+      transaction: Transação
+      transfer: Transferência
       personal: 
-      agent: 
-      product: 
-      user: 
+      agent: Instrutor
+      product: Produto
+      user: Usuário
   application:
     list_transactions_modal:
-      close: 
-      title: 
+      close: Fechar
+      title: Escolher transações
     nested_transactions_table:
       actions:
-        add_transaction: 
-        select_transactions: 
+        add_transaction: Crear transação
+        select_transactions: Escolher transações
   date:
     abbr_day_names:
     - Dom
@@ -275,7 +277,7 @@ pt-BR:
       already_authenticated: Você já está autenticado.
       inactive: A sua conta ainda não foi ativada.
       invalid: Email ou senha inválidos.
-      invalid_token: 
+      invalid_token: Código de autenticação não válido
       last_attempt: Você tem mais uma única tentativa antes de sua conta ser bloqueada.
       locked: A sua conta está bloqueada.
       not_found_in_database: Email ou senha inválidos.
@@ -315,14 +317,14 @@ pt-BR:
       unlocked: A sua conta foi desbloqueada com sucesso. Você está autenticado.
   enrollments:
     new:
-      title: 
+      title: Matrícula nova
   errors:
     format: ! '%{attribute} %{message}'
     messages:
       accepted: deve ser aceito
-      after: 
+      after: Deve ser depois %{restriction}
       already_confirmed: já foi confirmado
-      before: 
+      before: Deve ser antes %{restriction}
       blank: não pode ficar em branco
       confirmation: não está de acordo com a confirmação
       confirmation_period_expired: É necessário ser confirmado dentro do período %{period}, por favor requisite um novo usuário.
@@ -335,10 +337,10 @@ pt-BR:
       greater_than_or_equal_to: deve ser maior ou igual a %{count}
       inclusion: não está incluído na lista
       invalid: não é válido
-      invalid_date: 
-      invalid_datetime: 
-      invalid_time: 
-      is_at: 
+      invalid_date: Não é uma data válida
+      invalid_datetime: Não é um horário do dia válido
+      invalid_time: Não é um horário válido
+      is_at: Deve ser em %{restriction}
       less_than: deve ser menor que %{count}
       less_than_or_equal_to: deve ser menor ou igual a %{count}
       not_an_integer: não é um número inteiro
@@ -349,8 +351,8 @@ pt-BR:
         one: ! 'Não foi possível salvar %{resource}: 1 erro'
         other: ! 'Não foi possível salvar %{resource}: %{count} erros.'
       odd: deve ser ímpar
-      on_or_after: 
-      on_or_before: 
+      on_or_after: Deve ser em ou depois de %{restriction}
+      on_or_before: Deve ser em ou antes de %{restriction}
       record_invalid: ! 'A validação falhou: %{errors}'
       taken: já está em uso
       too_long: ! 'é muito longo (máximo: %{count} caracteres)'
@@ -375,7 +377,7 @@ pt-BR:
         create: 
         update: 
       business:
-        update: 
+        update: Atuallizar escola
       create: Criar %{model}
       enrollment:
         create: 
@@ -405,40 +407,40 @@ pt-BR:
     edit:
       title: 
     form:
-      agent_placeholder: 
+      agent_placeholder: Por favor, escolha um agente
     index:
       view_month_stats: 
     installments_table:
       header:
-        amount: 
-        month: 
-        status: 
+        amount: Quantidade
+        month: Mes
+        status: Estado
     new:
-      title: 
+      title: Matrícula nova
   layouts:
     navigation:
-      businesses: 
-      edit_account: 
+      businesses: Negócios
+      edit_account: Editar conta
     secondary_navigation:
-      edit_business: 
-      manage_memberships: 
-      manage_sales: 
-      manage_transactions: 
+      edit_business: Editar negócios
+      manage_memberships: Mensalidades
+      manage_sales: Vendas
+      manage_transactions: Transações
   memberships:
     edit:
-      title: 
+      title: Editar mensalidade
     form:
-      contact_placeholder: 
-      payment_type_placeholder: 
+      contact_placeholder: Por favor, escolha um contato
+      payment_type_placeholder: Por favor, escolha um tipo de pagamento
     overview:
-      close_membership: 
+      close_membership: Fechar mensalidade
     secondary_navigation:
-      new_membership: 
+      new_membership: Nova mensalidade
     show:
-      create_enrollment: 
-      new_installment: 
+      create_enrollment: Criar matrícula
+      new_installment: Nova matrícula
     table_header:
-      view_month_stats: 
+      view_month_stats: Ver estatísticas de %{month}
   number:
     currency:
       format:
@@ -496,23 +498,23 @@ pt-BR:
         delimiter: .
   payments:
     new_modal:
-      title: 
+      title: Criar pagamento
   sales:
     edit:
-      title: 
+      title: Editar venda
     form:
-      agent_placeholder: 
-      contact_placeholder: 
-      product_placeholder: 
+      agent_placeholder: Por favor, escolha um instrutor
+      contact_placeholder: Por favor, escolha um contato
+      product_placeholder: Por favor, escolha um produto
     index:
-      view_month_stats: 
+      view_month_stats: Ver estatísticas de %{month}
     new:
-      title: 
+      title: Nova venda
     secondary_navigation:
-      new_sale: 
+      new_sale: Nova venda
   simple_form:
     error_notification:
-      default_message: 
+      default_message: ! 'Por favor, veja os problemas abaixo:'
     hints:
       account:
         edit:
@@ -719,7 +721,7 @@ pt-BR:
         new:
           description: 
           name: 
-    'no': 
+    'no': Não
     options:
       transaction:
         edit:
@@ -783,9 +785,9 @@ pt-BR:
           email: 
     required:
       html: 
-      mark: 
-      text: 
-    'yes': 
+      mark: ! '*'
+      text: obrigatório
+    'yes': Sim
   support:
     array:
       last_word_connector: ! ' e '
@@ -802,54 +804,54 @@ pt-BR:
     edit:
       title: 
     fields:
-      source_prompt: 
-      target_prompt: 
+      source_prompt: Por favor, escolha uma conta como fonte
+      target_prompt: Por favor, escolha uma conta como destino
     field:
-      tags_placeholder: 
+      tags_placeholder: Por favor, escolha alguns rótulos
     new_modal:
-      title: 
+      title: Adicionar transação
   validates_timeliness:
     error_value_formats:
-      date: 
-      datetime: 
-      time: 
+      date: ! '%Y-%m-%d'
+      datetime: ! '%Y-%m-%d %H:%M:%S'
+      time: ! '%H:%M:%S'
   businesses:
     edit:
-      title: 
+      title: Editar negócios
     edit_sidebar:
-      manage_accounts: 
-      manage_agents: 
-      manage_contacts: 
+      manage_accounts: Contas
+      manage_agents: Instrutores
+      manage_contacts: Contatos
       manage_imports: 
-      manage_payment_types: 
-      manage_products: 
-      manage_tags: 
-      manage_users: 
+      manage_payment_types: Tipos de pagamento
+      manage_products: Produtos
+      manage_tags: Rótulos
+      manage_users: Autorizações
   agents:
     edit:
-      title: 
+      title: Editar instrutor
     index:
-      new_agent: 
+      new_agent: Instrutor novo
     new:
-      title: 
+      title: Novo instrutor
     form:
-      padma_placeholder: 
-    new_agent: 
+      padma_placeholder: Escolha o usuário de Padma
+    new_agent: Novo instrutor
   products:
     index:
-      new_product: 
-      title: 
+      new_product: Produto novo
+      title: Produtos
     edit:
-      title: 
+      title: Editar produto
   payment_types:
     index:
-      new_payment_type: 
-      title: 
+      new_payment_type: Novo tipo de pagamento
+      title: Tipos de pagamento
     edit:
-      title: 
+      title: Editar tipo de pagamento
     new:
-      title: 
+      title: Novo tipo de pagmento
   users:
     index:
-      title: 
-      share: 
+      title: Compartilhar com outro usuário
+      share: Compartilhar

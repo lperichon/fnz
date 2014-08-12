@@ -23,13 +23,13 @@ es:
         currency: Moneda
         name: Nombre
       school:
-        name: 
-        owner: 
-        padma_id: 
+        name: Nombre
+        owner: Dueño
+        padma_id: Padma
         send_weekly_reports: Enviar reportes semanales
-        type: 
-        share_enabled: 
-        transactions_enabled: 
+        type: Tipo
+        share_enabled: Compartir activado
+        transactions_enabled: Transacciones activadas
       user:
         current_password: Contraseña actual
         email: Email
@@ -100,7 +100,7 @@ es:
         status: Estado
         business: 
         padma_contact: Contacto
-        padma_contact_id: 
+        padma_contact_id: Contacto
         transactions: Transacciones
         cost: 
         price: 
@@ -162,7 +162,7 @@ es:
         one: Venta
         other: Ventas
       personal: 
-      agent: 
+      agent: Instructor
       product: Producto
       user: Usuario
   date:
