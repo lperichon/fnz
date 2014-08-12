@@ -2,7 +2,7 @@ class ProductsController < UserApplicationController
   before_filter :get_business
 
   def index
-    @products = @business.products
+    @products = @business.products.order('hidden ASC')
   end
 
   def show

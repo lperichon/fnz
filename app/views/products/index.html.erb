@@ -2,15 +2,31 @@
     <%= render :partial => 'businesses/edit_sidebar' %>
 <% end %>
 
-<h3>Products</h3>
-<ul class="products">
+<h3><%= t('products.index.title') %></h3>
+
+<table class="products table table-striped table-hover table-condensed table-bordered">
+  <thead>
+  	<td><%= Product.human_attribute_name(:name) %></td>
+  	<td><%= Product.human_attribute_name(:stock) %></td>
+  	<td><%= Product.human_attribute_name(:price) %></td>
+  	<td><%= Product.human_attribute_name(:cost) %></td>
+  	<td></td>
+  </thead>
   <% @products.each do |product| %>
-    <li>
-      <%= link_to product.name, business_product_path(@business, product) %>
-    </li>
+    <tr class="<%= 'hidden' if product.hidden %>">
+      <td><%= product.name %></td>
+      <td><%= product.stock %></td>
+      <td><%= number_to_currency(product.price, :unit => product.price_currency.symbol) %></td>
+      <td><%= number_to_currency(product.cost, :unit => product.cost_currency.symbol) %></td>
+      <td>
+      	<%= link_to content_tag(:i, "", :class => "icon-eye-open"), business_product_path(@business, product) %>
+      	<%= link_to content_tag(:i, "", :class => "icon-edit"), edit_business_product_path(@business, product) %>
+  		<%= link_to content_tag(:i, "", :class => "icon-trash"), business_product_path(@business, product), :confirm => t('actions.confirm_delete'), :method => 'delete' %>
+      </td>
+    </tr>
   <% end %>
-</ul>
+</table>
 
 <br />
 
-<%= link_to 'New Product', new_business_product_path(@business) %>
+<%= link_to t('products.index.new_product'), new_business_product_path(@business) %>

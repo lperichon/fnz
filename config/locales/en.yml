@@ -102,6 +102,9 @@ en:
         padma_contact: Contact
         padma_contact_id: Contact
         transactions: Transactions
+        cost: 
+        price: 
+        stock: 
       business:
         type: Type
         name: Name
@@ -109,6 +112,14 @@ en:
         business: 
         name: Name
         padma_id: 
+      product:
+        name: Name
+        cost: Cost
+        cost_currency: Cost Currency
+        hidden: Hidden
+        price: Price
+        price_currency: Price Currency
+        stock: Quantity
     errors:
       models:
         account:
@@ -148,6 +159,7 @@ en:
         other: Sales
       personal: Personal
       agent: Instructor
+      product: Product
   date:
     abbr_day_names:
     - Sun
@@ -375,6 +387,8 @@ en:
         update: 
       agent:
         create: 
+      product:
+        update: 
   layouts:
     navigation:
       businesses: Businesses
@@ -532,6 +546,15 @@ en:
         new:
           name: 
           padma_id: 
+      product:
+        edit:
+          cost: 
+          cost_currency: 
+          hidden: 
+          name: 
+          price: 
+          price_currency: 
+          stock: 
     labels:
       account:
         edit:
@@ -619,6 +642,15 @@ en:
         new:
           name: 
           padma_id: 
+      product:
+        edit:
+          cost: 
+          cost_currency: 
+          hidden: 
+          name: 
+          price: 
+          price_currency: 
+          stock: 
     'no': 'No'
     placeholders:
       account:
@@ -659,6 +691,12 @@ en:
       agent:
         new:
           name: 
+      product:
+        edit:
+          cost: 
+          name: 
+          price: 
+          stock: 
     required:
       html: 
       mark: ! '*'
@@ -760,3 +798,9 @@ en:
     form:
       padma_placeholder: Please select Padma user
     new_agent: New Instructor
+  products:
+    index:
+      new_product: New Product
+      title: Products
+    edit:
+      title: Edit Product

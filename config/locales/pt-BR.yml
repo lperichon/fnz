@@ -71,6 +71,9 @@ pt-BR:
         sold_on: 
         status: 
         transactions: 
+        cost: 
+        price: 
+        stock: 
       school:
         name: 
         owner: 
@@ -109,6 +112,14 @@ pt-BR:
         business: 
         name: 
         padma_id: 
+      product:
+        name: 
+        cost: 
+        cost_currency: 
+        hidden: 
+        price: 
+        price_currency: 
+        stock: 
     errors:
       models:
         account:
@@ -145,6 +156,7 @@ pt-BR:
       transfer: 
       personal: 
       agent: 
+      product: 
   application:
     list_transactions_modal:
       close: 
@@ -377,6 +389,8 @@ pt-BR:
       update: Atualizar %{model}
       agent:
         create: 
+      product:
+        update: 
   installments:
     edit:
       title: 
@@ -572,6 +586,15 @@ pt-BR:
         new:
           name: 
           padma_id: 
+      product:
+        edit:
+          cost: 
+          cost_currency: 
+          hidden: 
+          name: 
+          price: 
+          price_currency: 
+          stock: 
     labels:
       account:
         edit:
@@ -659,6 +682,15 @@ pt-BR:
         new:
           name: 
           padma_id: 
+      product:
+        edit:
+          cost: 
+          cost_currency: 
+          hidden: 
+          name: 
+          price: 
+          price_currency: 
+          stock: 
     'no': 
     options:
       transaction:
@@ -705,6 +737,12 @@ pt-BR:
       agent:
         new:
           name: 
+      product:
+        edit:
+          cost: 
+          name: 
+          price: 
+          stock: 
     required:
       html: 
       mark: 
@@ -759,3 +797,9 @@ pt-BR:
     form:
       padma_placeholder: 
     new_agent: 
+  products:
+    index:
+      new_product: 
+      title: 
+    edit:
+      title: 

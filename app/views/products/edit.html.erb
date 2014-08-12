@@ -2,9 +2,9 @@
     <%= render :partial => 'businesses/edit_sidebar' %>
 <% end %>
 
-<h2>Edit Product</h2>
+<h2><%= t('products.edit.title') %></h2>
 
 <%= render :partial => 'form', :locals => {:form_url => business_product_path(@business, @product)}%>
 
-<%= link_to 'Show', business_product_path(@business,@product) %> |
-<%= link_to 'Back', business_products_path(@business) %>
+<%= link_to t('actions.show'), business_product_path(@business,@product) %> |
+<%= link_to t('actions.back'), business_products_path(@business) %>
