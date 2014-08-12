@@ -164,6 +164,7 @@ en:
       personal: Personal
       agent: Instructor
       product: Product
+      user: User
   date:
     abbr_day_names:
     - Sun
@@ -396,6 +397,8 @@ en:
       payment_type:
         update: 
         create: 
+      user:
+        submit: 
   layouts:
     navigation:
       businesses: Businesses
@@ -489,6 +492,8 @@ en:
       user:
         edit:
           time_zone: 
+        index:
+          email: 
       installment:
         new:
           agent: 
@@ -593,6 +598,8 @@ en:
           password: 
           password_confirmation: 
           time_zone: 
+        index:
+          email: 
       installment:
         new:
           agent: 
@@ -725,6 +732,9 @@ en:
         new:
           description: 
           name: 
+      user:
+        index:
+          email: 
     required:
       html: 
       mark: ! '*'
@@ -840,3 +850,7 @@ en:
       title: Edit Payment Type
     new:
       title: New Payment Type
+  users:
+    index:
+      title: ! 'Share with another user:'
+      share: Share

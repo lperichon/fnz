@@ -161,6 +161,7 @@ pt-BR:
       personal: 
       agent: 
       product: 
+      user: 
   application:
     list_transactions_modal:
       close: 
@@ -398,6 +399,8 @@ pt-BR:
       payment_type:
         update: 
         create: 
+      user:
+        submit: 
   installments:
     edit:
       title: 
@@ -589,6 +592,8 @@ pt-BR:
       user:
         edit:
           time_zone: 
+        index:
+          email: 
       agent:
         new:
           name: 
@@ -692,6 +697,8 @@ pt-BR:
           password: 
           password_confirmation: 
           time_zone: 
+        index:
+          email: 
       agent:
         new:
           name: 
@@ -771,6 +778,9 @@ pt-BR:
         new:
           description: 
           name: 
+      user:
+        index:
+          email: 
     required:
       html: 
       mark: 
@@ -839,3 +849,7 @@ pt-BR:
       title: 
     new:
       title: 
+  users:
+    index:
+      title: 
+      share: 

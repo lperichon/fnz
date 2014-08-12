@@ -164,6 +164,7 @@ es:
       personal: 
       agent: 
       product: Producto
+      user: Usuario
   date:
     abbr_day_names:
     - dom
@@ -390,6 +391,8 @@ es:
       payment_type:
         update: 
         create: 
+      user:
+        submit: 
   layouts:
     navigation:
       businesses: Negocios
@@ -483,6 +486,8 @@ es:
       user:
         edit:
           time_zone: 
+        index:
+          email: 
       installment:
         new:
           agent: 
@@ -587,6 +592,8 @@ es:
           password: 
           password_confirmation: 
           time_zone: 
+        index:
+          email: 
       installment:
         new:
           agent: 
@@ -719,6 +726,9 @@ es:
         new:
           description: 
           name: 
+      user:
+        index:
+          email: 
     required:
       html: 
       mark: 
@@ -834,3 +844,7 @@ es:
       title: Editar forma de pago
     new:
       title: Nueva forma de pago
+  users:
+    index:
+      title: Compartir con otro usuario
+      share: Compartir

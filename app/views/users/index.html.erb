@@ -1,17 +1,17 @@
 <% content_for :sidebar do %>
     <%= render :partial => 'businesses/edit_sidebar' %>
 <% end %>
-<h3>Share with another user:</h3>
-<%= form_for :user, :url => business_users_path(@business), :html => {:class => "form-inline"} do |f| %>
-  <%= f.label :email %>
-  <%= f.text_field :email %>
-  <%= f.submit "Share", :class => "btn btn-primary" %>
+<h3><%= t('users.index.title') %></h3>
+<%= simple_form_for :user, :url => business_users_path(@business), :html => {:class => "form-inline"} do |f| %>
+  <%= f.input :email %>
+  <%= f.button :submit, t('users.index.share'), :class => "btn btn-primary"%>
 <% end %>
-<h3>Users</h3>
+
+<h3><%= User.model_name.human.pluralize %></h3>
 <ul class="users">
   <% @users.each do |user| %>
     <li>
-      <%= user.name %> <%= link_to content_tag(:i, '', :class => "icon-remove"), business_user_path(@business, user), :method => :delete, :confirm => 'Are you sure you want remove the user?' %>
+      <%= user.name %> (<%= user.email %>) <%= link_to content_tag(:i, '', :class => "icon-remove"), business_user_path(@business, user), :method => :delete, :confirm => t('actions.confirm_delete') %>
     </li>
   <% end %>
 </ul>
