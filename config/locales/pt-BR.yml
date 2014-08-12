@@ -422,7 +422,7 @@ pt-BR:
       businesses: Negócios
       edit_account: Editar conta
     secondary_navigation:
-      edit_business: Editar negócios
+      edit_business: Editar
       manage_memberships: Planos
       manage_sales: Vendas
       manage_transactions: Transações
@@ -817,7 +817,7 @@ pt-BR:
       time: ! '%H:%M:%S'
   businesses:
     edit:
-      title: Editar negócios
+      title: Editar
     edit_sidebar:
       manage_accounts: Contas
       manage_agents: Instrutores
