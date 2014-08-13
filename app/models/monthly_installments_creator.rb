@@ -20,4 +20,5 @@ class MonthlyInstallmentsCreator
         installment.save
       end
     end
- end
+  end
+end
