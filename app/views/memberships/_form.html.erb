@@ -53,7 +53,7 @@
     last_name: "asc"
     },
     username: "<%= current_user.username %>",
-    account_name: "<%= current_user.businesses.find(params[:business_id]).padma_id %>",
+    account_name: "<%= @business.padma_id %>",
     only_name: true,
     full_text: term,
     app_key: "<%= ENV['contacts_key'] %>"
