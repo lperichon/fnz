@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   devise :cas_authenticatable, :registerable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :time_zone, :drc_uid
+  attr_accessible :name, :email, :remember_me, :time_zone, :drc_uid
 
   has_many :owned_businesses, :foreign_key => :owner_id, :class_name => 'Business'
   has_and_belongs_to_many :businesses, :join_table => 'businesses_users'
@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
         user.update_attribute(:drc_uid, data.user)
         user
       else # Create a user with a stub password.
-        User.create!(:drc_uid => data.user, :email => data.user + "@metododerose.org", :password => Devise.friendly_token[0,20])
+        User.create!(:drc_uid => data.user, :email => data.user + "@metododerose.org")
       end
     end
   end

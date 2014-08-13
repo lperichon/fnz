@@ -12,7 +12,7 @@ class School < Business
   		
   		padma_account.users.each do |padma_user|
   			#initialize users
-  			user = User.find_or_create_by_drc_uid(drc_uid:padma_user.id, email: padma_user.email, password: Devise.friendly_token[0,20])
+  			user = User.find_or_create_by_drc_uid(drc_uid:padma_user.id, email: padma_user.email)
   			users << user
   			#initialize agents
   			agents.create(name: padma_user.id)
