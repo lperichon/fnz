@@ -13,7 +13,7 @@ class MonthlyInstallmentsCreator
         agent = business.agents.where(:padma_id => student.padma_teacher).first
 
         installment = current_membership.installments.new(:due_on => Date.today.end_of_month,
-                                                          :value => student.membership.value)
+                                                          :value => current_membership.value)
         
         installment.agent = agent if agent
 
