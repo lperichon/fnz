@@ -9,7 +9,7 @@ class MonthlyInstallmentsCreator
     business.contacts.students.each do |student|
       unless student.padma_teacher.blank? || student.installment_for(Date.today).present? || student.membership.blank?
         agent = business.agents.where(:padma_id => student.padma_teacher).first
-        student.membership.installments.create(:agent_id => agent.id,
+        student.current_membership.installments.create(:agent_id => agent.id,
                                                :due_on => Date.today.end_of_month,
                                                :value => student.membership.value) if agent
       end
