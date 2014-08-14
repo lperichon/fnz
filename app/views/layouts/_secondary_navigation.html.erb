@@ -1,6 +1,5 @@
 <% if @business.present? && @business.persisted? %>
 <ul class="nav nav-pills" id="secondary-navigation">
-  <% if @business.owner == current_user %>
   <li class="<%= 'active' if (controller.controller_name == "businesses" && controller.action_name == "edit") ||
                               controller.controller_name == "agents" ||
                               controller.controller_name == "contacts" ||
@@ -11,8 +10,7 @@
                               controller.controller_name == "users" %>">
     <%= link_to content_tag(:i, "", :class => "icon-cogs") + t("layouts.secondary_navigation.edit_business"), edit_business_path(@business) %>
   </li>
-  <% end %>
-  <% if can? :manage, @business.transactions.build %>
+  <% if @business.transactions_enabled? %>
   <li class="<%= 'active' if controller.controller_name == "transactions" %>"><%= link_to t('layouts.secondary_navigation.manage_transactions'), business_transactions_path(@business) %></li>
   <% end %>
   <% if @business.is_a? School %>

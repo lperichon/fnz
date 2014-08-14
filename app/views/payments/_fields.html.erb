@@ -7,7 +7,6 @@
 <%= f.input :transaction_at, :as => :date_time_picker %>
 
 <% if @business.transactions_enabled? %>
-<%= f.input :state, :as => :select, :collection => Transaction.available_states %>
+	<%= f.input :state, :as => :select, :collection => Transaction.available_states %>
+	<%= f.input :tag_ids, :as => :select, :collection => @business.tags, :input_html => {:class => "chosen", :multiple => true} %>
 <% end %>
-
-<%=  f.input :tag_ids, :as => :select, :collection => @business.tags, :input_html => {:class => "chosen", :multiple => true} %>
