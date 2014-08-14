@@ -531,6 +531,7 @@ pt-BR:
           type: 
           share_enabled: 
           transactions_enabled: 
+          owner: 
       enrollment:
         new:
           agent: 
@@ -632,6 +633,7 @@ pt-BR:
           type: 
           share_enabled: 
           transactions_enabled: 
+          owner: 
       enrollment:
         new:
           agent: 

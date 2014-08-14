@@ -1,6 +1,8 @@
 <%= simple_form_for(@business, :as => :business, :validate => true, :url => form_url, :html => {:class => "form-horizontal"}) do |f| %>
     <%= f.input :type, :collection => ["Personal", "School"], :as => :radio_buttons, :item_wrapper_class => 'inline' %>
 
+    <%= f.association :owner, :as => :select, :collection => User.all, label_method: lambda { |usr| usr.drc_uid }, :input_html => {'data-placeholder' => "Select user", :class => "chosen"} %>
+
     <%= f.input :name %>
 
 	<%= f.input :padma_id if @business.is_a? School %>

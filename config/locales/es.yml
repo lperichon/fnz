@@ -483,6 +483,7 @@ es:
           type: 
           share_enabled: 
           transactions_enabled: 
+          owner: 
       user:
         edit:
           time_zone: 
@@ -584,6 +585,7 @@ es:
           type: 
           share_enabled: 
           transactions_enabled: 
+          owner: 
       user:
         edit:
           current_password: 
