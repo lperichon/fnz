@@ -108,6 +108,7 @@ pt-BR:
       business:
         type: Tipo
         name: Nome
+        owner: 
       agent:
         business: 
         name: Nome

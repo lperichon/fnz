@@ -108,6 +108,7 @@ es:
       business:
         type: Tipo
         name: Nombre
+        owner: 
       agent:
         business: 
         name: Nombre
