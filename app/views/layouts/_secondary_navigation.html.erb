@@ -8,7 +8,7 @@
                               controller.controller_name == "accounts" ||
                               controller.controller_name == "imports" ||
                               controller.controller_name == "users" %>">
-    <%= link_to content_tag(:i, "", :class => "icon-cogs") + t("layouts.secondary_navigation.edit_business"), edit_business_path(@business) %>
+    <%= link_to content_tag(:i, "", :class => "icon-cogs") + t("layouts.secondary_navigation.edit_business"), @business.owner == current_user ? edit_business_path(@business) : business_path(@business) %>
   </li>
   <% if @business.transactions_enabled? %>
   <li class="<%= 'active' if controller.controller_name == "transactions" %>"><%= link_to t('layouts.secondary_navigation.manage_transactions'), business_transactions_path(@business) %></li>

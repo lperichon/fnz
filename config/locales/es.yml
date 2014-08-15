@@ -511,6 +511,7 @@ es:
           reconciled_at: 
           target_id: 
           type: 
+          source_id: 
         edit:
           amount: 
           conversion_rate: 

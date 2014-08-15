@@ -13,7 +13,7 @@
   <% if @business.transactions_enabled? %>
   <li class="<%= 'active' if controller.controller_name == "imports" %>"><%= link_to content_tag(:i, "", :class => "icon-upload") + t('businesses.edit_sidebar.manage_imports'), business_imports_path(@business) %></li>
   <% end %>
-  <% if @business.share_enabled? %>
+  <% if @business.share_enabled? && can? :manage, @business.users.build %>
   <li class="<%= 'active' if controller.controller_name == "users" %>"><%= link_to content_tag(:i, "", :class => "icon-globe") + t('businesses.edit_sidebar.manage_users'), business_users_path(@business) %></li>
   <% end %>
 </ul>

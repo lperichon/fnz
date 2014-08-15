@@ -1,7 +1,6 @@
 <% content_for :sidebar do %>
-    <%= render :partial => 'sidebar' %>
+    <%= render :partial => 'edit_sidebar' %>
 <% end %>
 
-<%= render :partial => 'transactions_table', :locals => {:transactions => @business.transactions} %>
-
-<%= link_to 'Back', businesses_path %>
+<p><b><%= Business.human_attribute_name(:name) %>:</b> <%= @business.name %> </p>
+<p><b><%= Business.human_attribute_name(:owner) %>:</b>  <%= @business.owner.drc_uid %> </p>
