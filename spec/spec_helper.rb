@@ -51,6 +51,4 @@ RSpec.configure do |config|
     PadmaUser.any_instance.stub(:enabled_accounts).and_return([PadmaAccount.new(:name => "test")])
     PadmaUser.any_instance.stub(:current_account_name).and_return("test")
   end
-
-  config.fail_fast = true
 end
