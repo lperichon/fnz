@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe TransactionsController do
+describe TransactionsController, :type => :controller do
 
   # This should return the minimal set of attributes required to create a valid
   # Business. As you add validations to Business, be sure to
@@ -12,6 +12,7 @@ describe TransactionsController do
       :source_id => @account.id,
       :business_id => @business.id,
       :transaction_at => Date.today,
+      :creator_id => @business.owner.id,
       :type => "Debit"
     }
   end

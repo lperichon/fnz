@@ -1,16 +1,16 @@
 require 'spec_helper'
 
-describe HomeController do
+describe HomeController, :type => :controller do
 
   before(:each) do
-    @user = FactoryGirl.create(:user)
-    sign_in @user
+    @school = FactoryGirl.create(:school)
+    sign_in @school.owner
   end
 
   describe "GET 'index'" do
     it "should be successful" do
       get 'index'
-      response.should be_success
+      response.should redirect_to(overview_business_memberships_path(:business_id => "test"))
     end
   end
 

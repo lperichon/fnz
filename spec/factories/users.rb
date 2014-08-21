@@ -8,9 +8,5 @@ FactoryGirl.define do
   factory :user, :aliases => [:owner] do
     name 'Test User'
     email
-    password 'please'
-    password_confirmation 'please'
-    # required if the Devise Confirmable module is used
-    # confirmed_at Time.now
   end
 end

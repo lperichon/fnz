@@ -45,9 +45,11 @@ RSpec.configure do |config|
   config.before(:each) do
     User.any_instance.stub(:padma).and_return(PadmaUser.new)
     PadmaContact.stub(:find_by_kshema_id).and_return(PadmaContact.new(:id => "123", :first_name => "Bart", :last_name => "Simpson"))
-    PadmaAccount.stub(:find).and_return(PadmaAccount.new)
+    PadmaAccount.stub(:find).and_return(PadmaAccount.new(:name => "test"))
     PadmaAccount.any_instance.stub(:admin).and_return(PadmaUser.new(:username => "homer.simpson", :id => "homer.simpson", :email => "homer@simpsons.com"))
     PadmaAccount.any_instance.stub(:users).and_return([PadmaUser.new(:id => "bart.simpson", :email => "bart@simpsons.com"), PadmaUser.new(:id => "lisa.simpson", :email => "lisa@simpsons.com") ])
+    PadmaUser.any_instance.stub(:enabled_accounts).and_return([PadmaAccount.new(:name => "test")])
+    PadmaUser.any_instance.stub(:current_account_name).and_return("test")
   end
 
   config.fail_fast = true

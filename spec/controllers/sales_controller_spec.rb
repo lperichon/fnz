@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe SalesController do
+describe SalesController, :type => :controller do
 
   # This should return the minimal set of attributes required to create a valid
   # Business. As you add validations to Business, be sure to

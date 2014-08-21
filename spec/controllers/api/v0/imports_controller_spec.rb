@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Api::V0::ImportsController do
+describe Api::V0::ImportsController, :type => :controller do
   def valid_attributes
     {
       import: { upload: fixture_file_upload('/belgrano_productos.csv', 'text/csv'),
