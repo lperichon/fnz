@@ -48,7 +48,7 @@ describe ImportsController, :type => :controller do
   describe "GET edit" do
     it "assigns the requested business as @business" do
       import = @business.imports.create! valid_attributes
-      get :edit, {:business_id => @business.to_param, :id => @business.to_param}
+      get :edit, {:business_id => @business.to_param, :id => import.to_param}
       assigns(:import).should eq(import)
     end
   end

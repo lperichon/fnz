@@ -49,7 +49,7 @@ describe PaymentTypesController, :type => :controller do
   describe "GET edit" do
     it "assigns the requested business as @business" do
       payment_type = @business.payment_types.create! valid_attributes
-      get :edit, {:business_id => @business.to_param, :id => @business.to_param}
+      get :edit, {:business_id => @business.to_param, :id => payment_type.to_param}
       assigns(:payment_type).should eq(payment_type)
     end
   end

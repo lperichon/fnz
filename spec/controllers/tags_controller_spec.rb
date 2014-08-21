@@ -48,7 +48,7 @@ describe TagsController, :type => :controller do
   describe "GET edit" do
     it "assigns the requested business as @business" do
       tag = @business.tags.create! valid_attributes
-      get :edit, {:business_id => @business.to_param, :id => @business.to_param}
+      get :edit, {:business_id => @business.to_param, :id => tag.to_param}
       assigns(:tag).should eq(tag)
     end
   end
