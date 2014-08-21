@@ -52,7 +52,7 @@ describe ProductsController, :type => :controller do
   describe "GET edit" do
     it "assigns the requested business as @business" do
       product = @business.products.create! FactoryGirl.attributes_for(:product)
-      get :edit, {:business_id => @business.to_param, :id => @business.to_param}
+      get :edit, {:business_id => @business.to_param, :id => product.to_param}
       assigns(:product).should eq(product)
     end
   end
