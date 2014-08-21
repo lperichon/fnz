@@ -1,19 +1,4 @@
 Fnz
 ========================
 
-This application was generated with the rails_apps_composer gem:
-https://github.com/RailsApps/rails_apps_composer
-provided by the RailsApps Project:
-http://railsapps.github.com/
-
-________________________
-
-Recipes:
-["auth", "controllers", "core", "email", "extras", "frontend", "gems", "git", "init", "models", "railsapps", "readme", "routes", "setup", "testing", "views"]
-
-Preferences:
-{:git=>true, :railsapps=>"rails3-bootstrap-devise-cancan", :database=>"sqlite", :templates=>"erb", :unit_test=>"rspec", :integration=>"cucumber", :fixtures=>"factory_girl", :frontend=>"bootstrap", :bootstrap=>"sass", :email=>"gmail", :authentication=>"devise", :devise_modules=>"default", :authorization=>"cancan", :starter_app=>"admin_app", :form_builder=>"none", :dev_webserver=>"webrick", :ban_spiders=>true}
-
-________________________
-
-License
+[ ![Codeship Status for lperichon/fnz](https://codeship.io/projects/dd8998d0-0b8a-0132-22a0-72230f3fc4ea/status)](https://codeship.io/projects/32015)
