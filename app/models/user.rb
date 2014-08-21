@@ -14,6 +14,10 @@ class User < ActiveRecord::Base
   has_many :owned_businesses, :foreign_key => :owner_id, :class_name => 'Business'
   has_and_belongs_to_many :businesses, :join_table => 'businesses_users'
 
+  validates_presence_of :email
+  validates_uniqueness_of :email, :case_sensitive => false, :allow_blank => false, :if => :email_changed?
+  validates_format_of :email, :with  => Devise.email_regexp, :allow_blank => true, :if => :email_changed?
+
   class << self
     def current_user=(user)
       Thread.current[:current_user] = user

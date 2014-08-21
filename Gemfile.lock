@@ -219,6 +219,8 @@ GEM
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
     rolify (3.4.0)
+    rspec-collection_matchers (1.0.0)
+      rspec-expectations (>= 2.99.0.beta1)
     rspec-core (3.0.3)
       rspec-support (~> 3.0.0)
     rspec-expectations (3.0.3)
@@ -340,6 +342,7 @@ DEPENDENCIES
   rails (= 3.2.8)
   resque
   rolify (>= 3.2.0)
+  rspec-collection_matchers
   rspec-rails (>= 2.11.0)
   sass-rails (~> 3.2.3)
   select2-rails
