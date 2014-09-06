@@ -16,7 +16,7 @@ class Installment < ActiveRecord::Base
   default_scope order("due_on DESC")
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :membership_id, :agent_id, :due_on, :value, :transactions_attributes, :installment_transactions_attributes
+  attr_accessible :membership_id, :agent_id, :due_on, :value, :transactions_attributes, :installment_transactions_attributes, :external_id
   accepts_nested_attributes_for :transactions, allow_destroy: true
   accepts_nested_attributes_for :installment_transactions, :reject_if => proc { |s| s['transaction_id'].blank? }
 
