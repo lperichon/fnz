@@ -46,6 +46,8 @@ class Installment < ActiveRecord::Base
 
   def self.build_from_csv(business, row)
 
+    return if Installment.find_by_external_id(row[0].to_i)
+
     membership = business.memberships.find_by_external_id(row[4].to_i)
 
     return unless membership
@@ -63,7 +65,8 @@ class Installment < ActiveRecord::Base
         :due_on => due_on_date,
         :value => row[1].to_f,
         :membership_id => membership.id,
-        :agent_id => agent.id
+        :agent_id => agent.id,
+        :external_id => row[0].to_i
     }
 
     unless row[3].blank? || row[3] == "false"
