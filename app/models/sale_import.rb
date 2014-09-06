@@ -3,11 +3,7 @@ class SaleImport < Import
   alias_method :imported_records, :sales
 
   def handle_row(business, row)
-    sale = Sale.build_from_csv(business, row)
-    unless sale.valid?
-    	puts sale.errors.full_messages
-    end
-    sale
+    Sale.build_from_csv(business, row)
   end
 
 end

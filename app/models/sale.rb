@@ -30,8 +30,13 @@ class Sale < ActiveRecord::Base
       agent_name = agent_id.blank? ? "Unknown" : agent_id
       agent = business.agents.create(:padma_id => agent_id, :name => agent_name)
     end
-    padma_contact = PadmaContact.find_by_kshema_id(row[3])
-    contact = Contact.find_by_padma_id(padma_contact.id)
+
+    padma_contact = nil
+    contact = nil
+    unless row[3].blank?
+      padma_contact = PadmaContact.find_by_kshema_id(row[3])
+      contact = Contact.find_by_padma_id(padma_contact.id)
+    end
 
     sale_date = DateTime.parse(row[5])
 
