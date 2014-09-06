@@ -123,7 +123,9 @@ class Api::V0::ImportsController < Api::V0::ApiController
       unless @business
         padma_account = PadmaAccount.find(padma_id)
         padma_user = padma_account.admin
-        owner = User.find_or_create_by_drc_uid(drc_uid: padma_user.username, :email => padma_user.username + "@metododerose.org")
+        owner = User.find_or_initialize_by_drc_uid(drc_uid: padma_user.username, :email => padma_user.username + "@metododerose.org")
+        # Skip validations to prevent PadmaUser#has_access_to_current_account to trigger when account is disabled
+        owner.save(validate: false) if owner.new_record?
         @business = School.create!(owner_id: owner.id, padma_id: padma_id, name: padma_id.titleize)
       end
       @business
