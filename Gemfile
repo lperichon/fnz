@@ -35,7 +35,7 @@ gem "paperclip", "~> 3.0"
 gem 'aws-sdk'
 gem 'tz_magic', '0.0.1'
 gem "squeel", '1.0.14'
-gem 'accounts_client', '0.0.21'
+gem 'accounts_client', '~> 0.2.6'
 gem 'contacts_client', '~> 0.0.21'
 gem 'messaging_client','~> 0.0.2'
 gem 'newrelic_rpm', :group => [:staging, :production]
@@ -53,3 +53,4 @@ gem 'mandrill_mailer', :git => "git://github.com/lperichon/mandrill_mailer.git"
 gem 'httparty'
 gem 'quiet_assets', :group => :development
 gem "active_model_serializers"
+gem "debugger"

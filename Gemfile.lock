@@ -10,9 +10,9 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    accounts_client (0.0.21)
+    accounts_client (0.2.6)
       gravtastic
-      logical_model (~> 0.5.8)
+      logical_model (>= 0.5.8)
       railties (>= 3.1)
     actionmailer (3.2.8)
       actionpack (= 3.2.8)
@@ -74,11 +74,18 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.7.1)
+    columnize (0.8.9)
     contacts_client (0.0.27)
       logical_model (>= 0.5.8)
       railties (>= 3.1)
     daemons (1.1.9)
     database_cleaner (1.3.0)
+    debugger (1.6.8)
+      columnize (>= 0.3.1)
+      debugger-linecache (~> 1.2.0)
+      debugger-ruby_core_source (~> 1.3.5)
+    debugger-linecache (1.2.0)
+    debugger-ruby_core_source (1.3.5)
     delayed_job (4.0.2)
       activesupport (>= 3.0, < 4.2)
     delayed_job_active_record (4.0.1)
@@ -294,7 +301,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  accounts_client (= 0.0.21)
+  accounts_client (~> 0.2.6)
   active_model_serializers
   awesome_nested_fields (= 0.6.0)
   aws-sdk
@@ -308,6 +315,7 @@ DEPENDENCIES
   contacts_client (~> 0.0.21)
   daemons
   database_cleaner (>= 0.8.0)
+  debugger
   delayed_job_active_record
   devise (>= 2.1.2)
   devise_cas_authenticatable
