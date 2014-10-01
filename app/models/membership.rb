@@ -60,7 +60,8 @@ class Membership < ActiveRecord::Base
         :ends_on => Date.parse(row[3]),
         :vip => row[4] == 'true',
         :contact_id => fnz_contact.id,
-        :external_id => row[0].to_i
+        :external_id => row[0].to_i,
+        :monthly_due_day => 10
     }
 
     unless row[8].blank? # if cancelled
