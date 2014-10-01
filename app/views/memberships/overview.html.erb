@@ -18,7 +18,7 @@
   <% @contacts.each do |contact| %>
     <tr class="<%=contact.padma_status%>" data-contact-id=<%= contact.id %>>
       <% membership = @memberships[contact] %>
-      <% if membership && !membership.closed? %>
+      <% if membership && !membership.closed? && contact.padma_status == 'student' %>
 		<% monthly_iterator = [] %>
 		<% (1..5).each do |n| %>
 			<% date = (6-n).months.ago %>

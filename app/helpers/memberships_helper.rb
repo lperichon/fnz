@@ -11,7 +11,7 @@ module MembershipsHelper
   end
 
   def table_contact_membership_link(contact, membership)
-  	link_to(membership.present? ? t('memberships.overview.close_membership') : t('memberships.secondary_navigation.new_membership') , membership.present? ? business_membership_path(@business, membership) : new_business_membership_path(@business, :membership => {:contact_id => contact.id}))
+  	link_to(membership.present? ? t('memberships.overview.close_membership') : t('memberships.secondary_navigation.new_membership') , membership.present? ? edit_business_membership_path(@business, membership) : new_business_membership_path(@business, :membership => {:contact_id => contact.id}))
   end	
 
   # Renders contacts membership end_date if available. Empty string if not.
