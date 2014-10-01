@@ -7,7 +7,7 @@ class PadmaContactsSynchronizer
 
   def sync
     contacts = @business.contacts
-    if contacts.empty?
+    if contacts.empty? || @business.synchronized_at.nil?
       # Get all students
       padma_contacts = PadmaContact.search(select: [:first_name, :last_name, :status, :global_teacher_username], :where => {:updated_at =>  @business.synchronized_at, :status => "student"}, per_page: 9999, username: @business.owner.username, account_name: @business.padma_id)
     else
