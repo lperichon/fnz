@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140907223422) do
+ActiveRecord::Schema.define(:version => 20141001120523) do
 
   create_table "accounts", :force => true do |t|
     t.string  "name",                                       :default => "",  :null => false
@@ -135,6 +135,7 @@ ActiveRecord::Schema.define(:version => 20140907223422) do
     t.integer "payment_type_id"
     t.boolean "vip"
     t.integer "external_id"
+    t.integer "monthly_due_day"
   end
 
   create_table "payment_types", :force => true do |t|

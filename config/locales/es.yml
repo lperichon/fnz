@@ -48,9 +48,10 @@ es:
         business: 
         closed_on: Fecha de cierre
         padma_contact_id: Contacto
+        monthly_due_day: Fecha de vencimento (del pago)
       installment:
         agent: Instructor
-        due_on: Fecha de vencimiento (del pago)
+        due_on: Día de vencimiento (del pago)
         value: Monto
         membership: 
         status: Estado

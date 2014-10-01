@@ -17,10 +17,14 @@
                       }
     %>
 
-    <%= f.input :begins_on, :as => "string", :input_html => {:class => "datepicker_input"} %></p>
-    <%= f.input :ends_on, :as => "string", :input_html => {:class => "datepicker_input"} %></p>
+    <%= f.input :begins_on, :as => "string", :input_html => {:class => "datepicker_input"} %>
+    
+    <%= f.input :ends_on, :as => "string", :input_html => {:class => "datepicker_input"} %>
+
+    <%= f.input :monthly_due_day, :as => :integer %>
+
     <% unless f.object.new_record? %>
-        <%= f.input :closed_on, :as => "string", :input_html => {:class => "datepicker_input"} %></p>
+        <%= f.input :closed_on, :as => "string", :input_html => {:class => "datepicker_input"} %>
     <% end %>
 
     <%= f.button :submit, :class => "btn btn-primary" %>

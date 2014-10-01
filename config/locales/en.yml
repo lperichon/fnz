@@ -48,6 +48,7 @@ en:
         business: 
         closed_on: Closed on
         padma_contact_id: Contact
+        monthly_due_day: Installment payment due on day
       installment:
         agent: Instructor
         due_on: Payment due on
