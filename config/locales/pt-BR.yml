@@ -44,7 +44,7 @@ pt-BR:
         value: Valor
       installment:
         agent: Instrutor
-        due_on: Data de validade
+        due_on: Data de vencimento (do pagamento)
         membership: 
         status: Estado
         transactions: Transações

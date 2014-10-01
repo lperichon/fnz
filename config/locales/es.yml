@@ -50,7 +50,7 @@ es:
         padma_contact_id: Contacto
       installment:
         agent: Instructor
-        due_on: Fecha de vencimiento
+        due_on: Fecha de vencimiento (del pago)
         value: Monto
         membership: 
         status: Estado

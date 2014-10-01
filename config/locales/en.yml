@@ -50,7 +50,7 @@ en:
         padma_contact_id: Contact
       installment:
         agent: Instructor
-        due_on: Due on
+        due_on: Payment due on
         value: Value
         membership: 
         status: Status
