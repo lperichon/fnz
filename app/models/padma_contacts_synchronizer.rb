@@ -29,7 +29,8 @@ class PadmaContactsSynchronizer
           @business.contacts.create(
             :name => "#{padma_contact.first_name} #{padma_contact.last_name}".strip,
             :padma_status => padma_contact.status,
-            :padma_teacher => padma_contact.global_teacher_username)
+            :padma_teacher => padma_contact.global_teacher_username,
+            :padma_id => padma_contact.id)
         end
     end
     @business.update_attribute(:synchronized_at, DateTime.now)
