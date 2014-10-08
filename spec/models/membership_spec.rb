@@ -14,6 +14,8 @@ describe Membership do
     }
   end
 
+  it { should have_db_column :name }
+
   describe "has a payment type" do
     it {should belong_to :payment_type }
     it "nullify association if payment is destroyed" do

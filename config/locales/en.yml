@@ -44,6 +44,7 @@ en:
         begins_on: Begins on
         contact: Contact
         enrollment: Enrollment
+        name: Name
         value: Value
         business: 
         closed_on: Closed on
@@ -421,6 +422,7 @@ en:
     form:
       contact_placeholder: Please select contact
       payment_type_placeholder: Please select payment type
+      name_placeholder: You may set a name for the membership
     edit:
       title: Edit Membership
     overview:

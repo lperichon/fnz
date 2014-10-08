@@ -56,6 +56,7 @@ pt-BR:
         contact: Contato
         ends_on: Finaliza em
         enrollment: Matrícula
+        name: Nome
         installments: Mensalidades
         padma_contact_id: Contato
         payment_type: Forma de pagamento
@@ -434,6 +435,7 @@ pt-BR:
     form:
       contact_placeholder: Por favor, escolha um contato
       payment_type_placeholder: Por favor, escolha um tipo de pagamento
+      name_placeholdeR: Pode colocar um nome para o plano
     overview:
       close_membership: Fechar plano
     secondary_navigation:
