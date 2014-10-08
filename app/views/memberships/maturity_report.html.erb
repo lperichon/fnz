@@ -22,7 +22,7 @@
   </tr>
   <% @search.results.each do |membership| %>
     <tr>
-      <td><%= membership.contact.name %></td>
+      <td><%= membership.contact.try :name %></td>
       <td><%= membership.name %></td>
       <td><%= membership.begins_on %> - <%= membership.ends_on %></td>
       <td><%= membership.value %></td>
