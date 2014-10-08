@@ -13,7 +13,7 @@ class Membership < ActiveRecord::Base
   validates :monthly_due_day, :numericality =>  {:greater_than => 0, :less_than => 29}
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :contact_id, :business_id, :payment_type_id, :begins_on, :ends_on, :value, :closed_on, :vip, :external_id, :monthly_due_day
+  attr_accessible :contact_id, :business_id, :payment_type_id, :begins_on, :ends_on, :value, :closed_on, :vip, :external_id, :monthly_due_day, :name
 
   after_save :update_contacts_current_membership
 
