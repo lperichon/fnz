@@ -100,6 +100,10 @@ class MembershipsController < UserApplicationController
   	end
   end
 
+  def maturity_report
+
+  end
+
   def stats
     @stats = MembershipStats.new(:business => @business, :year => params[:year].to_i, :month => params[:month].to_i)
   end
