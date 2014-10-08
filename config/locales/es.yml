@@ -408,6 +408,7 @@ es:
   memberships:
     secondary_navigation:
       new_membership: Nueva membresía
+      maturity_report: Reporte de vencimientos
     table_header:
       view_month_stats: Ver las estadísticas de %{month}
     show:

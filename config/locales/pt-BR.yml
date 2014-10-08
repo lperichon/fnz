@@ -440,6 +440,7 @@ pt-BR:
       close_membership: Fechar plano
     secondary_navigation:
       new_membership: Novo plano
+      maturity_report: Reporte de vencimentos
     show:
       create_enrollment: Criar matrícula
       new_installment: Nova mensalidade

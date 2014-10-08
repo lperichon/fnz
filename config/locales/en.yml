@@ -414,6 +414,7 @@ en:
   memberships:
     secondary_navigation:
       new_membership: New membership
+      maturity_report: Maturity report
     table_header:
       view_month_stats: View %{month} stats
     show:
