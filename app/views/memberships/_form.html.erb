@@ -7,6 +7,10 @@
 
     <%= f.input :value %>
 
+    <%= f.input :name, :input_html => {
+      'data-placeholder' => t('membreships.form.name_placeholder')
+    } %>
+
     <%= f.association :payment_type,
                       as: :select,
                       collection: @business.payment_types,

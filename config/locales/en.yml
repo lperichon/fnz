@@ -421,6 +421,7 @@ en:
     form:
       contact_placeholder: Please select contact
       payment_type_placeholder: Please select payment type
+      name_placeholder: You may set a name for the membership
     edit:
       title: Edit Membership
     overview:

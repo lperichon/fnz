@@ -415,6 +415,7 @@ es:
     form:
       contact_placeholder: Seleccione un contacto
       payment_type_placeholder: Seleccione una forma de pago
+      name_placeholder: Puede colocar un nombre para la membresía
     edit:
       title: Editar membresía
     overview:
