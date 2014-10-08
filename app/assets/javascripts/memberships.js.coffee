@@ -50,6 +50,7 @@ $(document).ready ->
     $("#period-options a").removeClass('btn-primary')
     $(this).addClass('btn-primary')
     $('#update-filter').addClass('btn-success')
+    $('#update-filter').show()
 
   $(".easy-period").click ->
     $("#custom-period-select").hide()
