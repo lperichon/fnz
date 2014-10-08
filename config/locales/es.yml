@@ -49,6 +49,7 @@ es:
         closed_on: Fecha de cierre
         padma_contact_id: Contacto
         monthly_due_day: Fecha de vencimento (del pago)
+        name: Nombre
       installment:
         agent: Instructor
         due_on: Día de vencimiento (del pago)

@@ -44,6 +44,7 @@ en:
         begins_on: Begins on
         contact: Contact
         enrollment: Enrollment
+        name: Name
         value: Value
         business: 
         closed_on: Closed on
