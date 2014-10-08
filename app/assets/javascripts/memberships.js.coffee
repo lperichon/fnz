@@ -54,6 +54,8 @@ $(document).ready ->
 
   $(".easy-period").click ->
     $("#custom-period-select").hide()
+    $("#membership_search_ends_after").val(this.data('ends-after'))
+    $("#membership_search_ends_before").val(this.data('ends-before'))
 
   $('#custom-period').click ->
     $("#custom-period-select").show()
