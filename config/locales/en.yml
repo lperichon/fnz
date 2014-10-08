@@ -412,6 +412,11 @@ en:
       manage_sales: Sales
       manage_transactions: Transactions
   memberships:
+    maturity_report:
+      student: Student
+      membership: Membership
+      period: Period
+      value: Value
     secondary_navigation:
       new_membership: New membership
       maturity_report: Maturity report

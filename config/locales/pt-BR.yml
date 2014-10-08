@@ -430,6 +430,11 @@ pt-BR:
       manage_sales: Vendas
       manage_transactions: Transações
   memberships:
+    maturity_report:
+      student: Aluno
+      membership: Plano
+      period: Período
+      value: Valor
     edit:
       title: Editar plano
     form:
