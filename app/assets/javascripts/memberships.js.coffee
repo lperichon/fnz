@@ -57,3 +57,6 @@ $(document).ready ->
 
   $('#custom-period').click ->
     $("#custom-period-select").show()
+
+  $("#update-filter").click ->
+    $("#new_membership_search").submit()
