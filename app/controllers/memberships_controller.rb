@@ -101,8 +101,12 @@ class MembershipsController < UserApplicationController
   end
 
   def maturity_report
-    @search = MembershipSearch.new(ends_before: Date.today.beginning_of_month,
-                                   ends_after: Date.today.end_of_month)
+    if params[:membership_search].nil?
+      attr = {ends_after: Date.today.beginning_of_month, ends_before: Date.today.end_of_month}
+    else
+      attr = params[:membership_search]
+    end
+    @search = MembershipSearch.new(attr)
   end
 
   def stats
