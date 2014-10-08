@@ -1,4 +1,4 @@
-<%= form_for @search do |f| %>
+<%= form_for @search, url: maturity_report_business_memberships_path(@business) do |f| %>
   <a class="btn pull-right btn-mini" id="update-filter"><%= t('update') %></a>
   <%= t('.see_memberships_maturing_during') %>
   <div class="btn-group" id="period-options">
