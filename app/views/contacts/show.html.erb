@@ -8,7 +8,7 @@
 <h3>Memberships</h3>
 <ul>
 <% @contact.memberships.each do |membership| %>
-  <p><%= membership.begins_on %> - <%= membership.ends_on %> <%= content_tag(:span, "Current", :class => "label label-primary") if membership == @contact.current_membership %> <%= link_to "Show", business_membership_path(@business, membership) %></p>
+  <p><%= "#{membership.name}: " %><%= membership.begins_on %> - <%= membership.ends_on %> <%= content_tag(:span, "Current", :class => "label label-primary") if membership == @contact.current_membership %> <%= link_to "Show", business_membership_path(@business, membership) %></p>
 <% end %>
 </ul>
 <% unless @contact.current_membership.present? %>
