@@ -1,0 +1,17 @@
+<%= form_for @search do |f| %>
+  <a class="btn pull-right btn-mini" id="update-filter"><%= t('update') %></a>
+  <%= t('.see_memberships_maturing_during') %>
+  <div class="btn-group" id="period-options">
+    <a href="#" class="btn btn-mini easy-period"><%= t('.current_month') %></a>
+    <a href="#" class="btn btn-mini easy-period"><%= t('.next_month') %></a>
+    <a href="#" id="custom-period" class="btn btn-mini"><%= t('.custom_period') %></a>
+  </div>
+  <div class="row-fluid" id="custom-period-select">
+    <div class="span6">
+      <%= f.input :ends_after, input_html: { class: 'datepicker_input' } %>
+    </div>
+    <div class="span6">
+      <%= f.input :ends_before, input_html: { class: 'datepicker_input' } %>
+    </div>
+  </div>
+<% end %>

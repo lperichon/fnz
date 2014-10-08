@@ -101,7 +101,7 @@ class MembershipsController < UserApplicationController
   end
 
   def maturity_report
-
+    @search = MembershipSearch.new
   end
 
   def stats
