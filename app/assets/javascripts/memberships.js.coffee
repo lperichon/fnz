@@ -44,3 +44,21 @@ $(document).ready ->
     contact_id = $(this).attr("data-contact-id")
     $(".table.memberships tr[data-contact-id='" + contact_id + "']").removeClass "contact-hover"
   )
+
+  # maturity_report form
+  $("#period-options a").click ->
+    $("#period-options a").removeClass('btn-primary')
+    $(this).addClass('btn-primary')
+    $('#update-filter').addClass('btn-success')
+    $('#update-filter').show()
+
+  $(".easy-period").click ->
+    $("#custom-period-select").hide()
+    $("#membership_search_ends_after").val($(this).data('ends-after'))
+    $("#membership_search_ends_before").val($(this).data('ends-before'))
+
+  $('#custom-period').click ->
+    $("#custom-period-select").show()
+
+  $("#update-filter").click ->
+    $("#new_membership_search").submit()

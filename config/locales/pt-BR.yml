@@ -430,6 +430,15 @@ pt-BR:
       manage_sales: Vendas
       manage_transactions: Transações
   memberships:
+    maturity_search:
+      current_month: Mês atual
+      next_month: Próximo mês
+      custom_period: Selecionar período
+    maturity_report:
+      student: Aluno
+      membership: Plano
+      period: Período
+      value: Valor
     edit:
       title: Editar plano
     form:
@@ -440,6 +449,7 @@ pt-BR:
       close_membership: Fechar plano
     secondary_navigation:
       new_membership: Novo plano
+      maturity_report: Reporte de vencimentos
     show:
       create_enrollment: Criar matrícula
       new_installment: Nova mensalidade

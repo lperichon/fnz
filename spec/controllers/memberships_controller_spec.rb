@@ -160,4 +160,12 @@ describe MembershipsController, :type => :controller do
     end
   end
 
+  describe "GET /business/:bid/memberships/maturity_report" do
+    render_views
+    before do
+      get :maturity_report, business_id: @business.id
+    end
+    it { should respond_with 200 }
+  end
+
 end

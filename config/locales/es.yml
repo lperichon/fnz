@@ -406,8 +406,18 @@ es:
       manage_sales: Ventas
       manage_transactions: Transacciones
   memberships:
+    maturity_search:
+      current_month: Este mes
+      next_month: Próximo mes
+      custom_period: Seleccionar período
+    maturity_report:
+      student: Alumno
+      membership: Membresía
+      period: Período
+      value: Valor
     secondary_navigation:
       new_membership: Nueva membresía
+      maturity_report: Reporte de vencimientos
     table_header:
       view_month_stats: Ver las estadísticas de %{month}
     show:

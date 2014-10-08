@@ -15,7 +15,11 @@
   <% end %>
   <% if @business.is_a? School %>
       <li class="<%= 'active' if controller.controller_name == "sales" %>"><%= link_to t('layouts.secondary_navigation.manage_sales'), business_sales_path(@business) %></li>
-      <li class="<%= 'active' if controller.controller_name == "memberships" %>"><%= link_to t('layouts.secondary_navigation.manage_memberships'), overview_business_memberships_path(@business) %></li>
+      <li class="<%= 'active' if memberships_link_active?  %>"><%= link_to t('layouts.secondary_navigation.manage_memberships'), overview_business_memberships_path(@business) %></li>
+      <li class="<%= 'active' if maturity_report_active?  %>">
+        <%= link_to t('memberships.secondary_navigation.maturity_report'),
+                    maturity_report_business_memberships_path(@business) %>
+      </li>
   <% end %>
   <%= yield(:secondary_navigation) %>
 </ul>
