@@ -1,1 +1,7 @@
-<li class="pull-right"><%= link_to content_tag(:i, "", :class => "icon-plus") + t('memberships.secondary_navigation.new_membership'), new_business_membership_path(@business) %></li>
+<li>
+<%= link_to t('memberships.secondary_navigation.maturity_report'),
+            maturity_report_business_memberships_path(@business) %>
+</li>
+<li class="pull-right">
+  <%= link_to content_tag(:i, "", :class => "icon-plus") + t('memberships.secondary_navigation.new_membership'), new_business_membership_path(@business) %>
+</li>

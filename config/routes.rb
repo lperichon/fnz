@@ -39,6 +39,7 @@ Fnz::Application.routes.draw do
       end
       get :overview, :on => :collection
       get :stats, :on => :collection
+      get :maturity_report, :on => :collection
     end
     resources :imports do
       put :process_csv, :on => :member
