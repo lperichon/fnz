@@ -430,6 +430,10 @@ pt-BR:
       manage_sales: Vendas
       manage_transactions: Transações
   memberships:
+    maturity_search:
+      current_month: Mês atual
+      next_month: Próximo mês
+      custom_period: Selecionar período
     maturity_report:
       student: Aluno
       membership: Plano
