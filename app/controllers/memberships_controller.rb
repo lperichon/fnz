@@ -101,7 +101,8 @@ class MembershipsController < UserApplicationController
   end
 
   def maturity_report
-    @search = MembershipSearch.new
+    @search = MembershipSearch.new(ends_before: Date.today.beginning_of_month,
+                                   ends_after: Date.today.end_of_month)
   end
 
   def stats
