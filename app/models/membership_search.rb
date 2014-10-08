@@ -14,4 +14,13 @@ class MembershipSearch
   def persisted?
     false
   end
+
+  def results
+    scope = Membership.scoped
+    
+    scope = scope.where("ends_on >= ?", @ends_after) unless @ends_after.nil?
+    scope = scope.where("ends_on <= ?", @ends_before) unless @ends_before.nil?
+
+    scope
+  end
 end
