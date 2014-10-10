@@ -19,7 +19,7 @@ class MembershipSearch
     scope = Membership.scoped
     
     scope = scope.where(business_id: @business_id) unless @business_id.nil?
-    scope = scope.where("ends_on >= ?", @ends_after) unless @ends_after.nil?
+    scope = scope.where("(closed_on IS NULL AND ends_on >= :ends_after_date) OR (closed_on >= :ends_after_date)", ends_after_date: @ends_after) unless @ends_after.nil?
     scope = scope.where("ends_on <= ?", @ends_before) unless @ends_before.nil?
 
     scope

@@ -41,6 +41,20 @@ describe MembershipSearch do
       it "wont include membership ending on 2013-2-1" do
         expect(ms.results).not_to include no
       end
+      it "wont include membership ending on 2014-2-1 but closed on 2013-2-1" do
+        closed = FactoryGirl.create(:membership,
+                                    begins_on: Date.civil(2013,1,1),
+                                    ends_on: Date.civil(2014,2,1),
+                                    closed_on: Date.civil(2013,2,1))
+        expect(ms.results).not_to include closed
+      end
+      it "includes membership closed on 2014-2-1" do
+        closed = FactoryGirl.create(:membership,
+                                    begins_on: Date.civil(2013,1,1),
+                                    ends_on: Date.civil(2014,3,1),
+                                    closed_on: Date.civil(2014,2,1))
+        expect(ms.results).to include closed
+      end
     end
   end
 end
