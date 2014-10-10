@@ -6,6 +6,10 @@
   display: none;
 }
 
+table#memberships tr:not(:first-child) {
+  cursor: pointer;
+}
+
 .overdue-membership {
   color: #d9534f;
 }

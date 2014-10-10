@@ -12,7 +12,7 @@
 <% end %>
 
 
-<table class="table table-striped table-bordered">
+<table id="memberships" class="table table-striped table-bordered">
   <tr>
     <th><%= t('memberships.maturity_report.student') %></th>
     <th><%= t('memberships.maturity_report.membership') %></th>
@@ -21,7 +21,7 @@
     <th><%= Membership.human_attribute_name(:payment_type) %></th>
   </tr>
   <% @search.results.each do |membership| %>
-    <tr>
+    <tr data-membership_url="<%= business_membership_url(business_id: params[:business_id], id: membership.id) %>">
       <td><%= membership.contact.try :name %></td>
       <td><%= membership.name %></td>
       <td><%= membership.begins_on %> - <%= membership.ends_on %></td>

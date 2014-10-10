@@ -46,6 +46,10 @@ $(document).ready ->
   )
 
   # maturity_report form
+
+  $("table#memberships tr:not(:first-child)").click ->
+    window.location.href = $(this).data('membership_url')
+
   $("#period-options a").click ->
     $("#period-options a").removeClass('btn-primary')
     $(this).addClass('btn-primary')
