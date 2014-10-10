@@ -107,6 +107,7 @@ class MembershipsController < UserApplicationController
       attr = params[:membership_search]
     end
     @search = MembershipSearch.new(attr)
+    @search.business_id = params[:business_id]
   end
 
   def stats

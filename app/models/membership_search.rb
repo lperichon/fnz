@@ -3,7 +3,7 @@ class MembershipSearch
   include ActiveModel::Conversion
   extend ActiveModel::Naming
 
-  attr_accessor :ends_after, :ends_before
+  attr_accessor :ends_after, :ends_before, :business_id
 
   def initialize(attributes = {})
     attributes.each do |name,value|
@@ -18,6 +18,7 @@ class MembershipSearch
   def results
     scope = Membership.scoped
     
+    scope = scope.where(business_id: @business_id) unless @business_id.nil?
     scope = scope.where("ends_on >= ?", @ends_after) unless @ends_after.nil?
     scope = scope.where("ends_on <= ?", @ends_before) unless @ends_before.nil?
 
