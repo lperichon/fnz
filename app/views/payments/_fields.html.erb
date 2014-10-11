@@ -4,9 +4,11 @@
 	<%= f.association :source, :collection => @business.accounts, :prompt => t('transactions.fields.source_prompt') %>
 <% end %>
 
-<%= f.input :transaction_at, :as => :date_time_picker %>
 
 <% if @business.transactions_enabled? %>
+  <%= f.input :transaction_at, :as => :date_time_picker %>
 	<%= f.input :state, :as => :select, :collection => Transaction.available_states %>
 	<%= f.input :tag_ids, :as => :select, :collection => @business.tags, :input_html => {:class => "chosen", :multiple => true} %>
+<% else -%>
+  <%= f.input :transaction_at, :as => :date_picker %>
 <% end %>
