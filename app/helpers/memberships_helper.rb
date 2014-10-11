@@ -1,5 +1,10 @@
 module MembershipsHelper
 
+  def suggested_agent_id_for(business,membership)
+    agents = business.agents.where(name: membership.contact.padma_teacher)
+    agents.empty?? nil : agents.first.id
+  end
+
   def sidebar_contact_membership_link(contact, membership)
     str = contact.name.html_safe
     str << overdue_fire_warning(membership)
@@ -12,7 +17,7 @@ module MembershipsHelper
 
   def table_contact_membership_link(contact, membership)
   	link_to(membership.present? ? t('memberships.overview.close_membership') : t('memberships.secondary_navigation.new_membership') , membership.present? ? edit_business_membership_path(@business, membership) : new_business_membership_path(@business, :membership => {:contact_id => contact.id}))
-  end	
+  end
 
   # Renders contacts membership end_date if available. Empty string if not.
   # @return [String]
@@ -42,5 +47,5 @@ module MembershipsHelper
   # @return [Installment]
   def installment_for(date, installments)
   	installments.detect {|i| i.due_on.beginning_of_month.beginning_of_day <= date && i.due_on.end_of_month.end_of_day >= date}
-  end	
+  end
 end
