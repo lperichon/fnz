@@ -430,6 +430,8 @@ pt-BR:
       manage_sales: Vendas
       manage_transactions: Transações
   memberships:
+    membership_filter:
+      filter: Filtrar
     maturity_search:
       current_month: Mês atual
       next_month: Próximo mês

@@ -412,6 +412,8 @@ en:
       manage_sales: Sales
       manage_transactions: Transactions
   memberships:
+    membership_filter:
+      filter: Filter
     maturity_report:
       student: Student
       membership: Membership

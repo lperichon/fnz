@@ -1,0 +1,13 @@
+<%= simple_form_for @membership_filter,
+                    :url => overview_business_memberships_url(@business),
+                    :method => :get,
+                    :html => {:class => "form-horizonal form-inline"}  do |f| %>
+  <%= f.association :payment_type,
+                    as: :select,
+                    :include_blank => t('.all'),
+                    collection: @business.payment_types
+  %>
+<%= f.button :submit,
+             :value => t('.filter'),
+             :class => "btn btn-primary" %>
+<% end %>
