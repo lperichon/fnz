@@ -14,11 +14,18 @@ class Contact < ActiveRecord::Base
   scope :students_without_membership, joins("left outer join memberships on contacts.id = memberships.contact_id").where(:padma_status => 'student').where('memberships.id' => nil)
   scope :former_students_with_open_membership, joins(:memberships).where('memberships.closed_on' => nil).where(:padma_status => 'former_student')
 
-  scope :all_students, joins("left outer join memberships on contacts.id = memberships.contact_id").where("padma_status = 'student' OR ((padma_status IS NULL OR padma_status = 'former_student') AND memberships.id IS NOT NULL AND memberships.closed_on IS NULL AND memberships.ends_on > '#{Date.today}')").includes(:business).includes(:current_membership).includes(:current_membership => :installments).uniq 
   default_scope order('name ASC')
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :business_id, :padma_id, :padma_status, :padma_teacher
+
+  def self.all_students(membership_filter=nil)
+    scope = self.joins("left outer join memberships on contacts.id = memberships.contact_id")
+    unless membership_filter.nil?
+      scope = scope.where(memberships: membership_filter)
+    end
+    scope = scope.where("padma_status = 'student' OR ((padma_status IS NULL OR padma_status = 'former_student') AND memberships.id IS NOT NULL AND memberships.closed_on IS NULL AND memberships.ends_on > '#{Date.today}')").includes(:business).includes(:current_membership).includes(:current_membership => :installments).uniq 
+  end
 
   def old_membership
     membership = memberships.where(:business_id => business.id).last
