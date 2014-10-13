@@ -7,14 +7,14 @@
     <h4>Global</h4>
     <li>Enrollments: $ <%= @stats.enrollments.first["sum"] %></li>
     <li><%= t('.paid_installments_total') %>: $ <%= @stats.installments.first["sum"]  %></li>
-    <li><%= t('.paid_installments_avg') %>: $ <%= @stats.installments.first["avg"]  %></li>
+    <li><%= t('.paid_installments_avg') %>: <%= number_to_currency(@stats.installments.first["avg"])%></li>
   </ul>
   <% @business.agents.each do |agent| %>
       <ul>
         <h4><%= agent.name %></h4>
         <li>Enrollments: $ <%= @stats.enrollments.where('enrollments.agent_id' => agent.id).first["sum"] %></li>
         <li><%= t('.paid_installments_total') %>: $ <%= @stats.installments.where('installments.agent_id' => agent.id).first["sum"] %></li>
-        <li><%= t('.paid_installments_avg') %>: $ <%= @stats.installments.where('installments.agent_id' => agent.id).first["avg"] %></li>
+        <li><%= t('.paid_installments_avg') %>: <%= number_to_currency(@stats.installments.where('installments.agent_id' => agent.id).first["avg"]) %></li>
       </ul>
   <% end %>
   <div class="modal-footer">
