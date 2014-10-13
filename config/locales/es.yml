@@ -434,8 +434,10 @@ es:
     overview:
       close_membership: Cerrar membresía
     stats_modal:
-      paid_installments_total: Total mensualidades pagas
-      paid_installments_avg: Promedio mensualidades pagas
+      total: Total
+      average: Promedio
+      paid_installments: Mensualidades pagas
+      all_installments: Mensualidades
   number:
     currency:
       format:
