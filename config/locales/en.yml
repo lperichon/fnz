@@ -436,7 +436,8 @@ en:
     overview:
       close_membership: Close membership
     stats_modal:
-      paid_installments: Paid installments
+      paid_installments_total: Paid installments total
+      paid_installments_avg: Paid installments average
   number:
     currency:
       format:

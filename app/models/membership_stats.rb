@@ -22,7 +22,7 @@ class MembershipStats
   end
 
   def installments
-    memberships.joins(:installments).joins(:installments => :transactions).where("due_on >= '#{Date.new(year, month, 1).to_date.beginning_of_month.beginning_of_day}' AND due_on <= '#{Date.new(year, month, 1).end_of_month.end_of_day}'").select("SUM(CASE WHEN transactions.amount > installments.value THEN installments.value ELSE transactions.amount END) AS sum")
+    memberships.joins(:installments).joins(:installments => :transactions).where("due_on >= '#{Date.new(year, month, 1).to_date.beginning_of_month.beginning_of_day}' AND due_on <= '#{Date.new(year, month, 1).end_of_month.end_of_day}'").select("SUM(CASE WHEN transactions.amount > installments.value THEN installments.value ELSE transactions.amount END) AS sum, AVG(CASE WHEN transactions.amount > installments.value THEN installments.value ELSE transactions.amount END) AS avg")
   end
 
   def memberships

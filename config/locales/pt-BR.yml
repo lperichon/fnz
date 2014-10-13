@@ -450,7 +450,8 @@ pt-BR:
     overview:
       close_membership: Fechar plano
     stats_modal:
-      paid_installments: Mensalidades pagas
+      paid_installments_total: Total mensalidades pagas
+      paid_installments_avg: Média mensalidades pagas
     secondary_navigation:
       new_membership: Novo plano
       maturity_report: Reporte de vencimentos
