@@ -2,18 +2,41 @@
   <td>
   	<div><%= l((6-n).months.ago, :format => "%b") %></div>
   	<div>
-  		<%= link_to content_tag(:i, "", :class => "icon-bar-chart", :title => t('memberships.table_header.view_month_stats', :month => l((6-n).months.ago, :format => "%B"))), stats_business_memberships_path(@business, :year => (6-n).months.ago.year, :month => (6-n).months.ago.month ), :remote => true %>
+  		<%= link_to content_tag(:i, "",
+                              :class => "icon-bar-chart",
+                              :title => t('memberships.table_header.view_month_stats',
+                              :month => l((6-n).months.ago, :format => "%B"))
+                             ),
+                  stats_business_memberships_path(
+                                            @business,
+                                :year => (6-n).months.ago.year,
+                                :month => (6-n).months.ago.month,
+                                :membership_filter => params[:membership]
+                                                 ),
+                  :remote => true %>
   	</div>
   </td>
 <% end %>
   <td class="current">
   	<div><%= l(Date.today, :format => "%b") %></div>
   	<div>
-  		<%= link_to content_tag(:i, "", :class => "icon-bar-chart", :title => t('memberships.table_header.view_month_stats', :month => l(Date.today, :format => "%B"))), stats_business_memberships_path(@business, :year => Date.today.year, :month => Date.today.month ), :remote => true  %>
+  		<%= link_to content_tag(:i, "", :class => "icon-bar-chart", :title => t('memberships.table_header.view_month_stats', :month => l(Date.today, :format => "%B"))),
+                  stats_business_memberships_path(@business,
+                                                  :year => Date.today.year,
+                                                  :month => Date.today.month,
+                                                  :membership_filter => params[:membership]
+                                                 ),
+                  :remote => true  %>
   	</div>
   </td>
 <% (1..6).each do |n| %>
   <td>
   	<div><%= l(n.months.from_now, :format => "%b") %></div>
-  	<div><%= link_to content_tag(:i, "", :class => "icon-bar-chart", :title => t('memberships.table_header.view_month_stats', :month => l(n.months.from_now, :format => "%B"))), stats_business_memberships_path(@business, :year => n.months.from_now.year, :month => n.months.from_now.month ), :remote => true %></div></td>
+  	<div><%= link_to content_tag(:i, "", :class => "icon-bar-chart", :title => t('memberships.table_header.view_month_stats', :month => l(n.months.from_now, :format => "%B"))),
+                     stats_business_memberships_path(@business,
+                                                     :year => n.months.from_now.year,
+                                                     :month => n.months.from_now.month,
+                                                     :membership_filter => params[:membership]
+                                                    ),
+                     :remote => true %></div></td>
 <% end %>

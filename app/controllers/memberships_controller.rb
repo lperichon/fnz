@@ -112,7 +112,7 @@ class MembershipsController < UserApplicationController
   end
 
   def stats
-    @stats = MembershipStats.new(:business => @business, :year => params[:year].to_i, :month => params[:month].to_i)
+    @stats = MembershipStats.new(:business => @business, :year => params[:year].to_i, :month => params[:month].to_i, :membership_filter => params[:membership_filter])
   end
 
   private
