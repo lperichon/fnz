@@ -11,13 +11,13 @@
 <ul>
   <h4>Global</h4>
   <li>Enrollments: $ <%= @stats.enrollments.sum(:value) %></li>
-  <li>Installments: $ <%= @stats.installments.sum(:value) %></li>
+  <li>Installments: $ <%= @stats.paid_installments.sum(:value) %></li>
 </ul>
 <% @business.agents.each do |agent| %>
 <ul>
   <h4><%= agent.name %></h4>
   <li>Enrollments: $ <%= @stats.enrollments.where('enrollments.agent_id' => agent.id).sum(:value) %></li>
-  <li>Installments: $ <%= @stats.installments.where('installments.agent_id' => agent.id).sum(:value) %></li>
+  <li>Installments: $ <%= @stats.paid_installments.where('installments.agent_id' => agent.id).sum(:value) %></li>
 </ul>
 <% end %>
 </div>
