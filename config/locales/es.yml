@@ -433,6 +433,8 @@ es:
       title: Editar membresía
     overview:
       close_membership: Cerrar membresía
+    stats_modal:
+      paid_installments: Mensualidades pagas
   number:
     currency:
       format:

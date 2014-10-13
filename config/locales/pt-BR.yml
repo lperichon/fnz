@@ -449,6 +449,8 @@ pt-BR:
       name_placeholdeR: Pode colocar um nome para o plano
     overview:
       close_membership: Fechar plano
+    stats_modal:
+      paid_installments: Mensalidades pagas
     secondary_navigation:
       new_membership: Novo plano
       maturity_report: Reporte de vencimentos

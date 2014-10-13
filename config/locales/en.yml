@@ -435,6 +435,8 @@ en:
       title: Edit Membership
     overview:
       close_membership: Close membership
+    stats_modal:
+      paid_installments: Paid installments
   number:
     currency:
       format:
