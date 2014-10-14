@@ -795,6 +795,8 @@ es:
       title: Editar Mensualidad
     index:
       view_month_stats: 
+    create:
+      success: Mensualidad creada
   enrollments:
     new:
       title: Nueva matrícula

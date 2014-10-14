@@ -46,7 +46,11 @@ class InstallmentsController < UserApplicationController
 
     respond_to do |format|
       if @installment.save
-        format.html { redirect_to business_membership_installment_path(@business, @membership, @installment), notice: 'Installment was successfully created.' }
+        format.html do
+          redirect_to overview_business_memberships_path(@business), notice: I18n.t('installments.create.success')
+          # TODO use redirect_back_or_default pattern
+          # redirect_to business_membership_installment_path(@business, @membership, @installment)
+        end
       else
         format.html { render action: "new" }
       end

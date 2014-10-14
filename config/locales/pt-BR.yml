@@ -407,6 +407,8 @@ pt-BR:
       user:
         submit: 
   installments:
+    create:
+      success: Mensalidade cadastrada
     edit:
       title: 
     form:

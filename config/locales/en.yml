@@ -784,6 +784,8 @@ en:
       datetime: ! '%Y-%m-%d %H:%M:%S'
       time: ! '%H:%M:%S'
   installments:
+    create:
+      success: Installment created
     installments_table:
       header:
         amount: Amount
