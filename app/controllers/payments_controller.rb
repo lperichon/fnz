@@ -21,7 +21,7 @@ class PaymentsController < UserApplicationController
         :type => "Credit",
         :amount => @installment.value
       }
-      @redirect_url = overview_business_memberships_path(@business)
+      @redirect_url = session.delete(:return_to) || overview_business_memberships_path(@business)
     elsif request.path.include?("enrollment") && @enrollment = @membership.enrollment
       default_payment_attributes = {
         :enrollment_ids => [@enrollment.id],
