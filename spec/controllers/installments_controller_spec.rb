@@ -72,9 +72,14 @@ describe InstallmentsController, :type => :controller do
         assigns(:installment).should be_persisted
       end
 
-      it "redirects to the created installment" do
+      xit "redirects to the created installment" do
         post :create, {:business_id => @business.to_param, :membership_id => @membership.to_param, :installment => valid_attributes}
         response.should redirect_to(business_membership_installment_url(@business, @membership, Installment.last))
+      end
+
+      it "redirects to overview" do
+        post :create, {:business_id => @business.to_param, :membership_id => @membership.to_param, :installment => valid_attributes}
+        response.should redirect_to(overview_business_memberships_url(@business))
       end
     end
 
