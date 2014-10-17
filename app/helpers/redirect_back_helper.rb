@@ -5,7 +5,7 @@ module RedirectBackHelper
     session[:return_to] = request.referer
   end
 
-  def redirect_back_or_default(default=nil,opts=nil)
+  def redirect_back_or_default_to(default=nil,opts=nil)
     debug "in redirect_back_or_default"
     debug "session return_to is #{session[:return_to]}"
     debug "default is #{default}"

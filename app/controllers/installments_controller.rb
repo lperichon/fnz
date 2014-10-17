@@ -49,7 +49,7 @@ class InstallmentsController < UserApplicationController
     respond_to do |format|
       if @installment.save
         format.html do
-          redirect_back_or_default overview_business_memberships_path(@business), notice: I18n.t('installments.create.success')
+          redirect_back_or_default_to overview_business_memberships_path(@business), notice: I18n.t('installments.create.success')
         end
       else
         format.html { render action: "new" }
