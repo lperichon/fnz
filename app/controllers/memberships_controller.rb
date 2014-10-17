@@ -1,4 +1,6 @@
 class MembershipsController < UserApplicationController
+  include RedirectBackHelper
+
   before_filter :get_context
 
   before_filter :store_location, only: [:index, :show, :overview, :maturity_report]
@@ -118,10 +120,6 @@ class MembershipsController < UserApplicationController
   end
 
   private
-
-  def store_location
-    session[:return_to] = request.referer
-  end
 
   def get_context
     business_id = params[:business_id]

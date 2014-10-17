@@ -1,5 +1,5 @@
 class InstallmentsController < UserApplicationController
-  include ApplicationHelper
+  include RedirectBackHelper
 
   before_filter :get_context
 
