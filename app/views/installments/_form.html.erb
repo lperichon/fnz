@@ -6,12 +6,13 @@
         <%= f.input :status, :as => :payment_status %>
     <% end %>
 
+    <%= f.input :observations, :as => 'string' %>
+
     <% if can? :manage, @business.transactions.build %>
     <h3><%= Installment.human_attribute_name(:transactions) %></h3>
     <%= render :partial => 'nested_transactions_table', :locals => {:f => f, :transactions => @transactions} %>
     <% elsif !@installment.new_record? && !@installment.complete?  %>
         <%= link_to t('actions.mark_as_paid'), new_business_membership_installment_payment_path(@business, f.object.membership, f.object), :remote => true %>
     <% end %>
-    <%= f.input :observations, :as => 'string' %>
     <%= f.button :submit, :class => "btn btn-primary" %>
 <% end %>

@@ -1,4 +1,7 @@
 $(document).ready ->
+
+  $('td[data-toggle="tooltip"]').tooltip()
+
   $("#membership_payment_type_id").chosen
     no_results_text: "No results matched"
     create_option: (name) ->

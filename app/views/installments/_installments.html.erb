@@ -9,7 +9,11 @@
   <% installments.each do |installment| %>
       <tr>
         <td><%= l(installment.due_on, format: "%B %Y") %></td>
-        <td class="amount"><%= number_to_currency(installment.value)%></td> 
+        <% if installment.observations.blank? -%>
+          <td class="amount"><%= number_to_currency(installment.value)%></td> 
+        <% else -%>
+          <td class="amount" data-toggle="tooltip" title="<%= installment.observations %>"><%= number_to_currency(installment.value)%></td> 
+        <% end -%>
         <td class="status"><%= content_tag(:i, "", :class => "icon-installment-#{installment.status}") %></td>
         <td>
         	<%= link_to content_tag(:i, "", :class => "icon-eye-open"), business_membership_installment_path(@business, @membership, installment) %>

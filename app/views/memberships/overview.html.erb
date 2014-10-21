@@ -38,7 +38,7 @@
 		<% monthly_iterator.each do |monthly_values| %>
 			<% installment = monthly_values[:installment] %>
 			<% date = monthly_values[:date] %>
-			<td class="<%= 'current' if(date == Date.today) %> <%= installment.try(:status) %>">
+			<td class="<%= 'current' if(date == Date.today) %> <%= installment.try(:status) %>" <%= "data-toggle='tooltip' title='#{installment.observations}'" unless installment.observations.blank? %>>
 		    	<div class="action-link">
 					<% if installment && installment.status.in?([:pending, :overdue, :incomplete]) %>
             <%= link_to t('actions.mark_as_paid'), new_business_membership_installment_payment_path(:business_id => @business.id,
