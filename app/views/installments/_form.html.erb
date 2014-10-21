@@ -12,5 +12,6 @@
     <% elsif !@installment.new_record? && !@installment.complete?  %>
         <%= link_to t('actions.mark_as_paid'), new_business_membership_installment_payment_path(@business, f.object.membership, f.object), :remote => true %>
     <% end %>
+    <%= f.input :observations, :as => 'string' %>
     <%= f.button :submit, :class => "btn btn-primary" %>
 <% end %>
