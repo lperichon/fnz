@@ -93,7 +93,7 @@ class MembershipsController < UserApplicationController
 
   def overview
     @membership_filter = Membership.new(params[:membership])
-  	@contacts = @business.contacts.all_students(params[:membership]).page(params[:page]).per(100)
+  	@contacts = @business.contacts.all_students(params[:membership]).page(params[:page]).per(50)
   	@installments = {}
   	@memberships = {}
   	@contacts.each do |c|
