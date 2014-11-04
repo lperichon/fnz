@@ -20,66 +20,67 @@
     <tr class="<%=contact.padma_status%>" data-contact-id=<%= contact.id %>>
       <% membership = @memberships[contact] %>
       <% if membership && !membership.closed? && contact.padma_status == 'student' %>
-		<% monthly_iterator = [] %>
-		<% (1..5).each do |n| %>
-			<% date = (6-n).months.ago %>
-		    <% installment = installment_for(date , @installments[contact]) %>
-		    <% monthly_iterator << {:date => date, :installment => installment } %>
-		<% end %>
-		<% date = Date.today %>
-		<% installment = installment_for(date, @installments[contact]) %>
-		<% monthly_iterator << {:date => date, :installment => installment } %>
-		<% (1..6).each do |n| %>
-			<% date = n.months.from_now %>
-		    <% installment = installment_for(date , @installments[contact]) %>
-		    <% monthly_iterator << {:date => date, :installment => installment } %>
-		<% end %>
+    		<% monthly_iterator = [] %>
+    		<% (1..5).each do |n| %>
+    			<% date = (6-n).months.ago %>
+    		    <% installment = installment_for(date , @installments[contact]) %>
+    		    <% monthly_iterator << {:date => date, :installment => installment } %>
+    		<% end %>
+    		<% date = Date.today %>
+    		<% installment = installment_for(date, @installments[contact]) %>
+    		<% monthly_iterator << {:date => date, :installment => installment } %>
+    		<% (1..6).each do |n| %>
+    			<% date = n.months.from_now %>
+    		    <% installment = installment_for(date , @installments[contact]) %>
+    		    <% monthly_iterator << {:date => date, :installment => installment } %>
+    		<% end %>
 
-		<% monthly_iterator.each do |monthly_values| %>
-			<% installment = monthly_values[:installment] %>
-			<% date = monthly_values[:date] %>
-        <% if installment.try(:observations).blank? %>
-  			   <td class="<%= 'current' if(date == Date.today) %> <%= installment.try(:status) %>">
-        <% else %>
-  			   <td data-toggle="tooltip" title="<%= installment.observations %>" class="<%= 'current' if(date == Date.today) %> <%= installment.try(:status) %>">
-        <% end %>
-  		    	<div class="action-link">
-  					<% if installment && installment.status.in?([:pending, :overdue, :incomplete]) %>
-              <%= link_to t('actions.mark_as_paid'), new_business_membership_installment_payment_path(:business_id => @business.id,
-                                                                                                      :membership_id => membership.id,
-                                                                                                      :installment_id => installment.id,
-                                                                                                      :transaction => {
-                                                                                                        :transaction_at => Time.zone.now
-                                                                                                      }
-                                                                                                     ), :remote => true %>
-  					<% else  %>
-              <%= link_to t('actions.create'),
-                          new_business_membership_installment_path(@business,
-                                                                   membership,
-                                                                   :installment => {
-                                                                     :due_on => date.end_of_month.to_date,
-                                                                     :value => membership.value,
-                                                                     :agent_id => suggested_agent_id_for(@business,membership)
-                                                                   }) %>
-  					<% end %>
-  				</div>
-  				<div class="installment-value">
-  					<% if installment %>
-  					  <div><%= number_to_currency(installment.try(:value)) %></div>
-  					  <%= content_tag(:i, "", :class => "icon-installment-#{installment.status}") %>
-  					<% elsif membership && date >= Date.today.beginning_of_month && date < membership.ends_on %>
-  					  <div><%= number_to_currency(membership.try(:value)) %></div>
-  					<% end %>
-  				</div>
-  			</td>
-  		<% end %>
-        <% else %>
-        	<td colspan="12"><%= table_contact_membership_link(contact, membership) %></td>
-        <% end %>
-      </tr>
-    <% end %>
-    </tbody>
-    <tfoot>
-    	<%= render :partial => 'table_header' %>
-    </tfoot>
-  </table>
+    		<% monthly_iterator.each do |monthly_values| %>
+    			<% installment = monthly_values[:installment] %>
+    			<% date = monthly_values[:date] %>
+            <% if installment.try(:observations).blank? %>
+      			   <td class="<%= 'current' if(date == Date.today) %> <%= installment.try(:status) %>">
+            <% else %>
+      			   <td data-toggle="tooltip" title="<%= installment.observations %>" class="<%= 'current' if(date == Date.today) %> <%= installment.try(:status) %>">
+            <% end %>
+      		    	<div class="action-link">
+      					<% if installment && installment.status.in?([:pending, :overdue, :incomplete]) %>
+                  <%= link_to t('actions.mark_as_paid'), 
+                              new_business_membership_installment_payment_path(
+                                :business_id => @business.id, 
+                                :membership_id => membership.id, 
+                                :installment_id => installment.id, 
+                                :transaction => { :transaction_at => Time.zone.now } ),
+                                :remote => true %>
+      					<% else  %>
+                  <%= link_to t('actions.create'),
+                              new_business_membership_installment_path(
+                                @business,
+                                membership,
+                                :installment => {
+                                 :due_on => date.end_of_month.to_date,
+                                 :value => membership.value,
+                                 :agent_id => suggested_agent_id_for(@business,membership)
+                                }) %>
+      					<% end %>
+      				</div>
+      				<div class="installment-value">
+      					<% if installment %>
+      					  <div><%= number_to_currency(installment.try(:value)) %></div>
+      					  <%= content_tag(:i, "", :class => "icon-installment-#{installment.status}") %>
+      					<% elsif membership && date >= Date.today.beginning_of_month && date < membership.ends_on %>
+      					  <div><%= number_to_currency(membership.try(:value)) %></div>
+      					<% end %>
+      				</div>
+      			</td>
+  	    <% end %>
+      <% else %>
+        <td colspan="12"><%= table_contact_membership_link(contact, membership) %></td>
+      <% end %>
+    </tr>
+  <% end %>
+  </tbody>
+  <tfoot>
+  	<%= render :partial => 'table_header' %>
+  </tfoot>
+</table>
