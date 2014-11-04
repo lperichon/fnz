@@ -13,11 +13,11 @@ class School < Business
   		padma_account.users.each do |padma_user|
   			#initialize users
   			user = User.find_or_create_by_drc_uid(drc_uid:padma_user.id, email: padma_user.email)
-  			users << user
+  			users << user unless users.include?(user)
   			#initialize agents
-  			agents.create(name: padma_user.id)
+  			agents.create(name: padma_user.id.gsub('.',' ').titleize, padma_id: padma_user.id) unless agents.collect(&:padma_id).include?(padma_user.id)
   		end
-  		agents.create(name: owner.drc_uid)
+      agents.create(name: owner.drc_uid.gsub('.',' ').titleize, padma_id: owner.drc_uid) unless agents.collect(&:padma_id).include?(owner.drc_uid)
   	end
 
   	accounts.create(:name => "Default")	

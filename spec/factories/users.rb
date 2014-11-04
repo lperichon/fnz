@@ -7,6 +7,7 @@ FactoryGirl.define do
 
   factory :user, :aliases => [:owner] do
     name 'Test User'
+    drc_uid 'test.user'
     email
   end
 end

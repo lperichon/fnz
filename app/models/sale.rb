@@ -27,7 +27,7 @@ class Sale < ActiveRecord::Base
     agent_id = row[2].gsub!(' ','')
     agent = business.agents.find_by_padma_id(agent_id) # some ids have spaces between
     unless agent
-      agent_name = agent_id.blank? ? "Unknown" : agent_id
+      agent_name = agent_id.blank? ? "Unknown" : agent_id.gsub('.',' ').titleize
       agent = business.agents.create(:padma_id => agent_id, :name => agent_name)
     end
 
