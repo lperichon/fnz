@@ -11,33 +11,39 @@ class Installment < ActiveRecord::Base
 
   scope :due, where("due_on BETWEEN '#{Date.today}' AND '#{Date.today.end_of_month}'")
   scope :overdue, where("due_on < '#{Date.today}'")
-  scope :incomplete, where("installments.value > installments.balance")
+  scope :incomplete, where(:status => :incomplete)
 
   default_scope order("due_on DESC")
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :membership_id, :agent_id, :due_on, :value, :transactions_attributes, :installment_transactions_attributes, :external_id, :observations
+  attr_accessible :membership_id, :agent_id, :due_on, :value, :transactions_attributes, :installment_transactions_attributes, :external_id, :observations, :status, :balance
   accepts_nested_attributes_for :transactions, allow_destroy: true
   accepts_nested_attributes_for :installment_transactions, :reject_if => proc { |s| s['transaction_id'].blank? }
 
+  before_save :refresh_status
+
+  def status
+    self[:status].to_sym
+  end
+
   def pending?
-    !transactions.empty? && transactions.any? { |t| t.pending? }
+    status.to_sym == :pending
   end
 
   def complete?
-    balance >= value
+    status.to_sym == :complete
   end
 
-  def status
-    if pending?
-      :pending
-    elsif complete?
-      :complete
-    elsif Date.today >= due_on
-      :overdue
-    else
-      :incomplete
-    end
+  def refresh_status
+    status = calculate_status
+  end
+
+  def update_balance_and_status 
+    self.update_attributes(:status => calculate_status, :balance => calculate_balance)
+  end
+
+  def update_status
+    self.update_attribute(:status, calculate_status)
   end
 
   def update_balance
@@ -98,4 +104,25 @@ class Installment < ActiveRecord::Base
   def calculate_balance
     transactions.where(:state => ['created', 'reconciled']).inject(0) {|balance, transaction| balance+transaction.sign(self)*transaction.amount}
   end
+
+  def calculate_status
+    if calculate_pending
+      :pending
+    elsif calculate_complete
+      :complete
+    elsif DateTime.now >= due_on
+      :overdue
+    else
+      :incomplete
+    end
+  end
+
+  def calculate_pending
+    !transactions.empty? && transactions.any? { |t| t.pending? }
+  end
+
+  def calculate_complete
+    balance >= value
+  end
+
 end

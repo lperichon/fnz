@@ -18,20 +18,20 @@
   <tbody>
   <% @contacts.each do |contact| %>
     <tr class="<%=contact.padma_status%>" data-contact-id=<%= contact.id %>>
-      <% membership = @memberships[contact] %>
+      <% membership = contact.current_membership %>
       <% if membership && !membership.closed? && contact.padma_status == 'student' %>
     		<% monthly_iterator = [] %>
     		<% (1..5).each do |n| %>
     			<% date = (6-n).months.ago %>
-    		    <% installment = installment_for(date , @installments[contact]) %>
+    		    <% installment = installment_for(date , contact.installments) %>
     		    <% monthly_iterator << {:date => date, :installment => installment } %>
     		<% end %>
     		<% date = Date.today %>
-    		<% installment = installment_for(date, @installments[contact]) %>
+    		<% installment = installment_for(date, contact.installments) %>
     		<% monthly_iterator << {:date => date, :installment => installment } %>
     		<% (1..6).each do |n| %>
     			<% date = n.months.from_now %>
-    		    <% installment = installment_for(date , @installments[contact]) %>
+    		    <% installment = installment_for(date , contact.installments) %>
     		    <% monthly_iterator << {:date => date, :installment => installment } %>
     		<% end %>
 

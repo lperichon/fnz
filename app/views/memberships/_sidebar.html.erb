@@ -3,7 +3,7 @@
   <li>
   </li>
   <% @contacts.each do |contact| %>
-    <%= sidebar_contact_membership_link(contact, @memberships[contact]) %>
+    <%= sidebar_contact_membership_link(contact, contact.current_membership) %>
   <% end %>
 </ul>
 <% end %>

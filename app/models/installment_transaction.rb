@@ -6,10 +6,11 @@ class InstallmentTransaction < ActiveRecord::Base
 
   attr_accessible :transaction_id
 
-  after_save :update_installment_balance
-  after_destroy :update_installment_balance
+  after_save :update_installment
+  after_destroy :update_installment
 
-  def update_installment_balance
+  def update_installment
     installment.update_balance
+    installment.update_status
   end
 end

@@ -94,15 +94,6 @@ class MembershipsController < UserApplicationController
   def overview
     @membership_filter = Membership.new(params[:membership])
   	@contacts = @business.contacts.all_students(params[:membership]).page(params[:page]).per(50)
-  	@installments = {}
-  	@memberships = {}
-  	@contacts.each do |c|
-  		membership = c.current_membership
-  		@memberships.merge!({c => membership})
-
-  		installments = (membership && !membership.closed?) ? membership.installments : []
-  		@installments.merge!({c => installments})
-  	end
   end
 
   def maturity_report
