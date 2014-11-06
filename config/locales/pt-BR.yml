@@ -127,6 +127,9 @@ pt-BR:
         business: 
         description: Descrição
         name: Nome
+      contact:
+        memberships: Planos
+        sales: Vendas
     errors:
       models:
         account:
@@ -167,6 +170,7 @@ pt-BR:
       agent: Instrutor
       product: Produto
       user: Usuário
+      contact: Contato
   application:
     list_transactions_modal:
       close: Fechar

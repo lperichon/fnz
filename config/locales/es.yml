@@ -127,6 +127,9 @@ es:
         business: 
         description: Descripción
         name: Nombre
+      contact:
+        memberships: Membresías
+        sales: Ventas
     errors:
       models:
         account:
@@ -168,6 +171,7 @@ es:
       agent: Instructor
       product: Producto
       user: Usuario
+      contact: Contacto
   date:
     abbr_day_names:
     - dom

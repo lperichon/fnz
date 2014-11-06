@@ -2,25 +2,24 @@
     <%= render :partial => 'businesses/edit_sidebar' %>
 <% end %>
 
-<h2>Contact</h2>
+<h2 class='title'><%= Contact.model_name.human %></h2> (<%= link_to t('actions.edit'), edit_business_contact_path(@business, @contact) %>)
 <p>Name: <%= @contact.name %></p>
 
-<h3>Memberships</h3>
+<h3><%= Contact.human_attribute_name(:memberships) %></h3>
 <ul>
 <% @contact.memberships.each do |membership| %>
-  <p><%= "#{membership.name}: " unless membership.name.blank? %><%= membership.begins_on %> - <%= membership.ends_on %> <%= content_tag(:span, "Current", :class => "label label-primary") if membership == @contact.current_membership %> <%= link_to "Show", business_membership_path(@business, membership) %></p>
+  <p><%= "#{membership.name}: " unless membership.name.blank? %><%= membership.begins_on %> - <%= membership.ends_on %> <%= content_tag(:span, "Current", :class => "label label-primary") if membership == @contact.current_membership %> <%= link_to t('actions.show'), business_membership_path(@business, membership) %></p>
 <% end %>
 </ul>
 <% unless @contact.current_membership.present? %>
   <%= link_to "Assign membership", new_business_membership_path(@business, :membership => {:contact_id => @contact.id}) %>
 <% end %>
 
-<h3>Sales</h3>
+<h3><%= Contact.human_attribute_name(:sales) %></h3>
 <ul>
 <% @contact.sales.each do |sale| %>
-  <p><%= sale.sold_on %> - <%= sale.try(:product).try(:name) %> <%= link_to "Show", business_sale_path(@business, sale) %></p>
+  <p><%= sale.sold_on %> - <%= sale.try(:product).try(:name) %> <%= link_to t('actions.show'), business_sale_path(@business, sale) %></p>
 <% end %>
 </ul>
 
-<%= link_to 'Edit', edit_business_contact_path(@business, @contact) %> |
-<%= link_to 'Back', business_contacts_path(@business) %>
+<%= link_to t('actions.back'), :back %>
