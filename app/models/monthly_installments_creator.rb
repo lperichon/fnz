@@ -10,7 +10,7 @@ class MonthlyInstallmentsCreator
       current_membership = student.current_membership
       unless student.installment_for(Date.today).present? || current_membership.blank?
         
-        agent = business.agents.where(:padma_id => student.padma_teacher).first
+        agent = business.agents.enabled.where(:padma_id => student.padma_teacher).first
 
         installment = current_membership.installments.new(:due_on => Date.new(Date.today.year,Date.today.month,current_membership.monthly_due_day),
                                                           :value => current_membership.value)

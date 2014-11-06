@@ -38,5 +38,14 @@ task :deliver_weekly_stats => :environment do
     puts "Sending weekly stats mail for #{business.name}..."
     WeeklyStatsMailer.stats(business).deliver
     puts "done."
-  end
+  end   
+end
+
+desc "This task is called by the Heroku scheduler add-on it syncs all business users and agents with PadmaAccounts"
+task :sync_with_padma_accounts => :environment do
+  Business.where("padma_id IS NOT NULL").each do |business|
+    puts "Synchronizing Padma Users for #{business.name}..."
+    PadmaAccountsSynchronizer.new(business).sync
+    puts "done."
+  end  
 end
