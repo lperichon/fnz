@@ -1,6 +1,8 @@
 class PaymentsController < UserApplicationController
-
+  include RedirectBackHelper
+  
   before_filter :get_context
+  before_filter :store_location, :only => [:create]
 
   def new
     @installment = @membership.installments.find(params[:installment_id]) if params[:installment_id]

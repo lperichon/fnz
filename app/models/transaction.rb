@@ -4,6 +4,7 @@ class Transaction < ActiveRecord::Base
   before_validation :set_creator
   before_validation :set_business
   after_save :update_balances
+  after_destroy :update_balances
 
   belongs_to :business
   belongs_to :source, :class_name => "Account"
