@@ -9,7 +9,7 @@ module MembershipsHelper
     str = contact.name.html_safe
     str << overdue_fire_warning(membership)
     content_tag(:li,
-                link_to(str, membership.present? ? business_membership_path(@business, membership) : new_business_membership_path(@business, :membership => {:contact_id => contact.id})),
+                link_to(str, business_contact_path(contact.business, contact)),
                 'data-contact-id' => contact.id, 'data-html' => true, 'data-content' => "#{render(:partial => 'memberships/contact_popover', :locals => {:membership => membership})}", :rel => "popover", 'data-placement' => "right", 'data-original-title' => contact.name, 'data-triggr' => "hover",
                 :class => [link_is_active?(contact)? 'active' : '',  contact.padma_status].join(" ")
     )
