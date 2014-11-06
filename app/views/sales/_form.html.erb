@@ -5,7 +5,7 @@
         <%= f.input :padma_contact_id, :as => :padma_contact %>
     <% end %>
 
-    <%= f.association :agent, :as => :select, :collection => @business.agents, :input_html => {'data-placeholder' => t('sales.form.agent_placeholder'), :class => "chosen"} %>
+    <%= f.association :agent, :as => :select, :collection => @business.agents.enabled, :input_html => {'data-placeholder' => t('sales.form.agent_placeholder'), :class => "chosen"} %>
 
     <%= f.association :product, :as => :select, :collection => @business.products, :input_html => {'data-business-id' => @business.id, 'data-placeholder' => t('sales.form.product_placeholder') ,:class => "chosen"} %>
 

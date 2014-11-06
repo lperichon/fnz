@@ -8,7 +8,7 @@
     <li>Total sales: $ <%= @stats.sales.inject(0) {|sum, sale| sum + sale.product.price} %></li>
   </ul>
   <ul>
-  <% @business.agents.each do |agent| %>
+  <% @business.agents.enabled.each do |agent| %>
     <li><%= agent.name %>: $ <%= @stats.sales.where('sales.agent_id' => agent.id).inject(0) {|sum, sale| sum + sale.product.try(:price)} %></li>
 
   <% end %>

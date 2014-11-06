@@ -2,7 +2,7 @@ class AgentsController < UserApplicationController
   before_filter :get_business
 
   def index
-    @agents = @business.agents
+    @agents = @business.agents.enabled
   end
 
   def show

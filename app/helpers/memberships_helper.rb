@@ -1,7 +1,7 @@
 module MembershipsHelper
 
   def suggested_agent_id_for(business,membership)
-    agents = business.agents.where(name: membership.contact.padma_teacher)
+    agents = business.agents.enabled.where(name: membership.contact.padma_teacher)
     agents.empty?? nil : agents.first.id
   end
 

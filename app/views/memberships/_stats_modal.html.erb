@@ -33,7 +33,7 @@
       </ul>
     </li>
   </ul>
-  <% @business.agents.each do |agent| %>
+  <% @business.agents.enabled.each do |agent| %>
       <ul>
         <h4><%= agent.name %></h4>
         <li>Enrollments: $ <%= @stats.enrollments.where('enrollments.agent_id' => agent.id).first["sum"] %></li>

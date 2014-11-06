@@ -13,7 +13,7 @@
   <li>Enrollments: $ <%= @stats.enrollments.sum(:value) %></li>
   <li>Installments: $ <%= @stats.paid_installments.sum(:value) %></li>
 </ul>
-<% @business.agents.each do |agent| %>
+<% @business.agents.enabled.each do |agent| %>
 <ul>
   <h4><%= agent.name %></h4>
   <li>Enrollments: $ <%= @stats.enrollments.where('enrollments.agent_id' => agent.id).sum(:value) %></li>

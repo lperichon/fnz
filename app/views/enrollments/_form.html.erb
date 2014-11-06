@@ -1,5 +1,5 @@
 <%= simple_form_for(@enrollment, :validate => true, :url => form_url, :html => {:class => "form-horizontal"}) do |f| %>
-    <%= f.association :agent, :as => :select, :collection => @business.agents, :input_html => {'data-placeholder' => 'Please select agent',:class => "chosen"} %>
+    <%= f.association :agent, :as => :select, :collection => @business.agents.enabled, :input_html => {'data-placeholder' => 'Please select agent',:class => "chosen"} %>
     <%= f.input :value %>
     <%= f.input :enrolled_on, :as => "string", :input_html => {:class => "datepicker_input"} %>
 

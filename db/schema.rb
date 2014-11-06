@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141105164720) do
+ActiveRecord::Schema.define(:version => 20141106185802) do
 
   create_table "accounts", :force => true do |t|
     t.string  "name",                                       :default => "",  :null => false
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(:version => 20141105164720) do
     t.string  "name",        :default => "Unknown", :null => false
     t.integer "business_id"
     t.string  "padma_id"
+    t.boolean "disabled",    :default => false
   end
 
   create_table "businesses", :force => true do |t|
