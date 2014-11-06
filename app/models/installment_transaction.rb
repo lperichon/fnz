@@ -10,7 +10,6 @@ class InstallmentTransaction < ActiveRecord::Base
   after_destroy :update_installment
 
   def update_installment
-    installment.update_balance
-    installment.update_status
+    installment.update_balance_and_status
   end
 end

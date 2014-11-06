@@ -39,7 +39,9 @@ class Installment < ActiveRecord::Base
   end
 
   def update_balance_and_status 
-    self.update_attributes(:status => calculate_status, :balance => calculate_balance)
+    balance = calculate_balance
+    status = calculate_status
+    save
   end
 
   def update_status
