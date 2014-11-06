@@ -39,8 +39,8 @@ class Installment < ActiveRecord::Base
   end
 
   def update_balance_and_status 
-    balance = calculate_balance
-    status = calculate_status
+    self.balance = calculate_balance
+    self.status = calculate_status
     save
   end
 
