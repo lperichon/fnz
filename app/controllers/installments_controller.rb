@@ -4,7 +4,9 @@ class InstallmentsController < UserApplicationController
   before_filter :get_context
 
   def index
-    @installments = @context.all
+    @search = InstallmentSearch.new(params[:installment_search])
+    @search.business_id = params[:business_id]
+    @installments = @search.results
   end
 
   def show
@@ -85,15 +87,30 @@ class InstallmentsController < UserApplicationController
   private
 
   def get_context
+    business_id = params[:business_id]
+    business_id = params[:membership][:business_id] unless business_id || params[:membership].blank?
+    param_is_padma_id = (false if Float(business_id) rescue true)
+    
     if current_user.admin?
-      @context = Business
+      @business_context = Business
     else
-      @context = current_user.businesses
+      @business_context = current_user.businesses
     end
 
-    @business = @context.find(params[:business_id])
-    @membership = @business.memberships.find(params[:membership_id])
-    @context = @membership.installments
+    if business_id
+      if param_is_padma_id
+        @business = @business_context.find_by_padma_id(params[:business_id])
+      else
+        @business = @business_context.find(params[:business_id])
+      end
+    end
+
+    if params[:membership_id]
+      @membership = @business.memberships.find(params[:membership_id])
+      @context = @membership.installments
+    else
+      @context = Installment.joins(:membership).where('memberships.business_id' => @business.id)
+    end
   end
 
 end
