@@ -1,0 +1,33 @@
+<%= simple_form_for(@search,
+                    :url => business_installments_path(@business),
+                    :method => :get,
+                    :html => {:class => "form-vertical"}) do |f| %>
+  <div class="control-group select optional">
+    <label class="select optional control-label" for="installment_search_period">Due on</label>
+    <div class="btn-group" id="installment-search-period-options">
+      <a href="#"
+         id="current-month"
+         data-due-after="<%= Date.today.beginning_of_month.to_date %>"
+         data-due-before="<%= Date.today.end_of_month.to_date %>"
+         class="btn btn-mini installment-search-easy-period"><%= t('.current_month') %></a>
+      <a href="#"
+         id="next-month"
+         data-due-after="<%= 1.month.from_now.beginning_of_month.to_date %>"
+         data-due-before="<%= 1.month.from_now.end_of_month.to_date %>"
+         class="btn btn-mini installment-search-easy-period"><%= t('.next_month') %></a>
+      <a href="#"
+         id="installment-search-custom-period"
+         class="btn btn-mini"><%= t('.custom_period') %></a>
+    </div>
+  </div>
+  <div class="row-fluid" id="installment-search-custom-period-select">
+    <%= f.input :due_after, input_html: { class: 'datepicker_input' } %>
+    <%= f.input :due_before, input_html: { class: 'datepicker_input' } %>
+  </div>
+  <div>
+    <%= f.input :status, :as => :select, :collection => [:complete, :overdue, :pending, :incomplete], :input_html => {:class => "chosen", :multiple => true} %>
+  </div>
+  <div>
+    <%= f.input :agent_id, :as => :select, :collection => @business.agents.enabled, :input_html => {:class => "chosen", :multiple => true} %>
+  </div>
+<% end %>
