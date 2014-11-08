@@ -43,6 +43,7 @@ pt-BR:
         transactions: Transações
         value: Valor
       installment:
+        contact: Contato
         agent: Instrutor
         due_on: Data de vencimento (do pagamento)
         membership: 
@@ -419,6 +420,7 @@ pt-BR:
       agent_placeholder: Por favor, escolha um instrutor
     index:
       view_month_stats: 
+      title: Mensalidades
     installments_table:
       header:
         amount: Valor
@@ -426,6 +428,12 @@ pt-BR:
         status: Estado
     new:
       title: Nova mensalidade
+    secondary_navigation:
+      unpaid_installments: Mensalidades não pagas
+    search_form:
+      current_month: Mês atual
+      next_month: Próximo mês
+      custom_period: Selecionar período
   layouts:
     navigation:
       businesses: Negócios
@@ -435,6 +443,7 @@ pt-BR:
       manage_memberships: Planos
       manage_sales: Vendas
       manage_transactions: Transações
+      reports: Reportes
   memberships:
     membership_filter:
       filter: Filtrar
@@ -750,7 +759,12 @@ pt-BR:
           name: 
         new:
           description: 
-          name: 
+          name:
+      installment_search:
+        due_after: Depois de
+        due_before: Antes de
+        agent_id: Instrutor
+        status: Estado 
     'no': Não
     options:
       transaction:

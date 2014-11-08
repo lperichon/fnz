@@ -1,8 +1,7 @@
 <% content_for :sidebar do %>
+  <h3><%= t('installments.index.title') %></h3>
   <%= render :partial => 'search_form' %>
   <a class="btn" id="update-installment-filter"><%= t('update') %></a>
 <% end %>
-
-<h3><%= t('installments.index.title') %></h3>
 
 <%= render :partial => 'installments', :locals => {:installments => @installments, :include_contact_column => true} %>

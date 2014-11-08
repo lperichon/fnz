@@ -2,12 +2,12 @@
 <table class="installments table table-striped table-hover table-condensed table-bordered">
   <thead>
     <% if include_contact_column %>
-    <td><%= t('installments.installments_table.header.contact') %></td>
+    <td><%= Installment.human_attribute_name(:contact) %></td>
     <% end %>
-    <td><%= t('installments.installments_table.header.agent') %></td>
+    <td><%= Installment.human_attribute_name(:agent) %></td>
   	<td><%= t('installments.installments_table.header.month') %></td>
-  	<td><%= t('installments.installments_table.header.amount') %></td>
-  	<td><%= t('installments.installments_table.header.status') %></td>
+  	<td><%= Installment.human_attribute_name(:value) %></td>
+  	<td><%= Installment.human_attribute_name(:status) %></td>
   	<td></td>
   </thead>
   <tbody>

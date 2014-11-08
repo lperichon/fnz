@@ -51,6 +51,7 @@ es:
         monthly_due_day: Fecha de vencimento (del pago)
         name: Nombre
       installment:
+        contact: Contacto
         agent: Instructor
         due_on: Día de vencimiento (del pago)
         value: Monto
@@ -130,6 +131,11 @@ es:
       contact:
         memberships: Membresías
         sales: Ventas
+      installment_search:
+        due_before: Antes de
+        due_after: Después de
+        status: Estado
+        agent: Instructor
     errors:
       models:
         account:
@@ -409,6 +415,7 @@ es:
       manage_memberships: Membresías
       manage_sales: Ventas
       manage_transactions: Transacciones
+      reports: Reportes
   memberships:
     membership_filter:
       filter: Filtrar
@@ -700,7 +707,12 @@ es:
           name: 
         new:
           description: 
-          name: 
+          name:
+      installment_search:
+        due_after: Después de
+        due_before: Antes de
+        agent_id: Instructor
+        status: Estado
     'no': 'No'
     placeholders:
       account:
@@ -798,9 +810,16 @@ es:
     edit:
       title: Editar Mensualidad
     index:
+      title: Mensualidades
       view_month_stats: 
     create:
       success: Mensualidad creada
+    secondary_navigation:
+      unpaid_installments: Mensualidades impagas
+    search_form:
+      current_month: Este mes
+      next_month: Próximo mes
+      custom_period: Seleccionar período
   enrollments:
     new:
       title: Nueva matrícula

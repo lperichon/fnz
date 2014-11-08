@@ -3,21 +3,21 @@
                     :method => :get,
                     :html => {:class => "form-vertical"}) do |f| %>
   <div class="control-group select optional">
-    <label class="select optional control-label" for="installment_search_period">Due on</label>
+    <label class="select optional control-label" for="installment_search_period"><%= Installment.human_attribute_name(:due_on) %></label>
     <div class="btn-group" id="installment-search-period-options">
       <a href="#"
          id="current-month"
          data-due-after="<%= Date.today.beginning_of_month.to_date %>"
          data-due-before="<%= Date.today.end_of_month.to_date %>"
-         class="btn btn-mini installment-search-easy-period"><%= t('.current_month') %></a>
+         class="btn btn-mini installment-search-easy-period"><%= t('installments.search_form.current_month') %></a>
       <a href="#"
          id="next-month"
          data-due-after="<%= 1.month.from_now.beginning_of_month.to_date %>"
          data-due-before="<%= 1.month.from_now.end_of_month.to_date %>"
-         class="btn btn-mini installment-search-easy-period"><%= t('.next_month') %></a>
+         class="btn btn-mini installment-search-easy-period"><%= t('installments.search_form.next_month') %></a>
       <a href="#"
          id="installment-search-custom-period"
-         class="btn btn-mini"><%= t('.custom_period') %></a>
+         class="btn btn-mini"><%= t('installments.search_form.custom_period') %></a>
     </div>
   </div>
   <div class="row-fluid" id="installment-search-custom-period-select">
