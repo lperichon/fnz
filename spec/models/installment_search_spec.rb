@@ -9,7 +9,7 @@ describe InstallmentSearch do
   end
 
   context "with status" do
-    let(:status){:overdue}
+    let(:status){'overdue'}
     let(:is_att){{status: status}}
     let(:is){InstallmentSearch.new(is_att)}
 

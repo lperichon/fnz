@@ -24,7 +24,7 @@ describe InstallmentsController, :type => :controller do
   describe "GET membership installments index" do
     it "assigns all installments as @installments" do
       installment = @membership.installments.create! valid_attributes
-      get :index, {:business_id => @business.to_param, :membership_id => @membership.to_param}
+      get :index, {:business_id => @business.to_param}
       assigns(:installments).should eq([installment])
     end
   end
@@ -70,11 +70,6 @@ describe InstallmentsController, :type => :controller do
         post :create, {:business_id => @business.to_param, :membership_id => @membership.to_param, :installment => valid_attributes}
         assigns(:installment).should be_a(Installment)
         assigns(:installment).should be_persisted
-      end
-
-      xit "redirects to the created installment" do
-        post :create, {:business_id => @business.to_param, :membership_id => @membership.to_param, :installment => valid_attributes}
-        response.should redirect_to(business_membership_installment_url(@business, @membership, Installment.last))
       end
 
       it "redirects to overview" do
