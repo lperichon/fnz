@@ -1,3 +1,9 @@
+<% if @installment.new_record? %>
+		<%= hidden_field_tag "installment[due_on]", @installment.due_on %>
+		<%= hidden_field_tag "installment[value]", @installment.value %>
+		<%= hidden_field_tag "installment[agent_id]", @installment.agent_id %>
+<% end %>
+
 <% if @business.accounts.count == 1 %>
 	<%= f.input :source_id, :as => :hidden, :input_html => { :value => @business.accounts.first.id } %>
 <% else %>

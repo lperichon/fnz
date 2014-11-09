@@ -5,7 +5,11 @@ class PaymentsController < UserApplicationController
   before_filter :store_location, :only => [:create]
 
   def new
-    @installment = @membership.installments.find(params[:installment_id]) if params[:installment_id]
+    if params[:installment]
+      @installment = @membership.installments.new(params[:installment])
+    elsif params[:installment_id]
+      @installment = @membership.installments.find(params[:installment_id]) 
+    end
     @enrollment = @membership.enrollment if request.path.include?("enrollment")
     @sale = @business.sales.find(params[:sale_id]) if params[:sale_id]
     @transaction = @business.transactions.new(params[:transaction])
@@ -16,7 +20,11 @@ class PaymentsController < UserApplicationController
   def create
     default_payment_attributes = {}
 
-    if params[:installment_id] && @installment = @membership.installments.find(params[:installment_id])
+    if params[:installment]
+      @installment = @membership.installments.create(params[:installment])
+    end
+
+    if @installment || (params[:installment_id] && @installment = @membership.installments.find(params[:installment_id]))
       default_payment_attributes = {
         :installment_ids => [@installment.id],
         :description => "Installment Payment - #{@membership.contact.name} - #{@installment.due_on.strftime('%B %Y')}",

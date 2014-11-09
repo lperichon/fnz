@@ -5,7 +5,9 @@
   </div>
 
   <% 
-    form_url = if @installment.present?
+    form_url = if @installment.present? && @installment.new_record?
+                  business_membership_installment_payment_path(@business, @membership, :installment_id => :create)
+               elsif @installment.present?
                   business_membership_installment_payment_path(@business, @membership, @installment)
                elsif @enrollment.present?
                   business_membership_enrollment_payment_path(@business, @membership, @enrollment)
