@@ -5,7 +5,7 @@
     	hideEmail: true,
         properties: {
           username: '<%= current_user.drc_uid %>',
-          account_name: '<%= @business.name %>',
+          account_name: '<%= @business.try(:name) %>',
           url: '<%= request.original_url %>'
         }
     };
