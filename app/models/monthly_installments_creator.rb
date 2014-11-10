@@ -8,7 +8,7 @@ class MonthlyInstallmentsCreator
   def run
     business.contacts.students.each do |student|
       current_membership = student.current_membership
-      unless student.installment_for(Date.today).present? || current_membership.blank?
+      unless student.installment_for(Date.today).present? || current_membership.blank? || current_membership.overdue?
         
         agent = business.agents.enabled.where(:padma_id => student.padma_teacher).first
 
