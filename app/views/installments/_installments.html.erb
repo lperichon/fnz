@@ -18,7 +18,7 @@
         <% contact = membership.contact %>
         <td><%= link_to(contact.name.html_safe, business_contact_path(@business, contact)) %></td>
         <% end %>
-        <td><%= installment.agent.name %></td>
+        <td><%= installment.agent.try(:name) %></td>
         <td><%= l(installment.due_on, format: "%B %Y") %></td>
         <% if installment.observations.blank? -%>
           <td class="amount"><%= number_to_currency(installment.value)%></td> 

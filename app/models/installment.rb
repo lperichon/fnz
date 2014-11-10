@@ -23,6 +23,7 @@ class Installment < ActiveRecord::Base
   before_save :refresh_status
 
   def status
+    self.update_status if self[:status].blank?
     self[:status].to_sym
   end
 
