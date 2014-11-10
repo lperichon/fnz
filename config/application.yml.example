@@ -12,4 +12,4 @@ messaging_key: "fnz_key"
 messaging_secret: "fnz_secret"
 MANDRILL_APIKEY: "1234"
 MANDRILL_USERNAME: "123"
-localeapp_api_key: '1234'
+APPSIGNAL_PUSH_API_KEY: dsadsa
