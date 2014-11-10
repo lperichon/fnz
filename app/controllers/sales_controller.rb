@@ -3,7 +3,7 @@ class SalesController < UserApplicationController
   before_filter :get_context
 
   def index
-    @sales = @context.all
+    @sales = @context.where {(sold_on.gteq 2.months.ago.beginning_of_month.beginning_of_day) & (sold_on.lteq Date.today.end_of_month.end_of_day)}
   end
 
   def show
