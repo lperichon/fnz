@@ -16,13 +16,13 @@
   <% if @business.is_a? School %>
       <li class="<%= 'active' if controller.controller_name == "sales" %>"><%= link_to t('layouts.secondary_navigation.manage_sales'), business_sales_path(@business) %></li>
       <li class="<%= 'active' if memberships_link_active?  %>"><%= link_to t('layouts.secondary_navigation.manage_memberships'), overview_business_memberships_path(@business) %></li>
-      <li class="dropdown <%= 'active' if maturity_report_active?  %>">
+      <li class="dropdown <%= 'active' if reports_active?  %>">
         <%= link_to('#', :class => 'dropdown_toggle', 'data-toggle' => "dropdown") do %>
           <%=  t('layouts.secondary_navigation.reports') %> <%= content_tag(:span, '', :class => 'caret') %>
         <% end %>
         <ul class="dropdown-menu" role="menu">
           <li><%= link_to t('memberships.secondary_navigation.maturity_report'),
-                    maturity_report_business_memberships_path(@business) %></li>
+                    business_memberships_path(@business, :membership_search => {:ends_after => Date.today.beginning_of_month, :ends_before => Date.today.end_of_month}) %></li>
           <li><%= link_to t('installments.secondary_navigation.unpaid_installments'),
                     business_installments_path(@business, :installment_search => {:status => [:incomplete, :due, :pending, :overdue], :due_after => Date.today.beginning_of_month, :due_before => Date.today.end_of_month}) %></li>
         </ul>

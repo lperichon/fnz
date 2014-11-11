@@ -3,18 +3,12 @@ class MembershipsController < UserApplicationController
 
   before_filter :get_context
 
-  before_filter :store_location, only: [:index, :show, :overview, :maturity_report]
+  before_filter :store_location, only: [:index, :show, :overview]
 
   def index
-    @overdue_installments = Installment.joins(:membership).where("memberships.business_id = #{@business.id}").overdue.incomplete
-    @due_installments = Installment.joins(:membership).where("memberships.business_id = #{@business.id}").due.incomplete
-    @stats = MembershipStats.new(:business => @business, :year => Date.today.year, :month => Date.today.month)
-    @contacts = @business.contacts.all_students
-  	@memberships = {}
-  	@contacts.each do |c|
-  		membership = c.current_membership
-  		@memberships.merge!({c => membership})
-  	end
+    @search = MembershipSearch.new(params[:membership_search])
+    @search.business_id = params[:business_id]
+    @memberships = @search.results
   end
 
   def show
@@ -94,16 +88,6 @@ class MembershipsController < UserApplicationController
   def overview
     @membership_filter = Membership.new(params[:membership])
   	@contacts = @business.contacts.all_students(params[:membership]).page(params[:page]).per(50)
-  end
-
-  def maturity_report
-    if params[:membership_search].nil?
-      attr = {ends_after: Date.today.beginning_of_month, ends_before: Date.today.end_of_month}
-    else
-      attr = params[:membership_search]
-    end
-    @search = MembershipSearch.new(attr)
-    @search.business_id = params[:business_id]
   end
 
   def stats

@@ -449,6 +449,8 @@ es:
       average: Promedio
       paid_installments: Mensualidades pagas
       all_installments: Mensualidades
+    index:
+      title: Membresías
   number:
     currency:
       format:

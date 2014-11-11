@@ -1,0 +1,30 @@
+<%= simple_form_for(@search,
+                    :url => business_memberships_path(@business),
+                    :method => :get,
+                    :html => {:class => "form-vertical"}) do |f| %>
+  <div class="control-group select optional">
+    <label class="select optional control-label" for="membership_search_period"><%= Membership.human_attribute_name(:ends_on) %></label>
+    <div class="btn-group" id="period-options">
+      <a href="#"
+         id="current-month"
+         data-ends-after="<%= Date.today.beginning_of_month.to_date %>"
+         data-ends-before="<%= Date.today.end_of_month.to_date %>"
+         class="btn btn-mini easy-period"><%= t('.current_month') %></a>
+      <a href="#"
+         id="next-month"
+         data-ends-after="<%= 1.month.from_now.beginning_of_month.to_date %>"
+         data-ends-before="<%= 1.month.from_now.end_of_month.to_date %>"
+         class="btn btn-mini easy-period"><%= t('.next_month') %></a>
+      <a href="#"
+         id="custom-period"
+         class="btn btn-mini"><%= t('.custom_period') %></a>
+    </div>
+  </div>
+  <div class="row-fluid" id="custom-period-select">
+    <%= f.input :ends_after, input_html: { class: 'datepicker_input' } %>
+    <%= f.input :ends_before, input_html: { class: 'datepicker_input' } %>
+  </div>
+  <div>
+    <%= f.input :payment_type_id, :as => :select, :collection => @business.payment_types, :input_html => {:class => "chosen", :multiple => true} %>
+  </div>
+<% end %>

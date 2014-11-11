@@ -1,50 +1,31 @@
-<% content_for :sidebar do %>
-    <%= render :partial => 'sidebar' %>
-<% end %>
-
 <% content_for :secondary_navigation do %>
     <%= render :partial => 'secondary_navigation' %>
 <% end %>
 
-<div class="span2">
-<h3>This month's stats</h3>
-<ul>
-  <h4>Global</h4>
-  <li>Enrollments: $ <%= @stats.enrollments.sum(:value) %></li>
-  <li>Installments: $ <%= @stats.paid_installments.sum(:value) %></li>
-</ul>
-<% @business.agents.enabled.each do |agent| %>
-<ul>
-  <h4><%= agent.name %></h4>
-  <li>Enrollments: $ <%= @stats.enrollments.where('enrollments.agent_id' => agent.id).sum(:value) %></li>
-  <li>Installments: $ <%= @stats.paid_installments.where('installments.agent_id' => agent.id).sum(:value) %></li>
-</ul>
+<% content_for :sidebar do %>
+  <h3><%= t('memberships.index.title') %></h3>
+  <%= render :partial => 'search_form' %>
+  <a class="btn" id="update-filter"><%= t('update') %></a>
 <% end %>
-</div>
 
-<div class="span-3">
-  <% unless @due_installments.empty? %>
-      <h3>Due Installments</h3>
-      <ul class="overdue-installments">
-        <% @due_installments.each do |installment| %>
-            <li>
-              <%= installment.membership.contact.name %> <%= link_to installment.due_on, business_membership_installment_path(@business, installment.membership, installment) %>  <%= content_tag(:span, "Pending", :class => "label label-warning") if installment.pending? %>
-            </li>
-        <% end %>
-      </ul>
-  <% end %>
-</div>
-
-<div class="span-3">
-<% unless @overdue_installments.empty? %>
-<h3>Overdue Installments</h3>
-<ul class="overdue-installments">
-  <% @overdue_installments.each do |installment| %>
-      <li>
-        <%= link_to "#{installment.due_on} #{installment.membership.contact.try(:name)} #{installment.value}", business_membership_installment_path(@business, installment.membership, installment) %>  <%= content_tag(:span, "Pending", :class => "label label-warning") if installment.pending? %>
-      </li>
-  <% end %>
-</ul>
-
+<% content_for :top do %>
 <% end %>
-</div>
+
+<table id="memberships" class="table table-striped table-bordered">
+  <tr>
+    <th><%= t('memberships.maturity_report.student') %></th>
+    <th><%= t('memberships.maturity_report.membership') %></th>
+    <th><%= t('memberships.maturity_report.period') %></th>
+    <th><%= t('memberships.maturity_report.value') %></th>
+    <th><%= Membership.human_attribute_name(:payment_type) %></th>
+  </tr>
+  <% @memberships.each do |membership| %>
+    <tr data-membership_url="<%= business_membership_url(business_id: params[:business_id], id: membership.id) %>">
+      <td><%= membership.contact.try :name %></td>
+      <td><%= membership.name %></td>
+      <td><%= membership.begins_on %> - <%= membership.ends_on %></td>
+      <td><%= membership.value %></td>
+      <td><%= memberships_payment_type_name(membership) %></td>
+    </tr>
+  <% end -%>
+</table>

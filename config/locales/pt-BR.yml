@@ -477,6 +477,8 @@ pt-BR:
       new_installment: Nova mensalidade
     table_header:
       view_month_stats: Ver estatísticas de %{month}
+    index:
+      title: Planos
   number:
     currency:
       format:

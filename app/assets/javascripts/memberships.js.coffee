@@ -69,3 +69,11 @@ $(document).ready ->
 
   $("#update-filter").click ->
     $("#new_membership_search").submit()
+
+  $("#membership_search_payment_type_id").chosen
+    allow_single_deselect: true
+
+  $("#membership_search_payment_type_id").change ->
+    $(this).addClass('btn-primary')
+    $('#update-filter').addClass('btn-success')
+    $('#update-filter').show()

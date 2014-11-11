@@ -6,6 +6,7 @@ class MembershipSearch
   attr_accessor :ends_after, :ends_before, :business_id, :payment_type_id
 
   def initialize(attributes = {})
+    attributes ||= {}
     attributes.each do |name,value|
       send("#{name}=", value)
     end

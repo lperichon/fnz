@@ -2,10 +2,11 @@ module ApplicationHelper
   include TzMagic::ApplicationHelper
 
   def memberships_link_active?
-    controller.controller_name == "memberships" && controller.action_name != 'maturity_report'
+    controller.controller_name == "memberships" && controller.action_name != 'index'
   end
 
-  def maturity_report_active?
-    controller.controller_name == "memberships" && controller.action_name == 'maturity_report'
+  def reports_active?
+    (controller.controller_name == "memberships" && controller.action_name == 'index') ||
+    (controller.controller_name == "installments" && controller.action_name == 'index')
   end
 end

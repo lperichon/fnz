@@ -440,6 +440,8 @@ en:
       average: Average
       paid_installments: Paid installments
       all_installments: Installments
+    index:
+      title: Memberships
   number:
     currency:
       format:
