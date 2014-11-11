@@ -17,6 +17,8 @@ class Membership < ActiveRecord::Base
 
   after_save :update_contacts_current_membership
 
+  after_initialize :init
+ 
   include BelongsToPadmaContact
 
   def closed?
@@ -82,4 +84,13 @@ class Membership < ActiveRecord::Base
   		contact.update_attribute(:current_membership_id, self.id)
   	end
   end
+
+  private
+  
+  def init
+    if self.new_record? && self.monthly_due_day.nil?
+      self.monthly_due_day = 10
+    end
+  end
+
 end
