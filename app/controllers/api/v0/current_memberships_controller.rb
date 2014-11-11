@@ -18,7 +18,7 @@ class Api::V0::CurrentMembershipsController < Api::V0::ApiController
   #
   # @author Luis Perichon
   def show
-    @membership = @contact.current_membership
+    @membership = @contact.try(:current_membership)
     render json: @membership, root: false
   end
 
