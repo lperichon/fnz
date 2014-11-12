@@ -5,6 +5,7 @@ class Membership < ActiveRecord::Base
   has_many :installments
   has_one :enrollment
 
+  validates :value, :numericality =>  {:greater_than => 0}
   validates :business, :presence => true
   validates :contact, :presence => true
   validates :begins_on, :presence => true
