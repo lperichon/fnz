@@ -5,7 +5,7 @@ class Membership < ActiveRecord::Base
   has_many :installments
   has_one :enrollment
 
-  validates :value, :numericality =>  {:greater_than => 0}
+  validates :value, :numericality =>  {:greater_than_or_equal => 0}
   validates :business, :presence => true
   validates :contact, :presence => true
   validates :begins_on, :presence => true
@@ -64,7 +64,8 @@ class Membership < ActiveRecord::Base
         :vip => row[4] == 'true',
         :contact_id => fnz_contact.id,
         :external_id => row[0].to_i,
-        :monthly_due_day => 10
+        :monthly_due_day => 10,
+        :value => 0 # Kshêma doesnt store plan value
     }
 
     unless row[8].blank? # if cancelled

@@ -66,11 +66,11 @@ describe MembershipStats do
       before do
         @membership_stats = FactoryGirl.build(:membership_stats, :business => business, :year => Date.today.year, :month => Date.today.month)
         @membership = FactoryGirl.create(:membership, :business => business)
-        @installment = FactoryGirl.create(:installment, :membership => @membership, :due_on => Date.today)
+        @installment = FactoryGirl.create(:installment, :membership => @membership, :due_on => Date.today, :status => 'overdue')
       end
 
       it "should not return installments" do
-        @membership_stats.paid_installments.first.sum.should be_nil
+        @membership_stats.paid_installments.first['sum'].should == 0
       end
     end
   end
