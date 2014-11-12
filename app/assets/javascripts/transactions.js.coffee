@@ -1,5 +1,5 @@
 $(document).ready ->
-  $(document.body).on 'click', '#new-transaction-modal [data-dismiss="modal"], #transaction-stats-modal [data-dismiss="modal"], #sale-stats-modal [data-dismiss="modal"], #new-payment-modal [data-dismiss="modal"]', () ->
+  $(document.body).on 'click', '#new-transaction-modal [data-dismiss="modal"], #transaction-stats-modal [data-dismiss="modal"], #sale-stats-modal [data-dismiss="modal"],  #membership-stats-modal [data-dismiss="modal"], #new-payment-modal [data-dismiss="modal"]', () ->
     $(this).parents('.modal').remove();
 
   $(document.body).on "change", "#transaction_type_transfer", ->
