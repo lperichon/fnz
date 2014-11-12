@@ -70,7 +70,7 @@ describe MembershipStats do
       end
 
       it "should not return installments" do
-        @membership_stats.paid_installments.first['sum'].should == 0
+        @membership_stats.paid_installments.first['sum'].should == 0.to_f
       end
     end
   end
