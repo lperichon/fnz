@@ -1,4 +1,4 @@
-<% if @installment.new_record? %>
+<% if @installment.present? && @installment.new_record? %>
 		<%= hidden_field_tag "installment[due_on]", @installment.due_on %>
 		<%= hidden_field_tag "installment[value]", @installment.value %>
 		<%= hidden_field_tag "installment[agent_id]", @installment.agent_id %>
