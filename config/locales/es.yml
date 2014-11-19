@@ -129,6 +129,7 @@ es:
         description: Descripción
         name: Nombre
       contact:
+        current_membership: Membresía actual
         memberships: Membresías
         sales: Ventas
       installment_search:

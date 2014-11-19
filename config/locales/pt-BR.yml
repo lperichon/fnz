@@ -129,6 +129,7 @@ pt-BR:
         description: Descrição
         name: Nome
       contact:
+        current_membership: Plano atual
         memberships: Planos
         sales: Vendas
     errors:

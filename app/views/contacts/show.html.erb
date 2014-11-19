@@ -8,7 +8,7 @@
 <h3><%= Contact.human_attribute_name(:memberships) %></h3>
 <ul>
 <% @contact.memberships.each do |membership| %>
-  <p><%= "#{membership.name}: " unless membership.name.blank? %><%= membership.begins_on %> - <%= membership.ends_on %> <%= content_tag(:span, "Current", :class => "label label-primary") if membership == @contact.current_membership %> <%= link_to t('actions.show'), business_membership_path(@business, membership) %></p>
+  <p><%= "#{membership.name}: " unless membership.name.blank? %><%= membership.begins_on %> - <%= membership.closed_on.present? ? membership.closed_on : membership.ends_on %> <%= content_tag(:span, "Current", :class => "label label-primary") if membership == @contact.current_membership %> <%= link_to t('actions.show'), business_membership_path(@business, membership) %></p>
 <% end %>
 </ul>
 <% unless @contact.current_membership.present? %>
