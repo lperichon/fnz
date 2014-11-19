@@ -83,6 +83,9 @@ table#memberships tr:not(:first-child) {
 
 .memberships.table .installment-value {
 	font-size: 11px;
+	.projection, .old {
+		color: gray;
+	}
 }
 
 .memberships.table td:hover .installment-value {

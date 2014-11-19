@@ -19,7 +19,7 @@
   <% @contacts.each do |contact| %>
     <tr class="<%=contact.padma_status%>" data-contact-id=<%= contact.id %>>
       <% membership = contact.current_membership %>
-      <% if membership && !membership.closed? && contact.padma_status == 'student' %>
+      <% if contact.padma_status == 'student' %>
     		<% monthly_iterator = [] %>
     		<% (1..5).each do |n| %>
     			<% date = (6-n).months.ago %>
@@ -49,7 +49,7 @@
                     <%= link_to t('actions.mark_as_paid'), 
                               new_business_membership_installment_payment_path(
                                 :business_id => @business.id, 
-                                :membership_id => membership.id, 
+                                :membership_id => installment.membership.id, 
                                 :installment_id => installment.id, 
                                 :transaction => { :transaction_at => Time.zone.now } ),
                                 :remote => true %>
@@ -57,14 +57,14 @@
                     <%= link_to t('actions.mark_as_paid'), 
                               business_membership_installment_payment_path(
                                 :business_id => @business.id, 
-                                :membership_id => membership.id, 
+                                :membership_id => installment.membership.id, 
                                 :installment_id => installment.id, 
                                 :transaction => { :transaction_at => Time.zone.now, 
                                                   :source_id => @business.accounts.first.id } ),
                               :remote => true, 
                               :method => :post %>
                   <% end %>
-      					<% else  %>
+      					<% elsif membership && !membership.closed? && date < membership.ends_on %>
                   <% if @business.transactions_enabled? %>
                     <%= link_to t('actions.mark_as_paid'), 
                               new_business_membership_installment_payment_path(
@@ -94,20 +94,21 @@
                               :remote => true, 
                               :method => :post %>
                   <% end %>
+                <% else %>
+                  <%= table_contact_membership_link(contact, membership) %>
       					<% end %>
       				</div>
       				<div class="installment-value">
       					<% if installment %>
-      					  <div><%= number_to_currency(installment.try(:value)) %></div>
-      					  <%= content_tag(:i, "", :class => "icon-installment-#{installment.status}") %>
+      					  <div class="<%= 'old' if installment.membership != membership %>"><%= number_to_currency(installment.try(:value)) %>
+      					  </div>
+                  <%= content_tag(:i, "", :class => "icon-installment-#{installment.status}") %>
       					<% elsif membership && date >= Date.today.beginning_of_month && date < membership.ends_on %>
-      					  <div><%= number_to_currency(membership.try(:value)) %></div>
+      					  <div class="projection"><%= number_to_currency(membership.try(:value)) %></div>
       					<% end %>
       				</div>
       			</td>
   	    <% end %>
-      <% else %>
-        <td colspan="12"><%= table_contact_membership_link(contact, membership) %></td>
       <% end %>
     </tr>
   <% end %>
