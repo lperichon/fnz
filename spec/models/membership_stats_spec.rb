@@ -28,7 +28,7 @@ describe MembershipStats do
     end
 
     it "sums paid and unpaid installments" do
-      expect(BigDecimal.new(stats.all_installments.first['sum'])).to eq (@paid_inst.value+@unpaid_inst.value)
+      expect(BigDecimal.new(stats.all_installments.first['sum']).to_f).to eq (@paid_inst.value+@unpaid_inst.value).to_f
     end
   end
 
