@@ -445,10 +445,15 @@ es:
     overview:
       close_membership: Cerrar membresía
     stats_modal:
+      title: Estadísticas de membresías
       total: Total
       average: Promedio
       paid_installments: Mensualidades pagas
       all_installments: Mensualidades
+      all_installments_tooltip: "Las mensualidades del mes"
+      paid_installments_tooltip: "Las mensualidades pagadas en el mes"
+      all_enrollments: Matrículas
+      school: Escuela
     index:
       title: Membresías
   number:

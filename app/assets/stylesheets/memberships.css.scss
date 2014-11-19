@@ -107,3 +107,7 @@ table#memberships tr:not(:first-child) {
 .memberships.table td.complete:hover .action-link {
 	display: none;
 }
+
+.membership-stats.table thead tr th, .membership-stats.table tbody tr td {
+	text-align: center;
+}

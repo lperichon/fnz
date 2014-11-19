@@ -436,10 +436,15 @@ en:
     overview:
       close_membership: Close membership
     stats_modal:
+      title: Membership Stats
       total: Total
       average: Average
       paid_installments: Paid installments
       all_installments: Installments
+      all_installments_tooltip: "This month's installments"
+      paid_installments_tooltip: "Installments paid this month"
+      all_enrollments: Enrollments
+      school: School
     index:
       title: Memberships
   number:

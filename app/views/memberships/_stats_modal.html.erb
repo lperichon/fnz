@@ -1,71 +1,50 @@
 <div id="membership-stats-modal" class = "modal hide fade">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>Membership Stats</h3>
+    <h3><%= t('.title') %></h3>
   </div>
-  <ul>
-    <h4>Global</h4>
-    <li>Enrollments: $ <%= @stats.enrollments.first["sum"] %></li>
-    <li>
-      <%= t('all_installments') %>:
-      <ul>
-        <li>
-          <%= t('.total') %>:
-          <%= number_to_currency(@stats.all_installments.first["sum"])  %>
-        </li>
-        <li>
-          <%= t('.average') %>:
-          <%= number_to_currency(@stats.all_installments.first["avg"])%>
-        </li>
-      </ul>
-    </li>
-    <li>
-      <%= t('paid_installments') %>:
-      <ul>
-        <li>
-          <%= t('.total') %>:
-          <%= number_to_currency(@stats.paid_installments.first["sum"])  %>
-        </li>
-        <li>
-          <%= t('.average') %>:
-          <%= number_to_currency(@stats.paid_installments.first["avg"])%>
-        </li>
-      </ul>
-    </li>
-  </ul>
-  <% @business.agents.enabled.each do |agent| %>
-      <ul>
-        <h4><%= agent.name %></h4>
-        <li>Enrollments: $ <%= @stats.enrollments.where('enrollments.agent_id' => agent.id).first["sum"] %></li>
-    <li>
-      <%= t('all_installments') %>:
-      <ul>
-        <li>
-          <%= t('.total') %>:
-          <%= number_to_currency(@stats.all_installments.where('installments.agent_id' => agent.id).first["sum"])  %>
-        </li>
-        <li>
-          <%= t('.average') %>:
-          <%= number_to_currency(@stats.all_installments.where('installments.agent_id' => agent.id).first["avg"])%>
-        </li>
-      </ul>
-    </li>
-    <li>
-      <%= t('paid_installments') %>:
-      <ul>
-        <li>
-          <%= t('.total') %>:
-          <%= number_to_currency(@stats.paid_installments.where('installments.agent_id' => agent.id).first["sum"])  %>
-        </li>
-        <li>
-          <%= t('.average') %>:
-          <%= number_to_currency(@stats.paid_installments.where('installments.agent_id' => agent.id).first["avg"])%>
-        </li>
-      </ul>
-    </li>
-    </ul>
-  <% end %>
+  <table class="membership-stats table table-striped table-hover table-condensed table-bordered">
+    <thead>
+      <tr>
+        <th></th>
+        <th><%= t('.all_enrollments') %></th>
+        <th colspan=2 data-toggle="tooltip" title="<%= t('.all_installments_tooltip') %>"><%= t('.all_installments') %> <%= content_tag(:i, "", :class => "icon-info-sign") %></th>
+        <th colspan=2 data-toggle="tooltip" title="<%= t('.paid_installments_tooltip') %>"><%= t('.paid_installments') %> <%= content_tag(:i, "", :class => "icon-info-sign") %></th>
+      </tr>
+      <tr>
+        <th></th>
+        <th><%= t('.total') %></th>
+        <th><%= t('.total') %></th>
+        <th><%= t('.average') %></th>
+        <th><%= t('.total') %></th>
+        <th><%= t('.average') %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th><%= t('.school') %></th>
+        <td><%= number_to_currency(@stats.enrollments.first["sum"]) %></td>
+        <td><%= number_to_currency(@stats.all_installments.first["sum"]) %></td>
+        <td><%= number_to_currency(@stats.all_installments.first["avg"]) %></td>
+        <td><%= number_to_currency(@stats.paid_installments.first["sum"]) %></td>
+        <td><%= number_to_currency(@stats.paid_installments.first["avg"]) %></td>
+      </tr>
+
+      <% @business.agents.enabled.each do |agent| %>
+      <tr>
+        <th><%= agent.name %></th>
+        <td><%= number_to_currency(@stats.enrollments.where('enrollments.agent_id' => agent.id).first["sum"]) %></td>
+        <td><%= number_to_currency(@stats.all_installments.where('installments.agent_id' => agent.id).first["sum"]) %></td>
+        <td><%= number_to_currency(@stats.all_installments.where('installments.agent_id' => agent.id).first["avg"]) %></td>
+        <td><%= number_to_currency(@stats.paid_installments.where('installments.agent_id' => agent.id).first["sum"]) %></td>
+        <td><%= number_to_currency(@stats.paid_installments.where('installments.agent_id' => agent.id).first["avg"]) %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  
+    
   <div class="modal-footer">
-    <%= link_to "Close", "#", :class => "btn", "data-dismiss" => "modal" %>
+    <%= link_to t('actions.close'), "#", :class => "btn", "data-dismiss" => "modal" %>
   </div>
 </div>
