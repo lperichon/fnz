@@ -2,4 +2,6 @@
   <p><%= Membership.human_attribute_name(:name) %>: <%= membership.name %></p>
   <p><%= Membership.human_attribute_name(:payment_type) %>: <%= memberships_payment_type_name(membership) %></p>
   <p><%= Membership.human_attribute_name(:ends_on) %>: <%= l(membership.ends_on, :format => "%B %Y") %></p>
+<% else %>
+  <%= table_contact_membership_link(contact, membership) %>
 <% end %>
