@@ -28,7 +28,7 @@ describe MembershipStats do
     end
 
     it "sums paid and unpaid installments" do
-      expect(BigDecimal.new(stats.all_installments.first['sum']).to_f).to eq (@paid_inst.value+@unpaid_inst.value).to_f
+      expect(BigDecimal.new(stats.all_installments.first['sum'])).to eq (@paid_inst.value+@unpaid_inst.value)
     end
   end
 
@@ -70,7 +70,7 @@ describe MembershipStats do
       end
 
       it "should not return installments" do
-        @membership_stats.paid_installments.first['sum'].should == 0.to_f
+        expect(BigDecimal.new(@membership_stats.paid_installments.first['sum'])).to eq BigDecimal.new(0)
       end
     end
   end
