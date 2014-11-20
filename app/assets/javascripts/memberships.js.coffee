@@ -77,3 +77,6 @@ $(document).ready ->
     $(this).addClass('btn-primary')
     $('#update-filter').addClass('btn-success')
     $('#update-filter').show()
+
+  $("a.mark_as_paid_link").click ->
+    $(this).html('<div class="loader">Loading...</div>')
