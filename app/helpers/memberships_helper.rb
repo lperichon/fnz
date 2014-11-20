@@ -32,7 +32,7 @@ module MembershipsHelper
   # Renders a fire warning icon if membership is missing, due or overdue (color varies)
   # @return [String]
   def overdue_fire_warning(membership)
-    if membership.blank? || membership.due? || membership.overdue?
+    if membership.blank? || membership.due? || membership.overdue? || membership.contact.padma_status == "former-student"
       content_tag(:i, "", :class => "#{membership.present? ? (membership.due? ? 'due' : 'overdue') : 'missing'}-membership pull-right icon-fire")
     end
   end

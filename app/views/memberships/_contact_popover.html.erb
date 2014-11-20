@@ -1,4 +1,4 @@
-<% if membership %>
+<% if contact.padma_status == "student" && membership %>
   <h4><%= Contact.human_attribute_name(:current_membership) %></h4>
   <p><%= Membership.human_attribute_name(:name) %>: <%= membership.name %></p>
   <p><%= Membership.human_attribute_name(:payment_type) %>: <%= memberships_payment_type_name(membership) %></p>
