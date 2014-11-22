@@ -24,7 +24,7 @@
           <li><%= link_to t('memberships.secondary_navigation.maturity_report'),
                     business_memberships_path(@business, :membership_search => {:ends_after => Date.today.beginning_of_month, :ends_before => Date.today.end_of_month}) %></li>
           <li><%= link_to t('installments.secondary_navigation.unpaid_installments'),
-                    business_installments_path(@business, :installment_search => {:status => [:incomplete, :due, :pending, :overdue], :due_after => Date.today.beginning_of_month, :due_before => Date.today.end_of_month}) %></li>
+                    business_installments_path(@business, :installment_search => {:status => [:incomplete, :due, :pending, :overdue], :due_after => Date.today.beginning_of_month, :due_before => Date.today.end_of_month, :agent_id => [:all]}) %></li>
         </ul>
       </li>
   <% end %>

@@ -41,4 +41,34 @@ describe InstallmentSearch do
       end
     end
   end
+
+  context "with agent" do
+    let(:agent_id){'agent_id'}
+    let(:is_att){{agent_id: agent_id}}
+    let(:is){InstallmentSearch.new(is_att)}
+
+    let(:my_inst){FactoryGirl.create(:installment, agent_id: agent_id)}
+    let(:other_inst){FactoryGirl.create(:installment)}
+
+    it "includes installment of given agent" do
+      expect(is.results).to include my_inst
+    end
+    it "excludes installments of another agent" do
+      expect(is.results).not_to include other_inst
+    end
+  end
+
+  context "with agent_all" do
+    let(:agent_id){'all'}
+    let(:is_att){{agent_id: agent_id}}
+    let(:is){InstallmentSearch.new(is_att)}
+
+    let(:my_inst){FactoryGirl.create(:installment, agent_id: 'agent_1')}
+    let(:other_inst){FactoryGirl.create(:installment, agent_id: 'agent_2')}
+
+    it "includes installment of all agents" do
+      expect(is.results).to include my_inst
+      expect(is.results).to include other_inst
+    end
+  end  
 end

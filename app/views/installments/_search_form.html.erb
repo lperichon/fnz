@@ -28,6 +28,7 @@
     <%= f.input :status, :as => :select, :collection => [:complete, :overdue, :pending, :incomplete], :input_html => {:class => "chosen", :multiple => true} %>
   </div>
   <div>
-    <%= f.input :agent_id, :as => :select, :collection => @business.agents.enabled, :input_html => {:class => "chosen", :multiple => true} %>
+    <% agent_options = @business.agents.enabled.collect {|a| [a.name, a.id]} + [["All", "all"]] %>
+    <%= f.input :agent_id, :as => :select, :collection => agent_options, :input_html => {:class => "chosen", :multiple => true} %>
   </div>
 <% end %>
