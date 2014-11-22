@@ -22,7 +22,7 @@ class InstallmentSearch
     scope = scope.where("due_on >= ?", @due_after) unless @due_after.nil?
     scope = scope.where("due_on <= ?", @due_before) unless @due_before.nil?
     scope = scope.where(:status => @status) unless @status.nil?
-    scope = scope.where(:agent_id => @agent_id) unless @agent_id.nil?
+    scope = scope.where(:agent_id => @agent_id) unless @agent_id.nil? || @agent_id == 'all'
 
     scope
   end
