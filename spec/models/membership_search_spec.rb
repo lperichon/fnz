@@ -73,4 +73,18 @@ describe MembershipSearch do
       expect(ms.results).not_to include other_mem
     end
   end
+
+  context "with payment_type all" do
+    let(:payment_type){'all'}
+    let(:ms_att){{payment_type_id: payment_type}}
+    let(:ms){MembershipSearch.new(ms_att)}
+
+    let(:my_mem){FactoryGirl.create(:membership, payment_type_id: 'payment_type_1')}
+    let(:other_mem){FactoryGirl.create(:membership, payment_type_id: 'payment_type_2')}
+
+    it "includes membreship of all payment type" do
+      expect(ms.results).to include my_mem
+      expect(ms.results).to include other_mem
+    end
+  end
 end

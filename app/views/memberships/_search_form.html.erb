@@ -25,6 +25,7 @@
     <%= f.input :ends_before, input_html: { class: 'datepicker_input' } %>
   </div>
   <div>
-    <%= f.input :payment_type_id, :as => :select, :collection => @business.payment_types, :input_html => {:class => "chosen", :multiple => true} %>
+    <% payment_type_options = @business.payment_types.collect {|a| [a.name, a.id]} + [["All", "all"]] %>
+    <%= f.input :payment_type_id, :as => :select, :collection => payment_type_options, :input_html => {:class => "chosen", :multiple => true} %>
   </div>
 <% end %>
