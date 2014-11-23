@@ -59,11 +59,11 @@ describe MembershipSearch do
   end
 
   context "with payment_type_id" do
-    let(:payment_type){FactoryGirl.create(:payment_type)}
-    let(:ms_att){{payment_type_id: payment_type.id}}
+    let(:payment_type_id){'payment_type_id'}
+    let(:ms_att){{payment_type_id: payment_type_id}}
     let(:ms){MembershipSearch.new(ms_att)}
 
-    let(:my_mem){FactoryGirl.create(:membership, payment_type: payment_type)}
+    let(:my_mem){FactoryGirl.create(:membership, payment_type_id: 'payment_type_id')}
     let(:other_mem){FactoryGirl.create(:membership)}
 
     it "includes membreship of payment type" do
