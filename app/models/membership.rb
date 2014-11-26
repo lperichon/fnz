@@ -61,7 +61,7 @@ class Membership < ActiveRecord::Base
         :business_id => business.id,
         :begins_on => Date.parse(row[2]),
         :ends_on => Date.parse(row[3]),
-        :vip => row[4] == 'true',
+        :vip => row[5] == 'true',
         :contact_id => fnz_contact.id,
         :external_id => row[0].to_i,
         :monthly_due_day => 10,
