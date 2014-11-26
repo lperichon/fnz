@@ -12,7 +12,7 @@ class Sale < ActiveRecord::Base
   validates :sold_on, :presence => true
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :contact_id, :business_id, :agent_id, :product_id, :transactions_attributes, :sale_transactions_attributes, :sold_on
+  attr_accessible :contact_id, :business_id, :agent_id, :product_id, :transactions_attributes, :sale_transactions_attributes, :sold_on, :external_id
   accepts_nested_attributes_for :transactions, allow_destroy: true
   accepts_nested_attributes_for :sale_transactions, :reject_if => proc { |s| s['transaction_id'].blank? }
 
@@ -22,6 +22,7 @@ class Sale < ActiveRecord::Base
   include BelongsToPadmaContact
 
   def self.build_from_csv(business, row)
+    return if Sale.find_by_external_id(row[0].to_i)
 
     product = business.products.find_by_external_id(row[1].to_i)
     agent_id = row[2].gsub!(' ','')
@@ -43,7 +44,8 @@ class Sale < ActiveRecord::Base
     sale_attributes = {
         :business_id => business.id,
         :agent_id => agent.id,
-        :sold_on => sale_date
+        :sold_on => sale_date,
+        :external_id => row[0].to_i
     }
 
     if contact
