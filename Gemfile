@@ -54,4 +54,4 @@ gem 'httparty'
 gem 'quiet_assets', :group => :development
 gem "active_model_serializers"
 gem "debugger", :group => [:development]
-gem 'airbrake', :group => [:test, :staging, :production]
+gem 'airbrake'
