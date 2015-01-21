@@ -457,6 +457,8 @@ es:
       school: Escuela
     index:
       title: Membresías
+    destroy:
+      success: "La membresía fue eliminada exitosamente."
   number:
     currency:
       format:

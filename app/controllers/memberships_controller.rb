@@ -3,7 +3,7 @@ class MembershipsController < UserApplicationController
 
   before_filter :get_context
 
-  before_filter :store_location, only: [:index, :show, :overview]
+  before_filter :store_location, only: [:index, :show, :overview, :destroy]
 
   def index
     @search = MembershipSearch.new(params[:membership_search])
@@ -81,7 +81,7 @@ class MembershipsController < UserApplicationController
     @membership.destroy
 
     respond_to do |format|
-      format.html { redirect_to business_memberships_url(@business) }
+      format.html { redirect_back_or_default_to business_memberships_url(@business), notice: I18n.t('memberships.destroy.success') }
     end
   end
 

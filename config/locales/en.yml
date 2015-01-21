@@ -447,6 +447,8 @@ en:
       school: School
     index:
       title: Memberships
+    destroy:
+      success: "Membership was successfully destroyed."
   number:
     currency:
       format:

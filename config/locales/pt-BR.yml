@@ -485,6 +485,8 @@ pt-BR:
       view_month_stats: Ver estatísticas de %{month}
     index:
       title: Planos
+    destroy:
+      success: O plano foi apagado com sucesso.
   number:
     currency:
       format:
