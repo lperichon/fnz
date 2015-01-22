@@ -3,7 +3,7 @@ class MembershipSearch
   include ActiveModel::Conversion
   extend ActiveModel::Naming
 
-  attr_accessor :ends_after, :ends_before, :business_id, :payment_type_id
+  attr_accessor :ends_after, :ends_before, :business_id, :payment_type_id, :status
 
   def initialize(attributes = {})
     attributes ||= {}
@@ -20,9 +20,14 @@ class MembershipSearch
     scope = Membership.scoped
     
     scope = scope.where(business_id: @business_id) unless @business_id.nil?
+    if @status == "due"
+      scope = scope.where("closed_on IS NULL AND ends_on > ? AND ends_on <= ?", Date.today.beginning_of_month, Date.today.end_of_month)
+    elsif @status == "overdue"
+      scope = scope.where("closed_on IS NULL AND ends_on <= ?", Date.today)
+    end
     scope = scope.where("(closed_on IS NULL AND ends_on >= :ends_after_date) OR (closed_on >= :ends_after_date)", ends_after_date: @ends_after) unless @ends_after.nil?
     scope = scope.where("ends_on <= ?", @ends_before) unless @ends_before.nil?
-    scope = scope.where(payment_type_id: @payment_type_id) unless @payment_type_id.nil? || @payment_type_id.include?('all')
+    scope = scope.where(payment_type_id: @payment_type_id) unless @payment_type_id.blank? || @payment_type_id.include?('all')
 
     scope
   end

@@ -87,4 +87,37 @@ describe MembershipSearch do
       expect(ms.results).to include other_mem
     end
   end
+
+  context "with status: due" do
+    let(:ms_attributes){{status: "due"}}
+    let(:ms){MembershipSearch.new(ms_attributes)}
+
+    describe "#results" do
+      let!(:yes){FactoryGirl.create(:membership,
+                                    begins_on: 6.months.ago.beginning_of_month,
+                                    ends_on: Date.today.end_of_month)}
+      let!(:no_active){FactoryGirl.create(:membership,
+                                   begins_on: 5.months.ago.beginning_of_month,
+                                   ends_on: 1.month.from_now.end_of_month)}
+      let!(:no_overdue){FactoryGirl.create(:membership,
+                                   begins_on: 7.months.ago.beginning_of_month,
+                                   ends_on: 1.month.ago.end_of_month)}
+      let!(:no_closed){FactoryGirl.create(:membership,
+                                    begins_on: 6.months.ago.beginning_of_month,
+                                    ends_on: Date.today.end_of_month,
+                                    closed_on: 1.month.ago.end_of_month)}
+      it "includes membership due this month" do
+        expect(ms.results).to include yes
+      end
+      it "wont include membership finishing next month" do
+        expect(ms.results).not_to include no_active
+      end
+      it "wont include membership finished last month" do
+        expect(ms.results).not_to include no_overdue
+      end
+      it "wont include membership ending this month but closed on last month" do
+        expect(ms.results).not_to include no_closed
+      end
+    end
+  end
 end

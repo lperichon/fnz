@@ -19,13 +19,9 @@ class Contact < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :business_id, :padma_id, :padma_status, :padma_teacher
 
-  def self.all_students(membership_filter=nil)
+  def self.all_students
     scope = self.joins("left outer join memberships on contacts.id = memberships.contact_id")
-    unless membership_filter.nil?
-      membership_filter.delete(:payment_type_id) if membership_filter[:payment_type_id].blank?
-      scope = scope.where(memberships: membership_filter) unless membership_filter.empty?
-    end
-    scope = scope.where("padma_status = 'student' OR ((padma_status IS NULL OR padma_status = 'former_student') AND memberships.id IS NOT NULL AND memberships.closed_on IS NULL AND memberships.ends_on > '#{Date.today}')").includes(:business).includes(:current_membership).includes(:current_membership => :installments).uniq 
+    scope = scope.where("contacts.padma_status = 'student' OR ((contacts.padma_status IS NULL OR contacts.padma_status = 'former_student') AND memberships.id IS NOT NULL AND memberships.closed_on IS NULL AND memberships.ends_on > '#{Date.today}')").includes(:business).includes(:current_membership).uniq 
   end
 
   def old_membership

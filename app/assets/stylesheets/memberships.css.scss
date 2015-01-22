@@ -111,3 +111,8 @@ table#memberships tr:not(:first-child) {
 .membership-stats.table thead tr th, .membership-stats.table tbody tr td {
 	text-align: center;
 }
+
+.membership-filter .control-group {
+	display: inline-block;
+	margin-left: 10px;
+}
