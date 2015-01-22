@@ -13,6 +13,11 @@
                     :include_blank => t('.all'),
                     collection: [["Due", :due], ["Overdue", :overdue]]
   %>
+  <%= f.input :contact_teacher,
+                    as: :select,
+                    :include_blank => t('.all'),
+                    collection: @business.agents.collect(&:padma_id)
+  %>
 <%= f.button :submit,
              :value => t('.filter'),
              :class => "btn btn-primary" %>

@@ -22,6 +22,7 @@ pt-BR:
         payment_type_id: Forma de pagamento
         contact_name: Nome
         status: Estado
+        contact_teacher: Instrutor
   activerecord:
     attributes:
       account:
@@ -454,6 +455,7 @@ pt-BR:
   memberships:
     membership_filter:
       filter: Filtrar
+      clear_filter: Apagar filtros
     maturity_search:
       current_month: Mês atual
       next_month: Próximo mês

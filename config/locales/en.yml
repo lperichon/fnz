@@ -20,8 +20,9 @@ en:
     attributes:
       membership_search:
         payment_type_id: Payment type
-        contact_name: Contact name
+        contact_name: Name
         status: Status
+        contact_teacher: Teacher
   activerecord:
     attributes:
       account:
@@ -420,6 +421,7 @@ en:
   memberships:
     membership_filter:
       filter: Filter
+      clear_filter: Clear filters
     maturity_report:
       student: Student
       membership: Membership

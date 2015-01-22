@@ -140,4 +140,24 @@ describe MembershipSearch do
       end
     end
   end
+
+  context "with contact_teacher" do
+    let(:ms_attributes){{contact_teacher: "luis.perichon"}}
+    let(:ms){MembershipSearch.new(ms_attributes)}
+
+    describe "#results" do
+      let!(:bart){FactoryGirl.create(:contact, :padma_teacher => "luis.perichon")}
+      let!(:homer){FactoryGirl.create(:contact, :name => "natalia.sanmartin")}
+      let!(:yes){FactoryGirl.create(:membership,
+                                    :contact => bart)}
+      let!(:no){FactoryGirl.create(:membership,
+                                    :contact => homer)}
+      it "includes bart's membership" do
+        expect(ms.results).to include yes
+      end
+      it "wont include homer's membership" do
+        expect(ms.results).not_to include no
+      end
+    end
+  end
 end

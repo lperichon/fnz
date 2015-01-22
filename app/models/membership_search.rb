@@ -3,7 +3,7 @@ class MembershipSearch
   include ActiveModel::Conversion
   extend ActiveModel::Naming
 
-  attr_accessor :ends_after, :ends_before, :business_id, :payment_type_id, :status, :contact_name
+  attr_accessor :ends_after, :ends_before, :business_id, :payment_type_id, :status, :contact_name, :contact_teacher
 
   def initialize(attributes = {})
     attributes ||= {}
@@ -28,6 +28,10 @@ class MembershipSearch
 
     if @contact_name.present?
       scope = scope.includes("contact").where("contacts.name LIKE ?", "%#{@contact_name}%")
+    end
+
+    if @contact_teacher.present?
+      scope = scope.includes("contact").where(:contacts => {:padma_teacher => @contact_teacher})
     end
 
     scope = scope.where("(closed_on IS NULL AND ends_on >= :ends_after_date) OR (closed_on >= :ends_after_date)", ends_after_date: @ends_after) unless @ends_after.nil?
