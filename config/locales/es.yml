@@ -23,6 +23,12 @@ es:
         contact_name: Nombre
         status: Estado
         contact_teacher: Instructor
+      contact_search:
+        membership_payment_type_id: Forma de pago
+        membership_status: Estado de la membresía
+        name: Nombre
+        status: Estado
+        contact_teacher: Instructor
   activerecord:
     attributes:
       account:
@@ -439,7 +445,7 @@ es:
       value: Valor
     secondary_navigation:
       new_membership: Nueva membresía
-      maturity_report: Reporte de vencimientos
+      maturity_report: Vencimiento de membresías
     table_header:
       view_month_stats: Ver las estadísticas de %{month}
     show:

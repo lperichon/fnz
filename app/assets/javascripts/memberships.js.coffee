@@ -73,10 +73,16 @@ $(document).ready ->
   $("#membership_search_payment_type_id").chosen
     allow_single_deselect: true
 
-  $("#membership_search_contact_teacher").chosen
+  $("#contact_search_membership_payment_type_id").chosen
     allow_single_deselect: true
 
-  $("#membership_search_status").chosen
+  $("#contact_search_teacher").chosen
+    allow_single_deselect: true
+
+  $("#contact_search_status").chosen
+    allow_single_deselect: true
+
+  $("#contact_search_membership_status").chosen
     allow_single_deselect: true
 
   $("#membership_search_payment_type_id").change ->

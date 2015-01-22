@@ -116,3 +116,7 @@ table#memberships tr:not(:first-child) {
 	display: inline-block;
 	margin-left: 10px;
 }
+
+.membership-filter .form-actions {
+	text-align: right;
+}

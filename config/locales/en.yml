@@ -23,6 +23,12 @@ en:
         contact_name: Name
         status: Status
         contact_teacher: Teacher
+      contact_search:
+        membership_payment_type_id: Payment Type
+        membership_status: Membership Status
+        name: Name
+        status: Status
+        teacher: Teacher
   activerecord:
     attributes:
       account:
@@ -429,7 +435,7 @@ en:
       value: Value
     secondary_navigation:
       new_membership: New membership
-      maturity_report: Maturity report
+      maturity_report: Membership expiration
     table_header:
       view_month_stats: View %{month} stats
     show:

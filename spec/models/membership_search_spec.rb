@@ -147,7 +147,7 @@ describe MembershipSearch do
 
     describe "#results" do
       let!(:bart){FactoryGirl.create(:contact, :padma_teacher => "luis.perichon")}
-      let!(:homer){FactoryGirl.create(:contact, :name => "natalia.sanmartin")}
+      let!(:homer){FactoryGirl.create(:contact, :padma_teacher => "natalia.sanmartin")}
       let!(:yes){FactoryGirl.create(:membership,
                                     :contact => bart)}
       let!(:no){FactoryGirl.create(:membership,
@@ -156,6 +156,32 @@ describe MembershipSearch do
         expect(ms.results).to include yes
       end
       it "wont include homer's membership" do
+        expect(ms.results).not_to include no
+      end
+    end
+  end
+
+  context "with contact_status: student" do
+    let(:ms_attributes){{contact_status: "student"}}
+    let(:ms){MembershipSearch.new(ms_attributes)}
+
+    describe "#results" do
+      let!(:student){FactoryGirl.create(:contact, :padma_status => "student")}
+      let!(:another_student){FactoryGirl.create(:contact, :padma_status => nil)}
+      let!(:former_student){FactoryGirl.create(:contact, :padma_status => "former_student")}
+      let!(:yes){FactoryGirl.create(:membership,
+                                    contact: student)}
+      let!(:yes_local){FactoryGirl.create(:membership,
+                                    contact: another_student)}
+      let!(:no){FactoryGirl.create(:membership,
+                                    contact: former_student)}
+      it "includes a padma student's membership" do
+        expect(ms.results).to include yes
+      end
+      it "includes a local contact's membership" do
+        expect(ms.results).to include yes_local
+      end
+      it "wont include a former_student's membership" do
         expect(ms.results).not_to include no
       end
     end

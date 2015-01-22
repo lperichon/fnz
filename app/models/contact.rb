@@ -14,14 +14,14 @@ class Contact < ActiveRecord::Base
   scope :students_without_membership, joins("left outer join memberships on contacts.id = memberships.contact_id").where(:padma_status => 'student').where('memberships.id' => nil)
   scope :former_students_with_open_membership, joins(:memberships).where('memberships.closed_on' => nil).where(:padma_status => 'former_student')
 
-  default_scope order('name ASC')
+  default_scope order('contacts.name ASC')
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :business_id, :padma_id, :padma_status, :padma_teacher
 
   def self.all_students
     scope = self.joins("left outer join memberships on contacts.id = memberships.contact_id")
-    scope = scope.where("contacts.padma_status = 'student' OR ((contacts.padma_status IS NULL OR contacts.padma_status = 'former_student') AND memberships.id IS NOT NULL AND memberships.closed_on IS NULL AND memberships.ends_on > '#{Date.today}')").includes(:business).includes(:current_membership).uniq 
+    scope = scope.includes(:business).includes(:current_membership).uniq 
   end
 
   def old_membership

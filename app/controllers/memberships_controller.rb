@@ -14,33 +14,15 @@ class MembershipsController < UserApplicationController
   def show
     @membership = @context.find(params[:id])
     @business = @membership.business
-    @contacts = @business.contacts.all_students
-  	@memberships = {}
-  	@contacts.each do |c|
-  		membership = c.current_membership
-  		@memberships.merge!({c => membership})
-  	end
   end
 
   def edit
     @membership = @context.find(params[:id])
     @business = @membership.business
-	  @contacts = @business.contacts.all_students
-  	@memberships = {}
-    @contacts.each do |c|
-  		membership = c.current_membership
-  		@memberships.merge!({c => membership})
-  	end
   end
 
   def new
     @membership = @context.new(params[:membership])
-    @contacts = @business.contacts.all_students
-  	@memberships = {}
-  	@contacts.each do |c|
-  		membership = c.current_membership
-  		@memberships.merge!({c => membership})
-  	end
   end
 
   # POST /accounts
@@ -86,9 +68,14 @@ class MembershipsController < UserApplicationController
   end
 
   def overview
-    @membership_filter = MembershipSearch.new(params[:membership_search])
-    contact_ids = @membership_filter.results.collect(&:contact_id)
-  	@contacts = @business.contacts.all_students.where(:id => contact_ids).page(params[:page]).per(50)
+    default_params = {
+      :contact_search => {
+        :status => "student"
+      }
+    }
+    params.reverse_merge!(default_params)
+    @membership_filter = ContactSearch.new(params[:contact_search].merge(:business_id => @business.id))
+  	@contacts = @membership_filter.results.page(params[:page]).per(50)
   end
 
   def stats
