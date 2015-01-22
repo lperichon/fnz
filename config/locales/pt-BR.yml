@@ -16,6 +16,12 @@ pt-BR:
     mark_as_paid: Marcar como já pago
     mark_as_paid): 
     show: Mostrar
+  activemodel:
+    attributes:
+      membership_search:
+        payment_type_id: Forma de pagamento
+        contact_name: Nome
+        status: Estado
   activerecord:
     attributes:
       account:

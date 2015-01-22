@@ -16,6 +16,12 @@ en:
     edit: Edit
     close: Close
     delete: Delete
+  activemodel:
+    attributes:
+      membership_search:
+        payment_type_id: Payment type
+        contact_name: Contact name
+        status: Status
   activerecord:
     attributes:
       account:

@@ -16,6 +16,12 @@ es:
     edit: Editar
     close: Cerrar
     delete: Eliminar
+  activemodel:
+    attributes:
+      membership_search:
+        payment_type_id: Forma de pago
+        contact_name: Nombre
+        status: Estado
   activerecord:
     attributes:
       account:

@@ -89,7 +89,6 @@ class MembershipsController < UserApplicationController
     @membership_filter = MembershipSearch.new(params[:membership_search])
     contact_ids = @membership_filter.results.collect(&:contact_id)
   	@contacts = @business.contacts.all_students.where(:id => contact_ids).page(params[:page]).per(50)
-    debugger
   end
 
   def stats
