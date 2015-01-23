@@ -1,8 +1,5 @@
 // make bootstrap popover stay on hover
 (function($) {
-
-    console.log("hola!");
-
     var oldHide = $.fn.popover.Constructor.prototype.hide;
 
     $.fn.popover.Constructor.prototype.hide = function() {
