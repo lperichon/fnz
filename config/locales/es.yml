@@ -829,6 +829,9 @@ es:
         status: Estado
     form:
       agent_placeholder: Seleccione un instructor
+      or_create: O crear
+      monthly_installments: mensualidades consecutivas
+      create_multiple: Crear Mensualidades
     new:
       title: Nueva mensualidad
     edit:

@@ -12,33 +12,16 @@ class InstallmentsController < UserApplicationController
   def show
     @installment = @context.find(params[:id])
     @contacts = @business.contacts.all_students
-  	@memberships = {}
-  	@contacts.each do |c|
-  		membership = c.current_membership
-  		@memberships.merge!({c => membership})
-  	end
   end
 
   def edit
     @installment = @context.find(params[:id])
-    @contacts = @business.contacts.all_students
-  	@memberships = {}
-  	@contacts.each do |c|
-  		membership = c.current_membership
-  		@memberships.merge!({c => membership})
-  	end
   	date = @installment.due_on
   	@transactions = @business.transactions.credits.where {(transaction_at.gteq(date - 1.month)) & (transaction_at.lteq(date + 1.month))}.order("transaction_at DESC")
   end
 
   def new
     @installment = @context.new(params[:installment])
-    @contacts = @business.contacts.all_students
-  	@memberships = {}
-  	@contacts.each do |c|
-  		membership = c.current_membership
-  		@memberships.merge!({c => membership})
-  	end
   	date = @installment.due_on || Date.today
   	@transactions = @business.transactions.credits.where {(transaction_at.gteq(date - 1.month)) & (transaction_at.lteq(date + 1.month))}.order("transaction_at DESC")
   end
@@ -46,15 +29,33 @@ class InstallmentsController < UserApplicationController
   # POST /accounts
   # POST /accounts.json
   def create
-    @installment = @context.new(params[:installment])
-
-    respond_to do |format|
-      if @installment.save
-        format.html do
-          redirect_back_or_default_to overview_business_memberships_path(@business), notice: I18n.t('installments.create.success')
+    if params["multiple_submit"].present?
+      count = params["installments_count"].to_i
+      @installment = @context.new(params[:installment])
+      respond_to do |format|
+        if @installment.save
+          (1...count).each do |i|
+            installment = @context.new(params[:installment])
+            installment.due_on = installment.due_on + i.months
+            installment.save
+          end
+          format.html do
+            redirect_back_or_default_to overview_business_memberships_path(@business), notice: I18n.t('installments.create.success_multiple')
+          end
+        else
+          format.html { render action: "new" }
         end
-      else
-        format.html { render action: "new" }
+      end
+    else
+      @installment = @context.new(params[:installment])
+      respond_to do |format|
+        if @installment.save
+          format.html do
+            redirect_back_or_default_to overview_business_memberships_path(@business), notice: I18n.t('installments.create.success')
+          end
+        else
+          format.html { render action: "new" }
+        end
       end
     end
   end

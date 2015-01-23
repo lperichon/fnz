@@ -4,3 +4,10 @@
 #installment-search-custom-period-select {
   display: none;
 }
+.multiple_installments_fields {
+  float: right;
+}
+input#installments_count {
+  width: 20px;
+  margin-left: 3px;
+}

@@ -4,6 +4,8 @@ class Installment < ActiveRecord::Base
   has_many :installment_transactions
   has_many :transactions, :through => :installment_transactions
 
+  attr_accessor :installments_count
+
   validates :membership, :presence => true
   validates :due_on, :presence => true
   validates_datetime :due_on, :after => Date.parse("0001-01-01")
@@ -16,7 +18,7 @@ class Installment < ActiveRecord::Base
   default_scope order("due_on DESC")
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :membership_id, :agent_id, :due_on, :value, :transactions_attributes, :installment_transactions_attributes, :external_id, :observations, :status, :balance
+  attr_accessible :membership_id, :agent_id, :due_on, :value, :transactions_attributes, :installment_transactions_attributes, :external_id, :observations, :status, :balance, :installments_count
   accepts_nested_attributes_for :transactions, allow_destroy: true
   accepts_nested_attributes_for :installment_transactions, :reject_if => proc { |s| s['transaction_id'].blank? }
 

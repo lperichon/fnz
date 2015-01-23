@@ -816,6 +816,9 @@ en:
         status: Status
     form:
       agent_placeholder: Please select agent
+      or_create: Or create
+      monthly_installments: monthly installments
+      create_multiple: Create Installments
     new:
       title: New Installment
     edit:

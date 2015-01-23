@@ -432,6 +432,9 @@ pt-BR:
       title: 
     form:
       agent_placeholder: Por favor, escolha um instrutor
+      or_create: Ou criar
+      monthly_installments: mensalidades consecutivas
+      create_multiple: Criar Mensalidades
     index:
       view_month_stats: 
       title: Mensalidades
