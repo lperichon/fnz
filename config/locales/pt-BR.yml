@@ -428,6 +428,7 @@ pt-BR:
   installments:
     create:
       success: Mensalidade cadastrada
+      success_multiple: Mensalidades cadastradas
     edit:
       title: 
     form:

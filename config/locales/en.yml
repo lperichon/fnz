@@ -809,6 +809,7 @@ en:
   installments:
     create:
       success: Installment created
+      success_multiple: Installments created
     installments_table:
       header:
         amount: Amount
