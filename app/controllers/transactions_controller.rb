@@ -81,9 +81,9 @@ class TransactionsController < UserApplicationController
     # List transactions that ocurred on that month or that are pending and ocurred before or that are reconciled on that month
     @context = @context.where {(transaction_at.gteq start_date) & (transaction_at.lteq end_date)}
 
-    @debits = @context.where(:type => "Debit").joins(:tags).group('tags.name').sum(:amount)
+    @debits = @context.where(:type => "Debit").joins(:tags).includes(:source).group("concat(tags.name, '-', accounts.currency)").sum(:amount)
     @untagged_debits = @context.where(:type => "Debit").untagged.sum(:amount)
-    @credits = @context.where(:type => "Credit").joins(:tags).group('tags.name').sum(:amount)
+    @credits = @context.where(:type => "Credit").joins(:tags).includes(:source).group("concat(tags.name, '-', accounts.currency)").sum(:amount)
     @untagged_credits = @context.where(:type => "Credit").untagged.sum(:amount)
   end
 
