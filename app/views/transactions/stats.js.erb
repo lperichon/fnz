@@ -11,7 +11,7 @@ debitsChart = new Highcharts.Chart({
         plotShadow: false
     },
     title: {
-        text: "Debits: $<%= @debits.values.sum.to_f.round(2) %>"
+        text: "Debits: <%= @debits.inject({}) {|c,(k,v)| c.merge({k.split('-')[1] => (c[k.split('-')[1]] || 0) + v})}.map {|currency, sum| Currency.find(currency).symbol + sum.to_s }.join(' - ') %>"
     },
     tooltip: {
         pointFormat: '<b>{point.y}</b>',
@@ -55,7 +55,7 @@ creditsChart = new Highcharts.Chart({
         plotShadow: false
     },
     title: {
-        text: "Credits: $<%= @credits.values.sum.to_f.round(2) %>"
+        text: "Credits: $<%= @credits.inject({}) {|c,(k,v)| c.merge({k.split('-')[1] => (c[k.split('-')[1]] || 0) + v})}.map {|currency, sum| Currency.find(currency).symbol + sum.to_s }.join(' - ') %>"
     },
     tooltip: {
         pointFormat: '<b>{point.y}</b>',
