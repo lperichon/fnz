@@ -249,7 +249,7 @@ GEM
       activesupport
     rush (0.6.8)
       session
-    sass (3.3.10)
+    sass (3.2.19)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
@@ -356,6 +356,7 @@ DEPENDENCIES
   rolify (>= 3.2.0)
   rspec-collection_matchers
   rspec-rails (>= 2.11.0)
+  sass (~> 3.2.19)
   sass-rails (~> 3.2.6)
   select2-rails
   shoulda-matchers
