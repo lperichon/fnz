@@ -58,4 +58,4 @@ gem 'quiet_assets', :group => :development
 gem "active_model_serializers"
 gem "debugger", :group => [:development]
 gem 'airbrake'
-gem 'rails_12factor', group: :production
+gem 'rails_12factor', :group => [:staging, :production]
