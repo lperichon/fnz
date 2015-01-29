@@ -7,8 +7,6 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
-  gem 'momentjs-rails'
-  gem 'bootstrap-daterangepicker-rails'
 end
 gem 'jquery-rails'
 gem "rspec-rails", ">= 2.11.0", :group => [:development, :test]
@@ -59,3 +57,4 @@ gem 'quiet_assets', :group => :development
 gem "active_model_serializers"
 gem "debugger", :group => [:development]
 gem 'airbrake'
+gem 'rails_12factor', group: :production
