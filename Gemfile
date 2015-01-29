@@ -58,3 +58,4 @@ gem "active_model_serializers"
 gem "debugger", :group => [:development]
 gem 'airbrake'
 gem 'rails_12factor', group: :production
+gem 'dalli', group: :production
