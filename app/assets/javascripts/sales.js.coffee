@@ -1,6 +1,26 @@
 $(document).ready ->
   $("form").nestedFields();
 
+  $("#sale_search_daterange").daterangepicker
+    ranges:
+      "Today": [
+        moment()
+        moment()
+      ]
+      "This Week": [
+        moment().startOf("week")
+        moment()
+      ]
+      "This Month": [
+        moment().startOf("month")
+        moment().endOf("month")
+      ]
+      "Last Month": [
+        moment().subtract("month", 1).startOf("month")
+        moment().subtract("month", 1).endOf("month")
+      ]
+    , (start, end) ->
+      window.location = "?start_date=" + start.format("YYYY-M-D") + "&end_date=" + end.format("YYYY-M-D")
 
 
   $("#sale_product_id").chosen
