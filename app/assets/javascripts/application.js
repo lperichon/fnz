@@ -19,4 +19,7 @@
 //= require rails.validations.simple_form
 //= require tz_magic/application
 //= require select2
+//= require moment
+//= require moment/es
+//= require daterangepicker
 //= require_tree .

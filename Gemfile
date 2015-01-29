@@ -44,6 +44,8 @@ gem 'resque'
 gem 'execjs'
 gem 'therubyracer'
 gem "select2-rails"
+gem 'momentjs-rails'
+gem 'bootstrap-daterangepicker-rails'
 gem 'delayed_job_active_record' # must be declared after 'protected_attributes' gem
 gem "workless", "~> 1.1.3"
 gem "kaminari"

@@ -1,4 +1,5 @@
 en:
+  date_format: 'YYYY-MM-DD'
   accounts:
     edit:
       title: Edit Account

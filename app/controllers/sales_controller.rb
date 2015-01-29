@@ -3,7 +3,11 @@ class SalesController < UserApplicationController
   before_filter :get_context
 
   def index
-    @sales = @context.where {(sold_on.gteq 2.months.ago.beginning_of_month.beginning_of_day) & (sold_on.lteq Date.today.end_of_month.end_of_day)}
+    # List transactions on this month or the year/month solicited
+    @start_date = Date.parse(params[:start_date] || Date.today.beginning_of_month.to_s).beginning_of_day
+    @end_date = Date.parse(params[:end_date] || Date.today.end_of_month.to_s).end_of_day
+
+    @sales = @context.where {(sold_on.gteq @start_date) & (sold_on.lteq @end_date)}
   end
 
   def show

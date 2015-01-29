@@ -56,6 +56,8 @@ GEM
     bcrypt (3.1.7)
     bootstrap-datepicker-rails (1.1.1.11)
       railties (>= 3.0)
+    bootstrap-daterangepicker-rails (0.0.8)
+      railties (>= 3.1)
     bootstrap-kaminari-views (0.0.3)
       kaminari (>= 0.13)
       rails (>= 3.1)
@@ -160,6 +162,8 @@ GEM
       railties (>= 3.1)
     mime-types (1.25.1)
     mini_portile (0.6.0)
+    momentjs-rails (2.9.0)
+      railties (>= 3.1)
     mono_logger (1.1.0)
     multi_json (1.10.1)
     multi_xml (0.5.5)
@@ -310,6 +314,7 @@ DEPENDENCIES
   awesome_nested_fields (= 0.6.0)
   aws-sdk
   bootstrap-datepicker-rails (~> 1.1.1.11)
+  bootstrap-daterangepicker-rails
   bootstrap-kaminari-views
   bootstrap-sass (= 2.0.4.0)
   cancan (>= 1.6.8)
@@ -333,6 +338,7 @@ DEPENDENCIES
   launchy (>= 2.1.2)
   mandrill_mailer!
   messaging_client (~> 0.0.2)
+  momentjs-rails
   newrelic_rpm
   paperclip (~> 3.0)
   pg

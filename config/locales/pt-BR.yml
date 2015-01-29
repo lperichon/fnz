@@ -1,4 +1,5 @@
 pt-BR:
+  date_format: 'DD/MM/YYYY'
   accounts:
     edit:
       title: Editar conta

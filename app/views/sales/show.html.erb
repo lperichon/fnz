@@ -1,7 +1,3 @@
-<% content_for :sidebar do %>
-    <%= render :partial => 'sidebar' %>
-<% end %>
-
 <h3><%= Sale.model_name.human %></h3>
 <p><b><%= Sale.human_attribute_name(:contact) %>:</b> <%= @sale.contact.try(:name) %></p>
 <p><b><%= Sale.human_attribute_name(:agent) %>:</b>: <%= @sale.agent.name %></p>
