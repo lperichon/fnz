@@ -354,7 +354,7 @@ DEPENDENCIES
   rolify (>= 3.2.0)
   rspec-collection_matchers
   rspec-rails (>= 2.11.0)
-  sass-rails (~> 3.2.3)
+  sass-rails (~> 3.2.6)
   select2-rails
   shoulda-matchers
   simple_form (= 2.0.2)
