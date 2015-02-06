@@ -15,13 +15,11 @@
 	</p>
 <% end %>
 
-<% if can? :manage, @business.transactions.build %>
+<% if @business.transactions_enabled? %>
 <h3><%= Installment.human_attribute_name(:transactions) %></h3>
 <%= render :layout => 'transactions_table', :locals => {:transactions => @installment.transactions} do |transaction| %>
-  <% if can? :manage, @business.transactions.build %>
    <%= link_to content_tag(:i, "", :class => "icon-edit"), edit_business_transaction_path(transaction.business, transaction), :remote => true %>
    <%= link_to content_tag(:i, "", :class => "icon-trash"), business_transaction_path(transaction.business, transaction), :confirm => t('actions.confirm_delete'), :method => 'delete' %>
-  <% end %>
 <% end %>
 <% end %>
 

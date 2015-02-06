@@ -8,11 +8,11 @@
 
     <%= f.input :observations, :as => 'string' %>
 
-    <% if can? :manage, @business.transactions.build %>
+    <% if @business.transactions_enabled? %>
     <h3><%= Installment.human_attribute_name(:transactions) %></h3>
     <%= render :partial => 'nested_transactions_table', :locals => {:f => f, :transactions => @transactions} %>
     <% elsif !@installment.new_record? && !@installment.complete?  %>
         <%= link_to t('actions.mark_as_paid'), new_business_membership_installment_payment_path(@business, f.object.membership, f.object), :remote => true %>
     <% end %>
-    <%= f.button :submit, :class => "btn btn-primary" %><span class="multiple_installments_fields"><%= t('installments.form.or_create') %><%= text_field_tag :installments_count %> <%= t('installments.form.monthly_installments') %> <%= f.button :submit, t('installments.form.create_multiple'), :name => "multiple_submit", :class => "btn btn-primary" %></span>
+    <%= f.button :submit, :class => "btn btn-primary" %><% if @installment.new_record? %><span class="multiple_installments_fields"><%= t('installments.form.or_create') %><%= text_field_tag :installments_count %> <%= t('installments.form.monthly_installments') %> <%= f.button :submit, t('installments.form.create_multiple'), :name => "multiple_submit", :class => "btn btn-primary" %></span><% end %>
 <% end %>

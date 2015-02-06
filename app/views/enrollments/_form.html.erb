@@ -5,7 +5,7 @@
 
     <%= f.input :status, :as => :payment_status %>
 
-    <% if can? :manage, @business.transactions.build %>
+    <% if @business.transactions_enabled? %>
     <h3><%= Enrollment.human_attribute_name(:transactions) %></h3>
     <%= render :partial => 'nested_transactions_table', :locals => {:f => f, :transactions => @transactions} %>
     <% elsif !@enrollment.new_record? && !@enrollment.complete? %>
