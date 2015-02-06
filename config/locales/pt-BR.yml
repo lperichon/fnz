@@ -579,6 +579,12 @@ pt-BR:
       title: Nova venda
     secondary_navigation:
       new_sale: Nova venda
+    stats_modal:
+      title: Estatísticas de vendas
+      all_sales: Vendas totales
+      paid_sales: Vendas pagadas
+      all_sales_tooltip: "Vendas do mes"
+      paid_sales_tooltip: "Vendas pagadas no mes"
   simple_form:
     error_notification:
       default_message: ! 'Por favor, veja os problemas abaixo:'

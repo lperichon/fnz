@@ -1,19 +1,33 @@
 <div id="sale-stats-modal" class = "modal hide fade">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>Sale Stats</h3>
+    <h3><%= t('.title') %></h3>
   </div>
-  <ul>
-    <h4>Global</h4>
-    <li>Total sales: $ <%= @stats.sales.inject(0) {|sum, sale| sum + sale.product.price} %></li>
-  </ul>
-  <ul>
-  <% @business.agents.enabled.each do |agent| %>
-    <li><%= agent.name %>: $ <%= @stats.sales.where('sales.agent_id' => agent.id).inject(0) {|sum, sale| sum + sale.product.try(:price)} %></li>
+  <table class="membership-stats table table-striped table-hover table-condensed table-bordered">
+    <thead>
+      <tr>
+        <th></th>
+        <th data-toggle="tooltip" title="<%= t('.all_sales_tooltip') %>"><%= t('.all_sales') %> <%= content_tag(:i, "", :class => "icon-info-sign") %></th>
+        <th data-toggle="tooltip" title="<%= t('.paid_sales_tooltip') %>"><%= t('.paid_sales') %> <%= content_tag(:i, "", :class => "icon-info-sign") %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th><%= t('.school') %></th>
+        <td><%= number_to_currency(@stats.all_sales.inject(0) {|sum, sale| sum + sale.product.price}) %></td>
+        <td><%= number_to_currency(@stats.paid_sales.inject(0) {|sum, sale| sum + sale.product.price}) %></td>
+      </tr>
 
-  <% end %>
-  </ul>
+      <% @business.agents.enabled.each do |agent| %>
+      <tr>
+        <th><%= agent.name %></th>
+        <td><%= number_to_currency(@stats.all_sales.where('sales.agent_id' => agent.id).inject(0) {|sum, sale| sum + sale.product.try(:price)}) %></td>
+        <td><%= number_to_currency(@stats.paid_sales.where('sales.agent_id' => agent.id).inject(0) {|sum, sale| sum + sale.product.try(:price)}) %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
   <div class="modal-footer">
-    <%= link_to "Close", "#", :class => "btn", "data-dismiss" => "modal" %>
+    <%= link_to t('actions.close'), "#", :class => "btn", "data-dismiss" => "modal" %>
   </div>
 </div>

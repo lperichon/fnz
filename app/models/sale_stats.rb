@@ -17,7 +17,11 @@ class SaleStats
     false
   end
 
-  def sales
-    business.sales.joins(:transactions).where("transaction_at >= '#{Date.new(year, month, 1).beginning_of_month.beginning_of_day}' AND transaction_at <= '#{Date.new(year, month, 1).end_of_month.end_of_day}'")
+  def all_sales
+    business.sales.joins(:transactions).where("sold_on >= '#{Date.new(year, month, 1).beginning_of_month.beginning_of_day}' AND sold_on <= '#{Date.new(year, month, 1).end_of_month.end_of_day}'")
+  end
+
+  def paid_sales
+    business.sales.joins(:transactions).where("transactions.report_at >= '#{Date.new(year, month, 1).beginning_of_month.beginning_of_day}' AND transactions.report_at <= '#{Date.new(year, month, 1).end_of_month.end_of_day}'")
   end
 end

@@ -868,6 +868,12 @@ en:
       title: New Sale
     edit:
       title: Edit Sale
+    stats_modal:
+      title: Sale Stats
+      all_sales: Total sales
+      paid_sales: Paid sales
+      all_sales_tooltip: "This month's sales"
+      paid_sales_tooltip: "Sales paid this month"
   businesses:
     edit:
       title: Edit Business

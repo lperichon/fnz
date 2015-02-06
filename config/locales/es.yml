@@ -890,6 +890,12 @@ es:
       title: Nueva venta
     edit:
       title: Editar venta
+    stats_modal:
+      title: Estadísticas de ventas
+      all_sales: Ventas totales
+      paid_sales: Ventas pagadas
+      all_sales_tooltip: "Ventas de este mes"
+      paid_sales_tooltip: "Ventas pagadas este mes"
   businesses:
     edit:
       title: Editar
