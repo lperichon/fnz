@@ -3,6 +3,7 @@ class Transaction < ActiveRecord::Base
 
   before_validation :set_creator
   before_validation :set_business
+  before_validation :set_report_at
   after_save :update_balances
   after_destroy :update_balances
 
@@ -23,13 +24,19 @@ class Transaction < ActiveRecord::Base
   validates :source, :presence => true
   validates :amount, :presence => true, :numericality => {:greater_than => 0}
   validates :creator, :presence => true
+  validates :transaction_at, :presence => true
+  validates :report_at, :presence => true
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :tag_ids, :description, :business_id, :source_id, :amount, :type, :transaction_at, :target_id, :conversion_rate, :state, :reconciled_at, :sale_ids, :installment_ids, :enrollment_ids, :creator_id
+  attr_accessible :tag_ids, :description, :business_id, :source_id, :amount, :type, :transaction_at, :target_id, :conversion_rate, :state, :reconciled_at, :sale_ids, :installment_ids, :enrollment_ids, :creator_id, :report_at
 
   scope :untagged, includes(:taggings).where("taggings.tag_id is null")
 
   scope :credits, where(:type => "Credit")
+
+  def set_report_at
+    self.report_at = self.transaction_at unless self.report_at.present?
+  end
 
   def update_balances
     source.update_balance

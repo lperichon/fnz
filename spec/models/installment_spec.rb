@@ -68,7 +68,7 @@ describe Installment do
     describe "when there is one comple@ted transaction" do
       before do
         source_account = FactoryGirl.create(:account, :business => @membership.business)
-        @transaction = FactoryGirl.create(:transaction, :type => "Credit", :business => @membership.business, :source => source_account, :creator => @membership.business.owner)
+        @transaction = FactoryGirl.create(:transaction, :type => "Credit", :business => @membership.business, :source => source_account, :creator => @membership.business.owner, :transaction_at => @installment.due_on.beginning_of_day)
         @installment.transactions << @transaction
         @installment.reload
       end

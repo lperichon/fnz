@@ -12,7 +12,8 @@ describe Transaction do
       :description => "Example Transaction",
       :business_id => @account.business.id,
       :source_id => @account.id,
-      :amount => 3.5
+      :amount => 3.5,
+      :transaction_at => 2.days.ago
     }
 
     User.current_user = @account.business.owner
@@ -100,5 +101,15 @@ describe Transaction do
   		new_transaction = Transaction.build_from_csv(@business, ['test','1983-03-03', '2.3', 'Testing', 'tag', 'pending'])
   		new_transaction.state.should eq("pending")
   	end
+  end
+
+  context "#report_at" do
+    before do
+      @transaction = Debit.create!(@attr)
+    end
+
+    it "should default to transaction_at value" do
+      @transaction.report_at.should eq(@transaction.transaction_at)
+    end
   end
 end
