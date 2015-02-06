@@ -81,6 +81,8 @@ es:
         state: Estado
         tag_ids: Etiquetas
         transaction_at: Fecha
+        report_at: Fecha de reporte
+        report_at_option: Fecha de reporte
         conversion_rate: 
         reconciled_at: 
         target_id: 
@@ -867,6 +869,8 @@ es:
     fields:
       source_prompt: Seleccione una cuenta
       target_prompt: Seleccione una cuenta
+      report_at_transaction_date: Fecha de transacción
+      report_at_due_date: Fecha de vencimiento
     field:
       tags_placeholder: Seleccione las etiquetas
     new_modal:

@@ -26,7 +26,7 @@ class MembershipStats
   end
 
   def paid_installments
-    memberships.joins(:installments).where("due_on >= '#{Date.new(year, month, 1).to_date.beginning_of_month.beginning_of_day}' AND due_on <= '#{Date.new(year, month, 1).end_of_month.end_of_day}'").select("SUM(CASE WHEN (installments.status = 'overdue' OR installments.status = 'incomplete') AND installments.balance < installments.value THEN installments.balance ELSE installments.value END) AS sum, AVG(CASE WHEN (installments.status = 'overdue' OR installments.status = 'incomplete') AND installments.balance < installments.value THEN installments.balance ELSE installments.value END) AS avg")
+    memberships.joins(:installments).joins(:installments => :transactions).where("transactions.report_at >= '#{Date.new(year, month, 1).to_date.beginning_of_month.beginning_of_day}' AND transactions.report_at <= '#{Date.new(year, month, 1).end_of_month.end_of_day}'").select("SUM(CASE WHEN (installments.status = 'overdue' OR installments.status = 'incomplete') AND installments.balance < installments.value THEN installments.balance ELSE installments.value END) AS sum, AVG(CASE WHEN (installments.status = 'overdue' OR installments.status = 'incomplete') AND installments.balance < installments.value THEN installments.balance ELSE installments.value END) AS avg")
   end
 
   def memberships

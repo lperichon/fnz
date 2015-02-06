@@ -5,7 +5,6 @@
         <% end %>
   		    	<div class="action-link">
   					<% if installment && installment.status.in?([:pending, :overdue, :incomplete]) %>
-              <% if @business.transactions_enabled? %>
                 <%= link_to t('actions.mark_as_paid'), 
                           new_business_membership_installment_payment_path(
                             :business_id => @business.id, 
@@ -14,20 +13,7 @@
                             :transaction => { :transaction_at => Time.zone.now } ),
                             :remote => true,
                             :class => "mark_as_paid_link" %>
-              <% else %>
-                <%= link_to t('actions.mark_as_paid'), 
-                          business_membership_installment_payment_path(
-                            :business_id => @business.id, 
-                            :membership_id => installment.membership.id, 
-                            :installment_id => installment.id, 
-                            :transaction => { :transaction_at => Time.zone.now, 
-                                              :source_id => @business.accounts.first.id } ),
-                          :remote => true, 
-                          :method => :post,
-                          :class => "mark_as_paid_link" %>
-              <% end %>
   					<% elsif membership && !membership.closed? && date < membership.ends_on %>
-              <% if @business.transactions_enabled? %>
                 <%= link_to t('actions.mark_as_paid'), 
                           new_business_membership_installment_payment_path(
                             :business_id => @business.id, 
@@ -41,23 +27,6 @@
                             :transaction => { :transaction_at => Time.zone.now } ),
                             :remote => true,
                             :class => "mark_as_paid_link" %>
-              <% else %>
-                <%= link_to t('actions.mark_as_paid'),
-                          business_membership_installment_payment_path(
-                            @business,
-                            membership,
-                            :installment_id => :create,
-                            :installment => {
-                             :due_on => date.end_of_month.to_date,
-                             :value => membership.value,
-                             :agent_id => suggested_agent_id_for(@business,membership)
-                            },
-                            :transaction => { :transaction_at => Time.zone.now, 
-                                              :source_id => @business.accounts.first.id } ),
-                          :remote => true, 
-                          :method => :post,
-                          :class => "mark_as_paid_link" %>
-              <% end %>
             <% else %>
               <%= table_contact_membership_link(contact, membership) %>
   					<% end %>

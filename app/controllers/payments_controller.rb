@@ -31,6 +31,9 @@ class PaymentsController < UserApplicationController
         :type => "Credit",
         :amount => @installment.value
       }
+
+      default_payment_attributes[:report_at] = @installment.due_on if params[:transaction][:report_at_option] == 'due_date'
+
       @redirect_url = session.delete(:return_to) || overview_business_memberships_path(@business)
     elsif request.path.include?("enrollment") && @enrollment = @membership.enrollment
       default_payment_attributes = {
@@ -39,6 +42,9 @@ class PaymentsController < UserApplicationController
         :type => "Credit",
         :amount => @enrollment.value
       }
+
+      default_payment_attributes[:report_at] = @enrollment.enrolled_on if params[:transaction][:report_at_option] == 'due_date'
+
       @redirect_url = business_membership_enrollment_path(@business,@membership)
     elsif params[:sale_id] && @sale = @business.sales.find(params[:sale_id])
       default_payment_attributes = {
@@ -47,6 +53,9 @@ class PaymentsController < UserApplicationController
         :type => "Credit",
         :amount => @sale.try(:product).try(:price)
       }
+
+      default_payment_attributes[:report_at] = @sale.sold_on if params[:transaction][:report_at_option] == 'due_date'
+
       @redirect_url = business_sale_path(@business, @sale)
     end
 

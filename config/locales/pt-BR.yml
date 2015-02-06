@@ -114,6 +114,8 @@ pt-BR:
         target: 
         target_id: 
         transaction_at: Data
+        report_at: Data de reporte
+        report_at_option: Data de reporte
         type: Tipo
       user:
         current_password: Senha atual
@@ -879,6 +881,8 @@ pt-BR:
     fields:
       source_prompt: Por favor, escolha uma conta como fonte
       target_prompt: Por favor, escolha uma conta como destino
+      report_at_transaction_date: Data de transação
+      report_at_due_date: Data de vencimento
     field:
       tags_placeholder: Por favor, escolha alguns rótulos
     new_modal:

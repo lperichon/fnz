@@ -14,7 +14,9 @@
 <% if @business.transactions_enabled? %>
   <%= f.input :transaction_at, :as => :date_time_picker %>
 	<%= f.input :state, :as => :select, :collection => Transaction.available_states %>
+	<%= f.input :report_at, :as => :date_picker %>
 	<%= f.input :tag_ids, :as => :select, :collection => @business.tags, :input_html => {:class => "chosen", :multiple => true} %>
 <% else -%>
   <%= f.input :transaction_at, :as => :date_picker %>
+  <%= f.input :report_at_option, :collection => [[t('transactions.fields.report_at_transaction_date'), nil], [t('transactions.fields.report_at_due_date'), :due_date]], :selected => nil %>
 <% end %>

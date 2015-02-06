@@ -80,6 +80,8 @@ en:
         state: Status
         tag_ids: Tags
         transaction_at: Date
+        report_at: Report Date
+        report_at_option: Report Date
         conversion_rate: 
         reconciled_at: 
         target_id: 
@@ -845,6 +847,8 @@ en:
     fields:
       source_prompt: Please select source account
       target_prompt: Please select target account
+      report_at_transaction_date: Transaction Date
+      report_at_due_date: Due Date
     field:
       tags_placeholder: Please select some tags
     new_modal:
