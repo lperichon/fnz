@@ -31,3 +31,24 @@ $(document).ready ->
     id = tr.attr('data-id')
     tr.children('td:last').html('<a href="#" class="remove-unsaved-nested-transaction"><i class="icon-remove"></i></a><input id="' + parent_type + '_transactions_attributes_' + random + '_transaction_id" name="' + parent_type + '[' + parent_type + '_transactions_attributes][' + random + '][transaction_id]" value="' + id + '" type="hidden">')
     $(".nested.transactions.table").append(tr)
+
+  $("#transaction_search_daterange").daterangepicker
+    ranges:
+      "Today": [
+        moment()
+        moment()
+      ]
+      "This Week": [
+        moment().startOf("week")
+        moment()
+      ]
+      "This Month": [
+        moment().startOf("month")
+        moment().endOf("month")
+      ]
+      "Last Month": [
+        moment().subtract("month", 1).startOf("month")
+        moment().subtract("month", 1).endOf("month")
+      ]
+    , (start, end) ->
+      window.location = "?start_date=" + start.format("YYYY-M-D") + "&end_date=" + end.format("YYYY-M-D")

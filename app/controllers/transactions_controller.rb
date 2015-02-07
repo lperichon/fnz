@@ -5,8 +5,8 @@ class TransactionsController < UserApplicationController
   def index
     @context = @context.order("transaction_at DESC")
     # List transactions on this month or the year/month solicited
-    start_date = Date.new(params[:year].present? ? params[:year].to_i : Date.today.year, params[:month].present? ? params[:month].to_i : (params[:year].present? ? 1 : Date.today.month), 1).beginning_of_month.beginning_of_day
-    end_date = Date.new(params[:year].present? ? params[:year].to_i : Date.today.year, params[:month].present? ? params[:month].to_i : (params[:year].present? ? 12 : Date.today.month), 28).end_of_month.end_of_day
+    start_date = @start_date = Date.parse(params[:start_date] || Date.today.beginning_of_month.to_s).beginning_of_day
+    end_date = @end_date = Date.parse(params[:end_date] || Date.today.end_of_month.to_s).end_of_day
 
     # List transactions that ocurred on that month or that are pending and ocurred before or that are reconciled on that month
     @context = @context.where {(transaction_at.gteq start_date) & (transaction_at.lteq end_date) |
@@ -75,8 +75,8 @@ class TransactionsController < UserApplicationController
   def stats
     @context = @context
     # List transactions on this month or the year/month solicited
-    start_date = Date.new(params[:year].present? ? params[:year].to_i : Date.today.year, params[:month].present? ? params[:month].to_i : (params[:year].present? ? 1 : Date.today.month), 1).beginning_of_month.beginning_of_day
-    end_date = Date.new(params[:year].present? ? params[:year].to_i : Date.today.year, params[:month].present? ? params[:month].to_i : (params[:year].present? ? 12 : Date.today.month), 28).end_of_month.end_of_day
+    start_date = @start_date = Date.parse(params[:start_date] || Date.today.beginning_of_month.to_s).beginning_of_day
+    end_date = @end_date = Date.parse(params[:end_date] || Date.today.end_of_month.to_s).end_of_day
 
     # List transactions that ocurred on that month or that are pending and ocurred before or that are reconciled on that month
     @context = @context.where {(transaction_at.gteq start_date) & (transaction_at.lteq end_date)}

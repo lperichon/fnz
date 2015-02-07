@@ -10,7 +10,16 @@
 <% if can? :create, @business.imports.build %>
   <%= link_to content_tag(:i, "", :class => "icon-upload") + "Import CSV", new_business_import_path(@business), :class => "btn" %>
 <% end %>
-  <%= link_to content_tag(:i, "", :class => "icon-bar-chart") + "Stats", stats_business_transactions_path(@business, :year => params[:year], :month => params[:month]), :remote => true, :class => "btn" %>
+  <%= link_to content_tag(:i, "", :class => "icon-bar-chart") + "Stats", stats_business_transactions_path(@business, :start_date => @start_date.to_date, :end_date => @end_date.to_date), :remote => true, :class => "btn" %>
+
+  <span class="control-group pull-right">
+    <span class="controls">
+      <span class="input-prepend">
+    	<span class="add-on icon-calendar"></span>
+    	<input type="text" class="daterange form-control" id="transaction_search_daterange" value='<%= "#{I18n.l(@start_date.to_date)} - #{I18n.l(@end_date.to_date)}" %>'/>
+  	  </span>
+    </span>
+  </span>
 </div>
 
 <h3>Transactions</h3>
