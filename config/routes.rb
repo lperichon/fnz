@@ -21,7 +21,12 @@ Fnz::Application.routes.draw do
     resources :debits, :controller => 'transactions', :only => [:index]
     resources :credits, :controller => 'transactions', :only => [:index]
     resources :transfers, :controller => 'transactions', :only => [:index]
-    resources :tags
+    resources :tags do
+      collection do
+        # required for Sortable GUI server side actions
+        post :rebuild
+      end
+    end
     resources :contacts
     resources :agents
     resources :products

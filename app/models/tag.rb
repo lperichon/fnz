@@ -1,4 +1,7 @@
 class Tag < ActiveRecord::Base
+  acts_as_nested_set
+  include TheSortableTree::Scopes
+
   belongs_to :business
 
   has_many :taggings, :dependent => :destroy
@@ -15,6 +18,10 @@ class Tag < ActiveRecord::Base
   validates_length_of :name, :maximum => 255
 
   def to_s
+    name
+  end
+
+  def title
     name
   end
 

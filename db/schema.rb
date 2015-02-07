@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150206123418) do
+ActiveRecord::Schema.define(:version => 20150207193511) do
 
   create_table "accounts", :force => true do |t|
     t.string  "name",                                       :default => "",  :null => false
@@ -203,8 +203,13 @@ ActiveRecord::Schema.define(:version => 20150206123418) do
   end
 
   create_table "tags", :force => true do |t|
-    t.string  "name",        :default => "", :null => false
+    t.string  "name",           :default => "", :null => false
     t.integer "business_id"
+    t.integer "parent_id"
+    t.integer "lft"
+    t.integer "rgt"
+    t.integer "depth"
+    t.integer "children_count"
   end
 
   create_table "transactions", :force => true do |t|

@@ -1,8 +1,10 @@
 class TagsController < UserApplicationController
+  include TheSortableTreeController::Rebuild
+
   before_filter :get_business
 
   def index
-    @tags = @business.tags
+    @tags = @business.tags.nested_set
   end
 
   def show

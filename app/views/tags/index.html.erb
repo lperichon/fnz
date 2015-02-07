@@ -3,15 +3,9 @@
 <% end %>
 
 <h3>Tags</h3>
-<ul class="tags">
-  <% @tags.each do |tag| %>
-  	<% unless tag.new_record? %>
-    <li>
-      <%= link_to tag.name, business_tag_path(@business, tag) %> <%= link_to content_tag(:i, "", :class => "icon-remove"), business_tag_path(@business, tag), :confirm => 'Are you sure you want to delete this item?', :method => 'delete' %>
-    </li>
-    <% end %>
-  <% end %>
-</ul>
+<ol class="sortable_tree tags" data-rebuild-url="<%= rebuild_business_tags_path(@business) %>">
+  <%= sortable_tree @tags %>
+</ol>
 
 <br />
 

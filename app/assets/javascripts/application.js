@@ -11,6 +11,7 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require jquery.ui.all
 //= require jquery_ujs
 //= require bootstrap
 //= require bootstrap-datepicker
@@ -21,4 +22,6 @@
 //= require select2
 //= require moment
 //= require daterangepicker
+//= require jquery.ui.nestedSortable
+//= require sortable_tree/initializer
 //= require_tree .
