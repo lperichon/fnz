@@ -1,4 +1,3 @@
-$('body').append("<%= escape_javascript(render(:partial => "transactions/stats_modal"))%>");
 $('#transaction-stats-modal').modal({
     keyboard: false
 });
@@ -42,7 +41,19 @@ debitsChart = new Highcharts.Chart({
             <%if @untagged_debits > 0 %>
               ['Untagged', <%= @untagged_debits.to_f.round(2) %>],
             <% end %>
-        ]
+        ],
+        point: {
+            events: {
+                click: function () {
+                    console.log(this);
+                    //$.post('/get/data/url/' + this.id, function(data) {
+                        // you may need to format your data here
+                        // Set the level here. e.g Level 1, 2 or 3 and then depending on that you can also change the url also or any other logic
+                    //    chart.series[0].setData(data);
+                    //});
+                }
+            }
+        }
     }]
 });
 

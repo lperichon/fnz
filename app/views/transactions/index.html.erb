@@ -29,3 +29,4 @@
   <%= link_to content_tag(:i, "", :class => "icon-trash"), business_transaction_path(transaction.business, transaction), :confirm => 'Are you sure you want to delete this item?', :method => 'delete' %>
   <% end %>
 <% end %>
+<%= render(:partial => "transactions/stats_modal") %>
