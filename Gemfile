@@ -62,3 +62,4 @@ gem 'rails_12factor', :group => [:staging, :production]
 gem 'jquery-ui-rails'
 gem 'awesome_nested_set' # or any similar gem (gem 'nested_set')
 gem "the_sortable_tree", "~> 2.5.0"
+gem "intercom-rails"

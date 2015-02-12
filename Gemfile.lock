@@ -133,6 +133,8 @@ GEM
       multi_xml (>= 0.5.2)
     hub (1.12.2)
     i18n (0.6.11)
+    intercom-rails (0.2.27)
+      activesupport (> 3.0)
     journey (1.0.4)
     jquery-rails (3.1.1)
       railties (>= 3.0, < 5.0)
@@ -345,6 +347,7 @@ DEPENDENCIES
   factory_girl_rails (>= 4.0.0)
   httparty
   hub (>= 1.10.2)
+  intercom-rails
   jquery-rails
   jquery-ui-rails
   kaminari
