@@ -75,7 +75,7 @@ class MembershipsController < UserApplicationController
     }
     params.reverse_merge!(default_params)
     @membership_filter = ContactSearch.new(params[:contact_search].merge(:business_id => @business.id))
-  	@contacts = @membership_filter.results.includes(:installments).includes(:installments => :agent).includes(:installments => :membership).page(params[:page]).per(50)
+  	@contacts = @membership_filter.results.includes(:current_membership).includes(:current_membership => :payment_type).includes(:installments).includes(:installments => :agent).includes(:installments => :membership).page(params[:page]).per(50)
   end
 
   def stats
