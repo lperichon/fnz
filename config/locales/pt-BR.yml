@@ -457,6 +457,7 @@ pt-BR:
       custom_period: Selecionar período
   layouts:
     navigation:
+      crm: Voltar a CRM
       businesses: Negócios
       edit_account: Editar conta
     secondary_navigation:

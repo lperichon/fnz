@@ -6,6 +6,10 @@ else
 	CONFIG = {}
 end
 
+module Crm
+	URL = ENV['crm_url'] || CONFIG['crm_url']
+end
+
 module Accounts
   API_KEY = ENV['accounts_key'] || CONFIG['accounts_key']
 end

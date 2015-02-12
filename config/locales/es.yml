@@ -425,6 +425,7 @@ es:
         submit: 
   layouts:
     navigation:
+      crm: Volver a CRM
       businesses: Negocios
       edit_account: Editar cuenta
     secondary_navigation:

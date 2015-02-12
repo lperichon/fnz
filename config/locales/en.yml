@@ -420,6 +420,7 @@ en:
         submit: 
   layouts:
     navigation:
+      crm: Back to CRM
       businesses: Businesses
       edit_account: Edit Account
     secondary_navigation:
