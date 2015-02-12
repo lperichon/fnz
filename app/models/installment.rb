@@ -5,6 +5,7 @@ class Installment < ActiveRecord::Base
   has_many :transactions, :through => :installment_transactions
 
   attr_accessor :installments_count
+  attr_accessor :agent_padma_id
 
   validates :membership, :presence => true
   validates :due_on, :presence => true
@@ -18,11 +19,17 @@ class Installment < ActiveRecord::Base
   default_scope order("due_on DESC")
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :membership_id, :agent_id, :due_on, :value, :transactions_attributes, :installment_transactions_attributes, :external_id, :observations, :status, :balance, :installments_count
+  attr_accessible :membership_id, :agent_id, :due_on, :value, :transactions_attributes, :installment_transactions_attributes, :external_id, :observations, :status, :balance, :installments_count, :agent_padma_id
   accepts_nested_attributes_for :transactions, allow_destroy: true
   accepts_nested_attributes_for :installment_transactions, :reject_if => proc { |s| s['transaction_id'].blank? }
 
   before_save :refresh_status
+
+  before_save :set_agent
+  
+  def set_agent
+    self.agent = self.membership.business.agents.find_by_padma_id(self.agent_padma_id) if self.agent_padma_id.present?
+  end
 
   def status
     self.update_status if self[:status].blank?

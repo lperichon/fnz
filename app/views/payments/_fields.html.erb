@@ -2,6 +2,7 @@
 		<%= hidden_field_tag "installment[due_on]", @installment.due_on %>
 		<%= hidden_field_tag "installment[value]", @installment.value %>
 		<%= hidden_field_tag "installment[agent_id]", @installment.agent_id %>
+		<%= hidden_field_tag "installment[agent_padma_id]", @installment.agent_padma_id %>
 <% end %>
 
 <% if @business.accounts.count == 1 %>

@@ -22,7 +22,7 @@
                             :installment => {
                              :due_on => date.end_of_month.to_date,
                              :value => membership.value,
-                             :agent_id => suggested_agent_id_for(@business,membership)
+                             :agent_padma_id => contact.padma_teacher
                             },
                             :transaction => { :transaction_at => Time.zone.now } ),
                             :remote => true,
