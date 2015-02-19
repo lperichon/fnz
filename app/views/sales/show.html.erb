@@ -6,6 +6,8 @@
 <p><b><%= Sale.human_attribute_name(:status) %>:</b> <%= content_tag(:span, @sale.status, :class => "label label-#{@sale.status}") %>
 	<% if !@sale.complete?  %>
         <%= link_to t('actions.mark_as_paid'), new_business_sale_payment_path(@business, @sale), :remote => true %>
+    <% elsif @sale.complete? && !@business.transactions_enabled? %>
+    	 <%= link_to content_tag(:i, "", :class => "icon-trash"), business_transaction_path(@business, @sale.transactions.first), :confirm => t('actions.confirm_delete'), :method => 'delete' %>
     <% end %>
 </p>
 

@@ -5,7 +5,7 @@ class Transaction < ActiveRecord::Base
   before_validation :set_business
   before_validation :set_report_at
   after_save :update_balances
-  after_destroy :update_balances
+  around_destroy :update_balances_around_destroy
 
   attr_accessor :report_at_option
 
@@ -44,6 +44,12 @@ class Transaction < ActiveRecord::Base
     source.update_balance
     target.update_balance if target.present?
     installments.each { |installment| installment.update_balance_and_status } if installments.count > 0
+  end
+
+  def update_balances_around_destroy
+    cached_installments = self.installments.all
+    yield
+    cached_installments.each { |installment| installment.update_balance_and_status } if cached_installments.count > 0
   end
 
   def set_creator

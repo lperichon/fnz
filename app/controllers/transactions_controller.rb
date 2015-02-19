@@ -68,7 +68,7 @@ class TransactionsController < UserApplicationController
     @transaction.destroy
 
     respond_to do |format|
-      format.html { redirect_to business_transactions_url(@business) }
+      format.html { redirect_to :back }
     end
   end
 

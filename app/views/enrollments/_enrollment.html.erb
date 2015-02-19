@@ -3,5 +3,7 @@
 <p><b><%= Enrollment.human_attribute_name(:status) %>:</b> <%= content_tag(:span, enrollment.status, :class => "label label-#{enrollment.status}") %>
 	<% if !enrollment.new_record? && !enrollment.complete? %>
         <%= link_to t('actions.mark_as_paid'), new_business_membership_enrollment_payment_path(@business, enrollment.membership, enrollment), :remote => true %>
+    <% elsif !enrollment.new_record? && !@business.transactions_enabled? && enrollment.complete? %>
+    	 <%= link_to content_tag(:i, "", :class => "icon-trash"), business_transaction_path(@business, enrollment.transactions.first), :confirm => t('actions.confirm_delete'), :method => 'delete' %>
     <% end %>
 </p>
