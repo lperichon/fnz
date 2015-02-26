@@ -17,7 +17,7 @@ class MonthlyInstallmentsCreator
           installment.agent = agent
           installment.save
         end
-      else current_membership.present? and not current_membership.overdue?
+      elsif current_membership.present? and not current_membership.overdue?
         # create installment
         agent = business.agents.enabled.where(:padma_id => student.padma_teacher).first
         installment = current_membership.installments.new(:due_on => Date.new(Date.today.year,Date.today.month,current_membership.monthly_due_day),

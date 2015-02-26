@@ -9,9 +9,6 @@ end
 
 desc "This task is called by the Heroku scheduler add-on it creates monthly installments for all open memberships"
 task :create_monthly_installments  => :environment do
-  # Only run the first day of the month
-  return unless Date.today.day == 1
-
   School.where("padma_id IS NOT NULL").each do |business|
     puts "Creating installments for #{business.name}..."
     MonthlyInstallmentsCreator.new(business).run
