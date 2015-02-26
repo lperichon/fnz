@@ -155,6 +155,10 @@ describe TransactionsController, :type => :controller do
   end
 
   describe "DELETE destroy" do
+    before do
+      request.env["HTTP_REFERER"] = "/businesses/#{@business.id}/transactions"
+    end
+
     it "destroys the requested transaction" do
       transaction = @business.transactions.create! valid_attributes
       expect {

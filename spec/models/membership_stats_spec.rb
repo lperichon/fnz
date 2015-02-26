@@ -70,7 +70,7 @@ describe MembershipStats do
       end
 
       it "should not return installments" do
-        expect(BigDecimal.new(@membership_stats.paid_installments.first['sum'])).to eq BigDecimal.new(0)
+        expect(@membership_stats.paid_installments.first['sum']).to eq nil
       end
     end
   end
