@@ -11,8 +11,8 @@
 
     <%= f.input :sold_on, :as => :date_picker %>
 
-    <% if !@sale.new_record? %>
-        <%= f.input :status, :as => :payment_status %>
+    <% unless @sale.new_record? %>
+        <%= f.input :status, :as => :payment_status, :business => @business %>
     <% end %>
     
     <% if @business.transactions_enabled? %>

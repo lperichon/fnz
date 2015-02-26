@@ -3,7 +3,7 @@
     <%= f.input :due_on, :as => "string", :input_html => {:class => "datepicker_input"} %>
     <%= f.input :value %>
     <% unless @installment.new_record? %>
-        <%= f.input :status, :as => :payment_status %>
+        <%= f.input :status, :as => :payment_status, :business => @business %>
     <% end %>
 
     <%= f.input :observations, :as => 'string' %>

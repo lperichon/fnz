@@ -2,9 +2,9 @@
     <%= f.association :agent, :as => :select, :collection => @business.agents.enabled, :input_html => {'data-placeholder' => 'Please select agent',:class => "chosen"} %>
     <%= f.input :value %>
     <%= f.input :enrolled_on, :as => "string", :input_html => {:class => "datepicker_input"} %>
-
-    <%= f.input :status, :as => :payment_status %>
-
+    <% unless @enrollment.new_record? %>
+        <%= f.input :status, :as => :payment_status, :business => @business %>
+    <% end %>
     <% if @business.transactions_enabled? %>
     <h3><%= Enrollment.human_attribute_name(:transactions) %></h3>
     <%= render :partial => 'nested_transactions_table', :locals => {:f => f, :transactions => @transactions} %>
