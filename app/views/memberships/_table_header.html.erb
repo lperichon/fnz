@@ -11,7 +11,7 @@
                                             @business,
                                 :year => (6-n).months.ago.year,
                                 :month => (6-n).months.ago.month,
-                                :membership_filter => params[:membership]
+                                :contact_search => params[:contact_search]
                                                  ),
                   :remote => true %>
   	</div>
@@ -24,7 +24,7 @@
                   stats_business_memberships_path(@business,
                                                   :year => Date.today.year,
                                                   :month => Date.today.month,
-                                                  :membership_filter => params[:membership]
+                                                  :contact_search => params[:contact_search]
                                                  ),
                   :remote => true  %>
   	</div>
@@ -36,7 +36,7 @@
                      stats_business_memberships_path(@business,
                                                      :year => n.months.from_now.year,
                                                      :month => n.months.from_now.month,
-                                                     :membership_filter => params[:membership]
+                                                     :contact_search => params[:contact_search]
                                                     ),
                      :remote => true %></div></td>
 <% end %>

@@ -30,9 +30,10 @@ class MembershipStats
   end
 
   def memberships
-    @memberships = Membership.where(business_id: business.id)
-    unless @membership_filter.nil?
-      @memberships = @memberships.where(@membership_filter)
+    if @membership_filter.nil?
+      @memberships = Membership.where(business_id: business.id)
+    else
+      @memberships = Membership.where(:id => @membership_filter.results.collect {|c| c.membership_ids })
     end
     @memberships
   end
