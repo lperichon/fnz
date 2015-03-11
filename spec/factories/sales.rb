@@ -4,6 +4,7 @@ FactoryGirl.define do
   factory :sale do
     contact
     business
+    agent
     sold_on Date.today
   end
 end

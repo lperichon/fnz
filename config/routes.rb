@@ -74,6 +74,7 @@ Fnz::Application.routes.draw do
           resource :current_membership
         end
       end
+      resources :merges, only: [:create]
     end
   end
 end
