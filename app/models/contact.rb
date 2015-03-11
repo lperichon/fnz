@@ -19,6 +19,30 @@ class Contact < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :business_id, :padma_id, :padma_status, :padma_teacher
 
+  # finds contact by padma_id
+  # if it doesnt exist it creates
+  def self.get_by_padma_id(padma_id)
+    c = self.find_by_padma_id(padma_id)
+    if c.nil?
+      business_id = get_bussines_from_scope(self)
+      if business_id
+        b = Business.find(business_id)
+        padma_contact = PadmaContact.find(padma_id,
+                          select: [:id, :full_name, :local_status, :local_teacher],
+                          account_name: b.padma_id
+                         ) 
+        if padma_contact
+          c = b.contacts.create(
+            :name => "#{padma_contact.first_name} #{padma_contact.last_name}".strip,
+            :padma_status => padma_contact.local_status,
+            :padma_teacher => padma_contact.local_teacher,
+            :padma_id => padma_contact.id)
+        end
+      end
+    end
+    c
+  end
+
   def self.all_students
     scope = self.joins("left outer join memberships on contacts.id = memberships.contact_id")
     scope = scope.includes(:business).includes(:current_membership).uniq 
@@ -40,5 +64,13 @@ class Contact < ActiveRecord::Base
 
   def installment_for(date)
     installments.where("due_on >= '#{date.beginning_of_month}' AND due_on <= '#{date.end_of_month}'").first
+  end
+
+  private
+  
+  def self.get_bussines_from_scope(scope)
+    scope = scope.scoped
+    res = scope.to_sql.match(/business_id\" \= (\d+)/)
+    (res)? res[1].to_i : nil
   end
 end
