@@ -8,7 +8,7 @@ class ContactsController < UserApplicationController
   def show
     param_is_padma_id = (false if Float(params[:id]) rescue true)
     if param_is_padma_id
-      @contact = @business.contacts.find_by_padma_id(params[:id])
+      @contact = @business.contacts.get_by_padma_id(params[:id])
     else
       @contact = @business.contacts.find(params[:id])
     end
