@@ -8,7 +8,6 @@ class Merge
 
   def merge
     Contact.where(padma_id: son_id).each do |son|
-    debugger
       father = son.business.contacts.where(padma_id: father_id).first
       if father
         Membership.where(contact_id: son.id).update_all(contact_id: father.id)
