@@ -12,7 +12,7 @@ RSpec.describe Api::V0::MergesController, :type => :controller do
            }
     end
 
-    it { should respond_with 200 }
+    it { should respond_with 201 }
 
   end
 end

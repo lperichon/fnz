@@ -4,7 +4,7 @@ class Api::V0::MergesController < Api::V0::ApiController
     son_id = params[:merge]['son_id']
     father_id = params[:merge]['father_id']
 
-    m = Merge.new(son_id, father_id)
+    m = ContactsMerger.new(son_id, father_id)
     m.merge
 
     render json: "OK", status: 201

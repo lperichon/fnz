@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe Merge, :type => :model do
+RSpec.describe ContactsMerger, :type => :model do
   describe "#merge" do
     let!(:b){FactoryGirl.create(:business)}
     let!(:father){FactoryGirl.create(:contact, padma_id: 'father', business_id: b.id)}
@@ -11,7 +11,7 @@ RSpec.describe Merge, :type => :model do
     let!(:son_sale){FactoryGirl.create(:sale, contact_id: son.id, business_id: b.id)}
     before do
       @son_id = son.id
-      Merge.new('son','father').merge
+      ContactsMerger.new('son','father').merge
     end
     it "destroys son" do
       expect{Contact.find(@son_id)}.to raise_exception(ActiveRecord::RecordNotFound)

@@ -1,4 +1,4 @@
-class Merge 
+class ContactsMerger
   attr_accessor :son_id, :father_id
 
   def initialize(son_id, father_id)
