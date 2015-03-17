@@ -22,6 +22,8 @@ class Membership < ActiveRecord::Base
  
   include BelongsToPadmaContact
 
+  scope :current, where(:closed_on => nil).select("DISTINCT ON(contact_id) *").order("contact_id, begins_on DESC")
+
   def closed?
     closed_on.present?
   end

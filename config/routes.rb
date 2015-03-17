@@ -73,6 +73,7 @@ Fnz::Application.routes.draw do
         resources :contacts do
           resource :current_membership
         end
+	match 'current_memberships', to: "current_memberships#index"
       end
     end
   end
