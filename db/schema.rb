@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150320131821) do
+ActiveRecord::Schema.define(:version => 20150320171118) do
 
   create_table "accounts", :force => true do |t|
     t.string  "name",                                       :default => "",  :null => false
@@ -28,16 +28,17 @@ ActiveRecord::Schema.define(:version => 20150320131821) do
   end
 
   create_table "businesses", :force => true do |t|
-    t.string   "name",                 :default => "",         :null => false
-    t.integer  "owner_id",                                     :null => false
-    t.datetime "created_at",                                   :null => false
-    t.datetime "updated_at",                                   :null => false
-    t.string   "type",                 :default => "Personal"
+    t.string   "name",                      :default => "",         :null => false
+    t.integer  "owner_id",                                          :null => false
+    t.datetime "created_at",                                        :null => false
+    t.datetime "updated_at",                                        :null => false
+    t.string   "type",                      :default => "Personal"
     t.string   "padma_id"
     t.datetime "synchronized_at"
-    t.boolean  "send_weekly_reports",  :default => true
+    t.boolean  "send_weekly_reports",       :default => true
     t.boolean  "transactions_enabled"
     t.boolean  "share_enabled"
+    t.boolean  "use_calendar_installments", :default => true
   end
 
   create_table "businesses_users", :force => true do |t|

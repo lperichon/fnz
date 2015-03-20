@@ -18,7 +18,7 @@ class Business < ActiveRecord::Base
   validates :owner, :presence => true
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :type, :name, :owner_id, :padma_id, :synchronized_at, :send_weekly_reports, :transactions_enabled, :share_enabled
+  attr_accessible :type, :name, :owner_id, :padma_id, :synchronized_at, :send_weekly_reports, :transactions_enabled, :share_enabled, :use_calendar_installments
   
   after_create :initialize_feature_flags
   after_save :link_to_owner

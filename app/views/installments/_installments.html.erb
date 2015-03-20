@@ -5,10 +5,14 @@
     <td><%= Installment.human_attribute_name(:contact) %></td>
     <% end %>
     <td><%= Installment.human_attribute_name(:agent) %></td>
-  	<td><%= t('installments.installments_table.header.month') %></td>
-  	<td><%= Installment.human_attribute_name(:value) %></td>
-  	<td><%= Installment.human_attribute_name(:status) %></td>
-  	<td></td>
+      <% if @business.use_calendar_installments? %>
+	<td><%= t('installments.installments_table.header.month') %></td>
+      <% else %>
+	<td><%= t('installments.installments_table.header.period') %></td>
+    <% end %>
+    <td><%= Installment.human_attribute_name(:value) %></td>
+    <td><%= Installment.human_attribute_name(:status) %></td>
+    <td></td>
   </thead>
   <tbody>
   <% installments.each do |installment| %>
@@ -18,8 +22,12 @@
         <% contact = membership.contact %>
         <td><%= link_to(contact.name.html_safe, business_contact_path(@business, contact)) %></td>
         <% end %>
-        <td><%= installment.agent.try(:name) %></td>
-        <td><%= l(installment.due_on, format: "%B %Y") %></td>
+	<td><%= installment.agent.try(:name) %></td>
+	<% if @business.use_calendar_installments? %>
+	  <td><%= l(installment.due_on, format: "%B %Y") %></td>
+  	<% else %>
+	  <td><%= l(installment.due_on, format: "%d %B") %> - <%= l(installment.due_on + 1.month - 1.day, format: "%d %B") %></td>
+	<% end %>
         <% if installment.observations.blank? -%>
           <td class="amount"><%= number_to_currency(installment.value)%></td> 
         <% else -%>
