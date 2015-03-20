@@ -120,3 +120,11 @@ table#memberships tr:not(:first-child) {
 .membership-filter .form-actions {
 	text-align: right;
 }
+
+.memberships.table.list-mode thead tr {
+  height: 44px;
+}
+.memberships.table.list-mode thead tr th {
+  vertical-align: middle;
+  text-align: center;
+}	

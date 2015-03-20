@@ -1,9 +1,12 @@
 <% content_for :sidebar do %>
-    <%= render :partial => 'businesses/edit_sidebar' %>
+<ul class="nav nav-pills nav-stacked" id="edit-sidebar">
+  <li>
+    <%= link_to t('actions.back'), :back %>
+  </li>
+</ul>
 <% end %>
 
-<h2 class='title'><%= Contact.model_name.human %></h2> (<%= link_to t('actions.edit'), edit_business_contact_path(@business, @contact) %>)
-<p>Name: <%= @contact.name %></p>
+<h2 class='title'><%= @contact.name %></h2>
 
 <h3><%= Contact.human_attribute_name(:memberships) %></h3>
 <table class="contact-memberships table table-striped table-hover table-condensed table-bordered">
@@ -32,10 +35,25 @@
 <% end %>
 
 <h3><%= Contact.human_attribute_name(:sales) %></h3>
-<ul>
-<% @contact.sales.each do |sale| %>
-  <p><%= sale.sold_on %> - <%= sale.try(:product).try(:name) %> <%= link_to t('actions.show'), business_sale_path(@business, sale) %></p>
-<% end %>
-</ul>
-
-<%= link_to t('actions.back'), :back %>
+<table class="sales table table-striped table-hover table-condensed table-bordered">
+  <thead>
+  	<td><%= Sale.human_attribute_name(:sold_on) %></td>
+  	<td><%= Sale.human_attribute_name(:product) %></td>
+  	<td><%= Sale.human_attribute_name(:amount) %></td>
+  	<td><%= Sale.human_attribute_name(:status) %></td>
+  	<td></td>
+  </thead>
+  <% @contact.sales.each do |sale| %>
+    <tr>
+      <td><%= l(sale.sold_on, :format => :long) %></td>
+      <td><%= sale.try(:product).try(:name) %></td>
+      <td><%= number_to_currency(sale.product.price, :unit => sale.product.price_currency.symbol) if sale.product %></td>
+      <td><%= content_tag(:span, sale.status, :class => "label label-#{sale.status}") %></td>
+      <td>
+      	<%= link_to content_tag(:i, "", :class => "icon-eye-open"), business_sale_path(@business, sale) %>
+      	<%= link_to content_tag(:i, "", :class => "icon-edit"), edit_business_sale_path(@business, sale) %>
+  	<%= link_to content_tag(:i, "", :class => "icon-trash"), business_sale_path(@business, sale), :confirm => t('actions.confirm_delete'), :method => 'delete' %>
+      </td>
+    </tr>
+  <% end %>
+</table>
