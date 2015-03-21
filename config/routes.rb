@@ -75,6 +75,7 @@ Fnz::Application.routes.draw do
         end
 	match 'current_memberships', to: "current_memberships#index"
       end
+      resources :merges, only: [:create]
     end
   end
 end
