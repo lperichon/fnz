@@ -24,6 +24,9 @@
                     collection: [["Due", :due], ["Overdue", :overdue]]
   %>
   <div class="form-actions">
+    <%= link_to t('.download'), 
+                url_for( params.merge({:format => 'csv'}) ),
+                :class => "btn btn-primary pull-left" %>
     <%= f.button :submit,
                  :value => t('.filter'),
                  :class => "btn btn-primary" %>

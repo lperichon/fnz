@@ -1,0 +1,60 @@
+<%- require 'csv' -%>
+<%= CSV.generate do |csv| %>
+	<%- if current_user.overview_mode == 'table' -%>
+	    <%- line = [] -%>
+	    <%- line << "Name" -%>
+		<%- (1..5).each do |n| -%>
+		  <%- line << l((6-n).months.ago, :format => "%b") -%>
+		<%- end -%>
+		  <%- line << l(Date.today, :format => "%b") -%>
+		<%- (1..6).each do |n| -%>
+		  <%- line << l(n.months.from_now, :format => "%b") -%>
+		<%- end -%>
+		<%- csv << line -%>
+	  <%- @contacts.each do |contact| -%>
+	  		<%- line = [] -%>
+	  		<%- line << contact.name -%>
+			<%- membership = contact.current_membership -%>
+	  		<%- monthly_iterator = [] -%>
+	  		<%- (1..5).each do |n| -%>
+	  			<%- date = (6-n).months.ago -%>
+	  		    <%- installment = installment_for(date , contact.installments) -%>
+	  		    <%- monthly_iterator << {:date => date, :installment => installment } -%>
+	  		<%- end -%>
+	  		<%- date = Date.today -%>
+	  		<%- installment = installment_for(date, contact.installments) -%>
+	  		<%- monthly_iterator << {:date => date, :installment => installment } -%>
+	  		<%- (1..6).each do |n| -%>
+	  			<%- date = n.months.from_now -%>
+	  		    <%- installment = installment_for(date , contact.installments) -%>
+	  		    <%- monthly_iterator << {:date => date, :installment => installment } -%>
+	  		<%- end -%>
+	  		<%- monthly_iterator.each do |monthly_values| -%>
+	  			<%- installment = monthly_values[:installment] -%>
+	  			<%- date = monthly_values[:date] -%>
+	        <%- line << ((installment && installment.complete?) ? installment.try(:value) : nil) -%>
+		    <%- end -%>
+		    <%- csv << line -%>
+	  <%- end -%>
+	<%- else -%>
+	    <%- line = [] -%>
+	    <%- line << "Name" -%>
+	    <%- line << t('memberships.maturity_report.membership') -%>
+	    <%- line << t('memberships.maturity_report.period') -%>
+	    <%- line << Membership.human_attribute_name(:monthly_due_day) -%>
+	    <%- line << t('memberships.maturity_report.value') -%>
+	    <%- line << Membership.human_attribute_name(:payment_type) -%>
+  		<%- csv << line -%>
+	  <%- @contacts.each do |contact| -%>
+	    <%- membership = contact.current_membership -%>
+	    <%- line = [] -%>
+	    <%- line << contact.name -%>
+	    <%- line << (membership.present? ? membership.name : nil) -%>
+	    <%- line << (membership.present? ? "#{membership.begins_on} - #{membership.ends_on}" : nil) -%>
+	    <%- line << (membership.present? ? membership.monthly_due_day : nil) -%>
+	    <%- line << (membership.present? ? membership.value : nil) -%>
+	    <%- line << (membership.present? ? membership.payment_type.try(:name) : nil) -%>
+	    <%- csv << line -%>
+	  <%- end -%>
+	<%- end -%>
+<%- end.html_safe -%>
