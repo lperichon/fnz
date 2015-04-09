@@ -4,11 +4,14 @@
 	    <%- line = [] -%>
 	    <%- line << "Name" -%>
 		<%- (1..5).each do |n| -%>
-		  <%- line << l((6-n).months.ago, :format => "%b") -%>
+		  <%- line << "#{l((6-n).months.ago, :format => '%b')} - Value" -%>
+		  <%- line << "#{l((6-n).months.ago, :format => '%b')} - Payment" -%>
 		<%- end -%>
-		  <%- line << l(Date.today, :format => "%b") -%>
+		  <%- line << "#{l(Date.today, :format => '%b')} - Value" -%>
+		  <%- line << "#{l(Date.today, :format => '%b')} - Payment" -%>
 		<%- (1..6).each do |n| -%>
-		  <%- line << l(n.months.from_now, :format => "%b") -%>
+		  <%- line << "#{l(n.months.from_now, :format => '%b')} - Value" -%>
+		  <%- line << "#{l(n.months.from_now, :format => '%b')} - Payment" -%>
 		<%- end -%>
 		<%- csv << line -%>
 	  <%- @contacts.each do |contact| -%>
@@ -32,7 +35,15 @@
 	  		<%- monthly_iterator.each do |monthly_values| -%>
 	  			<%- installment = monthly_values[:installment] -%>
 	  			<%- date = monthly_values[:date] -%>
-	        <%- line << ((installment && installment.complete?) ? installment.try(:value) : nil) -%>
+	        		<%- line << (installment ? installment.try(:value) : nil) -%>
+				<%- case installment.try(:status)
+				    when :complete 
+					 line << installment.value
+				    when :incomplete, :due, :overdue
+					 line << installment.balance
+				    else line << nil
+			            end
+				-%>
 		    <%- end -%>
 		    <%- csv << line -%>
 	  <%- end -%>
