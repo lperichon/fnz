@@ -32,7 +32,7 @@ class ContactSearch
     end
 
     if @status == "student"
-      scope = scope.where("contacts.padma_status = 'student' OR ((contacts.padma_status IS NULL OR contacts.padma_status = 'former_student') AND memberships.id IS NOT NULL AND memberships.closed_on IS NULL)")
+      scope = scope.where("contacts.padma_status = 'student' OR (contacts.padma_status IS NULL AND memberships.id IS NOT NULL AND memberships.closed_on IS NULL)")
     elsif @status == "former_student"
       scope = scope.where(:padma_status => "former_student")
     end
