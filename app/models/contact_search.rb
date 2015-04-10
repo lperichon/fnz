@@ -24,7 +24,7 @@ class ContactSearch
     scope = scope.where(business_id: @business_id) unless @business_id.nil?
     
     if @name.present?
-      scope = scope.where("contacts.name LIKE ?", "%#{@name}%")
+      scope = scope.where("lower(contacts.name) LIKE ?", "%#{@name.downcase}%")
     end
 
     if @teacher.present?
