@@ -29,10 +29,13 @@
   		</td>
    	</tr>
   <% end %>
+  </tbody>
+  <tfoot>
+    <th colspan=4>
+      <%= link_to content_tag(:i, "", :class => "icon-plus") + t('memberships.secondary_navigation.new_membership'), new_business_membership_path(@business, :membership => {:contact_id => @contact.id}) %>
+    </th>
+  </tfoot>
 </table>
-<% unless @contact.current_membership.present? %>
-  <%= link_to "Assign membership", new_business_membership_path(@business, :membership => {:contact_id => @contact.id}) %>
-<% end %>
 
 <h3><%= Contact.human_attribute_name(:sales) %></h3>
 <table class="sales table table-striped table-hover table-condensed table-bordered">
@@ -43,6 +46,7 @@
   	<td><%= Sale.human_attribute_name(:status) %></td>
   	<td></td>
   </thead>
+  <tbody>
   <% @contact.sales.each do |sale| %>
     <tr>
       <td><%= l(sale.sold_on, :format => :long) %></td>
@@ -56,4 +60,11 @@
       </td>
     </tr>
   <% end %>
+  </tbody>
+  <tfoot>
+    <th colspan=5>
+      <%= link_to content_tag(:i, "", :class => "icon-plus") + t('sales.secondary_navigation.new_sale'), new_business_sale_path(@business, :sale => {:contact_id => @contact.id}) %>
+    </th>
+  </tfoot>
+
 </table>
