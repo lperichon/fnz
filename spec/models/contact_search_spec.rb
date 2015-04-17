@@ -147,8 +147,8 @@ describe ContactSearch do
       it "includes a padma student without membership" do
         expect(cs.results).to include yet_another_student
       end
-      it "includes a former student with membership" do
-        expect(cs.results).to include former_student
+      it "wont include a former student with membership" do
+        expect(cs.results).not_to include former_student
       end
       it "wont include a former_student with closed membership" do
         expect(cs.results).not_to include another_former_student
