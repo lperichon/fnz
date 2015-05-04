@@ -3,6 +3,7 @@
 	<%- if current_user.overview_mode == 'table' -%>
 	    <%- line = [] -%>
 	    <%- line << "Name" -%>
+	    <%- line << "Teacher" -%>
 		<%- (1..5).each do |n| -%>
 		  <%- line << "#{l((6-n).months.ago, :format => '%b')} - Value" -%>
 		  <%- line << "#{l((6-n).months.ago, :format => '%b')} - Payment" -%>
@@ -17,6 +18,7 @@
 	  <%- @contacts.each do |contact| -%>
 	  		<%- line = [] -%>
 	  		<%- line << contact.name -%>
+	  		<%- line << contact.padma_teacher -%>
 			<%- membership = contact.current_membership -%>
 	  		<%- monthly_iterator = [] -%>
 	  		<%- (1..5).each do |n| -%>
