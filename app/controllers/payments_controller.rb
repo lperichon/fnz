@@ -24,15 +24,23 @@ class PaymentsController < UserApplicationController
       @installment = @membership.installments.create(params[:installment])
     end
 
-    if @installment || (params[:installment_id] && @installment = @membership.installments.find(params[:installment_id]))
-      default_payment_attributes = {
-        :installment_ids => [@installment.id],
-        :description => "Installment Payment - #{@membership.contact.name} - #{@installment.due_on.strftime('%B %Y')}",
-        :type => "Credit",
-        :amount => @installment.value
-      }
+    if @installment || params[:transaction][:installment_ids] || (params[:installment_id] && @installment = @membership.installments.find(params[:installment_id]))
+      if params[:transaction][:installment_ids]
+        default_payment_attributes = {
+          :installment_ids => params[:transaction][:installment_ids],
+          :description => "Multiple Installment Payment - #{@membership.contact.name}",
+          :type => "Credit"
+        } 
+      else
+	default_payment_attributes = {
+          :installment_ids => [@installment.id],
+          :description => "Installment Payment - #{@membership.contact.name} - #{@installment.due_on.strftime('%B %Y')}",
+          :type => "Credit",
+          :amount => @installment.value
+        }
 
-      default_payment_attributes[:report_at] = @installment.due_on if params[:transaction][:report_at_option] == 'due_date'
+        default_payment_attributes[:report_at] = @installment.due_on if params[:transaction][:report_at_option] == 'due_date'
+      end
 
       @redirect_url = session.delete(:return_to) || overview_business_memberships_path(@business)
     elsif request.path.include?("enrollment") && @enrollment = @membership.enrollment

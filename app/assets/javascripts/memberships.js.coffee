@@ -92,3 +92,12 @@ $(document).ready ->
 
   $("a.mark_as_paid_link").click ->
     $(this).html('<div class="loader">Loading...</div>')
+
+  $("#multiple_mark_as_paid").click (e) ->
+    e.preventDefault()
+    valuesToSubmit = $('form#multiple_installments').serialize()
+    $.ajax(
+      type: 'GET'
+      url: $(this).attr('href')
+      data: valuesToSubmit
+      dataType: 'script')

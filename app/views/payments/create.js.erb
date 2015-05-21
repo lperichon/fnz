@@ -1,7 +1,5 @@
 $('#new-payment-modal').modal('hide').remove();
-console.log("<%= @redirect_url %>");
-console.log("<%= overview_business_memberships_path(@business) %>");
-<% if @redirect_url.ends_with?("overview") %>
+<% if @redirect_url.present? && @redirect_url.ends_with?("overview") %>
 	<% @installment.reload %>
 	$('tr[data-contact-id="<%= @installment.membership.contact.id %>"] td[data-month="<%= @installment.due_on.month %>"]').replaceWith("<%= escape_javascript render(:partial => 'memberships/table_cell', :locals => {:contact => @installment.membership.contact, :membership => @installment.membership, :installment => @installment, :date => @installment.due_on}) %>");
 <% else %>

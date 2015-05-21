@@ -1,6 +1,11 @@
 <% include_contact_column ||= false %>
+<% include_form ||= false %>
+<%= form_tag "#", :id => "multiple_installments" do %>
 <table class="installments table table-striped table-hover table-condensed table-bordered">
   <thead>
+    <% if include_form %>
+      <td></td>
+    <% end %>	    
     <% if include_contact_column %>
     <td><%= Installment.human_attribute_name(:contact) %></td>
     <% end %>
@@ -19,6 +24,9 @@
   <% installments.each do |installment| %>
       <% membership = installment.membership %>
       <tr>
+        <% if include_form %>
+	  <td><%= check_box_tag "transaction[installment_ids][]", installment.id %></td>	      
+	<% end %>
         <% if include_contact_column %>
         <% contact = membership.contact %>
         <td><%= link_to(contact.name.html_safe, business_contact_path(@business, contact)) %></td>
@@ -43,3 +51,4 @@
       </tr>
   <% end %>
 </table>
+<% end %>
