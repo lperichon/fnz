@@ -101,3 +101,9 @@ $(document).ready ->
       url: $(this).attr('href')
       data: valuesToSubmit
       dataType: 'script')
+
+  checkboxes = $("form#multiple_installments input[type='checkbox']")
+  submitButt = $("#multiple_mark_as_paid")
+
+  checkboxes.click ->
+    submitButt.attr("disabled", !checkboxes.is(":checked"))

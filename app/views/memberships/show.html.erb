@@ -25,9 +25,9 @@
 <% end %>
 
 <h3><%= Membership.human_attribute_name('installments') %></h3>
-<p class="btn-group">
+<p>
   <%= link_to t('memberships.show.new_installment'), new_business_membership_installment_path(@business, @membership), :class => "btn btn-sm btn-default" %>
-  <%= link_to "Mark as Paid", new_business_membership_payment_path(@business, @membership), :class => "btn btn-sm btn-default", :id => "multiple_mark_as_paid" %>
+  <%= link_to t('actions.mark_as_paid'), new_business_membership_payment_path(@business, @membership), :class => "btn btn-sm btn-default", :id => "multiple_mark_as_paid", :disabled => true %>
 </p>
 <%= render :partial => 'installments/installments', :locals => {:installments => @membership.installments, :include_form => true} %>
 
