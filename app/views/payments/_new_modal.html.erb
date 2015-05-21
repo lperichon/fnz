@@ -9,8 +9,10 @@
                   business_membership_installment_payment_path(@business, @membership, :installment_id => :create)
                elsif @installment.present?
 		  business_membership_installment_payment_path(@business, @membership, @installment)
-	       elsif @transaction.installment_ids.present?
+	       elsif @transaction.installment_ids.present? && @membership.present?
 		  business_membership_payment_path(@business, @membership)
+	       elsif @transaction.installment_ids.present?
+		  business_payment_path(@business)
                elsif @enrollment.present?
                   business_membership_enrollment_payment_path(@business, @membership, @enrollment)
                else

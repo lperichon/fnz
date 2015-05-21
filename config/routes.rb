@@ -36,6 +36,7 @@ Fnz::Application.routes.draw do
     end
     resources :payment_types
     resources :installments
+    resource :payment, :only => [:new, :create]
     resources :memberships do
       resource :payment, :only => [:new, :create]
       resources :installments do

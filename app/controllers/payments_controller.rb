@@ -10,6 +10,11 @@ class PaymentsController < UserApplicationController
     elsif params[:installment_id]
       @installment = @membership.installments.find(params[:installment_id]) 
     end
+    
+    unless @membership.present?
+      params[:transaction][:description] = "Multiple Installment Payment"
+    end
+
     @enrollment = @membership.enrollment if request.path.include?("enrollment")
     @sale = @business.sales.find(params[:sale_id]) if params[:sale_id]
     @transaction = @business.transactions.new(params[:transaction])
@@ -28,9 +33,14 @@ class PaymentsController < UserApplicationController
       if params[:transaction][:installment_ids]
         default_payment_attributes = {
           :installment_ids => params[:transaction][:installment_ids],
-          :description => "Multiple Installment Payment - #{@membership.contact.name}",
           :type => "Credit"
         } 
+	
+	if @membership.present?
+	  default_payment_attributes[:description] = "Multiple Installment Payment - #{@membership.contact.name}"
+	else
+          default_payment_attributes[:description] = "Multiple Installment Payment"
+	end
       else
 	default_payment_attributes = {
           :installment_ids => [@installment.id],
@@ -67,7 +77,7 @@ class PaymentsController < UserApplicationController
       @redirect_url = business_sale_path(@business, @sale)
     end
 
-    @transaction = @business.transactions.new(params[:transaction].merge(default_payment_attributes))
+    @transaction = @business.transactions.new(params[:transaction].reverse_merge!(default_payment_attributes))
     @transaction.save
   end
 

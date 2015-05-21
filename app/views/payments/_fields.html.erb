@@ -13,6 +13,10 @@
 
 
 <% if @business.transactions_enabled? %>
+  <%= f.input :description unless @membership.present? %>
+  <% if @transaction.installment_ids.count > 1 %>
+    <%= f.input :amount %>
+  <% end %>
   <%= f.input :transaction_at, :as => :date_time_picker %>
   <%= f.input :state, :as => :select, :collection => Transaction.available_states %>
   <%= f.input :report_at, :as => :date_picker %>
