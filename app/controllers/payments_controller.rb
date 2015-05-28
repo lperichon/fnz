@@ -11,7 +11,7 @@ class PaymentsController < UserApplicationController
       @installment = @membership.installments.find(params[:installment_id]) 
     end
     
-    unless @membership.present?
+    if params[:transaction].present? and params[:transaction][:description].present? and @membership.blank?
       params[:transaction][:description] = "Multiple Installment Payment"
     end
 
