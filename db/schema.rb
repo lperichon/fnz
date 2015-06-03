@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150320171118) do
+ActiveRecord::Schema.define(:version => 20150602210011) do
 
   create_table "accounts", :force => true do |t|
     t.string  "name",                                       :default => "",  :null => false
@@ -130,17 +130,19 @@ ActiveRecord::Schema.define(:version => 20150320171118) do
   end
 
   create_table "memberships", :force => true do |t|
-    t.integer "business_id"
-    t.integer "contact_id"
-    t.date    "begins_on"
-    t.date    "ends_on"
-    t.decimal "value",           :precision => 8, :scale => 2, :default => 0.0, :null => false
-    t.date    "closed_on"
-    t.integer "payment_type_id"
-    t.boolean "vip"
-    t.integer "external_id"
-    t.integer "monthly_due_day"
-    t.string  "name"
+    t.integer  "business_id"
+    t.integer  "contact_id"
+    t.date     "begins_on"
+    t.date     "ends_on"
+    t.decimal  "value",           :precision => 8, :scale => 2, :default => 0.0, :null => false
+    t.date     "closed_on"
+    t.integer  "payment_type_id"
+    t.boolean  "vip"
+    t.integer  "external_id"
+    t.integer  "monthly_due_day"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "payment_types", :force => true do |t|

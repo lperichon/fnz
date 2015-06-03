@@ -19,6 +19,7 @@
   <% @contacts.each do |contact| %>
     <tr class="<%=contact.padma_status%>" data-contact-id=<%= contact.id %>>
       <% membership = contact.current_membership %>
+      <% cache ["#{@business.padma_id}-overview-table-contact-#{contact.id}", contact.updated_at.to_i] do %>
   		<% monthly_iterator = [] %>
   		<% (1..5).each do |n| %>
   			<% date = (6-n).months.ago %>
@@ -35,10 +36,11 @@
   		<% end %>
 
   		<% monthly_iterator.each do |monthly_values| %>
-  			<% installment = monthly_values[:installment] %>
-  			<% date = monthly_values[:date] %>
-        <%= render :partial => 'table_cell', :locals => {:contact => contact, :membership => membership, :installment => installment, :date => date} %>
-	    <% end %>
+  		  <% installment = monthly_values[:installment] %>
+  		  <% date = monthly_values[:date] %>
+                  <%= render :partial => 'table_cell', :locals => {:contact => contact, :membership => membership, :installment => installment, :date => date} %>
+                <% end %>
+      <% end %>
     </tr>
   <% end %>
   </tbody>

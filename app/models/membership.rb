@@ -1,6 +1,6 @@
 class Membership < ActiveRecord::Base
   belongs_to :business
-  belongs_to :contact
+  belongs_to :contact, :touch => true
   belongs_to :payment_type
   has_many :installments
   has_one :enrollment

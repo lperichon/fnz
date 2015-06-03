@@ -1,5 +1,5 @@
 class Installment < ActiveRecord::Base
-  belongs_to :membership
+  belongs_to :membership, :touch => true
   belongs_to :agent
   has_many :installment_transactions
   has_many :transactions, :through => :installment_transactions
