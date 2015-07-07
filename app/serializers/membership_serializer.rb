@@ -1,5 +1,5 @@
 class MembershipSerializer < ActiveModel::Serializer
-  attributes :value, :begins_on, :ends_on, :payment_type, :padma_contact_id
+  attributes :value, :begins_on, :ends_on, :payment_type, :padma_contact_id, :name
   has_many :installments
 
   def payment_type
