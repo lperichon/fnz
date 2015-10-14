@@ -79,7 +79,7 @@ es:
         description: Descripción
         source: Cuenta orígen
         state: Estado
-        tag_ids: Etiquetas
+        tag_ids: Categoría
         transaction_at: Fecha
         report_at: Fecha de reporte
         report_at_option: Fecha de reporte
@@ -89,7 +89,7 @@ es:
         type: Tipo
         date: Date
         target: Cuenta destino
-        tags: Etiquetas
+        tags: Categoría
       enrollment:
         agent: Instructor
         enrolled_on: Fecha de matrícula
@@ -873,7 +873,7 @@ es:
       report_at_transaction_date: Fecha de transacción
       report_at_due_date: Fecha de vencimiento
     field:
-      tags_placeholder: Seleccione las etiquetas
+      tags_placeholder: Seleccione la categoría
     new_modal:
       title: Crear Transacción
     edit:
@@ -907,7 +907,7 @@ es:
       manage_imports: Importaciones
       manage_payment_types: Formas de pago
       manage_products: Productos
-      manage_tags: Etiquetas
+      manage_tags: Categorías
       manage_users: Permisos
   agents:
     edit:
@@ -937,3 +937,6 @@ es:
     index:
       title: Compartir con otro usuario
       share: Compartir
+  tags:
+    index:
+      title: Categorías
