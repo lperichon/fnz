@@ -109,8 +109,8 @@ pt-BR:
         reconciled_at: 
         source: Conta de origem
         state: Estado
-        tag_ids: Rótulos
-        tags: Rótulos
+        tag_ids: Categoria
+        tags: Categoria
         target: 
         target_id: 
         transaction_at: Data
@@ -891,7 +891,7 @@ pt-BR:
       report_at_transaction_date: Data de transação
       report_at_due_date: Data de vencimento
     field:
-      tags_placeholder: Por favor, escolha alguns rótulos
+      tags_placeholder: Por favor, escolha uma categoria
     new_modal:
       title: Adicionar transação
   validates_timeliness:
@@ -909,7 +909,7 @@ pt-BR:
       manage_imports: 
       manage_payment_types: Tipos de pagamento
       manage_products: Produtos
-      manage_tags: Rótulos
+      manage_tags: Categorias
       manage_users: Autorizações
   agents:
     edit:
@@ -939,3 +939,6 @@ pt-BR:
     index:
       title: Compartilhar com outro usuário
       share: Compartilhar
+  tags:
+    index:
+      title: Categorias

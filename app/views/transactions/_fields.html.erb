@@ -24,4 +24,4 @@
 
 <%= f.input :report_at, :as => :date_picker %>
 
-<%=  f.input :tag_ids, :as => :select, :collection => @business.tags, :input_html => {:class => "chosen", :multiple => true, 'data-placeholder' => t('transactions.field.tags_placeholder')} %>
+<%=  f.input :tag_ids, :as => :select, :collection => @business.tags, :input_html => {:class => "chosen", 'data-placeholder' => t('transactions.field.tags_placeholder')} %>
