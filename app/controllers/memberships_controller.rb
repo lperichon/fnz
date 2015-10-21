@@ -68,6 +68,10 @@ class MembershipsController < UserApplicationController
   end
 
   def overview
+    per_page = nil
+    if params[:format].try(:to_s) == 'csv'
+      per_page = 9999
+    end
     default_params = {
       :contact_search => {
         :status => "student"
@@ -79,9 +83,11 @@ class MembershipsController < UserApplicationController
       current_user.update_attribute(:overview_mode, params[:overview_mode])
     end
     if current_user.overview_mode == 'table'
-      @contacts = @membership_filter.results.includes(:current_membership).includes(:current_membership => :payment_type).includes(:installments).includes(:installments => :agent).includes(:installments => :membership).page(params[:page]).per(50)
+      per_page ||= 50
+      @contacts = @membership_filter.results.includes(:current_membership).includes(:current_membership => :payment_type).includes(:installments).includes(:installments => :agent).includes(:installments => :membership).page(params[:page]).per(per_page)
     else
-      @contacts = @membership_filter.results.includes(:current_membership).includes(:current_membership => :payment_type).page(params[:page]).per(100)
+      per_page ||= 100
+      @contacts = @membership_filter.results.includes(:current_membership).includes(:current_membership => :payment_type).page(params[:page]).per(per_page)
     end
   end
 
