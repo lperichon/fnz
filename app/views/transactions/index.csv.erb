@@ -1,0 +1,5 @@
+<%- headers = ['Type', 'Status', 'Description', 'Amount', 'Source', 'Target', 'Transaction at', 'Category'] -%>
+<%= CSV.generate_line headers %>
+<%- @transactions.each do |t| -%>
+<%= CSV.generate_line([t.type, t.state, t.description, t.amount, t.source.name, t.target.try(:name), t.transaction_at.to_s(:short), t.tags.join(",")]) -%>
+<%- end -%>

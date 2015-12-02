@@ -13,6 +13,14 @@ class TransactionsController < UserApplicationController
                               ((state.eq 'pending') & (transaction_at.lt start_date)) |
                               ((state.eq 'reconciled') & (reconciled_at.gteq start_date) & (reconciled_at.lteq end_date))}
     @transactions = @context.all
+
+    respond_to do |format|
+      format.html
+      format.csv do
+        headers['Content-Disposition'] = "attachment; filename=\"transactions\""
+        headers['Content-Type'] ||= 'text/csv'
+      end
+    end
   end
 
   def show
