@@ -12,6 +12,7 @@
 <table class="contact-memberships table table-striped table-hover table-condensed table-bordered">
   <thead>
     <td><%= Membership.human_attribute_name(:begins_on) %> - <%= Membership.human_attribute_name(:ends_on) %></td>
+    <td><%= Membership.human_attribute_name(:payment_type) %></td>
     <td><%= Installment.human_attribute_name(:name) %></td>
   	<td><%= Installment.human_attribute_name(:value) %></td>
   	<td></td>
@@ -20,6 +21,7 @@
   <% @contact.memberships.each do |membership| %>
     <tr>
    		<td><%= membership.begins_on %> - <%= membership.closed_on.present? ? membership.closed_on : membership.ends_on %> <%= content_tag(:span, "Current", :class => "label label-primary") if membership == @contact.current_membership %></td>
+   		<td><%= membership.payment_type.name unless membership.payment_type.blank? %></td>
    		<td><%= membership.name unless membership.name.blank? %></td>
    		<td><%= membership.value %></td>
    		<td>
