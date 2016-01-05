@@ -14,7 +14,7 @@ class Tag < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :business_id
 
-  validates_uniqueness_of :name
+  validates_uniqueness_of :name, :scope => :business_id
   validates_length_of :name, :maximum => 255
 
   def to_s
