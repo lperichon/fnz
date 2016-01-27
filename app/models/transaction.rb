@@ -20,6 +20,7 @@ class Transaction < ActiveRecord::Base
   has_and_belongs_to_many :sales
   has_and_belongs_to_many :enrollments
   has_and_belongs_to_many :installments
+  has_and_belongs_to_many :inscriptions
 
   validates :description, :presence => true
   validates :business, :presence => true
@@ -44,6 +45,7 @@ class Transaction < ActiveRecord::Base
     source.update_balance
     target.update_balance if target.present?
     installments.each { |installment| installment.update_balance_and_status } if installments.count > 0
+    inscriptions.each { |inscription| inscription.update_balance } if inscriptions.count > 0
   end
 
   def update_balances_around_destroy

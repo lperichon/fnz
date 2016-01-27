@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150602210011) do
+ActiveRecord::Schema.define(:version => 20160127171433) do
 
   create_table "accounts", :force => true do |t|
     t.string  "name",                                       :default => "",  :null => false
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(:version => 20150602210011) do
     t.boolean  "transactions_enabled"
     t.boolean  "share_enabled"
     t.boolean  "use_calendar_installments", :default => true
+    t.integer  "derose_events_id"
   end
 
   create_table "businesses_users", :force => true do |t|
@@ -100,6 +101,24 @@ ActiveRecord::Schema.define(:version => 20150602210011) do
 
   create_table "imports_transactions", :force => true do |t|
     t.integer "import_id"
+    t.integer "transaction_id"
+  end
+
+  create_table "inscriptions", :force => true do |t|
+    t.integer  "business_id"
+    t.integer  "contact_id"
+    t.decimal  "value",           :precision => 8, :scale => 2, :default => 0.0, :null => false
+    t.decimal  "balance",         :precision => 8, :scale => 2, :default => 0.0, :null => false
+    t.integer  "payment_type_id"
+    t.integer  "external_id"
+    t.string   "observations"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "padma_account"
+  end
+
+  create_table "inscriptions_transactions", :force => true do |t|
+    t.integer "inscription_id"
     t.integer "transaction_id"
   end
 

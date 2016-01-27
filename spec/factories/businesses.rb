@@ -11,4 +11,10 @@ FactoryGirl.define do
     type 'School'
     owner
   end
+
+  factory :event do
+    name 'Test Event'
+    type 'Event'
+    owner
+  end
 end

@@ -1,0 +1,41 @@
+<% content_for :sidebar do %>
+<% end %>
+
+<% content_for :secondary_navigation do %>
+    <%= render :partial => 'secondary_navigation' %>
+<% end %>
+
+<h2><%= Membership.model_name.human %><%= " '#{@membership.name}'" unless @membership.name.blank? %></h2>
+<p><b><%= Membership.human_attribute_name(:contact) %>:</b> <%= @membership.contact.try(:name) %></p>
+<p><b><%= Membership.human_attribute_name(:value) %>:</b> <%= number_to_currency(@membership.value) %></p>
+<p><b><%= Membership.human_attribute_name(:payment_type) %>:</b> <%= @membership.payment_type.try(:name) %></p>
+<p><b><%= Membership.human_attribute_name(:begins_on) %>:</b> <%= @membership.begins_on %></p>
+<p><b><%= Membership.human_attribute_name(:ends_on) %>:</b> <%= @membership.ends_on %></p>
+
+<h3><%= Membership.human_attribute_name(:enrollment) %></h3>
+<% if @membership.enrollment %>
+  <%= render :partial => 'enrollments/enrollment', :locals => {:enrollment => @membership.enrollment} %>
+    <%= link_to t('actions.show'), business_membership_enrollment_path(@business, @membership) %> |
+    <%= link_to t('actions.edit'), edit_business_membership_enrollment_path(@business, @membership) %> |
+    <%= link_to t('actions.delete'), business_membership_enrollment_path(@business, @membership), :confirm => t('actions.confirm_delete'), :method => 'delete' %>
+<% else %>
+<p class="btn-group">
+  <%= link_to t('memberships.show.create_enrollment'), new_business_membership_enrollment_path(@business, @membership), :class => "btn btn-sm btn-default" %>
+</p>
+<% end %>
+
+<h3><%= Membership.human_attribute_name('installments') %></h3>
+<p>
+  <%= link_to t('memberships.show.new_installment'),
+              new_business_membership_installment_path(@business,
+                                                       @membership,
+                                                       installment: {
+                                                         value: @membership.value
+                                                       }),
+              :class => "btn btn-sm btn-default" %>
+  <%= link_to t('actions.mark_as_paid'), new_business_membership_payment_path(@business, @membership), :class => "btn btn-sm btn-default", :id => "multiple_mark_as_paid", :disabled => true %>
+</p>
+<%= render :partial => 'installments/installments', :locals => {:installments => @membership.installments, :include_form => true} %>
+
+<%= link_to t('actions.edit'), edit_business_membership_path(@business, @membership) %> |
+<%= link_to t('actions.back'),:back %>

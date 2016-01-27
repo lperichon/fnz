@@ -1,0 +1,37 @@
+<%= simple_form_for @membership_filter,
+                    :url => overview_business_memberships_url(@business),
+                    :method => :get,
+                    :html => {:class => "membership-filter form-horizonal form-inline"}  do |f| %>
+  <%= f.input :name %>
+  <%= f.input :status,
+                    as: :select,
+                    :include_blank => false,
+                    collection: [["Student", :student],["Former Student", :former_student]]
+  %>
+  <%= f.input :teacher,
+                    as: :select,
+                    :include_blank => t('.all'),
+                    collection: @business.agents.collect(&:padma_id)
+  %>
+  <%= f.input :membership_payment_type_id,
+                    as: :select,
+                    :include_blank => t('.all'),
+                    collection: @business.payment_types
+  %>
+  <%= f.input :membership_status,
+                    as: :select,
+                    :include_blank => t('.all'),
+                    collection: [["Due", :due], ["Overdue", :overdue]]
+  %>
+  <div class="form-actions">
+    <%= link_to t('.download'), 
+                url_for( params.merge({:format => 'csv'}) ),
+                :class => "btn btn-primary pull-left" %>
+    <%= f.button :submit,
+                 :value => t('.filter'),
+                 :class => "btn btn-primary" %>
+    <%= link_to t('.clear_filter'), 
+                overview_business_memberships_url(@business),
+                :class => "btn btn-danger" %>
+  </div>
+<% end %>

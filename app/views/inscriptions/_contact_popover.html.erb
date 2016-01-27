@@ -1,0 +1,13 @@
+<% if contact.padma_status == "student" && membership %>
+  <h4><%= Contact.human_attribute_name(:current_membership) %></h4>
+  <p><%= Membership.human_attribute_name(:name) %>: <%= membership.name %></p>
+  <p><%= Membership.human_attribute_name(:payment_type) %>: <%= memberships_payment_type_name(membership) %></p>
+  <p><%= Membership.human_attribute_name(:ends_on) %>: <%= l(membership.ends_on, :format => "%B %Y") %></p>
+  <% if membership.overdue? %>
+  <p><%= table_contact_membership_link(contact, membership) %></p>
+  <% else %>
+  <p><%= link_to t('actions.edit'), edit_business_membership_path(@business, membership) %></p>
+  <% end %>
+<% else %>
+	<p><%= table_contact_membership_link(contact, membership) %></p>
+<% end %>

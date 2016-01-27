@@ -1,0 +1,9 @@
+<%= simple_form_for(@search,
+                    :url => business_inscriptions_path(@business),
+                    :method => :get,
+                    :html => {:class => "form-vertical"}) do |f| %>
+  <div>
+    <% payment_type_options = @business.payment_types.collect {|a| [a.name, a.id]} + [["All", "all"]] %>
+    <%= f.input :payment_type_id, :as => :select, :collection => payment_type_options, :input_html => {:class => "chosen", :multiple => true} %>
+  </div>
+<% end %>

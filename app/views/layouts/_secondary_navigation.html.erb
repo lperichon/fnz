@@ -27,6 +27,8 @@
                     business_installments_path(@business, :installment_search => {:status => [:incomplete, :due, :pending, :overdue], :due_after => Date.today.beginning_of_month, :due_before => Date.today.end_of_month, :agent_id => [:all]}) %></li>
         </ul>
       </li>
+  <% elsif @business.is_a? Event %>
+     <li class="<%= 'active' if inscriptions_link_active?  %>"><%= link_to t('layouts.secondary_navigation.manage_inscriptions'), business_inscriptions_path(@business) %></li>
   <% end %>
   <%= yield(:secondary_navigation) %>
 </ul>

@@ -1,0 +1,8 @@
+<% content_for :sidebar do %>
+<% end %>
+
+<h2>New Inscription</h2>
+
+<%= render :partial => 'form', :locals => {:form_url => business_inscriptions_url(@business)} %>
+
+<%= link_to 'Back', :back %>
