@@ -54,6 +54,8 @@ Fnz::Application.routes.draw do
       get :errors, :on => :member
     end
     resources :users
+    resources :closures
+    resource :closure
   end
   resources :debits, :controller => 'transactions', :except => [:index]
   resources :credits, :controller => 'transactions', :except => [:index]

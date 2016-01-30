@@ -63,6 +63,12 @@ class InscriptionsController < UserApplicationController
     end
   end
 
+  def stats
+    @credits = @business.transactions.credits
+    @debits = @business.transactions.debits
+    @inscriptions_by_padma_account = @context.group_by(:padma_account)
+  end
+
   private
 
   def get_context

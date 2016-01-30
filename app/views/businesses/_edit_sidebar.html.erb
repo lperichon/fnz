@@ -1,8 +1,9 @@
 <ul class="nav nav-pills nav-stacked" id="edit-sidebar">
-  <% if @business.is_a? School %>
+  <% if @business.is_a?(School) || @business.is_a?(Event) %>
   <li class="<%= 'active' if controller.controller_name == "agents" %>"><%= link_to content_tag(:i, "", :class => "icon-sitemap") + t('businesses.edit_sidebar.manage_agents'), business_agents_path(@business) %></li>
-  <li class="<%= 'active' if controller.controller_name == "products" %>"><%= link_to content_tag(:i, "", :class => "icon-shopping-cart") + t('businesses.edit_sidebar.manage_products'), business_products_path(@business) %></li>
   <li class="<%= 'active' if controller.controller_name == "payment_types" %>"><%= link_to content_tag(:i, "", :class => "icon-money") + t('businesses.edit_sidebar.manage_payment_types'), business_payment_types_path(@business) %></li>
+  <% elsif @business.is_a? School %>
+    <li class="<%= 'active' if controller.controller_name == "products" %>"><%= link_to content_tag(:i, "", :class => "icon-shopping-cart") + t('businesses.edit_sidebar.manage_products'), business_products_path(@business) %></li>
   <% end %>
   <% if @business.transactions_enabled? %>
   <li class="<%= 'active' if controller.controller_name == "tags" %>"><%= link_to content_tag(:i, "", :class => "icon-tags") + t('businesses.edit_sidebar.manage_tags'), business_tags_path(@business) %></li>

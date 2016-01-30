@@ -36,6 +36,7 @@ class Transaction < ActiveRecord::Base
   scope :untagged, includes(:taggings).where("taggings.tag_id is null")
 
   scope :credits, where(:type => "Credit")
+  scope :debits, where(:type => "Debit")
 
   def set_report_at
     self.report_at = self.transaction_at unless self.report_at.present?

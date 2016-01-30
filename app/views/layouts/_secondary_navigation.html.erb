@@ -29,6 +29,7 @@
       </li>
   <% elsif @business.is_a? Event %>
      <li class="<%= 'active' if inscriptions_link_active?  %>"><%= link_to t('layouts.secondary_navigation.manage_inscriptions'), business_inscriptions_path(@business) %></li>
+     <li class="<%= 'active' if closures_link_active?  %>"><%= link_to t('layouts.secondary_navigation.manage_event_closure'), :controller => :closures, :action => :show, :business_id => @business.id %></li>
   <% end %>
   <%= yield(:secondary_navigation) %>
 </ul>

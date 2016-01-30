@@ -1,0 +1,173 @@
+<% content_for :secondary_navigation do %>
+<% end %>
+
+<% content_for :sidebar do %>
+<% end %>
+
+<% content_for :top do %>
+<% end %>
+<h2>Inscriptions</h2>
+<table id="inscriptions" class="table table-striped table-bordered">
+  <tr>
+    <th><%= t('closures.show.inscriptions.padma_account') %></th>
+    <th><%= t('closures.show.inscriptions.value') %></th>
+  </tr>
+  <% inscriptions_per_padma_account = @closure.inscriptions_per_padma_account %>
+  <% inscriptions_per_padma_account.each do |item| %>
+    <tr>
+      <td><%= item['padma_account'] %></td>
+      <td><%= number_to_currency(item['sum_value'].to_f) %></td>
+    </tr>
+  <% end -%>
+  <tr>
+    <th>Total</th>
+    <% sum_inscriptions = inscriptions_per_padma_account.sum {|item| item['sum_value'].to_f} %>
+    <th><%= number_to_currency(sum_inscriptions) %></th>
+  </tr>
+</table>
+
+<h2>Other credits</h2>
+<table id="other_credits" class="table table-striped table-bordered">
+  <tr>
+    <th><%= t('closures.show.other_credits.category') %></th>
+    <th><%= t('closures.show.other_credits.amount') %></th>
+  </tr>
+  <% other_credits_per_category = @closure.other_credits_per_category %>
+  <% other_credits_per_category.each do |category, amount| %>
+    <tr>
+      <td><%= category %></td>
+      <td><%= number_to_currency(amount) %></td>
+    </tr>
+  <% end -%>
+  <tr>
+    <th>Total</th>
+    <% sum_other_credits = other_credits_per_category.sum {|cat, amount| amount} %>
+    <th><%= number_to_currency(sum_other_credits) %></th>
+  </tr>
+</table>
+
+<h2>Debits</h2>
+<table id="debits" class="table table-striped table-bordered">
+  <tr>
+    <th><%= t('closures.show.debits.category') %></th>
+    <th><%= t('closures.show.debits.amount') %></th>
+  </tr>
+  <% debits_per_category = @closure.debits_per_category %>
+  <% debits_per_category.each do |category, amount| %>
+    <tr>
+      <td><%= category %></td>
+      <td><%= number_to_currency(amount) %></td>
+    </tr>
+  <% end -%>
+  <tr>
+    <th>Total</th>
+    <% sum_debits = debits_per_category.sum {|cat, amount| amount} %>
+    <th><%= number_to_currency(sum_debits) %></th>
+  </tr>
+</table>
+<h2>Commissions</h2>
+<table id="commissions" class="table table-striped table-bordered">
+  <tr>
+    <th><%= t('closures.show.profit.school') %></th>
+    <th><%= t('closures.show.profit.commission') %></th>
+    <th><%= t('closures.show.profit.amount') %></th>
+    <th><%= t('closures.show.profit.missing_payment') %></th>
+  </tr>
+  <% commissions_per_padma_account = @closure.commissions_per_padma_account %>
+  <% commissions_per_padma_account.each do |item| %>
+    <tr>
+      <td><%= item['padma_account'] %></td>
+      <td><%= number_to_percentage(10, precision: 0) %></th>
+      <% school_commission = item['commission'].to_f %>
+      <td><%= number_to_currency(school_commission) %></td>
+      <td><%= number_to_currency(item['sum_value'].to_f-item['sum_balance'].to_f) %></td>
+    </tr>
+  <% end -%>
+  <tr>
+    <th colspan='2'>Total</th>
+    <% sum_commissions = commissions_per_padma_account.sum {|item| item['commission'].to_f} %>
+    <th><%= number_to_currency(sum_commissions) %></th>
+    <th></th>
+  </tr>
+</table>
+
+<h2>Profit</h2>
+<table id="profit" class="table table-striped table-bordered">
+  <tr>
+    <th><%= t('closures.show.profit.category') %></th>
+    <th><%= t('closures.show.profit.amount') %></th>
+  </tr>
+  <tr>
+    <td><%= t('closures.show.profit.inscriptions') %></td>
+    <td><%= number_to_currency(sum_inscriptions) %></td>
+  </tr>
+  <tr>
+    <td><%= t('closures.show.profit.other_credits') %></td>
+    <td><%= number_to_currency(sum_other_credits) %></td>
+  </tr>
+  <tr>
+    <th><%= t('closures.show.profit.subtotal_credits') %></td>
+    <% subtotal_credits = sum_inscriptions+sum_other_credits %>
+    <th><%= number_to_currency(subtotal_credits) %></td>
+  </tr>
+  <tr>
+    <td><%= t('closures.show.profit.debits') %></td>
+    <td><%= number_to_currency(sum_debits) %></td>
+  </tr>
+  <tr>
+    <td><%= t('closures.show.profit.office') %></td>
+    <% office = 0.1*subtotal_credits %>
+    <td><%= number_to_currency(office) %></td>
+  </tr>
+  <tr>
+    <td><%= t('closures.show.profit.commissions') %></td>
+    <td><%= number_to_currency(sum_commissions) %></td>
+  </tr>
+  <tr>
+    <th><%= t('closures.show.profit.subtotal_debits') %></th>
+    <% subtotal_debits = sum_debits+office+sum_commissions %>
+    <th><%= number_to_currency(sum_commissions) %></th>
+  </tr>
+  <tr>
+    <th><%= t('closures.show.profit.net_profit') %></th>
+    <% net_profit = subtotal_credits-subtotal_debits %>
+    <th><%= number_to_currency(net_profit) %></th>
+  </tr>
+  <tr>
+    <td><%= t('closures.show.profit.organizer_share') %></td>
+    <% organizer_share = 0.1*net_profit %>
+    <td><%= number_to_currency(organizer_share) %></td>
+  </tr>  
+  <tr>
+    <th><%= t('closures.show.profit.total_profit') %></th>
+    <% total_profit = net_profit-organizer_share %>
+    <th><%= number_to_currency(total_profit) %></th>
+  </tr>
+  <tr>
+    <th><%= t('closures.show.profit.lecturer_profit') %></th>
+    <th><%= number_to_currency(total_profit/2) %></th>
+  </tr>
+  <tr>
+    <th><%= t('closures.show.profit.associated_schools_profit') %></th>
+    <th><%= number_to_currency(total_profit/2) %></th>
+  </tr>
+</table>
+
+<table id="profit" class="table table-striped table-bordered">
+  <tr>
+    <th><%= t('closures.show.profit.school') %></th>
+    <th><%= t('closures.show.profit.school_share') %></th>
+    <th><%= t('closures.show.profit.amount') %></th>
+    <th><%= t('closures.show.profit.missing_payment') %></th>
+  </tr>
+  <% inscriptions_per_padma_account.each do |item| %>
+    <tr>
+      <td><%= item['padma_account'] %></td>
+      <% school_share = item['sum_value'].to_f / sum_inscriptions %>
+      <td><%= number_to_percentage(school_share*100, precision: 2) %></th>
+      <% school_earnings = school_share*total_profit/2 %>
+      <td><%= number_to_currency(school_earnings) %></td>
+      <td><%= number_to_currency(item['sum_value'].to_f-item['sum_balance'].to_f) %></td>
+    </tr>
+  <% end -%>
+</table>
