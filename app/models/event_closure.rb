@@ -25,6 +25,10 @@ class EventClosure
       .group(:padma_account).pluck_all("padma_account, SUM(value) as sum_value, SUM(balance) as sum_balance, SUM(value)*0.1 as commission")
   end
 
+  def inscriptions_per_associate
+    business.inscriptions.where(:padma_account => business.agents.collect(&:padma_id)).group(:padma_account).pluck_all("padma_account, SUM(value) as sum_value, SUM(balance) as sum_balance")
+  end
+
   #has_many closure_participants
   #lecturer_minimum_cachet
   #organizer_rate

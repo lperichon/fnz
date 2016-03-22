@@ -17,6 +17,7 @@ es:
     edit: Editar
     close: Cerrar
     delete: Eliminar
+    update: Actualizar
   activemodel:
     attributes:
       membership_search:
@@ -30,8 +31,18 @@ es:
         name: Nombre
         status: Estado
         contact_teacher: Instructor
+      inscription_search:
+        payment_type_id: Forma de pago
   activerecord:
     attributes:
+      inscription:
+        contact: Contacto
+        padma_account: Escuela
+        payment_type: Forma de pago
+        observations: Observaciones
+        value: Valor
+        balance: Balance
+        transactions: Transacciones
       account:
         business: Negocio
         currency: Moneda
@@ -195,6 +206,7 @@ es:
       product: Producto
       user: Usuario
       contact: Contacto
+      inscription: Inscripción
   date:
     abbr_day_names:
     - dom
@@ -434,6 +446,8 @@ es:
       manage_sales: Ventas
       manage_transactions: Transacciones
       reports: Reportes
+      manage_inscriptions: Inscripciones
+      manage_event_closure: Reporte de cierre
   memberships:
     membership_filter:
       filter: Filtrar
@@ -863,6 +877,17 @@ es:
       actions:
         add_transaction: Crear transacción
         select_transactions: Seleccionar transacciones
+  inscriptions:
+    secondary_navigation:
+      new_inscription: Nueva inscripción
+    search_form:
+      all_payment_types: Todas
+      select_payment_types: Seleccioná una forma de pago
+    index:
+      title: Inscripciones
+      total: Total
+    edit:
+      title: Editar inscripción
   payments:
     new_modal:
       title: Registrar pago
@@ -940,3 +965,25 @@ es:
   tags:
     index:
       title: Categorías
+  closures:
+    event_closure:
+      inscriptions: Inscripciones
+      padma_account: Escuela
+      total: Total
+      other_credits: Otras ingresos
+      category: Categoría
+      debits: Gastos
+      commissions: Comisiones
+      commision: Comisión
+      missing_payment: Falta pagar
+      closure: Cierre
+      subtotal_credits: Subtotal Ingresos
+      subtotal_debits: Subtotal Gastos
+      office: Office (10%)
+      profit: Ganancia
+      organizer_share: Organización (10%)
+      net_profit: Ganancia Neta
+      lecturer_profit: Disertante
+      associated_schools_profit: Escuelas
+      school_share: Participación
+      amount: Monto

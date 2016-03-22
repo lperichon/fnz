@@ -1,6 +1,8 @@
 class ClosuresController < UserApplicationController
   before_filter :get_business
 
+  layout 'application_without_sidebar'
+
   def index
     case @business.type
     when School

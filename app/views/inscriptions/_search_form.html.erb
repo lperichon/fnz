@@ -3,7 +3,7 @@
                     :method => :get,
                     :html => {:class => "form-vertical"}) do |f| %>
   <div>
-    <% payment_type_options = @business.payment_types.collect {|a| [a.name, a.id]} + [["All", "all"]] %>
-    <%= f.input :payment_type_id, :as => :select, :collection => payment_type_options, :input_html => {:class => "chosen", :multiple => true} %>
+    <% payment_type_options = @business.payment_types.collect {|a| [a.name, a.id]} + [[t('inscriptions.search_form.all_payment_types'), "all"]] %>
+    <%= f.input :payment_type_id, :as => :select, :collection => payment_type_options, :input_html => {:class => "chosen", :multiple => true, 'data-placeholder' => t('inscriptions.search_form.select_payment_types')} %>
   </div>
 <% end %>

@@ -11,7 +11,7 @@ class Inscription < ActiveRecord::Base
   validates :contact, :presence => true
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :contact_id, :business_id, :payment_type_id, :value, :external_id, :transactions_attributes, :inscription_transactions_attributes, :observations, :balance
+  attr_accessible :contact_id, :business_id, :payment_type_id, :value, :external_id, :transactions_attributes, :inscription_transactions_attributes, :observations, :balance, :padma_account
  
   include BelongsToPadmaContact
 

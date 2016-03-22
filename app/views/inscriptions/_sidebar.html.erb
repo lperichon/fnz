@@ -1,9 +1,0 @@
-<% if @business.present? && @business.persisted? %>
-<ul class="nav nav-pills nav-stacked">
-  <li>
-  </li>
-  <% @contacts.each do |contact| %>
-    <%= contact.name %>
-  <% end %>
-</ul>
-<% end %>

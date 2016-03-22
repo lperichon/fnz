@@ -14,6 +14,8 @@
         <%= f.input :external_id, :as => :derose_events_contact %>
     <% end %>
 
+    <%= f.input :padma_account %>
+
     <%= f.association :payment_type,
                       as: :select,
                       collection: @business.payment_types,
@@ -27,6 +29,11 @@
     <%= f.input :value %>
     
     <%= f.input :observations, :as => :text, :input_html => {:rows => 3} %>
+
+    <% if @business.transactions_enabled? %>
+    <h3><%= Inscription.human_attribute_name(:transactions) %></h3>
+    <%= render :partial => 'nested_transactions_table', :locals => {:f => f, :transactions => @business.transactions.all} %>
+    <% end %>
 
     <%= f.button :submit, :class => "btn btn-primary" %>
 <% end %>

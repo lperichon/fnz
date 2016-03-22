@@ -39,3 +39,90 @@ $(document).ready ->
 
   $("#update-filter").click ->
     $("#new_inscription_search").submit()
+
+  inscriptionsChart = new (Highcharts.Chart)(
+    chart:
+      height: 350
+      width: 350
+      renderTo: 'inscriptions_chart'
+      plotBackgroundColor: null
+      plotBorderWidth: null
+      plotShadow: false
+    title: text: ''
+    tooltip:
+      pointFormat: '<b>{point.y}</b>'
+      valueDecimals: 2
+      valuePrefix: '$'
+    plotOptions: pie:
+      allowPointSelect: true
+      cursor: 'pointer'
+      dataLabels:
+        enabled: true
+        color: '#000000'
+        connectorColor: '#000000'
+        formatter: ->
+          '<b>' + @point.name + '</b>: $' + @y
+      showInLegend: false
+    series: [ {
+      type: 'pie'
+      name: 'Inscriptions'
+      data: $('#inscriptions_chart').data('data')
+    } ])
+
+  creditsChart = new (Highcharts.Chart)(
+    chart:
+      height: 350
+      width: 350
+      renderTo: 'credits_chart'
+      plotBackgroundColor: null
+      plotBorderWidth: null
+      plotShadow: false
+    title: text: ''
+    tooltip:
+      pointFormat: '<b>{point.y}</b>'
+      valueDecimals: 2
+      valuePrefix: '$'
+    plotOptions: pie:
+      allowPointSelect: true
+      cursor: 'pointer'
+      dataLabels:
+        enabled: true
+        color: '#000000'
+        connectorColor: '#000000'
+        formatter: ->
+          '<b>' + @point.name + '</b>: $' + @y
+      showInLegend: false
+    series: [ {
+      type: 'pie'
+      name: 'Credits'
+      data: $('#credits_chart').data('data')
+    } ])
+
+  debitsChart = new (Highcharts.Chart)(
+    chart:
+      height: 350
+      width: 350
+      renderTo: 'debits_chart'
+      plotBackgroundColor: null
+      plotBorderWidth: null
+      plotShadow: false
+    title: text: ''
+    tooltip:
+      pointFormat: '<b>{point.y}</b>'
+      valueDecimals: 2
+      valuePrefix: '$'
+    plotOptions: pie:
+      allowPointSelect: true
+      cursor: 'pointer'
+      dataLabels:
+        enabled: true
+        color: '#000000'
+        connectorColor: '#000000'
+        formatter: ->
+          '<b>' + @point.name + '</b>: $' + @y
+      showInLegend: false
+    series: [ {
+      type: 'pie'
+      name: 'Debits'
+      data: $('#debits_chart').data('data')
+    } ])

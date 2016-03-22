@@ -45,7 +45,7 @@ class InscriptionsController < UserApplicationController
 
     respond_to do |format|
       if @inscription.update_attributes(params[:inscription])
-        format.html { redirect_to business_inscription_path(@business, @inscription), notice: 'Inscription was successfully updated.' }
+        format.html { redirect_to edit_business_inscription_path(@business, @inscription), notice: 'Inscription was successfully updated.' }
       else
         format.html { render action: "edit" }
       end
