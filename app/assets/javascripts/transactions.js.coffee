@@ -33,6 +33,7 @@ $(document).ready ->
     $(".nested.transactions.table").append(tr)
 
   $("#transaction_search_daterange").daterangepicker
+    opens: "left",
     ranges:
       "Today": [
         moment()
