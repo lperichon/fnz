@@ -888,6 +888,8 @@ es:
       total: Total
     edit:
       title: Editar inscripción
+    create:
+      success: Inscripción creada exitosamente
   payments:
     new_modal:
       title: Registrar pago
@@ -970,7 +972,7 @@ es:
       inscriptions: Inscripciones
       padma_account: Escuela
       total: Total
-      other_credits: Otras ingresos
+      other_credits: Otros ingresos
       category: Categoría
       debits: Gastos
       commissions: Comisiones
