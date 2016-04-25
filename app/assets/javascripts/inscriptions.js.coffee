@@ -44,7 +44,7 @@ $(document).ready ->
     inscriptionsChart = new (Highcharts.Chart)(
       chart:
         height: 350
-        width: 350
+        width: 650
         renderTo: 'inscriptions_chart'
         plotBackgroundColor: null
         plotBorderWidth: null
@@ -74,7 +74,7 @@ $(document).ready ->
     creditsChart = new (Highcharts.Chart)(
       chart:
         height: 350
-        width: 350
+        width: 650
         renderTo: 'credits_chart'
         plotBackgroundColor: null
         plotBorderWidth: null
@@ -104,7 +104,7 @@ $(document).ready ->
     debitsChart = new (Highcharts.Chart)(
       chart:
         height: 350
-        width: 350
+        width: 650
         renderTo: 'debits_chart'
         plotBackgroundColor: null
         plotBorderWidth: null
