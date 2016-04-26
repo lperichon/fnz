@@ -6,4 +6,8 @@
     <% payment_type_options = @business.payment_types.collect {|a| [a.name, a.id]} + [[t('inscriptions.search_form.all_payment_types'), "all"]] %>
     <%= f.input :payment_type_id, :as => :select, :collection => payment_type_options, :input_html => {:class => "chosen", :multiple => true, 'data-placeholder' => t('inscriptions.search_form.select_payment_types')} %>
   </div>
+  <div>
+    <% agent_options = @business.inscriptions.collect {|p| [p.padma_account, p.padma_account]} + [[t('inscriptions.search_form.all_padma_accounts'), "all"]] %>
+    <%= f.input :agent_padma_id, :as => :select, :collection => agent_options, :input_html => {:class => "chosen", :multiple => true, 'data-placeholder' => t('inscriptions.search_form.select_padma_accounts')} %>
+  </div>
 <% end %>

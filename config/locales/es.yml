@@ -33,6 +33,7 @@ es:
         contact_teacher: Instructor
       inscription_search:
         payment_type_id: Forma de pago
+        agent_padma_id: Escuela
   activerecord:
     attributes:
       inscription:
@@ -881,6 +882,8 @@ es:
     secondary_navigation:
       new_inscription: Nueva inscripción
     search_form:
+      all_padma_accounts: Todas
+      select_padma_accounts: Seleccioná una escuela
       all_payment_types: Todas
       select_payment_types: Seleccioná una forma de pago
     index:

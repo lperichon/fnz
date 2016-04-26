@@ -37,6 +37,15 @@ $(document).ready ->
     $('#update-filter').show()
 
 
+  $("#inscription_search_agent_padma_id").chosen
+    allow_single_deselect: true
+
+  $("#inscription_search_agent_padma_id").change ->
+    $(this).addClass('btn-primary')
+    $('#update-filter').addClass('btn-success')
+    $('#update-filter').show()
+
+
   $("#update-filter").click ->
     $("#new_inscription_search").submit()
 
