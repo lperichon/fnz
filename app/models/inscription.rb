@@ -25,4 +25,8 @@ class Inscription < ActiveRecord::Base
   def calculate_balance
     transactions.where(:state => ['created', 'reconciled']).inject(0) {|balance, transaction| balance+transaction.sign(self)*transaction.amount}
   end
+
+  def balance
+    self[:balance] > value ? value : self[:balance]
+  end
 end

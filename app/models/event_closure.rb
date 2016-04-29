@@ -6,7 +6,7 @@ class EventClosure
   end
 
   def inscriptions_per_padma_account
-    business.inscriptions.group(:padma_account).pluck_all("padma_account, SUM(value) as sum_value, SUM(balance) as sum_balance")
+    business.inscriptions.group(:padma_account).pluck_all("padma_account, SUM(value) as sum_value")
   end
 
   def other_credits_per_category
@@ -22,11 +22,11 @@ class EventClosure
   def commissions_per_padma_account
      business.inscriptions
       .where("padma_account NOT IN( ? )", business.agents.blank? ? '' : business.agents.collect(&:padma_id))
-      .group(:padma_account).pluck_all("padma_account, SUM(value) as sum_value, SUM(balance) as sum_balance, SUM(value)*0.1 as commission")
+      .group(:padma_account).pluck_all("padma_account, SUM(value)*0.1 as commission")
   end
 
   def inscriptions_per_associate
-    business.inscriptions.where(:padma_account => business.agents.collect(&:padma_id)).group(:padma_account).pluck_all("padma_account, SUM(value) as sum_value, SUM(balance) as sum_balance")
+    business.inscriptions.where(:padma_account => business.agents.collect(&:padma_id)).group(:padma_account).pluck_all("padma_account, SUM(value) as sum_value")
   end
 
   #has_many closure_participants

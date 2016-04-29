@@ -90,7 +90,6 @@ Cargando...
     <th><%= t('.padma_account') %></th>
     <th><%= t('.commision') %></th>
     <th><%= t('.amount') %></th>
-    <th><%= t('.missing_payment') %></th>
   </tr>
   <% commissions_per_padma_account = @closure.commissions_per_padma_account %>
   <% commissions_per_padma_account.each do |item| %>
@@ -99,7 +98,6 @@ Cargando...
       <td><%= number_to_percentage(10, precision: 0) %></th>
       <% school_commission = item['commission'].to_f %>
       <td><%= number_to_currency(school_commission) %></td>
-      <td><%= number_to_currency(item['sum_value'].to_f-item['sum_balance'].to_f) %></td>
     </tr>
   <% end -%>
   <tr>
@@ -183,7 +181,6 @@ Cargando...
     <th><%= t('.padma_account') %></th>
     <th><%= t('.school_share') %></th>
     <th><%= t('.amount') %></th>
-    <th><%= t('.missing_payment') %></th>
   </tr>
   <% inscriptions_per_associate = @closure.inscriptions_per_associate %>
   <% sum_associate_inscriptions = inscriptions_per_associate.sum {|item| item['sum_value'].to_f} %>
@@ -194,7 +191,6 @@ Cargando...
       <td><%= number_to_percentage(school_share*100, precision: 2) %></th>
       <% school_earnings = school_share*total_profit/2 %>
       <td><%= number_to_currency(school_earnings) %></td>
-      <td><%= number_to_currency(item['sum_value'].to_f-item['sum_balance'].to_f) %></td>
     </tr>
   <% end -%>
 </table>
