@@ -1,7 +1,7 @@
 <% content_for :sidebar do %>
 <% end %>
 
-<h2>New Inscription</h2>
+<h2><%= I18n.t('inscriptions.new.title') %></h2>
 
 <%= render :partial => 'form', :locals => {:form_url => business_inscriptions_url(@business)} %>
 

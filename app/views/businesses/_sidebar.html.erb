@@ -1,7 +1,7 @@
 <% if @business.present? && @business.persisted? %>
-<p>Accounts
+<p><%= I18n.t('businesses.sidebar.title') %>
 <% if can? :manage, @business.accounts.build %>
-(<%= link_to 'manage', business_accounts_path(@business) %>)
+(<%= link_to t('businesses.sidebar.manage'), business_accounts_path(@business) %>)
 <% end %>
 :
 <ul class="nav nav-pills nav-stacked">

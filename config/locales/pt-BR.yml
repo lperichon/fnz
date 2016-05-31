@@ -30,6 +30,9 @@ pt-BR:
         name: Nome
         status: Estado
         teacher: Instrutor
+      inscription_search:
+        payment_type_id: Forma de pagamento
+        agent_padma_id: Escola
   activerecord:
     attributes:
       account:
@@ -56,6 +59,14 @@ pt-BR:
         status: Estado
         transactions: Transações
         value: Valor
+      inscription:
+        contact: Contato
+        padma_account: Escola
+        payment_type: Forma de pagamento
+        observations: Observações
+        value: Valor
+        balance: Balance
+        transactions: Transações
       installment:
         contact: Contato
         agent: Instrutor
@@ -189,6 +200,7 @@ pt-BR:
       product: Produto
       user: Usuário
       contact: Contato
+      inscription: Inscrição
   application:
     list_transactions_modal:
       close: Fechar
@@ -466,6 +478,25 @@ pt-BR:
       manage_sales: Vendas
       manage_transactions: Transações
       reports: Reportes
+      manage_inscriptions: Inscrições
+      manage_event_closure: Reporte de fechamento
+  inscriptions:
+    secondary_navigation:
+      new_inscription: Nova inscrição
+    search_form:
+      all_padma_accounts: Todas
+      select_padma_accounts: Escolher uma escola
+      all_payment_types: Todas
+      select_payment_types: Escolher uma forma de pagamento
+    index:
+      title: Inscrições
+      total: Total
+    edit:
+      title: Editar inscrição
+    create:
+      success: Inscrição criada com sucesso
+    new:
+      title: Nova Inscrição
   memberships:
     membership_filter:
       filter: Filtrar
@@ -883,6 +914,12 @@ pt-BR:
       short: ! '%d/%m, %H:%M h'
     pm: ''
   transactions:
+    index:
+      import: Importação
+      stats: Estatística
+      title: Transações
+    secondary_navigation:
+      add_transaction: Nova transação
     edit:
       title: 
     fields:
@@ -900,6 +937,9 @@ pt-BR:
       datetime: ! '%Y-%m-%d %H:%M:%S'
       time: ! '%H:%M:%S'
   businesses:
+    sidebar:
+      title: Contas
+      manage: editar
     edit:
       title: Editar
     edit_sidebar:
@@ -942,3 +982,25 @@ pt-BR:
   tags:
     index:
       title: Categorias
+  closures:
+    event_closure:
+      inscriptions: Inscrições
+      padma_account: Escola
+      total: Total
+      other_credits: Outras entradas
+      category: Categoria
+      debits: Despesas
+      commissions: Comissões
+      commision: Comissão
+      missing_payment: Falta pagar
+      closure: Fechamento
+      subtotal_credits: Subtotal
+      subtotal_debits: Subtotal
+      office: Office (10%)
+      profit: Lucro
+      organizer_share: Organização (10%)
+      net_profit: Lucro
+      lecturer_profit: Disertante
+      associated_schools_profit: Escolas
+      school_share: Participação
+      amount: Quantidade

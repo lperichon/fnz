@@ -893,10 +893,14 @@ es:
       title: Editar inscripción
     create:
       success: Inscripción creada exitosamente
+    new:
+      title: Nueva inscripción
   payments:
     new_modal:
       title: Registrar pago
   transactions:
+    secondary_navigation:
+      add_transaction: Nueva transacción
     fields:
       source_prompt: Seleccione una cuenta
       target_prompt: Seleccione una cuenta
@@ -908,6 +912,10 @@ es:
       title: Crear Transacción
     edit:
       title: 
+    index:
+      import: Importar CSV
+      stats: Estadísticas
+      title: Transacciones
   sales:
     index:
       view_month_stats: Ver las estadísticas de %{month}
@@ -928,6 +936,9 @@ es:
       all_sales_tooltip: "Ventas de este mes"
       paid_sales_tooltip: "Ventas pagadas este mes"
   businesses:
+    sidebar:
+      title: Cuentas
+      manage: configurar
     edit:
       title: Editar
     edit_sidebar:
