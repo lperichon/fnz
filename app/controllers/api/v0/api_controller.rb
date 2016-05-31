@@ -2,7 +2,7 @@ require 'typhoeus_fix/array_decoder'
 
 class Api::V0::ApiController < ActionController::Base
 
-  protect_from_forgery
+  protect_from_forgery with: :null_session
 
   include TyphoeusFix
   before_filter :decode_typhoeus_arrays
