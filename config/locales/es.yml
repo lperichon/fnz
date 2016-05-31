@@ -943,7 +943,10 @@ es:
       title: Editar
     edit_sidebar:
       manage_accounts: Cuentas
-      manage_agents: Instructores
+      school:
+        manage_agents: Instructores
+      event:
+        manage_agents: Escuelas
       manage_contacts: Contactos
       manage_imports: Importaciones
       manage_payment_types: Formas de pago
@@ -952,11 +955,25 @@ es:
       manage_users: Permisos
   agents:
     edit:
-      title: Editar instructor
+      school:
+        title: Editar instructor
+      event:
+        title: Editar escuela
     index:
-      new_agent: Nuevo instructor
+      school:
+        new_agent: Nuevo instructor
+      event:
+        new_agent: Nueva escuela
     new:
-      title: Nuevo instructor
+      school:
+        title: Nuevo instructor
+      event:
+        title: Nueva escuela
+    show:
+      school:
+        title: Instructor
+      event:
+        title: Escuela
     form:
       padma_placeholder: Seleccione el usuario de Padma
     new_agent: Nuevo instructor

@@ -12,4 +12,4 @@
 
 <br />
 
-<%= link_to t('agents.new_agent'), new_business_agent_path(@business) %>
+<%= link_to t("agents.index.#{@business.type.downcase}.new_agent"), new_business_agent_path(@business) %>

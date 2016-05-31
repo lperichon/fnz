@@ -2,7 +2,7 @@
     <%= render :partial => 'businesses/edit_sidebar' %>
 <% end %>
 
-<h2><%= t('agents.new.title') %></h2>
+<h2><%= t("agents.new.#{@business.type.downcase}.title") %></h2>
 
 <%= render :partial => 'form', :locals => {:form_url => business_agents_path(@business)} %>
 

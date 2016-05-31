@@ -2,7 +2,7 @@
     <%= render :partial => 'businesses/edit_sidebar' %>
 <% end %>
 
-<h3><%= Agent.model_name.human %></h3>
+<h3><%= t("agents.show.#{@business.type.downcase}.title") %></h3>
 <p><b><%= Agent.human_attribute_name(:name) %>:</b> <%= @agent.name %></p>
 
 <%= link_to t('actions.edit'), edit_business_agent_path(@business, @agent) %> |
