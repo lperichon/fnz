@@ -982,8 +982,8 @@ es:
       commision: Comisión
       missing_payment: Falta pagar
       closure: Cierre
-      subtotal_credits: Subtotal Ingresos
-      subtotal_debits: Subtotal Gastos
+      subtotal_credits: Subtotal
+      subtotal_debits: Subtotal
       office: Office (10%)
       profit: Ganancia
       organizer_share: Organización (10%)

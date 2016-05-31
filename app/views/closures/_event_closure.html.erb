@@ -149,7 +149,7 @@ Cargando...
     <th><%= number_to_currency(subtotal_debits) %></th>
   </tr>
   <tr>
-    <th><%= t('.profit') %></th>
+    <th><%= t('.net_profit') %></th>
     <% net_profit = subtotal_credits-subtotal_debits %>
     <th><%= number_to_currency(net_profit) %></th>
   </tr>
@@ -159,16 +159,16 @@ Cargando...
     <td><%= number_to_currency(organizer_share) %></td>
   </tr>  
   <tr>
-    <th><%= t('closures.show.profit.net_profit') %></th>
+    <th><%= t('.net_profit') %></th>
     <% total_profit = net_profit-organizer_share %>
     <th><%= number_to_currency(total_profit) %></th>
   </tr>
   <tr>
-    <th><%= t('closures.show.profit.lecturer_profit') %></th>
+    <th><%= t('.lecturer_profit') %></th>
     <th><%= number_to_currency(total_profit/2) %></th>
   </tr>
   <tr>
-    <th><%= t('closures.show.profit.associated_schools_profit') %></th>
+    <th><%= t('.associated_schools_profit') %></th>
     <th><%= number_to_currency(total_profit/2) %></th>
   </tr>
 </table>
