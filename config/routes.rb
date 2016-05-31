@@ -80,9 +80,10 @@ Fnz::Application.routes.draw do
         resources :contacts do
           resource :current_membership
         end
-	match 'current_memberships', to: "current_memberships#index"
+	      match 'current_memberships', to: "current_memberships#index"
       end
       resources :merges, only: [:create]
+      resources :inscriptions, only: [:create]
     end
   end
 end
