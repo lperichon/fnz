@@ -85,5 +85,8 @@ module Fnz
     config.assets.paths << "#{Rails.root}/app/assets/fonts"
 
     config.i18n.enforce_available_locales = true
+
+    require 'pdfkit'
+    config.middleware.use PDFKit::Middleware
   end
 end

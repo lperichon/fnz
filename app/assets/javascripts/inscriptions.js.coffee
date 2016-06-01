@@ -52,8 +52,8 @@ $(document).ready ->
   if $("#inscriptions_chart").length > 0
     inscriptionsChart = new (Highcharts.Chart)(
       chart:
-        height: 350
-        width: 650
+        height: 250
+        width: 350
         renderTo: 'inscriptions_chart'
         plotBackgroundColor: null
         plotBorderWidth: null
@@ -77,13 +77,16 @@ $(document).ready ->
         type: 'pie'
         name: 'Inscriptions'
         data: $('#inscriptions_chart').data('data')
+        enableMouseTracking: false
+        shadow: false
+        animation: false
       } ])
 
   if $("#credits_chart").length > 0
     creditsChart = new (Highcharts.Chart)(
       chart:
-        height: 350
-        width: 650
+        height: 250
+        width: 350
         renderTo: 'credits_chart'
         plotBackgroundColor: null
         plotBorderWidth: null
@@ -107,13 +110,16 @@ $(document).ready ->
         type: 'pie'
         name: 'Credits'
         data: $('#credits_chart').data('data')
+        enableMouseTracking: false
+        shadow: false
+        animation: false
       } ])
 
   if $("#debits_chart").length > 0
     debitsChart = new (Highcharts.Chart)(
       chart:
-        height: 350
-        width: 650
+        height: 250
+        width: 350
         renderTo: 'debits_chart'
         plotBackgroundColor: null
         plotBorderWidth: null
@@ -137,4 +143,7 @@ $(document).ready ->
         type: 'pie'
         name: 'Debits'
         data: $('#debits_chart').data('data')
+        enableMouseTracking: false
+        shadow: false
+        animation: false
       } ])

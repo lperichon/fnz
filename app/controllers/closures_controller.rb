@@ -19,6 +19,16 @@ class ClosuresController < UserApplicationController
     end
   end
 
+
+  def print
+    if params[:id].present?
+      @closure = @business.closures.find(params[:id])
+    else
+      @closure = EventClosure.new @business
+    end
+    render :layout => 'clean'
+  end
+
   private
 
   def get_business

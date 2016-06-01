@@ -1000,6 +1000,8 @@ pt-BR:
     index:
       title: Categorias
   closures:
+    print:
+      title: "Administração Participativa"
     event_closure:
       inscriptions: Inscrições
       padma_account: Escola
@@ -1011,6 +1013,7 @@ pt-BR:
       commision: Comissão
       missing_payment: Falta pagar
       closure: Fechamento
+      distribution: Distribuição
       subtotal_credits: Subtotal
       subtotal_debits: Subtotal
       office: Office (10%)

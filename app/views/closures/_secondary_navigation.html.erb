@@ -1,0 +1,3 @@
+<li class="pull-right">
+  <%= link_to content_tag(:i, "", :class => "icon-print") + t('closures.secondary_navigation.print'), {:controller => "/closures", :action => :print, :business_id => @business.id, :id => nil, :format => 'pdf'}, :target => '_blank' %>
+</li>

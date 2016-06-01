@@ -64,3 +64,5 @@ gem 'awesome_nested_set' # or any similar gem (gem 'nested_set')
 gem "the_sortable_tree", "~> 2.5.0"
 gem "intercom-rails"
 gem "cache_digests"
+gem "wkhtmltopdf-heroku"
+gem "pdfkit"
