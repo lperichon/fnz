@@ -23,7 +23,7 @@
   <tbody>
   <% installments.each do |installment| %>
       <% membership = installment.membership %>
-      <tr>
+      <tr data-amount="<%= installment.value %>">
         <% if include_form %>
 	  <td><%= check_box_tag "transaction[installment_ids][]", installment.id %></td>	      
 	<% end %>

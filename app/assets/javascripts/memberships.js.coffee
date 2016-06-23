@@ -96,6 +96,12 @@ $(document).ready ->
   $("#multiple_mark_as_paid").click (e) ->
     e.preventDefault()
     valuesToSubmit = $('form#multiple_installments').serialize()
+
+    totalAmount = 0
+    totalAmount += $(selectedCheckbox).parents('tr').data('amount') for selectedCheckbox in $("#multiple_installments input[type=checkbox]:checked")
+
+    valuesToSubmit += "transaction[amount]=#{totalAmount}"
+
     $.ajax(
       type: 'GET'
       url: $(this).attr('href')
