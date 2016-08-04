@@ -76,6 +76,7 @@ es:
         padma_contact_id: Contacto
         monthly_due_day: Día de vencimento mensual
         name: Nombre
+        create_monthly_installments: Inicializar pagos mensuales
       installment:
         contact: Contacto
         agent: Instructor

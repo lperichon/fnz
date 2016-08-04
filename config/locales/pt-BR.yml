@@ -88,6 +88,7 @@ pt-BR:
         payment_type: Forma de pagamento
         value: Valor
         monthly_due_day: Dia do vencimento mensal
+        create_monthly_installments: Inicializar pagamentos mensais
       sale:
         agent: Instrutor
         amount: Quantidade
