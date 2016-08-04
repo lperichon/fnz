@@ -27,7 +27,9 @@
 
     <%= f.input :monthly_due_day, :as => :integer %>
 
-    <% unless f.object.new_record? %>
+    <% if f.object.new_record? %>
+      <%= f.input :create_monthly_installments, as: :boolean %>
+    <% else -%>
         <%= f.input :closed_on, :as => "string", :input_html => {:class => "datepicker_input"} %>
     <% end %>
 
