@@ -14,9 +14,11 @@ class Membership < ActiveRecord::Base
   validates :monthly_due_day, :numericality =>  {:greater_than => 0, :less_than => 29}
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :contact_id, :business_id, :payment_type_id, :begins_on, :ends_on, :value, :closed_on, :vip, :external_id, :monthly_due_day, :name
+  attr_accessible :contact_id, :business_id, :payment_type_id, :begins_on, :ends_on, :value, :closed_on, :vip, :external_id, :monthly_due_day, :name, :create_monthly_installments
 
   after_save :update_contacts_current_membership
+
+  after_save :create_the_monthly_installments, if: :create_monthly_installments
 
   after_initialize :init
  
@@ -92,6 +94,19 @@ class Membership < ActiveRecord::Base
   end
 
   private
+
+  def create_the_monthly_installments
+    begin
+      i = 0
+      installment_date = Date.civil(begins_on.year,begins_on.month,monthly_due_day)
+
+      if installment_date > begins_on && installment_date < ends_on
+        self.installments.create(value: value, due_on: installment_date) 
+      end
+
+      i += 1
+    end until installment_date > ends_on
+  end
   
   def init
     if self.new_record? && self.monthly_due_day.nil?

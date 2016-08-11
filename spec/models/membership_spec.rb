@@ -17,6 +17,19 @@ describe Membership do
 
   it { should have_db_column :name }
 
+  describe "creating without :create_monthly_installments" do
+    it "wont create installments" do
+      m = FactoryGirl.build(:membership)
+      expect{ m.save }.not_to change{ Installment.count }
+    end
+  end
+  describe "creating with :create_monthly_installments flag" do
+    it "creates monthly installments of membership value" do
+      m = FactoryGirl.build(:membership, create_monthly_installments: true)
+      expect{ m.save }.to change{ Installment.count }.by ((m.ends_on.year*12+m.ends_on.month) - (m.begins_on.year*12+m.begins_on.month))
+    end
+  end
+
   describe "has a payment type" do
     it {should belong_to :payment_type }
     it "nullify association if payment is destroyed" do
