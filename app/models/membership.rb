@@ -1,4 +1,6 @@
 class Membership < ActiveRecord::Base
+  attr_accessor :create_monthly_installments
+
   belongs_to :business
   belongs_to :contact, :touch => true
   belongs_to :payment_type
@@ -96,11 +98,11 @@ class Membership < ActiveRecord::Base
   private
 
   def create_the_monthly_installments
+    i = 0
     begin
-      i = 0
-      installment_date = Date.civil(begins_on.year,begins_on.month,monthly_due_day)
+      installment_date = Date.civil(begins_on.year,begins_on.month + i,monthly_due_day)
 
-      if installment_date > begins_on && installment_date < ends_on
+      if installment_date >= begins_on && installment_date <= ends_on
         self.installments.create(value: value, due_on: installment_date) 
       end
 
