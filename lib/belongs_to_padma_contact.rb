@@ -6,7 +6,7 @@ module BelongsToPadmaContact #:nodoc:
 
     def padma_contact_id= padma_contact_id
     	return if padma_contact_id.blank?
-	    unless c = Contact.find_by_padma_id(padma_contact_id)
+	    unless c = Contact.where(padma_id: padma_contact_id, business_id: self.business_id).first
 	      padma_contact = PadmaContact.find(padma_contact_id, select: [:first_name, :last_name, :status, :global_teacher_username])
 	      c = Contact.create(padma_id: padma_contact_id,
 	                         business_id: self.business_id,
