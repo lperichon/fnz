@@ -18,6 +18,10 @@ class PaymentsController < UserApplicationController
     @enrollment = @membership.enrollment if request.path.include?("enrollment")
     @sale = @business.sales.find(params[:sale_id]) if params[:sale_id]
     @transaction = @business.transactions.new(params[:transaction])
+
+    # defaults
+    @transaction.transaction_at = Time.zone.now if @transaction.transaction_at.nil?
+    @transaction.report_at = @transaction.transaction_at.to_date if @transaction.report_at.nil?
   end
 
   # POST /accounts

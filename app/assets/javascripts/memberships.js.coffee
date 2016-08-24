@@ -98,9 +98,9 @@ $(document).ready ->
     valuesToSubmit = $('form#multiple_installments').serialize()
 
     totalAmount = 0
-    totalAmount += $(selectedCheckbox).parents('tr').data('amount') for selectedCheckbox in $("#multiple_installments input[type=checkbox]:checked")
+    totalAmount += parseInt($(selectedCheckbox).parents('tr').data('amount'),10) for selectedCheckbox in $("#multiple_installments input[type=checkbox]:checked")
 
-    valuesToSubmit += "transaction[amount]=#{totalAmount}"
+    valuesToSubmit += "&transaction[amount]=#{totalAmount}"
 
     $.ajax(
       type: 'GET'
