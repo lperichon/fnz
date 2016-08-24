@@ -102,12 +102,12 @@ class Membership < ActiveRecord::Base
     begin
       installment_date = Date.civil(begins_on.year,begins_on.month,monthly_due_day) + i.months
 
-      if installment_date >= begins_on && installment_date <= ends_on
+      if installment_date >= begins_on.to_date && installment_date <= ends_on.to_date
         self.installments.create(value: value, due_on: installment_date) 
       end
 
       i += 1
-    end until installment_date > ends_on
+    end until installment_date > ends_on.to_date
   end
   
   def init

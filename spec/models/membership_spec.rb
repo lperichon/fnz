@@ -25,8 +25,12 @@ describe Membership do
   end
   describe "creating with :create_monthly_installments flag" do
     it "creates monthly installments of membership value" do
-      m = FactoryGirl.build(:membership, create_monthly_installments: true)
-      expect{ m.save }.to change{ Installment.count }.by ((m.ends_on.year*12+m.ends_on.month) - (m.begins_on.year*12+m.begins_on.month))
+      m = FactoryGirl.build(:membership,
+                            create_monthly_installments: true,
+                            begins_on: Date.today.beginning_of_month,
+                            ends_on:   11.months.from_now.end_of_month
+                           )
+      expect{ m.save }.to change{ Installment.count }.by 12
     end
   end
 
