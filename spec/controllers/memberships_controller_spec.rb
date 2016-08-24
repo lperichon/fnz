@@ -16,7 +16,19 @@ describe MembershipsController, :type => :controller do
     }
   end
 
+  def attributes_with_padma_contact_id
+    ret = valid_attributes
+    ret.delete(:contact_id)
+    ret[:padma_contact_id] = 'contact-id'
+    ret
+  end
+
   before(:each) do
+
+	  PadmaContact.stub(:find).and_return(
+      PadmaContact.new(first_name: 'blah', last_name: 'balh', global_teacher_username: 'luis.perichon', status: 'student')
+    )
+
     @business = FactoryGirl.create(:school)
     @contact = FactoryGirl.create(:contact, :business => @business)
     @agent = FactoryGirl.create(:agent, :business => @business)
@@ -62,6 +74,30 @@ describe MembershipsController, :type => :controller do
   end
 
   describe "POST create" do
+    describe "with params with padma_id" do
+      it "creates a new Membership" do
+        expect {
+          post :create, { business_id: @business.to_param,
+                          membership: attributes_with_padma_contact_id }
+        }.to change(Membership, :count).by(1)
+      end
+      describe "if 2 contacts exist in different business" do
+        before do
+          pcid = attributes_with_padma_contact_id[:padma_contact_id]
+          @other_contact = FactoryGirl.create(:contact, padma_id: pcid)
+          @my_contact = FactoryGirl.create(:contact,
+                                           padma_id: pcid,
+                                           :business => @business)
+        end
+        it "creates membership of current business" do
+          expect {
+            post :create, { business_id: @business.to_param,
+                            membership: attributes_with_padma_contact_id }
+          }.to change{ @my_contact.memberships.count }.by(1)
+        end
+      end
+    end
+
     describe "with valid params" do
       it "creates a new Membership" do
         expect {
