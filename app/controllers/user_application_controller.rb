@@ -1,8 +1,22 @@
 class UserApplicationController < ApplicationController
+  before_filter :mock_login
   before_filter :authenticate_user!
   before_filter :set_current_user
   before_filter :set_time_zone
   before_filter :set_locale
+
+  # Mocks login in development environment
+  # this way CAS interaction is not needed during development
+  # OBSERVATION!!:
+  #   "interaction with accounts service is also mocked in User#accounts for development environment"
+  def mock_login
+    if Rails.env.development?
+      unless signed_in?
+        user = User.find_by_drc_uid("luis.perichon")
+        sign_in(user)
+      end
+    end
+  end
 
   def set_current_user
     User.current_user = current_user if current_user
