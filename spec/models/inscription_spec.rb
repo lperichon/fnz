@@ -46,7 +46,7 @@ describe Inscription do
       @inscription.balance.should eq(0)
     end
 
-    describe "when there is one comple@ted transaction" do
+    describe "when there is one completed transaction" do
       before do
         source_account = FactoryGirl.create(:account, :business => @business)
         @transaction = FactoryGirl.create(:transaction, :type => "Credit", :business => @business, :source => source_account, :creator => @business.owner, :transaction_at => Date.today)
@@ -60,12 +60,12 @@ describe Inscription do
 
       describe "and it is updated" do
         before do
-          @transaction.amount = 123
+          @transaction.amount = 99
           @transaction.save
           @inscription.reload
         end
 
-        it "should recalculate the installment's balance" do
+        it "should recalculate the inscriptions's balance" do
           @inscription.balance.should eq(@transaction.amount)
         end
       end
