@@ -16,6 +16,9 @@ $(document).ready ->
   $("#update-installment-filter").click ->
     $("#new_installment_search").submit()
 
+  $("#installment_search_payment_type_id").chosen
+    allow_single_deselect: true
+
   $("#installment_search_status").chosen
     allow_single_deselect: true
 

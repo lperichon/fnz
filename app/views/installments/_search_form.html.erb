@@ -31,4 +31,10 @@
     <% agent_options = @business.agents.enabled.collect {|a| [a.name, a.id]} + [["All", "all"]] %>
     <%= f.input :agent_id, :as => :select, :collection => agent_options, :input_html => {:class => "chosen", :multiple => true} %>
   </div>
+  <div>
+    <%= f.input :payment_type_id,
+                as: :select,
+                collection: @business.payment_types.collect {|pt| [pt.name,pt.id]},
+                input_html: { class: 'chosen', multiple: true} %>
+  </div>
 <% end %>

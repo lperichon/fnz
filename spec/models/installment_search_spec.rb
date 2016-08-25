@@ -58,6 +58,46 @@ describe InstallmentSearch do
     end
   end
 
+  describe "with payment_type_id" do
+    subject{ is.results }
+    let(:is_att){{payment_type_id: payment_type_id}}
+    let(:is){InstallmentSearch.new(is_att)}
+    let!(:xx_installment){FactoryGirl.create(:installment, membership: FactoryGirl.create(:membership, payment_type: FactoryGirl.create(:payment_type, name: 'xx')))}
+    let!(:yy_installment){FactoryGirl.create(:installment, membership: FactoryGirl.create(:membership, payment_type: FactoryGirl.create(:payment_type, name: 'yy')))}
+    describe "nil" do
+      let(:payment_type_id){ nil }
+      it "includes all installments" do
+        should include xx_installment
+        should include yy_installment
+      end
+    end
+    describe "''" do
+      let(:payment_type_id){ "" }
+      it "includes all installments" do
+        should include xx_installment
+        should include yy_installment
+      end
+    end
+    describe "a payment_id" do
+      let(:payment_type_id){ xx_installment.membership.payment_type_id }
+      it "includes installments of given payment_type" do
+        should include xx_installment
+      end
+      it "wont include installment of other payment types" do
+        should_not include yy_installment
+      end
+    end
+    describe "an array of payment_ids" do
+      let(:payment_type_id){ [xx_installment.membership.payment_type_id]}
+      it "includes installments of given payment_type" do
+        should include xx_installment
+      end
+      it "wont include installment of other payment types" do
+        should_not include yy_installment
+      end
+    end
+  end
+
   context "with agent_all" do
     let(:agent_id){'all'}
     let(:is_att){{agent_id: agent_id}}
