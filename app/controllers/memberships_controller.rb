@@ -86,10 +86,10 @@ class MembershipsController < UserApplicationController
     end
     if current_user.overview_mode == 'table'
       per_page ||= 50
-      @contacts = @membership_filter.results.includes(:current_membership).includes(:current_membership => :payment_type).includes(:installments).includes(:installments => :agent).includes(:installments => :membership).page(params[:page]).per(per_page)
+      @contacts = @membership_filter.results.includes(current_membership: :payment_type).includes(installments: [:agent,:membership]).page(params[:page]).per(per_page)
     else
       per_page ||= 100
-      @contacts = @membership_filter.results.includes(:current_membership).includes(:current_membership => :payment_type).page(params[:page]).per(per_page)
+      @contacts = @membership_filter.results.includes(current_membership: :payment_type).page(params[:page]).per(per_page)
     end
   end
 
