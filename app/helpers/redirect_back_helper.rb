@@ -23,6 +23,6 @@ module RedirectBackHelper
   end
 
   def debug(msg)
-    Rails.logger.warn "loggin-shit: ===============================> #{msg}"
+    Rails.logger.debug "loggin-shit: ===============================> #{msg}"
   end
 end
