@@ -88,7 +88,7 @@ class MembershipsController < UserApplicationController
       per_page ||= 50
       @contacts = @membership_filter.results.includes(current_membership: :payment_type).includes(installments: [:agent,:membership]).page(params[:page]).per(per_page)
     else
-      per_page ||= 100
+      per_page ||= 50
       @contacts = @membership_filter.results.includes(current_membership: :payment_type).page(params[:page]).per(per_page)
     end
   end
