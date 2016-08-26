@@ -71,9 +71,9 @@ describe InscriptionsController, :type => :controller do
         assigns(:inscription).should be_persisted
       end
 
-      it "redirects to the created inscription" do
+      it "redirects to the inscriptions list" do
         post :create, {:business_id => @business.to_param, :inscription => valid_attributes}
-        response.should redirect_to(business_inscription_url(@business, Inscription.last))
+        response.should redirect_to(business_inscriptions_url(@business))
       end
     end
 
@@ -115,7 +115,7 @@ describe InscriptionsController, :type => :controller do
       it "redirects to the inscription" do
         inscription = @business.inscriptions.create! valid_attributes
         put :update, {:business_id => @business.to_param, :id => inscription.to_param, :inscription => valid_attributes}
-        response.should redirect_to(business_inscription_url(@business, inscription))
+        response.should redirect_to(edit_business_inscription_url(@business, inscription))
       end
     end
 
