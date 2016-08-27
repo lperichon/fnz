@@ -70,7 +70,7 @@ class MembershipsController < UserApplicationController
   end
 
   def overview
-    per_page = nil
+    per_page = params[:per_page]
     if params[:format].try(:to_s) == 'csv'
       per_page = 9999
     end
