@@ -28,7 +28,9 @@ class MembershipsController < UserApplicationController
   # POST /accounts
   # POST /accounts.json
   def create
+    
     padma_contact_id = params[:membership].delete(:padma_contact_id)
+    params[:membership][:create_monthly_installments] = params[:membership][:create_monthly_installments]=="1"
     @membership = @context.new(params[:membership])
     @membership.padma_contact_id = padma_contact_id # set contact after initialization to ensure business has been setted
     @business = @membership.business
