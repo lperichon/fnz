@@ -12,7 +12,8 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :remember_me, :time_zone, :drc_uid
 
   has_many :owned_businesses, :foreign_key => :owner_id, :class_name => 'Business'
-  has_and_belongs_to_many :businesses, :join_table => 'businesses_users'
+  has_many :user_businesses
+  has_many :businesses, :through => :user_businesses
 
   validates_presence_of :email
   validates_uniqueness_of :email, :case_sensitive => false, :allow_blank => false, :if => :email_changed?
