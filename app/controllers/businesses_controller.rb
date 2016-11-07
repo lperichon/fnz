@@ -1,6 +1,6 @@
 class BusinessesController < UserApplicationController
   def index
-    @businesses = current_user.businesses
+    @businesses = current_user.user_businesses
   end
 
   def show

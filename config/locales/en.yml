@@ -876,6 +876,8 @@ en:
       all_sales_tooltip: "This month's sales"
       paid_sales_tooltip: "Sales paid this month"
   businesses:
+    index:
+      title: Businesses
     edit:
       title: Edit Business
     edit_sidebar:
