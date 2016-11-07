@@ -14,6 +14,14 @@ class Transaction < ActiveRecord::Base
   belongs_to :target, :class_name => "Account"
   belongs_to :creator, :class_name => "User"
 
+  def source
+    Account.unscoped { super }
+  end
+
+  def target
+    Account.unscoped { super }
+  end
+
   has_many :taggings
   has_many :tags, :through => :taggings
 
