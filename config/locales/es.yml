@@ -469,6 +469,7 @@ es:
     table_header:
       view_month_stats: Ver las estadísticas de %{month}
     show:
+      see_in_crm: Ver en CRM
       new_installment: Nueva mensualidad
       create_enrollment: Crear matrícula
     form:

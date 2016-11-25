@@ -533,6 +533,7 @@ pt-BR:
       new_membership: Novo plano
       maturity_report: Vencimento de planos
     show:
+      see_in_crm: "Ver no CRM"
       create_enrollment: Criar matrícula
       new_installment: Nova mensalidade
     table_header:

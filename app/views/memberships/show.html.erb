@@ -6,7 +6,12 @@
 <% end %>
 
 <h2><%= Membership.model_name.human %><%= " '#{@membership.name}'" unless @membership.name.blank? %></h2>
-<p><b><%= Membership.human_attribute_name(:contact) %>:</b> <%= @membership.contact.try(:name) %></p>
+<p>
+  <b><%= Membership.human_attribute_name(:contact) %>:</b> <%= @membership.contact.try(:name) %>
+  <% if @membership.contact.padma_id.present? %>
+  (<%= link_to t('.see_in_crm'), "#{Crm::URL}/contacts/#{@membership.contact.padma_id}" %>)
+  <% end %>
+</p>
 <p><b><%= Membership.human_attribute_name(:value) %>:</b> <%= number_to_currency(@membership.value) %></p>
 <p><b><%= Membership.human_attribute_name(:payment_type) %>:</b> <%= @membership.payment_type.try(:name) %></p>
 <p><b><%= Membership.human_attribute_name(:begins_on) %>:</b> <%= @membership.begins_on %></p>
