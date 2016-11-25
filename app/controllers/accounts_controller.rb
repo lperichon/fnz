@@ -2,15 +2,15 @@ class AccountsController < UserApplicationController
   before_filter :get_business
 
   def index
-    @accounts = @business.accounts
+    @accounts = @business.accounts.with_deleted
   end
 
   def show
-    @account = @business.accounts.find(params[:id])
+    @account = @business.accounts.with_deleted.find(params[:id])
   end
 
   def edit
-    @account = @business.accounts.find(params[:id])
+    @account = @business.accounts.with_deleted.find(params[:id])
   end
 
   def new
@@ -36,7 +36,7 @@ class AccountsController < UserApplicationController
   # PUT /accounts/1
   # PUT /accounts/1.json
   def update
-    @account = @business.accounts.find(params[:id])
+    @account = @business.accounts.with_deleted.find(params[:id])
 
     respond_to do |format|
       if @account.update_attributes(params[:account])
@@ -52,8 +52,12 @@ class AccountsController < UserApplicationController
   # DELETE /accounts/1
   # DELETE /accounts/1.json
   def destroy
-    @account = @business.accounts.find(params[:id])
-    @account.destroy
+    @account = @business.accounts.with_deleted.find(params[:id])
+    if @account.deleted?
+      @account.update_attribute(:deleted_at, nil)
+    else
+      @account.destroy
+    end
 
     respond_to do |format|
       format.html { redirect_to business_accounts_url(@business) }

@@ -1,4 +1,5 @@
 class Account < ActiveRecord::Base
+  acts_as_paranoid
   belongs_to :business
 
   validates :name, :presence => true

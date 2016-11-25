@@ -6,6 +6,7 @@ Fnz::Application.routes.draw do
   end
   root :to => "home#index"
   devise_for :users, :controllers => { :registrations => "registrations"}
+  resources :user_businesses
   resources :businesses do
     resources :accounts do
       resources :transactions, :only => [:index] do

@@ -938,6 +938,8 @@ es:
       all_sales_tooltip: "Ventas de este mes"
       paid_sales_tooltip: "Ventas pagadas este mes"
   businesses:
+    index:
+      title: Negocios
     sidebar:
       title: Cuentas
       manage: configurar

@@ -11,14 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160826214602) do
+ActiveRecord::Schema.define(:version => 20161107122117) do
 
   create_table "accounts", :force => true do |t|
-    t.string  "name",                                       :default => "",  :null => false
-    t.integer "business_id"
-    t.decimal "balance",     :precision => 12, :scale => 2, :default => 0.0, :null => false
-    t.string  "currency"
+    t.string   "name",                                       :default => "",  :null => false
+    t.integer  "business_id"
+    t.decimal  "balance",     :precision => 12, :scale => 2, :default => 0.0, :null => false
+    t.string   "currency"
+    t.datetime "deleted_at"
   end
+
+  add_index "accounts", ["deleted_at"], :name => "index_accounts_on_deleted_at"
 
   create_table "agents", :force => true do |t|
     t.string  "name",        :default => "Unknown", :null => false
@@ -45,6 +48,7 @@ ActiveRecord::Schema.define(:version => 20160826214602) do
   create_table "businesses_users", :force => true do |t|
     t.integer "business_id"
     t.integer "user_id"
+    t.boolean "show_on_menu", :default => true
   end
 
   create_table "contacts", :force => true do |t|

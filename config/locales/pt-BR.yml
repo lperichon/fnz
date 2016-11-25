@@ -939,6 +939,8 @@ pt-BR:
       datetime: ! '%Y-%m-%d %H:%M:%S'
       time: ! '%H:%M:%S'
   businesses:
+    index:
+      title: Negócios
     sidebar:
       title: Contas
       manage: editar

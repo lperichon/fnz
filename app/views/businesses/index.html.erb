@@ -1,13 +1,25 @@
-<h3>Businesses</h3>
-<ul class="businesses">
-  <% @businesses.each do |business| %>
-    <li>
-      <%= link_to business.name, business_path(business) %>
-      <%= link_to content_tag(:i, "", :class => "icon-trash"), business_path(business), :confirm => 'Are you sure you want to delete this item?', :method => 'delete' %>
-    </li>
-  <% end %>
-</ul>
+<% content_for :secondary_navigation do %>
+<% end %>
 
-<br />
+<% content_for :sidebar do %>
+  <h3><%= t('businesses.index.title') %></h3>
+<% end %>
 
-<%= link_to 'New Business', new_business_path %>
+<% content_for :top do %>
+<% end %>
+
+<table id="businesses" class="table table-striped table-bordered">
+  <tr>
+    <th><%= Business.human_attribute_name(:name) %></th>
+    <th></th>
+  </tr>
+  <% @businesses.each do |user_business| %>
+    <tr>
+      <td><%= link_to user_business.business.name, business_path(user_business.business) %></td>
+      <td>
+        <%= link_to content_tag(:i, "", :class => "icon-eye-#{user_business.show_on_menu? ? 'open' : 'close'}"), user_business_path(user_business, :user_business => {:show_on_menu => !user_business.show_on_menu}), :method => 'put' %>
+        <%= link_to content_tag(:i, "", :class => "icon-trash"), business_path(user_business.business), :confirm => 'Are you sure you want to delete this item?', :method => 'delete' %>
+      </td>
+    </tr>
+  <% end -%>
+</table>
