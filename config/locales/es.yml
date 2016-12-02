@@ -452,7 +452,7 @@ es:
       manage_event_closure: Reporte de cierre
   contacts:
     show:
-      see_in_crm: Ver en CRM
+      see_in_crm: Ver este contacto en CRM
   memberships:
     membership_filter:
       filter: Filtrar

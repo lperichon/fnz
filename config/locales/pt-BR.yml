@@ -500,7 +500,7 @@ pt-BR:
       title: Nova Inscrição
   contacts:
     show:
-      see_in_crm: Ver en CRM
+      see_in_crm: Ver este contato no CRM
   memberships:
     membership_filter:
       filter: Filtrar
