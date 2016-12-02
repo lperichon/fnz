@@ -7,6 +7,11 @@
 <% end %>
 
 <h2 class='title'><%= @contact.name %></h2>
+<% if @contact.padma_id.present? %>
+  <div>
+    (<%= link_to t('.see_in_crm'), "#{Crm::URL}/contacts/#{@contact.padma_id}" %>)
+  </div>
+<% end %>
 
 <h3><%= Contact.human_attribute_name(:memberships) %></h3>
 <table class="contact-memberships table table-striped table-hover table-condensed table-bordered">

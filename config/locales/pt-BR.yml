@@ -498,6 +498,9 @@ pt-BR:
       success: Inscrição criada com sucesso
     new:
       title: Nova Inscrição
+  contacts:
+    show:
+      see_in_crm: Ver en CRM
   memberships:
     membership_filter:
       filter: Filtrar
