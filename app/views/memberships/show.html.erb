@@ -7,7 +7,7 @@
 
 <h2><%= Membership.model_name.human %><%= " '#{@membership.name}'" unless @membership.name.blank? %></h2>
 <p>
-  <b><%= Membership.human_attribute_name(:contact) %>:</b> <%= @membership.contact.try(:name) %>
+  <b><%= Membership.human_attribute_name(:contact) %>:</b> <%= link_to(@membership.contact.name, business_contact_path(@business,@membership.contact)) if @membership.contact.present? %>
   <% if @membership.contact.padma_id.present? %>
   (<%= link_to t('.see_in_crm'), "#{Crm::URL}/contacts/#{@membership.contact.padma_id}" %>)
   <% end %>
@@ -16,6 +16,10 @@
 <p><b><%= Membership.human_attribute_name(:payment_type) %>:</b> <%= @membership.payment_type.try(:name) %></p>
 <p><b><%= Membership.human_attribute_name(:begins_on) %>:</b> <%= @membership.begins_on %></p>
 <p><b><%= Membership.human_attribute_name(:ends_on) %>:</b> <%= @membership.ends_on %></p>
+<p>
+<%= link_to t('actions.edit'), edit_business_membership_path(@business, @membership) %>
+</p>
+
 
 <h3><%= Membership.human_attribute_name(:enrollment) %></h3>
 <% if @membership.enrollment %>
@@ -41,6 +45,3 @@
   <%= link_to t('actions.mark_as_paid'), new_business_membership_payment_path(@business, @membership), :class => "btn btn-sm btn-default", :id => "multiple_mark_as_paid", :disabled => true %>
 </p>
 <%= render :partial => 'installments/installments', :locals => {:installments => @membership.installments, :include_form => true} %>
-
-<%= link_to t('actions.edit'), edit_business_membership_path(@business, @membership) %> |
-<%= link_to t('actions.back'),:back %>
