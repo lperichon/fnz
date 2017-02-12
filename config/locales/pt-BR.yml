@@ -86,7 +86,7 @@ pt-BR:
         installments: Mensalidades
         padma_contact_id: Contato
         payment_type: Forma de pagamento
-        value: Valor
+        value: Valor mensal
         monthly_due_day: Dia do vencimento mensal
         create_monthly_installments: Inicializar pagamentos mensais
       sale:
