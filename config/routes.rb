@@ -87,6 +87,9 @@ Fnz::Application.routes.draw do
       end
       resources :merges, only: [:create]
       resources :inscriptions, only: [:create]
+      namespace 'notifications' do
+        get :mercadopago
+      end
     end
   end
 end
