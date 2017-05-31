@@ -20,7 +20,7 @@ class Inscription < ActiveRecord::Base
   accepts_nested_attributes_for :contact, allow_destroy: true
 
   def contact_name= name
-    self.contact = @business.contacts.create(:name => name)
+    self.contact = @business.contacts.find_or_create_by_name(name)
   end
 
   def update_balance
