@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '1.9.3'
+ruby '2.0'
 gem 'rails', '3.2.8'
 gem 'sqlite3', :group => [:development, :test]
 gem 'pg', :group => [:staging, :production]
@@ -55,7 +55,7 @@ gem 'mandrill_mailer', :git => "git://github.com/lperichon/mandrill_mailer.git"
 gem 'httparty'
 gem 'quiet_assets', :group => :development
 gem "active_model_serializers"
-gem "debugger", :group => [:development, :test]
+gem "debugger2", :group => [:development, :test]
 gem 'airbrake'
 gem 'rails_12factor', :group => [:staging, :production]
 gem 'jquery-ui-rails'
