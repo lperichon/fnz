@@ -67,6 +67,7 @@ Fnz::Application.routes.draw do
   resources :transfers, :controller => 'transactions', :except => [:index]
 
   match 'messages', to: 'messages#catch_message'
+  match 'sns', to: 'messages#sns'
 
   namespace 'admin' do
     resources :businesses, only: [:index, :show, :edit, :update, :destroy]
