@@ -25,9 +25,10 @@ module Contacts
 end
 
 module Messaging
-  API_KEY = ENV['messaging_key'] || CONFIG['messaging_key']
-  API_SECRET = ENV['messaging_secret'] || CONFIG['messaging_secret']
+  KEY = ENV['messaging_key'] || CONFIG['messaging_key']
   if ENV['C9_USER']
     HOST = "padma-messaging-#{ENV['C9_USER']}.c9users.io"
   end
+  SNS_KEY_ID = ENV['padma_aws_key_id']
+  SNS_SECRET_ACCESS_KEY = ENV['padma_aws_secret_access_key']
 end
