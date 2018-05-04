@@ -1,4 +1,7 @@
 <%= simple_form_for(@import, :url => form_url, :validate => true) do |f| %>
+		<%= f.input :type, as: :select, :collection => [["Transactions CSV", "TransactionImport"], ["Santander Rio Argentina", "SantanderRioArImport"]], include_blank: false %>
+		<a href="#" class="field transaction">Descargá un ejemplo</a>
+		<%= f.input :account_id, as: :select, :collection => @business.accounts, wrapper_html: { class: "field santander" } %>
 
     <%= f.input :upload %></p>
 

@@ -21,8 +21,7 @@ class ImportsController < UserApplicationController
   # POST /imports.json
   def create
     @import = @business.imports.new(params[:import])
-    @import.type = "TransactionImport"
-
+    
     respond_to do |format|
       if @import.save
         format.html { redirect_to business_import_path(@business, @import), notice: 'Import was successfully created.' }

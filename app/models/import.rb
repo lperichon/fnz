@@ -6,9 +6,9 @@ class Import < ActiveRecord::Base
 
 
   validates :business, :presence => true
-  validates_attachment :upload, :presence => true, :content_type => { :content_type => "text/csv" }
+  validates_attachment :upload, :presence => true
 
-  attr_accessible :upload, :business_id, :status, :type
+  attr_accessible :upload, :business_id, :status, :type, :account_id
 
   before_create :set_defaults
 
@@ -57,6 +57,7 @@ class Import < ActiveRecord::Base
 
     return errs.empty?
   end
+  
   # Override this on child class
   # @param [Business]
   # @param [CSV::Row]

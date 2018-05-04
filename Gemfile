@@ -67,3 +67,5 @@ gem "wkhtmltopdf-heroku"
 gem "pdfkit"
 gem "paranoia", "~> 1.0"
 gem 'rake', '< 11.0'
+gem "roo"
+gem "roo-xls"
