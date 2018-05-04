@@ -18,9 +18,18 @@ describe SantanderRioArImport do
     import = SantanderRioArImport.create(@attr)
     expect {
       import.process
-    }.to change(Transaction, :count).by(10)
+    }.to change(Transaction, :count).by(3)
     import.status.should == :finished
   end
 
+
+  it "should update transactions already imported" do
+    import = SantanderRioArImport.create(@attr)
+    import.process
+    expect {
+      import.process
+    }.not_to change(Transaction, :count)
+    import.status.should == :finished
+  end
 
 end

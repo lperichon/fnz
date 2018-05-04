@@ -57,8 +57,9 @@ class SantanderRioArImport < TransactionImport
   end
 
   def handle_row(business, row)
-
-    t = business.transactions.new
+  	
+  	t = business.transactions.find_by_external_id(row[3])
+    t = business.transactions.new unless t
     t.creator_id = business.owner_id
     t.transaction_at = row[0]
     t.description = row[2]
