@@ -58,12 +58,12 @@ class MercadopagoImport < TransactionImport
 
   def handle_row(business, row)
   	
-  	t = business.transactions.find_by_external_id(row[2])
+  	t = business.transactions.find_by_external_id(row[2].to_s)
     t = business.transactions.new unless t
     t.creator_id = business.owner_id
     t.transaction_at = row[0]
     t.description = row[1]
-    t.external_id = row[2]
+    t.external_id = row[2].to_s
     t.amount = row[4].abs
     t.type = row[4] > 0 ? "Credit" : "Debit"
     t.source = account
