@@ -24,7 +24,7 @@ class MercadopagoImport < TransactionImport
     last_row = sheet.last_row
 
 
-    (1..last_row).each do |row_index|
+    (2..last_row).each do |row_index|
       n += 1
 
       row = sheet.row(row_index)
