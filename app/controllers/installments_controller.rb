@@ -22,7 +22,7 @@ class InstallmentsController < UserApplicationController
 
   def new
     @installment = @context.new(params[:installment])
-  	date = @installment.due_on || Date.today
+  	date = Date.today
   	@transactions = @business.transactions.credits.where {(transaction_at.gteq(date - 1.month)) & (transaction_at.lteq(date + 1.month))}.order("transaction_at DESC")
   end
 
@@ -53,8 +53,10 @@ class InstallmentsController < UserApplicationController
           format.html do
             redirect_back_or_default_to overview_business_memberships_path(@business), notice: I18n.t('installments.create.success')
           end
+          format.js {}
         else
           format.html { render action: "new" }
+          format.js {}
         end
       end
     end
@@ -68,8 +70,10 @@ class InstallmentsController < UserApplicationController
     respond_to do |format|
       if @installment.update_attributes(params[:installment])
         format.html { redirect_to business_membership_installment_path(@business, @membership, @installment), notice: 'Installment was successfully updated.' }
+        format.js {}
       else
         format.html { render action: "edit" }
+        format.js {}
       end
     end
   end

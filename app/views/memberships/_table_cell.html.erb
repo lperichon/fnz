@@ -1,43 +1,15 @@
 <% if installment.try(:observations).blank? %>
-  			   <td data-month=<%= date.month %> class="<%= 'current' if(date == Date.today) %> <%= installment.try(:status) %>">
-        <% else %>
-  			   <td data-toggle="tooltip" title="<%= installment.observations %>" class="<%= 'current' if(date == Date.today) %> <%= installment.try(:status) %>">
-        <% end %>
-  		    	<div class="action-link">
-  					<% if installment && installment.status.in?([:pending, :overdue, :incomplete]) %>
-                <%= link_to t('actions.mark_as_paid'), 
-                          new_business_membership_installment_payment_path(
-                            :business_id => @business.id, 
-                            :membership_id => installment.membership.id, 
-                            :installment_id => installment.id, 
-                            :transaction => { :transaction_at => Time.zone.now } ),
-                            :remote => true,
-                            :class => "mark_as_paid_link" %>
-  					<% elsif membership && !membership.closed? && date < membership.ends_on %>
-                <%= link_to t('actions.mark_as_paid'), 
-                          new_business_membership_installment_payment_path(
-                            :business_id => @business.id, 
-                            :membership_id => membership.id, 
-                            :installment_id => :create,
-                            :installment => {
-                             :due_on => date.end_of_month.to_date,
-                             :value => membership.value,
-                             :agent_padma_id => contact.padma_teacher
-                            },
-                            :transaction => { :transaction_at => Time.zone.now } ),
-                            :remote => true,
-                            :class => "mark_as_paid_link" %>
-            <% else %>
-              <%= table_contact_membership_link(contact, membership) %>
-  					<% end %>
-  				</div>
-  				<div class="installment-value">
-  					<% if installment %>
-  					  <div class="<%= 'old' if installment.membership != membership %>"><%= number_to_currency(installment.try(:value)) %>
-  					  </div>
-              <%= content_tag(:i, "", :class => "icon-installment-#{installment.status}") %>
-  					<% elsif membership && date >= membership.begins_on && date < membership.ends_on %>
-  					  <div class="projection"><%= number_to_currency(membership.try(:value)) %></div>
-  					<% end %>
-  				</div>
-  			</td>
+   <td data-month=<%= date.month %> class="<%= 'current' if(date == Date.today) %> <%= installment.try(:status) %>">
+<% else %>
+   <td data-toggle="tooltip" title="<%= installment.observations %>" class="<%= 'current' if(date == Date.today) %> <%= installment.try(:status) %>">
+<% end %>	
+	<%= content_tag :div, :class => "installment-value", 'data-content' => "#{render(:partial => 'memberships/installment_popover', :locals => {:membership => membership, :installment => installment, :date => date, :contact => contact})}", :rel => "popover", 'data-placement' => "right", 'data-triggr' => "hover" do %>
+		<% if installment %>
+		  <div class="<%= 'old' if installment.membership != membership %>"><%= number_to_currency(installment.try(:value)) %>
+		  </div>
+      <%= content_tag(:i, "", :class => "icon-installment-#{installment.status}") %>
+		<% elsif membership && date >= membership.begins_on && date < membership.ends_on %>
+		  <div class="projection"><%= number_to_currency(membership.try(:value)) %></div>
+		<% end %>
+	<% end %>
+</td>

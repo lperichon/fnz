@@ -39,14 +39,14 @@ class PaymentsController < UserApplicationController
           :installment_ids => params[:transaction][:installment_ids],
           :type => "Credit"
         } 
-	
-	if @membership.present?
-	  default_payment_attributes[:description] = "Multiple Installment Payment - #{@membership.contact.name}"
-	else
+      	
+      	if @membership.present?
+      	  default_payment_attributes[:description] = "Multiple Installment Payment - #{@membership.contact.name}"
+      	else
           default_payment_attributes[:description] = "Multiple Installment Payment"
-	end
+      	end
       else
-	default_payment_attributes = {
+      	default_payment_attributes = {
           :installment_ids => [@installment.id],
           :description => "Installment Payment - #{@membership.contact.name} - #{@installment.due_on.strftime('%B %Y')}",
           :type => "Credit",

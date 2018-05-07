@@ -1,0 +1,23 @@
+<div id="list-transactions-modal" class = "modal hide fade">
+  <%= simple_form_for(installment, :url => form_url, :remote => true, :html => {:class => "installment_transaction_select_form"}) do |f| %>
+  <%= f.input :due_on, :as => :hidden %>
+  <%= f.input :value, :as => :hidden %>
+  <%= f.input :agent_padma_id, :as => :hidden %>
+  <% f.object.transaction_ids.each_with_index do |transaction_id, index| %>
+    <%= f.input "transaction_ids", :as => :hidden, :input_html => {:id => "transaction_ids_#{index}", :name => "installment[transaction_ids][]", :value => transaction_id} %>
+  <% end %>
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3><%= t('application.list_transactions_modal.title') %></h3>
+  </div>
+  <div class="modal-body">
+    <%= render :layout => "transactions_table", :locals => {:transactions => transactions} do |transaction| %>
+        <%= link_to content_tag(:i, "", :class => "icon-link"), "#", :class => "link-transaction-to-installment-form" %>
+    <% end %>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <%= link_to t('actions.close'), "#", :class => "btn", "data-dismiss" => "modal" %>
+  </div>
+  <% end %>
+</div>

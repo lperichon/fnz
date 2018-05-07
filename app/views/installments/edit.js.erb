@@ -1,0 +1,4 @@
+$('body').append("<%= escape_javascript(render(:partial => "link_transactions_modal", :locals => {:installment => @installment, :transactions => @transactions, :form_url => business_membership_installment_path(@business, @membership, @installment)}))%>");
+$('#list-transactions-modal').modal({
+    keyboard: false
+});

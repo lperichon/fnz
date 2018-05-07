@@ -1,0 +1,3 @@
+$('#list-transactions-modal').modal('hide').remove();
+<% @installment.reload %>
+$('tr[data-contact-id="<%= @installment.membership.contact.id %>"] td[data-month="<%= @installment.due_on.month %>"]').replaceWith("<%= escape_javascript render(:partial => 'memberships/table_cell', :locals => {:contact => @installment.membership.contact, :membership => @installment.membership, :installment => @installment, :date => @installment.due_on}) %>");

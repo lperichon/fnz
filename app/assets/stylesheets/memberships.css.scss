@@ -88,26 +88,6 @@ table#memberships tr:not(:first-child) {
 	}
 }
 
-.memberships.table td:hover .installment-value {
-	display:none;
-}
-
-.memberships.table td.complete:hover .installment-value {
-	display:block;
-}
-
-.memberships.table td .action-link {
-	display: none;
-}
-
-.memberships.table td:hover .action-link {
-	display: block;
-}
-
-.memberships.table td.complete:hover .action-link {
-	display: none;
-}
-
 .membership-stats.table thead tr th, .membership-stats.table tbody tr td {
 	text-align: center;
 }
@@ -128,3 +108,16 @@ table#memberships tr:not(:first-child) {
   vertical-align: middle;
   text-align: center;
 }	
+
+#list-transactions-modal form {
+  margin: 0;
+}
+
+.popover-action-list {
+  list-style: none;
+  margin: 0;
+
+  li {
+    margin: 5px 0;
+  }
+}

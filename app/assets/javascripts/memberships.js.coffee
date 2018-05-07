@@ -31,6 +31,12 @@ $(document).ready ->
     persistent_create_option: true
 
   $(".students.nav li").popover()
+  $(".installment-value").popover({html: true})
+
+  $('#list-transactions-modal').on 'show', (event) =>
+      console.log(event)
+      name = $(this).data('modal').options.person
+      $(this).find('.person').html(name)
 
   $(".table.memberships tr").hover (->
     contact_id = $(this).attr("data-contact-id")
@@ -113,3 +119,11 @@ $(document).ready ->
 
   checkboxes.click ->
     submitButt.attr("disabled", !checkboxes.is(":checked"))
+
+  $(document.body).on "click", ".link-transaction-to-installment-form", (e) ->
+    tr = $(this).parents('tr')
+    id = tr.attr('data-id')
+    random = $.now()
+    tr.hide()
+    input = '<input id="' + 'transactions_ids_' + random + '" name="installment[transaction_ids][]" value="' + id + '" type="hidden">'
+    $(".installment_transaction_select_form").append(input)
