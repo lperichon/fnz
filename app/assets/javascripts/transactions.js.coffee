@@ -53,3 +53,6 @@ $(document).ready ->
       ]
     , (start, end) ->
       window.location = "?start_date=" + start.format("YYYY-M-D") + "&end_date=" + end.format("YYYY-M-D")
+
+
+  jQuery(".best_in_place").best_in_place();

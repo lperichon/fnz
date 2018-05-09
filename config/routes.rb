@@ -19,9 +19,9 @@ Fnz::Application.routes.draw do
     resources :transactions do
       get :stats, :on => :collection
     end
-    resources :debits, :controller => 'transactions', :only => [:index]
-    resources :credits, :controller => 'transactions', :only => [:index]
-    resources :transfers, :controller => 'transactions', :only => [:index]
+    resources :debits, :controller => 'transactions', :only => [:index, :update]
+    resources :credits, :controller => 'transactions', :only => [:index, :update]
+    resources :transfers, :controller => 'transactions', :only => [:index, :update]
     resources :tags do
       collection do
         # required for Sortable GUI server side actions

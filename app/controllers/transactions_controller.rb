@@ -62,9 +62,11 @@ class TransactionsController < UserApplicationController
       if @transaction.update_attributes(params[:transaction])
         format.html { redirect_to business_transaction_path(@business, @transaction), notice: 'Transaction was successfully updated.' }
         format.js {}
+        format.json { respond_with_bip(@transaction.becomes(Transaction)) }
       else
         format.html { render action: "edit" }
         format.js {}
+        format.json { respond_with_bip(@transaction.becomes(Transaction)) }
       end
     end
   end

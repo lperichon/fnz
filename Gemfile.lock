@@ -65,6 +65,9 @@ GEM
       aws-sigv4 (~> 1.0)
     aws-sigv4 (1.0.2)
     bcrypt (3.1.7)
+    best_in_place (3.0.3)
+      actionpack (>= 3.2)
+      railties (>= 3.2)
     bootstrap-datepicker-rails (1.1.1.11)
       railties (>= 3.0)
     bootstrap-daterangepicker-rails (0.0.8)
@@ -353,6 +356,7 @@ DEPENDENCIES
   awesome_nested_fields (= 0.6.0)
   awesome_nested_set
   aws-sdk
+  best_in_place (~> 3.0.1)
   bootstrap-datepicker-rails (~> 1.1.1.11)
   bootstrap-daterangepicker-rails
   bootstrap-kaminari-views

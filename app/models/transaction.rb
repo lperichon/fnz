@@ -18,6 +18,14 @@ class Transaction < ActiveRecord::Base
     Account.unscoped { super }
   end
 
+  def source_name
+    source.name
+  end
+
+  def target_name
+    target.name
+  end
+
   def target
     Account.unscoped { super }
   end
@@ -39,12 +47,24 @@ class Transaction < ActiveRecord::Base
   validates :report_at, :presence => true
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :tag_ids, :description, :business_id, :source_id, :amount, :type, :transaction_at, :target_id, :conversion_rate, :state, :reconciled_at, :sale_ids, :installment_ids, :enrollment_ids, :creator_id, :report_at, :report_at_option, :inscription_ids
+  attr_accessible :tag_id, :tag_ids, :description, :business_id, :source_id, :amount, :type, :transaction_at, :target_id, :conversion_rate, :state, :reconciled_at, :sale_ids, :installment_ids, :enrollment_ids, :creator_id, :report_at, :report_at_option, :inscription_ids
 
   scope :untagged, includes(:taggings).where("taggings.tag_id is null")
 
   scope :credits, where(:type => "Credit")
   scope :debits, where(:type => "Debit")
+
+  def tag_id= id
+    self.tag_ids = [id]
+  end
+
+  def tag_id
+    self.tags.first.try(:id)
+  end
+
+  def tag
+    self.tags.first
+  end
 
   def set_report_at
     self.report_at = self.transaction_at unless self.report_at.present?
