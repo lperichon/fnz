@@ -1,8 +1,8 @@
 <% content_for :sidebar do %>
 <% end %>
 
-<h2>New Membership</h2>
+<h2><%= t(".new_membership") %></h2>
 
 <%= render :partial => 'form', :locals => {:form_url => business_memberships_url(@business)} %>
 
-<%= link_to 'Back', :back %>
+<%= link_to t('actions.back'), :back %>

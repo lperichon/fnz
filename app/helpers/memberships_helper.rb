@@ -1,5 +1,15 @@
 module MembershipsHelper
 
+  def attributes_for_duplicate(membership)
+    {
+      contact_id: membership.contact_id,
+      name: membership.name,
+      value: membership.value,
+      payment_type_id: membership.payment_type_id,
+      monthly_due_day: membership.monthly_due_day
+    }
+  end
+
   def suggested_agent_id_for(business,membership)
     agents = business.agents.enabled.where(padma_id: membership.contact.padma_teacher)
     agents.empty?? nil : agents.first.id

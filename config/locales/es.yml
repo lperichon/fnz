@@ -471,6 +471,8 @@ es:
       maturity_report: Vencimiento de membresías
     table_header:
       view_month_stats: Ver las estadísticas de %{month}
+    new:
+      new_membership: Nueva membresía
     show:
       see_in_crm: Ver en CRM
       new_installment: Nueva mensualidad

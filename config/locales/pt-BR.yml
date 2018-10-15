@@ -514,12 +514,14 @@ pt-BR:
       membership: Plano
       period: Período
       value: Valor
+    new:
+      new_membership: Novo plano
     edit:
       title: Editar plano
     form:
       contact_placeholder: Por favor, escolha um contato
       payment_type_placeholder: Por favor, escolha um tipo de pagamento
-      name_placeholdeR: Pode colocar um nome para o plano
+      name_placeholder: Pode colocar um nome para o plano
     overview:
       close_membership: Fechar plano
     stats_modal:

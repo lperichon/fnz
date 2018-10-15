@@ -32,6 +32,7 @@
    		<td>
    			<%= link_to content_tag(:i, "", :class => "icon-eye-open"), business_membership_path(@business, membership) %>
         	<%= link_to content_tag(:i, "", :class => "icon-edit"), edit_business_membership_path(@business, membership) %>
+          <%= link_to content_tag(:i, "", :class => "icon-copy"), new_business_membership_path(@business, membership: attributes_for_duplicate(membership)) %>
   			<%= link_to content_tag(:i, "", :class => "icon-trash"), business_membership_path(@business, membership), :confirm => t('actions.confirm_delete'), :method => 'delete' %>
   		</td>
    	</tr>
@@ -63,7 +64,7 @@
       <td>
       	<%= link_to content_tag(:i, "", :class => "icon-eye-open"), business_sale_path(@business, sale) %>
       	<%= link_to content_tag(:i, "", :class => "icon-edit"), edit_business_sale_path(@business, sale) %>
-  	<%= link_to content_tag(:i, "", :class => "icon-trash"), business_sale_path(@business, sale), :confirm => t('actions.confirm_delete'), :method => 'delete' %>
+        <%= link_to content_tag(:i, "", :class => "icon-trash"), business_sale_path(@business, sale), :confirm => t('actions.confirm_delete'), :method => 'delete' %>
       </td>
     </tr>
   <% end %>
