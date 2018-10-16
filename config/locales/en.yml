@@ -445,6 +445,8 @@ en:
     show:
       new_installment: New Installment
       create_enrollment: Create enrollment
+    new:
+      new_membership: New membership
     form:
       contact_placeholder: Please select contact
       payment_type_placeholder: Please select payment type
