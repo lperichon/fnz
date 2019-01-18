@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20180503221307) do
+ActiveRecord::Schema.define(:version => 20190118183736) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name",                                       :default => "",  :null => false
@@ -61,6 +61,9 @@ ActiveRecord::Schema.define(:version => 20180503221307) do
     t.string   "padma_teacher"
     t.integer  "current_membership_id"
   end
+
+  add_index "contacts", ["business_id"], :name => "index_contacts_on_business_id"
+  add_index "contacts", ["current_membership_id"], :name => "index_contacts_on_current_membership_id"
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0, :null => false
@@ -143,10 +146,14 @@ ActiveRecord::Schema.define(:version => 20180503221307) do
     t.string  "status"
   end
 
+  add_index "installments", ["membership_id"], :name => "index_installments_on_membership_id"
+
   create_table "installments_transactions", :force => true do |t|
     t.integer "installment_id"
     t.integer "transaction_id"
   end
+
+  add_index "installments_transactions", ["installment_id", "transaction_id"], :name => "installment_transaction_link_index"
 
   create_table "membership_imports_memberships", :force => true do |t|
     t.integer "membership_import_id"
@@ -168,6 +175,11 @@ ActiveRecord::Schema.define(:version => 20180503221307) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "memberships", ["business_id", "payment_type_id"], :name => "index_memberships_on_business_id_and_payment_type_id"
+  add_index "memberships", ["business_id"], :name => "index_memberships_on_business_id"
+  add_index "memberships", ["contact_id"], :name => "index_memberships_on_contact_id"
+  add_index "memberships", ["payment_type_id"], :name => "index_memberships_on_payment_type_id"
 
   create_table "payment_types", :force => true do |t|
     t.string   "name"
@@ -254,6 +266,8 @@ ActiveRecord::Schema.define(:version => 20180503221307) do
     t.date     "report_at"
     t.string   "external_id"
   end
+
+  add_index "transactions", ["business_id"], :name => "index_transactions_on_business_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",      :null => false
