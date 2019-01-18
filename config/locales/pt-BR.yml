@@ -943,6 +943,9 @@ pt-BR:
       date: ! '%Y-%m-%d'
       datetime: ! '%Y-%m-%d %H:%M:%S'
       time: ! '%H:%M:%S'
+  imports:
+    new:
+      new_import: Nova importação
   businesses:
     index:
       title: Negócios

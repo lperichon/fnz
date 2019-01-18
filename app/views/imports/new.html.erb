@@ -2,8 +2,8 @@
     <%= render :partial => 'businesses/edit_sidebar' %>
 <% end %>
 
-<h2>New Import</h2>
+<h2><%= t('.new_import') %></h2>
 
 <%= render :partial => 'form', :locals => {:form_url => business_imports_url(@business)} %>
 
-<%= link_to 'Back', business_imports_path(@business) %>
+<%= link_to t('actions.back'), business_imports_path(@business) %>
