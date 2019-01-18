@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20190118183736) do
+ActiveRecord::Schema.define(:version => 20190118195752) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name",                                       :default => "",  :null => false
@@ -146,6 +146,7 @@ ActiveRecord::Schema.define(:version => 20190118183736) do
     t.string  "status"
   end
 
+  add_index "installments", ["agent_id"], :name => "index_installments_on_agent_id"
   add_index "installments", ["membership_id"], :name => "index_installments_on_membership_id"
 
   create_table "installments_transactions", :force => true do |t|
