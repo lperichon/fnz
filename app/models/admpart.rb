@@ -138,18 +138,10 @@ class Admpart < ActiveRecord::Base
       url = ENV['attendance_url'] || CONFIG['attendance-url']
       key = ENV['attendance_key'] || CONFIG['attendance_key']
 
-      query = {
+      response = HTTParty.get("#{url}/api/v0/stats", query: attendance_report_query.merge({
         app_key: key,
-        stats: {
-          start_on: ref_date.beginning_of_month,
-          end_on: ref_date.end_of_month
-        },
-        account_name: business.padma_id,
-        include_former_students: 1,
-        include_cultural_activities: 1
-      }
-
-      response = HTTParty.get("#{url}/api/v0/stats", query: query)
+        account_name: business.padma_id
+      }))
       report = if response.code == 200
         response.parsed_response
       else
@@ -161,7 +153,24 @@ class Admpart < ActiveRecord::Base
     end
   end
 
+  def attendance_detail_url
+    url = ENV['attendance_url'] || CONFIG['attendance-url']
+    "#{url}/stats?#{attendance_report_query.to_query}&distribution=instructor"
+  end
+
+
   private
+
+  def attendance_report_query
+    {
+      stats: {
+        start_on: ref_date.beginning_of_month,
+        end_on: ref_date.end_of_month,
+        include_former_students: 1,
+        include_cultural_activities: 1
+      }
+    }
+  end
 
   def set_defaults
     self.owners_percentage = 50 if self.owners_percentage.nil?
