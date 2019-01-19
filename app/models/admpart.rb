@@ -129,7 +129,7 @@ class Admpart < ActiveRecord::Base
   #
   # teacher_id is username with . changed for _
   #
-  def fetch_attendance_report
+  def attendance_report
     cache_key = [self,ref_date,"attendance_report"]
     report = Rails.cache.read(cache_key)
     if report && !force_refresh
