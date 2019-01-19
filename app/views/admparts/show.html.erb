@@ -97,6 +97,26 @@
           <%= t(".owners_winnings") %>
         </th>
         <td>
+          <%= @adm.owners_aft_expenses_amount %>
+        </td>
+        <td colspan="2"></td>
+      </tr>
+    <% end %>
+    <% unless @adm.dir_from_owners_aft_expses_percentage.blank? %>
+      <tr>
+        <th>
+          <%= @adm.dir_from_owners_aft_expses_percentage %>% <%= t(".director_winnings") %>
+        </th>
+        <td>
+          <%= @adm.director_from_owners_amount %>
+        </td>
+        <td colspan="2"></td>
+      </tr>
+      <tr>
+        <th>
+          <%= t(".owners_winnings") %>
+        </th>
+        <td>
           <%= @adm.owners_final_amount %>
         </td>
         <td colspan="2"></td>
