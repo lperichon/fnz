@@ -66,6 +66,11 @@ class Transaction < ActiveRecord::Base
     self.tags.first
   end
 
+  def self.to_report_on_month(ref_date)
+    ref_date = Time.zone.today if ref_date.nil?
+    self.where("report_at >= ? AND report_at <= ?", ref_date.to_time.beginning_of_month, ref_date.to_time.end_of_month)
+  end
+
   def set_report_at
     self.report_at = self.transaction_at unless self.report_at.present?
   end

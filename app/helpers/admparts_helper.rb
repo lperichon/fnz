@@ -1,0 +1,2 @@
+module AdmpartsHelper
+end

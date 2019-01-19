@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20190118195752) do
+ActiveRecord::Schema.define(:version => 20190118222305) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name",                                       :default => "",  :null => false
@@ -22,6 +22,14 @@ ActiveRecord::Schema.define(:version => 20190118195752) do
   end
 
   add_index "accounts", ["deleted_at"], :name => "index_accounts_on_deleted_at"
+
+  create_table "admparts", :force => true do |t|
+    t.integer  "business_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "admparts", ["business_id"], :name => "index_admparts_on_business_id"
 
   create_table "agents", :force => true do |t|
     t.string  "name",        :default => "Unknown", :null => false
@@ -242,14 +250,17 @@ ActiveRecord::Schema.define(:version => 20190118195752) do
     t.integer "tag_id"
   end
 
+  add_index "taggings", ["tag_id", "transaction_id"], :name => "index_taggings_on_tag_id_and_transaction_id"
+
   create_table "tags", :force => true do |t|
-    t.string  "name",           :default => "", :null => false
+    t.string  "name",            :default => "", :null => false
     t.integer "business_id"
     t.integer "parent_id"
     t.integer "lft"
     t.integer "rgt"
     t.integer "depth"
     t.integer "children_count"
+    t.string  "admpart_section"
   end
 
   create_table "transactions", :force => true do |t|

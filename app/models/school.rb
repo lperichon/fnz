@@ -3,6 +3,8 @@ class School < Business
   has_many :memberships, :foreign_key => :business_id
   has_many :enrollments, :through => :memberships
 
+  has_one :admpart, foreign_key: :business_id
+
   after_create :initialize_padma_school
 
   def initialize_padma_school

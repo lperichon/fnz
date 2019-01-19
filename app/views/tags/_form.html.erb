@@ -14,6 +14,11 @@
     <p><%= f.label :name %><br />
       <%= f.text_field :name %></p>
 
+    <% if @tag.root? %>
+      <p><%= f.label :admpart_section %><br />
+        <%= f.select :admpart_section, collection: [""]+Admpart::VALID_SECTIONS %></p>
+    <% end %>
+
     <div class="actions">
       <%= f.submit %>
     </div>

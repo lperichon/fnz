@@ -8,6 +8,7 @@ Fnz::Application.routes.draw do
   devise_for :users, :controllers => { :registrations => "registrations"}
   resources :user_businesses
   resources :businesses do
+    resource :admpart
     resources :accounts do
       resources :transactions, :only => [:index] do
         get :stats, :on => :collection

@@ -5,6 +5,8 @@ FactoryGirl.define do
     description 'Test Transaction'
     amount 3.5
     business
+    creator { FactoryGirl.create(:user) }
+    date { Date.today }
     source
   end
 end

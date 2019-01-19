@@ -1,0 +1,61 @@
+<table class="table table-striped table-hover table-condensed table-bordered">
+
+  <thead>
+    <tr>
+      <th colspan="4"><%= l(@ref_date, format: :month) %></th>
+    </tr>
+    <tr>
+      <th colspan="2"><%= t('.incomes') %></th>
+      <th colspan="2"><%= t('.expenses') %></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% i = 0 %>
+    <%= loop do %>
+      <% income_tag = @adm.root_tags_for_section("income")[i] %>
+      <% expense_tag = @adm.root_tags_for_section("expense")[i] %>
+      <% break if income_tag.nil? && expense_tag.nil? %>
+      <tr>
+        <td>
+          <%= link_to income_tag.name,
+            business_tag_path(business_id: @business.id, id: income_tag.id) if income_tag %>
+        </td>
+        <td>
+          <%= @adm.total_for_tag(income_tag) if income_tag %>
+        </td>
+        <td>
+          <%= link_to expense_tag.name,
+            business_tag_path(business_id: @business.id, id: expense_tag.id) if expense_tag %>
+        </td>
+        <td>
+          <%= @adm.total_for_tag(expense_tag) if expense_tag %>
+        </td>
+      </tr>
+      <% i += 1 %>
+    <% end %>
+    <tr>
+      <th><%= t(".total_income") %></th>
+      <td><%= @adm.section_total("income") %></td>
+      <th><%= t(".total_expense") %></th>
+      <td><%= @adm.section_total("expense") %></td>
+    </tr>
+    <tr>
+      <th><%= t(".profit") %></th>
+      <td colspan="3"><%= @adm.profit %></td>
+    </tr>
+  </tbody>
+
+
+</table>
+
+<table>
+  <tr><th><%= t(".ignored_tags") %></th></tr>
+  <% @adm.wout_section_root_tags.each do |tag| %>
+    <tr>
+      <td>
+        <%= link_to tag.name, business_tag_path(business_id: @business.id, id: tag.id) %>
+      </td>
+    </tr>
+  <% end %>
+</table>
