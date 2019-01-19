@@ -69,4 +69,4 @@ gem "paranoia", "~> 1.0"
 gem 'rake', '< 11.0'
 gem "roo"
 gem "roo-xls"
-gem 'best_in_place', '~> 3.0.1'
+gem 'best_in_place', '~> 3.1.1'

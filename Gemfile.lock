@@ -65,7 +65,7 @@ GEM
       aws-sigv4 (~> 1.0)
     aws-sigv4 (1.0.2)
     bcrypt (3.1.7)
-    best_in_place (3.0.3)
+    best_in_place (3.1.1)
       actionpack (>= 3.2)
       railties (>= 3.2)
     bootstrap-datepicker-rails (1.1.1.11)
@@ -205,7 +205,7 @@ GEM
     quiet_assets (1.0.3)
       railties (>= 3.1, < 5.0)
     rack (1.4.7)
-    rack-cache (1.7.1)
+    rack-cache (1.8.0)
       rack (>= 0.4)
     rack-protection (1.5.3)
       rack
@@ -313,7 +313,7 @@ GEM
     therubyracer (0.12.1)
       libv8 (~> 3.16.14.0)
       ref
-    thor (0.20.0)
+    thor (0.20.3)
     thread_safe (0.3.4)
     tilt (1.4.1)
     timeliness (0.3.7)
@@ -356,7 +356,7 @@ DEPENDENCIES
   awesome_nested_fields (= 0.6.0)
   awesome_nested_set
   aws-sdk
-  best_in_place (~> 3.0.1)
+  best_in_place (~> 3.1.1)
   bootstrap-datepicker-rails (~> 1.1.1.11)
   bootstrap-daterangepicker-rails
   bootstrap-kaminari-views
@@ -421,4 +421,4 @@ RUBY VERSION
    ruby 2.0.0p648
 
 BUNDLED WITH
-   1.16.1
+   1.17.1
