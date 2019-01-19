@@ -44,6 +44,65 @@
       <th><%= t(".profit") %></th>
       <td colspan="3"><%= @adm.profit %></td>
     </tr>
+    <% if @adm.director_from_profit_percentage %>
+      <tr>
+        <th><%= @adm.director_from_profit_percentage %>% <%= t(".director_winnings") %></th>
+        <td colspan="3"><%= @adm.director_from_profit_pre_expenses_amount %></td>
+      </tr>
+      <% @adm.root_tags_for_section("director_expenses").each do |tag| %>
+        <tr>
+          <td colspan="2"></td>
+          <td>
+            <%= link_to tag.name,
+                        business_tag_path(business_id: @business.id, id: tag.id) %>
+          </td>
+          <td>
+            <%= @adm.total_for_tag(tag) %>
+          </td>
+        </tr>
+      <% end %>
+      <% unless @adm.root_tags_for_section("director_expenses").empty? %>
+        <tr>
+          <td colspan="2"></td>
+          <th><%= t(".director_winnings") %></th>
+          <td><%= @adm.director_from_profit_final_amount %></td>
+        </tr>
+      <% end %>
+      <tr>
+        <th><%= t(".subtotal") %></th>
+        <td colspan="3"><%= @adm.total_before_owner %></td>
+      </tr>
+    <% end %>
+    <tr>
+      <th><%= @adm.owners_percentage %>% <%= t(".owners_winnings") %></th>
+      <td><%= @adm.owners_pre_expenses_amount %></td>
+      <th><%= @adm.teams_percentage %>% <%= t(".team_winnings") %></th>
+      <td><%= @adm.teams_amount %></td>
+    </tr>
+    <% @adm.root_tags_for_section("owners_expenses").each do |tag| %>
+      <tr>
+        <td>
+          <%= link_to tag.name,
+                      business_tag_path(business_id: @business.id, id: tag.id) %>
+        </td>
+        <td>
+          <%= @adm.total_for_tag(tag) %>
+        </td>
+        <td colspan="2"></td>
+      </tr>
+    <% end %>
+    <% unless @adm.root_tags_for_section("owners_expenses").empty? %>
+      <tr>
+        <th>
+          <%= t(".owners_winnings") %>
+        </th>
+        <td>
+          <%= @adm.owners_final_amount %>
+        </td>
+        <td colspan="2"></td>
+      </tr>
+    <% end %>
+
   </tbody>
 
 

@@ -15,6 +15,8 @@ class AdmpartsController < UserApplicationController
     end
 
     @adm = Admpart.find_or_create_by_business_id(@business.id)
+    @adm.ref_date = @ref_date
+    @adm.force_refresh = params[:force_refresh]
   end
 
   def edit
