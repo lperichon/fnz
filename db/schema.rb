@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20190119182936) do
+ActiveRecord::Schema.define(:version => 20190119225538) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name",                                       :default => "",  :null => false
@@ -280,6 +280,8 @@ ActiveRecord::Schema.define(:version => 20190119182936) do
     t.datetime "reconciled_at"
     t.date     "report_at"
     t.string   "external_id"
+    t.integer  "contact_id"
+    t.integer  "agent_id"
   end
 
   add_index "transactions", ["business_id"], :name => "index_transactions_on_business_id"
