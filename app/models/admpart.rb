@@ -115,6 +115,52 @@ class Admpart < ActiveRecord::Base
     end
   end
 
+  ###
+  #
+  # hash of format:
+  # {
+  #   contact_padma_id => {
+  #     total => 3,
+  #     teacher_1 => '0.2',
+  #     teacher_2 => '0.8'
+  #   }
+  #   ...
+  # }
+  #
+  # teacher_id is username with . changed for _
+  #
+  def fetch_attendance_report
+    cache_key = [self,ref_date,"attendance_report"]
+    report = Rails.cache.read(cache_key)
+    if report && !force_refresh
+      report
+    else
+      url = ENV['attendance_url'] || CONFIG['attendance-url']
+      key = ENV['attendance_key'] || CONFIG['attendance_key']
+
+      query = {
+        app_key: key,
+        stats: {
+          start_on: ref_date.beginning_of_month,
+          end_on: ref_date.end_of_month
+        },
+        account_name: business.padma_id,
+        include_former_students: 1,
+        include_cultural_activities: 1
+      }
+
+      response = HTTParty.get("#{url}/api/v0/stats", query: query)
+      report = if response.code == 200
+        response.parsed_response
+      else
+        # attendance-ws error
+        nil
+      end
+      Rails.cache.write(cache_key, report, expires_in: 1.hour)
+      report
+    end
+  end
+
   private
 
   def set_defaults

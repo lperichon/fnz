@@ -10,6 +10,7 @@ accounts_key: "1234"
 contacts_key: "1234"
 messaging_key: "fnz_key"
 messaging_secret: "fnz_secret"
+attendance_key: "secret"
 MANDRILL_APIKEY: "1234"
 MANDRILL_USERNAME: "123"
 APPSIGNAL_PUSH_API_KEY: dsadsa
