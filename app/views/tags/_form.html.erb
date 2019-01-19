@@ -19,6 +19,11 @@
         <%= f.select :admpart_section, collection: [""]+Admpart::VALID_SECTIONS %></p>
     <% end %>
 
+    <% if @tag.root? || !@tag.system_name.blank? %>
+      <p><%= f.label :system_name %><br />
+        <%= f.select :system_name, collection: [""]+Tag::VALID_SYSTEM_NAMES %></p>
+    <% end %>
+
     <div class="actions">
       <%= f.submit %>
     </div>

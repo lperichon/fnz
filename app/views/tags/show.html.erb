@@ -7,6 +7,9 @@
 <% if @tag.root? %>
 <p>Section: <%= @tag.admpart_section %></p>
 <% end %>
+<% unless @tag.system_name.blank? %>
+<p>system name: <%= @tag.system_name %></p>
+<% end %>
 
 <%= link_to 'Edit', edit_business_tag_path(@business, @tag) %> |
 <%= link_to 'Back', business_tags_path(@business) %>
