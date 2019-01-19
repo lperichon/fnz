@@ -129,6 +129,8 @@ pt-BR:
         report_at: Data de reporte
         report_at_option: Data de reporte
         type: Tipo
+        agent: Instrutor
+        contact: Contato
       user:
         current_password: Senha atual
         email: E-mail

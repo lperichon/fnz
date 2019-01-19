@@ -89,6 +89,8 @@ en:
         date: Fecha
         target: Target account
         tags: Category
+        agent: Instructor
+        contact: Contact
       enrollment:
         agent: Instructor
         enrolled_on: Enrolled On

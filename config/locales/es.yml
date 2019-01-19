@@ -103,6 +103,8 @@ es:
         date: Date
         target: Cuenta destino
         tags: Categoría
+        agent: Instructor
+        contact: Contacto
       enrollment:
         agent: Instructor
         enrolled_on: Fecha de matrícula
