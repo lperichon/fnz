@@ -1,5 +1,7 @@
 class Admpart < ActiveRecord::Base
   
+  attr_accessible :director_from_profit_percentage, :owners_percentage, :dir_from_owners_aft_expses_percentage
+
   belongs_to :business
 
   has_many :admpart_tags

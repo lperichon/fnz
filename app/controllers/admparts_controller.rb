@@ -20,7 +20,16 @@ class AdmpartsController < UserApplicationController
   end
 
   def edit
+    @adm = Admpart.find_or_create_by_business_id(@business.id)
+  end
 
+  def update
+    @adm = Admpart.find_or_create_by_business_id(@business.id)
+    if @adm.update_attributes(params[:admpart])
+      redirect_to business_admpart_path(business_id: @business.id, force_refresh: true)
+    else
+      render :edit
+    end
   end
 
   private
