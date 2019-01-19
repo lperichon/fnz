@@ -15,6 +15,7 @@
     <%= loop do %>
       <% income_tag = @adm.root_tags_for_section("income")[i] %>
       <% expense_tag = @adm.root_tags_for_section("expense")[i] %>
+      <% i += 1 %>
       <% break if income_tag.nil? && expense_tag.nil? %>
       <tr>
         <td>
@@ -32,7 +33,6 @@
           <%= @adm.total_for_tag(expense_tag) if expense_tag %>
         </td>
       </tr>
-      <% i += 1 %>
     <% end %>
     <tr>
       <th><%= t(".total_income") %></th>
@@ -77,21 +77,34 @@
       <th><%= @adm.owners_percentage %>% <%= t(".owners_winnings") %></th>
       <td><%= @adm.owners_pre_expenses_amount %></td>
       <th><%= @adm.teams_percentage %>% <%= t(".team_winnings") %></th>
-      <td><%= @adm.teams_amount %></td>
+      <td><%= @adm.teams_pre_expenses_amount %></td>
     </tr>
-    <% @adm.root_tags_for_section("owners_expenses").each do |tag| %>
+
+    <% i = 0 %>
+    <% loop do %>
+      <% owner_tag = @adm.root_tags_for_section("owners_expenses")[i] %>
+      <% team_tag = @adm.root_tags_for_section("teams_expenses")[i] %>
+      <% break if owner_tag.nil? && team_tag.nil? %>
+      <% i += 1 %>
       <tr>
         <td>
-          <%= link_to tag.name,
-                      business_tag_path(business_id: @business.id, id: tag.id) %>
+          <%= link_to owner_tag.name,
+                      business_tag_path(business_id: @business.id, id: owner_tag.id) if owner_tag %>
         </td>
         <td>
-          <%= @adm.total_for_tag(tag) %>
+          <%= @adm.total_for_tag(owner_tag) if owner_tag %>
         </td>
-        <td colspan="2"></td>
+        <td>
+          <%= link_to team_tag.name,
+                      business_tag_path(business_id: @business.id, id: team_tag.id) if team_tag %>
+        </td>
+        <td>
+          <%= @adm.total_for_tag(team_tag) if team_tag %>
+        </td>
       </tr>
     <% end %>
-    <% unless @adm.root_tags_for_section("owners_expenses").empty? %>
+
+    <% unless @adm.root_tags_for_section("owners_expenses").empty? && @adm.root_tags_for_section("teams_expenses").empty?%>
       <tr>
         <th>
           <%= t(".owners_winnings") %>
@@ -99,7 +112,10 @@
         <td>
           <%= @adm.owners_aft_expenses_amount %>
         </td>
-        <td colspan="2"></td>
+        <th>
+          <%= t(".team_winnings") %>
+        </th>
+        <td><%= @adm.teams_final_amount %></td>
       </tr>
     <% end %>
     <% unless @adm.dir_from_owners_aft_expses_percentage.blank? %>
@@ -120,6 +136,20 @@
           <%= @adm.owners_final_amount %>
         </td>
         <td colspan="2"></td>
+      </tr>
+    <% end %>
+
+    <tr><td colspan="4"></td></tr>
+
+    <tr>
+      <th colspan="4"><%= t(".team_distribution") %></th>
+    </tr>
+    <% @adm.team_members.each do |tm| %>
+      <tr>
+        <td><%= tm.name %></td>
+        <td></td>
+        <td></td>
+        <td></td>
       </tr>
     <% end %>
 

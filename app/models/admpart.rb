@@ -4,8 +4,6 @@ class Admpart < ActiveRecord::Base
 
   belongs_to :business
 
-  has_many :admpart_tags
-
   [:owners_percentage, :director_from_profit_percentage, :dir_from_owners_aft_expses_percentage].each do |per|
     validates per,
               allow_blank: true,
@@ -20,7 +18,7 @@ class Admpart < ActiveRecord::Base
                 :force_refresh
 
 
-  VALID_SECTIONS = %W(income expense ignore director_expenses owners_expenses)
+  VALID_SECTIONS = %W(income expense ignore director_expenses owners_expenses teams_expenses)
 
   before_save :set_defaults
 
@@ -72,8 +70,16 @@ class Admpart < ActiveRecord::Base
     100 - owners_percentage
   end
 
-  def teams_amount
+  def teams_pre_expenses_amount
     total_before_owner + owners_pre_expenses_amount # resto el pre-expenses, si no estaria restando 2 veces.
+  end
+
+  def teams_final_amount
+    teams_pre_expenses_amount + section_total("teams_expenses")
+  end
+
+  def team_members
+    business.agents
   end
 
   def section_total(section)
