@@ -1,9 +1,18 @@
+<% if @ignore_zero_income %>
+  <div class="alert alert-notice">
+    <%= content_tag :div, t(".contacts_with_zero_income_skipped") %>
+  </div>
+<% end %>
+
+
 <%= l(@ref_date, format: :month) %>
+
+
 <table class="table table-striped table-hover table-condensed table-bordered">
   <thead>
     <tr>
       <th><%= t(".contact") %></th>
-      <th><%= t(".contact_teacher") %></th>
+      <th><%= t(".payment_teacher") %></th>
       <th><%= t(".paid") %></th>
       <th><%= t(".total_presence") %></th>
       <% @adm.team_members.each do |tm| %>
@@ -15,17 +24,46 @@
     <% @contacts.each do |contact| %>
       <% contact_detail = @adm.attendance_report[contact.padma_id] || {} %>
       <% contact_income = @adm.total_for_tag(@adm.installments_tag,nil,{contact_id: contact.id}) %>
-      <tr>
-        <th><%= contact.name %></th>
-        <th><%= contact.teacher.try(:name) %></th>
-        <td><%= pm contact_income %></td>
-        <td><%= contact_detail["total"] %></td>
-      <% @adm.team_members.each do |tm| %>
-        <% per = (contact_detail[tm.padma_id.gsub(".","_")].try(:to_f) || 0)*100 %>
-        <td><%= number_with_precision(per, precision: 2) %>%</td>
-        <td><%= pm contact_income * per/100 %></td>
+      <% next if @ignore_zero_income && contact_income == 0 %>
+      <% first_contact_row = true %>
+      <% teachers_with_income_for_this_contact = {} %>
+      <% @adm.team_members.each do |tm|
+           teacher_contact_income = @adm.total_for_tag(@adm.installments_tag,tm.id,{contact_id: contact.id})
+           if teacher_contact_income > 0
+             teachers_with_income_for_this_contact[tm] = teacher_contact_income
+           end
+         end
+         if !@ignore_zero_income && teachers_with_income_for_this_contact.empty?
+           teachers_with_income_for_this_contact[contact.teacher] = 0
+         end %>
+      <% teachers_with_income_for_this_contact.each_pair do |tm,income| %>
+        <tr>
+          <% if first_contact_row %>
+            <th rowspan="<%= teachers_with_income_for_this_contact.keys.size %>">
+              <%= contact.name %>
+            </th>
+          <% end %>
+          <td>
+            <%= tm.name if tm %>
+          </td>
+          <td><%= pm income %></td>
+          <% if first_contact_row %>
+            <td rowspan="<%= teachers_with_income_for_this_contact.keys.size %>">
+              <%= contact_detail["total"] %>
+            </td>
+          <% end %>
+        <% @adm.team_members.each do |tm| %>
+          <% per = (contact_detail[tm.padma_id.gsub(".","_")].try(:to_f) || 0)*100 %>
+          <% if first_contact_row %>
+            <td rowspan="<%= teachers_with_income_for_this_contact.keys.size %>">
+              <%= number_with_precision(per, precision: 2) %>%
+            </td>
+          <% end %>
+          <td><%= pm income * per/100 %></td>
+        <% end %>
+        </tr>
+        <% first_contact_row = false %>
       <% end %>
-      </tr>
     <% end %>
     <tr>
       <th><%= t(".no_teacher") %></th>
