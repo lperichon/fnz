@@ -7,6 +7,7 @@ class Ability
       can :manage, :all
     end
 
+    can :manage, Admpart, :business => {:transactions_enabled => true}
     can :manage, Transaction, :business => {:transactions_enabled => true}
     can :manage, Account, :business => {:transactions_enabled => true}
     can :manage, Tag, :business => {:transactions_enabled => true}

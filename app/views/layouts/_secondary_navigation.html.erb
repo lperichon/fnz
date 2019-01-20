@@ -25,6 +25,11 @@
                     business_memberships_path(@business, :membership_search => {:ends_after => Date.today.beginning_of_month, :ends_before => Date.today.end_of_month, :payment_type_id => [:all]}) %></li>
           <li><%= link_to t('installments.secondary_navigation.unpaid_installments'),
                     business_installments_path(@business, :installment_search => {:status => [:incomplete, :due, :pending, :overdue], :due_after => Date.today.beginning_of_month, :due_before => Date.today.end_of_month, :agent_id => [:all]}) %></li>
+
+          <% if can?(:read, @business.admpart ) %>
+            <li><%= link_to t('admparts.secondary_navigation.administration'), business_admpart_path(business_id: @business.id, ref_date: Date.today) %></li>
+            <li><%= link_to t('admparts.secondary_navigation.attendance_detail'), attendance_detail_business_admpart_path(business_id: @business.id, ref_date: Date.today) %></li>
+          <% end %>
         </ul>
       </li>
   <% elsif @business.is_a? Event %>

@@ -211,6 +211,10 @@ es:
       user: Usuario
       contact: Contacto
       inscription: Inscripción
+  admparts:
+    secondary_navigation:
+      administration: Administración participativa
+      attendance_detail: Detalle x asistencia
   date:
     abbr_day_names:
     - dom

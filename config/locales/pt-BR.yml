@@ -204,6 +204,10 @@ pt-BR:
       user: Usuário
       contact: Contato
       inscription: Inscrição
+  admparts:
+    secondary_navigation:
+      administration: Administração participativa
+      attendance_detail: Detalhe x presenças
   application:
     list_transactions_modal:
       close: Fechar
