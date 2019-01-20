@@ -4,12 +4,13 @@
 <tr>
   <th><%= t(".agent") %></th>
   <th><%= t(".enrollments_income") %></th>
+  <th><%= t(".enrollments_quantity") %></th>
 </tr>
 <% @adm.team_members.each do |tm| %>
   <tr>
     <th><%= tm.name %></th>
     <td><%= pm @adm.total_for_tag(@adm.enrollments_tag, tm.id) %></td>
-    <td></td>
+    <td><%= @adm.enrollments_by_teacher[tm.padma_id] %></td>
     <td></td>
   </tr>
 <% end %>
