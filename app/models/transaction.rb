@@ -152,7 +152,6 @@ class Transaction < ActiveRecord::Base
   end
 
   def self.update_each_admpart_tag
-    # no validations or callbacks
-    self.all.each{|t| t.update_column(:admpart_tag_id, t.tag_id) }
+    self.all.each{|t| t.update_column(:admpart_tag_id, t.taggings.first.try(:tag_id)) }
   end
 end
