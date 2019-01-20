@@ -19,22 +19,7 @@
 
     <tr><td colspan="4"></td></tr>
 
-    <tr>
-      <th colspan="4"><%= t(".team_distribution") %></th>
-    </tr>
-    <% @adm.team_members.each do |tm| %>
-      <tr>
-        <td><%= tm.name %></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-    <% end %>
-    <tr>
-      <td colspan="4">
-        <%= link_to t(".attendance_detail"), @adm.attendance_detail_url, target: "_blank" %>
-      </td>
-    </tr>
+    <%= render "team_distribution" %>
 
   </tbody>
 

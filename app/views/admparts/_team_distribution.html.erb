@@ -1,0 +1,26 @@
+<tr>
+  <th colspan="4"><%= t(".team_distribution") %></th>
+</tr>
+<tr>
+  <th><%= t(".agent") %></th>
+  <th><%= t(".raw_installment") %></th>
+</tr>
+<% @adm.team_members.each do |tm| %>
+  <tr>
+    <th><%= tm.name %></th>
+    <td><%= @adm.total_for_tag(@adm.installments_tag, tm.id) %></td>
+    <td></td>
+    <td></td>
+  </tr>
+<% end %>
+  <tr>
+    <th><%= t(".no_teacher") %></th>
+    <td><%= @adm.total_for_tag(@adm.installments_tag, "") %></td>
+    <td></td>
+    <td></td>
+  </tr>
+<tr>
+  <td colspan="4">
+    <%= link_to t(".attendance_detail"), @adm.attendance_detail_url, target: "_blank" %>
+  </td>
+</tr>

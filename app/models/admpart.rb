@@ -95,8 +95,12 @@ class Admpart < ActiveRecord::Base
   end
 
   CACHE_DURATION = 5.minutes
-  def total_for_tag(tag)
-    cache_key = [self,ref_date,"total_for_tag",tag]
+  def total_for_tag(tag,agent_id=nil)
+    cache_key = [id,ref_date,"total_for_tag",tag]
+    unless agent_id.nil?
+      cache_key << "agent:#{agent_id}"
+    end
+
     @total = Rails.cache.read(cache_key)
     if @total && !force_refresh
       @total
@@ -104,11 +108,31 @@ class Admpart < ActiveRecord::Base
       @total = 0
       # TODO consider currencies
       # TODO consider state of transaction
-      @total += tag.transactions.credits.to_report_on_month(ref_date).sum(:amount)
-      @total -= tag.transactions.debits.to_report_on_month(ref_date).sum(:amount)
+      
+      scope = tag.transactions.to_report_on_month(ref_date)
+      unless agent_id.nil?
+        if agent_id == ""
+          scope = scope.where("agent_id is null")
+        else
+          scope = scope.where(agent_id: agent_id) 
+        end
+      end
+
+      @total += scope.credits.sum(:amount)
+      @total -= scope.debits.sum(:amount)
+
       tag.descendants.each do |d|
-        @total += d.transactions.credits.to_report_on_month(ref_date).sum(:amount)
-        @total -= d.transactions.debits.to_report_on_month(ref_date).sum(:amount)
+        s = d.transactions.to_report_on_month(ref_date)
+        unless agent_id.nil?
+          if agent_id == ""
+            s= s.where("agent_id is null")
+          else
+            s= s.where(agent_id: agent_id) 
+          end
+        end
+
+        @total += s.credits.sum(:amount)
+        @total -= s.debits.sum(:amount)
       end
       Rails.cache.write(cache_key, @total, expires_in: CACHE_DURATION)
       @total
@@ -159,17 +183,19 @@ class Admpart < ActiveRecord::Base
   end
 
   def installments_tag
-    @installments_tag ||= business.tags.where(system_name: "installment")
+    @installments_tag ||= business.tags.where(system_name: "installment").first
   end
 
   def sales_tag
-    @sales_tag ||= business.tags.where(system_name: "sale")
+    @sales_tag ||= business.tags.where(system_name: "sale").first
   end
 
   def enrollments_tag
-    @enrollments_tag ||= business.tags.where(system_name: "enrollment")
+    @enrollments_tag ||= business.tags.where(system_name: "enrollment").first
   end
 
+
+  
   private
 
   def attendance_report_query
