@@ -1,0 +1,48 @@
+<%= l(@ref_date, format: :month) %>
+<table class="table table-striped table-hover table-condensed table-bordered">
+  <thead>
+    <tr>
+      <th><%= t(".contact") %></th>
+      <th><%= t(".paid") %></th>
+      <th><%= t(".total_presence") %></th>
+      <% @adm.team_members.each do |tm| %>
+        <th colspan="2"><%= tm.name %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% @contacts.each do |contact| %>
+      <% contact_detail = @adm.attendance_report[contact.padma_id] || {} %>
+      <% contact_income = @adm.total_for_tag(@adm.installments_tag,nil,{contact_id: contact.id}) %>
+      <tr>
+        <th><%= contact.name %></th>
+        <td><%= pm contact_income %></td>
+        <td><%= contact_detail["total"] %></td>
+      <% @adm.team_members.each do |tm| %>
+        <% per = (contact_detail[tm.padma_id.gsub(".","_")].try(:to_f) || 0)*100 %>
+        <td><%= number_with_precision(per, precision: 2) %>%</td>
+        <td><%= pm contact_income * per/100 %></td>
+      <% end %>
+      </tr>
+    <% end %>
+    <tr>
+      <th><%= t(".no_teacher") %></th>
+      <td><%= pm @adm.total_for_tag(@adm.installments_tag,nil,{contact_id: ''}) %></td>
+      <td></td>
+      <% @adm.team_members.each do |tm| %>
+        <td></td>
+      <% end %>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th></th>
+      <td><%= pm @adm.total_for_tag(@adm.installments_tag) %></td>
+      <td></td>
+      <% @adm.team_members.each do |tm| %>
+        <td></td>
+      <% end %>
+    </tr>
+  </tfoot>
+
+</table>

@@ -111,6 +111,7 @@ class Admpart < ActiveRecord::Base
     unless agent_id.nil?
       cache_key << "agent:#{agent_id}"
     end
+    contact_id = options[:contact_id]
 
     @total = Rails.cache.read(cache_key)
     if @total && !force_refresh
@@ -128,6 +129,13 @@ class Admpart < ActiveRecord::Base
           scope = scope.where(agent_id: agent_id) 
         end
       end
+      unless contact_id.nil?
+        if contact_id == ""
+          scope = scope.where("contact_id is null")
+        else
+          scope = scope.where(contact_id: contact_id) 
+        end
+      end
 
       @total += scope.credits.sum(:amount)
       @total -= scope.debits.sum(:amount)
@@ -139,6 +147,13 @@ class Admpart < ActiveRecord::Base
             s= s.where("agent_id is null")
           else
             s= s.where(agent_id: agent_id) 
+          end
+        end
+        unless contact_id.nil?
+          if contact_id == ""
+            s= s.where("contact_id is null")
+          else
+            s= s.where(contact_id: contact_id) 
           end
         end
 
@@ -164,7 +179,8 @@ class Admpart < ActiveRecord::Base
   #
   # hash of format:
   # {
-  #   contact_padma_id => {
+  #   contact_id => {
+  #     name => "Fulano de tal",
   #     total => 3,
   #     teacher_1 => '0.2',
   #     teacher_2 => '0.8'
@@ -175,26 +191,30 @@ class Admpart < ActiveRecord::Base
   # teacher_id is username with . changed for _
   #
   def attendance_report
-    cache_key = [self,ref_date,"attendance_report"]
-    report = Rails.cache.read(cache_key)
-    if report && !force_refresh
-      report
+    if @attendance_report
+      @attendance_report
     else
-      url = ENV['attendance_url'] || CONFIG['attendance-url']
-      key = ENV['attendance_key'] || CONFIG['attendance_key']
-
-      response = HTTParty.get("#{url}/api/v0/stats", query: attendance_report_query.merge({
-        app_key: key,
-        account_name: business.padma_id
-      }))
-      report = if response.code == 200
-        response.parsed_response
+      cache_key = [self,ref_date,"attendance_report"]
+      report = Rails.cache.read(cache_key)
+      if report && !force_refresh
+        report
       else
-        # attendance-ws error
-        nil
+        url = ENV['attendance_url'] || CONFIG['attendance-url']
+        key = ENV['attendance_key'] || CONFIG['attendance_key']
+
+        response = HTTParty.get("#{url}/api/v0/stats", query: attendance_report_query.merge({
+          app_key: key,
+          account_name: business.padma_id
+        }))
+        report = if response.code == 200
+          response.parsed_response
+        else
+          # attendance-ws error
+          nil
+        end
+        Rails.cache.write(cache_key, report, expires_in: 1.hour)
+        @attendance_report = report
       end
-      Rails.cache.write(cache_key, report, expires_in: 1.hour)
-      report
     end
   rescue Errno::ECONNREFUSED => e
     nil
@@ -288,7 +308,6 @@ class Admpart < ActiveRecord::Base
   rescue Errno::ECONNREFUSED => e
     nil
   end
-
   
   private
 

@@ -19,6 +19,20 @@ class AdmpartsController < UserApplicationController
     @adm.force_refresh = true # params[:force_refresh] 
   end
 
+  def attendance_detail
+    @ref_date = if params[:ref_date]
+      Date.parse(params[:ref_date])
+    else
+      Time.zone.today
+    end
+
+    @adm = Admpart.find_or_create_by_business_id(@business.id)
+    @adm.ref_date = @ref_date
+    @adm.force_refresh = true # params[:force_refresh] 
+
+    @contacts = @adm.business.contacts.where(padma_id: @adm.attendance_report.keys)
+  end
+
   def edit
     @adm = Admpart.find_or_create_by_business_id(@business.id)
   end
