@@ -310,33 +310,37 @@ class Admpart < ActiveRecord::Base
   # @return Integer enrollments on given month
   # @return nil on error
   def enrollments_by_teacher
-    cache_key = [id,ref_date,"enrollments_by_teacher"]
-    report = Rails.cache.read(cache_key)
-    if report && !force_refresh
-      report
+    if @enrollments_by_teacher
+      @enrollments_by_teacher
     else
-      url = ENV["overmind_url"] || CONFIG["overmind-url"]
-      key = ENV["overmind_key"] || CONFIG["overmind_key"]
-
-      response = HTTParty.get("#{url}/api/v0/monthly_stats",query: {
-        api_key: key,
-        where: {
-          type: 'TeacherMonthlyStat',
-          year: ref_date.year,
-          month: ref_date.month,
-          account_name: business.padma_id,
-          name: 'enrollments'
-        }
-      }) 
-      if response.code == 200
-        report = {}
-        response.parsed_response["collection"].each do |stat|
-          report[stat["teacher_username"]] = stat["value"]
-        end
-        Rails.cache.write(cache_key,report,expires_in: 1.hour)
+      cache_key = [id,ref_date,"enrollments_by_teacher"]
+      report = Rails.cache.read(cache_key)
+      if report && !force_refresh
         report
       else
-        nil
+        url = ENV["overmind_url"] || CONFIG["overmind-url"]
+        key = ENV["overmind_key"] || CONFIG["overmind_key"]
+
+        response = HTTParty.get("#{url}/api/v0/monthly_stats",query: {
+          api_key: key,
+          where: {
+            type: 'TeacherMonthlyStat',
+            year: ref_date.year,
+            month: ref_date.month,
+            account_name: business.padma_id,
+            name: 'enrollments'
+          }
+        }) 
+        if response.code == 200
+          report = {}
+          response.parsed_response["collection"].each do |stat|
+            report[stat["teacher_username"]] = stat["value"]
+          end
+          Rails.cache.write(cache_key,report,expires_in: 1.hour)
+          report
+        else
+          nil
+        end
       end
     end
   rescue Errno::ECONNREFUSED => e
