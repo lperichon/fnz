@@ -83,6 +83,28 @@
   </tbody>
   <tfoot>
     <tr>
+      <th><%= t(".total_by_attendance") %></th>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td><%= pm (@adm.total_for_tag(@adm.installments_tag) - @adm.total_for_tag(@adm.installments_tag,nil,{contact_id: ''})) * ( @adm.agent_installments_attendance_percentage ) / 100 %></td>
+      <td></td>
+      <% @adm.team_members.each do |tm| %>
+        <td colspan="2"><%= pm @adm.agent_installments_collection_by_presence_total(tm) %></td>
+      <% end %>
+    </tr>
+    <tr>
+      <th><%= t(".total_by_link") %></th>
+      <td></td>
+      <td></td>
+      <td><%= pm (@adm.total_for_tag(@adm.installments_tag) - @adm.total_for_tag(@adm.installments_tag,nil,{contact_id: ''})) * ( @adm.agent_installments_link_percentage ) / 100 %></td>
+      <td></td>
+      <td></td>
+      <% @adm.team_members.each do |tm| %>
+        <td colspan="2"><%= pm @adm.agent_installments_collection_by_link_total(tm) %></td>
+      <% end %>
+    </tr>
+    <tr>
       <th><%= t("total") %></th>
       <td></td>
       <td><%= pm @adm.total_for_tag(@adm.installments_tag) %></td>
@@ -90,7 +112,7 @@
       <td><%= pm (@adm.total_for_tag(@adm.installments_tag) - @adm.total_for_tag(@adm.installments_tag,nil,{contact_id: ''})) * ( @adm.agent_installments_attendance_percentage ) / 100 %></td>
       <td></td>
       <% @adm.team_members.each do |tm| %>
-        <td colspan="2"><%= pm @adm.agent_installments_collection_by_presence_total(tm) %></td>
+        <td colspan="2"><%= pm @adm.agent_installments_collection_total(tm) %></td>
       <% end %>
     </tr>
   </tfoot>

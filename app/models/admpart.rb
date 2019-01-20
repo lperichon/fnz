@@ -243,6 +243,15 @@ class Admpart < ActiveRecord::Base
     100 - (agent_installments_attendance_percentage || 0)
   end
 
+  def agent_installments_collection_by_link_total(agent)
+    acum = 0
+    contacts_in_attendance_report.each do |contact|
+      contact_detail = attendance_report[contact.padma_id] || {}
+      acum += total_for_tag(installments_tag,agent.id,{contact_id: contact.id}) * agent_installments_link_percentage / 100
+    end
+    acum
+  end
+
   def agent_installments_collection_by_presence_total(agent)
     acum = 0
     contacts_in_attendance_report.each do |contact|
@@ -252,6 +261,10 @@ class Admpart < ActiveRecord::Base
       acum += per * distributable_contact_payment / 100
     end
     acum
+  end
+  
+  def agent_installments_collection_total(agent)
+    agent_installments_collection_by_presence_total(agent) + agent_installments_collection_by_link_total(agent)
   end
 
   def sales_tag
