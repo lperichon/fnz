@@ -237,6 +237,17 @@ class Admpart < ActiveRecord::Base
     @installments_tag ||= system_tag("installment")
   end
 
+  def agent_installments_collection_by_presence_total(agent)
+    acum = 0
+    contacts_in_attendance_report.each do |contact|
+      contact_detail = attendance_report[contact.padma_id] || {}
+      contact_paid = total_for_tag(installments_tag,nil,{contact_id: contact.id})
+      per = (contact_detail[agent.padma_id.gsub(".","_")].try(:to_f) || 0)*100
+      acum += per * contact_paid / 100
+    end
+    acum
+  end
+
   def sales_tag
     @sales_tag ||= system_tag("sale")
   end

@@ -30,17 +30,17 @@
       <td><%= pm @adm.total_for_tag(@adm.installments_tag,nil,{contact_id: ''}) %></td>
       <td></td>
       <% @adm.team_members.each do |tm| %>
-        <td></td>
+        <td colspan="2"></td>
       <% end %>
     </tr>
   </tbody>
   <tfoot>
     <tr>
-      <th></th>
+      <th><%= t("total") %></th>
       <td><%= pm @adm.total_for_tag(@adm.installments_tag) %></td>
       <td></td>
       <% @adm.team_members.each do |tm| %>
-        <td></td>
+        <td colspan="2"><%= pm @adm.agent_installments_collection_by_presence_total(tm) %></td>
       <% end %>
     </tr>
   </tfoot>
