@@ -36,6 +36,9 @@ class Transaction < ActiveRecord::Base
   has_many :taggings
   has_many :tags, :through => :taggings
 
+  belongs_to :admpart_tag, class_name: "Tag"
+  before_save :set_admpart_tag
+
   has_and_belongs_to_many :sales
   has_and_belongs_to_many :enrollments
   has_and_belongs_to_many :installments
@@ -50,7 +53,7 @@ class Transaction < ActiveRecord::Base
   validates :report_at, :presence => true
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :tag_id, :tag_ids, :description, :business_id, :source_id, :amount, :type, :transaction_at, :target_id, :conversion_rate, :state, :reconciled_at, :sale_ids, :installment_ids, :enrollment_ids, :creator_id, :report_at, :report_at_option, :inscription_ids, :contact_id, :agent_id
+  attr_accessible :tag_id, :tag_ids, :description, :business_id, :source_id, :amount, :type, :transaction_at, :target_id, :conversion_rate, :state, :reconciled_at, :sale_ids, :installment_ids, :enrollment_ids, :creator_id, :report_at, :report_at_option, :inscription_ids, :contact_id, :agent_id, :admpart_tag_id 
 
   scope :untagged, includes(:taggings).where("taggings.tag_id is null")
 
@@ -142,5 +145,14 @@ class Transaction < ActiveRecord::Base
 
   def self.csv_header
     "Account,Date,Amount,Description,Tags".split(',')
+  end
+
+  def set_admpart_tag
+    self.admpart_tag_id = self.tag_id
+  end
+
+  def self.update_each_admpart_tag
+    # no validations or callbacks
+    self.all.each{|t| t.update_column(:admpart_tag_id, t.tag_id) }
   end
 end

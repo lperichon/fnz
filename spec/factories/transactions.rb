@@ -2,11 +2,12 @@
 
 FactoryGirl.define do
   factory :transaction do
+    type "Debit"
     description 'Test Transaction'
     amount 3.5
     business
     creator { FactoryGirl.create(:user) }
-    date { Date.today }
+    transaction_at { Date.today }
     source
   end
 end
