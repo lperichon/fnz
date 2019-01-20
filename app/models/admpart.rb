@@ -122,61 +122,46 @@ class Admpart < ActiveRecord::Base
     business.tags.roots.where("admpart_section is null or admpart_section not in (?)", VALID_SECTIONS)
   end
 
+  def transactions_for_tag(tag,options={})
+    return [] if tag.nil?
+    tags = [tag]
+    tags += tag.descendants
+    scope = business.transactions
+                    .to_report_on_month(ref_date)
+                    .where(admpart_tag_id: tags.map(&:id))
+    if options[:agent_id] == ""
+      scope = scope.where(agent_id: nil)
+    elsif options[:agent_id]
+      scope = scope.where(agent_id: options[:agent_id])
+    end
+
+    if options[:contact_id] == ""
+      scope = scope.where(contact_id: nil)
+    elsif options[:contact_id]
+      scope = scope.where(contact_id: options[:contact_id])
+    end
+    scope
+  end
+
   CACHE_DURATION = 5.minutes
   def total_for_tag(tag,agent_id=nil,options={})
     cache_key = [id,ref_date,"total_for_tag",tag,options.to_param]
     unless agent_id.nil?
       cache_key << "agent:#{agent_id}"
     end
-    contact_id = options[:contact_id]
 
     @total = Rails.cache.read(cache_key)
     if @total && !force_refresh
       @total
     else
       @total = 0
+
       # TODO consider currencies
       # TODO consider state of transaction
       
-      scope = tag.transactions.to_report_on_month(ref_date)
-      unless agent_id.nil?
-        if agent_id == ""
-          scope = scope.where("agent_id is null")
-        else
-          scope = scope.where(agent_id: agent_id) 
-        end
-      end
-      unless contact_id.nil?
-        if contact_id == ""
-          scope = scope.where("contact_id is null")
-        else
-          scope = scope.where(contact_id: contact_id) 
-        end
-      end
-
+      scope = transactions_for_tag(tag, options.merge({ agent_id: agent_id }))
       @total += scope.credits.sum(:amount)
       @total -= scope.debits.sum(:amount)
-
-      tag.descendants.each do |d|
-        s = d.transactions.to_report_on_month(ref_date)
-        unless agent_id.nil?
-          if agent_id == ""
-            s= s.where("agent_id is null")
-          else
-            s= s.where(agent_id: agent_id) 
-          end
-        end
-        unless contact_id.nil?
-          if contact_id == ""
-            s= s.where("contact_id is null")
-          else
-            s= s.where(contact_id: contact_id) 
-          end
-        end
-
-        @total += s.credits.sum(:amount)
-        @total -= s.debits.sum(:amount)
-      end
 
       if agent_id.nil? && !options[:ignore_discounts]
         case tag.system_name
