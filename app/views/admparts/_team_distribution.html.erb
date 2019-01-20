@@ -4,25 +4,33 @@
 </tr>
 <tr>
   <th><%= t(".agent") %></th>
-  <th><%= t(".raw_installment") %></th>
+  <th><%= t(".installment_collection") %></th>
 </tr>
+<% acum = 0 %>
 <% @adm.team_members.each do |tm| %>
+  <% acum += @adm.agent_installments_collection_total(tm) %>
   <tr>
     <th><%= tm.name %></th>
-    <td><%= pm @adm.total_for_tag(@adm.installments_tag, tm.id) %></td>
+    <td><%= pm @adm.agent_installments_collection_total(tm) %></td>
     <td></td>
     <td></td>
   </tr>
 <% end %>
   <tr>
     <th><%= t(".no_teacher") %></th>
-    <td><%= pm @adm.total_for_tag(@adm.installments_tag, "") %></td>
+    <td><%= pm (@adm.total_for_tag(@adm.installments_tag)-acum) %></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <th><%= t("total") %></th>
+    <td><%= pm @adm.total_for_tag(@adm.installments_tag) %></td>
     <td></td>
     <td></td>
   </tr>
 <tr>
   <td colspan="4">
-    <%= link_to t(".attendance_detail"), @adm.attendance_detail_url, target: "_blank" %>
+    <%= link_to t(".attendance_detail"), attendance_detail_business_admpart_path(@adm.business) %>
   </td>
 </tr>
 </table>
