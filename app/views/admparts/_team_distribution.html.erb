@@ -5,15 +5,18 @@
 <tr>
   <th><%= t(".agent") %></th>
   <th><%= t(".installment_collection") %></th>
+  <th><%= t(".percentage_from_total") %></th>
+  <th><%= t(".takes_from_team") %></th>
 </tr>
+<% team_winnings = @adm.teams_final_amount %>
 <% acum = 0 %>
 <% @adm.team_members.each do |tm| %>
   <% acum += @adm.agent_installments_collection_total(tm) %>
   <tr>
     <th><%= tm.name %></th>
-    <td><%= pm @adm.agent_installments_collection_total(tm) %></td>
-    <td></td>
-    <td></td>
+    <td><%= pm @adm.agent_total_collection(tm) %></td>
+    <td><%= number_with_precision((per = @adm.agent_from_team_final_amount_percentage(tm)), precision: 2) %>%</td>
+    <td><%= pm (team_winnings * per / 100) %></td>
   </tr>
 <% end %>
   <tr>

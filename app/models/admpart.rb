@@ -95,6 +95,16 @@ class Admpart < ActiveRecord::Base
     business.agents
   end
 
+  def agent_total_collection(agent)
+    # considering only INSTALLMENTS
+    agent_installments_collection_total(agent)
+  end
+
+  def agent_from_team_final_amount_percentage(agent)
+    # considering only INSTALLMENTS
+    (agent_installments_collection_total(agent) / total_for_tag(installments_tag)) * 100
+  end
+
   def section_total(section)
     root_tags_for_section(section).sum{|t| total_for_tag(t) }
   end
