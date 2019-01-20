@@ -1,0 +1,27 @@
+<tr>
+  <th colspan="4"><%= t(".sales") %></th>
+</tr>
+<tr>
+  <th><%= t(".agent") %></th>
+  <th><%= t(".sales_income") %></th>
+  <th colspan="2"><%= t(".agent_comission") %></th>
+</tr>
+<% @adm.team_members.each do |tm| %>
+  <tr>
+    <th><%= tm.name %></th>
+    <td><%= pm @adm.total_for_tag(@adm.sales_tag, tm.id) %></td>
+    <td colspan="2">
+      <%= pm @adm.total_for_tag(@adm.sales_tag, tm.id) * (@adm.agent_sale_percentage || 0) / 100 %>
+    </td>
+  </tr>
+<% end %>
+<tr>
+  <th><%= t(".no_teacher") %></th>
+  <td><%= pm @adm.total_for_tag(@adm.sales_tag, "") %></td>
+  <td></td>
+  <td></td>
+</tr>
+<tr>
+  <th colspan="2"></th>
+  <th colspan="2"><%= pm @adm.sales_total_discount %></th>
+</tr>

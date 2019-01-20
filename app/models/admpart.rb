@@ -1,10 +1,21 @@
 class Admpart < ActiveRecord::Base
   
-  attr_accessible :director_from_profit_percentage, :owners_percentage, :dir_from_owners_aft_expses_percentage
+  attr_accessible :director_from_profit_percentage,         # % del lucro para director 
+                  :owners_percentage,                       # % para inversores
+                  :dir_from_owners_aft_expses_percentage,   # % de inversores para director
+                  :agent_sale_percentage,                   # % de la venta para instructor
+                  :agent_enrollment_income_percentage,      # % de recaudación x matrículas para instructor
+                  :agent_enrollment_quantity_fixed_amount   # valor fijo x matricula para instructor
+  
 
   belongs_to :business
 
-  [:owners_percentage, :director_from_profit_percentage, :dir_from_owners_aft_expses_percentage].each do |per|
+  [:owners_percentage,
+   :director_from_profit_percentage,
+   :dir_from_owners_aft_expses_percentage,
+   :agent_sale_percentage,
+   :agent_enrollment_income_percentage
+  ].each do |per|
     validates per,
               allow_blank: true,
               numericality: {
@@ -95,7 +106,7 @@ class Admpart < ActiveRecord::Base
   end
 
   CACHE_DURATION = 5.minutes
-  def total_for_tag(tag,agent_id=nil)
+  def total_for_tag(tag,agent_id=nil,ignore_discounts=false)
     cache_key = [id,ref_date,"total_for_tag",tag]
     unless agent_id.nil?
       cache_key << "agent:#{agent_id}"
@@ -134,6 +145,16 @@ class Admpart < ActiveRecord::Base
         @total += s.credits.sum(:amount)
         @total -= s.debits.sum(:amount)
       end
+
+      if agent_id.nil? && !ignore_discounts
+        case tag.system_name
+        when "sale" 
+          @total -= sales_total_discount
+        when "enrollment"
+          @total -= enrollments_total_discount
+        end
+      end
+
       Rails.cache.write(cache_key, @total, expires_in: CACHE_DURATION)
       @total
     end
@@ -182,19 +203,38 @@ class Admpart < ActiveRecord::Base
     "#{url}/stats?#{attendance_report_query.to_query}&distribution=instructor"
   end
 
+  def system_tag(name)
+    business.tags.where(system_name: name).first
+  end
+
   def installments_tag
-    @installments_tag ||= business.tags.where(system_name: "installment").first
+    @installments_tag ||= system_tag("installment")
   end
 
   def sales_tag
-    @sales_tag ||= business.tags.where(system_name: "sale").first
+    @sales_tag ||= system_tag("sale")
+  end
+
+  def sales_total_discount
+    acum = 0
+    team_members.each do |tm|
+      acum += total_for_tag(sales_tag, tm.id) * (agent_sale_percentage || 0) / 100
+    end
+    acum 
   end
 
   def enrollments_tag
-    @enrollments_tag ||= business.tags.where(system_name: "enrollment").first
+    @enrollments_tag ||= system_tag("enrollment")
   end
 
-
+  def enrollments_total_discount
+    acum = 0
+    team_members.each do |tm|
+      acum += total_for_tag(enrollments_tag, tm.id) * (agent_enrollment_income_percentage || 0) / 100
+      # TODO discount agent_enrollment_quantity_fixed_amount
+    end
+    acum
+  end
   
   private
 

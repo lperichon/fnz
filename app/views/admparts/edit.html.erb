@@ -88,6 +88,29 @@
       <td> </td>
       <td colspan="2"></td>
     </tr>
+
+    <tr><td colspan="4"></td></tr>
+    <tr>
+      <th colspan="4"><%= t(".sales") %></th>
+    </tr>
+    <tr>
+      <th><%= t(".agent") %></th>
+      <th><%= t(".sales_income") %></th>
+      <th><%= f.input :agent_sale_percentage %></th>
+      <th></th>
+    </tr>
+    <tr><td colspan="4"></td></tr>
+    <tr>
+      <th colspan="4"><%= t(".enrollments") %></th>
+    </tr>
+    <tr>
+      <th><%= t(".agent") %></th>
+      <th><%= t(".enrollments_income") %></th>
+      <th><%= f.input :agent_enrollment_income_percentage %></th>
+      <th><%= f.input :agent_enrollment_quantity_fixed_amount %></th>
+      <th></th>
+    </tr>
+
   </tbody>
 </table>
 
