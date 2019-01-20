@@ -1,8 +1,8 @@
 <tr>
   <th><%= @adm.owners_percentage %>% <%= t(".owners_winnings") %></th>
-  <td><%= @adm.owners_pre_expenses_amount %></td>
+  <td><%= pm @adm.owners_pre_expenses_amount %></td>
   <th><%= @adm.teams_percentage %>% <%= t(".team_winnings") %></th>
-  <td><%= @adm.teams_pre_expenses_amount %></td>
+  <td><%= pm @adm.teams_pre_expenses_amount %></td>
 </tr>
 
 <% i = 0 %>
@@ -17,14 +17,14 @@
                   business_tag_path(business_id: @business.id, id: owner_tag.id) if owner_tag %>
     </td>
     <td>
-      <%= @adm.total_for_tag(owner_tag) if owner_tag %>
+      <%= pm @adm.total_for_tag(owner_tag) if owner_tag %>
     </td>
     <td>
       <%= link_to team_tag.name,
                   business_tag_path(business_id: @business.id, id: team_tag.id) if team_tag %>
     </td>
     <td>
-      <%= @adm.total_for_tag(team_tag) if team_tag %>
+      <%= pm @adm.total_for_tag(team_tag) if team_tag %>
     </td>
   </tr>
 <% end %>
@@ -35,12 +35,12 @@
       <%= t(".owners_winnings") %>
     </th>
     <td>
-      <%= @adm.owners_aft_expenses_amount %>
+      <%= pm @adm.owners_aft_expenses_amount %>
     </td>
     <th>
       <%= t(".team_winnings") %>
     </th>
-    <td><%= @adm.teams_final_amount %></td>
+    <td><%= pm @adm.teams_final_amount %></td>
   </tr>
 <% end %>
 <% unless @adm.dir_from_owners_aft_expses_percentage.blank? %>
@@ -49,7 +49,7 @@
       <%= @adm.dir_from_owners_aft_expses_percentage %>% <%= t(".director_winnings") %>
     </th>
     <td>
-      <%= @adm.director_from_owners_amount %>
+      <%= pm @adm.director_from_owners_amount %>
     </td>
     <td colspan="2"></td>
   </tr>
@@ -58,7 +58,7 @@
       <%= t(".owners_winnings") %>
     </th>
     <td>
-      <%= @adm.owners_final_amount %>
+      <%= pm @adm.owners_final_amount %>
     </td>
     <td colspan="2"></td>
   </tr>

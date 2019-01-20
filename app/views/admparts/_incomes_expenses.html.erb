@@ -11,25 +11,25 @@
         business_tag_path(business_id: @business.id, id: income_tag.id) if income_tag %>
     </td>
     <td>
-      <%= @adm.total_for_tag(income_tag) if income_tag %>
+      <%= pm(@adm.total_for_tag(income_tag)) if income_tag %>
     </td>
     <td>
       <%= link_to expense_tag.name,
         business_tag_path(business_id: @business.id, id: expense_tag.id) if expense_tag %>
     </td>
     <td>
-      <%= @adm.total_for_tag(expense_tag) if expense_tag %>
+      <%= pm @adm.total_for_tag(expense_tag) if expense_tag %>
     </td>
   </tr>
 <% end %>
 <tr>
   <th><%= t(".total_income") %></th>
-  <td><%= @adm.section_total("income") %></td>
+  <td><%= pm @adm.section_total("income") %></td>
   <th><%= t(".total_expense") %></th>
-  <td><%= @adm.section_total("expense") %></td>
+  <td><%= pm @adm.section_total("expense") %></td>
 </tr>
 <tr>
   <th><%= t(".profit") %></th>
-  <td colspan="3"><%= @adm.profit %></td>
+  <td colspan="3"><%= pm @adm.profit %></td>
 </tr>
 <!-- incomes n expenses end -->
