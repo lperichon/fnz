@@ -30,7 +30,7 @@ class AdmpartsController < UserApplicationController
     @adm.ref_date = @ref_date
     @adm.force_refresh = true # params[:force_refresh] 
 
-    @contacts = @adm.business.contacts.where(padma_id: @adm.attendance_report.keys)
+    @contacts = @adm.contacts_in_attendance_report
   end
 
   def edit

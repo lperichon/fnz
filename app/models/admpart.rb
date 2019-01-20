@@ -220,6 +220,10 @@ class Admpart < ActiveRecord::Base
     nil
   end
 
+  def contacts_in_attendance_report
+    @contacts_in_attendance_report ||= business.contacts.where(padma_id: attendance_report.keys)
+  end
+
   def attendance_detail_url
     url = ENV['attendance_url'] || CONFIG['attendance-url']
     "#{url}/stats?#{attendance_report_query.to_query}&distribution=instructor"
