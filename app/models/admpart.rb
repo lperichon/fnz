@@ -166,6 +166,9 @@ class Admpart < ActiveRecord::Base
     @sales_tag ||= business.tags.where(system_name: "sale")
   end
 
+  def enrollments_tag
+    @enrollments_tag ||= business.tags.where(system_name: "enrollment")
+  end
 
   private
 

@@ -18,7 +18,7 @@ class Tag < ActiveRecord::Base
   validates_uniqueness_of :name, :scope => :business_id
   validates_length_of :name, :maximum => 255
 
-  VALID_SYSTEM_NAMES = %W(installment sale)
+  VALID_SYSTEM_NAMES = %W(installment sale enrollment)
   validates :system_name,
             allow_blank: true,
             inclusion: { in: VALID_SYSTEM_NAMES },
