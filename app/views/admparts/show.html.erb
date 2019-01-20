@@ -1,7 +1,6 @@
 <%= render "warnings" %>
 
 <table class="table table-striped table-hover table-condensed table-bordered">
-
   <thead>
     <tr>
       <th colspan="4"><%= l(@ref_date, format: :month) %></th>
@@ -16,20 +15,12 @@
     <%= render "incomes_expenses" %>
     <%= render "director_from_profit" %>
     <%= render "owners_team" %>
-
-    <tr><td colspan="4"></td></tr>
-    <%= render "team_distribution" %>
-
-    <tr><td colspan="4"></td></tr>
-    <%= render "enrollments" %>
-
-    <tr><td colspan="4"></td></tr>
-    <%= render "sales" %>
-
   </tbody>
-
-
 </table>
+
+<%= render "team_distribution" %>
+<%= render "enrollments" %>
+<%= render "sales" %>
 
 <%= link_to t("actions.edit"), edit_business_admpart_path(business_id: @adm.business_id) %>
 

@@ -106,8 +106,8 @@ class Admpart < ActiveRecord::Base
   end
 
   CACHE_DURATION = 5.minutes
-  def total_for_tag(tag,agent_id=nil,ignore_discounts=false)
-    cache_key = [id,ref_date,"total_for_tag",tag]
+  def total_for_tag(tag,agent_id=nil,options={})
+    cache_key = [id,ref_date,"total_for_tag",tag,options.to_param]
     unless agent_id.nil?
       cache_key << "agent:#{agent_id}"
     end
@@ -146,7 +146,7 @@ class Admpart < ActiveRecord::Base
         @total -= s.debits.sum(:amount)
       end
 
-      if agent_id.nil? && !ignore_discounts
+      if agent_id.nil? && !options[:ignore_discounts]
         case tag.system_name
         when "sale" 
           @total -= sales_total_discount
@@ -217,10 +217,14 @@ class Admpart < ActiveRecord::Base
     @sales_tag ||= system_tag("sale")
   end
 
+  def agent_sales_comission(agent)
+    total_for_tag(sales_tag, agent.id) * (agent_sale_percentage || 0) / 100
+  end
+
   def sales_total_discount
     acum = 0
     team_members.each do |tm|
-      acum += total_for_tag(sales_tag, tm.id) * (agent_sale_percentage || 0) / 100
+      acum += agent_sales_comission(tm)
     end
     acum 
   end
@@ -229,11 +233,22 @@ class Admpart < ActiveRecord::Base
     @enrollments_tag ||= system_tag("enrollment")
   end
 
+  def agent_enrollments_comission(agent)
+    total_for_tag(enrollments_tag, agent.id) * (agent_enrollment_income_percentage || 0) / 100
+  end
+
+  def agent_enrollments_prize(agent)
+    (enrollments_by_teacher[agent.padma_id] || 0) * (agent_enrollment_quantity_fixed_amount || 0)
+  end
+
+  def agent_from_enrollments_total(agent)
+    agent_enrollments_comission(agent) + agent_enrollments_prize(agent)
+  end
+
   def enrollments_total_discount
     acum = 0
     team_members.each do |tm|
-      acum += total_for_tag(enrollments_tag, tm.id) * (agent_enrollment_income_percentage || 0) / 100
-      # TODO discount agent_enrollment_quantity_fixed_amount
+      acum += agent_from_enrollments_total(tm)
     end
     acum
   end
