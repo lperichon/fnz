@@ -1,0 +1,13 @@
+<% if @adm.installments_tag.blank? %>
+  <!-- TODO add form to set it here -->
+  <div class="alert alert-error">
+    <%= content_tag :div, t(".missing_installments_tag") %>
+  </div>
+<% end %>
+
+<% if @adm.sales_tag.blank? %>
+  <!-- TODO add form to set it here -->
+  <div class="alert alert-error">
+    <%= content_tag :div, t(".missing_sales_tag") %>
+  </div>
+<% end %>

@@ -158,6 +158,14 @@ class Admpart < ActiveRecord::Base
     "#{url}/stats?#{attendance_report_query.to_query}&distribution=instructor"
   end
 
+  def installments_tag
+    @installments_tag ||= business.tags.where(system_name: "installment")
+  end
+
+  def sales_tag
+    @sales_tag ||= business.tags.where(system_name: "sale")
+  end
+
 
   private
 
