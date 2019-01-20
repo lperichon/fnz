@@ -53,6 +53,14 @@ class Contact < ActiveRecord::Base
     membership unless membership.try(:closed_on)
   end
 
+  def teacher
+    if padma_teacher
+      Rails.cache.fetch([business_id, "agent_by_username", padma_teacher], expires_in: 5.minutes) do
+        business.agents.find_by_padma_id padma_teacher
+      end
+    end
+  end
+
   def padma
     PadmaContact.find(padma_id, select: [:email]) if padma_id
   end
