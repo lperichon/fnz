@@ -14,6 +14,8 @@
       <th><%= t(".contact") %></th>
       <th><%= t(".payment_teacher") %></th>
       <th><%= t(".paid") %></th>
+      <th><%= @adm.agent_installments_link_percentage %>% <%= t(".payment_teacher_collection") %></th>
+      <th><%= @adm.agent_installments_attendance_percentage%>% <%= t(".to_distribute_by_attendance") %></th>
       <th><%= t(".total_presence") %></th>
       <% @adm.team_members.each do |tm| %>
         <th colspan="2"><%= tm.name %></th>
@@ -47,6 +49,8 @@
             <%= tm.name if tm %>
           </td>
           <td><%= pm income %></td>
+          <td><%= pm income * @adm.agent_installments_link_percentage / 100 %></td>
+          <td><%= pm income * (@adm.agent_installments_attendance_percentage || 0) / 100 %></td>
           <% if first_contact_row %>
             <td rowspan="<%= teachers_with_income_for_this_contact.keys.size %>">
               <%= contact_detail["total"] %>
@@ -59,7 +63,7 @@
               <%= number_with_precision(per, precision: 2) %>%
             </td>
           <% end %>
-          <td><%= pm income * per/100 %></td>
+          <td><%= pm income * (@adm.agent_installments_attendance_percentage || 0) * per / 10000 %></td>
         <% end %>
         </tr>
         <% first_contact_row = false %>
@@ -69,6 +73,8 @@
       <th><%= t(".no_teacher") %></th>
       <td></td>
       <td><%= pm @adm.total_for_tag(@adm.installments_tag,nil,{contact_id: ''}) %></td>
+      <td></td>
+      <td></td>
       <td></td>
       <% @adm.team_members.each do |tm| %>
         <td colspan="2"></td>
@@ -80,6 +86,8 @@
       <th><%= t("total") %></th>
       <td></td>
       <td><%= pm @adm.total_for_tag(@adm.installments_tag) %></td>
+      <td><%= pm (@adm.total_for_tag(@adm.installments_tag) - @adm.total_for_tag(@adm.installments_tag,nil,{contact_id: ''})) * ( @adm.agent_installments_link_percentage ) / 100 %></td>
+      <td><%= pm (@adm.total_for_tag(@adm.installments_tag) - @adm.total_for_tag(@adm.installments_tag,nil,{contact_id: ''})) * ( @adm.agent_installments_attendance_percentage ) / 100 %></td>
       <td></td>
       <% @adm.team_members.each do |tm| %>
         <td colspan="2"><%= pm @adm.agent_installments_collection_by_presence_total(tm) %></td>

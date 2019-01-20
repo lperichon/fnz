@@ -5,7 +5,8 @@ class Admpart < ActiveRecord::Base
                   :dir_from_owners_aft_expses_percentage,   # % de inversores para director
                   :agent_sale_percentage,                   # % de la venta para instructor
                   :agent_enrollment_income_percentage,      # % de recaudación x matrículas para instructor
-                  :agent_enrollment_quantity_fixed_amount   # valor fijo x matricula para instructor
+                  :agent_enrollment_quantity_fixed_amount,  # valor fijo x matricula para instructor
+                  :agent_installments_attendance_percentage # % de recaudación x alumno que va segun presencia, el resto va x vinculo transaccion-agente
   
 
   belongs_to :business
@@ -14,7 +15,8 @@ class Admpart < ActiveRecord::Base
    :director_from_profit_percentage,
    :dir_from_owners_aft_expses_percentage,
    :agent_sale_percentage,
-   :agent_enrollment_income_percentage
+   :agent_enrollment_income_percentage,
+   :agent_installments_attendance_percentage
   ].each do |per|
     validates per,
               allow_blank: true,
@@ -237,13 +239,17 @@ class Admpart < ActiveRecord::Base
     @installments_tag ||= system_tag("installment")
   end
 
+  def agent_installments_link_percentage
+    100 - (agent_installments_attendance_percentage || 0)
+  end
+
   def agent_installments_collection_by_presence_total(agent)
     acum = 0
     contacts_in_attendance_report.each do |contact|
       contact_detail = attendance_report[contact.padma_id] || {}
-      contact_paid = total_for_tag(installments_tag,nil,{contact_id: contact.id})
+      distributable_contact_payment = total_for_tag(installments_tag,nil,{contact_id: contact.id}) * (agent_installments_attendance_percentage || 0) / 100
       per = (contact_detail[agent.padma_id.gsub(".","_")].try(:to_f) || 0)*100
-      acum += per * contact_paid / 100
+      acum += per * distributable_contact_payment / 100
     end
     acum
   end
