@@ -88,11 +88,11 @@ class Admpart < ActiveRecord::Base
   end
 
   def teams_final_amount
-    teams_pre_expenses_amount + section_total("teams_expenses")
+    @teams_final_amount ||= (teams_pre_expenses_amount + section_total("teams_expenses"))
   end
 
   def team_members
-    business.agents
+    @team_members ||= business.agents
   end
 
   def agent_total_collection(agent)
@@ -103,6 +103,11 @@ class Admpart < ActiveRecord::Base
   def agent_from_team_final_amount_percentage(agent)
     # considering only INSTALLMENTS
     (agent_installments_collection_total(agent) / total_for_tag(installments_tag)) * 100
+  end
+
+  def agent_from_team_final_amount(agent)
+    # considering only INSTALLMENTS
+    agent_from_team_final_amount_percentage(agent) * teams_final_amount / 100
   end
 
   def section_total(section)
@@ -355,6 +360,10 @@ class Admpart < ActiveRecord::Base
     end
   rescue Errno::ECONNREFUSED => e
     nil
+  end
+
+  def agent_total_winnings(agent)
+    agent_from_team_final_amount(agent) + agent_sales_comission(agent) + agent_from_enrollments_total(agent)
   end
   
   private

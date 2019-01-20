@@ -1,0 +1,21 @@
+<table class="table table-striped table-hover table-condensed table-bordered">
+<tr>
+  <th colspan="4"><%= t(".total_by_agent") %></th>
+</tr>
+<tr>
+  <th><%= t(".agent") %></th>
+  <th><%= t(".profit_distribution") %></th>
+  <th><%= t(".sales_comission") %></th>
+  <th><%= t(".enrollments_comission") %></th>
+  <th><%= t(".agent_total_winnings") %></th>
+</tr>
+<% @adm.team_members.each do |tm| %>
+  <tr>
+    <th><%= tm.name %></th>
+    <td><%= pm @adm.agent_from_team_final_amount(tm) %></td>
+    <td><%= pm @adm.agent_sales_comission(tm) %></td>
+    <td><%= pm @adm.agent_from_enrollments_total(tm) %></td>
+    <td><%= pm @adm.agent_total_winnings(tm) %></td>
+  </tr>
+<% end %>
+</table>
