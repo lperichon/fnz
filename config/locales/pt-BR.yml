@@ -937,6 +937,9 @@ pt-BR:
       target_prompt: Por favor, escolha uma conta como destino
       report_at_transaction_date: Data de transação
       report_at_due_date: Data de vencimento
+      tags_placeholder: Por favor, escolha uma categoria
+      agent_placeholder: Instrutor vinculado
+      contact_placeholder: Contato vinculado
     field:
       tags_placeholder: Por favor, escolha uma categoria
     new_modal:

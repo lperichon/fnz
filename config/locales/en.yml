@@ -855,6 +855,9 @@ en:
       target_prompt: Please select target account
       report_at_transaction_date: Transaction Date
       report_at_due_date: Due Date
+      tags_placeholder: Please select a category
+      agent_placeholder: Associated teacher
+      contact_placeholder: Associated contact
     field:
       tags_placeholder: Please select a category
     new_modal:

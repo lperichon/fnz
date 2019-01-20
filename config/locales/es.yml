@@ -916,6 +916,9 @@ es:
       target_prompt: Seleccione una cuenta
       report_at_transaction_date: Fecha de transacción
       report_at_due_date: Fecha de vencimiento
+      tags_placeholder: Seleccione la categoría
+      agent_placeholder: Instructor asociado
+      contact_placeholder: Contacto asociado
     field:
       tags_placeholder: Seleccione la categoría
     new_modal:
