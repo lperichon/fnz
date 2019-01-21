@@ -17,10 +17,14 @@ class InstallmentTransaction < ActiveRecord::Base
 
   def set_transaction_contact_and_agent
     if installment
-      transaction.update_attributes(
+      attrs = {
         contact_id: installment.try(:membership).try(:contact_id),
         agent_id: installment.agent_id
-      )
+      }
+      if t = Tag.where(business_id: transaction.business_id, system_name: "installment").first
+        attrs.merge( tag_id: t.id )
+      end
+      transaction.update_attributes( attrs )
     end
   end
 end
