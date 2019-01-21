@@ -14,12 +14,12 @@
     <p><%= f.label :name %><br />
       <%= f.text_field :name %></p>
 
-    <% if @tag.root? %>
+    <% if can?(:read, Admpart) && @tag.root? %>
       <p><%= f.label :admpart_section %><br />
         <%= f.select :admpart_section, collection: [""]+Admpart::VALID_SECTIONS %></p>
     <% end %>
 
-    <% if @tag.root? || !@tag.system_name.blank? %>
+    <% if can?(:read, Admpart) && @tag.root? || !@tag.system_name.blank? %>
       <p><%= f.label :system_name %><br />
         <%= f.select :system_name, collection: [""]+Tag::VALID_SYSTEM_NAMES %></p>
     <% end %>
