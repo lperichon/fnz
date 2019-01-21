@@ -21,7 +21,7 @@ describe BusinessesController, :type => :controller do
       business = Business.last
 
       get :index, {}
-      assigns(:businesses).should eq([business])
+      assigns(:businesses).map(&:id).should eq([business].map(&:id))
     end
   end
 
