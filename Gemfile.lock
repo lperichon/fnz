@@ -47,6 +47,8 @@ GEM
     airbrake (4.1.0)
       builder
       multi_json
+    appsignal (2.8.1)
+      rack
     arel (3.0.3)
     awesome_nested_fields (0.6.0)
       rails (>= 3.0.0)
@@ -353,6 +355,7 @@ DEPENDENCIES
   accounts_client (~> 0.2.6)
   active_model_serializers
   airbrake
+  appsignal
   awesome_nested_fields (= 0.6.0)
   awesome_nested_set
   aws-sdk

@@ -70,3 +70,4 @@ gem 'rake', '< 11.0'
 gem "roo"
 gem "roo-xls"
 gem 'best_in_place', '~> 3.1.1'
+gem "appsignal"
