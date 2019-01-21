@@ -26,6 +26,6 @@
 
 <%=  f.input :tag_ids, :as => :select, :collection => @business.tags, :input_html => {:class => "chosen", 'data-placeholder' => t('transactions.fields.tags_placeholder')} %>
 
-<%=  f.input :agent_id, :as => :select, :collection => @business.agents, :input_html => {:class => "chosen", 'data-placeholder' => t('transactions.fields.agent_placeholder')} %>
+<%=  f.input :agent_id, :as => :select, :collection => @business.agents.enabled, :input_html => {:class => "chosen", 'data-placeholder' => t('transactions.fields.agent_placeholder')} %>
 
 <%=  f.input :contact_id, :as => :select, :collection => @business.contacts, :input_html => {:class => "chosen", 'data-placeholder' => t('transactions.fields.contact_placeholder')} %>

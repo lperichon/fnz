@@ -6,5 +6,5 @@
 <td><%= best_in_place_if transaction.is_a?(Transfer), transaction.becomes(Transaction), :target_id, :as => :select, :collection => @business.accounts.map { |i| [i.id, i.name] } , :url => business_transaction_path(@business, transaction)%></td>
 <td><%= best_in_place transaction.becomes(Transaction), :transaction_at, :url => business_transaction_path(@business, transaction), :display_with => lambda {|d| d.to_s(:short)} %></td>
 <td><%= best_in_place transaction.becomes(Transaction), :tag_id, :as => :select, :collection => @business.tags.order(:name).map { |i| [i.id, i.name] }, :url => business_transaction_path(@business, transaction) %></td>
-<td><%= best_in_place transaction.becomes(Transaction), :agent_id, :as => :select, :collection => [["",""]]+@business.agents.order(:name).map { |i| [i.id, i.name] }, :url => business_transaction_path(@business, transaction) %></td>
+<td><%= best_in_place transaction.becomes(Transaction), :agent_id, :as => :select, :collection => [["",""]]+@business.agents.enabled.map { |i| [i.id, i.name] }, :url => business_transaction_path(@business, transaction) %></td>
 <td><%= best_in_place transaction.becomes(Transaction), :contact_id, :as => :select, :collection => [["",""]]+@business.contacts.order(:name).map { |i| [i.id, i.name] }, :url => business_transaction_path(@business, transaction) %></td>
