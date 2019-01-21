@@ -24,4 +24,12 @@ describe Account do
     no_business_account.should_not be_valid
   end
 
+  it "defaults currency to business's currency" do
+    b = FactoryGirl.create(:business, currency_code: "ars")
+    a = FactoryGirl.build(:account, business_id: b.id)
+    a.save
+    expect(a.currency.iso_code.downcase).to eq b.currency_code.downcase
+  end
+
+
 end

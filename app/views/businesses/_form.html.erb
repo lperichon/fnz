@@ -1,7 +1,7 @@
 <%= simple_form_for(@business, :as => :business, :validate => true, :url => form_url, :html => {:class => "form-horizontal"}) do |f| %>
   <%= f.input :name %>
 
-  <%= f.input :currency, :as => :select, :collection => SUPPORTED_CURRENCIES %>  
+  <%= f.input :currency_code, :as => :select, :collection => SUPPORTED_CURRENCIES %>  
 
 	<%= f.input :send_weekly_reports %>
 	<%= f.input :use_calendar_installments %>

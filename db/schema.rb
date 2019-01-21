@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20190120224048) do
+ActiveRecord::Schema.define(:version => 20190121144705) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name",                                       :default => "",  :null => false
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(:version => 20190120224048) do
     t.boolean  "share_enabled"
     t.boolean  "use_calendar_installments", :default => true
     t.integer  "derose_events_id"
-    t.string   "currency"
+    t.string   "currency_code"
   end
 
   create_table "businesses_users", :force => true do |t|
@@ -291,7 +291,6 @@ ActiveRecord::Schema.define(:version => 20190120224048) do
     t.integer  "admpart_tag_id"
   end
 
-  add_index "transactions", ["business_id", "admpart_tag_id"], :name => "index_transactions_on_business_id_and_admpart_tag_id"
   add_index "transactions", ["business_id"], :name => "index_transactions_on_business_id"
 
   create_table "users", :force => true do |t|
