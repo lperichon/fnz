@@ -7,6 +7,8 @@
 
 	<%= f.input :padma_id if @business.is_a? School %>
 
+  <%= f.input :currency_code, :as => :select, :collection => SUPPORTED_CURRENCIES %>  
+
 	<%= f.input :send_weekly_reports %>
 
 	<%= f.input :transactions_enabled %>
