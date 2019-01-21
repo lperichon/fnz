@@ -1,5 +1,5 @@
-require 'rails_helper'
+require 'spec_helper'
 
-RSpec.describe AdmpartsController, :type => :controller do
+describe AdmpartsController, :type => :controller do
 
 end
