@@ -95,7 +95,7 @@ class Admpart < ActiveRecord::Base
     if @team_members
       @team_members
     else
-      @team_members ||= business.agents.select{|a| !a.padma_id.blank? }
+      @team_members ||= business.agents.enabled.select{|a| !a.padma_id.blank? }
     end
   end
 
