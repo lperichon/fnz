@@ -35,6 +35,15 @@ class Tag < ActiveRecord::Base
     name
   end
 
+  # gem descendants seems buggy
+  def self_and_descendants
+    if children.empty?
+      [self]
+    else
+      [self,children.map(&:self_and_descendants)]
+    end.flatten
+  end
+
   private
 
   def valid_system_name_and_section

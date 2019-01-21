@@ -128,8 +128,7 @@ class Admpart < ActiveRecord::Base
 
   def transactions_for_tag(tag,options={})
     return [] if tag.nil?
-    tags = [tag]
-    tags += tag.descendants
+    tags = tag.self_and_descendants
     scope = business.transactions
                     .to_report_on_month(ref_date)
                     .where(admpart_tag_id: tags.map(&:id))
