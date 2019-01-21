@@ -8,15 +8,19 @@ class AdmpartsController < UserApplicationController
   before_filter :get_context
 
   def show
+    @adm = Admpart.find_or_create_by_business_id(@business.id)
     @ref_date = if params[:ref_date]
       Date.parse(params[:ref_date])
     else
       Time.zone.today
     end
 
-    @adm = Admpart.find_or_create_by_business_id(@business.id)
-    @adm.ref_date = @ref_date
-    @adm.force_refresh = params[:force_refresh] 
+    if !@adm.valid?
+      redirect_to edit_business_admpart_path(@business)
+    else
+      @adm.ref_date = @ref_date
+      @adm.force_refresh = params[:force_refresh] 
+    end
   end
 
   def attendance_detail

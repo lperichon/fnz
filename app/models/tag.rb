@@ -24,8 +24,10 @@ class Tag < ActiveRecord::Base
             inclusion: { in: VALID_SYSTEM_NAMES },
             uniqueness: { scope: :business_id }
 
-  validate :valid_system_name_and_section
   before_validation :ensure_system_sections
+  validate :valid_system_name_and_section
+
+  validate :systags_must_be_root
 
   def to_s
     name
@@ -45,6 +47,12 @@ class Tag < ActiveRecord::Base
   end
 
   private
+
+  def systags_must_be_root
+    if self.system_name.in?(VALID_SYSTEM_NAMES) && !self.parent_id.nil?
+      self.errors.add(:parent_id, "systag must be root")
+    end
+  end
 
   def valid_system_name_and_section
     if self.system_name.in?(VALID_SYSTEM_NAMES) && self.admpart_section != "income"

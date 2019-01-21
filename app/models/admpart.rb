@@ -1,13 +1,15 @@
 class Admpart < ActiveRecord::Base
   
-  attr_accessible :director_from_profit_percentage,         # % del lucro para director 
-                  :owners_percentage,                       # % para inversores
-                  :dir_from_owners_aft_expses_percentage,   # % de inversores para director
-                  :agent_sale_percentage,                   # % de la venta para instructor
-                  :agent_enrollment_income_percentage,      # % de recaudación x matrículas para instructor
-                  :agent_enrollment_quantity_fixed_amount,  # valor fijo x matricula para instructor
-                  :agent_installments_attendance_percentage # % de recaudación x alumno que va segun presencia, el resto va x vinculo transaccion-agente
-  
+  attr_accessible :director_from_profit_percentage,          # % del lucro para director 
+                  :owners_percentage,                        # % para inversores
+                  :dir_from_owners_aft_expses_percentage,    # % de inversores para director
+                  :agent_sale_percentage,                    # % de la venta para instructor
+                  :agent_enrollment_income_percentage,       # % de recaudación x matrículas para instructor
+                  :agent_enrollment_quantity_fixed_amount,   # valor fijo x matricula para instructor
+                  :agent_installments_attendance_percentage, # % de recaudación x alumno que va segun presencia, el resto va x vinculo transaccion-agente
+                  :installments_tag_id,
+                  :enrollments_tag_id,
+                  :sales_tag_id
 
   belongs_to :business
 
@@ -32,6 +34,11 @@ class Admpart < ActiveRecord::Base
 
 
   VALID_SECTIONS = %W(income expense ignore director_expenses owners_expenses teams_expenses)
+
+
+  Tag::VALID_SYSTEM_NAMES.each do |sysname|
+    validates "#{sysname}s_tag", presence: true
+  end
 
   before_save :set_defaults
 
@@ -352,6 +359,24 @@ class Admpart < ActiveRecord::Base
 
   def agent_total_winnings(agent)
     agent_from_team_final_amount(agent) + agent_sales_comission(agent) + agent_from_enrollments_total(agent)
+  end
+
+  # installments_tag_id, enrollments_tag_id, sales_tag_id getter and setter
+  Tag::VALID_SYSTEM_NAMES.each do |sysname|
+    define_method "#{sysname}s_tag_id" do
+      send("#{sysname}s_tag").try(:id)
+    end
+    define_method "#{sysname}s_tag_id=" do |tag_id|
+      if send("#{sysname}s_tag")
+        if send("#{sysname}s_tag").id != tag_id
+          send("#{sysname}s_tag").update_attribute(:system_name, nil)
+        else
+          # no changes
+          return send("#{sysname}s_tag")
+        end
+      end
+      business.tags.find(tag_id).update_attribute(:system_name, sysname)
+    end
   end
   
   private

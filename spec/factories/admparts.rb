@@ -2,5 +2,6 @@
 
 FactoryGirl.define do
   factory :admpart do
+    business
   end
 end

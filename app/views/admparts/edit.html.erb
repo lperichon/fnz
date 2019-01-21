@@ -16,10 +16,25 @@
   <tbody>
     <tr>
       <td colspan="2">
-        income section
+        <%= f.input :installments_tag_id, as: :select, collection: @adm.business.tags.where(parent_id: nil) %>
       </td>
-      <td colspan="2">
+      <td rowspan="4" colspan="2">
         expense section
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <%= f.input :enrollments_tag_id, as: :select, collection: @adm.business.tags.where(parent_id: nil) %>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <%= f.input :sales_tag_id, as: :select, collection: @adm.business.tags.where(parent_id: nil) %>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        income section
       </td>
     </tr>
     <tr>
