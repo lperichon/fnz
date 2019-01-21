@@ -48,8 +48,16 @@ describe Transaction do
     no_source_transaction.should_not be_valid
   end
 
-  it "should import from csv row" do
+  it "should import from uncomplete csv row" do
     transaction = Transaction.build_from_csv(@account.business, [@account.name, Date.today, "2.1", "Test import transaction"])
+    transaction.should be_valid
+  end
+
+  it "should import from complete csv row" do
+    FactoryGirl.create(:agent, business_id: @account.business.id)
+    FactoryGirl.create(:contact, business_id: @account.business.id)
+
+    transaction = Transaction.build_from_csv(@account.business, [@account.name, Date.today, "2.1", "Test import transaction", @account.business.agents.enabled.first.name, @account.business.contacts.first.name])
     transaction.should be_valid
   end
 

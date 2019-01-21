@@ -133,6 +133,16 @@ class Transaction < ActiveRecord::Base
         :state => ['created', 'pending', 'reconciled'].include?(state) ? state : 'created'
     }
 
+    # Agent
+    unless row[6].blank?
+      transaction.agent_id = business.agents.enabled.where(padma_id: row[6]).first
+    end
+
+    # Contact
+    unless row[7].blank?
+      transaction.contact_id = business.contacts.where(name: row[7].strip).first
+    end
+
     tags_str = row[4]
     unless tags_str.blank?
       tags_str.split(';').each do |tag_name|
@@ -144,7 +154,7 @@ class Transaction < ActiveRecord::Base
   end
 
   def self.csv_header
-    "Account,Date,Amount,Description,Tags".split(',')
+    "Account,Date,Amount,Description,Tags,State,Agent,Contact".split(',')
   end
 
   def set_admpart_tag
