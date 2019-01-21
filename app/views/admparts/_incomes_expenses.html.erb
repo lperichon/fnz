@@ -7,15 +7,13 @@
   <% break if income_tag.nil? && expense_tag.nil? %>
   <tr>
     <td>
-      <%= link_to income_tag.name,
-        business_tag_path(business_id: @business.id, id: income_tag.id) if income_tag %>
+      <%= link_to_tag_detail(income_tag) if income_tag %>
     </td>
     <td>
       <%= pm(@adm.total_for_tag(income_tag)) if income_tag %>
     </td>
     <td>
-      <%= link_to expense_tag.name,
-        business_tag_path(business_id: @business.id, id: expense_tag.id) if expense_tag %>
+      <%= link_to_tag_detail(expense_tag) if expense_tag %>
     </td>
     <td>
       <%= pm @adm.total_for_tag(expense_tag) if expense_tag %>

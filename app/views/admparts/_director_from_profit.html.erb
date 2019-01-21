@@ -8,8 +8,7 @@
     <tr>
       <td colspan="2"></td>
       <td>
-        <%= link_to tag.name,
-                    business_tag_path(business_id: @business.id, id: tag.id) %>
+        <%= link_to_tag_detail(tag) %>
       </td>
       <td>
         <%= pm @adm.total_for_tag(tag) %>

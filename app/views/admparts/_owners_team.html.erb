@@ -13,15 +13,13 @@
   <% i += 1 %>
   <tr>
     <td>
-      <%= link_to owner_tag.name,
-                  business_tag_path(business_id: @business.id, id: owner_tag.id) if owner_tag %>
+      <%= link_to_tag_detail(owner_tag) if owner_tag %>
     </td>
     <td>
       <%= pm @adm.total_for_tag(owner_tag) if owner_tag %>
     </td>
     <td>
-      <%= link_to team_tag.name,
-                  business_tag_path(business_id: @business.id, id: team_tag.id) if team_tag %>
+      <%= link_to_tag_detail(team_tag) if team_tag %>
     </td>
     <td>
       <%= pm @adm.total_for_tag(team_tag) if team_tag %>
