@@ -92,7 +92,11 @@ class Admpart < ActiveRecord::Base
   end
 
   def team_members
-    @team_members ||= business.agents
+    if @team_members
+      @team_members
+    else
+      @team_members ||= business.agents.select{|a| !a.padma_id.blank? }
+    end
   end
 
   def agent_total_collection(agent)
