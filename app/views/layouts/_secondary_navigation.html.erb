@@ -26,7 +26,7 @@
           <li><%= link_to t('installments.secondary_navigation.unpaid_installments'),
                     business_installments_path(@business, :installment_search => {:status => [:incomplete, :due, :pending, :overdue], :due_after => Date.today.beginning_of_month, :due_before => Date.today.end_of_month, :agent_id => [:all]}) %></li>
 
-          <% if can?(:read, @business.admpart ) %>
+          <% if @business.is_a?(School) && can?(:read, @business.admpart ) %>
             <li><%= link_to t('admparts.secondary_navigation.administration'), business_admpart_path(business_id: @business.id, ref_date: Date.today) %></li>
             <li><%= link_to t('admparts.secondary_navigation.attendance_detail'), attendance_detail_business_admpart_path(business_id: @business.id, ref_date: Date.today) %></li>
           <% end %>
