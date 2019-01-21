@@ -84,7 +84,7 @@ class Admpart < ActiveRecord::Base
   end
 
   def teams_pre_expenses_amount
-    total_before_owner + owners_pre_expenses_amount # resto el pre-expenses, si no estaria restando 2 veces.
+    total_before_owner * teams_percentage / 100
   end
 
   def teams_final_amount
