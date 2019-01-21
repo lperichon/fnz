@@ -956,6 +956,15 @@ pt-BR:
   imports:
     new:
       new_import: Nova importação
+    form:
+      transaction_csv_columns: "As colunas do arquivo são as seguintes, nessa ordem. As primeiras 3 são necessarias, as outras optativas"
+      account_name: "nome da conta (ej: caixa)"
+      date: "data (ej: 2019-12-31)"
+      amount: "valor (ej: -10.4)"
+      category: "categoría (ej: mensalidades)"
+      agent_padma_id: "usuario vinculado (ej: dwayne.macgowan)"
+      contact_name: "nome do contato vinculado"
+      state: "estado ( created, pending, reconciled )"
   businesses:
     index:
       title: Negócios

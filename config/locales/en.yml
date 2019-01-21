@@ -883,6 +883,16 @@ en:
       paid_sales: Paid sales
       all_sales_tooltip: "This month's sales"
       paid_sales_tooltip: "Sales paid this month"
+  imports:
+    form:
+      transaction_csv_columns: "These should be the file's columns. Firts 3 are mandatory, rest are optional"
+      account_name: "account name (ej: pocket change)"
+      date: "date (ej: 2019-12-31)"
+      amount: "amount (ej: -10.4)"
+      category: "category (ej: sales)"
+      agent_padma_id: "linked user (ej: dwayne.macgowan)"
+      contact_name: "linked contact's name"
+      state: "state ( created, pending, reconciled )"
   businesses:
     index:
       title: Businesses

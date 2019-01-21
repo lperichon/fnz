@@ -954,7 +954,16 @@ es:
       paid_sales_tooltip: "Ventas pagadas este mes"
   imports:
     new:
-      new_import: Nueva importación
+      new_import: "Nueva importación"
+    form:
+      transaction_csv_columns: "Estas son las columnas que debe tener el archivo. Las primeras 3 son necesarias, el resto opcionales"
+      account_name: "nombre de la cuenta (ej: caja chica)"
+      date: "fecha (ej: 2019-12-31)"
+      amount: "valor (ej: -10.4)"
+      category: "categoría (ej: mensualidades)"
+      agent_padma_id: "usuario vinculado (ej: dwayne.macgowan)"
+      contact_name: "nombre del contacto vinculado"
+      state: "estado ( created, pending, reconciled )"
   businesses:
     index:
       title: Negocios
