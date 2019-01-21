@@ -117,7 +117,7 @@ class Transaction < ActiveRecord::Base
     amount = BigDecimal.new(row[2])
     type = amount > 0 ? "Credit" : "Debit"
 
-    state = row[5]
+    state = row[7]
     unless state.blank?
     	state = state.downcase
     end
@@ -134,12 +134,12 @@ class Transaction < ActiveRecord::Base
     }
 
     # Agent
-    unless row[6].blank?
+    unless row[5].blank?
       transaction.agent_id = business.agents.enabled.where(padma_id: row[6]).first
     end
 
     # Contact
-    unless row[7].blank?
+    unless row[6].blank?
       transaction.contact_id = business.contacts.where(name: row[7].strip).first
     end
 
@@ -154,7 +154,7 @@ class Transaction < ActiveRecord::Base
   end
 
   def self.csv_header
-    "Account,Date,Amount,Description,Tags,State,Agent,Contact".split(',')
+    "Account,Date,Amount,Description,Tags,Agent,Contact,State".split(',')
   end
 
   def set_admpart_tag
