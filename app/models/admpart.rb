@@ -386,10 +386,16 @@ class Admpart < ActiveRecord::Base
     end
   end
 
+  def queue_refresh_cache
+    # TODO avoid duplication
+    delay.refresh_cache(ref_date) 
+  end
+
   # refreshes cache by calling methods with force_refresh=true
-  def refresh_cache
+  def refresh_cache(ref_date)
     bckup = self.force_refresh
     self.force_refresh = true
+    self.ref_date = ref_date
 
     # webservices calls
     attendance_report

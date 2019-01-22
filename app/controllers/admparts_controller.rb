@@ -22,7 +22,7 @@ class AdmpartsController < UserApplicationController
       @adm.ref_date = @ref_date
 
       unless params[:skip_refresh]
-        @adm.delay.refresh_cache
+        @adm.queue_refresh_cache
         Appsignal.instrument("waiting") do
           sleep(2) # wait 2 seconds
         end
