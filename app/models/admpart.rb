@@ -1,3 +1,6 @@
+require 'appsignal'
+require 'appsignal/integrations/object'
+
 class Admpart < ActiveRecord::Base
   
   attr_accessible :director_from_profit_percentage,          # % del lucro para director 
@@ -186,6 +189,7 @@ class Admpart < ActiveRecord::Base
       @total
     end
   end
+  appsignal_instrument_method :total_for_tag
 
   ###
   #
@@ -231,6 +235,7 @@ class Admpart < ActiveRecord::Base
   rescue Errno::ECONNREFUSED => e
     nil
   end
+  appsignal_instrument_method :attendance_report
 
   def contacts_in_attendance_report
     @contacts_in_attendance_report ||= business.contacts.where(padma_id: attendance_report.keys)
@@ -272,6 +277,7 @@ class Admpart < ActiveRecord::Base
     end
     acum
   end
+  appsignal_instrument_method :agent_installments_collection_by_presence_total
   
   def agent_installments_collection_total(agent)
     agent_installments_collection_by_presence_total(agent) + agent_installments_collection_by_link_total(agent)
@@ -356,6 +362,7 @@ class Admpart < ActiveRecord::Base
   rescue Errno::ECONNREFUSED => e
     nil
   end
+  appsignal_instrument_method :enrollments_by_teacher
 
   def agent_total_winnings(agent)
     agent_from_team_final_amount(agent) + agent_sales_comission(agent) + agent_from_enrollments_total(agent)
