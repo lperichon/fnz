@@ -40,6 +40,7 @@ class AdmpartsController < UserApplicationController
 
   def edit
     @adm = Admpart.find_or_create_by_business_id(@business.id)
+    @adm.force_refresh = true
   end
 
   def update
