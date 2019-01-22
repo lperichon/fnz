@@ -387,8 +387,11 @@ class Admpart < ActiveRecord::Base
   end
 
   def queue_refresh_cache
-    # TODO avoid duplication
-    delay.refresh_cache(ref_date) 
+    queued_job = Delayed::Job.where("handler like '%Admpart%id: #{id}%refresh_cache%#{ref_date}'").last
+    if queued_job.nil?
+      queued_job = delay.refresh_cache(ref_date) 
+    end
+    queued_job
   end
 
   # refreshes cache by calling methods with force_refresh=true
