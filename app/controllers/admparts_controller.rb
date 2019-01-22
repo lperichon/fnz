@@ -23,6 +23,9 @@ class AdmpartsController < UserApplicationController
 
       unless params[:skip_refresh]
         @adm.delay.refresh_cache
+        Appsignal.instrument("waiting") do
+          sleep(2) # wait 2 seconds
+        end
         params.delete(:action)
         redirect_to business_admpart_path(params.merge({skip_refresh: true}))
       end
