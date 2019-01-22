@@ -385,6 +385,20 @@ class Admpart < ActiveRecord::Base
       business.tags.find(tag_id).update_attribute(:system_name, sysname)
     end
   end
+
+  # refreshes cache by calling methods with force_refresh=true
+  def refresh_cache
+    bckup = self.force_refresh
+    self.force_refresh = true
+
+    VALID_SECTIONS.each{|s| section_total(s) }    
+    attendance_report
+    enrollments_by_teacher
+
+    team_members.each{|tm| agent_total_winnings(tm) }
+
+    self.force_refresh = bckup
+  end
   
   private
 
