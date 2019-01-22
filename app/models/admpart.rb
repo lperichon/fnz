@@ -391,10 +391,12 @@ class Admpart < ActiveRecord::Base
     bckup = self.force_refresh
     self.force_refresh = true
 
-    VALID_SECTIONS.each{|s| section_total(s) }    
+    # webservices calls
     attendance_report
     enrollments_by_teacher
 
+    # DB queries
+    VALID_SECTIONS.each{|s| section_total(s) }    
     team_members.each{|tm| agent_total_winnings(tm) }
 
     self.force_refresh = bckup
