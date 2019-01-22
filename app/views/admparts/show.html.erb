@@ -26,13 +26,9 @@
 
 <%= link_to t("actions.edit"), edit_business_admpart_path(business_id: @adm.business_id) %>
 
-<table>
-  <tr><th><%= t(".ignored_tags") %></th></tr>
-  <% @adm.wout_section_root_tags.each do |tag| %>
-    <tr>
-      <td>
-        <%= link_to tag.name, business_tag_path(business_id: @business.id, id: tag.id) %>
-      </td>
-    </tr>
-  <% end %>
-</table>
+<h4><%= t(".ignored_tags") %></h4>
+<% @adm.wout_section_root_tags.each do |tag| %>
+  <div>
+    <%= link_to tag.name, business_tag_path(business_id: @business.id, id: tag.id) %>
+  </div>
+<% end %>

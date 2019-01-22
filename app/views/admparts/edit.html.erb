@@ -19,7 +19,7 @@
         <%= f.input :installments_tag_id, as: :select, collection: @adm.business.tags.where(parent_id: nil) %>
       </td>
       <td rowspan="4" colspan="2">
-        expense section
+          expense section
       </td>
     </tr>
     <tr>
@@ -140,4 +140,24 @@
 
 <%= f.submit %>
 
+<% @adm.wout_section_root_tags.each do |tag| %>
+  <div data-tag-id="<%= tag.id %>" class="draggable-tag">
+    <%= tag.name %>
+  </div>
 <% end %>
+
+  <% Admpart::VALID_SECTIONS.each do |section_name| %>
+    <hr>
+    <div id="<%= section_name %>-section" class="droppable-section" data-section-name="<%= section_name %>" data-business-id="<%= @adm.business_id %>">
+      drop here for <%= section_name %>
+    </div>
+    <div>
+      <% @adm.root_tags_for_section(section_name).each do |tag| %>
+        <div data-tag-id="<%= tag.id %>" class="draggable-tag">
+          <%= tag.name %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
+

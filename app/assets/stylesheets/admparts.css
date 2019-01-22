@@ -1,0 +1,16 @@
+.droppable-hover {
+  background-color: blue;
+}
+
+.droppable-active {
+  background-color: darkblue;
+}
+
+.droppable-section {
+  border: 1px;
+  background-color: lightgrey;
+  padding: 5px;
+  height: 100px;
+  vertical-align: center;
+}
+
