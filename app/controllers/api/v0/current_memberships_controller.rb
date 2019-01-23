@@ -33,7 +33,7 @@ class Api::V0::CurrentMembershipsController < Api::V0::ApiController
   private
 
   def get_scope
-    @business = Business.find_by_padma_id(params[:business_id])
+    @business = Business.get_by_padma_id(params[:business_id])
     @contact = @business.contacts.find_by_padma_id(params[:contact_id]) if params[:business_id].present?
   end
 end
