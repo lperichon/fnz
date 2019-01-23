@@ -15,6 +15,11 @@ class PadmaAccountsSynchronizer
       business.save
     end
 
+    if padma_account
+      business.name = padma_account.name
+      business.save
+    end
+
     business.users.each do |user|
       # Remove users not present on Padma
       business.users.delete(user) unless padma_account.users.collect(&:id).include?(user.drc_uid)
