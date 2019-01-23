@@ -46,4 +46,18 @@ class Business < ActiveRecord::Base
       })
     end
   end
+
+  def self.get_by_padma_id(padma_id)
+    b = self.find_by_padma_id(padma_id)
+    if b.nil?
+      b = School.new(padma_id: padma_id)
+      begin
+        PadmaAccountsSynchronizer.new(b).sync
+      rescue
+        b = nil
+      end
+    end
+    b
+  end
+
 end
