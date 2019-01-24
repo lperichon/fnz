@@ -1,5 +1,6 @@
 <%= simple_form_for(@adm,
-                    url: business_admpart_path(business_id: @adm.business_id)
+                    url: business_admpart_path(business_id: @adm.business_id),
+                    method: :put
                    ) do |f| %>
 <table class="table table-striped table-hover table-condensed table-bordered">
 
