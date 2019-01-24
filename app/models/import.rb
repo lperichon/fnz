@@ -39,15 +39,15 @@ class Import < ActiveRecord::Base
       new_record = nil
       begin
         new_record = handle_row(business, row)
-      rescue
-        # exception when initializing record
-      end
-      # Save upon valid
-      # otherwise collect error records to export
-      if new_record && new_record.save
-        imported_records << new_record
-      else
-        errs << [row, record_errors(new_record) ].flatten
+        # Save upon valid
+        # otherwise collect error records to export
+        if new_record && new_record.save
+          imported_records << new_record
+        else
+          errs << [row, record_errors(new_record) ].flatten
+        end
+      rescue => e
+        errs << [row, e.to_s ].flatten
       end
     end
 
