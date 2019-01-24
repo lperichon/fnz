@@ -17,5 +17,8 @@
 <p>Hint: You can use this same import, just upload the new file</p>
 <% end %>
 
-<%= link_to 'Edit', edit_business_import_path(@business, @import) %> |
-<%= link_to 'Back', business_imports_path(@business) %>
+
+
+<%= link_to t('actions.delete'), business_import_path(@business,@import), confirm: t(".confirm_delete"), method: 'delete' %> |
+<%= link_to t('actions.edit'), edit_business_import_path(@business, @import) %> |
+<%= link_to t('actions.back'), business_imports_path(@business) %>

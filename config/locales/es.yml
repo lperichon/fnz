@@ -955,6 +955,8 @@ es:
   imports:
     new:
       new_import: "Nueva importación"
+    show:
+      confirm_delete: "Al eliminar la importación se eliminan TODAS las transacciones importadas. Este cambio no puede ser revertido, tendrá que importar nuevamente el archivo. ¿Desea eliminar la importación?"
     form:
       transaction_csv_columns: "Estas son las columnas que debe tener el archivo. Las primeras 3 son necesarias, el resto opcionales"
       account_name: "nombre de la cuenta (ej: caja chica)"

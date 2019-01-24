@@ -884,6 +884,8 @@ en:
       all_sales_tooltip: "This month's sales"
       paid_sales_tooltip: "Sales paid this month"
   imports:
+    show:
+      confirm_delete: "Deleting import will delete ALL imported transactions, this can not be reverted. Do you with to remove import?"
     form:
       transaction_csv_columns: "These should be the file's columns. Firts 3 are mandatory, rest are optional"
       account_name: "account name (ej: pocket change)"

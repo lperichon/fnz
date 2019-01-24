@@ -4,8 +4,14 @@ class TransactionImport < Import
 
   validates_attachment :upload, :presence => true, :content_type => { :content_type => "text/csv" }
 
+  before_destroy :destroy_transactions
+
   def handle_row(business, row)
     Transaction.build_from_csv(business, row)
+  end
+
+  def destroy_transactions
+    transactions.destroy_all
   end
 
 end

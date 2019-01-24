@@ -956,6 +956,8 @@ pt-BR:
   imports:
     new:
       new_import: Nova importação
+    show:
+      confirm_delete: "Ao apagar esta importação TODAS as transações importadas seram apagadas também. Isto não pode ser revertido. Deseja apagar a importação?"
     form:
       transaction_csv_columns: "As colunas do arquivo são as seguintes, nessa ordem. As primeiras 3 são necessarias, as outras optativas"
       account_name: "nome da conta (ej: caixa)"
