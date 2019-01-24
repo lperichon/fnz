@@ -142,7 +142,15 @@ class Transaction < ActiveRecord::Base
 
     # Contact
     unless row[6].blank?
-      transaction.contact_id = business.contacts.where(name: row[7].strip).first
+      # by name
+      transaction.contact_id = business.contacts.where(name: row[6].strip).first
+      if transaction.contact_id.nil?
+        # by id
+        transaction.contact_id = business.contacts.get_by_padma_id(row[6].strip)
+        if transaction.contact_id.nil?
+          raise "couldnt find contact"
+        end
+      end
     end
 
     tags_str = row[4]
