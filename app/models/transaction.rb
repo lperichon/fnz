@@ -143,10 +143,10 @@ class Transaction < ActiveRecord::Base
     # Contact
     unless row[6].blank?
       # by name
-      transaction.contact_id = business.contacts.where(name: row[6].strip).first.id
+      transaction.contact_id = business.contacts.where(name: row[6].strip).first.try(:id)
       if transaction.contact_id.nil?
         # by id
-        transaction.contact_id = business.contacts.get_by_padma_id(row[6].strip).id
+        transaction.contact_id = business.contacts.get_by_padma_id(row[6].strip).try(:id)
         if transaction.contact_id.nil?
           raise "couldnt find contact"
         end
