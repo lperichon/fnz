@@ -137,7 +137,7 @@ class Transaction < ActiveRecord::Base
 
     # Agent
     unless row[5].blank?
-      transaction.agent_id = business.agents.enabled.where(padma_id: row[6]).first
+      transaction.agent_id = business.agents.enabled.where(padma_id: row[5]).first
     end
 
     # Contact
