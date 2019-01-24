@@ -99,7 +99,9 @@ class Transaction < ActiveRecord::Base
   end
 
   def set_business
-    self.business = source.business unless business
+    if source
+      self.business = source.business unless business
+    end
   end
 
   state_machine do
