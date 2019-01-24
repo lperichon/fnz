@@ -26,20 +26,28 @@ class Import < ActiveRecord::Base
     	upload.url
     end
 
+
+    columns = nil
     CSV.parse(open(path)) do |row|
+      columns = row.size
       n += 1
       # SKIP: header i.e. first row OR blank row
       next if n == 1 or row.join.blank?
 
       # build_from_csv method will map attributes &
       # build new record
-      new_record = handle_row(business, row)
+      new_record = nil
+      begin
+        new_record = handle_row(business, row)
+      rescue
+        # exception when initializing record
+      end
       # Save upon valid
       # otherwise collect error records to export
       if new_record && new_record.save
         imported_records << new_record
       else
-        errs << row
+        errs << [row, record_errors(new_record) ].flatten
       end
     end
 
@@ -48,7 +56,7 @@ class Import < ActiveRecord::Base
     if errs.empty?
       self.update_attribute(:errors_csv, nil)
     else
-      errs.insert(0, Transaction.csv_header)
+      errs.insert(0, [Transaction.csv_header[0..columns-1],"error"].flatten )
       errCSV = CSV.generate do |csv|
         errs.each {|row| csv << row}
       end
@@ -56,6 +64,14 @@ class Import < ActiveRecord::Base
     end
 
     return errs.empty?
+  end
+
+  def record_errors(record)
+    if record
+      record.errors.messages.to_a.map{|m| m.join(" ") }.join(" - ") 
+    else
+      "couldnt process"
+    end
   end
   
   # Override this on child class
