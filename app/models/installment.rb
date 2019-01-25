@@ -26,6 +26,27 @@ class Installment < ActiveRecord::Base
   before_save :refresh_status
 
   before_save :set_agent
+
+  # @example Installment.for_contact_on_month(contact_id: 123, ref_date: Date.today)
+  def self.for_contact(contact_id)
+    self.joins(:membership).where(
+      membership: {
+        contact_id: contact_id
+      }
+    )
+  end
+
+  def self.on_business(business_id)
+    self.joins(:membership).where(
+      membership: {
+        business_id: business_id
+      }
+    )
+  end
+
+  def self.on_month(ref_date)
+    self.where(due_on: (ref_date.beginning_of_month..ref_date.end_of_month))
+  end
   
   def set_agent
     self.agent = self.membership.business.agents.find_by_padma_id(self.agent_padma_id) if self.agent_padma_id.present?

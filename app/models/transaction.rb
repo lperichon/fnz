@@ -4,8 +4,12 @@ class Transaction < ActiveRecord::Base
   before_validation :set_creator
   before_validation :set_business
   before_validation :set_report_at
+
   after_save :update_balances
   around_destroy :update_balances_around_destroy
+
+  attr_accessor :skip_infer_associations
+  after_save :infer_associations, unless: :skip_infer_associations
 
   attr_accessor :report_at_option
 
@@ -86,6 +90,53 @@ class Transaction < ActiveRecord::Base
     target.update_balance if target.present?
     installments.each { |installment| installment.update_balance_and_status } if installments.count > 0
     inscriptions.each { |inscription| inscription.update_balance } if inscriptions.count > 0
+  end
+
+  def infer_associations
+    return if business_id.nil?
+    if admpart_tag
+      # tagged 
+      
+      if admpart_tag.system_name == "installment" && !contact_id.blank?
+        # with installments
+        
+        if installments.empty?
+          # but no installments
+          # find installments and link
+          installment = Installment.for_contact(contact_id)
+                                   .on_business(business_id)
+                                   .on_month(transaction_at)
+                                   .first
+          if installment
+            if installment.agent_id
+              self.update_attribute(:agent_id, installment.agent_id)
+            end
+            # infer agent 
+            self.installments << installment
+          end
+        end
+      end
+    elsif !installments.empty?
+      # not tagged and installments linked
+
+      ref_installment = self.installments.first
+
+      new_attrs = {
+        contact_id: ref_installment.try(:membership).try(:contact_id),
+        agent_id: ref_installment.agent_id
+      }
+
+      if t = Tag.where(business_id: business_id,
+                       system_name: "installment").first
+        new_attrs.merge!({
+          tag_id: t.id,
+          admpart_tag_id: t.id
+        })
+      end
+
+      self.skip_infer_associations = true
+      update_attributes(new_attrs)
+    end
   end
 
   def update_balances_around_destroy
