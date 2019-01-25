@@ -2,6 +2,7 @@ class TransactionsController < UserApplicationController
 
   before_filter :get_context
 
+  PER_PAGE = 200
   def index
     @context = @context.order("transaction_at DESC")
     # List transactions on this month or the year/month solicited
@@ -17,10 +18,12 @@ class TransactionsController < UserApplicationController
                                 ((state.eq 'pending') & (transaction_at.lt start_date)) |
                                 ((state.eq 'reconciled') & (reconciled_at.gteq start_date) & (reconciled_at.lteq end_date))}
     end
-    @transactions = @context.includes(:agent, :contact, :tags).all
+    @transactions = @context.includes(:agent, :contact, :tags)
 
     respond_to do |format|
-      format.html
+      format.html do
+        @transactions = @transactions.page(params[:page]).per(params[:per_page] || PER_PAGE )
+      end
       format.csv do
         headers['Content-Disposition'] = "attachment; filename=\"transactions\""
         headers['Content-Type'] ||= 'text/csv'
