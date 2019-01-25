@@ -55,7 +55,7 @@ gem 'mandrill_mailer', :git => "git://github.com/lperichon/mandrill_mailer.git"
 gem 'httparty'
 gem 'quiet_assets', :group => :development
 gem "active_model_serializers"
-gem "debugger2", :group => [:development, :test]
+gem "byebug"
 gem 'airbrake'
 gem 'rails_12factor', :group => [:staging, :production]
 gem 'jquery-ui-rails'

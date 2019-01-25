@@ -83,3 +83,5 @@ pickle-email-*.html
 
 # LocaleApp
 .localeapp
+
+.byebug_history
