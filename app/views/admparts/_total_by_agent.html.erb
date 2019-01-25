@@ -7,6 +7,7 @@
   <th><%= t(".profit_distribution") %></th>
   <th><%= t(".sales_comission") %></th>
   <th><%= t(".enrollments_comission") %></th>
+  <th><%= t(".agent_from_equal_distribution") %></th>
   <th><%= t(".agent_total_winnings") %></th>
 </tr>
 <% @adm.team_members.each do |tm| %>
@@ -15,6 +16,7 @@
     <td><%= pm @adm.agent_from_team_final_amount(tm) %></td>
     <td><%= pm @adm.agent_sales_comission(tm) %></td>
     <td><%= pm @adm.agent_from_enrollments_total(tm) %></td>
+    <td><%= pm @adm.agent_from_equal_distribution_section %></td>
     <td><%= pm @adm.agent_total_winnings(tm) %></td>
   </tr>
 <% end %>
