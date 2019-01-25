@@ -97,7 +97,7 @@ class Transaction < ActiveRecord::Base
     if admpart_tag
       # tagged 
       
-      if admpart_tag.system_name == "installment" && !contact_id.blank?
+      if !contact_id.blank? && admpart_tag.in?(Tag.system_tags_tree(business_id,"installment"))
         # with installments
         
         if installments.empty?
@@ -111,7 +111,6 @@ class Transaction < ActiveRecord::Base
             if installment.agent_id
               self.update_attribute(:agent_id, installment.agent_id)
             end
-            # infer agent 
             self.installments << installment
           end
         end
@@ -126,8 +125,7 @@ class Transaction < ActiveRecord::Base
         agent_id: ref_installment.agent_id
       }
 
-      if t = Tag.where(business_id: business_id,
-                       system_name: "installment").first
+      if t = Tag.system_tags_tree(business_id,"installment").first
         new_attrs.merge!({
           tag_id: t.id,
           admpart_tag_id: t.id

@@ -46,6 +46,17 @@ class Tag < ActiveRecord::Base
     end.flatten
   end
 
+  def self.system_tags_root(system_name)
+    self.where(system_name: system_name)
+  end
+
+  def self.system_tags_tree(business_id,system_name)
+    Rails.cache.fetch([business_id,system_name,"system_tags_tree"], expires_in: 1.minute) do
+      root = Tag.where(system_name: system_name, business_id: business_id)
+      root.self_and_descendants
+    end
+  end
+
   private
 
   def systags_must_be_root
