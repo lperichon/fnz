@@ -29,3 +29,6 @@
   <%= link_to content_tag(:i, "", :class => "icon-trash"), business_transaction_path(transaction.business, transaction), :confirm => I18n.t('actions.confirm_delete'), :method => 'delete' %>
   <% end %>
 <% end %>
+<div id="pagination">
+<%= paginate @transactions %>
+</div>
