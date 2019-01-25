@@ -51,8 +51,8 @@ class Tag < ActiveRecord::Base
   end
 
   def self.system_tags_tree(business_id,system_name)
-    Rails.cache.fetch([business_id,system_name,"system_tags_tree"], expires_in: 1.minute) do
-      root = Tag.where(system_name: system_name, business_id: business_id)
+    root = Tag.where(system_name: system_name, business_id: business_id).first
+    if root
       root.self_and_descendants
     end
   end

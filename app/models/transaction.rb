@@ -108,10 +108,14 @@ class Transaction < ActiveRecord::Base
                                    .on_month(transaction_at)
                                    .first
           if installment
-            if installment.agent_id
-              self.update_attribute(:agent_id, installment.agent_id)
+            if agent_id.blank? && installment.agent_id
+              update_attribute(:agent_id, installment.agent_id)
             end
-            self.installments << installment
+            # to ensure callbacks that calculate balances, etc.
+            InstallmentTransaction.create(
+              installment_id: installment.id,
+              transaction_id: id
+            )
           end
         end
       end
@@ -125,7 +129,7 @@ class Transaction < ActiveRecord::Base
         agent_id: ref_installment.agent_id
       }
 
-      if t = Tag.system_tags_tree(business_id,"installment").first
+      if t = Tag.where(business_id: business_id, system_name: "installment").first
         new_attrs.merge!({
           tag_id: t.id,
           admpart_tag_id: t.id
