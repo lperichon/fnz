@@ -1,9 +1,25 @@
 desc "This task is called by the Heroku scheduler add-on it synchronizes contacts with Padma for all businesses"
 task :synchronize  => :environment do
   School.where("padma_id IS NOT NULL").each do |business|
-    puts "Synchronizing Padma Contacts for #{business.name}..."
-    PadmaContactsSynchronizer.new(business).sync
-    puts "done."
+    if PadmaAccount.find(business.padma_id).enabled?
+      puts "Synchronizing Padma Contacts for #{business.name}..."
+      PadmaContactsSynchronizer.new(business).sync
+      puts "done."
+    end
+  end
+end
+
+desc "This task is called by the Heroku scheduler add-on it synchronizes contacts with Padma for all businesses ignoring synched_at date"
+task :weekly_deep_synchronize_contact  => :environment do
+  if Date.today.sunday?
+    School.where("padma_id IS NOT NULL").each do |business|
+      if PadmaAccount.find(business.padma_id).enabled?
+        business.synchronized_at = nil
+        puts "Synchronizing Padma Contacts for #{business.name}..."
+        PadmaContactsSynchronizer.new(business).sync
+        puts "done."
+      end
+    end
   end
 end
 
