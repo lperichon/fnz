@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20190121144705) do
+ActiveRecord::Schema.define(:version => 20190126161426) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name",                                       :default => "",  :null => false
@@ -291,6 +291,7 @@ ActiveRecord::Schema.define(:version => 20190121144705) do
     t.integer  "admpart_tag_id"
   end
 
+  add_index "transactions", ["business_id", "admpart_tag_id"], :name => "index_transactions_on_business_id_and_admpart_tag_id"
   add_index "transactions", ["business_id"], :name => "index_transactions_on_business_id"
 
   create_table "users", :force => true do |t|
