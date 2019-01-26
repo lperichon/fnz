@@ -106,7 +106,7 @@ describe Transaction do
   		@business = FactoryGirl.create(:business)
   	end
   	it "should consider status column" do
-  		new_transaction = Transaction.build_from_csv(@business, ['test','1983-03-03', '2.3', 'Testing', 'tag', 'pending'])
+  		new_transaction = Transaction.build_from_csv(@business, ['test','1983-03-03', '2.3', 'Testing', 'tag', nil, nil, 'pending'])
   		new_transaction.state.should eq("pending")
   	end
   end
