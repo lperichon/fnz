@@ -61,6 +61,32 @@ describe Transaction do
     transaction.should be_valid
   end
 
+  describe "installments automagick" do
+    let(:transaction){ FactoryGirl.build(:transaction, contact_id: nil, agent_id: nil) }
+    let(:contact){ FactoryGirl.create(:contact, business_id: transaction.business_id) }
+    let(:admpart_tag){ FactoryGirl.create(:tag, business_id: transaction.business_id, system_name: "installment") }
+
+    describe "linked to an installment" do
+      let(:installment){ FactoryGirl.create(:installment, membership: FactoryGirl.create(:membership, business_id: transaction.business_id, contact_id: contact.id ) ) }
+      before do
+        transaction.installments << installment
+        transaction.save
+      end
+      it "sets contact_id and agent_id" do
+        expect(transaction.agent_id).to eq installment.agent_id
+        expect(transaction.contact_id).to eq installment.membership.contact_id
+      end
+      it "tags as installment" do
+        expect(transaction.reload.admpart_tag_id).to eq admpart_tag.id
+      end
+    end
+
+    describe "if tagged as installment" do
+      it "links available installment"
+    end
+  end
+
+
   context "updating an existing transaction" do
     before(:each) do
       @credit = Credit.create!(@attr)
