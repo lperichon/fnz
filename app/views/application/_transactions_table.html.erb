@@ -3,34 +3,7 @@
 
   <% transactions.each do |transaction| %>
     <tr data-id="<%= transaction.id %>">
-
-
-<%# copy-paste application/_transactions_table_item.html.erb for rendering performance %>
-<%# render :partial => 'transactions_table_item', :locals => {:transaction => transaction} %>
-
-<td><%= content_tag(:i, "", :class => "icon-" + transaction.type.downcase, :title => transaction.type) %></td>
-<td><%= content_tag(:i, "", :class => "icon-" + transaction.state, :title => transaction.state.titleize) %></td>
-<td><%= best_in_place transaction.becomes(Transaction), :description, :url => business_transaction_path(@business, transaction) %></td>
-<td><%= best_in_place transaction.becomes(Transaction), :amount, :url => business_transaction_path(@business, transaction), :display_with => :number_to_currency, :helper_options => {:unit =>  transaction.source.currency.symbol} if transaction.source %></td>
-<td><%= best_in_place transaction.becomes(Transaction), :source_id, :as => :select, :collection => @business.accounts.map { |i| [i.id, i.name] } , :url => business_transaction_path(@business, transaction) %></td>
-<td><%= best_in_place_if transaction.is_a?(Transfer), transaction.becomes(Transaction), :target_id, :as => :select, :collection => @business.accounts.map { |i| [i.id, i.name] } , :url => business_transaction_path(@business, transaction)%></td>
-<td><%= best_in_place transaction.becomes(Transaction), :transaction_at, :url => business_transaction_path(@business, transaction), :display_with => lambda {|d| d.to_s(:short)} %></td>
-<td class="select2"
-  <% begin %>
-    <%# avoiding becomes call keeps included tags avoiding call to DB.  %>
-    <%= bip_tag_id(transaction) %>
-  <% rescue %>
-    <%= bip_tag_id(transaction.becomes(Transaction)) %>
-  <% end %>
-</td>
-<td><%= best_in_place transaction.becomes(Transaction), :agent_id, :as => :select, :collection => [["",""]]+@business.agents.enabled.map { |i| [i.id, i.name] }, :url => business_transaction_path(@business, transaction) %></td>
-<td class="select2"><%= best_in_place transaction.becomes(Transaction), :contact_id, :as => :select, :collection => [["",""]]+@business.contacts.order(:name).map { |i| [i.id, i.name] }, :url => business_transaction_path(@business, transaction) %></td>
-
-
-
-
-
-
+      <%= render :partial => 'transactions_table_item', :locals => {:transaction => transaction} %>
       <td>
         <%= yield transaction %>
       </td>
