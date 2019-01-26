@@ -18,7 +18,7 @@ class TransactionsController < UserApplicationController
                                 ((state.eq 'pending') & (transaction_at.lt start_date)) |
                                 ((state.eq 'reconciled') & (reconciled_at.gteq start_date) & (reconciled_at.lteq end_date))}
     end
-    @transactions = @context.includes(:agent, :contact, :tags)
+    @transactions = @context.includes(:agent, :contact, :tags, :source)
 
     respond_to do |format|
       format.html do
