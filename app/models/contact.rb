@@ -1,3 +1,5 @@
+# ATENTION - padma_id is not unique
+#                     this model represents padma's account-contact realation
 class Contact < ActiveRecord::Base
   belongs_to :business
 
@@ -21,6 +23,7 @@ class Contact < ActiveRecord::Base
 
   # finds contact by padma_id
   # if it doesnt exist it creates
+  # BUSINESS should be specified on scope, padma_id is not unique
   def self.get_by_padma_id(padma_id)
     c = self.find_by_padma_id(padma_id)
     if c.nil?
