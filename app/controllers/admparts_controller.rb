@@ -3,18 +3,12 @@ class AdmpartsController < UserApplicationController
   
   layout "application_without_sidebar"
 
-  before_filter :store_location, only: [:index, :show, :overview, :destroy]
+  before_filter :store_location, except: [:edit]
 
   before_filter :get_context
+  before_filter :get_admpart, only: [:show, :edit, :update, :attendance_detail]
 
-  before_filter :get_admpart, only: [:show, :edit, :attendance_detail]
   def show
-    @ref_date = if params[:ref_date]
-      Date.parse(params[:ref_date])
-    else
-      Time.zone.today
-    end
-
     if @adm
 
       unless params[:skip_refresh]
@@ -23,7 +17,11 @@ class AdmpartsController < UserApplicationController
           sleep(2) # wait 2 seconds, usually enough for webservices to be cached
         end
         params.delete(:action)
-        redirect_to business_admpart_path(params.merge({id: @adm.id, skip_refresh: true}))
+        if params[:year]
+          redirect_to dated_admpart_business_admparts_path(params.merge(skip_refresh: true))
+        else
+          redirect_to business_admpart_path(params.merge({skip_refresh: true}))
+        end
       end
 
     else
@@ -40,14 +38,10 @@ class AdmpartsController < UserApplicationController
   end
 
   def edit
-    if @adm.nil?
-      @adm = @business.current_admpart
-    end
     @adm.force_refresh = true
   end
 
   def update
-    @adm = Admpart.find_or_create_by_business_id(@business.id)
     if @adm.update_attributes(params[:admpart])
       redirect_to business_admpart_path(@business, @adm)
     else
@@ -64,10 +58,10 @@ class AdmpartsController < UserApplicationController
        if id.to_s == "current"
          @business.current_admpart
        else
-         Admpart.find(id)
+         @business.admparts.find id
        end
-    elsif params[:ref_date]
-      Admpart.where(business_id: @business.id).for_ref_date(params[:ref_date]).first
+    elsif params[:year] && params[:month]
+      @business.admparts.for_ref_date(Date.civil(params[:year].to_i,params[:month].to_i,1)).first
     end
   end
 

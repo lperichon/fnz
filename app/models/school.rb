@@ -29,7 +29,7 @@ class School < Business
 
   # current admpart
   def current_admpart
-    @current_admpart ||= self.admparts.for_ref_date(Time.zone.today).first || self.admparts.new(ref_date: Time.zone.today.beginning_of_month)
+    @current_admpart ||= self.admparts.get_or_create_for_ref_date(Time.zone.today)
   end
   alias_method :admpart, :current_admpart
 

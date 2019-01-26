@@ -32,9 +32,10 @@ class Admpart < ActiveRecord::Base
                 less_than_or_equal_to: 100
               }
   end
+
+  before_validation :force_ref_date_to_first_day_of_month
   validates :ref_date, presence: true, uniqueness: { scope: :business_id } 
   validate :ref_date_first_day_of_month
-  before_validation :force_ref_date_to_first_day_of_month
 
   attr_accessor :force_refresh
 
@@ -50,6 +51,23 @@ class Admpart < ActiveRecord::Base
 
   def self.for_ref_date(rd)
     self.where(ref_date: rd.to_date.beginning_of_month)
+  end
+
+  IGNORED_ATTRIBUTES_IN_CLONE = %W(id ref_date business_id created_at updated_at)
+  def self.get_or_create_for_ref_date(rd)
+    ret = self.for_ref_date(rd).first
+    if ret.nil?
+      prev = self.for_ref_date(rd-1.month).first
+      ret = if prev
+        self.create( prev.attributes_for_clone.merge( ref_date: rd ) )
+      else
+        self.create(ref_date: rd)
+      end
+    end
+    ret
+  end
+  def attributes_for_clone
+    attributes.reject{|k| k.in?(IGNORED_ATTRIBUTES_IN_CLONE) }
   end
 
   # total_income + total_expense
@@ -446,7 +464,7 @@ class Admpart < ActiveRecord::Base
   end
 
   def force_ref_date_to_first_day_of_month
-    if ref_date.day != 1
+    if ref_date && ref_date.day != 1
       self.ref_date= ref_date.beginning_of_month
     end
   end

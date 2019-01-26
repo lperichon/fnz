@@ -13,6 +13,7 @@ Fnz::Application.routes.draw do
         get :attendance_detail
       end
       collection do
+        match ":year/:month", to: "admparts#show", as: :dated_admpart
         get :current, to: "admparts#show", id: :current
       end
     end
