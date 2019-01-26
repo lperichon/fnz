@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20190126161426) do
+ActiveRecord::Schema.define(:version => 20190126212707) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name",                                       :default => "",  :null => false
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(:version => 20190126161426) do
     t.integer  "agent_enrollment_income_percentage"
     t.integer  "agent_enrollment_quantity_fixed_amount"
     t.integer  "agent_installments_attendance_percentage"
+    t.date     "ref_date"
   end
 
   add_index "admparts", ["business_id"], :name => "index_admparts_on_business_id"

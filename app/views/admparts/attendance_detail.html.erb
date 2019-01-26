@@ -1,11 +1,17 @@
 <% if @ignore_zero_income %>
   <div class="alert alert-notice">
-    <%= content_tag :div, t(".contacts_with_zero_income_skipped") %>
+    <p>
+      <%= content_tag :div, t(".contacts_with_zero_income_skipped") %>
+    </p>
+    <p>
+    <%= link_to t(".show_all"), attendance_detail_business_admpart_path(params.merge(show_zero_income: true)) %>
+    </p>
+
   </div>
 <% end %>
 
 
-<%= l(@ref_date, format: :month) %>
+<%= l(@adm.ref_date, format: :month) %>
 
 
 <table class="table table-striped table-hover table-condensed table-bordered">
@@ -119,4 +125,4 @@
 
 </table>
 
-<%= link_to t(".attendance_detail"), @adm.attendance_detail_url, target: "_blank" %>
+<%= link_to t(".attendances_attendance_detail"), @adm.attendance_detail_url, target: "_blank" %>

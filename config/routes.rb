@@ -8,8 +8,13 @@ Fnz::Application.routes.draw do
   devise_for :users, :controllers => { :registrations => "registrations"}
   resources :user_businesses
   resources :businesses do
-    resource :admpart do
-      get :attendance_detail
+    resources :admparts do
+      member do
+        get :attendance_detail
+      end
+      collection do
+        get :current, to: "admparts#show", id: :current
+      end
     end
     resources :accounts do
       resources :transactions, :only => [:index] do

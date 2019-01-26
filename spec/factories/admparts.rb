@@ -2,6 +2,7 @@
 
 FactoryGirl.define do
   factory :admpart do
+    ref_date { Date.today }
     business
   end
 end

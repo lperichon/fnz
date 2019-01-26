@@ -12,7 +12,8 @@ class Admpart < ActiveRecord::Base
                   :agent_installments_attendance_percentage, # % de recaudación x alumno que va segun presencia, el resto va x vinculo transaccion-agente
                   :installments_tag_id,
                   :enrollments_tag_id,
-                  :sales_tag_id
+                  :sales_tag_id,
+                  :ref_date
 
   belongs_to :business
 
@@ -31,9 +32,11 @@ class Admpart < ActiveRecord::Base
                 less_than_or_equal_to: 100
               }
   end
+  validates :ref_date, presence: true, uniqueness: { scope: :business_id } 
+  validate :ref_date_first_day_of_month
+  before_validation :force_ref_date_to_first_day_of_month
 
-  attr_accessor :ref_date,
-                :force_refresh
+  attr_accessor :force_refresh
 
 
   VALID_SECTIONS = %W(income expense ignore director_expenses owners_expenses teams_expenses equal_distribution)
@@ -44,6 +47,10 @@ class Admpart < ActiveRecord::Base
   end
 
   before_save :set_defaults
+
+  def self.for_ref_date(rd)
+    self.where(ref_date: rd.to_date.beginning_of_month)
+  end
 
   # total_income + total_expense
   def profit
@@ -402,7 +409,6 @@ class Admpart < ActiveRecord::Base
   def refresh_cache(ref_date)
     bckup = self.force_refresh
     self.force_refresh = true
-    self.ref_date = ref_date
 
     # webservices calls
     attendance_report
@@ -429,7 +435,20 @@ class Admpart < ActiveRecord::Base
   end
 
   def set_defaults
+    self.ref_date = Time.zone.today.beginning_of_month if self.ref_date.nil?
     self.owners_percentage = 50 if self.owners_percentage.nil?
+  end
+
+  def ref_date_first_day_of_month
+    if ref_date && ref_date.day != 1
+      errors.add(:ref_date, "must be first day of month")
+    end
+  end
+
+  def force_ref_date_to_first_day_of_month
+    if ref_date.day != 1
+      self.ref_date= ref_date.beginning_of_month
+    end
   end
 
 end

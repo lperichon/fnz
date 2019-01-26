@@ -3,7 +3,7 @@ class School < Business
   has_many :memberships, :foreign_key => :business_id
   has_many :enrollments, :through => :memberships
 
-  has_one :admpart, foreign_key: :business_id
+  has_many :admparts, foreign_key: :business_id
 
   after_create :initialize_padma_school
 
@@ -26,4 +26,11 @@ class School < Business
 
   	accounts.create(:name => "Default")	
   end
+
+  # current admpart
+  def current_admpart
+    @current_admpart ||= self.admparts.for_ref_date(Time.zone.today).first || self.admparts.new(ref_date: Time.zone.today.beginning_of_month)
+  end
+  alias_method :admpart, :current_admpart
+
 end

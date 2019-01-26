@@ -26,7 +26,7 @@
 
 <%= render "total_by_agent" %>
 
-<%= link_to t("actions.edit"), edit_business_admpart_path(business_id: @adm.business_id) %>
+<%= link_to t("actions.edit"), edit_business_admpart_path(@adm.business,@adm) %>
 
 <h4><%= t(".ignored_tags") %></h4>
 <% @adm.wout_section_root_tags.each do |tag| %>
