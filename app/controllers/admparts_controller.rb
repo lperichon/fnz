@@ -9,7 +9,7 @@ class AdmpartsController < UserApplicationController
   before_filter :get_admpart, only: [:show, :edit, :update, :attendance_detail]
 
   def show
-    if @adm
+    if @adm.valid?
 
       unless params[:skip_refresh]
         @adm.queue_refresh_cache
@@ -25,7 +25,7 @@ class AdmpartsController < UserApplicationController
       end
 
     else
-      redirect_to edit_business_admpart_path(@business, id: :current)
+      redirect_to edit_business_admpart_path(@business, id: @adm.try(:ref_date) || Date.today)
     end
   end
 
@@ -51,14 +51,18 @@ class AdmpartsController < UserApplicationController
 
   private
 
-  # get admpart from id (current or id) or from ref_date
+  # get admpart from id (current, a date or id) or from year and month
   def get_admpart
     id = params[:id] || params[:admpart_id]
     @adm = if id
        if id.to_s == "current"
          @business.current_admpart
        else
-         @business.admparts.find id
+         begin
+           @business.admparts.get_or_create_for_ref_date(id.to_date)
+         rescue
+           @business.admparts.find id
+         end
        end
     elsif params[:year] && params[:month]
       @business.admparts.get_or_create_for_ref_date(Date.civil(params[:year].to_i,params[:month].to_i,1))
