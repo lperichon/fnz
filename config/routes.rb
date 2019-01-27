@@ -9,7 +9,7 @@ Fnz::Application.routes.draw do
   resources :user_businesses
   resources :businesses do
     resources :admparts do
-      match ":year/:month", to: "admparts#show", as: :dated_admpart, on: :collection
+      match "/ym/:year/:month", to: "admparts#show", as: :dated_admpart, on: :collection
       member do
         get :attendance_detail
       end
