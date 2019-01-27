@@ -57,9 +57,9 @@ class Admpart < ActiveRecord::Base
   def self.get_or_create_for_ref_date(rd)
     ret = self.for_ref_date(rd).first
     if ret.nil?
-      prev = self.for_ref_date(rd-1.month).first
-      ret = if prev
-        self.create( prev.attributes_for_clone.merge( ref_date: rd ) )
+      clone_ref = self.for_ref_date(rd-1.month).first || self.for_ref_date(rd+1.month).first || self.first
+      ret = if clone_ref
+        self.create( clone_ref.attributes_for_clone.merge( ref_date: rd ) )
       else
         self.create(ref_date: rd)
       end
