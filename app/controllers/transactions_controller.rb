@@ -128,7 +128,8 @@ class TransactionsController < UserApplicationController
     end
 
     if params[:admpart_tag_id]
-      @context = @business.admpart.transactions_for_tag(Tag.find(params[:admpart_tag_id]))
+      t = Tag.find params[:admpart_tag_id]
+      @context = @business.transactions.where(admpart_tag_id: t.self_and_descendants.map(&:id))
     end
   end
 
