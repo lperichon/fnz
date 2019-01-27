@@ -119,7 +119,8 @@ class Admpart < ActiveRecord::Base
   end
 
   def teams_pre_expenses_amount
-    total_before_owner * teams_percentage / 100
+    ret = total_before_owner * teams_percentage / 100
+    (ret < 0)? 0 : ret
   end
 
   def teams_final_amount
