@@ -23,4 +23,10 @@ $(document).ready(function(){
     }
   });
 
+  $("[data-action=redirectOnChange]").change(function(){
+    var year = event.currentTarget.value.substring(0,4);
+    var month = event.currentTarget.value.substring(5,7);
+    window.location.href = "/businesses/"+event.currentTarget.dataset.businessId+"/admparts/"+year+"/"+month;
+  });
+
 })

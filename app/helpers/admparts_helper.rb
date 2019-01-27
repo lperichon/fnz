@@ -10,4 +10,14 @@ module AdmpartsHelper
                                                  report_on: @adm.ref_date
                                                 )
   end
+
+  def ref_date_options
+    options = []
+    (0..6).each do |i|
+      i=6-i
+      options << [l(i.month.ago.to_date.beginning_of_month, format: :month),
+                  i.month.ago.to_date.beginning_of_month]
+    end
+    options_for_select( options, @adm.ref_date )
+  end
 end

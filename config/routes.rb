@@ -9,11 +9,11 @@ Fnz::Application.routes.draw do
   resources :user_businesses
   resources :businesses do
     resources :admparts do
+      match ":year/:month", to: "admparts#show", as: :dated_admpart, on: :collection
       member do
         get :attendance_detail
       end
       collection do
-        match ":year/:month", to: "admparts#show", as: :dated_admpart
         get :current, to: "admparts#show", id: :current
       end
     end
