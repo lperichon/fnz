@@ -37,7 +37,7 @@ describe Admpart, :type => :model do
     end
   end
 
-  describe "get_or_create_for_ref_date" do
+  describe "get_for_ref_date" do
     describe "if already created" do
       let!(:admpart){ FactoryGirl.create(:admpart, ref_date: Date.today) }
       it "does nothing" do

@@ -54,7 +54,7 @@ class Admpart < ActiveRecord::Base
   end
 
   IGNORED_ATTRIBUTES_IN_CLONE = %W(id ref_date business_id created_at updated_at)
-  def self.get_or_create_for_ref_date(rd)
+  def self.get_for_ref_date(rd)
     ret = self.for_ref_date(rd).first
     if ret.nil?
       clone_ref = self.for_ref_date(rd-1.month).first || self.for_ref_date(rd+1.month).first || self.first

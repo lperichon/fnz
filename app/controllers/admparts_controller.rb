@@ -59,13 +59,13 @@ class AdmpartsController < UserApplicationController
          @business.current_admpart
        else
          begin
-           @business.admparts.get_or_create_for_ref_date(id.to_date)
+           @business.admparts.get_for_ref_date(id.to_date)
          rescue
            @business.admparts.find id
          end
        end
     elsif params[:year] && params[:month]
-      @business.admparts.get_or_create_for_ref_date(Date.civil(params[:year].to_i,params[:month].to_i,1))
+      @business.admparts.get_for_ref_date(Date.civil(params[:year].to_i,params[:month].to_i,1))
     end
   end
 
