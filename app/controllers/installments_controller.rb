@@ -71,9 +71,11 @@ class InstallmentsController < UserApplicationController
       if @installment.update_attributes(params[:installment])
         format.html { redirect_to business_membership_installment_path(@business, @membership, @installment), notice: 'Installment was successfully updated.' }
         format.js {}
+        format.json { respond_with_bip(@installment) }
       else
         format.html { render action: "edit" }
         format.js {}
+        format.json { respond_with_bip(@installment) }
       end
     end
   end
