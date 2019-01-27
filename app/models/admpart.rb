@@ -94,7 +94,7 @@ class Admpart < ActiveRecord::Base
   end
 
   def owners_pre_expenses_amount
-    owners_percentage * total_before_owner / 100
+    total_before_owner - teams_pre_expenses_amount # substract in case profit < 0 and teams_pre_expenses_amount was forced to 0
   end
   
   def owners_aft_expenses_amount
