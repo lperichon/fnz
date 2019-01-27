@@ -1,13 +1,17 @@
 <%= render "warnings" %>
 
+<div>
+        <%= select_tag :ref_date,
+                       ref_date_options,
+                       data: { action: "redirectOnChange", business_id: @adm.business_id  } %>
+</div>
+<div id="admpart">
+
 <table class="table table-striped table-hover table-condensed table-bordered">
   <thead>
     <tr>
       <th colspan="4" class="form-horizontal form-inline">
-        <%= select_tag :ref_date,
-                       ref_date_options,
-                       data: { action: "redirectOnChange", business_id: @adm.business_id  } %>
-        <%=  %>
+        <%= l(@adm.ref_date, format: :month) %>
       </th>
     </tr>
     <tr>
@@ -39,3 +43,4 @@
     <%= link_to tag.name, business_tag_path(business_id: @business.id, id: tag.id) %>
   </div>
 <% end %>
+</div>

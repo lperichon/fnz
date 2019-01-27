@@ -24,6 +24,7 @@ $(document).ready(function(){
   });
 
   $("[data-action=redirectOnChange]").change(function(){
+    $("#admpart").html("<img src='/assets/spinner.gif' />");
     var year = event.currentTarget.value.substring(0,4);
     var month = event.currentTarget.value.substring(5,7);
     window.location.href = "/businesses/"+event.currentTarget.dataset.businessId+"/admparts/ym/"+year+"/"+month;
