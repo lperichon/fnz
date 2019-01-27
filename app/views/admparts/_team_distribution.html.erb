@@ -16,7 +16,7 @@
     <th><%= tm.name %></th>
     <td><%= pm @adm.agent_total_collection(tm) %></td>
     <td><%= number_with_precision((per = @adm.agent_from_team_final_amount_percentage(tm)), precision: 2) %>%</td>
-    <td><%= pm (team_winnings * per / 100) %></td>
+    <td><%= pm per.nan?? 0 : (team_winnings * per / 100) %></td>
   </tr>
 <% end %>
   <tr>
