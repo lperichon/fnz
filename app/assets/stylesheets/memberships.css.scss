@@ -43,6 +43,13 @@ table#memberships tr:not(:first-child) {
   vertical-align: middle;
 }
 
+table.memberships .cell .installment-observations {
+  display: none;
+}
+table.memberships .cell:hover .installment-observations {
+  display: block;
+}
+
 .students.nav li {
   height: 43px;
   padding-top: 2.1px;
