@@ -29,6 +29,9 @@ class Membership < ActiveRecord::Base
   default_scope order('begins_on DESC')
 
   scope :current, where(:closed_on => nil).select("DISTINCT ON(contact_id) *").order("contact_id, begins_on DESC")
+  scope :wout_installments, joins("left outer join installments on memberships.id = installments.membership_id").where('installments.id' => nil)
+  scope :open, where(closed_on: nil)
+  scope :valid_on, ->(ref_date){ open.where("begins_on <= :rd and ends_on >= :rd", rd: ref_date) }
 
   def closed?
     closed_on.present?
