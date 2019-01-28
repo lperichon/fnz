@@ -43,7 +43,7 @@
   <li><%= table_contact_membership_link(contact, membership) %></li>
 <% end %>
 <% if @business.transactions_enabled? %>
-  <% if installment %>
+  <% if installment && membership %>
     <li><%= link_to t('application.nested_transactions_table.actions.select_transactions'), edit_business_membership_installment_path(@business, membership, installment), :remote => true, :class => "btn" %></li>
   <% elsif membership %>
     <li><%= link_to t('application.nested_transactions_table.actions.select_transactions'), new_business_membership_installment_path(@business, membership, :installment => {
