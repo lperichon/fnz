@@ -1,5 +1,5 @@
 <ul class="popover-action-list">
-<% if installment %>
+<% if installment && membership %>
   <li><%= link_to t('actions.edit'), edit_business_membership_installment_path(@business, membership, installment), :class => "btn" %></li>
 <% elsif membership %>
   <li>
