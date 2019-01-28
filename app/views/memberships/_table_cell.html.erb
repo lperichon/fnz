@@ -2,7 +2,7 @@
     class="<%= 'current' if(date == Date.today) %> <%= installment.try(:status) %> cell"
     >
 	<%= content_tag :div, :class => "installment-value", 'data-content' => "#{render(:partial => 'memberships/installment_popover', :locals => {:membership => membership, :installment => installment, :date => date, :contact => contact})}", :rel => "popover", 'data-placement' => "right", 'data-triggr' => "hover" do %>
-		<% if installment %>
+		<% if installment && membership %>
       <div class="<%= 'old' if installment.membership != membership %>">
         <%= best_in_place installment, :value, url: business_membership_installment_path(@business,membership,installment), display_with: :number_to_currency %>
         <div class="installment-observations">
