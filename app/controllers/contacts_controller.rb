@@ -12,6 +12,7 @@ class ContactsController < UserApplicationController
     else
       @contact = @business.contacts.find(params[:id])
     end
+    @memberships = @contact.memberships.where(business_id: @business.id)
   end
 
   def edit
