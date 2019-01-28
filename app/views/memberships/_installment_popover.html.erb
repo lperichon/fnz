@@ -1,6 +1,19 @@
 <ul class="popover-action-list">
 <% if installment %>
   <li><%= link_to t('actions.edit'), edit_business_membership_installment_path(@business, membership, installment), :class => "btn" %></li>
+<% elsif membership %>
+  <li>
+    <%= link_to t('.add_installment'),
+      new_business_membership_installment_path({
+                  business_id: @business.id,
+                  membership_id: membership.id,
+                  installment: {
+                    value: membership.value,
+                    due_on: Date.civil(date.year, date.month, membership.monthly_due_day)
+                  }
+                }),
+                class: "btn" %>
+  </li>
 <% end %>
 
 <% if installment && installment.status.in?([:pending, :overdue, :incomplete]) %>
