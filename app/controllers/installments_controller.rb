@@ -21,7 +21,15 @@ class InstallmentsController < UserApplicationController
   end
 
   def new
-    @installment = @context.new(params[:installment])
+    defaults = {}
+    if @membership && @membership.contact
+      agent = @business.agents.enabled.where(padma_id: @membership.contact.padma_teacher).first
+      if agent
+        defaults.merge!({ agent_id: agent.id }) 
+      end
+    end
+
+    @installment = @context.new((params[:installment]||{}).reverse_merge(defaults))
   	date = Date.today
   	@transactions = @business.transactions.credits.where {(transaction_at.gteq(date - 1.month)) & (transaction_at.lteq(date + 1.month))}.order("transaction_at DESC")
   end
