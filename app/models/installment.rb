@@ -47,6 +47,10 @@ class Installment < ActiveRecord::Base
   def self.on_month(ref_date)
     self.where(due_on: (ref_date.beginning_of_month..ref_date.end_of_month))
   end
+
+  def self.last_updated_at(business_id)
+    Installment.unscoped.joins(:membership).where(memberships: { business_id: business_id }).select("max(installments.updated_at) as last_update").group("memberships.business_id").order("last_update asc").last.last_update
+  end
   
   def set_agent
     self.agent = self.membership.business.agents.find_by_padma_id(self.agent_padma_id) if self.agent_padma_id.present?

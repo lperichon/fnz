@@ -227,4 +227,8 @@ class Transaction < ActiveRecord::Base
   def self.update_each_admpart_tag
     self.all.each{|t| t.update_column(:admpart_tag_id, t.taggings.first.try(:tag_id)) }
   end
+
+  def self.last_updated_at
+    self.select("max(transactions.updated_at) as last_update")[0].last_update
+  end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20190126212707) do
+ActiveRecord::Schema.define(:version => 20190128151141) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name",                                       :default => "",  :null => false
@@ -153,17 +153,20 @@ ActiveRecord::Schema.define(:version => 20190126212707) do
   end
 
   create_table "installments", :force => true do |t|
-    t.integer "membership_id"
-    t.date    "due_on"
-    t.decimal "value",         :precision => 8, :scale => 2, :default => 0.0, :null => false
-    t.integer "agent_id"
-    t.decimal "balance",       :precision => 8, :scale => 2, :default => 0.0, :null => false
-    t.integer "external_id"
-    t.string  "observations"
-    t.string  "status"
+    t.integer  "membership_id"
+    t.date     "due_on"
+    t.decimal  "value",         :precision => 8, :scale => 2, :default => 0.0, :null => false
+    t.integer  "agent_id"
+    t.decimal  "balance",       :precision => 8, :scale => 2, :default => 0.0, :null => false
+    t.integer  "external_id"
+    t.string   "observations"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "installments", ["agent_id"], :name => "index_installments_on_agent_id"
+  add_index "installments", ["membership_id", "updated_at"], :name => "index_installments_on_membership_id_and_updated_at"
   add_index "installments", ["membership_id"], :name => "index_installments_on_membership_id"
 
   create_table "installments_transactions", :force => true do |t|
@@ -290,9 +293,12 @@ ActiveRecord::Schema.define(:version => 20190126212707) do
     t.integer  "contact_id"
     t.integer  "agent_id"
     t.integer  "admpart_tag_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "transactions", ["business_id", "admpart_tag_id"], :name => "index_transactions_on_business_id_and_admpart_tag_id"
+  add_index "transactions", ["business_id", "updated_at"], :name => "index_transactions_on_business_id_and_updated_at"
   add_index "transactions", ["business_id"], :name => "index_transactions_on_business_id"
 
   create_table "users", :force => true do |t|
