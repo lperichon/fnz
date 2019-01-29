@@ -92,6 +92,7 @@ class Transaction < ActiveRecord::Base
     inscriptions.each { |inscription| inscription.update_balance } if inscriptions.count > 0
   end
 
+  # installments automagic
   def infer_associations
     return if business_id.nil?
     if admpart_tag
@@ -110,6 +111,7 @@ class Transaction < ActiveRecord::Base
           if installment
             if agent_id.blank? && installment.agent_id
               update_attribute(:agent_id, installment.agent_id)
+              # TODO if installment.agent_id is NULL get contact.padma_teacher 
             end
             # to ensure callbacks that calculate balances, etc.
             InstallmentTransaction.create(
