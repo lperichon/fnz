@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20190128151141) do
+ActiveRecord::Schema.define(:version => 20190129190316) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name",                                       :default => "",  :null => false
@@ -297,7 +297,7 @@ ActiveRecord::Schema.define(:version => 20190128151141) do
     t.datetime "updated_at"
   end
 
-  add_index "transactions", ["business_id", "admpart_tag_id"], :name => "index_transactions_on_business_id_and_admpart_tag_id"
+  add_index "transactions", ["business_id", "admpart_tag_id", "report_at"], :name => "tag_transactions_index"
   add_index "transactions", ["business_id", "updated_at"], :name => "index_transactions_on_business_id_and_updated_at"
   add_index "transactions", ["business_id"], :name => "index_transactions_on_business_id"
 
