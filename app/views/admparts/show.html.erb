@@ -1,6 +1,6 @@
 <%= render "warnings" %>
 
-<div>
+<div id="admpart-date-select">
         <%= select_tag :ref_date,
                        ref_date_options,
                        data: { action: "redirectOnChange", business_id: @adm.business_id  } %>

@@ -2,4 +2,13 @@
   header.navbar, #secondary-navigation {
     display: none;
   }
+
+  #admpart-date-select {
+    display: none;
+  }
+
+  #admpart {
+    margin-top: -100px;
+    position: absolute;
+  }
 }
