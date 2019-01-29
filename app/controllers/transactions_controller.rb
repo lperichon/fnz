@@ -40,7 +40,10 @@ class TransactionsController < UserApplicationController
   end
 
   def new
-    @transaction = @context.new(params[:transaction])
+    attrs = ( params[:transaction] || {}).reverse_merge({
+      transaction_at: Time.zone.now
+    })
+    @transaction = @context.new(attrs)
   end
 
   # POST /accounts
