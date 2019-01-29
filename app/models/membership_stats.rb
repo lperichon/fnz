@@ -66,11 +66,16 @@ class MembershipStats
   end
 
   def memberships
-    if @membership_filter.nil?
-      @memberships = Membership.unscoped.where(business_id: business.id)
+    if @memberships
+      @memberships
     else
-      @memberships = Membership.unscoped.where(business_id: business.id).where(:id => @membership_filter.results.collect {|c| c.membership_ids })
+      if @membership_filter.nil?
+        @memberships = Membership.unscoped.where(business_id: business.id)
+      else
+        # includes(:memberships) to avoid N-queries
+        @memberships = Membership.unscoped.where(business_id: business.id).where(:id => @membership_filter.results.includes(:memberships).collect {|c| c.membership_ids })
+      end
+      @memberships
     end
-    @memberships
   end
 end

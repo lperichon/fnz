@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20190129190316) do
+ActiveRecord::Schema.define(:version => 20190129195040) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name",                                       :default => "",  :null => false
@@ -105,10 +105,15 @@ ActiveRecord::Schema.define(:version => 20190129190316) do
     t.date    "enrolled_on"
   end
 
+  add_index "enrollments", ["agent_id"], :name => "index_enrollments_on_agent_id"
+  add_index "enrollments", ["membership_id"], :name => "index_enrollments_on_membership_id"
+
   create_table "enrollments_transactions", :force => true do |t|
     t.integer "enrollment_id"
     t.integer "transaction_id"
   end
+
+  add_index "enrollments_transactions", ["enrollment_id", "transaction_id"], :name => "enrollments_transactions_link_index"
 
   create_table "imports", :force => true do |t|
     t.integer  "business_id"
