@@ -188,7 +188,7 @@ class Admpart < ActiveRecord::Base
 
   CACHE_DURATION = 5.minutes
   def total_for_tag(tag,agent_id=nil,options={})
-    cache_key = [id,ref_date,"total_for_tag",tag,options.to_param]
+    cache_key = [id,"total_for_tag",tag.id,options.to_param]
     unless agent_id.nil?
       cache_key << "agent:#{agent_id}"
     end
@@ -200,7 +200,7 @@ class Admpart < ActiveRecord::Base
       @total = 0
 
       # TODO consider currencies
-      # TODO consider state of transaction
+      # TODO consider state of transaction. maybe no need?
       
       scope = transactions_for_tag(tag, options.merge({ agent_id: agent_id }))
       @total += scope.credits.sum(:amount)
