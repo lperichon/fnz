@@ -38,8 +38,8 @@
   		<% monthly_iterator.each do |monthly_values| %>
   		  <% installment = monthly_values[:installment] %>
   		  <% date = monthly_values[:date] %>
-                  <%= render :partial => 'table_cell', :locals => {:contact => contact, :membership => membership, :installment => installment, :date => date} %>
-                <% end %>
+          <%= render :partial => 'table_cell', :locals => {:contact => contact, :membership => membership, :installment => installment, :date => date} %>
+        <% end %>
       <% end %>
     </tr>
   <% end %>
