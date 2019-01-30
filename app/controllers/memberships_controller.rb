@@ -76,13 +76,9 @@ class MembershipsController < UserApplicationController
     if params[:format].try(:to_s) == 'csv'
       per_page = 9999
     end
-    default_params = {
-      :contact_search => {
-        :status => "student"
-      }
-    }
-    params.reverse_merge!(default_params)
-    @membership_filter = ContactSearch.new(params[:contact_search].merge(:business_id => @business.id))
+
+    init_membership_filter
+
     if params[:overview_mode].present? && %(list table).include?(params[:overview_mode])
       current_user.update_attribute(:overview_mode, params[:overview_mode])
     end
@@ -96,13 +92,7 @@ class MembershipsController < UserApplicationController
   end
 
   def stats
-    default_params = {
-      :contact_search => {
-        :status => "student"
-      }
-    }
-    params.reverse_merge!(default_params)
-    @membership_filter = ContactSearch.new(params[:contact_search].merge(:business_id => @business.id))
+    init_membership_filter
 
     @stats = MembershipStats.new(business: @business,
                                  year: params[:year].to_i, month: params[:month].to_i,
@@ -111,6 +101,16 @@ class MembershipsController < UserApplicationController
   end
 
   private
+
+  def init_membership_filter
+    default_params = {
+      :contact_search => {
+        :status => "student"
+      }
+    }
+    params.reverse_merge!(default_params)
+    @membership_filter = ContactSearch.new(params[:contact_search].merge(business_id: @business.id))
+  end
 
   def get_context
     business_id = params[:business_id]
