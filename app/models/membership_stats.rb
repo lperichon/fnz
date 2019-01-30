@@ -47,8 +47,8 @@ class MembershipStats
     end
     is.select("SUM(installments.value) AS sum")
 
-    ms = memberships.wout_installments
-               .valid_on(ref_date)
+    ms = memberships.wout_installments_due_on_month(ref_date)
+                    .valid_on(ref_date)
     if agent
       if agent == ""
         ms = ms.joins(:contact).where(contacts: { padma_teacher: nil })

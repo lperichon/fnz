@@ -33,6 +33,13 @@ class Membership < ActiveRecord::Base
   scope :open, where(closed_on: nil)
   scope :valid_on, ->(ref_date){ open.where("begins_on <= :rd and ends_on >= :rd", rd: ref_date) }
 
+  def self.wout_installments_due_on_month(ref_date)
+    all_ids = self.pluck(:id)
+    period = (ref_date.beginning_of_month..ref_date.end_of_month)
+    with_installment_ids = self.joins(:installments).where(installments: { due_on: period }).pluck(:id)
+    self.where(id: (all_ids - with_installment_ids))
+  end
+
   def closed?
     closed_on.present?
   end
