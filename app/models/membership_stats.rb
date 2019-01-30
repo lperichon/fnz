@@ -72,13 +72,12 @@ class MembershipStats
     if @memberships
       @memberships
     else
+      scope = Membership.unscoped.where(business_id: business.id)
       if @membership_filter.nil?
         scope = if @only_current
-          Membership.unscoped.joins("contacts ON contacts.current_membership_id=memberships.id")
-        else
-          scope = Membership.unscoped
+          scope = scope.joins("contacts ON contacts.current_membership_id=memberships.id")
         end
-        @memberships = scope.where(business_id: business.id)
+        @memberships = scope
       else
         ids_method = if @only_current
           "current_membership_id"
@@ -86,7 +85,10 @@ class MembershipStats
           "membership_ids"
         end
         # includes(:memberships) to avoid N-queries when calling membership_ids
-        @memberships = Membership.unscoped.where(business_id: business.id).where(:id => @membership_filter.results.includes(:memberships).collect {|c| c.send(ids_method) })
+        @memberships = scope.where(id: @membership_filter.results
+                                                         .includes(:memberships)
+                                                         .collect {|c| c.send(ids_method) }
+                                  )
       end
     end
   end
