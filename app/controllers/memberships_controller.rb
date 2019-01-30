@@ -96,7 +96,6 @@ class MembershipsController < UserApplicationController
 
     @stats = MembershipStats.new(business: @business,
                                  year: params[:year].to_i, month: params[:month].to_i,
-                                 only_current: true,
                                  membership_filter: @membership_filter)
   end
 
