@@ -60,6 +60,7 @@ module MembershipsHelper
 
   # @return [Installment]
   def installment_for(date, installments)
-  	installments.detect {|i| i.due_on.beginning_of_month.beginning_of_day <= date && i.due_on.end_of_month.end_of_day >= date}
+    installments.select {|i| date.beginning_of_month <= i.due_on && i.due_on <= date.end_of_month }
+  	# installments.detect {|i| i.due_on.beginning_of_month.beginning_of_day <= date && i.due_on.end_of_month.end_of_day >= date}
   end
 end
