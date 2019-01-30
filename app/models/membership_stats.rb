@@ -3,7 +3,10 @@ class MembershipStats
   include ActiveModel::Conversion
   extend ActiveModel::Naming
 
-  attr_accessor :business, :month, :year, :membership_filter
+  attr_accessor :business,
+                :month, :year,
+                :membership_filter,
+                :only_current
 
   validates_presence_of :business, :month, :year
 
@@ -70,12 +73,21 @@ class MembershipStats
       @memberships
     else
       if @membership_filter.nil?
-        @memberships = Membership.unscoped.where(business_id: business.id)
+        scope = if @only_current
+          Membership.unscoped.joins("contacts ON contacts.current_membership_id=memberships.id")
+        else
+          scope = Membership.unscoped
+        end
+        @memberships = scope.where(business_id: business.id)
       else
-        # includes(:memberships) to avoid N-queries
-        @memberships = Membership.unscoped.where(business_id: business.id).where(:id => @membership_filter.results.includes(:memberships).collect {|c| c.membership_ids })
+        ids_method = if @only_current
+          "current_membership_id"
+        else
+          "membership_ids"
+        end
+        # includes(:memberships) to avoid N-queries when calling membership_ids
+        @memberships = Membership.unscoped.where(business_id: business.id).where(:id => @membership_filter.results.includes(:memberships).collect {|c| c.send(ids_method) })
       end
-      @memberships
     end
   end
 end

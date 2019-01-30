@@ -104,7 +104,10 @@ class MembershipsController < UserApplicationController
     params.reverse_merge!(default_params)
     @membership_filter = ContactSearch.new(params[:contact_search].merge(:business_id => @business.id))
 
-    @stats = MembershipStats.new(:business => @business, :year => params[:year].to_i, :month => params[:month].to_i, :membership_filter => @membership_filter)
+    @stats = MembershipStats.new(business: @business,
+                                 year: params[:year].to_i, month: params[:month].to_i,
+                                 only_current: true,
+                                 membership_filter: @membership_filter)
   end
 
   private
