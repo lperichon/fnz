@@ -186,7 +186,6 @@ class Admpart < ActiveRecord::Base
     scope
   end
 
-  CACHE_DURATION = 5.minutes
   def total_for_tag(tag,agent_id=nil,options={})
     cache_key = [id,"total_for_tag",tag.id,options.to_param]
     unless agent_id.nil?
@@ -215,7 +214,7 @@ class Admpart < ActiveRecord::Base
         end
       end
 
-      Rails.cache.write(cache_key, @total, expires_in: CACHE_DURATION)
+      Rails.cache.write(cache_key, @total, expires_in: 1.minute)
       @total
     end
   end
