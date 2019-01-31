@@ -71,3 +71,4 @@ gem "roo"
 gem "roo-xls"
 gem 'best_in_place', '~> 3.1.1'
 gem "appsignal"
+gem "translation"

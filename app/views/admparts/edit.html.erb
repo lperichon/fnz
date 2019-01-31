@@ -17,25 +17,25 @@
   <tbody>
     <tr>
       <td colspan="2">
-        <%= f.input :installments_tag_id, as: :select, collection: @adm.business.tags.where(parent_id: nil) %>
+        <%= f.input :installments_tag_id, as: :select, collection: @adm.business.tags.where(parent_id: nil), label: _("Categoría de mensualidades") %>
       </td>
       <td rowspan="4" colspan="2">
-          expense section
+        <%= t(".this_is_section", section_name: "expense") %>
       </td>
     </tr>
     <tr>
       <td colspan="2">
-        <%= f.input :enrollments_tag_id, as: :select, collection: @adm.business.tags.where(parent_id: nil) %>
+        <%= f.input :enrollments_tag_id, as: :select, collection: @adm.business.tags.where(parent_id: nil), label: _("Categoría de matrículas") %>
       </td>
     </tr>
     <tr>
       <td colspan="2">
-        <%= f.input :sales_tag_id, as: :select, collection: @adm.business.tags.where(parent_id: nil) %>
+        <%= f.input :sales_tag_id, as: :select, collection: @adm.business.tags.where(parent_id: nil), label: _("Categoría de ventas") %>
       </td>
     </tr>
     <tr>
       <td colspan="2">
-        income section
+        <%= t(".this_is_section", section_name: "income") %>
       </td>
     </tr>
     <tr>
@@ -55,7 +55,7 @@
       <tr>
         <td colspan="2"></td>
         <td colspan="2">
-          director_expenses section
+        <%= t(".this_is_section", section_name: "director_expenses") %>
         </td>
       </tr>
       <tr>
@@ -75,10 +75,10 @@
     </tr>
     <tr>
       <td colspan="2">
-        owners_expenses section
+        <%= t(".this_is_section", section_name: "owners_expenses") %>
       </td>
       <td colspan="2">
-        teams_expenses section
+        <%= t(".this_is_section", section_name: "teams_expenses") %>
       </td>
     </tr>
     <tr>
@@ -143,7 +143,9 @@
     </tr>
     <tr>
       <th><%= t(".agent") %></th>
-      <th>equal_distribution section</th>
+      <th>
+        <%= t(".this_is_section", section_name: "equal_distribution") %>
+      </th>
       <th></th>
     </tr>
   </tbody>

@@ -1,5 +1,6 @@
+---
 es:
-  date_format: 'DD/MM/YYYY'
+  date_format: DD/MM/YYYY
   accounts:
     edit:
       title: Editar cuenta
@@ -212,6 +213,12 @@ es:
       contact: Contacto
       inscription: Inscripción
   admparts:
+    edit:
+      incomes: Entradas
+      expenses: Salidas
+      total_income: Total de entradas
+      total_expense: Total de gastos
+      this_is_section: "Esta es la sección '%{section_name}'"
     secondary_navigation:
       administration: Administración participativa
       attendance_detail: Detalle x asistencia
@@ -247,10 +254,10 @@ es:
     - viernes
     - sábado
     formats:
-      default: ! '%d/%m/%Y'
-      long: ! '%d de %B de %Y'
-      short: ! '%d de %b'
-      month: ! '%m/%Y'
+      default: '%d/%m/%Y'
+      long: '%d de %B de %Y'
+      short: '%d de %b'
+      month: '%m/%Y'
     month_names:
     - 
     - enero
@@ -295,16 +302,16 @@ es:
         other: más de %{count} años
       x_days:
         one: 1 día
-        other: ! '%{count} días'
+        other: '%{count} días'
       x_minutes:
         one: 1 minuto
-        other: ! '%{count} minutos'
+        other: '%{count} minutos'
       x_months:
         one: 1 mes
-        other: ! '%{count} meses'
+        other: '%{count} meses'
       x_seconds:
         one: 1 segundo
-        other: ! '%{count} segundos'
+        other: '%{count} segundos'
     prompts:
       day: Día
       hour: Hora
@@ -315,8 +322,11 @@ es:
   devise:
     confirmations:
       confirmed: Su cuenta fue confirmada exitosamente. Ya esta logueado.
-      send_instructions: Vas a recibir un correo con instrucciones sobre cómo confirmar tu cuenta en unos minutos.
-      send_paranoid_instructions: Si tu correo existe en nuestra base de datos, en unos minutos recibirás un correo con instrucciones sobre cómo confirmar tu cuenta.
+      send_instructions: Vas a recibir un correo con instrucciones sobre cómo confirmar
+        tu cuenta en unos minutos.
+      send_paranoid_instructions: Si tu correo existe en nuestra base de datos, en
+        unos minutos recibirás un correo con instrucciones sobre cómo confirmar tu
+        cuenta.
     failure:
       already_authenticated: Ya has iniciado sesión.
       inactive: Tu cuenta aún no ha sido activada.
@@ -339,28 +349,41 @@ es:
       failure: No has sido autorizado en la cuenta %{kind} porque "%{reason}".
       success: Has sido autorizado satisfactoriamente en la cuenta %{kind}.
     passwords:
-      no_token: No puedes acceder a esta página si no es a través de un enlace para resetear tu contraseña. Si has llegado hasta aquí desde el email para resetear tu contraseña, por favor asegúrate de que la URL introducida está completa.
-      send_instructions: Recibirás un correo con instrucciones sobre cómo resetear tu contraseña en unos pocos minutos.
-      send_paranoid_instructions: Si tu correo existe en nuestra base de datos, recibirás un correo con instrucciones sobre cómo resetear tu contraseña en tu bandeja de entrada.
+      no_token: No puedes acceder a esta página si no es a través de un enlace para
+        resetear tu contraseña. Si has llegado hasta aquí desde el email para resetear
+        tu contraseña, por favor asegúrate de que la URL introducida está completa.
+      send_instructions: Recibirás un correo con instrucciones sobre cómo resetear
+        tu contraseña en unos pocos minutos.
+      send_paranoid_instructions: Si tu correo existe en nuestra base de datos, recibirás
+        un correo con instrucciones sobre cómo resetear tu contraseña en tu bandeja
+        de entrada.
       updated: Se ha cambiado tu contraseña. Ya iniciaste sesión.
       updated_not_active: Tu contraseña fue cambiada.
     registrations:
       destroyed: Fue grato tenerte con nosotros. Tu cuenta fue cancelada.
       signed_up: Bienvenido. Tu cuenta fue creada.
-      signed_up_but_inactive: Tu cuenta ha sido creada correctamente. Sin embargo, no hemos podido iniciar la sesión porque tu cuenta aún no está activada.
-      signed_up_but_locked: Tu cuenta ha sido creada correctamente. Sin embargo, no hemos podido iniciar la sesión porque que tu cuenta está bloqueada.
-      signed_up_but_unconfirmed: Se ha enviado un mensaje con un enlace de confirmación a tu correo electrónico. Abre el enlace para activar tu cuenta.
-      update_needs_confirmation: Has actualizado tu cuenta correctamente, pero es necesario confirmar tu nuevo correo electrónico. Por favor, comprueba tu correo y sigue el enlace de confirmación para finalizar la comprobación del nuevo correo eletrónico.
+      signed_up_but_inactive: Tu cuenta ha sido creada correctamente. Sin embargo,
+        no hemos podido iniciar la sesión porque tu cuenta aún no está activada.
+      signed_up_but_locked: Tu cuenta ha sido creada correctamente. Sin embargo, no
+        hemos podido iniciar la sesión porque que tu cuenta está bloqueada.
+      signed_up_but_unconfirmed: Se ha enviado un mensaje con un enlace de confirmación
+        a tu correo electrónico. Abre el enlace para activar tu cuenta.
+      update_needs_confirmation: Has actualizado tu cuenta correctamente, pero es
+        necesario confirmar tu nuevo correo electrónico. Por favor, comprueba tu correo
+        y sigue el enlace de confirmación para finalizar la comprobación del nuevo
+        correo eletrónico.
       updated: Tu cuenta se ha actualizada.
     sessions:
       signed_in: Sesión iniciada.
       signed_out: Sesión finalizada.
     unlocks:
-      send_instructions: Vas a recibir instrucciones para desbloquear tu cuenta en unos pocos minutos.
-      send_paranoid_instructions: Si tu cuenta existe, vas a recibir instrucciones para desbloquear tu cuenta en unos pocos minutos.
+      send_instructions: Vas a recibir instrucciones para desbloquear tu cuenta en
+        unos pocos minutos.
+      send_paranoid_instructions: Si tu cuenta existe, vas a recibir instrucciones
+        para desbloquear tu cuenta en unos pocos minutos.
       unlocked: Tu cuenta ha sido desbloqueada. Ya puedes iniciar sesión.
   errors:
-    format: ! '%{attribute} %{message}'
+    format: '%{attribute} %{message}'
     messages:
       accepted: debe ser aceptado
       after: 
@@ -368,7 +391,8 @@ es:
       before: 
       blank: no puede estar en blanco
       confirmation: no coincide con la confirmación
-      confirmation_period_expired: necesita confirmarse dentro de %{period}, por favor solicita una nueva
+      confirmation_period_expired: necesita confirmarse dentro de %{period}, por favor
+        solicita una nueva
       empty: no puede estar vacío
       equal_to: debe ser igual a %{count}
       even: debe ser par
@@ -389,18 +413,18 @@ es:
       not_found: no se ha encontrado
       not_locked: no estaba bloqueada
       not_saved:
-        one: ! 'Ocurrió un error al tratar de guardar %{resource}:'
-        other: ! 'Ocurrieron %{count} errores al tratar de guardar %{resource}:'
+        one: 'Ocurrió un error al tratar de guardar %{resource}:'
+        other: 'Ocurrieron %{count} errores al tratar de guardar %{resource}:'
       odd: debe ser impar
       on_or_after: 
       on_or_before: 
-      record_invalid: ! 'La validación falló: %{errors}'
+      record_invalid: 'La validación falló: %{errors}'
       taken: ya está en uso
       too_long: es demasiado largo (%{count} caracteres máximo)
       too_short: es demasiado corto (%{count} caracteres mínimo)
       wrong_length: no tiene la longitud correcta (%{count} caracteres exactos)
     template:
-      body: ! 'Se encontraron problemas con los siguientes campos:'
+      body: 'Se encontraron problemas con los siguientes campos:'
       header:
         one: No se pudo guardar este/a %{model} porque se encontró 1 error
         other: No se pudo guardar este/a %{model} porque se encontraron %{count} errores
@@ -498,33 +522,33 @@ es:
       average: Promedio
       paid_installments: Mensualidades pagas
       all_installments: Mensualidades
-      all_installments_tooltip: "Las mensualidades del mes"
-      paid_installments_tooltip: "Las mensualidades pagadas en el mes"
+      all_installments_tooltip: Las mensualidades del mes
+      paid_installments_tooltip: Las mensualidades pagadas en el mes
       all_enrollments: Matrículas
       school: Escuela
     index:
       title: Membresías
     destroy:
-      success: "La membresía fue eliminada exitosamente."
+      success: La membresía fue eliminada exitosamente.
   number:
     currency:
       format:
         delimiter: .
-        format: ! '%u%n'
+        format: '%u%n'
         precision: 2
-        separator: ! ','
+        separator: ','
         significant: false
         strip_insignificant_zeros: false
         unit: $
     format:
       delimiter: .
       precision: 3
-      separator: ! ','
+      separator: ','
       significant: false
       strip_insignificant_zeros: false
     human:
       decimal_units:
-        format: ! '%n %u'
+        format: '%n %u'
         units:
           billion: mil millones
           million: millón
@@ -538,7 +562,7 @@ es:
         significant: true
         strip_insignificant_zeros: true
       storage_units:
-        format: ! '%n %u'
+        format: '%n %u'
         units:
           byte:
             one: Byte
@@ -764,7 +788,7 @@ es:
           name: 
         new:
           description: 
-          name:
+          name: 
       installment_search:
         due_after: Después de
         due_before: Antes de
@@ -839,15 +863,15 @@ es:
           state: 
   support:
     array:
-      last_word_connector: ! ', y '
-      two_words_connector: ! ' y '
-      words_connector: ! ', '
+      last_word_connector: ', y '
+      two_words_connector: ' y '
+      words_connector: ', '
   time:
     am: am
     formats:
-      default: ! '%A, %d de %B de %Y %H:%M:%S %z'
-      long: ! '%d de %B de %Y %H:%M'
-      short: ! '%d de %b %H:%M'
+      default: '%A, %d de %B de %Y %H:%M:%S %z'
+      long: '%d de %B de %Y %H:%M'
+      short: '%d de %b %H:%M'
     pm: pm
   validates_timeliness:
     error_value_formats:
@@ -950,22 +974,25 @@ es:
       title: Estadísticas de ventas
       all_sales: Ventas totales
       paid_sales: Ventas pagadas
-      all_sales_tooltip: "Ventas de este mes"
-      paid_sales_tooltip: "Ventas pagadas este mes"
+      all_sales_tooltip: Ventas de este mes
+      paid_sales_tooltip: Ventas pagadas este mes
   imports:
     new:
-      new_import: "Nueva importación"
+      new_import: Nueva importación
     show:
-      confirm_delete: "Al eliminar la importación se eliminan TODAS las transacciones importadas. Este cambio no puede ser revertido, tendrá que importar nuevamente el archivo. ¿Desea eliminar la importación?"
+      confirm_delete: Al eliminar la importación se eliminan TODAS las transacciones
+        importadas. Este cambio no puede ser revertido, tendrá que importar nuevamente
+        el archivo. ¿Desea eliminar la importación?
     form:
-      transaction_csv_columns: "Estas son las columnas que debe tener el archivo. Las primeras 3 son necesarias, el resto opcionales"
-      account_name: "nombre de la cuenta (ej: caja chica)"
-      date: "fecha (ej: 2019-12-31)"
-      amount: "valor (ej: -10.4)"
-      category: "categoría (ej: mensualidades)"
-      agent_padma_id: "usuario vinculado (ej: dwayne.macgowan)"
-      contact_name: "nombre del contacto vinculado"
-      state: "estado ( created, pending, reconciled )"
+      transaction_csv_columns: Estas son las columnas que debe tener el archivo. Las
+        primeras 3 son necesarias, el resto opcionales
+      account_name: 'nombre de la cuenta (ej: caja chica)'
+      date: 'fecha (ej: 2019-12-31)'
+      amount: 'valor (ej: -10.4)'
+      category: 'categoría (ej: mensualidades)'
+      agent_padma_id: 'usuario vinculado (ej: dwayne.macgowan)'
+      contact_name: nombre del contacto vinculado
+      state: estado ( created, pending, reconciled )
   businesses:
     index:
       title: Negocios
