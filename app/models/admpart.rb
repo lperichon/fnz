@@ -187,7 +187,8 @@ class Admpart < ActiveRecord::Base
   end
 
   def total_for_tag(tag,agent_id=nil,options={})
-    cache_key = [id,"total_for_tag",tag.id,options.to_param]
+    options_digest = Digest::MD5.hexdigest(options.to_param) 
+    cache_key = [id,"total_for_tag",tag.id,options_digest]
     unless agent_id.nil?
       cache_key << "agent:#{agent_id}"
     end
