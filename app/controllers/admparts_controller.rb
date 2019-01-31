@@ -30,11 +30,16 @@ class AdmpartsController < UserApplicationController
   end
 
   def attendance_detail
-    @adm.force_refresh = params[:force_refresh] 
+    unless @adm.valid?
+      redirect_to edit_business_admpart_path(@business, id: @adm.try(:ref_date) || Date.today)
+    else
 
-    @ignore_zero_income = !params[:show_zero_income]
+      @adm.force_refresh = params[:force_refresh] 
 
-    @contacts = @adm.contacts_in_attendance_report
+      @ignore_zero_income = !params[:show_zero_income]
+
+      @contacts = @adm.contacts_in_attendance_report
+    end
   end
 
   def edit
