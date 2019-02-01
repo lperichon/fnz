@@ -23,7 +23,7 @@ pt-BR:
     edit: Editar
     close: Fechar
     delete: Apagar
-    update: 
+    update: Atualizar
   activemodel:
     attributes:
       membership_search:
@@ -143,7 +143,7 @@ pt-BR:
       installment_search:
         due_before: Antes de
         due_after: Depois de
-        status: 
+        status: Estado
         agent: Instrutor
     models:
       account: Conta
@@ -170,11 +170,11 @@ pt-BR:
       administration: Administração participativa
       attendance_detail: Detalhe x presenças
     edit:
-      incomes: 
-      expenses: 
-      total_income: 
-      total_expense: 
-      this_is_section: 
+      incomes: Entrada
+      expenses: Despesa
+      total_income: Total de entradas
+      total_expense: Despesas totais
+      this_is_section: Esta é a seção '%{section_name}'
   date:
     abbr_day_names:
     - Dom
@@ -435,11 +435,11 @@ pt-BR:
     human:
       decimal_units:
         units:
-          billion: 
-          million: 
-          quadrillion: 
+          billion: mil milhões
+          million: milhão
+          quadrillion: mil bilhões
           thousand: mil
-          trillion: 
+          trillion: bilhão
       storage_units:
         units:
           byte:
@@ -475,7 +475,7 @@ pt-BR:
     new:
       title: Nova mensalidade
     edit:
-      title: 
+      title: Alterar mensalidade
     index:
       title: Mensalidades
     create:
@@ -587,7 +587,7 @@ pt-BR:
       event:
         manage_agents: Escolas
       manage_contacts: Contatos
-      manage_imports: 
+      manage_imports: Importações
       manage_payment_types: Tipos de pagamento
       manage_products: Produtos
       manage_tags: Categorias

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnz 1.0\n"
 "Report-Msgid-Bugs-To: contact@translation.io\n"
-"POT-Creation-Date: 2019-02-01 18:23-0300\n"
-"PO-Revision-Date: 2019-02-01 22:24+0100\n"
+"POT-Creation-Date: 2019-02-01 18:30-0300\n"
+"PO-Revision-Date: 2019-02-01 22:30+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Portuguese\n"
 "Language: pt_BR\n"
@@ -20,11 +20,11 @@ msgstr ""
 
 #: ../../../app/models/tag.rb:90
 msgid "etiqueta de sistema tiene que ser raiz, no puede estar bajo otra"
-msgstr ""
+msgstr "Categorías do sistema tem que ser raiz, não pode estar sob outra"
 
 #: ../../../app/models/tag.rb:96
 msgid "tiene que estar en 'income'"
-msgstr ""
+msgstr "tem que estar em 'income'"
 
 #: ../../../app/views/admparts/edit.html.erb:20
 msgid "Categoría de mensualidades"
@@ -40,8 +40,8 @@ msgstr "Categoría das vendas"
 
 #: ../../../app/views/tags/_form.html.erb:4
 msgid "evitaron que la categoría sea actualizada:"
-msgstr ""
+msgstr "impediram que a categoria fosse atualizada:"
 
 #: ../../../app/views/tags/edit.html.erb:5
 msgid "Editar categoría"
-msgstr ""
+msgstr "Alterar categoria"
