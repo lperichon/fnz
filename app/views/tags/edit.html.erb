@@ -2,9 +2,9 @@
     <%= render :partial => 'businesses/edit_sidebar' %>
 <% end %>
 
-<h2>Edit Tag</h2>
+<h2><%= _("Editar categoría") %></h2>
 
 <%= render :partial => 'form', :locals => {:form_url => business_tag_path(@business, @tag)} %>
 
-<%= link_to 'Show', business_tag_path(@business,@tag) %> |
-<%= link_to 'Back', business_tags_path(@business) %>
+<%= link_to t('actions.show'), business_tag_path(@business,@tag) %> |
+<%= link_to t('actions.back'), business_tags_path(@business) %>

@@ -1,7 +1,7 @@
 <%= form_for(@tag, :url => form_url) do |f| %>
     <% if @tag.errors.any? %>
         <div id="error_explanation">
-          <h2><%= pluralize(@tag.errors.count, "error") %> prohibited this tag from being saved:</h2>
+          <h2><%= pluralize(@tag.errors.count, "error") %> <%= _("evitaron que la categoría sea actualizada:") %></h2>
 
           <ul>
             <% @tag.errors.full_messages.each do |msg| %>
@@ -11,18 +11,10 @@
         </div>
     <% end %>
 
-    <p><%= f.label :name %><br />
-      <%= f.text_field :name %></p>
-
-    <% if can?(:read, Admpart) && @tag.root? %>
-      <p><%= f.label :admpart_section %><br />
-        <%= f.select :admpart_section, collection: [""]+Admpart::VALID_SECTIONS %></p>
-    <% end %>
-
-    <% if can?(:read, Admpart) && @tag.root? || !@tag.system_name.blank? %>
-      <p><%= f.label :system_name %><br />
-        <%= f.select :system_name, collection: [""]+Tag::VALID_SYSTEM_NAMES %></p>
-    <% end %>
+    <p>
+      <%= f.label :name %><br />
+      <%= f.text_field :name %>
+    </p>
 
     <div class="actions">
       <%= f.submit %>
