@@ -1,9 +1,0 @@
-<tr data-id="<%= transaction.id %>">
-  <%= render :partial => 'transactions_table_item', :locals => {:transaction => transaction} %>
-  <td>
-    <% if can? :manage, @business.transactions.build %>
-      <%= link_to content_tag(:i, "", :class => "icon-edit"), edit_business_transaction_path(transaction.business, transaction), :remote => true %>
-      <%= link_to content_tag(:i, "", :class => "icon-trash"), business_transaction_path(transaction.business, transaction), :confirm => I18n.t('actions.confirm_delete'), :method => 'delete' %>
-    <% end %>
-  </td>
-</tr>
