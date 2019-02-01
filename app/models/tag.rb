@@ -29,6 +29,8 @@ class Tag < ActiveRecord::Base
 
   validate :systags_must_be_root
 
+  before_destroy :cancel_if_system_tag
+
   def to_s
     name
   end
@@ -76,6 +78,12 @@ class Tag < ActiveRecord::Base
   end
 
   private
+
+  def cancel_if_system_tag
+    unless system_name.blank?
+      return false # this cancels callbacks and destroy
+    end
+  end
 
   def systags_must_be_root
     if self.system_name.in?(VALID_SYSTEM_NAMES) && !self.parent_id.nil?

@@ -11,6 +11,7 @@ class Ability
     can :manage, Transaction, :business => {:transactions_enabled => true}
     can :manage, Account, :business => {:transactions_enabled => true}
     can :manage, Tag, :business => {:transactions_enabled => true}
+    cannot :destroy, Tag, system_name: Tag::VALID_SYSTEM_NAMES
     can :manage, Import, :business => {:transactions_enabled => true}
     can :manage, User, :business => {:share_enabled => true}
     # Define abilities for the passed in user here. For example:

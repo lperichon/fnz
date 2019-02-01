@@ -41,5 +41,11 @@ describe Tag do
     end
   end
 
+  it "prevents system tags from being destroyed" do
+    t = business.tags.get_sales_tag
+    expect{ t.destroy }.not_to change{ Tag.count }
+    expect(Tag.find(t.id)).to eq t
+  end
+
 
 end
