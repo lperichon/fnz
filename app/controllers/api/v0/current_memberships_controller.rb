@@ -18,12 +18,13 @@ class Api::V0::CurrentMembershipsController < Api::V0::ApiController
   #
   # @author Luis Perichon
   def show
+    @contact = @business.contacts.find_by_padma_id(params[:contact_id]) if params[:business_id].present?
     @membership = @contact.try(:current_membership)
     render json: @membership, root: false
   end
 
   def index
-    @memberships = @business.memberships.current.includes(:contact)
+    @memberships = @business.memberships.current.includes(:contact, :payment_type, :installments)
     if params[:padma_contact_ids].present?
       @memberships = @memberships.where("contacts.padma_id" => params[:padma_contact_ids])
     end
@@ -34,6 +35,5 @@ class Api::V0::CurrentMembershipsController < Api::V0::ApiController
 
   def get_scope
     @business = Business.get_by_padma_id(params[:business_id])
-    @contact = @business.contacts.find_by_padma_id(params[:contact_id]) if params[:business_id].present?
   end
 end
