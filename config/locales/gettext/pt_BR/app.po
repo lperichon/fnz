@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnz 1.0\n"
 "Report-Msgid-Bugs-To: contact@translation.io\n"
-"POT-Creation-Date: 2019-02-01 18:30-0300\n"
-"PO-Revision-Date: 2019-02-01 22:30+0100\n"
+"POT-Creation-Date: 2019-02-01 19:37-0300\n"
+"PO-Revision-Date: 2019-02-01 23:37+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Portuguese\n"
 "Language: pt_BR\n"
@@ -26,6 +26,14 @@ msgstr "Categorías do sistema tem que ser raiz, não pode estar sob outra"
 msgid "tiene que estar en 'income'"
 msgstr "tem que estar em 'income'"
 
+#: ../../../app/views/admparts/_refreshing.html.erb:3
+msgid ""
+"Estamos recalculando tu administración. Estos datos pueden tener hasta 10 minu"
+"tos de antigüedad. Refrescá la página para ver los datos actualizados."
+msgstr ""
+"Estamos recalculando sua administração. Estes dados apresentados podem ter até"
+" 10 minutos de antiguedade. Atualize a página para ver os dados atualizados."
+
 #: ../../../app/views/admparts/edit.html.erb:20
 msgid "Categoría de mensualidades"
 msgstr "Categoría das mensalidades"
@@ -37,6 +45,10 @@ msgstr "Categoría das matrículas"
 #: ../../../app/views/admparts/edit.html.erb:33
 msgid "Categoría de ventas"
 msgstr "Categoría das vendas"
+
+#: ../../../app/views/admparts/show.html.erb:11
+msgid "Recalcular administración ahora"
+msgstr "Recalcule a administração agora"
 
 #: ../../../app/views/tags/_form.html.erb:4
 msgid "evitaron que la categoría sea actualizada:"

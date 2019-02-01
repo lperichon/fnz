@@ -1,5 +1,5 @@
 @media print {
-  header.navbar, #secondary-navigation {
+  header.navbar, #secondary-navigation, .hide-in-print {
     display: none;
   }
 

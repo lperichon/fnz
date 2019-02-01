@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnz 1.0\n"
 "Report-Msgid-Bugs-To: contact@translation.io\n"
-"POT-Creation-Date: 2019-02-01 18:30-0300\n"
-"PO-Revision-Date: 2019-02-01 18:30-0300\n"
+"POT-Creation-Date: 2019-02-01 19:37-0300\n"
+"PO-Revision-Date: 2019-02-01 19:37-0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -26,6 +26,12 @@ msgstr ""
 msgid "tiene que estar en 'income'"
 msgstr ""
 
+#: ../../../app/views/admparts/_refreshing.html.erb:3
+msgid ""
+"Estamos recalculando tu administración. Estos datos pueden tener hasta 10 minu"
+"tos de antigüedad. Refrescá la página para ver los datos actualizados."
+msgstr ""
+
 #: ../../../app/views/admparts/edit.html.erb:20
 msgid "Categoría de mensualidades"
 msgstr ""
@@ -36,6 +42,10 @@ msgstr ""
 
 #: ../../../app/views/admparts/edit.html.erb:33
 msgid "Categoría de ventas"
+msgstr ""
+
+#: ../../../app/views/admparts/show.html.erb:11
+msgid "Recalcular administración ahora"
 msgstr ""
 
 #: ../../../app/views/tags/_form.html.erb:4

@@ -400,16 +400,20 @@ class Admpart < ActiveRecord::Base
     end
   end
 
+  def queued_refresh
+    @queued_refresh ||= Delayed::Job.where("handler like '%Admpart%id: #{id}%refresh_cache%'").last
+  end
+
   def queue_refresh_cache
-    queued_job = Delayed::Job.where("handler like '%Admpart%id: #{id}%refresh_cache'").last
+    queued_job = queued_refresh
     if queued_job.nil?
-      queued_job = delay.refresh_cache(ref_date) 
+      queued_job = delay.refresh_cache
     end
     queued_job
   end
 
   # refreshes cache by calling methods with force_refresh=true
-  def refresh_cache(ref_date)
+  def refresh_cache
     bckup = self.force_refresh
     self.force_refresh = true
 
@@ -438,7 +442,7 @@ class Admpart < ActiveRecord::Base
   end
 
   def set_defaults
-    self.ref_date = Time.zone.today.beginning_of_month if self.ref_date.nil?
+    self.ref_date = Time.zone.today.beginning_of_month.to_date if self.ref_date.nil?
     self.owners_percentage = 50 if self.owners_percentage.nil?
   end
 

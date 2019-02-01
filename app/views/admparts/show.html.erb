@@ -1,9 +1,15 @@
-<%= render "warnings" %>
+<div class="hide-in-print">
+  <%= render "warnings" %>
+  <%= render "refreshing" %>
+</div>
 
 <div id="admpart-date-select">
         <%= select_tag :ref_date,
                        ref_date_options,
-                       data: { action: "redirectOnChange", business_id: @adm.business_id  } %>
+                       data: { action: "redirectOnChange", business_id: @adm.business_id  } %><br/>
+  <% if @adm.queued_refresh.nil? %>
+    <%= link_to _("Recalcular administración ahora"), business_admpart_path(@adm.business,@adm), class: "hide-in-print" %>
+  <% end %>
 </div>
 <div id="admpart">
 
