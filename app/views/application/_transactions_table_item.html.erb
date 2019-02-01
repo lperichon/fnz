@@ -1,17 +1,19 @@
-<td><%= content_tag(:i, "", :class => "icon-" + transaction.type.downcase, :title => transaction.type) %></td>
-<td><%= content_tag(:i, "", :class => "icon-" + transaction.state, :title => transaction.state.titleize) %></td>
-<td><%= best_in_place transaction.becomes(Transaction), :description, :url => business_transaction_path(@business, transaction) %></td>
-<td><%= best_in_place transaction.becomes(Transaction), :amount, :url => business_transaction_path(@business, transaction), :display_with => :number_to_currency, :helper_options => {:unit =>  transaction.source.currency.symbol} if transaction.source %></td>
-<td><%= best_in_place transaction.becomes(Transaction), :source_id, :as => :select, :collection => @business.accounts.map { |i| [i.id, i.name] } , :url => business_transaction_path(@business, transaction) %></td>
-<td><%= best_in_place_if transaction.is_a?(Transfer), transaction.becomes(Transaction), :target_id, :as => :select, :collection => @business.accounts.map { |i| [i.id, i.name] } , :url => business_transaction_path(@business, transaction)%></td>
-<td><%= best_in_place transaction.becomes(Transaction), :transaction_at, :url => business_transaction_path(@business, transaction), :display_with => lambda {|d| d.to_s(:short)} %></td>
-<td class="select2">
-  <% begin %>
-    <%# avoiding becomes call keeps included tags avoiding call to DB.  %>
-    <%= bip_tag_id(transaction) %>
-  <% rescue %>
-    <%= bip_tag_id(transaction.becomes(Transaction)) %>
-  <% end %>
-</td>
-<td><%= best_in_place transaction.becomes(Transaction), :agent_id, as: :select, collection: agent_options_for_select, url: business_transaction_path(@business, transaction) %></td>
-<td class="select2"><%= best_in_place transaction.becomes(Transaction), :contact_id, as: :select, collection: contact_options_for_select, url: business_transaction_path(@business, transaction) %></td>
+<% cache transaction do %>
+  <td><%= content_tag(:i, "", :class => "icon-" + transaction.type.downcase, :title => transaction.type) %></td>
+  <td><%= content_tag(:i, "", :class => "icon-" + transaction.state, :title => transaction.state.titleize) %></td>
+  <td><%= best_in_place transaction.becomes(Transaction), :description, :url => business_transaction_path(@business, transaction) %></td>
+  <td><%= best_in_place transaction.becomes(Transaction), :amount, :url => business_transaction_path(@business, transaction), :display_with => :number_to_currency, :helper_options => {:unit =>  transaction.source.currency.symbol} if transaction.source %></td>
+  <td><%= best_in_place transaction.becomes(Transaction), :source_id, :as => :select, :collection => @business.accounts.map { |i| [i.id, i.name] } , :url => business_transaction_path(@business, transaction) %></td>
+  <td><%= best_in_place_if transaction.is_a?(Transfer), transaction.becomes(Transaction), :target_id, :as => :select, :collection => @business.accounts.map { |i| [i.id, i.name] } , :url => business_transaction_path(@business, transaction)%></td>
+  <td><%= best_in_place transaction.becomes(Transaction), :transaction_at, :url => business_transaction_path(@business, transaction), :display_with => lambda {|d| d.to_s(:short)} %></td>
+  <td class="select2">
+    <% begin %>
+      <%# avoiding becomes call keeps included tags avoiding call to DB.  %>
+      <%= bip_tag_id(transaction) %>
+    <% rescue %>
+      <%= bip_tag_id(transaction.becomes(Transaction)) %>
+    <% end %>
+  </td>
+  <td><%= best_in_place transaction.becomes(Transaction), :agent_id, as: :select, collection: agent_options_for_select, url: business_transaction_path(@business, transaction) %></td>
+  <td class="select2"><%= best_in_place transaction.becomes(Transaction), :contact_id, as: :select, collection: contact_options_for_select, url: business_transaction_path(@business, transaction) %></td>
+<% end %>
