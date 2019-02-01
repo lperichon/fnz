@@ -662,3 +662,8 @@ en:
       associated_schools_profit: 
       school_share: 
       amount: 
+  tag:
+    system_names:
+      installment: Installment
+      enrollment: Enrollment
+      sale: Sale

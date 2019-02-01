@@ -662,3 +662,8 @@ pt-BR:
       associated_schools_profit: Escolas
       school_share: Participação
       amount: Quantidade
+  tag:
+    system_names:
+      installment: Mensalidade
+      enrollment: Matrícula
+      sale: Venda

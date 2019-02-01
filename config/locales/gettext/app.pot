@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnz 1.0\n"
 "Report-Msgid-Bugs-To: contact@translation.io\n"
-"POT-Creation-Date: 2019-01-31 13:12-0300\n"
-"PO-Revision-Date: 2019-01-31 13:12-0300\n"
+"POT-Creation-Date: 2019-02-01 18:23-0300\n"
+"PO-Revision-Date: 2019-02-01 18:23-0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -17,6 +17,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: ../../../app/models/tag.rb:90
+msgid "etiqueta de sistema tiene que ser raiz, no puede estar bajo otra"
+msgstr ""
+
+#: ../../../app/models/tag.rb:96
+msgid "tiene que estar en 'income'"
+msgstr ""
 
 #: ../../../app/views/admparts/edit.html.erb:20
 msgid "Categoría de mensualidades"
@@ -28,4 +36,12 @@ msgstr ""
 
 #: ../../../app/views/admparts/edit.html.erb:33
 msgid "Categoría de ventas"
+msgstr ""
+
+#: ../../../app/views/tags/_form.html.erb:4
+msgid "evitaron que la categoría sea actualizada:"
+msgstr ""
+
+#: ../../../app/views/tags/edit.html.erb:5
+msgid "Editar categoría"
 msgstr ""
