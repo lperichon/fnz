@@ -2,11 +2,12 @@ require 'spec_helper'
 
 describe Tag do
   
+  let(:business){ FactoryGirl.create(:business) }
+
   before(:each) do
-    @business = FactoryGirl.create(:business)
     @attr = { 
       :name => "Example Tag",
-      :business_id => @business.id
+      :business_id => business.id
     }
   end
   
@@ -23,5 +24,22 @@ describe Tag do
     no_business_tag = Tag.new(@attr.merge(:business_id => nil))
     no_business_tag.should_not be_valid
   end
+
+  describe ".get_installments_tag" do
+    describe "if installment_tag exists" do
+      let!(:itag){ FactoryGirl.create(:tag, system_name: "installment", business_id: business.id) }
+      it "returns scope's installment tag" do
+        expect(business.tags.get_installments_tag).to eq itag
+      end
+    end
+    describe "if installment_tag doesnt exist" do
+      it "creates it respecting scope" do
+        expect{ business.tags.get_installments_tag }.to change{ Tag.count }
+        expect(business.tags.get_installments_tag.business_id).to eq business.id
+                
+      end
+    end
+  end
+
 
 end

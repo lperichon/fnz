@@ -57,17 +57,35 @@ class Tag < ActiveRecord::Base
     end
   end
 
+  def self.get_system_tag(sysname)
+    t = self.where(system_name: sysname).first
+    if t.nil?
+      t = self.create!(
+        name: I18n.t("tag.system_names.#{sysname}"),
+        admpart_section: "income",
+        system_name: sysname
+      ) 
+    end
+    t
+  end
+
+  VALID_SYSTEM_NAMES.each do |sysname|
+    define_singleton_method "get_#{sysname}s_tag" do
+      self.get_system_tag(sysname)
+    end
+  end
+
   private
 
   def systags_must_be_root
     if self.system_name.in?(VALID_SYSTEM_NAMES) && !self.parent_id.nil?
-      self.errors.add(:parent_id, "systag must be root")
+      self.errors.add(:parent_id, _("etiqueta de sistema tiene que ser raiz, no puede estar bajo otra"))
     end
   end
 
   def valid_system_name_and_section
     if self.system_name.in?(VALID_SYSTEM_NAMES) && self.admpart_section != "income"
-      self.errors.add(:admpart_section, "must be income")
+      self.errors.add(:admpart_section, _("tiene que estar en 'income'"))
     end
   end
 

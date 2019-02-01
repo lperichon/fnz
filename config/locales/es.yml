@@ -1,6 +1,11 @@
 ---
 es:
   date_format: DD/MM/YYYY
+  tag:
+    system_names:
+      installment: Mensualidad
+      enrollment: Matrícula
+      sale: Venta
   accounts:
     edit:
       title: Editar cuenta
