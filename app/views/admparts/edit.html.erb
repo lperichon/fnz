@@ -17,7 +17,7 @@
   <tbody>
     <tr>
       <td colspan="2">
-        <%= f.input :installments_tag_id, as: :select, collection: @adm.business.tags.where(parent_id: nil), label: _("Categoría de mensualidades") %>
+        <%=_("Categoría de mensualidades") %>: <%= best_in_place @adm.installments_tag, :name, url: business_tag_path(@adm.business,@adm.installments_tag) %>
       </td>
       <td rowspan="4" colspan="2">
         <%= t(".this_is_section", section_name: "expense") %>
@@ -25,12 +25,12 @@
     </tr>
     <tr>
       <td colspan="2">
-        <%= f.input :enrollments_tag_id, as: :select, collection: @adm.business.tags.where(parent_id: nil), label: _("Categoría de matrículas") %>
+        <%=_("Categoría de matrículas") %>: <%= best_in_place @adm.enrollments_tag, :name, url: business_tag_path(@adm.business,@adm.enrollments_tag) %>
       </td>
     </tr>
     <tr>
       <td colspan="2">
-        <%= f.input :sales_tag_id, as: :select, collection: @adm.business.tags.where(parent_id: nil), label: _("Categoría de ventas") %>
+        <%=_("Categoría de ventas") %>: <%= best_in_place @adm.sales_tag, :name, url: business_tag_path(@adm.business,@adm.sales_tag) %>
       </td>
     </tr>
     <tr>

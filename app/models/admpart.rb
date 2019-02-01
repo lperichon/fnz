@@ -42,11 +42,6 @@ class Admpart < ActiveRecord::Base
 
   VALID_SECTIONS = %W(income expense ignore director_expenses owners_expenses teams_expenses equal_distribution)
 
-
-  Tag::VALID_SYSTEM_NAMES.each do |sysname|
-    validates "#{sysname}s_tag", presence: true
-  end
-
   before_save :set_defaults
 
   def self.for_ref_date(rd)
@@ -277,7 +272,7 @@ class Admpart < ActiveRecord::Base
   end
 
   def system_tag(name)
-    business.tags.where(system_name: name).first
+    business.tags.get_system_tag(name)
   end
 
   def installments_tag
@@ -402,17 +397,6 @@ class Admpart < ActiveRecord::Base
   Tag::VALID_SYSTEM_NAMES.each do |sysname|
     define_method "#{sysname}s_tag_id" do
       send("#{sysname}s_tag").try(:id)
-    end
-    define_method "#{sysname}s_tag_id=" do |tag_id|
-      if send("#{sysname}s_tag")
-        if send("#{sysname}s_tag").id != tag_id
-          send("#{sysname}s_tag").update_attribute(:system_name, nil)
-        else
-          # no changes
-          return send("#{sysname}s_tag")
-        end
-      end
-      business.tags.find(tag_id).update_attribute(:system_name, sysname)
     end
   end
 
