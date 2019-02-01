@@ -23,12 +23,10 @@
 </div>
 
 <h3><%= I18n.t('transactions.index.title') %></h3>
-<%= render :layout => 'transactions_table', :locals => {:transactions => @transactions} do |transaction| %>
-  <% if can? :manage, @business.transactions.build %>
-  <%= link_to content_tag(:i, "", :class => "icon-edit"), edit_business_transaction_path(transaction.business, transaction), :remote => true %>
-  <%= link_to content_tag(:i, "", :class => "icon-trash"), business_transaction_path(transaction.business, transaction), :confirm => I18n.t('actions.confirm_delete'), :method => 'delete' %>
-  <% end %>
-<% end %>
+<table class="transactions table table-striped table-hover table-condensed table-bordered">
+  <%= render :partial => 'transactions_table_header' %>
+  <%= render partial: "transaction_row", collection: @transactions, as: :transaction %>
+</table>
 <div id="pagination">
 <%= paginate @transactions %>
 </div>
