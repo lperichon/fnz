@@ -210,7 +210,7 @@ class Admpart < ActiveRecord::Base
         end
       end
 
-      Rails.cache.write(cache_key, @total, expires_in: 1.minute)
+      Rails.cache.write(cache_key, @total, expires_in: 10.minutes)
       @total
     end
   end
@@ -401,7 +401,7 @@ class Admpart < ActiveRecord::Base
   end
 
   def queue_refresh_cache
-    queued_job = Delayed::Job.where("handler like '%Admpart%id: #{id}%refresh_cache%#{ref_date}'").last
+    queued_job = Delayed::Job.where("handler like '%Admpart%id: #{id}%refresh_cache").last
     if queued_job.nil?
       queued_job = delay.refresh_cache(ref_date) 
     end
