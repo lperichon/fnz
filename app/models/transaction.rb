@@ -5,7 +5,8 @@ class Transaction < ActiveRecord::Base
   before_validation :set_business
   before_validation :set_report_at
 
-  after_save :update_balances
+  attr_accessor :skip_update_balances
+  after_save :update_balances, unless: :skip_update_balances
   around_destroy :update_balances_around_destroy
 
   attr_accessor :skip_infer_associations
