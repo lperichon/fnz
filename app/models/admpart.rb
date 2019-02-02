@@ -188,11 +188,11 @@ class Admpart < ActiveRecord::Base
       cache_key << "agent:#{agent_id}"
     end
 
-    @total = Rails.cache.read(cache_key)
-    if @total && !force_refresh
-      @total
+    total = Rails.cache.read(cache_key)
+    if total && !force_refresh
+      total
     else
-      @total = 0
+      total = 0
 
       # TODO consider currencies
       # TODO consider state of transaction. maybe no need?
@@ -211,8 +211,8 @@ class Admpart < ActiveRecord::Base
         end
       end
 
-      Rails.cache.write(cache_key, @total, expires_in: 10.minutes)
-      @total
+      Rails.cache.write(cache_key, total, expires_in: 10.minutes)
+      total
     end
   end
   appsignal_instrument_method :total_for_tag
