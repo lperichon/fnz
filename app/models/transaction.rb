@@ -78,8 +78,8 @@ class Transaction < ActiveRecord::Base
   end
 
   def self.to_report_on_month(ref_date)
-    ref_date = Time.zone.today if ref_date.nil?
-    self.where("report_at >= ? AND report_at <= ?", ref_date.to_time.beginning_of_month, ref_date.to_time.end_of_month)
+    ref_date = Time.zone.today.to_date if ref_date.nil?
+    self.where("report_at >= ? AND report_at <= ?", ref_date.beginning_of_month, ref_date.end_of_month)
   end
 
   def self.api_where(q=nil)
