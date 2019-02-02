@@ -71,6 +71,12 @@ class MembershipStats
       .select("SUM(CASE WHEN ((installments.status IS NULL) OR installments.status = 'overdue' OR installments.status = 'incomplete') AND installments.balance < installments.value THEN installments.balance ELSE installments.value END) AS sum, AVG(CASE WHEN ((installments.status IS NULL) OR installments.status = 'overdue' OR installments.status = 'incomplete') AND installments.balance < installments.value THEN installments.balance ELSE installments.value END) AS avg")
   end
 
+  def total_for_installments(agent=nil)
+    adm = business.admparts.get_for_ref_date(ref_date)
+    agent_id = (agent=="")? "" : agent.try(:id)
+    adm.total_for_tag(adm.installments_tag,agent_id,{contact_id: @membership_filter.results.map(&:id)})
+  end
+
   def memberships
     if @memberships
       @memberships
