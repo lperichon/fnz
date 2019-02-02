@@ -203,16 +203,16 @@ class Admpart < ActiveRecord::Base
       # TODO consider state of transaction. maybe no need?
       
       scope = transactions_for_tag(tag, options.merge({ agent_id: agent_id }))
-      @total = scope.sum("CASE WHEN transactions.type='Credit' THEN transactions.amount WHEN transactions.type='Debit' THEN -1 * transactions.amount ELSE 0 END").to_f # using CASE casts to string ¿?
-      #@total += scope.credits.sum(:amount)
-      #@total -= scope.debits.sum(:amount)
+      total = scope.sum("CASE WHEN transactions.type='Credit' THEN transactions.amount WHEN transactions.type='Debit' THEN -1 * transactions.amount ELSE 0 END").to_f # using CASE casts to string ¿?
+      #total += scope.credits.sum(:amount)
+      #total -= scope.debits.sum(:amount)
 
       if agent_id.nil? && !options[:ignore_discounts]
         case tag.system_name
         when "sale" 
-          @total -= sales_total_discount
+          total -= sales_total_discount
         when "enrollment"
-          @total -= enrollments_total_discount
+          total -= enrollments_total_discount
         end
       end
 
