@@ -1,10 +1,10 @@
 <% if @ignore_zero_income %>
   <div class="alert alert-notice">
     <p>
-      <%= content_tag :div, t(".contacts_with_zero_income_skipped") %>
+      <%= content_tag :div, _("Los contactos con 0 de mensualidad están ocultos en este reporte.") %>
     </p>
     <p>
-    <%= link_to t(".show_all"), attendance_detail_business_admpart_path(params.merge(show_zero_income: true)) %>
+    <%= link_to _("mostrar todos"), attendance_detail_business_admpart_path(params.merge(show_zero_income: true)) %>
     </p>
 
   </div>
@@ -125,4 +125,4 @@
 
 </table>
 
-<%= link_to t(".attendances_attendance_detail"), @adm.attendance_detail_url, target: "_blank" %>
+<%= link_to _("ver el reporte de asistencias en el módulo de clases"), @adm.attendance_detail_url, target: "_blank" %>

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnz 1.0\n"
 "Report-Msgid-Bugs-To: contact@translation.io\n"
-"POT-Creation-Date: 2019-02-01 19:37-0300\n"
-"PO-Revision-Date: 2019-02-01 23:37+0100\n"
+"POT-Creation-Date: 2019-02-01 19:55-0300\n"
+"PO-Revision-Date: 2019-02-01 23:55+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Portuguese\n"
 "Language: pt_BR\n"
@@ -33,6 +33,18 @@ msgid ""
 msgstr ""
 "Estamos recalculando sua administração. Estes dados apresentados podem ter até"
 " 10 minutos de antiguedade. Atualize a página para ver os dados atualizados."
+
+#: ../../../app/views/admparts/attendance_detail.html.erb:4
+msgid "Los contactos con 0 de mensualidad están ocultos en este reporte."
+msgstr ""
+
+#: ../../../app/views/admparts/attendance_detail.html.erb:7
+msgid "mostrar todos"
+msgstr ""
+
+#: ../../../app/views/admparts/attendance_detail.html.erb:128
+msgid "ver el reporte de asistencias en el módulo de clases"
+msgstr ""
 
 #: ../../../app/views/admparts/edit.html.erb:20
 msgid "Categoría de mensualidades"
