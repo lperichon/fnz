@@ -68,7 +68,7 @@ class MembershipStats
     memberships.joins(:installments)
                .joins(:installments => :transactions)
                .where("transactions.report_at >= '#{ref_date.to_date.beginning_of_month}' AND transactions.report_at <= '#{ref_date.end_of_month}'")
-               .select("SUM(CASE WHEN (installments.status = 'overdue' OR installments.status = 'incomplete') AND installments.balance < installments.value THEN installments.balance ELSE installments.value END) AS sum, AVG(CASE WHEN (installments.status = 'overdue' OR installments.status = 'incomplete') AND installments.balance < installments.value THEN installments.balance ELSE installments.value END) AS avg")
+      .select("SUM(CASE WHEN ((installments.status IS NULL) OR installments.status = 'overdue' OR installments.status = 'incomplete') AND installments.balance < installments.value THEN installments.balance ELSE installments.value END) AS sum, AVG(CASE WHEN ((installments.status IS NULL) OR installments.status = 'overdue' OR installments.status = 'incomplete') AND installments.balance < installments.value THEN installments.balance ELSE installments.value END) AS avg")
   end
 
   def memberships
