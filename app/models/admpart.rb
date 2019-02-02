@@ -330,7 +330,8 @@ class Admpart < ActiveRecord::Base
   end
 
   def agent_enrollments_comission(agent)
-    total_for_tag(enrollments_tag, agent.id) * (agent_enrollment_income_percentage || 0) / 100
+    per = agent_enrollment_income_percentage.blank?? 0 : agent_enrollment_income_percentage
+    total_for_tag(enrollments_tag, agent.id) * per / 100
   end
 
   def agent_enrollments_prize(agent)
