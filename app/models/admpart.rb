@@ -137,7 +137,12 @@ class Admpart < ActiveRecord::Base
 
   def agent_from_team_final_amount_percentage(agent)
     # considering only INSTALLMENTS
-    (agent_installments_collection_total(agent) / total_for_tag(installments_tag)) * 100
+    installments_total = total_for_tag(installments_tag)
+    if installments_total == 0
+      0.0
+    else
+      (agent_installments_collection_total(agent) / installments_total ) * 100
+    end
   end
 
   def agent_from_team_final_amount(agent)
