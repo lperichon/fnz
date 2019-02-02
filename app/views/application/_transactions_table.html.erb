@@ -1,12 +1,29 @@
 <table class="transactions table table-striped table-hover table-condensed table-bordered">
   <%= render :partial => 'transactions_table_header' %>
 
+  <% acum = 0 %>
   <% transactions.each do |transaction| %>
+    <% acum += (transaction.type=="Credit")? transaction.amount : ((transaction.type=="Debit")? -transaction.amount : 0) %>
     <tr data-id="<%= transaction.id %>">
       <%= render :partial => 'transactions_table_item', :locals => {:transaction => transaction} %>
       <td>
         <%= yield transaction %>
       </td>
+    </tr>
+  <% end %>
+  <% if params[:admpart_tag_id] %>
+    <tr>
+      <td></td>
+      <td></td>
+      <td><%= _("Subtotal Entradas - Salidas") %></td>
+      <td><%= number_to_currency acum, precision: 2 %></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
     </tr>
   <% end %>
 </table>
