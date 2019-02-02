@@ -134,6 +134,8 @@ class TransactionsController < UserApplicationController
       t = Tag.find params[:admpart_tag_id]
       @context = @business.transactions.where(admpart_tag_id: t.self_and_descendants.map(&:id))
     end
+
+    @context = @context.api_where(params[:q])
   end
 
 end

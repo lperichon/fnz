@@ -82,6 +82,19 @@ class Transaction < ActiveRecord::Base
     self.where("report_at >= ? AND report_at <= ?", ref_date.to_time.beginning_of_month, ref_date.to_time.end_of_month)
   end
 
+  def self.api_where(q=nil)
+    q = {} if q.nil?
+
+    if q[:admpart_tag_id] && (t = Tag.find(q[:admpart_tag_id]))
+      q[:admpart_tag_id] = t.self_and_descendants.map(&:id)
+    end
+    if q[:account_id]
+      q[:source_id] = q.delete(:account_id)
+    end
+
+    self.where(q)
+  end
+
   def set_report_at
     self.report_at = self.transaction_at unless self.report_at.present?
   end
