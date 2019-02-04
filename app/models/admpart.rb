@@ -193,7 +193,7 @@ class Admpart < ActiveRecord::Base
       cache_key << "agent:#{agent_id}"
     end
 
-    total = Rails.cache.read(cache_key)
+    total = Rails.cache.read(cache_key) unless force_refresh
     if total && !force_refresh
       total
     else
