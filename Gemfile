@@ -73,5 +73,4 @@ gem 'best_in_place', '~> 3.1.1'
 gem "appsignal"
 gem "translation"
 
-gem 'dalli', '2.6.4'
-gem 'dalli-delete-matched', '1.3.1'
+gem 'dalli', '2.6.4', group: [:development, :test]
