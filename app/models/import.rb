@@ -49,6 +49,8 @@ class Import < ActiveRecord::Base
       rescue => e
         errs << [row, e.to_s ].flatten
       end
+    rescue => e
+      errs << [_("El archivo tiene un formato inválido"), e.message ]
     end
 
     self.update_attribute(:status, :finished)
