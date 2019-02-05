@@ -53,7 +53,7 @@ class TransactionsController < UserApplicationController
 
     respond_to do |format|
       if @transaction.save
-        format.html { redirect_to business_transaction_path(@business, @transaction), notice: 'Transaction was successfully created.' }
+        format.html { redirect_to business_transaction_path(@business, @transaction), notice: _('Movimiento creado') }
         format.json { render json: @transaction, status: :created, location: business_transaction_path(@business, @transaction) }
         format.js {}
       else
@@ -70,8 +70,8 @@ class TransactionsController < UserApplicationController
     @transaction = @context.find(params[:id])
 
     respond_to do |format|
-      if @transaction.update_attributes(params[:transaction])
-        format.html { redirect_to business_transaction_path(@business, @transaction), notice: 'Transaction was successfully updated.' }
+      if @transaction.update_attributes(transaction_attributes_for_update)
+        format.html { redirect_to business_transaction_path(@business, @transaction), notice: _("Movimiento actualizado") }
         format.js {}
         format.json { respond_with_bip(@transaction.becomes(Transaction)) }
       else
@@ -109,6 +109,16 @@ class TransactionsController < UserApplicationController
   end
 
   private
+
+  def transaction_attributes_for_update
+    if params[:credit]
+      params[:transaction] = params.delete(:credit)
+    end
+    if params[:debit]
+      params[:transaction] = params.delete(:debit)
+    end
+    params[:transaction]
+  end
 
   def get_context
     business_id = params[:business_id]
