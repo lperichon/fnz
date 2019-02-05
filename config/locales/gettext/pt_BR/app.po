@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnz 1.0\n"
 "Report-Msgid-Bugs-To: contact@translation.io\n"
-"POT-Creation-Date: 2019-02-01 19:55-0300\n"
-"PO-Revision-Date: 2019-02-01 23:55+0100\n"
+"POT-Creation-Date: 2019-02-05 16:23-0300\n"
+"PO-Revision-Date: 2019-02-05 20:24+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Portuguese\n"
 "Language: pt_BR\n"
@@ -17,6 +17,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "\n"
+
+#: ../../../app/controllers/transactions_controller.rb:56
+msgid "Movimiento creado"
+msgstr "Movimento criado"
+
+#: ../../../app/controllers/transactions_controller.rb:74
+msgid "Movimiento actualizado"
+msgstr "Movimento atualizado"
 
 #: ../../../app/models/tag.rb:90
 msgid "etiqueta de sistema tiene que ser raiz, no puede estar bajo otra"
@@ -36,15 +44,15 @@ msgstr ""
 
 #: ../../../app/views/admparts/attendance_detail.html.erb:4
 msgid "Los contactos con 0 de mensualidad están ocultos en este reporte."
-msgstr ""
+msgstr "Contatos com 0 pagamentos mensais estão ocultos neste relatório."
 
 #: ../../../app/views/admparts/attendance_detail.html.erb:7
 msgid "mostrar todos"
-msgstr ""
+msgstr "mostrar tudo"
 
 #: ../../../app/views/admparts/attendance_detail.html.erb:128
 msgid "ver el reporte de asistencias en el módulo de clases"
-msgstr ""
+msgstr "veja o relatório de presença no módulo de aulas"
 
 #: ../../../app/views/admparts/edit.html.erb:20
 msgid "Categoría de mensualidades"
@@ -58,9 +66,13 @@ msgstr "Categoría das matrículas"
 msgid "Categoría de ventas"
 msgstr "Categoría das vendas"
 
-#: ../../../app/views/admparts/show.html.erb:11
+#: ../../../app/views/admparts/show.html.erb:10
 msgid "Recalcular administración ahora"
 msgstr "Recalcule a administração agora"
+
+#: ../../../app/views/application/_transactions_table.html.erb:18
+msgid "Subtotal Entradas - Salidas"
+msgstr "Subtotal Entradas - Saídas"
 
 #: ../../../app/views/tags/_form.html.erb:4
 msgid "evitaron que la categoría sea actualizada:"

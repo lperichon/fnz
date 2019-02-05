@@ -23,7 +23,7 @@ en:
     edit: Edit
     close: Close
     delete: Delete
-    update: 
+    update: update
   activemodel:
     attributes:
       membership_search:
@@ -36,20 +36,20 @@ en:
         membership_status: Membership Status
         name: Name
         status: Status
-        contact_teacher: 
+        contact_teacher: Teacher
       inscription_search:
-        payment_type_id: 
-        agent_padma_id: 
+        payment_type_id: Payment Type
+        agent_padma_id: School
   activerecord:
     attributes:
       inscription:
-        contact: 
-        padma_account: 
-        payment_type: 
-        observations: 
-        value: 
-        balance: 
-        transactions: 
+        contact: Contact
+        padma_account: School
+        payment_type: Payment Type
+        observations: Observations
+        value: Value
+        balance: Balance
+        transactions: Transactions
       account:
         business: Business
         currency: Currency
@@ -81,9 +81,9 @@ en:
         padma_contact_id: Contact
         monthly_due_day: Installment payment due on day
         name: Name
-        create_monthly_installments: 
+        create_monthly_installments: Initialize monthly payments
       installment:
-        contact: 
+        contact: Contact
         agent: Instructor
         due_on: Payment due on
         value: Value
@@ -137,14 +137,14 @@ en:
         description: Description
         name: Name
       contact:
-        current_membership: 
-        memberships: 
-        sales: 
+        current_membership: Current membership
+        memberships: Memberships
+        sales: Sales
       installment_search:
-        due_before: 
-        due_after: 
-        status: 
-        agent: 
+        due_before: Before
+        due_after: After
+        status: State
+        agent: Teacher
     models:
       account: Account
       payment_type: Payment Type
@@ -163,18 +163,18 @@ en:
       agent: Instructor
       product: Product
       user: User
-      contact: 
-      inscription: 
+      contact: Contact
+      inscription: Inscription
   admparts:
     secondary_navigation:
-      administration: 
-      attendance_detail: 
+      administration: Participative administration
+      attendance_detail: Assistance detail
     edit:
-      incomes: 
-      expenses: 
-      total_income: 
-      total_expense: 
-      this_is_section: 
+      incomes: Income
+      expenses: Expense
+      total_income: Total income
+      total_expense: Total expenditures
+      this_is_section: This is the section '%{section_name}'
   date:
     abbr_day_names:
     - Sun
@@ -354,9 +354,9 @@ en:
       odd: must be odd
       record_invalid: 'Validation failed: %{errors}'
       taken: has already been taken
-      too_long: 
-      too_short: 
-      wrong_length: 
+      too_long: it is too long (%{count} characters maximum)
+      too_short: it is too short (%{count} characters minimum)
+      wrong_length: does not have the correct length (%{count} exact characters)
     template:
       body: 'There were problems with the following fields:'
       header:
@@ -379,20 +379,20 @@ en:
       manage_memberships: Memberships
       manage_sales: Sales
       manage_transactions: Transactions
-      reports: 
-      manage_inscriptions: 
-      manage_event_closure: 
+      reports: Reports
+      manage_inscriptions: Inscriptions
+      manage_event_closure: Manage event closure
   contacts:
     show:
-      see_in_crm: 
+      see_in_crm: See this contact in CRM
   memberships:
     membership_filter:
       filter: Filter
       clear_filter: Clear filters
     maturity_search:
-      current_month: 
-      next_month: 
-      custom_period: 
+      current_month: This month
+      next_month: Next month
+      custom_period: Select period
     maturity_report:
       student: Student
       membership: Membership
@@ -406,7 +406,7 @@ en:
     new:
       new_membership: New membership
     show:
-      see_in_crm: 
+      see_in_crm: See in CRM
       new_installment: New Installment
       create_enrollment: Create enrollment
     form:
@@ -452,10 +452,10 @@ en:
   simple_form:
     labels:
       installment_search:
-        due_after: 
-        due_before: 
-        agent_id: 
-        status: 
+        due_after: After
+        due_before: Before
+        agent_id: Instructor
+        status: Status
     'no': 'No'
     'yes': 'Yes'
   time:
@@ -477,16 +477,16 @@ en:
     edit:
       title: Edit Installment
     index:
-      title: 
+      title: Installments
     create:
       success: Installment created
       success_multiple: Installments created
     secondary_navigation:
-      unpaid_installments: 
+      unpaid_installments: Unpaid installments
     search_form:
-      current_month: 
-      next_month: 
-      custom_period: 
+      current_month: This month
+      next_month: Next month
+      custom_period: Select period
   enrollments:
     new:
       title: New Enrollment
@@ -500,27 +500,27 @@ en:
         select_transactions: Select transactions
   inscriptions:
     secondary_navigation:
-      new_inscription: 
+      new_inscription: New inscription
     search_form:
-      all_padma_accounts: 
-      select_padma_accounts: 
-      all_payment_types: 
-      select_payment_types: 
+      all_padma_accounts: All
+      select_padma_accounts: Select a school
+      all_payment_types: All
+      select_payment_types: Select a payment method
     index:
-      title: 
-      total: 
+      title: Inscriptions
+      total: Total
     edit:
-      title: 
+      title: Update inscription
     create:
-      success: 
+      success: Inscription created successfully
     new:
-      title: 
+      title: New inscription
   payments:
     new_modal:
       title: Create Payment
   transactions:
     secondary_navigation:
-      add_transaction: 
+      add_transaction: New transaction
     fields:
       source_prompt: Please select source account
       target_prompt: Please select target account
@@ -534,9 +534,9 @@ en:
     new_modal:
       title: Add Transaction
     index:
-      import: 
-      stats: 
-      title: 
+      import: Import CSV
+      stats: Statistics
+      title: Transactions
   sales:
     index:
       view_month_stats: View %{month} stats
@@ -558,7 +558,7 @@ en:
       paid_sales_tooltip: Sales paid this month
   imports:
     new:
-      new_import: 
+      new_import: New import
     show:
       confirm_delete: Deleting import will delete ALL imported transactions, this
         can not be reverted. Do you with to remove import?
@@ -576,16 +576,16 @@ en:
     index:
       title: Businesses
     sidebar:
-      title: 
-      manage: 
+      title: Accounts
+      manage: set up
     edit:
       title: Edit Business
     edit_sidebar:
       manage_accounts: Accounts
       school:
-        manage_agents: 
+        manage_agents: Teachers
       event:
-        manage_agents: 
+        manage_agents: Schools
       manage_contacts: Contacts
       manage_imports: Imports
       manage_payment_types: Payment Types
@@ -595,24 +595,24 @@ en:
   agents:
     edit:
       school:
-        title: 
+        title: Edit teacher
       event:
-        title: 
+        title: Edit school
     index:
       school:
-        new_agent: 
+        new_agent: New teacher
       event:
-        new_agent: 
+        new_agent: New school
     new:
       school:
-        title: 
+        title: New teacher
       event:
-        title: 
+        title: New school
     show:
       school:
-        title: 
+        title: Teacher
       event:
-        title: 
+        title: School
     form:
       padma_placeholder: Please select Padma user
     new_agent: New Instructor
@@ -639,29 +639,29 @@ en:
       title: Categories
   closures:
     print:
-      title: 
+      title: Participative administration
     event_closure:
-      inscriptions: 
-      padma_account: 
-      total: 
-      other_credits: 
-      category: 
-      debits: 
-      commissions: 
-      commision: 
-      missing_payment: 
-      closure: 
-      distribution: 
-      subtotal_credits: 
-      subtotal_debits: 
-      office: 
-      profit: 
-      organizer_share: 
-      net_profit: 
-      lecturer_profit: 
-      associated_schools_profit: 
-      school_share: 
-      amount: 
+      inscriptions: Inscriptions
+      padma_account: School
+      total: Total
+      other_credits: Other income
+      category: Category
+      debits: Expenses
+      commissions: commissions
+      commision: Commission
+      missing_payment: Pending payment
+      closure: Closure
+      distribution: Distribution
+      subtotal_credits: Subtotal
+      subtotal_debits: Subtotal
+      office: Office (10%)
+      profit: Profit
+      organizer_share: Organization (10%)
+      net_profit: Net income
+      lecturer_profit: Professor
+      associated_schools_profit: Schools
+      school_share: Participation
+      amount: Amount
   tag:
     system_names:
       installment: Installment
