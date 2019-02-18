@@ -16,7 +16,7 @@
       <td></td>
       <td></td>
       <td><%= _("Subtotal Entradas - Salidas") %></td>
-      <td><%= number_to_currency acum, precision: 2 %></td>
+      <td><%= number_to_currency acum, unit: @business.currency_symbol, precision: 2 %></td>
       <td></td>
       <td></td>
       <td></td>

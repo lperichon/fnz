@@ -26,10 +26,10 @@
 		</div>
 		<div class="installment-value">
 			<% if installment %>
-			  <div><%= number_to_currency(installment.try(:value)) %></div>
+			  <div><%= number_to_currency(installment.try(:value), unit: @business.currency_symbol) %></div>
 			  <%= content_tag(:i, "", :class => "icon-installment-#{installment.status}") %>
 			<% elsif membership && date >= Date.today.beginning_of_month && date < membership.ends_on %>
-			  <div><%= number_to_currency(membership.try(:value)) %></div>
+			  <div><%= number_to_currency(membership.try(:value), unit: @business.currency_symbol) %></div>
 			<% end %>
 		</div>
 	</td>

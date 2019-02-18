@@ -38,9 +38,9 @@
 	  <td><%= l(installment.due_on, format: "%d %B") %> - <%= l(installment.due_on + 1.month - 1.day, format: "%d %B") %></td>
 	<% end %>
         <% if installment.observations.blank? -%>
-          <td class="amount"><%= number_to_currency(installment.value)%></td> 
+          <td class="amount"><%= number_to_currency(installment.value, unit: @business.currency_symbol)%></td> 
         <% else -%>
-          <td class="amount" data-toggle="tooltip" title="<%= installment.observations %>"><%= number_to_currency(installment.value)%></td> 
+          <td class="amount" data-toggle="tooltip" title="<%= installment.observations %>"><%= number_to_currency(installment.value, unit: @business.currency_symbol)%></td> 
         <% end -%>
         <td><%= membership.try(:payment_type).try(:name) %></td>
         <td class="status"><%= content_tag(:i, "", :class => "icon-installment-#{installment.status}") %></td>

@@ -15,7 +15,7 @@
 		  </div>
       <%= content_tag(:i, "", :class => "icon-installment-#{installment.status}") %>
 		<% elsif membership && date >= membership.begins_on && date < membership.ends_on %>
-		  <div class="projection"><%= number_to_currency(membership.try(:value)) %></div>
+		  <div class="projection"><%= number_to_currency(membership.try(:value), unit: @business.currency_symbol) %></div>
 		<% end %>
 	<% end %>
 </td>
