@@ -28,27 +28,31 @@ class Import < ActiveRecord::Base
 
 
     columns = nil
-    CSV.parse(open(path)) do |row|
-      columns = row.size
-      n += 1
-      # SKIP: header i.e. first row OR blank row
-      next if n == 1 or row.join.blank?
+    begin
+      CSV.parse(open(path)) do |row|
+        columns = row.size
+        n += 1
+        # SKIP: header i.e. first row OR blank row
+        next if n == 1 or row.join.blank?
 
-      # build_from_csv method will map attributes &
-      # build new record
-      new_record = nil
-      begin
-        new_record = handle_row(business, row)
-        # Save upon valid
-        # otherwise collect error records to export
-        if new_record && new_record.save
-          imported_records << new_record
-        else
-          errs << [row, record_errors(new_record) ].flatten
+        # build_from_csv method will map attributes &
+        # build new record
+        new_record = nil
+        begin
+          new_record = handle_row(business, row)
+          # Save upon valid
+          # otherwise collect error records to export
+          if new_record && new_record.save
+            imported_records << new_record
+          else
+            errs << [row, record_errors(new_record) ].flatten
+          end
+        rescue => e
+          errs << [row, e.to_s ].flatten
         end
-      rescue => e
-        errs << [row, e.to_s ].flatten
       end
+    rescue => e
+      errs << [_("El archivo tiene un formato inválido"), e.message ]
     end
 
     self.update_attribute(:status, :finished)
