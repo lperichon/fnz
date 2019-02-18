@@ -63,6 +63,8 @@ class Business < ActiveRecord::Base
   def currency_symbol
     if currency_code
       Currency.find(currency_code).try(:symbol)
+    else
+      Currency.find("usd").try(:symbol)
     end
   end
 
