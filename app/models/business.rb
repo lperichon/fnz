@@ -17,6 +17,8 @@ class Business < ActiveRecord::Base
   validates :name, :presence => true
   validates :owner, :presence => true
 
+  DEFAULT_CURRENCY_SYMBOL = "$"
+
   # Setup accessible (or protected) attributes for your model
   attr_accessible :type, :name, :owner_id, :padma_id, :synchronized_at, :send_weekly_reports, :transactions_enabled, :share_enabled, :use_calendar_installments, :currency_code
   
@@ -63,6 +65,8 @@ class Business < ActiveRecord::Base
   def currency_symbol
     if currency_code
       Currency.find(currency_code).try(:symbol)
+    else
+      DEFAULT_CURRENCY_SYMBOL
     end
   end
 
