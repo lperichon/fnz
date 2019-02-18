@@ -60,4 +60,10 @@ class Business < ActiveRecord::Base
     b
   end
 
+  def currency_symbol
+    if currency_code
+      Currency.find(currency_code).try(:symbol)
+    end
+  end
+
 end
