@@ -124,7 +124,7 @@ class MembershipsController < UserApplicationController
 
     if business_id
       if param_is_padma_id
-        @business = @business_context.find_by_padma_id(params[:business_id])
+        @business = @business_context.get_by_padma_id(params[:business_id])
       else
         @business = @business_context.find(params[:business_id])
       end
