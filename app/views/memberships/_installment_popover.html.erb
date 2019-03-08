@@ -1,19 +1,6 @@
 <ul class="popover-action-list">
 <% if installment && membership %>
   <li><%= link_to t('actions.edit'), edit_business_membership_installment_path(@business, membership, installment), :class => "btn" %></li>
-<% elsif membership %>
-  <li>
-    <%= link_to t('.add_installment'),
-      new_business_membership_installment_path({
-                  business_id: @business.id,
-                  membership_id: membership.id,
-                  installment: {
-                    value: membership.value,
-                    due_on: Date.civil(date.year, date.month, membership.monthly_due_day)
-                  }
-                }),
-                class: "btn" %>
-  </li>
 <% end %>
 
 <% if installment && installment.status.in?([:pending, :overdue, :incomplete]) %>
@@ -26,6 +13,18 @@
                 :remote => true,
                 :class => "btn btn-primary mark_as_paid_link" %></li>
 <% elsif !installment && membership && !membership.closed? && date < membership.ends_on %>
+    <li>
+      <%= link_to _("Registrar cuota"),
+        new_business_membership_installment_path({
+                    business_id: @business.id,
+                    membership_id: membership.id,
+                    installment: {
+                      value: membership.value,
+                      due_on: Date.civil(date.year, date.month, membership.monthly_due_day)
+                    }
+                  }),
+                  class: "btn" %>
+    </li>
     <li><%= link_to t('actions.mark_as_paid'), 
               new_business_membership_installment_payment_path(
                 :business_id => @business.id, 
@@ -39,13 +38,29 @@
                 :transaction => { :transaction_at => Time.zone.now } ),
                 :remote => true,
                 :class => "btn btn-primary mark_as_paid_link" %></li>
+<% elsif !installment && membership && !membership.closed? && date > membership.ends_on %>
+  <li>
+    <%= link_to _("Extender membersía hasta este mes"),
+                business_membership_path(
+                  business_id: @business.id,
+                  id: membership.id,
+                  membership: {
+                    ends_on: date.end_of_month.to_date
+                  },
+                  return_to: url_for(params)
+                ),
+                confirm: _("seguro?"),
+                method: :put,
+                class: "btn"
+                  %>
+  </li>
 <% else %>
   <li><%= table_contact_membership_link(contact, membership) %></li>
 <% end %>
 <% if @business.transactions_enabled? %>
   <% if installment && membership %>
     <li><%= link_to t('application.nested_transactions_table.actions.select_transactions'), edit_business_membership_installment_path(@business, membership, installment), :remote => true, :class => "btn" %></li>
-  <% elsif membership %>
+  <% elsif membership && date < membership.ends_on %>
     <li><%= link_to t('application.nested_transactions_table.actions.select_transactions'), new_business_membership_installment_path(@business, membership, :installment => {
          :due_on => date.end_of_month.to_date,
          :value => membership.value,
