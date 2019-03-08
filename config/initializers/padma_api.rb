@@ -12,9 +12,6 @@ end
 
 module Accounts
   API_KEY = ENV['accounts_key'] || CONFIG['accounts_key']
-  if ENV['C9_USER']
-    HOST = "padma-accounts-#{ENV['C9_USER']}.c9users.io"
-  end
 end
 
 module Contacts
