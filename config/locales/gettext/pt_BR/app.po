@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnz 1.0\n"
 "Report-Msgid-Bugs-To: contact@translation.io\n"
-"POT-Creation-Date: 2019-02-05 16:23-0300\n"
-"PO-Revision-Date: 2019-02-05 20:24+0100\n"
+"POT-Creation-Date: 2019-03-08 13:51-0300\n"
+"PO-Revision-Date: 2019-03-08 17:51+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Portuguese\n"
 "Language: pt_BR\n"
@@ -18,6 +18,10 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "\n"
 
+#: ../../../app/controllers/memberships_controller.rb:57
+msgid "Membresía actualizada"
+msgstr "Plano atualizado"
+
 #: ../../../app/controllers/transactions_controller.rb:56
 msgid "Movimiento creado"
 msgstr "Movimento criado"
@@ -25,6 +29,10 @@ msgstr "Movimento criado"
 #: ../../../app/controllers/transactions_controller.rb:74
 msgid "Movimiento actualizado"
 msgstr "Movimento atualizado"
+
+#: ../../../app/models/import.rb:55
+msgid "El archivo tiene un formato inválido"
+msgstr "O arquivo tem um formato inválido"
 
 #: ../../../app/models/tag.rb:90
 msgid "etiqueta de sistema tiene que ser raiz, no puede estar bajo otra"
@@ -73,6 +81,18 @@ msgstr "Recalcule a administração agora"
 #: ../../../app/views/application/_transactions_table.html.erb:18
 msgid "Subtotal Entradas - Salidas"
 msgstr "Subtotal Entradas - Saídas"
+
+#: ../../../app/views/memberships/_installment_popover.html.erb:17
+msgid "Registrar cuota"
+msgstr "Cadastrar valor"
+
+#: ../../../app/views/memberships/_installment_popover.html.erb:43
+msgid "Extender membersía hasta este mes"
+msgstr "Estender o plano até este mês"
+
+#: ../../../app/views/memberships/_installment_popover.html.erb:52
+msgid "seguro?"
+msgstr "Certeza?"
 
 #: ../../../app/views/tags/_form.html.erb:4
 msgid "evitaron que la categoría sea actualizada:"
