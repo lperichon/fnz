@@ -26,7 +26,10 @@ class Api::V0::CurrentMembershipsController < Api::V0::ApiController
   def index
     @memberships = @business.memberships.current.includes(:contact, :payment_type, :installments)
     if params[:padma_contact_ids].present?
-      @memberships = @memberships.where("contacts.padma_id" => params[:padma_contact_ids])
+      @memberships = @memberships.where(contacts: {
+        business_id: @business.id, # for query to use contact's [business_id, padma_id] index
+        padma_id: params[:padma_contact_ids]
+      })
     end
     render json: {:collection => @memberships.map{|m| MembershipSerializer.new(m, :root => false)}.as_json}
   end
