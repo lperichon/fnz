@@ -52,7 +52,10 @@ class MembershipsController < UserApplicationController
 
     respond_to do |format|
       if @membership.update_attributes(params[:membership])
-        format.html { redirect_to business_membership_path(@business, @membership), notice: 'Membership was successfully updated.' }
+        format.html do
+          redirect_back_or_default_to(business_membership_path(@business, @membership),
+                                      notice: _('Membresía actualizada'))
+        end
       else
         format.html { render action: "edit" }
       end
