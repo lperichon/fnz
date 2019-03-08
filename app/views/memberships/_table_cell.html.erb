@@ -1,7 +1,13 @@
-<td data-month=<%= date.month %>
-    class="<%= 'current' if(date == Date.today) %> <%= installment.try(:status) %> cell"
-    >
-	<%= content_tag :div, :class => "installment-value", 'data-content' => "#{render(:partial => 'memberships/installment_popover', :locals => {:membership => membership, :installment => installment, :date => date, :contact => contact})}", :rel => "popover", 'data-placement' => "right", 'data-triggr' => "hover" do %>
+<%= content_tag :td,
+    data: {
+      month: date.month,
+      content: "#{render(:partial => 'memberships/installment_popover', :locals => {:membership => membership, :installment => installment, :date => date, :contact => contact})}",
+      placement: "right",
+      trigger: "hover"
+    },
+    rel: "popover",
+    class: "#{'current' if(date == Date.today)} #{installment.try(:status)} cell installment-value" do %>
+  <div>
 		<% if installment && membership %>
       <div class="<%= 'old' if installment.membership != membership %>">
         <%= best_in_place installment, :value,
@@ -16,6 +22,8 @@
       <%= content_tag(:i, "", :class => "icon-installment-#{installment.status}") %>
 		<% elsif membership && date >= membership.begins_on && date < membership.ends_on %>
 		  <div class="projection"><%= number_to_currency(membership.try(:value), unit: @business.currency_symbol) %></div>
+    <% else %>
+      <div class="projection"></div>
 		<% end %>
-	<% end %>
-</td>
+  </div>
+<% end %>
