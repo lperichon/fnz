@@ -3,7 +3,12 @@ class ContactSearch
   include ActiveModel::Conversion
   extend ActiveModel::Naming
 
-  attr_accessor :business_id, :name, :teacher, :status, :membership_payment_type_id, :membership_status
+  attr_accessor :business_id,
+                :name,
+                :teacher,
+                :status,
+                :membership_payment_type_id,
+                :membership_status
 
   def initialize(attributes = {})
     attributes ||= {}
@@ -37,13 +42,35 @@ class ContactSearch
       scope = scope.where(:padma_status => "former_student")
     end
 
-    scope = scope.where(:current_membership => {payment_type_id: @membership_payment_type_id}) unless @membership_payment_type_id.blank? || @membership_payment_type_id.include?('all')
-
-    if @membership_status == "due"
-      scope = scope.where("memberships.closed_on IS NULL AND memberships.ends_on > ? AND memberships.ends_on <= ?", Date.today.beginning_of_month, Date.today.end_of_month)
-    elsif @membership_status == "overdue"
-      scope = scope.where("memberships.closed_on IS NULL AND memberships.ends_on <= ?", Date.today)
+    ## FILTER BY membership payment_type_id
+    if @membership_payment_type_id
+      @membership_payment_type_id = [@membership_payment_type_id] unless @membership_payment_type_id.is_a?(Array)
+      @membership_payment_type_id.reject!(&:empty?)
+      scope = scope.where(:current_membership => {payment_type_id: @membership_payment_type_id}) unless @membership_payment_type_id.empty? || @membership_payment_type_id.include?('all')
     end
+
+
+    ## FILTER BY membership_status
+    @membership_status = [@membership_status] unless @membership_status.is_a?(Array)
+    ms_queries_to_or = []
+    ms_vars = {}
+    @membership_status.each do |ms|
+      case ms
+      when "due"
+        ms_queries_to_or << "(memberships.closed_on IS NULL AND memberships.ends_on > :due_ends_on_gt AND memberships.ends_on <= :due_ends_on_lte)"
+        ms_vars.merge!({
+          due_ends_on_gt: Date.today.beginning_of_month,
+          due_ends_on_lte: Date.today.end_of_month
+        })
+      when "overdue"
+        ms_queries_to_or << "(memberships.closed_on IS NULL AND memberships.ends_on <= :overdue_ends_on_lte)"
+        ms_vars.merge!({
+          overdue_ends_on_lte: Date.today
+        })
+      end
+    end
+    scope = scope.where(ms_queries_to_or.join("OR"), ms_vars) unless ms_queries_to_or.empty?
+
 
     scope
   end

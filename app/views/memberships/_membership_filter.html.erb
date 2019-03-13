@@ -14,14 +14,18 @@
                     collection: @business.agents.collect(&:padma_id)
   %>
   <%= f.input :membership_payment_type_id,
-                    as: :select,
-                    :include_blank => t('.all'),
-                    collection: @business.payment_types
+              as: :select,
+              input_html: {
+                multiple: true
+              },
+              collection: @business.payment_types
   %>
   <%= f.input :membership_status,
-                    as: :select,
-                    :include_blank => t('.all'),
-                    collection: [["Due", :due], ["Overdue", :overdue]]
+              as: :select,
+              input_html: {
+                multiple: true
+              },
+              collection: [["Due", :due], ["Overdue", :overdue]]
   %>
   <div class="form-actions">
     <%= link_to t('.download'), 

@@ -26,17 +26,38 @@ describe ContactSearch do
 
   context "with membership_payment_type_id" do
     let(:payment_type_id){'payment_type_id'}
-    let(:cs_att){{membership_payment_type_id: payment_type_id}}
     let(:cs){ContactSearch.new(cs_att)}
+    let!(:my_mem){FactoryGirl.create(:membership, payment_type_id: 'payment_type_id')}
+    let!(:other_mem){FactoryGirl.create(:membership)}
+    describe "string" do
+      let(:cs_att){{membership_payment_type_id: payment_type_id}}
 
-    let(:my_mem){FactoryGirl.create(:membership, payment_type_id: 'payment_type_id')}
-    let(:other_mem){FactoryGirl.create(:membership)}
-
-    it "includes membreship of payment type" do
-      expect(cs.results).to include my_mem.contact
+      it "includes membreship of payment type" do
+        expect(cs.results).to include my_mem.contact
+      end
+      it "excludes membership of other payment_type" do
+        expect(cs.results).not_to include other_mem.contact
+      end
     end
-    it "excludes membership of other payment_type" do
-      expect(cs.results).not_to include other_mem.contact
+    describe "array" do
+      describe "['']" do
+        let(:cs_att){{membership_payment_type_id: [""]}}
+        it "includes membreship of payment type" do
+          expect(cs.results).to include my_mem.contact
+        end
+        it "includes membership of other payment_type" do
+          expect(cs.results).to include other_mem.contact
+        end
+      end
+      describe "[value]" do
+        let(:cs_att){{membership_payment_type_id: [payment_type_id]}}
+        it "includes membreship of payment type" do
+          expect(cs.results).to include my_mem.contact
+        end
+        it "excludes membership of other payment_type" do
+          expect(cs.results).not_to include other_mem.contact
+        end
+      end
     end
   end
 
