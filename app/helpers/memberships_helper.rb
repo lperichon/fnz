@@ -27,7 +27,14 @@ module MembershipsHelper
 
   def table_contact_membership_link(contact, membership)
     if membership.present?
-      link_to(t('memberships.overview.close_membership'), business_membership_path(@business, membership, :membership => {:closed_on => Date.today}), :method => :put, :class => "btn btn-warning")
+      link_to(t('memberships.overview.close_membership'),
+              business_membership_path(@business,
+                                       membership,
+                                       membership: {closed_on: Date.today},
+                                       return_to: request.url
+                                      ),
+              method: :put,
+              class: "btn btn-warning")
     else  
       link_to(t('memberships.secondary_navigation.new_membership') , new_business_membership_path(@business, :membership => {:contact_id => contact.id}), :class => "btn btn-primary")
     end
