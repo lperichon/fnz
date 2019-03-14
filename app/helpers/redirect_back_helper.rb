@@ -5,10 +5,14 @@ module RedirectBackHelper
   end
 
   def redirect_back_or_default_to(default=nil,opts=nil)
+
+    # always remove return_to from session. even if we'll use params[:return_to]
+    session_return_to = session.delete(:return_to)
+
     destination = if params[:return_to]
       params[:return_to]
-    elsif session[:return_to]
-      session.delete(:return_to)
+    elsif session_return_to
+      session_return_to
     elsif default
       default
     else
