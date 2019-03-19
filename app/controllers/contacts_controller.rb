@@ -72,7 +72,7 @@ class ContactsController < UserApplicationController
   def get_business
     param_is_padma_id = (false if Float(params[:business_id]) rescue true)
     if param_is_padma_id
-      @business = get_context.find_by_padma_id(params[:business_id])
+      @business = get_context.get_by_padma_id(params[:business_id])
     else
       @business = get_context.find(params[:business_id])
     end
