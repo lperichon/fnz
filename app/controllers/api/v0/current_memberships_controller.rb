@@ -31,7 +31,10 @@ class Api::V0::CurrentMembershipsController < Api::V0::ApiController
         padma_id: params[:padma_contact_ids]
       })
     end
-    render json: {:collection => @memberships.map{|m| MembershipSerializer.new(m, :root => false)}.as_json}
+    Appsignal.instrument("serialize_memberships") do
+      @json = @memberships.map{|m| MembershipSerializer.new(m, :root => false)}.as_json
+    end
+    render json: {:collection => @json }
   end
 
   private
