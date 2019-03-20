@@ -30,8 +30,14 @@ class InstallmentsController < UserApplicationController
     end
 
     @installment = @context.new((params[:installment]||{}).reverse_merge(defaults))
+
   	date = Date.today
   	@transactions = @business.transactions.credits.where {(transaction_at.gteq(date - 1.month)) & (transaction_at.lteq(date + 1.month))}.order("transaction_at DESC")
+    # la linea de arriba retorna nil a veces. ver:
+    # https://appsignal.com/padma/sites/5c463bba74782025e5d6f521/exceptions/incidents/111?timestamp=2019-03-20T16%3A22%3A03Z
+    if @transactions.nil?
+      @transactions = []
+    end
   end
 
   # POST /accounts
