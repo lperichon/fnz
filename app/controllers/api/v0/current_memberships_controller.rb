@@ -1,6 +1,6 @@
 # @restful_api v0
 class Api::V0::CurrentMembershipsController < Api::V0::ApiController
-  before_filter :get_scope
+  before_filter :get_business
   
   ##
   # Returns current membership
@@ -49,7 +49,9 @@ class Api::V0::CurrentMembershipsController < Api::V0::ApiController
 
   private
 
-  def get_scope
-    @business = Business.get_by_padma_id(params[:business_id])
+  def get_business
+    Appsignal.instrument("get_business") do
+      @business = Business.get_by_padma_id(params[:business_id])
+    end
   end
 end
