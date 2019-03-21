@@ -32,7 +32,17 @@ class Api::V0::CurrentMembershipsController < Api::V0::ApiController
       })
     end
     Appsignal.instrument("serialize_memberships") do
-      @json = @memberships.map{|m| MembershipSerializer.new(m, :root => false)}.as_json
+      @json = @memberships.map do |m|
+        {
+          value: m.value,
+          begins_on: m.begins_on,
+          ends_on: m.ends_on,
+          payment_type: m.payment_type.try(:name),
+          padma_contact_id: m.contact.try(:padma_id),
+          name: m.name,
+          installments: m.installments
+        }
+      end
     end
     render json: {:collection => @json }
   end
