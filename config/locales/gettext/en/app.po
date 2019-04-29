@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnz 1.0\n"
 "Report-Msgid-Bugs-To: contact@translation.io\n"
-"POT-Creation-Date: 2019-03-08 13:51-0300\n"
-"PO-Revision-Date: 2019-03-08 17:51+0100\n"
+"POT-Creation-Date: 2019-04-29 12:53-0300\n"
+"PO-Revision-Date: 2019-04-29 17:54+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: English\n"
 "Language: en\n"
@@ -78,6 +78,10 @@ msgstr ""
 
 #: ../../../app/views/application/_transactions_table.html.erb:18
 msgid "Subtotal Entradas - Salidas"
+msgstr ""
+
+#: ../../../app/views/imports/_form.html.erb:7
+msgid "descripción"
 msgstr ""
 
 #: ../../../app/views/memberships/_installment_popover.html.erb:17

@@ -87,3 +87,5 @@ pt-BR:
   spree:
     say_no: false
     say_yes: true
+    date_picker:
+      first_day: 0
