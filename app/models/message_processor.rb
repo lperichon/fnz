@@ -1,5 +1,5 @@
 class MessageProcessor
-  include SsoSessionsHelper
+  extend SsoSessionsHelper
   
   def self.catch_message(key_name, data)
     if key_name == "sso_session_destroyed"
