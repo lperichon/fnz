@@ -5,7 +5,12 @@ Fnz::Application.routes.draw do
     root :to => 'home#index'
   end
   root :to => "home#index"
+
+  match "/login",  to: "sso_sessions#show"
+  match '/logout', to: "sso_sessions#destroy"
   devise_for :users, :controllers => { :registrations => "registrations"}
+  resource :sso_session
+
   resources :user_businesses
   resources :businesses do
     resources :admparts do

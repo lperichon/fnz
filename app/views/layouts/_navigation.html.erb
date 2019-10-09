@@ -10,7 +10,7 @@
   <% end %>
   <% if user_signed_in? %>
     <li>
-    <%= link_to content_tag(:i, "", :class => "icon-off", :title => t("actions.logout"), :rel => "tooltip"), destroy_user_session_path, :method=>'delete' %>
+    <%= link_to content_tag(:i, "", :class => "icon-off", :title => t("actions.logout"), :rel => "tooltip"), logout_path, :method=>'delete' %>
     </li>
   <% else %>
     <li>

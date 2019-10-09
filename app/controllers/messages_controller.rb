@@ -1,5 +1,6 @@
 class MessagesController < ApplicationController
   include SnsHelper
+  include SsoSessionsHelper
   
   def sns
     case sns_type

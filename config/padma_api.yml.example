@@ -1,0 +1,5 @@
+accounts_key: secret
+contacts_key: secret
+messaging_key: secret
+crm_url: "http://localhost:3000"
+accounts_url: "http://localhost:3001"

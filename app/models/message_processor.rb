@@ -1,5 +1,10 @@
 class MessageProcessor
+  include SsoSessionsHelper
+  
   def self.catch_message(key_name, data)
+    if key_name == "sso_session_destroyed"
+      set_sso_session_destroyed_flag(data[:username])
+    end
     return unless key_name == 'subscription_change'
     
     business = Business.find_by_padma_id(data[:account_name])

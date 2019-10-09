@@ -21,7 +21,6 @@ gem "launchy", ">= 2.1.2", :group => :test
 gem "factory_girl_rails", ">= 4.0.0", :group => [:development, :test]
 gem "bootstrap-sass", "2.0.4.0"
 gem "devise", ">= 2.1.2"
-gem 'devise_cas_authenticatable'
 gem "cancan", ">= 1.6.8"
 gem "rolify", ">= 3.2.0"
 gem "hub", ">= 1.10.2", :require => nil, :group => [:development]
@@ -36,7 +35,7 @@ gem "paperclip", "~> 3.0"
 gem 'aws-sdk'
 gem 'tz_magic', '0.0.1'
 gem "squeel", '1.0.14'
-gem 'accounts_client', '~> 0.2.6'
+gem 'accounts_client', '0.2.38'
 gem 'contacts_client', '~> 0.0.47'
 gem 'messaging_client','~> 0.1'
 gem 'unicorn'

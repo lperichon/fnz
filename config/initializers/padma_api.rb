@@ -12,6 +12,7 @@ end
 
 module Accounts
   API_KEY = ENV['accounts_key'] || CONFIG['accounts_key']
+	URL = ENV['accounts_url'] || CONFIG['accounts_url']
 end
 
 module Contacts

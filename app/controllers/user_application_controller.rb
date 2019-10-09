@@ -1,4 +1,7 @@
 class UserApplicationController < ApplicationController
+  include SsoSessionsHelper
+
+  before_filter :get_sso_session
   before_filter :mock_login
   before_filter :authenticate_user!
   before_filter :set_current_user
