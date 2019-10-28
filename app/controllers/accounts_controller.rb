@@ -2,7 +2,7 @@ class AccountsController < UserApplicationController
   before_filter :get_business
 
   def index
-    @accounts = @business.accounts.with_deleted
+    @accounts = @business.accounts.with_deleted.order("name")
   end
 
   def show
