@@ -23,6 +23,9 @@ Fnz::Application.routes.draw do
       end
     end
     resources :accounts do
+      member do
+        put :update_balance
+      end
       resources :transactions, :only => [:index] do
         get :stats, :on => :collection
       end

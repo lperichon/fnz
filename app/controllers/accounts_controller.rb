@@ -49,6 +49,12 @@ class AccountsController < UserApplicationController
     end
   end
 
+  def update_balance
+    @account = @business.accounts.with_deleted.find(params[:id])
+    @account.update_balance
+    head :no_content
+  end
+
   # DELETE /accounts/1
   # DELETE /accounts/1.json
   def destroy

@@ -18,7 +18,10 @@
   	<% unless account.new_record? %>
     <tr>
       <td><%= link_to account.name, business_account_path(@business, account) %></td>
-      <td><%= number_to_currency(account.balance, :unit => account.currency.symbol) %></td>
+      <td>
+        <%= number_to_currency(account.balance, :unit => account.currency.symbol) %>
+        <%= link_to content_tag(:i, "", :class => "icon-undo"), update_balance_business_account_path(@business,account), method: 'PUT', class: "refreshOnResponse", remote: true %>
+      </td>
       <td>
         <%= link_to content_tag(:i, "", :class => "icon-#{account.deleted? ? 'undo' : 'trash'}"), business_account_path(@business,account), :confirm => "Are you sure you want to #{account.deleted? ? 'restore' : 'delete'} this item?", :method => 'delete' %>
       </td>
