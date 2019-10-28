@@ -4,10 +4,10 @@
 
 <%= f.input :amount %>
 
-<%= f.association :source, :collection => @business.accounts, :prompt => t('transactions.fields.source_prompt') %>
+<%= f.association :source, :collection => @business.accounts.order("name"), :prompt => t('transactions.fields.source_prompt') %>
 
 <span class="transfer_field" style="display:none;">
-  <%= f.input :target_id, :as => :select, :collection => @business.accounts, :prompt => t('transactions.fields.target_prompt') %>
+  <%= f.input :target_id, :as => :select, :collection => @business.accounts.order("name"), :prompt => t('transactions.fields.target_prompt') %>
 </span>
 
 <%= f.input :transaction_at, :as => :date_time_picker %>
