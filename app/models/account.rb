@@ -8,7 +8,7 @@ class Account < ActiveRecord::Base
   validates :business, :presence => true
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :business_id, :currency
+  attr_accessible :name, :business_id, :currency, :default
 
   def transactions
     Transaction.where("source_id = ? or target_id = ?", self.id, self.id)

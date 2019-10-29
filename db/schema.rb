@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20190201211118) do
+ActiveRecord::Schema.define(:version => 20191029212333) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name",                                       :default => "",  :null => false
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(:version => 20190201211118) do
     t.decimal  "balance",     :precision => 12, :scale => 2, :default => 0.0, :null => false
     t.string   "currency"
     t.datetime "deleted_at"
+    t.boolean  "default"
   end
 
   add_index "accounts", ["deleted_at"], :name => "index_accounts_on_deleted_at"
