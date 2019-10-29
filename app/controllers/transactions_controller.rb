@@ -41,6 +41,7 @@ class TransactionsController < UserApplicationController
 
   def new
     attrs = ( params[:transaction] || {}).reverse_merge({
+      type: 'Debit',
       transaction_at: Time.zone.now
     })
     @transaction = @context.new(attrs)
