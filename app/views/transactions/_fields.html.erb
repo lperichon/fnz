@@ -1,4 +1,9 @@
-<%= f.input :type, :collection => [[Debit.model_name.human, "Debit"], [Credit.model_name.human, "Credit"], [Transfer.model_name.human, "Transfer"]], :as => :radio_buttons, :item_wrapper_class => 'inline' %>
+<%= f.input :type,
+            collection: [[Debit.model_name.human, "Debit"], [Credit.model_name.human, "Credit"], [Transfer.model_name.human, "Transfer"]],
+            as: :radio_buttons,
+            item_wrapper_class: 'inline',
+            input_html: { data: { target: "transaction_form.transactionTypeOption",
+                                  action: "transaction_form#updateFormFields" }} %>
 
 <%= f.input :description %>
 
@@ -6,17 +11,21 @@
 
 <%= f.association :source, :collection => @business.accounts.order("name"), :prompt => t('transactions.fields.source_prompt') %>
 
-<span class="transfer_field" style="display:none;">
+<span class="transfer_field" style="display:none;" data-target="transaction_form.transferField">
   <%= f.input :target_id, :as => :select, :collection => @business.accounts.order("name"), :prompt => t('transactions.fields.target_prompt') %>
 </span>
 
 <%= f.input :transaction_at, :as => :date_time_picker %>
 
-<span class="transfer_field" style="display:none;">
+<span class="transfer_field" style="display:none;" data-target="transaction_form.transferField">
   <%= f.input :conversion_rate %>
 </span>
 
-<%= f.input :state, :as => :select, :collection => Transaction.available_states %>
+<%= f.input :state,
+            as: :select,
+            collection: Transaction.available_states,
+            input_html: { data: { target: "transaction_form.stateField",
+                                  action: "transaction_form#updateFormFields" } } %>
 
 <span class="pending_field" style="display:none;">
   <%= f.input :reconciled_at, :as => :date_time_picker %>
