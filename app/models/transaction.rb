@@ -100,6 +100,13 @@ class Transaction < ActiveRecord::Base
   end
 
   def update_balances
+    if source_id_was != source_id && source_id_was != target_id
+      Account.find(source_id_was).update_balance if source_id_was
+    end
+    if target_id_was != source_id && target_id_was != source_id
+      Account.find(target_id_was).update_balance if target_id_was 
+    end
+
     source.update_balance
     target.update_balance if target.present?
     installments.each { |installment| installment.update_balance_and_status } if installments.count > 0
@@ -158,9 +165,13 @@ class Transaction < ActiveRecord::Base
   end
 
   def update_balances_around_destroy
+    cached_source = source
+    cached_target = target
     cached_installments = self.installments.all
     yield
     cached_installments.each { |installment| installment.update_balance_and_status } if cached_installments.count > 0
+    cached_source.update_balance if cached_source
+    cached_target.update_balance if cached_target
   end
 
   def set_creator
