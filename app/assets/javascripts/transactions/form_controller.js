@@ -5,6 +5,7 @@
     }
 
     initialize(){
+      this.updateFormFields();
       this.updateColor();
       this.toggleExtraOptions();
     }
