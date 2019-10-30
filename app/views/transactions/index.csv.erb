@@ -12,5 +12,5 @@
     t.tags.join(","),
     t.agent.try(:name),
     t.contact.try(:name)
-  ]) -%>
+  ]).html_safe -%>
 <%- end -%>
