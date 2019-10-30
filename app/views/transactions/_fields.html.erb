@@ -3,7 +3,7 @@
             as: :radio_buttons,
             item_wrapper_class: 'inline',
             input_html: { data: { target: "transaction_form.transactionTypeOption",
-                                  action: "transaction_form#updateFormFields" }} %>
+                                  action: "change->transaction_form#updateFormFields change->transaction_form#updateColor" }} %>
 
 <%= f.input :description %>
 
@@ -15,26 +15,36 @@
   <%= f.input :target_id, :as => :select, :collection => @business.accounts.order("name"), :prompt => t('transactions.fields.target_prompt') %>
 </span>
 
-<%= f.input :transaction_at, :as => :date_time_picker %>
+<div class="control-group controls">
+  <a href="#" data-action="transaction_form#toggleExtraOptions">
+  <span data-target="transaction_form.toggleButtonVerb" data-show-msg="<%= _("mostrar") %>" data-hide-msg="<%= _("ocultar") %>"></span> 
+    <%= _("más opciones") %>
+  </a>
+</div>
 
-<span class="transfer_field" style="display:none;" data-target="transaction_form.transferField">
-  <%= f.input :conversion_rate %>
-</span>
+<div data-target="transaction_form.extraFieldsContainer">
 
-<%= f.input :state,
-            as: :select,
-            collection: Transaction.available_states,
-            input_html: { data: { target: "transaction_form.stateField",
-                                  action: "transaction_form#updateFormFields" } } %>
+  <%= f.input :transaction_at, :as => :date_time_picker %>
 
-<span class="pending_field" style="display:none;">
-  <%= f.input :reconciled_at, :as => :date_time_picker %>
-</span>
+  <span class="transfer_field" style="display:none;" data-target="transaction_form.transferField">
+    <%= f.input :conversion_rate %>
+  </span>
 
-<%= f.input :report_at, :as => :date_picker %>
+  <%= f.input :state,
+              as: :select,
+              collection: Transaction.available_states,
+              input_html: { data: { target: "transaction_form.stateField",
+                                    action: "transaction_form#updateFormFields" } } %>
 
-<%=  f.input :tag_ids, :as => :select, :collection => @business.tags, :input_html => {:class => "chosen", 'data-placeholder' => t('transactions.fields.tags_placeholder')} %>
+  <span class="pending_field" style="display:none;">
+    <%= f.input :reconciled_at, :as => :date_time_picker %>
+  </span>
 
-<%=  f.input :agent_id, :as => :select, :collection => @business.agents.enabled, :input_html => {:class => "chosen", 'data-placeholder' => t('transactions.fields.agent_placeholder')} %>
+  <%= f.input :report_at, :as => :date_picker %>
 
-<%=  f.input :contact_id, :as => :select, :collection => @business.contacts, :input_html => {:class => "chosen", 'data-placeholder' => t('transactions.fields.contact_placeholder')} %>
+  <%=  f.input :tag_ids, :as => :select, :collection => @business.tags, :input_html => {:class => "chosen", 'data-placeholder' => t('transactions.fields.tags_placeholder')} %>
+
+  <%=  f.input :agent_id, :as => :select, :collection => @business.agents.enabled, :input_html => {:class => "chosen", 'data-placeholder' => t('transactions.fields.agent_placeholder')} %>
+
+  <%=  f.input :contact_id, :as => :select, :collection => @business.contacts, :input_html => {:class => "chosen", 'data-placeholder' => t('transactions.fields.contact_placeholder')} %>
+</div>

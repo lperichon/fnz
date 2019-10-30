@@ -1,10 +1,13 @@
 (()=>{
   stimulusApplication.register("transaction_form", class extends Stimulus.Controller {
     static get targets(){
-      return ["transactionTypeOption","transferField", "stateField"];
+      return ["transactionTypeOption","transferField", "stateField","footer","extraFieldsContainer","toggleButtonVerb"];
     }
 
-    initialize(){ }
+    initialize(){
+      this.updateColor();
+      this.toggleExtraOptions();
+    }
 
     updateFormFields(){
       var so = this.selectedTransactionOption();
@@ -31,6 +34,37 @@
         }
       }
 
+    }
+
+    toggleExtraOptions(){
+      var el = this.extraFieldsContainerTarget;
+      if(window.getComputedStyle(el).display == 'none'){
+        this.toggleButtonVerbTarget.innerHTML = this.toggleButtonVerbTarget.dataset.hideMsg;
+        el.style.display = "block";
+      } else {
+        this.toggleButtonVerbTarget.innerHTML = this.toggleButtonVerbTarget.dataset.showMsg;
+        el.style.display = "none";
+      }
+      return el;
+    }
+
+    updateColor(){
+      var so = this.selectedTransactionOption();
+      if(so){
+        var color = "";
+        switch(so.value){
+          case "Transfer":
+            color = "";
+            break;
+          case "Debit":
+            color = "red";
+            break;
+          case "Credit":
+            color = "green";
+            break;
+        }
+        this.footerTarget.style="background-color: "+color+";";
+      }
     }
 
     selectedTransactionOption(){
