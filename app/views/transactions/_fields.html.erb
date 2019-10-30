@@ -32,7 +32,7 @@
 
   <%= f.input :state,
               as: :select,
-              collection: Transaction.available_states,
+              collection: Transaction.available_states.map{|s| [t(".state_options.#{s}"),s]},
               input_html: { data: { target: "transaction_form.stateField",
                                     action: "transaction_form#updateFormFields" } } %>
 

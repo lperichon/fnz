@@ -102,9 +102,9 @@ es:
         transaction_at: Fecha
         report_at: Fecha de reporte
         report_at_option: Fecha de reporte
-        conversion_rate: 
-        reconciled_at: 
-        target_id: 
+        conversion_rate: Tasa conversión
+        reconciled_at: Fecha en que fue saldado
+        target_id: Cuenta destino
         type: Tipo
         date: Date
         target: Cuenta destino
@@ -952,6 +952,10 @@ es:
       tags_placeholder: Seleccione la categoría
       agent_placeholder: Instructor asociado
       contact_placeholder: Contacto asociado
+      state_options:
+        created: pago
+        pending: pendiente
+        reconciled: "saldado (estaba pendiente)"
     field:
       tags_placeholder: Seleccione la categoría
     new_modal:
