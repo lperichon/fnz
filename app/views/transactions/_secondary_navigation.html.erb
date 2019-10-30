@@ -1,12 +1,22 @@
 <% if can? :create, @business.transactions.build %>
+  <% transaction_params = {}
+     if @account
+       transaction_params.merge!({source_id: @account.id})
+     end
+     if @contact
+       transaction_params.merge!({contact_id: @contact.id})
+     end
+  %>
   <li class="pull-right">
     <%= link_to content_tag(:i, "", :class => "icon-plus") + I18n.t('transactions.secondary_navigation.add_transaction'),
-                new_business_transaction_path(@business, transaction: { source_id: @account.try(:id) }),
+                new_business_transaction_path(@business, transaction: transaction_params ),
                 :remote => true %>
   </li>
   <li class="pull-right" data-toggle="tooltip" title="<%= _("copiá este link y guardalo en tu celu para agregar fácilmente movimientos.") %>">
     <%= link_to content_tag(:i, "", class: "icon-bookmark"),
-                new_business_transaction_path(@business, transaction: { source_id: @account.try(:id) }, quick: 1)
+                new_business_transaction_path(@business,
+                                              transaction: transaction_params,
+                                              quick: 1)
     %>
   </li>
 <% end %>

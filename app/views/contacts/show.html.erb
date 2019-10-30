@@ -74,5 +74,12 @@
       <%= link_to content_tag(:i, "", :class => "icon-plus") + t('sales.secondary_navigation.new_sale'), new_business_sale_path(@business, :sale => {:contact_id => @contact.id}) %>
     </th>
   </tfoot>
-
 </table>
+
+<% if @business.transactions_enabled? %>
+  <%= content_for :secondary_navigation do %>
+    <%= render partial: 'transactions/secondary_navigation' %>
+  <% end %>
+  <h3><%= _("Todas las transacciones") %></h3>
+  <%= render partial: "transactions_table", locals: { transactions: @business.transactions.where(contact_id: @contact.id) } %>
+<% end %>
