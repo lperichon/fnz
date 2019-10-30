@@ -7,7 +7,7 @@ group :assets do
   gem "sass", "~> 3.2.19"
   gem 'sass-rails',   '~> 3.2.6'
   gem 'coffee-rails', '~> 3.2.1'
-  gem 'uglifier', '>= 1.0.3'
+  gem 'uglifier', '~> 3.2'
 end
 gem 'jquery-rails'
 gem "rspec-rails", ">= 2.11.0", :group => [:development, :test]
@@ -40,7 +40,7 @@ gem 'contacts_client', '~> 0.0.47'
 gem 'messaging_client','~> 0.1'
 gem 'unicorn'
 gem 'resque'
-gem 'execjs'
+gem 'execjs', '2.7.0'
 gem 'therubyracer'
 gem "select2-rails"
 gem 'momentjs-rails'
