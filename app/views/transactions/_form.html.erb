@@ -1,6 +1,16 @@
-<%= simple_form_for(@transaction, :as => :transaction, :url => form_url, :validate => true, :html => {:class => "form-horizontal", :data => { :controller => "transaction_form" }}) do |f| %>
+<div id="quickForm">
+<%= simple_form_for(@transaction,
+                    as: :transaction,
+                    url: form_url,
+                    validate: true,
+                    html: {
+                      data: {
+                        controller: "transaction_form" }}) do |f| %>
+    <div id="colorSignal" data-target="transaction_form.colorSignal"></div>
+      <input type="hidden" name="quick" value="1"></input>
 
-    <%= render :partial => 'fields', :locals => {:f => f} %>
+      <%= render :partial => 'fields', :locals => {:f => f} %>
 
-    <%= f.button :submit, :class => "btn-primary" %>
+      <%= f.button :submit, :class => "btn-primary" %>
 <% end %>
+</div>

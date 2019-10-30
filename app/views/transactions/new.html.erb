@@ -3,8 +3,7 @@
 <% end %>
 
 
-<h2>Edit Transaction</h2>
+<h2><%= _("Registrar transacción") %></h2>
 
-<%= render :partial => 'form', :locals => {:form_url => business_transactions_path(@business)} %>
-
-<%= link_to 'Back', :back %>
+<%= render partial: 'form',
+          locals: {form_url: business_transactions_path(@business)} %>

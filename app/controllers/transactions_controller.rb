@@ -50,6 +50,9 @@ class TransactionsController < UserApplicationController
       })
     end
     @transaction = @context.new(attrs)
+    if params[:quick]
+      render layout: "quick_mobile"
+    end
   end
 
   # POST /accounts
@@ -59,7 +62,12 @@ class TransactionsController < UserApplicationController
 
     respond_to do |format|
       if @transaction.save
-        format.html { redirect_to business_transaction_path(@business, @transaction), notice: _('Movimiento creado') }
+        return_to_url = if params[:quick]
+          new_business_transaction_path(@business, quick: 1)
+        else
+          business_transaction_path(@business, @transaction)
+        end
+        format.html { redirect_to return_to_url, notice: _('Movimiento creado') }
         format.json { render json: @transaction, status: :created, location: business_transaction_path(@business, @transaction) }
         format.js {}
       else
