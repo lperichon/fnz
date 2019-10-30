@@ -26,7 +26,7 @@ class TagsController < UserApplicationController
 
     respond_to do |format|
       if @tag.save
-        format.html { redirect_to business_tag_path(@business, @tag), notice: 'Tag was successfully created.' }
+        format.html { redirect_to business_tags_path(@business), notice: _("Categoría creada") }
         format.json { render json: @tag, status: :created, location: business_tag_path(@business, @tag) }
       else
         format.html { render action: "new" }
