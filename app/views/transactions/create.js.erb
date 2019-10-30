@@ -1,4 +1,5 @@
 $('#new-transaction-modal').modal('hide').remove();
+
 if ($(".nested.transactions.table").length > 0) {
   $('.nested.transactions.table tbody').prepend("<tr data-id=<%= @transaction.id %>><%= escape_javascript render(:partial => 'application/transactions_table_item', :locals => {:transaction => @transaction}) %><td><%= escape_javascript link_to(content_tag(:i, '', :class => 'icon-remove'), '#', :class => 'remove-nested-transaction') %></td></tr>")
 } else if($(".transactions.table").length > 0) {
@@ -6,3 +7,15 @@ if ($(".nested.transactions.table").length > 0) {
 } else {
   window.location = '<%= business_transactions_path(@business) %>'
 }
+
+<% if @transaction.source_id %>
+if($(".account_<%= @transaction.source_id %>_balance").length > 0){
+  $(".account_<%= @transaction.source_id %>_balance").html("<%= number_to_currency(@transaction.source.balance, unit: @transaction.source.currency.symbol) %>");
+}
+<% end %>
+
+<% if @transaction.target_id %>
+if($(".account_<%= @transaction.target_id %>_balance").length > 0){
+  $(".account_<%= @transaction.target_id %>_balance").html("<%= number_to_currency(@transaction.target.balance, unit: @transaction.target.currency.symbol) %>");
+}
+<% end %>
