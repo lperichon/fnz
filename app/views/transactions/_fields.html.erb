@@ -7,7 +7,7 @@
 
 <%= f.input :description %>
 
-<%= f.input :amount %>
+<%= f.input :amount, type: "number" %>
 
 <%= f.association :source, :collection => @business.accounts.order("name"), :prompt => t('transactions.fields.source_prompt') %>
 
