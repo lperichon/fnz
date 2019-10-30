@@ -1,5 +1,6 @@
 <%= simple_form_for(@account, :url => form_url, :validate => true, :html => {:class => "form-horizontal"}) do |f| %>
   <%= f.input :name %>
   <%= f.input :currency, :as => :select, :collection => SUPPORTED_CURRENCIES %>  
+  <%= f.input :default %>
   <%= f.button :submit, :class => "btn btn-primary" %>
 <% end %>
