@@ -10,7 +10,7 @@
             <%= f.input "#{nested_resource_type}_ids", :as => :hidden, :input_html => {:id => "#{nested_resource_type}_ids_#{index}", :name => "transaction[#{nested_resource_type}_ids][]", :value => nested_resource_id} %>
           <% end %>
       <% end %>
-      <div class="modal-footer" data-target="transaction_form.footer">
+      <div class="modal-footer" data-target="transaction_form.colorSignal">
         <%= link_to t('actions.close'), "#", :class => "btn", "data-dismiss" => "modal" %>
         <%= f.button :submit, :class => "btn btn-primary" %>
       </div>
