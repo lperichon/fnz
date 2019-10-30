@@ -13,6 +13,9 @@ class ContactsController < UserApplicationController
       @contact = @business.contacts.find(params[:id])
     end
     @memberships = @contact.memberships.where(business_id: @business.id)
+    if @business.transactions_enabled?
+      @transactions = @business.transactions.where(contact_id: @contact.id)
+    end
   end
 
   def edit

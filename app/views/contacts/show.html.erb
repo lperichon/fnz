@@ -81,5 +81,5 @@
     <%= render partial: 'transactions/secondary_navigation' %>
   <% end %>
   <h3><%= _("Todas las transacciones") %></h3>
-  <%= render partial: "transactions_table", locals: { transactions: @business.transactions.where(contact_id: @contact.id) } %>
+  <%= render partial: "transactions_table", locals: { transactions: @transactions } %>
 <% end %>
