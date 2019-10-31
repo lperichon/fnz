@@ -9,7 +9,13 @@
                   new_business_account_balance_check_path(@business, @account),
                   remote: true %>
     <% end %>
+    <%# link_to content_tag(:i, "", class: "icon-list"),
+                business_account_balance_checks_path(@business, @account),
+                "data-toggle" => "tooltip",
+                title: _("listar los cierres de caja registrados") %>
     <%= link_to content_tag(:i, "", class: "icon-list"),
-                business_account_balance_checks_path(@business, @account) %>
+                params.merge( active_only: true ),
+                "data-toggle" => "tooltip",
+                title: _("Ver solo los movimientos desde el último cierre de caja") %>
   </div>
 <% end %>

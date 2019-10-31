@@ -150,7 +150,11 @@ class TransactionsController < UserApplicationController
       @context = @business.transactions
       if source_id
         @account = @business.accounts.find(source_id)
-        @context = @account.transactions
+        if params[:active_only]
+          @context = @account.active_transactions
+        else
+          @context = @account.transactions
+        end
       end
     end
 

@@ -33,7 +33,7 @@ class Account < ActiveRecord::Base
   end
 
   # transactions considered in balance calculation
-  def active_balance_transactions
+  def active_transactions
     if last_balance_check
       from = last_balance_check.checked_at
       transactions.where("
@@ -55,7 +55,7 @@ class Account < ActiveRecord::Base
   def calculate_balance
     base = last_balance_check.nil?? 0 : last_balance_check.balance
     
-    active_balance_transactions.inject(base) do |balance, transaction|
+    active_transactions.inject(base) do |balance, transaction|
       balance+transaction.sign(self)*transaction.amount
     end
   end
