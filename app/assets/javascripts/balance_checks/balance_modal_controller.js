@@ -7,8 +7,8 @@
     initialize(){ }
 
     connect(){
-      console.log("connected");
       this.expectedTarget.value = this.data.get("expectedBalance");
+      this.avoidDoubleSubmission();
     }
 
     removeModal(){
@@ -17,6 +17,14 @@
 
     updateDifference(){
       this.differenceTarget.value = this.balanceTarget.value - this.expectedTarget.value
+    }
+
+    avoidDoubleSubmission(){
+      console.log("bind avoidance");
+      $("#new_balance_check").submit(()=>{
+        console.log("disable");
+        $("#submitBalanceCheck").attr("disabled","disabled");
+      });
     }
 
 

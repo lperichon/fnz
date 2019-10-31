@@ -42,7 +42,10 @@
 
     <div class="modal-footer">
       <%= link_to t('actions.close'), "#", class: "btn", "data-action" => "balance_modal#removeModal" %>
-      <%= f.button :submit, _("Guardar cierre de caja"), class: "btn btn-primary" %>
+      <%= f.button :submit,
+                   _("Guardar cierre de caja"),
+                   id: "submitBalanceCheck",
+                   class: "btn btn-primary" %>
     </div>
   <% end %>
 </div>
