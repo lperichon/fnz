@@ -7,6 +7,8 @@ class Account < ActiveRecord::Base
   validates :name, :presence => true
   validates :business, :presence => true
 
+  has_many :balance_checks
+
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :business_id, :currency, :default
 
@@ -26,6 +28,24 @@ class Account < ActiveRecord::Base
     Currency.find(self[:currency]) || Currency.find(business.currency_code) || Currency.find(:usd)
   end
 
+  def last_balance_check
+    @last_balance_check ||= balance_checks.order(:checked_at).last
+  end
+
+  # transactions considered in balance calculation
+  def active_balance_transactions
+    if last_balance_check
+      from = last_balance_check.checked_at
+      transactions.where("
+                         ((state = 'created') AND (transaction_at > ?))
+                         OR
+                         ((state = 'reconciled') AND (reconciled_at > ?))",
+                         from, from)
+    else
+      transactions.where(:state => ['created', 'reconciled'])
+    end
+  end
+
   private
 
   def set_defaults
@@ -33,6 +53,10 @@ class Account < ActiveRecord::Base
   end
 
   def calculate_balance
-    transactions.where(:state => ['created', 'reconciled']).inject(0) {|balance, transaction| balance+transaction.sign(self)*transaction.amount}
+    base = last_balance_check.nil?? 0 : last_balance_check.balance
+    
+    active_balance_transactions.inject(base) do |balance, transaction|
+      balance+transaction.sign(self)*transaction.amount
+    end
   end
 end

@@ -7,7 +7,7 @@ FactoryGirl.define do
     amount 3.5
     business
     creator { FactoryGirl.create(:user) }
-    transaction_at { Date.today }
+    transaction_at { Time.now }
     source
   end
 end
