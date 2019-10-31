@@ -10,6 +10,8 @@
       this.toggleExtraOptions();
     }
 
+    connect(){ }
+
     updateFormFields(){
       var so = this.selectedTransactionOption();
       if(so){

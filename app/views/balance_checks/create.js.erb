@@ -1,0 +1,5 @@
+$('#new-business-check-modal').modal("hide").remove();
+
+if($(".account_<%= @balance_check.account_id %>_balance").length > 0){
+  $(".account_<%= @balance_check.account_id %>_balance").html("<%= number_to_currency(@balance_check.account.balance, unit: @balance_check.account.currency.symbol) %>");
+}

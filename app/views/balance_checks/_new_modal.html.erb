@@ -1,0 +1,48 @@
+<div id="new-business-check-modal" class="modal hide fade"
+     data-controller="balance_modal"
+     data-balance_modal-expected-balance="<%= @balance_check.account.balance %>"
+     >
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3><%= _("Cierre de caja") %></h3>
+  </div>
+  <%= simple_form_for(@balance_check,
+                      url: business_account_balance_checks_path(@business,@account),
+                      validate: true,
+                      remote: true,
+                      html: { class: "form-horizontal" }) do |f| %>
+
+    <%= f.input :account_id, as: :hidden %>
+
+    <div class="control-group string optional">
+      <label class="string optional control-label"><%= _("Balance esperado") %></label>
+      <div class="controls">
+        <input data-target="balance_modal.expected" class="string optional" size="50" type="number" disabled>
+      </div>
+    </div>
+
+    <%= f.input :balance,
+                label: _("Establecer balance a"),
+                input_html: {
+                  type: "number",
+                  data: {
+                    target: "balance_modal.balance",
+                    action: "keyup@window->balance_modal#updateDifference"
+                  }
+                } %>
+
+    <div class="control-group string optional">
+      <label class="string optional control-label"><%= _("Diferencia") %></label>
+      <div class="controls">
+        <input data-target="balance_modal.difference" class="string optional" size="50" type="number" disabled>
+      </div>
+    </div>
+
+    <%= f.input :checked_at, as: :date_time_picker %>
+
+    <div class="modal-footer">
+      <%= link_to t('actions.close'), "#", class: "btn", "data-action" => "balance_modal#removeModal" %>
+      <%= f.button :submit, _("Guardar cierre de caja"), class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

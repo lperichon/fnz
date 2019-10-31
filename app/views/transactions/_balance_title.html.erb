@@ -1,0 +1,15 @@
+<% if @account %>
+  <div class="pull-right" id="account_balance_title">
+    <%= _("Balance %{account_name}") % { account_name: @account.name } %>: 
+    <span class="account_<%= @account.id %>_balance">
+      <%= number_to_currency(@account.balance, unit: @account.currency.symbol) %>
+    </span>
+    <% if can?(:create, @account.balance_checks.build ) %>
+      <%= link_to content_tag(:i, "", class: "icon-edit"),
+                  new_business_account_balance_check_path(@business, @account),
+                  remote: true %>
+    <% end %>
+    <%= link_to content_tag(:i, "", class: "icon-list"),
+                business_account_balance_checks_path(@business, @account) %>
+  </div>
+<% end %>
