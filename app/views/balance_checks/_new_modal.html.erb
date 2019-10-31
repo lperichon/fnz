@@ -41,6 +41,9 @@
     <%= f.input :checked_at, as: :date_time_picker %>
 
     <div class="modal-footer">
+      <%= link_to content_tag(:i, "", class: "icon-list")+" "+_("ver los cierres de caja registrados"),
+                  business_account_balance_checks_path(@business, @account),
+                  class: "pull-left" %>
       <%= link_to t('actions.close'), "#", class: "btn", "data-action" => "balance_modal#removeModal" %>
       <%= f.button :submit,
                    _("Guardar cierre de caja"),

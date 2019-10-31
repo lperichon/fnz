@@ -4,7 +4,7 @@ class BalanceChecksController < UserApplicationController
   before_filter :get_account
 
   def index
-    @balance_checks = @account.balance_checks
+    @balance_checks = @account.balance_checks.order("checked_at DESC")
   end
 
   def new

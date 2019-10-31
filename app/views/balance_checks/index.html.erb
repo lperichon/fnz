@@ -5,6 +5,7 @@
     <tr class="balance_check_<%= bc.id %>">
       <td><%= l bc.checked_at, format: :short %></td>
       <td><%= bc.balance %></td>
+      <td><%= bc.creator.name %></td>
       <td>
         <%= link_to content_tag(:id,"",class: "icon-trash"),
                     business_account_balance_check_path(@business,@account,bc),
