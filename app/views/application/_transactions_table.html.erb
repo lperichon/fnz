@@ -3,7 +3,9 @@
 
   <% acum = 0 %>
   <% transactions.each do |transaction| %>
-    <% acum += (transaction.type=="Credit")? transaction.amount : ((transaction.type=="Debit")? -transaction.amount : 0) %>
+    <% if params[:admpart_tag_id] %>
+      <% acum += (transaction.type=="Credit")? transaction.amount : ((transaction.type=="Debit")? -transaction.amount : 0) %>
+    <% end %>
     <tr data-id="<%= transaction.id %>">
       <%= render :partial => 'transactions_table_item', :locals => {:transaction => transaction} %>
       <td>
