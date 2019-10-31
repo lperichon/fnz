@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20191031163513) do
+ActiveRecord::Schema.define(:version => 20191031195403) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name",                                       :default => "",  :null => false
@@ -52,8 +52,9 @@ ActiveRecord::Schema.define(:version => 20191031163513) do
     t.integer  "creator_id"
     t.integer  "balance_cents"
     t.datetime "checked_at"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.integer  "difference_transaction_id"
   end
 
   add_index "balance_checks", ["account_id"], :name => "index_balance_checks_on_account_id"

@@ -4,10 +4,14 @@ class BalanceCheck < ActiveRecord::Base
   belongs_to :account
   belongs_to :creator, :class_name => "User"
 
+  belongs_to :difference_transaction, dependent: :destroy, class_name: "Transaction"
+
   before_validation :set_creator
 
   validate :balance, presence: true
   validate :account, presence: true
+
+  before_create :create_difference_transaction
 
   after_save :set_accounts_balance
   around_destroy :set_accounts_balance_around_destroy
@@ -19,8 +23,23 @@ class BalanceCheck < ActiveRecord::Base
   def balance=(new_balance)
     self.balance_cents = (new_balance.nil?? nil : new_balance.to_f*100)
   end
-  
+
   private 
+
+  def create_difference_transaction
+    if balance && account
+      diff = balance - account.balance    
+      self.difference_transaction = Transaction.create!(
+        type: (diff > 0)? "Credit" : "Debit",
+        amount: diff.abs,
+        state: "created",
+        transaction_at: checked_at,
+        source_id: account_id,
+        business_id: account.business_id,
+        description: _("Diferencia de caja (balance: %{balance})") % { balance: balance }
+      )
+    end
+  end
 
   def set_creator
     self.creator = User.current_user unless creator

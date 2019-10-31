@@ -22,6 +22,8 @@ class Transaction < ActiveRecord::Base
   belongs_to :contact
   belongs_to :agent
 
+  has_one :balance_check, dependent: :destroy, foreign_key: 'difference_transaction_id'
+
   def source
     Account.unscoped { super }
   end
