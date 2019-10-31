@@ -5,12 +5,14 @@
     }
 
     initialize(){
+    }
+
+    connect(){
       this.updateFormFields();
       this.updateColor();
       this.toggleExtraOptions();
+      this.avoidDoubleSubmit();
     }
-
-    connect(){ }
 
     updateFormFields(){
       var so = this.selectedTransactionOption();
@@ -79,6 +81,12 @@
       } else {
         return null;
       }
+    }
+
+    avoidDoubleSubmit(){
+      $("#new_transaction").submit(()=>{
+        $("#submitTransaction").attr("disabled","disabled");
+      });
     }
   });
 })();

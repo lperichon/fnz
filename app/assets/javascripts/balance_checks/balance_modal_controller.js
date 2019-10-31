@@ -20,9 +20,7 @@
     }
 
     avoidDoubleSubmission(){
-      console.log("bind avoidance");
       $("#new_balance_check").submit(()=>{
-        console.log("disable");
         $("#submitBalanceCheck").attr("disabled","disabled");
       });
     }
