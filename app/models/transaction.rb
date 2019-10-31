@@ -52,7 +52,6 @@ class Transaction < ActiveRecord::Base
   validates :description, :presence => true
   validates :business, :presence => true
   validates :source, :presence => true
-  validates :amount, :presence => true, :numericality => {:greater_than => 0}
   validates :amount, :presence => true, :numericality => {:greater_than_or_equal_to => 0}
   validates :creator, :presence => true
   validates :transaction_at, :presence => true
