@@ -9,8 +9,8 @@
     <%= f.input :observations, :as => 'string' %>
 
     <% if @business.transactions_enabled? %>
-    <h3><%= Installment.human_attribute_name(:transactions) %></h3>
-    <%= render :partial => 'nested_transactions_table', :locals => {:f => f, :transactions => @transactions} %>
+      <h3><%= Installment.human_attribute_name(:transactions) %></h3>
+      <%= render :partial => 'nested_transactions_table', :locals => {:f => f, :transactions => @transactions} %>
     <% elsif !@installment.new_record? && !@installment.complete?  %>
         <%= link_to t('actions.mark_as_paid'), new_business_membership_installment_payment_path(@business, f.object.membership, f.object), :remote => true %>
     <% end %>
