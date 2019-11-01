@@ -10,7 +10,7 @@
                   remote: true %>
     <% end %>
     <%= link_to content_tag(:i, "", class: "icon-list"),
-                params.merge( active_only: true ),
+                business_account_transactions_path(@business, @account, active_only: 1, start_date: Date.civil(1,1,1), end_date: Date.civil(3000,1,1)),
                 "data-toggle" => "tooltip",
                 title: _("Ver solo los movimientos desde el último cierre de caja") %>
   </div>
