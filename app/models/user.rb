@@ -55,6 +55,10 @@ class User < ActiveRecord::Base
     self.has_role? :admin
   end
 
+  def time_zone
+    businesses.last.time_zone
+  end
+
   def self.create_or_update_from_sso(username)
     lu = self.find_by_drc_uid(username)
     pu = PadmaUser.find username

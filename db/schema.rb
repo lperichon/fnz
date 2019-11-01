@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20191031195403) do
+ActiveRecord::Schema.define(:version => 20191101132728) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name",                                       :default => "",  :null => false
@@ -333,7 +333,6 @@ ActiveRecord::Schema.define(:version => 20191031195403) do
     t.datetime "created_at",                                  :null => false
     t.datetime "updated_at",                                  :null => false
     t.string   "name"
-    t.string   "time_zone",              :default => "UTC"
     t.string   "drc_uid"
     t.string   "overview_mode",          :default => "table"
   end

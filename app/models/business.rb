@@ -33,6 +33,12 @@ class Business < ActiveRecord::Base
     PadmaAccount.find(padma_id) if padma_id
   end
 
+  def time_zone
+    Rails.cache.fetch("time_zone_business_#{self.id}") do
+      self.padma.try(:timezone)
+    end
+  end
+
   def initialize_feature_flags
     if type == "School"
       update_attributes({
@@ -66,6 +72,14 @@ class Business < ActiveRecord::Base
     else
       Currency.find("usd").try(:symbol)
     end
+  end
+
+  def self.current=(b)
+    Thread.current[:current_business] = b
+  end
+
+  def self.current
+    Thread.current[:current_business]
   end
 
 end

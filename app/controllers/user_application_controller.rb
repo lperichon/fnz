@@ -4,7 +4,10 @@ class UserApplicationController < ApplicationController
   before_filter :secret_key_login
   before_filter :get_sso_session
   before_filter :authenticate_user!
+
   before_filter :set_current_user
+  before_filter :set_current_business
+
   before_filter :set_time_zone
   before_filter :set_locale
 
@@ -12,8 +15,16 @@ class UserApplicationController < ApplicationController
     User.current_user = current_user if current_user
   end
 
+  def set_current_business
+    if params[:business_id]
+      Business.current = Business.find(params[:business_id])
+    end
+  end
+
   def set_time_zone
-    Time.zone = current_user.time_zone if current_user
+    if Business.current
+      Time.zone = Business.current.time_zone
+    end
   end
 
   def set_locale
