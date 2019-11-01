@@ -111,6 +111,7 @@ es:
         tags: Categoría
         agent: Instructor
         contact: Contacto
+        account: Cuenta
       enrollment:
         agent: Instructor
         enrolled_on: Fecha de matrícula
