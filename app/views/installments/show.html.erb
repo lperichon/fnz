@@ -25,5 +25,11 @@
 <% end %>
 <% end %>
 
-<%= link_to t('actions.edit'), edit_business_installment_path(@business, @installment) %> |
-<%= link_to t('actions.back'), :back %>
+<p>
+<%= link_to _("modificar esta cuota"), edit_business_installment_path(@business, @installment) %>
+</p>
+<p>
+<%= _("Volver a ") %>
+<%= link_to @installment.membership.contact.name, [@business.becomes(Business),@installment.membership.contact] %> |
+<%= link_to @installment.membership.name, [@business.becomes(Business),@installment.membership] %> |
+</p>
