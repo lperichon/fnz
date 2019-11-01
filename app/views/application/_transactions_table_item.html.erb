@@ -10,7 +10,19 @@
       <%= best_in_place_if transaction.is_a?(Transfer), transaction.becomes(Transaction), :target_id, :as => :select, :collection => @business.accounts.order("name").map { |i| [i.id, i.name] } , :url => business_transaction_path(@business, transaction)%>
     <% end %>
   </td>
-  <td><%= best_in_place transaction.becomes(Transaction), :transaction_at, :url => business_transaction_path(@business, transaction), :display_with => lambda {|d| d.to_s(:short)} %></td>
+  <td>
+    <%= best_in_place transaction.becomes(Transaction), :transaction_at, :url => business_transaction_path(@business, transaction), :display_with => lambda {|d| d.to_s(:short)} %>
+    <% if transaction.report_at && transaction.report_at.end_of_month!=transaction.transaction_at.to_date.end_of_month %>
+      <p>
+        (<%= _("a admin %{month}") % {month: l(transaction.report_at, format: :month)} %>)
+      </p>
+    <% end %>
+    <% if transaction.reconciled_at %>
+      <p>
+        (<%= _("saldó el %{rd}") % {rd: l(transaction.reconciled_at, format: :short)} %>)
+      </p>
+    <% end %>
+  </td>
   <td class="select2">
     <% begin %>
       <%# avoiding becomes call keeps included tags avoiding call to DB.  %>
