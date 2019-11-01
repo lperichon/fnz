@@ -38,3 +38,12 @@
 <div id="pagination">
 <%= paginate @transactions %>
 </div>
+
+<% if params[:active_only] %>
+  <div class="alert alert-notice">
+    <b>
+      <%= _("Mostrando solo los movimientos que hubo después del último cierre de caja") %>.
+    </b>
+    <%= link_to _("volver a todos los movimientos"), params.reject{|k,v| k =~ /active_only/ } %>
+  </div>
+<% end %>
