@@ -9,7 +9,7 @@
       <% %w(sale installment enrollment).each do |nested_resource_type| %>
           <% f.object.send("#{nested_resource_type}_ids").each_with_index do |nested_resource_id, index| %>
             <div class="control-group controls">
-              <%= link_to "#{nested_resource_type}##{nested_resource_id}",
+              <%= _("vinculado a ") %><%= link_to "#{nested_resource_type}##{nested_resource_id}",
                           send("business_#{nested_resource_type}_path",
                                @business,nested_resource_id),
                           target: "_blank" %>

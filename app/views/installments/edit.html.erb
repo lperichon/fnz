@@ -3,7 +3,9 @@
 
 <h2><%= t('installments.edit.title') %></h2>
 
-<%= render :partial => 'form', :locals => {:form_url => business_membership_installment_path(@business, @membership, @installment)} %>
+<%= render :partial => 'form', :locals => {:form_url => business_installment_path(@business, @installment)} %>
 
-<%= link_to t('actions.show'), business_membership_installment_path(@business, @membership, @installment) %> |
-<%= link_to t('actions.back'), :back %>
+<p>
+<%= link_to _("volver"), business_installment_path(@business, @installment) %>
+</p>
+<%= render 'footer_navigation' %>
