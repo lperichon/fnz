@@ -53,6 +53,15 @@ class Business < ActiveRecord::Base
     end
   end
 
+  def self.smart_find(id_or_padma_id)
+    param_is_padma_id = (false if Float(id_or_padma_id) rescue true)
+    if param_is_padma_id
+      self.get_by_padma_id(id_or_padma_id)
+    else
+      self.find(id_or_padma_id)
+    end
+  end
+
   def self.get_by_padma_id(padma_id)
     b = self.find_by_padma_id(padma_id)
     if b.nil?

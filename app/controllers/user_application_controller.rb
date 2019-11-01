@@ -17,7 +17,7 @@ class UserApplicationController < ApplicationController
 
   def set_current_business
     if params[:business_id]
-      Business.current = Business.find(params[:business_id])
+      Business.current = Business.smart_find(params[:business_id])
     end
   end
 
