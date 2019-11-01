@@ -19,7 +19,7 @@ class SsoSessionsController < ApplicationController
     st = SsoToken.find params[:sso_token]
     if st && !st.account_name.blank? && !st.username.blank?
 
-      user = User.find_or_create_by_drc_uid(st.username)
+      user = User.create_or_update_from_sso(st.username)
       sign_in(user)
 
       if params[:destination].blank?

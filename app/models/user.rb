@@ -54,5 +54,25 @@ class User < ActiveRecord::Base
   def admin?
     self.has_role? :admin
   end
+
+  def self.create_or_update_from_sso(username)
+    lu = self.find_by_drc_uid(username)
+    pu = PadmaUser.find username
+    if pu
+      if lu
+        lu.update_attributes(
+          email: pu.email,
+          name: pu.full_name
+        )
+      else
+        lu = self.create(
+          drc_uid: pu.username,
+          email: pu.email,
+          name: pu.full_name
+        )
+      end
+    end
+    lu
+  end
   
 end
