@@ -79,7 +79,7 @@ class InstallmentsController < UserApplicationController
   # PUT /accounts/1
   # PUT /accounts/1.json
   def update
-    @installment = @context.find(params[:id])
+    @installment = @context.readonly(false).find(params[:id]) # readonly for nested_attributes changes to work. eg. unlinking installment
 
     respond_to do |format|
       if @installment.update_attributes(params[:installment])
