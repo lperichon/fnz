@@ -33,10 +33,11 @@ $(document).ready ->
   $(".students.nav li").popover()
   $(".installment-value").popover({html: true})
 
-  $('#list-transactions-modal').on 'show', (event) =>
-      console.log(event)
-      name = $(this).data('modal').options.person
-      $(this).find('.person').html(name)
+  # obsolete ????
+  #$('#list-transactions-modal').on 'show', (event) =>
+  #    console.log(event)
+  #    name = $(this).data('modal').options.person
+  #    $(this).find('.person').html(name)
 
   $(".table.memberships tr").hover (->
     contact_id = $(this).attr("data-contact-id")

@@ -17,6 +17,8 @@ class InstallmentsController < UserApplicationController
   def edit
     @installment = @context.find(params[:id])
   	date = @installment.due_on
+
+    # transactions available to link to installment
   	@transactions = @business.transactions.credits.where {(transaction_at.gteq(date - 1.month)) & (transaction_at.lteq(date + 1.month))}.order("transaction_at DESC")
   end
 
