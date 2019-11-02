@@ -83,7 +83,7 @@ class InstallmentsController < UserApplicationController
 
     respond_to do |format|
       if @installment.update_attributes(params[:installment])
-        format.html { redirect_to business_membership_installment_path(@business, @membership, @installment), notice: 'Installment was successfully updated.' }
+        format.html { redirect_to business_installment_path(@business, @installment), notice: _("Cuota actualizada") }
         format.js {}
         format.json { respond_with_bip(@installment) }
       else
