@@ -129,7 +129,7 @@ class Transaction < ActiveRecord::Base
           # find installments and link
           installment = Installment.for_contact(contact_id)
                                    .on_business(business_id)
-                                   .on_month(transaction_at)
+                                   .on_month(report_at.nil?? transaction_at : report_at ) # fetch installment of report month first, or of transaction month
                                    .first
           if installment
             if agent_id.blank? && installment.agent_id
