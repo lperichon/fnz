@@ -1,5 +1,7 @@
 class TransactionImport < Import
-  has_and_belongs_to_many :transactions, :join_table => "imports_transactions", :foreign_key => "import_id"
+  has_and_belongs_to_many :transactions,
+                          join_table: "imports_transactions",
+                          foreign_key: "import_id"
   alias_method :imported_records, :transactions
 
   validates_attachment :upload, :presence => true, :content_type => { :content_type => "text/csv" }
@@ -11,7 +13,7 @@ class TransactionImport < Import
   end
 
   def destroy_transactions
-    transactions.destroy_all
+    transactions.readonly(false).destroy_all
   end
 
 end

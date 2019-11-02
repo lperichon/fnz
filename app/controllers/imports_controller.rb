@@ -53,7 +53,7 @@ class ImportsController < UserApplicationController
   # DELETE /imports/1.json
   def destroy
     @import = @business.imports.find(params[:id])
-    @import.destroy
+    @import.reload.destroy
 
     respond_to do |format|
       format.html { redirect_to business_imports_url(@business) }
