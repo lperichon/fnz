@@ -1,3 +1,6 @@
+<% content_for :head do %>
+  <meta http-equiv="refresh" content="<%= 15.minutes %>" >
+<% end %>
 <% content_for :sidebar do %>
     <%= render :partial => 'businesses/sidebar' %>
 <% end %>
