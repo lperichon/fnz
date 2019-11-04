@@ -21,15 +21,25 @@
       </div>
     </div>
 
+  <div class="control-group" data-controller="calculator">
+    <label class="control-label"><%= _("Establecer balance a") %></label>
+    <div class="controls">
+      <input type="text" data-target="calculator.formula"
+                         data-action="keyup@window->calculator#calculateResult"
+                         class="calculatorFormula"
+                         ></input> 
+      =
+      <input type="text" data-target="calculator.result" class="calculatorResult" disabled></input> 
     <%= f.input :balance,
-                label: _("Establecer balance a"),
+                as: :hidden,
                 input_html: {
-                  type: "number",
                   data: {
-                    target: "balance_modal.balance",
+                    target: "balance_modal.balance calculator.result",
                     action: "keyup@window->balance_modal#updateDifference"
                   }
                 } %>
+    </div>
+  </div>
 
     <div class="control-group string optional">
       <label class="string optional control-label"><%= _("Diferencia") %></label>
