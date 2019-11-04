@@ -878,6 +878,7 @@ es:
       default: '%A, %d de %B de %Y %H:%M:%S %z'
       long: '%d de %B de %Y %H:%M'
       short: '%d de %b %H:%M'
+      month: '%m/%Y'
     pm: pm
   validates_timeliness:
     error_value_formats:
