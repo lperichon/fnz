@@ -7,7 +7,18 @@
 
 <%= f.input :description %>
 
-<%= f.input :amount, type: "number" %>
+<div class="control-group" data-controller="calculator">
+  <label class="control-label"><%= _("Valor") %></label>
+  <div class="controls">
+    <input type="text" data-target="calculator.formula"
+                       data-action="keyup@window->calculator#calculateResult"
+                       class="calculatorFormula"
+                       ></input> 
+    =
+    <input type="text" data-target="calculator.result" class="calculatorResult" disabled></input> 
+    <%= f.input :amount, as: :hidden, input_html: { data: { target: "calculator.result" }} %>
+  </div>
+</div>
 
 <%= f.association :source, :collection => @business.accounts.order("name"), :prompt => t('transactions.fields.source_prompt') %>
 

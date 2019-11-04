@@ -1,0 +1,9 @@
+.calculatorFormula {
+  width: 31%;
+  text-align: right;
+}
+
+.calculatorResult {
+  width: 15%;
+  text-align: left;
+}
