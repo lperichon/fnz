@@ -11,7 +11,7 @@
       } catch (err) {
         // do nothing
       }
-      if(result){
+      if(result !== null){
         this.resultTargets.forEach((i) => {
           i.value = result;
         });
