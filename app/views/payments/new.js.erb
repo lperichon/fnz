@@ -2,6 +2,9 @@ $('body').append("<%= escape_javascript(render(:partial => "new_modal"))%>");
 $('#new-payment-modal').modal({
     keyboard: false
 });
+$('#new-payment-modal').on("hide.bs.modal", function(){
+  $('#new-payment-modal').remove();
+});
 $("#new_transaction #transaction_tag_ids").chosen({
     no_results_text: "No results matched",
     create_option: function(term){
