@@ -96,6 +96,21 @@ class TransactionsController < UserApplicationController
     end
   end
 
+  def batch_edit
+    respond_to do |format|
+      format.js
+    end
+  end
+  def batch_update
+    @transactions = @context.where(id: params[:ids])
+    @success = true
+    #@transactions.find_each{|t| @success &&= t.update_attributes(transaction_attributes_for_update) } # trigger callbacks
+    respond_to do |format|
+      format.js 
+    end
+  end
+
+
   # DELETE /accounts/1
   # DELETE /accounts/1.json
   def destroy

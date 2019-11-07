@@ -9,10 +9,12 @@
     <%= render :partial => 'secondary_navigation' %>
 <% end %>
 
+<%= form_tag batch_edit_business_transactions_path(@business), method: :get, remote: true do %>
 <div class="actions">
   <% if can? :create, @business.imports.build %>
     <%= link_to content_tag(:i, "", :class => "icon-upload") + I18n.t('transactions.index.import'), new_business_import_path(@business), :class => "btn" %>
   <% end %>
+  <%= submit_tag _("Editar"), class: "btn" %>
   <%= link_to content_tag(:i, "", :class => "icon-bar-chart") + I18n.t('transactions.index.stats'), stats_business_transactions_path(@business, :start_date => @start_date.to_date, :end_date => @end_date.to_date), :remote => true, :class => "btn" %>
 
   <div class="pull-right">
@@ -28,7 +30,6 @@
   </span>
 
   <%= render "balance_title" %>
- 
 </div>
 
 <h3><%= I18n.t('transactions.index.title') %></h3>
@@ -41,6 +42,7 @@
 <div id="pagination">
 <%= paginate @transactions %>
 </div>
+<% end %>
 
 <% if params[:active_only] %>
   <div class="alert alert-notice">

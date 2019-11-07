@@ -7,6 +7,11 @@
       <% acum += (transaction.type=="Credit")? transaction.amount : ((transaction.type=="Debit")? -transaction.amount : 0) %>
     <% end %>
     <tr data-id="<%= transaction.id %>">
+      <td>
+        <%= check_box_tag "ids[]",
+                          transaction.id,
+                          false %>
+      </td>
       <%= render :partial => 'transactions_table_item', :locals => {:transaction => transaction} %>
       <td>
         <%= yield transaction %>

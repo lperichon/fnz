@@ -35,7 +35,11 @@ Fnz::Application.routes.draw do
       resources :balance_checks
     end
     resources :transactions do
-      get :stats, :on => :collection
+      collection do
+        get :batch_edit
+        put :batch_update
+        get :stats
+      end
     end
     resources :debits, :controller => 'transactions', :only => [:index, :update]
     resources :credits, :controller => 'transactions', :only => [:index, :update]
