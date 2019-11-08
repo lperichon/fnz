@@ -1,3 +1,6 @@
+<% if params[:ids].blank? %>
+    alert("<%= _("Seleccioná algunas transacciones") %>");
+<% else %>
 $('#batch-edit-transaction-modal').remove();
 $('body').append("<%= escape_javascript(render(partial: "transactions/batch_edit_modal"))%>");
 $('#batch-edit-transaction-modal').modal({
@@ -16,3 +19,4 @@ $("#edit_transaction #transaction_tag_ids").chosen({
     },
     persistent_create_option: true
 });
+<% end %>
