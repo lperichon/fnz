@@ -1,9 +1,9 @@
 $('#new-transaction-modal').modal('hide').remove();
 
 if ($(".nested.transactions.table tbody").length > 0) {
-  $('.nested.transactions.table tbody').prepend("<tr data-id=<%= @transaction.id %>><%= escape_javascript render(:partial => 'application/transactions_table_item', :locals => {:transaction => @transaction}) %><td><%= escape_javascript link_to(content_tag(:i, '', :class => 'icon-remove'), '#', :class => 'remove-nested-transaction') %></td></tr>")
+  $('.nested.transactions.table tbody').prepend("<tr data-id='<%= @transaction.id %>'><%= escape_javascript render(:partial => 'application/transactions_table_item', :locals => {:transaction => @transaction}) %><td><%= escape_javascript link_to(content_tag(:i, '', :class => 'icon-remove'), '#', :class => 'remove-nested-transaction') %></td></tr>")
 } else if($(".transactions.table tbody").length > 0) {
-  <%= render partial: "append_transaction_on_index" %>
+    <%= render partial: "append_transaction_on_index" %>
 } else {
   window.location = '<%= business_transactions_path(@business) %>'
 }
