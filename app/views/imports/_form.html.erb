@@ -7,7 +7,7 @@
       <%= t(".account_name") %>,<%= t(".date") %>, <%= t(".amount") %>, <%= _("descripción") %>, <%= t(".category") %>, <%= t(".agent_padma_id") %>, <%= t(".contact_name") %>, <%= t(".state") %>
     </p>
 
-		<%= f.input :account_id, as: :select, :collection => @business.accounts, wrapper_html: { class: "field santander mercadopago" } %>
+		<%= f.input :account_id, as: :select, :collection => @business.accounts.order("name"), wrapper_html: { class: "field santander mercadopago" } %>
 
     <%= f.input :upload %></p>
 
