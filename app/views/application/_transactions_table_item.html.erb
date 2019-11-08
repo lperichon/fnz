@@ -1,4 +1,9 @@
 <% cache transaction do %>
+  <td>
+    <%= check_box_tag "ids[]",
+                      transaction.id,
+                      false %>
+  </td>
   <td><%= content_tag(:i, "", :class => "icon-" + transaction.type.downcase, :title => transaction.type) %></td>
   <td><%= content_tag(:i, "", :class => "icon-" + transaction.state, :title => transaction.state.titleize) %></td>
   <td><%= best_in_place transaction.becomes(Transaction), :description, :url => business_transaction_path(@business, transaction) %></td>
