@@ -14,9 +14,9 @@ class TransactionsController < UserApplicationController
       @context = @context.to_report_on_month(ref_date)
     else
       # List transactions that ocurred on that month or that are pending and ocurred before or that are reconciled on that month
-      @context = @context.where {(transaction_at.gteq start_date) & (transaction_at.lteq end_date) |
+      @context = @context.where {(transaction_at.gteq start_date.to_time) & (transaction_at.lteq end_date.to_time) |
                                 ((state.eq 'pending') & (transaction_at.lt start_date)) |
-                                ((state.eq 'reconciled') & (reconciled_at.gteq start_date) & (reconciled_at.lteq end_date))}
+                                ((state.eq 'reconciled') & (reconciled_at.gteq start_date.to_time) & (reconciled_at.lteq end_date.to_time))}
     end
     @transactions = @context.includes(:agent, :contact, :tags, :source, :business)
 
