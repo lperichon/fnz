@@ -42,15 +42,17 @@
     }
 
     toggleExtraOptions(){
-      var el = this.extraFieldsContainerTarget;
-      if(window.getComputedStyle(el).display == 'none'){
-        this.toggleButtonVerbTarget.innerHTML = this.toggleButtonVerbTarget.dataset.hideMsg;
-        el.style.display = "block";
-      } else {
-        this.toggleButtonVerbTarget.innerHTML = this.toggleButtonVerbTarget.dataset.showMsg;
-        el.style.display = "none";
+      if(this.hasExtraFieldsContainerTarget){
+        var el = this.extraFieldsContainerTarget;
+        if(window.getComputedStyle(el).display == 'none'){
+          this.toggleButtonVerbTarget.innerHTML = this.toggleButtonVerbTarget.dataset.hideMsg;
+          el.style.display = "block";
+        } else {
+          this.toggleButtonVerbTarget.innerHTML = this.toggleButtonVerbTarget.dataset.showMsg;
+          el.style.display = "none";
+        }
+        return el;
       }
-      return el;
     }
 
     updateColor(){
