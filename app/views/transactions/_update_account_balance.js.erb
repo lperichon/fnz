@@ -1,0 +1,3 @@
+if($(".account_<%= account.id %>_balance").length > 0){
+  $(".account_<%= account.id %>_balance").html("<%= number_to_currency(account.balance, unit: account.currency.symbol) %>");
+}

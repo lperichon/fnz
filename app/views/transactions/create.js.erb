@@ -9,13 +9,9 @@ if ($(".nested.transactions.table tbody").length > 0) {
 }
 
 <% if @transaction.source_id %>
-if($(".account_<%= @transaction.source_id %>_balance").length > 0){
-  $(".account_<%= @transaction.source_id %>_balance").html("<%= number_to_currency(@transaction.source.balance, unit: @transaction.source.currency.symbol) %>");
-}
+  <%= render partial: "update_account_balance", locals: { account: @transaction.source } %>
 <% end %>
 
 <% if @transaction.target_id %>
-if($(".account_<%= @transaction.target_id %>_balance").length > 0){
-  $(".account_<%= @transaction.target_id %>_balance").html("<%= number_to_currency(@transaction.target.balance, unit: @transaction.target.currency.symbol) %>");
-}
+  <%= render partial: "update_account_balance", locals: { account: @transaction.target } %>
 <% end %>

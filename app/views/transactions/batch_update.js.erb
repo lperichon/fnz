@@ -1,1 +1,12 @@
-alert("<%= @success %>");
+$('#batch-edit-transaction-modal').modal('hide').remove();
+
+<% @transactions.each do |transaction| %>
+  $('.transactions.table tr[data-id=<%= transaction.id %>]').html("<td><%= escape_javascript check_box_tag 'ids[]',transaction.id, false %></td><%= escape_javascript render(partial: 'application/transactions_table_item', locals: {transaction: transaction}) %> <td><%= escape_javascript link_to(content_tag(:i, '', class: 'icon-edit'), business_transaction_path(transaction.business, transaction)) %> <%= escape_javascript link_to(content_tag(:i, '', class: 'icon-trash'), business_transaction_path(transaction.business, transaction), confirm: _("¿Seguro que querés eliminar esta transacción? No podrá ser recuperada."), method: 'delete') %></td>");
+  <% if transaction.source_id %>
+    <%= render partial: "update_account_balance", locals: { account: transaction.source } %>
+  <% end %>
+
+  <% if transaction.target_id %>
+    <%= render partial: "update_account_balance", locals: { account: transaction.target } %>
+  <% end %>
+<% end %>

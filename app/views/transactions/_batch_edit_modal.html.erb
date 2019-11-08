@@ -25,10 +25,6 @@
       <%= f.input :reconciled_at, as: :date_time_picker %>
     </span>
 
-    <%= f.input :report_at, as: :date_picker %>
-
-    <%= f.input :tag_ids, as: :select, collection: @business.tags, input_html: {class: "chosen", 'data-placeholder' => t('transactions.fields.tags_placeholder')} %>
-
     <div class="modal-footer">
       <%= link_to _("Cerrar"), "#", class: "btn", "data-dismiss" => "modal" %>
       <%= f.button :submit, _("Actualizar transacciones"),  class: "btn btn-primary" %>
