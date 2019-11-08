@@ -2,7 +2,7 @@
   <td>
     <%= check_box_tag "ids[]",
                       transaction.id,
-                      params[:ids].present?? transaction.id.to_s.in?(params[:ids]) : false %>
+                      false %>
   </td>
   <td><%= content_tag(:i, "", :class => "icon-" + transaction.type.downcase, :title => transaction.type) %></td>
   <td><%= content_tag(:i, "", :class => "icon-" + transaction.state, :title => transaction.state.titleize) %></td>
