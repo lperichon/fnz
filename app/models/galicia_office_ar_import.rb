@@ -12,6 +12,10 @@ class GaliciaOfficeArImport < TransactionImport
     	upload.url
     end
     columns = nil
+
+    backuped_timezone = Time.zone
+    Time.zone = business.time_zone
+
     begin
       CSV.parse(open(path,"r:ISO-8859-1"),col_sep: ";") do |row|
         columns = row.size
@@ -57,6 +61,8 @@ class GaliciaOfficeArImport < TransactionImport
       end
       self.update_attribute(:errors_csv, errCSV)
     end
+
+    Time.zone = backuped_timezone
 
     return errs.empty?
   end
