@@ -1,0 +1,37 @@
+<div id="batch-edit-transaction-modal" class="modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3><%= _("Editar transacciones") %></h3>
+  </div>
+  <%= simple_form_for(@transaction,
+                      url: batch_update_business_transactions_path(@business, ids: params[:ids]),
+                      validate: true,
+                      method: :put,
+                      remote: true,
+                      html: {class: 'form-horizontal', data: { controller: "transaction_form" } }) do |f| %>
+    <div class="alert alert-notice">
+      <p>
+        <%= _("Los campos vacíos seran ignorados") %>.
+      </p>
+    </div>
+
+    <%= f.input :state,
+                as: :select,
+                collection: Transaction.available_states.map{|s| [t(".state_options.#{s}"),s]},
+                input_html: { data: { target: "transaction_form.stateField",
+                                      action: "transaction_form#updateFormFields" } } %>
+
+    <span class="pending_field" style="display:none;">
+      <%= f.input :reconciled_at, as: :date_time_picker %>
+    </span>
+
+    <%= f.input :report_at, as: :date_picker %>
+
+    <%= f.input :tag_ids, as: :select, collection: @business.tags, input_html: {class: "chosen", 'data-placeholder' => t('transactions.fields.tags_placeholder')} %>
+
+    <div class="modal-footer">
+      <%= link_to _("Cerrar"), "#", class: "btn", "data-dismiss" => "modal" %>
+      <%= f.button :submit, _("Actualizar transacciones"),  class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

@@ -12,7 +12,7 @@
                           transaction.id,
                           false %>
       </td>
-      <%= render :partial => 'transactions_table_item', :locals => {:transaction => transaction} %>
+      <%= render partial: 'transactions_table_item', locals: {transaction: transaction} %>
       <td>
         <%= yield transaction %>
       </td>

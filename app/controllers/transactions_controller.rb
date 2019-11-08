@@ -97,6 +97,7 @@ class TransactionsController < UserApplicationController
   end
 
   def batch_edit
+    @transaction = Transaction.new
     respond_to do |format|
       format.js
     end
@@ -104,7 +105,7 @@ class TransactionsController < UserApplicationController
   def batch_update
     @transactions = @context.where(id: params[:ids])
     @success = true
-    #@transactions.find_each{|t| @success &&= t.update_attributes(transaction_attributes_for_update) } # trigger callbacks
+    @transactions.find_each{|t| @success &&= t.update_attributes(transaction_attributes_for_batch_update) } # trigger callbacks
     respond_to do |format|
       format.js 
     end
@@ -147,6 +148,11 @@ class TransactionsController < UserApplicationController
       params[:transaction] = params.delete(:debit)
     end
     params[:transaction]
+  end
+
+  def transaction_attributes_for_batch_update
+    # TODO remove blanks
+    params[:transaction].reject{|k,v| v.blank? }
   end
 
   def get_context
