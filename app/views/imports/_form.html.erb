@@ -1,5 +1,5 @@
 <%= simple_form_for(@import, :url => form_url, :validate => true) do |f| %>
-		<%= f.input :type, as: :select, :collection => [["Transactions CSV", "TransactionImport"], ["Santander Rio Argentina", "SantanderRioArImport"], ["Mercadopago Argentina", "MercadopagoImport"]], include_blank: false %>
+		<%= f.input :type, as: :select, :collection => [["Transactions CSV", "TransactionImport"], ["Santander Rio Argentina", "SantanderRioArImport"], ["Mercadopago Argentina", "MercadopagoImport"], ["Galicia Office Argentina","GaliciaOfficeArImport"]], include_blank: false %>
     
     <!-- <a href="#" class="field transaction">Descargá un ejemplo</a> -->
     <p class="field transaction">

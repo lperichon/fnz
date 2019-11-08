@@ -5,7 +5,7 @@ $(document).ready ->
     if val == "TransactionImport"
       $(".field").hide()
       $(".transaction.field").show()
-    else if val == "SantanderRioArImport" || val =="MercadopagoImport"
+    else if val == "SantanderRioArImport" || val =="MercadopagoImport" || val == "GaliciaOfficeArImport"
       $(".field").hide()
       $(".santander.field").show()
   
@@ -13,6 +13,6 @@ $(document).ready ->
   if val == "TransactionImport"
     $(".field").hide()
     $(".transaction.field").show()
-  else if val == "SantanderRioArImport" || val =="MercadopagoImport"
+  else if val == "SantanderRioArImport" || val =="MercadopagoImport" || val == "GaliciaOfficeArImport"
     $(".field").hide()
     $(".santander.field").show()
