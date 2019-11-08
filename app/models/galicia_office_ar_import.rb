@@ -63,7 +63,7 @@ class GaliciaOfficeArImport < TransactionImport
 
   def handle_row(business, row)
     transaction = Transaction.new
-    type = (row[3].to_i == 0)? "Credit" : "Debit"
+    type = (row[3].to_f == 0)? "Credit" : "Debit"
     transaction.attributes = {
       business_id: business.id,
       type: type,
