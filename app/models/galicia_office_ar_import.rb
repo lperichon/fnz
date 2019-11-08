@@ -68,7 +68,7 @@ class GaliciaOfficeArImport < TransactionImport
       business_id: business.id,
       type: type,
       source_id: account.id,
-      transaction_at: row[0],
+      transaction_at: row[0].to_date.to_time, # first to date for timezone not to shift one day behind
       amount: BigDecimal.new(row[(type=="Debit")? 3 : 4].gsub(",",".")),
       description: "#{row[1]} #{row[10]}",
       creator_id: business.owner_id,
