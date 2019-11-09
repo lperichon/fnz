@@ -5,8 +5,8 @@
                       false %>
   </td>
   <td>
-    <%= content_tag(:i, "", class: "icon-" + transaction.state, title: transaction.state.titleize) if transaction.state != "created" %>
-    <%= content_tag(:i, "", class: "icon-" + transaction.type.downcase, title: transaction.type) %>
+    <%= content_tag(:i, "", class: "pull-left icon-" + transaction.state, title: transaction.state.titleize) if transaction.state != "created" %>
+    <%= content_tag(:i, "", class: "pull-right icon-" + transaction.type.downcase, title: transaction.type) %>
   </td>
   <td>
     <%= best_in_place transaction.becomes(Transaction), :description, :url => business_transaction_path(@business, transaction) %>
