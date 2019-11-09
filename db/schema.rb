@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20191109160312) do
+ActiveRecord::Schema.define(:version => 20191109162116) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name",                                       :default => "",  :null => false
@@ -141,6 +141,7 @@ ActiveRecord::Schema.define(:version => 20191109160312) do
     t.string   "type"
     t.integer  "account_id"
     t.string   "description"
+    t.boolean  "archived"
   end
 
   create_table "imports_transactions", :force => true do |t|

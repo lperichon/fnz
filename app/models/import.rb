@@ -8,7 +8,7 @@ class Import < ActiveRecord::Base
   validates :business, :presence => true
   validates_attachment :upload, :presence => true
 
-  attr_accessible :upload, :business_id, :status, :type, :account_id, :description
+  attr_accessible :upload, :business_id, :status, :type, :account_id, :description, :archived
 
   before_create :set_defaults
 
