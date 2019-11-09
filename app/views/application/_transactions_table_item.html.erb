@@ -4,10 +4,16 @@
                       transaction.id,
                       false %>
   </td>
-  <td><%= content_tag(:i, "", :class => "icon-" + transaction.type.downcase, :title => transaction.type) %></td>
-  <td><%= content_tag(:i, "", :class => "icon-" + transaction.state, :title => transaction.state.titleize) %></td>
-  <td><%= best_in_place transaction.becomes(Transaction), :description, :url => business_transaction_path(@business, transaction) %></td>
-  <td><%= best_in_place transaction.becomes(Transaction), :amount, :url => business_transaction_path(@business, transaction), :display_with => :number_to_currency, :helper_options => {:unit =>  transaction.source.currency.symbol} if transaction.source %></td>
+  <td>
+    <%= content_tag(:i, "", class: "icon-" + transaction.state, title: transaction.state.titleize) if transaction.state != "created" %>
+    <%= content_tag(:i, "", class: "icon-" + transaction.type.downcase, title: transaction.type) %>
+  </td>
+  <td>
+    <%= best_in_place transaction.becomes(Transaction), :description, :url => business_transaction_path(@business, transaction) %>
+  </td>
+  <td>
+    <%= best_in_place transaction.becomes(Transaction), :amount, :url => business_transaction_path(@business, transaction), :display_with => :number_to_currency, :helper_options => {:unit =>  transaction.source.currency.symbol} if transaction.source %>
+  </td>
   <td>
     <%= best_in_place transaction.becomes(Transaction), :source_id, :as => :select, :collection => @business.accounts.order("name").map { |i| [i.id, i.name] } , :url => business_transaction_path(@business, transaction) %>
     <% unless transaction.target_id.nil? %>
