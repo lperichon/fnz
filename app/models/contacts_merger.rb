@@ -12,6 +12,7 @@ class ContactsMerger
       if father
         Membership.where(contact_id: son.id).update_all(contact_id: father.id)
         Sale.where(contact_id: son.id).update_all(contact_id: father.id)
+        Transaction.where(contact_id: son.id).update_all(contact_id: father.id)
         # TODO recalculate current memebership
         son.destroy
       else
