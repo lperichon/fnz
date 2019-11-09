@@ -9,6 +9,10 @@
     <%= render :partial => 'secondary_navigation' %>
 <% end %>
 
+<% content_for :top do %>
+  <button data-action="sidebar#toggleSideBar" data-target="sidebar.toggler" data-show-msg="<%= _("mostrar") %>" data-hide-msg="<%= _("ocultar") %>" class="btn"><span data-target="sidebar.togglerVerb"></span> <%= _("cuentas") %></button>
+<% end %>
+
 <%= form_tag batch_edit_business_transactions_path(@business), method: :get, remote: true do %>
 <div class="actions">
   <% if can? :create, @business.imports.build %>

@@ -24,7 +24,7 @@
         </div>
       </nav>
     </header>
-    <div id="main" role="main">
+    <div id="main" role="main" data-controller="sidebar">
       <div class="container-fluid">
         <div class="content">
            <div class="row-fluid">
@@ -35,18 +35,18 @@
           </div>
           <div class="row-fluid">
             <div class="span12">
-		  		<%= yield(:top) %>
-		  	</div>
+              <%= yield(:top) %>
+            </div>
           </div>
           <div class="row-fluid">
-            <div class="span3">
+            <div class="span3" data-target="sidebar.sidebar">
               <%= yield :sidebar %>
             </div>
-            <div class="span9">
+            <div class="span9" data-target="sidebar.body">
               <%= yield %>
             </div>
           </div>
-		  <%= yield(:bottom) %>
+          <%= yield(:bottom) %>
           <footer>
           </footer>
         </div>
