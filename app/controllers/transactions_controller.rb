@@ -98,6 +98,7 @@ class TransactionsController < UserApplicationController
 
   def batch_edit
     @transaction = Transaction.new
+    @transaction.state = ""
     respond_to do |format|
       format.js
     end
