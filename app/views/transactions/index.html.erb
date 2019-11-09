@@ -47,7 +47,7 @@
 <% if params[:active_only] %>
   <div class="alert alert-notice">
     <p>
-      <%= _("Mostrando solo los movimientos que hubo después del último cierre de caja") %>.<br/>
+      <%= _("Mostrando solo los movimientos que hubo después del último cierre de caja y que afectan al saldo") %>.<br/>
       <% if @account.last_balance_check %>
         <b><%= number_to_currency @account.last_balance_check.balance, unit: @account.currency.symbol %> @ <%= l @account.last_balance_check.checked_at, format: :short %></b>
       <% end %>
