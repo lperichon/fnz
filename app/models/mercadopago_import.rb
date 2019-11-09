@@ -96,6 +96,8 @@ class MercadopagoImport < TransactionImport
       "created"
     when "rejected"
       "pending"
+    when "in_process"
+      "pending"
     else 
       "pending"
     end
