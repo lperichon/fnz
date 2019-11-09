@@ -26,6 +26,8 @@ class Import < ActiveRecord::Base
     	upload.url
     end
 
+    backuped_timezone = Time.zone
+    Time.zone = business.time_zone
 
     columns = nil
     begin
@@ -66,6 +68,8 @@ class Import < ActiveRecord::Base
       end
       self.update_attribute(:errors_csv, errCSV)
     end
+
+    Time.zone = backuped_timezone
 
     return errs.empty?
   end
