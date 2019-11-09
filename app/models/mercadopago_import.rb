@@ -77,7 +77,7 @@ class MercadopagoImport < TransactionImport
     desc = ""
     desc << (value_for(row,"reason") || "")
     desc << " "
-    desc << (value_for(row,"counterpart_nickname") || "")
+    desc << (value_for(row,"counterpart_name") || "")
     desc << " - "
     desc << (value_for(row,"status") || "")
   end
