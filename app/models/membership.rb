@@ -14,7 +14,6 @@ class Membership < ActiveRecord::Base
   validates :ends_on, :presence => true
   validates_datetime :ends_on, :after => :begins_on
   validates :monthly_due_day, :numericality =>  {:greater_than => 0, :less_than => 29}
-  validate  :avoid_overlapping
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :contact_id, :business_id, :payment_type_id, :begins_on, :ends_on, :value, :closed_on, :vip, :external_id, :monthly_due_day, :name, :create_monthly_installments
@@ -107,18 +106,6 @@ class Membership < ActiveRecord::Base
   end
 
   private
-
-  def avoid_overlapping
-    return if contact.nil? || begins_on.nil? || ends_on.nil?
-
-    if contact.memberships.where("(begins_on BETWEEN :so AND :eo) OR (ends_on BETWEEN :so AND :eo) OR (begins_on <= :so AND ends_on >= :eo)",
-                              so: begins_on,
-                              eo: ends_on)
-                         .exists?
-      errors.add(:begins_on, _("Se superpone con otra membersia de este contacto"))
-      errors.add(:ends_on, _("Se superpone con otra membersia de este contacto"))
-    end
-  end
 
   def create_the_monthly_installments
     i = 0
