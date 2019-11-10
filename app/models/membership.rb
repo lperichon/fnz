@@ -110,13 +110,16 @@ class Membership < ActiveRecord::Base
 
   def avoid_overlapping
     return if contact.nil? || begins_on.nil? || ends_on.nil?
-
-    if contact.memberships.where("(begins_on BETWEEN :so AND :eo) OR (ends_on BETWEEN :so AND :eo) OR (begins_on <= :so AND ends_on >= :eo)",
-                              so: begins_on,
-                              eo: ends_on)
-                         .where("id != ?", id)
-                         .exists?
+    if contact.memberships
+              .where("id != ?", id)
+              .where("? BETWEEN begins_on AND ends_on", begins_on)
+              .exists?
       errors.add(:begins_on, _("Se superpone con otra membersia de este contacto"))
+    end
+    if contact.memberships
+              .where("id != ?", id)
+              .where("? BETWEEN begins_on AND ends_on", ends_on)
+              .exists?
       errors.add(:ends_on, _("Se superpone con otra membersia de este contacto"))
     end
   end
