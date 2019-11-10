@@ -114,6 +114,7 @@ class Membership < ActiveRecord::Base
     if contact.memberships.where("(begins_on BETWEEN :so AND :eo) OR (ends_on BETWEEN :so AND :eo) OR (begins_on <= :so AND ends_on >= :eo)",
                               so: begins_on,
                               eo: ends_on)
+                         .where("id != ?", id)
                          .exists?
       errors.add(:begins_on, _("Se superpone con otra membersia de este contacto"))
       errors.add(:ends_on, _("Se superpone con otra membersia de este contacto"))
