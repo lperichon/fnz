@@ -16,7 +16,7 @@
                        ></input> 
     =
     <input type="text" data-target="calculator.result" class="calculatorResult" disabled></input> 
-    <%= f.input :amount, as: :hidden, input_html: { data: { target: "calculator.result" }} %>
+    <%= f.input :amount, as: :hidden, input_html: { data: { target: "calculator.result calculator.initialValue" }} %>
   </div>
 </div>
 

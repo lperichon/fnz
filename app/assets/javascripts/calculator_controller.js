@@ -1,7 +1,18 @@
 (()=>{
   stimulusApplication.register("calculator", class extends Stimulus.Controller {
     static get targets(){
-      return ["formula","result"];
+      return ["formula","result","initialValue"];
+    }
+
+    connect(){
+      this.initValue();
+    }
+
+    initValue(){
+      if(this.hasInitialValueTarget){
+        this.formulaTarget.value = this.initialValueTarget.value;
+        this.calculateResult();
+      }
     }
 
     calculateResult(){
