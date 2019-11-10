@@ -97,6 +97,7 @@ class MembershipStats
         @memberships = scope.where(id: @membership_filter.results
                                                          .includes(:memberships)
                                                          .collect {|c| c.send(ids_method) }
+                                                         .flatten
                                   )
       end
     end
