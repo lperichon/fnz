@@ -5,7 +5,18 @@
         <%= f.input :padma_contact_id, :as => :padma_contact %>
     <% end %>
 
-    <%= f.input :value %>
+    <div class="control-group" data-controller="calculator">
+      <label class="control-label"><%= _("Valor") %></label>
+      <div class="controls">
+        <input type="text" data-target="calculator.formula"
+                           data-action="keyup@window->calculator#calculateResult"
+                           class="calculatorFormula"
+                           ></input> 
+        =
+        <input type="text" data-target="calculator.result" class="calculatorResult" disabled></input> 
+        <%= f.input :value, as: :hidden, input_html: { data: { target: "calculator.result calculator.initialValue" }} %>
+      </div>
+    </div>
 
     <%= f.input :name, :input_html => {
       'placeholder' => t('memberships.form.name_placeholder')
