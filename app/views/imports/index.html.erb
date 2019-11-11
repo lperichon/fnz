@@ -2,9 +2,11 @@
     <%= render :partial => 'businesses/edit_sidebar' %>
 <% end %>
 
-<div class="actions">
-  <%= link_to content_tag(:i, "", class: "icon-upload") +_("Nueva importación"), new_business_import_path(@business), class: "btn pull-right" %>
-</div>
+<% content_for :secondary_navigation do %>
+  <li class="pull-right">
+    <%= link_to content_tag(:i, "", class: "icon-upload") +_("Nueva importación"), new_business_import_path(@business) %>
+  </li>
+<% end %>
 
 <h3><%= _("Importaciones") %></h3>
 <table class="table table-striped table-hover table-condensed table-bordered" 
