@@ -21,7 +21,7 @@
   </td>
   <td>
     <%= best_in_place transaction.becomes(Transaction), :source_id, :as => :select, :collection => @business.accounts.order("name").map { |i| [i.id, i.name] } , :url => business_transaction_path(@business, transaction) %>
-    <% if transaction.type == "Transfer" %>
+    <% if transaction.is_a?(Transfer) %>
       <br/>-><br/> 
       <%= best_in_place_if transaction.is_a?(Transfer), transaction.becomes(Transaction), :target_id, :as => :select, :collection => @business.accounts.order("name").map { |i| [i.id, i.name] } , :url => business_transaction_path(@business, transaction)%>
     <% end %>
