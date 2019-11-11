@@ -71,6 +71,45 @@
       <%= m.begins_on %> - <%= m.ends_on %>
     </td>
     <td>
+    </td>
+    <td>
+      <%= m.value %>
+    </td>
+  </tr>
+<% end %>
+  </tbody>
+</table>
+
+<h1>Installments pagos</h1>
+<table class="table table-striped table-hover table-condensed table-bordered">
+  <thead>
+    <tr>
+      <th> id </th>
+      <th> contact </th>
+      <th> nombre membresia </th>
+      <th> periodo </th>
+      <th></th>
+      <th> valor membresia </th>
+    </tr>
+  </thead>
+  <tbody>
+<% @stats.paid_installments_scope.joins(:contact).order("contacts.name").each do |m| %>
+  <tr>
+    <td>
+      <%= m.id %>
+    </td>
+    <td>
+      <%= m.contact.name %>
+    </td>
+    <td>
+      <%= m.name %>
+    </td>
+    <td>
+      <%= m.begins_on %> - <%= m.ends_on %>
+    </td>
+    <td>
+    </td>
+    <td>
       <%= m.value %>
     </td>
   </tr>
