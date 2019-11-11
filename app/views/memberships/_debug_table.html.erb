@@ -1,0 +1,57 @@
+  <%
+    @stats = MembershipStats.new(business: @business,
+                                 year: params[:year].to_i, month: params[:month].to_i,
+                                 membership_filter: @membership_filter)
+  %>
+
+<h1>Proyección installments</h1>
+<table class="table table-striped table-hover table-condensed table-bordered">
+
+<% @stats.is_scope.each do |m| %>
+  <tr>
+    <td>
+      <%= m.id %>
+    </td>
+    <td>
+      <%= m.contact.name %>
+    </td>
+    <td>
+      <%= m.name %>
+    </td>
+    <td>
+      <%= m.begins_on %> - <%= m.ends_on %>
+    </td>
+    <td>
+      suma installments<br>
+      <%= @stats.is_scope.where(id: m.id).sum("installments.value") %>
+    </td>
+    <td>
+      valor membresia<br>
+      <%= @stats.is_scope.where(id: m.id).sum("installments.value") %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<h1>Proyección membresias sin installment</h1>
+<table class="table table-striped table-hover table-condensed table-bordered">
+<% @stats.ms_scope.each do |m| %>
+  <tr>
+    <td>
+      <%= m.id %>
+    </td>
+    <td>
+      <%= m.contact.name %>
+    </td>
+    <td>
+      <%= m.name %>
+    </td>
+    <td>
+      <%= m.begins_on %> - <%= m.ends_on %>
+    </td>
+    <td>
+      <%= m.value %>
+    </td>
+  </tr>
+<% end %>
+</table>
