@@ -1,13 +1,37 @@
 module MembershipsHelper
 
+  def duration_in_words(membership)
+    distance_of_time_in_words(membership.ends_on,membership.begins_on)
+  end
+
   def attributes_for_duplicate(membership)
+
+    new_ends_on = membership.ends_on+(membership.ends_on-membership.begins_on)+1.day
+    if membership.ends_on == membership.ends_on.end_of_month
+      new_ends_on = nearest_end_of_month(membership.ends_on)
+    end
+
     {
       contact_id: membership.contact_id,
       name: membership.name,
       value: membership.value,
       payment_type_id: membership.payment_type_id,
-      monthly_due_day: membership.monthly_due_day
+      monthly_due_day: membership.monthly_due_day,
+      begins_on: membership.ends_on+1.day,
+      ends_on: new_ends_on
     }
+  end
+
+  def nearest_end_of_month(date)
+    tolerance = 5.days # days
+    eo = date.end_of_month
+    if date + tolerance < eo
+      # if casting moves date more than tolerance days ahead
+      # return previous end of month
+      (date - 1.month).end_of_month
+    else
+      eo
+    end
   end
 
   def suggested_agent_id_for(business,membership)

@@ -20,6 +20,7 @@
     <td><%= Membership.human_attribute_name(:payment_type) %></td>
     <td><%= Installment.human_attribute_name(:name) %></td>
   	<td><%= Installment.human_attribute_name(:value) %></td>
+    <td><%= _("Duración") %></td>
   	<td></td>
   </thead>
   <tbody>
@@ -29,6 +30,9 @@
    		<td><%= membership.payment_type.name unless membership.payment_type.blank? %></td>
    		<td><%= membership.name unless membership.name.blank? %></td>
    		<td><%= membership.value %></td>
+      <td>
+        <%= duration_in_words(membership) %>
+      </td>
    		<td>
    			<%= link_to content_tag(:i, "", :class => "icon-eye-open"), business_membership_path(@business, membership) %>
         	<%= link_to content_tag(:i, "", :class => "icon-edit"), edit_business_membership_path(@business, membership) %>
