@@ -45,10 +45,14 @@ class MembershipStats
         is = is.where(installments: {agent_id: agent.id})
       end
     end
-    is.select("SUM(installments.value) AS sum")
+    #is.select("SUM(installments.value) AS sum") # not necessary, L61 makes sum
 
-    ms = memberships.wout_installments_due_on_month(ref_date)
-                    .valid_on(ref_date)
+    ms = memberships
+    if is.count > 0
+      ms = memberships.where("memberships.id not in (?)", is.pluck("installments.membership_id"))  #wout_installments_due_on_month(ref_date)
+    end
+    ms = ms.valid_on(ref_date)
+
     if agent
       if agent == ""
         ms = ms.joins(:contact).where(contacts: { padma_teacher: nil })
@@ -56,7 +60,7 @@ class MembershipStats
         ms = ms.joins(:contact).where(contacts: { padma_teacher: agent.padma_id })
       end
     end
-    ms.select("SUM(memberships.value) AS sum")
+    #ms.select("SUM(memberships.value) AS sum") # not necessary, L61 makes sum
 
     total_sum = is.sum("installments.value") + ms.sum("memberships.value")
     total_avg = total_sum / (is.count + ms.count)
