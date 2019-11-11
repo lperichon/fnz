@@ -18,7 +18,7 @@
   </thead>
 
   <tbody>
-<% @stats.is_scope.each do |m| %>
+<% @stats.is_scope.joins(:contact).order("contacts.name").each do |m| %>
   <tr>
     <td>
       <%= m.id %>
@@ -56,7 +56,7 @@
     </tr>
   </thead>
   <tbody>
-<% @stats.ms_scope.each do |m| %>
+<% @stats.ms_scope.joins(:contact).order("contacts.name").each do |m| %>
   <tr>
     <td>
       <%= m.id %>
