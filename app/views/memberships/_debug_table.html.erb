@@ -29,7 +29,7 @@
       <%= m.contact.name %>
     </td>
     <td>
-      <%= installment_for(debug_date,m.installments).agent.name %>
+      <%= installment_for(debug_date,m.installments).agent.try :name %>
     </td>
     <td>
       <%= m.name %>
