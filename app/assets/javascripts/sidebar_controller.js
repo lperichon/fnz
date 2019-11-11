@@ -6,11 +6,13 @@
     }
 
     connect(){
-      // sideBar starts visible
-      this.togglerVerbTarget.innerHTML = this.togglerTarget.dataset.hideMsg;
+      if(this.hasTogglerVerbTarget && this.hasTogglerTarget){
+        // sideBar starts visible
+        this.togglerVerbTarget.innerHTML = this.togglerTarget.dataset.hideMsg;
 
-      if(this.readCookieState() == "hidden"){
-        this.hideSideBar();
+        if(this.readCookieState() == "hidden"){
+          this.hideSideBar();
+        }
       }
     }
 
