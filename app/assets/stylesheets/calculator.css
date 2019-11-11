@@ -7,3 +7,9 @@
   width: 15%;
   text-align: left;
 }
+
+.membershipValue .calculatorResult,
+.membershipValue .calculatorFormula {
+  max-width: 93px;
+}
+
