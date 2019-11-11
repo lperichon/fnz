@@ -33,6 +33,14 @@ class MembershipStats
   end
 
   def all_including_projections(agent=nil)
+    is = is_scope(agent)
+    ms = ms_scope(agent)
+    total_sum = is.sum("installments.value") + ms.sum("memberships.value")
+    total_avg = total_sum / (is.count + ms.count)
+
+    { sum: total_sum, avg: total_avg }
+  end
+  def is_scope(agent=nil)
     is = memberships.joins(:installments)
                .where("due_on >= :first_day_of_month AND due_on <= :last_day_of_month",
                          first_day_of_month: ref_date,
@@ -45,34 +53,34 @@ class MembershipStats
         is = is.where(installments: {agent_id: agent.id})
       end
     end
-    #is.select("SUM(installments.value) AS sum") # not necessary, L61 makes sum
+    is
+  end
+  def ms_scope(agent=nil)
+   ms = memberships
+   if is_scope(agent).count > 0
+     ms = memberships.where("memberships.id not in (?)", is_scope(agent).pluck("installments.membership_id"))  #wout_installments_due_on_month(ref_date)
+   end
+   ms = ms.valid_on(ref_date)
 
-    ms = memberships
-    if is.count > 0
-      ms = memberships.where("memberships.id not in (?)", is.pluck("installments.membership_id"))  #wout_installments_due_on_month(ref_date)
-    end
-    ms = ms.valid_on(ref_date)
-
-    if agent
-      if agent == ""
-        ms = ms.joins(:contact).where(contacts: { padma_teacher: nil })
-      else
-        ms = ms.joins(:contact).where(contacts: { padma_teacher: agent.padma_id })
-      end
-    end
-    #ms.select("SUM(memberships.value) AS sum") # not necessary, L61 makes sum
-
-    total_sum = is.sum("installments.value") + ms.sum("memberships.value")
-    total_avg = total_sum / (is.count + ms.count)
-
-    { sum: total_sum, avg: total_avg }
+   if agent
+     if agent == ""
+       ms = ms.joins(:contact).where(contacts: { padma_teacher: nil })
+     else
+       ms = ms.joins(:contact).where(contacts: { padma_teacher: agent.padma_id })
+     end
+   end
+   ms
   end
 
   def paid_installments
+    paid_installments_scope
+    .select("SUM(CASE WHEN ((installments.status IS NULL) OR installments.status = 'overdue' OR installments.status = 'incomplete') AND installments.balance < installments.value THEN installments.balance ELSE installments.value END) AS sum, AVG(CASE WHEN ((installments.status IS NULL) OR installments.status = 'overdue' OR installments.status = 'incomplete') AND installments.balance < installments.value THEN installments.balance ELSE installments.value END) AS avg")
+  end
+
+  def paid_installments_scope
     memberships.joins(:installments)
                .joins(:installments => :transactions)
                .where("transactions.report_at >= '#{ref_date.to_date.beginning_of_month}' AND transactions.report_at <= '#{ref_date.end_of_month}'")
-      .select("SUM(CASE WHEN ((installments.status IS NULL) OR installments.status = 'overdue' OR installments.status = 'incomplete') AND installments.balance < installments.value THEN installments.balance ELSE installments.value END) AS sum, AVG(CASE WHEN ((installments.status IS NULL) OR installments.status = 'overdue' OR installments.status = 'incomplete') AND installments.balance < installments.value THEN installments.balance ELSE installments.value END) AS avg")
   end
 
   def total_for_installments(agent=nil)
