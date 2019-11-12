@@ -1,0 +1,119 @@
+<h2><%= t('memberships.stats_modal.all_installments_tooltip') %></h2>
+
+<% acum = 0 %>
+<table class="table table-striped table-hover table-condensed table-bordered">
+  <thead>
+    <tr>
+      <th><%= _("Contacto") %></th>
+      <th><%= _("Instructor") %></th>
+      <th><%= _("Membresía") %></th>
+      <th><%= _("Período") %></th>
+      <th><%= _("Cuota del mes") %></th>
+      <th><%= _("Valor mensual de la membresía") %></th>
+    </tr>
+  </thead>
+
+  <tbody>
+<% @stats.is_scope.includes(:contact, installments: :agent).order("contacts.name").each do |m| %>
+  <tr>
+    <td>
+      <%= link_to m.contact.name, [@business.becomes(Business),m.contact] %>
+    </td>
+    <td>
+      <%= installment_for(@debug_date,m.installments).agent.try :name %>
+    </td>
+    <td>
+      <%= link_to m.name, [@business.becomes(Business),m] %>
+    </td>
+    <td>
+      <%= m.begins_on %> - <%= m.ends_on %>
+    </td>
+    <td>
+      <%= adds = @stats.is_scope.where(id: m.id).sum("installments.value") %>
+    </td>
+    <td>
+      <%= m.value %>
+    </td>
+  </tr>
+  <% acum += adds %>
+<% end %>
+
+  <tr>
+    <th colspan="6">
+      <%= _("Membersía sin cuota detalla para este mes. Proyectamo su valor mensual") %>
+    </th>
+  </tr>
+<% @stats.ms_scope.includes(:contact).order("contacts.name").each do |m| %>
+  <tr>
+    <td>
+      <%= link_to m.contact.name, [@business.becomes(Business),m.contact] %>
+    </td>
+    <td>
+      <%= m.contact.padma_teacher %>
+    </td>
+    <td>
+      <%= link_to m.name, [@business.becomes(Business),m] %>
+    </td>
+    <td>
+      <%= m.begins_on %> - <%= m.ends_on %>
+    </td>
+    <td>
+    </td>
+    <td>
+      <%= adds = m.value %>
+    </td>
+  </tr>
+  <% acum += adds %>
+<% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th colspan="4"></th>
+      <th colspan="2"><%= number_to_currency acum %></th>
+    </tr>
+  </tfoot>
+</table>
+
+<% acum = 0 %>
+<h2><%= t('memberships.stats_modal.paid_installments_tooltip') %></h2>
+<table class="table table-striped table-hover table-condensed table-bordered">
+  <thead>
+    <tr>
+      <th><%= _("Contacto") %></th>
+      <th><%= _("Instructor") %></th>
+      <th><%= _("Membresía") %></th>
+      <th><%= _("Período") %></th>
+      <th><%= _("Cuota del mes") %></th>
+      <th><%= _("Valor mensual de la membresía") %></th>
+    </tr>
+  </thead>
+  <tbody>
+<% @stats.paid_installments_scope.joins(:contact).order("contacts.name").each do |m| %>
+  <tr>
+    <td>
+      <%= link_to m.contact.name, [@business.becomes(Business),m.contact] %>
+    </td>
+    <td> </td>
+    <td>
+      <%= link_to m.name, [@business.becomes(Business),m] %>
+    </td>
+    <td>
+      <%= m.begins_on %> - <%= m.ends_on %>
+    </td>
+    <td>
+      <%= adds = @stats.paid_installments_scope.where(id: m.id).select("SUM(CASE WHEN ((installments.status IS NULL) OR installments.status = 'overdue' OR installments.status = 'incomplete') AND installments.balance < installments.value THEN installments.balance ELSE installments.value END) AS sum, AVG(CASE WHEN ((installments.status IS NULL) OR installments.status = 'overdue' OR installments.status = 'incomplete') AND installments.balance < installments.value THEN installments.balance ELSE installments.value END) AS avg").first["sum"] %>
+    </td>
+    <td>
+      <%= m.value %>
+    </td>
+  </tr>
+  <% acum += adds.to_f %>
+<% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th colspan="4"></th>
+      <th colspan="2"><%= number_to_currency acum %></th>
+    </tr>
+  </tfoot>
+</table>

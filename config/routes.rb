@@ -70,6 +70,7 @@ Fnz::Application.routes.draw do
       end
       get :overview, :on => :collection
       get :stats, :on => :collection
+      get :stats_detail, :on => :collection
     end
     resources :inscriptions do
       resources :transactions

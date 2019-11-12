@@ -102,6 +102,12 @@ class MembershipsController < UserApplicationController
                                  membership_filter: @membership_filter)
   end
 
+  def stats_detail
+    stats
+    @debug_date = Date.civil(params[:year].to_i,params[:month].to_i,1)
+    render layout: "application_without_sidebar"
+  end
+
   private
 
   def init_membership_filter

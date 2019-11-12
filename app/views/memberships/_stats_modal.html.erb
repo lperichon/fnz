@@ -74,6 +74,7 @@
   
     
   <div class="modal-footer">
+    <%= link_to _("ver detalle"), stats_detail_business_memberships_path(@business,params: params), class: "btn pull-left" %>
     <%= link_to t('actions.close'), "#", :class => "btn", "data-dismiss" => "modal" %>
   </div>
 </div>
