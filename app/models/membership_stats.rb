@@ -74,7 +74,7 @@ class MembershipStats
 
   def paid_installments
     paid_installments_scope
-    .select("SUM(CASE WHEN ((installments.status IS NULL) OR installments.status = 'overdue' OR installments.status = 'incomplete') AND installments.balance < installments.value THEN installments.balance ELSE installments.value END) AS sum, AVG(CASE WHEN ((installments.status IS NULL) OR installments.status = 'overdue' OR installments.status = 'incomplete') AND installments.balance < installments.value THEN installments.balance ELSE installments.value END) AS avg")
+    .select("SUM(CASE WHEN ((installments.status IS NULL) OR installments.status = 'overdue' OR installments.status = 'incomplete') AND installments.balance < installments.value THEN installments.balance ELSE installments.value END) AS sum, AVG(CASE WHEN ((installments.status IS NULL) OR installments.status = 'overdue' OR installments.status = 'incomplete') AND installments.balance < installments.value THEN installments.balance ELSE installments.value END) AS avg") # esto CUENTA los pending
   end
 
   def paid_installments_scope
