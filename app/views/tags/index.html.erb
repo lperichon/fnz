@@ -2,11 +2,13 @@
     <%= render :partial => 'businesses/edit_sidebar' %>
 <% end %>
 
+<% content_for :secondary_navigation do %>
+  <li class="pull-right">
+    <%= link_to content_tag(:i, "", class: "icon-plus") +_("Nueva categoría"), new_business_tag_path(@business) %>
+  </li>
+<% end %>
+
 <h3><%= I18n.t("tags.index.title") %></h3>
 <ol class="sortable_tree tags" data-rebuild-url="<%= rebuild_business_tags_path(@business) %>">
   <%= sortable_tree @tags %>
 </ol>
-
-<br />
-
-<%= link_to 'New Tag', new_business_tag_path(@business) %>
