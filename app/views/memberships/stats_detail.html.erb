@@ -38,11 +38,13 @@
   <% acum += adds %>
 <% end %>
 
+<% unless @stats.ms_scope.empty? %>
   <tr>
     <th colspan="6">
-      <%= _("Membersía sin cuota detalla para este mes. Proyectamo su valor mensual") %>
+      <%= _("Membersía sin cuota detalla para este mes. Proyectamo su valor mensual"): %>
     </th>
   </tr>
+<% end %>
 <% @stats.ms_scope.includes(:contact).order("contacts.name").each do |m| %>
   <tr>
     <td>
