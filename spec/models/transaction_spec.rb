@@ -19,6 +19,22 @@ describe Transaction do
     User.current_user = @account.business.owner
   end
 
+  it "unsets target when changing FROM transfer" do
+    t = FactoryGirl.create(:transaction, type: "Transfer", target: @account)
+    expect(t.target).to eq @account
+    t.type = "Debit"
+    t.save
+    expect(t.target).to be_nil
+    expect(Transaction.find(t.id).target).to be_nil
+
+    t = FactoryGirl.create(:transaction, type: "Transfer", target: @account)
+    expect(t.target).to eq @account
+    t.amount = 10
+    t.save
+    expect(t.target).to eq @account
+    expect(Transaction.find(t.id).target).to eq @account
+  end
+
   it "should create a new instance given a valid attribute" do
     Debit.create!(@attr)
   end

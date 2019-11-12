@@ -4,6 +4,7 @@ class Transaction < ActiveRecord::Base
   before_validation :set_creator
   before_validation :set_business
   before_validation :set_report_at
+  before_validation :unset_target
 
   attr_accessor :skip_update_balances
   after_save :update_balances, unless: :skip_update_balances
@@ -174,6 +175,13 @@ class Transaction < ActiveRecord::Base
     cached_installments.each { |installment| installment.update_balance_and_status } if cached_installments.count > 0
     cached_source.update_balance if cached_source
     cached_target.update_balance if cached_target
+  end
+
+  def unset_target
+    if type_changed? && type_was == "Transfer"
+      self.target_id = nil
+      self.target = nil
+    end
   end
 
   def set_creator
