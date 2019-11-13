@@ -1,6 +1,9 @@
 (()=>{
   stimulusApplication.register("filter", class extends Stimulus.Controller {
     static get targets(){
+      // item : rows we'll search through
+      // query : input for seach. Allow for "column:value" format.
+      // header : used for querying specific columns
       return ["query","item","header"];
     }
 

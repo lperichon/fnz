@@ -6,4 +6,4 @@
 <p>
   <%= link_to t('actions.mark_as_paid'), new_business_payment_path(@business), :class => "btn btn-sm btn-default", :id => "multiple_mark_as_paid", :disabled => true %>
 </p>
-<%= render :partial => 'installments', :locals => {:installments => @installments, :include_contact_column => true, :include_form => true} %>
+<%= render :partial => 'installments', :locals => {:installments => @installments, :include_contact_column => true, :include_form => true, :include_sum => true} %>
