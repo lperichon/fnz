@@ -2,7 +2,7 @@ class PaymentTypesController < UserApplicationController
   before_filter :get_business
 
   def index
-    @payment_types = @business.payment_types
+    @payment_types = @business.payment_types.order("name")
   end
 
   def show
