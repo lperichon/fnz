@@ -6,7 +6,7 @@
     <% if params[:admpart_tag_id] %>
       <% acum += (transaction.type=="Credit")? transaction.amount : ((transaction.type=="Debit")? -transaction.amount : 0) %>
     <% end %>
-    <tr data-id="<%= transaction.id %>">
+    <tr data-id="<%= transaction.id %>" data-target="filter.item">
       <%= render partial: 'transactions_table_item', locals: {transaction: transaction} %>
       <td>
         <%= yield transaction %>

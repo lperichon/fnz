@@ -13,8 +13,8 @@
   <button data-action="sidebar#toggleSideBar" data-target="sidebar.toggler" data-show-msg="<%= _("mostrar") %>" data-hide-msg="<%= _("ocultar") %>" class="btn"><span data-target="sidebar.togglerVerb"></span> <%= _("cuentas") %></button>
 <% end %>
 
-<%= form_tag batch_edit_business_transactions_path(@business), method: :get, remote: true do %>
-<div class="actions">
+<%= form_tag batch_edit_business_transactions_path(@business), method: :get, remote: true, "data-controller" => "filter" do %>
+<div class="actions row-fluid">
   <% if can? :create, @business.imports.build %>
     <%= link_to content_tag(:i, "", :class => "icon-upload") + I18n.t('transactions.index.import'), new_business_import_path(@business), :class => "btn" %>
   <% end %>
@@ -36,7 +36,12 @@
   <%= render "balance_title" %>
 </div>
 
-<h3><%= I18n.t('transactions.index.title') %></h3>
+<div class="row-fluid">
+  <div class="span10"></div>
+  <div id="filterContainer" class="span2">
+    <input type="text" id="transactionsFilter" data-target="filter.query" data-action="keyup@window->filter#filterItems"></input>  
+  </div>
+</div>
 <%= render :layout => 'transactions_table', :locals => {:transactions => @transactions} do |transaction| %>
   <% if can? :manage, @business.transactions.build %>
   <%= link_to content_tag(:i, "", :class => "icon-edit"), edit_business_transaction_path(transaction.business, transaction), :remote => true %>
