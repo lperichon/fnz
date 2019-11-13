@@ -2,7 +2,10 @@
   <td>
     <%= check_box_tag "ids[]",
                       transaction.id,
-                      false %>
+                      false,
+                      "data-target" => "sum_selected.selector",
+                      "data-action" => "sum_selected#showSubtotal"
+                    %>
   </td>
   <td>
     <%= content_tag(:i, "", class: "pull-left icon-" + transaction.state, title: transaction.state.titleize) if transaction.state != "created" %>

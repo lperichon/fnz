@@ -18,6 +18,7 @@
       } else {
         this.generalFilter();
       }
+      this.dispatchFilterevent();
     }
 
     generalFilter(){
@@ -33,6 +34,11 @@
           el.classList.toggle("filter--noMatch", !content.toLowerCase().match(this.smartValue().toLowerCase()));
         });
       }
+    }
+
+    dispatchFilterevent(){
+      var e = new Event("listrefreshed");
+      window.dispatchEvent(e);
     }
 
     queryIsSmart(){

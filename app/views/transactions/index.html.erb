@@ -13,7 +13,7 @@
   <button data-action="sidebar#toggleSideBar" data-target="sidebar.toggler" data-show-msg="<%= _("mostrar") %>" data-hide-msg="<%= _("ocultar") %>" class="btn"><span data-target="sidebar.togglerVerb"></span> <%= _("cuentas") %></button>
 <% end %>
 
-<%= form_tag batch_edit_business_transactions_path(@business), method: :get, remote: true, "data-controller" => "filter" do %>
+<%= form_tag batch_edit_business_transactions_path(@business), method: :get, remote: true, "data-controller" => "filter transactions_table" do %>
 <div class="actions row-fluid">
   <% if can? :create, @business.imports.build %>
     <%= link_to content_tag(:i, "", :class => "icon-upload") + I18n.t('transactions.index.import'), new_business_import_path(@business), :class => "btn" %>
