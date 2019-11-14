@@ -23,6 +23,10 @@ module ApplicationHelper
     contacts.each do |c|
       url << "contact_search[ids][]=#{c.padma_id}&"
     end
+    %W(full_name membership_name membership_ends_on membership_value membership_payment_type).each do |col_name|
+      url << "conact_search[chosen_columns][]=#{col_name}&"
+    end
+    url << "search_name=#{_("Export FNZ Membresías")}"
     link_to content_tag("i",class: "icon-list"){}+" "+ _("ver en CRM"), url, options
   end
 end
