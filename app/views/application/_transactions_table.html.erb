@@ -6,7 +6,7 @@
 
   <% acum = 0 %>
   <% transactions.each do |transaction| %>
-    <% if params[:admpart_tag_id] %>
+    <% if params[:admpart_tag_id] || params[:show_subtotal] %>
       <% acum += (transaction.type=="Credit")? transaction.amount : ((transaction.type=="Debit")? -transaction.amount : 0) %>
     <% end %>
     <tr data-id="<%= transaction.id %>" data-target="filter.item">
@@ -16,7 +16,7 @@
       </td>
     </tr>
   <% end %>
-  <% if params[:admpart_tag_id] %>
+  <% if params[:admpart_tag_id] || params[:show_subtotal] %>
     <tr>
       <td></td>
       <td></td>
