@@ -23,7 +23,7 @@ module ApplicationHelper
     contacts.each do |c|
       url << "contact_search[ids][]=#{c.padma_id}&"
     end
-    %W(full_name membership_name membership_ends_on membership_value membership_payment_type).each do |col_name|
+    %W(full_name membership_name membership_ends_on membership_value membership_payment_type last_seen_at).each do |col_name|
       url << "contact_search[chosen_columns][]=#{col_name}&"
     end
     url << "search_name=#{_("Export FNZ Membresías")}"
