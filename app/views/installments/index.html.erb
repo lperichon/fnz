@@ -3,7 +3,12 @@
   <%= render :partial => 'search_form' %>
   <a class="btn" id="update-installment-filter"><%= t('update') %></a>
 <% end %>
-<p>
-  <%= link_to t('actions.mark_as_paid'), new_business_payment_path(@business), :class => "btn btn-sm btn-default", :id => "multiple_mark_as_paid", :disabled => true %>
-</p>
+<div class="actions">
+  <div class="pull-left">
+    <%= link_to t('actions.mark_as_paid'), new_business_payment_path(@business), :class => "btn btn-sm btn-default", :id => "multiple_mark_as_paid", :disabled => true %>
+  </div>
+  <div class="pull-right">
+    <%= link_to_list_in_crm(@installments.map{|i| i.membership.try(:contact) }, class: "btn", target: "_blank") %>
+  </div>
+</div>
 <%= render :partial => 'installments', :locals => {:installments => @installments, :include_contact_column => true, :include_form => true, :include_sum => true} %>
