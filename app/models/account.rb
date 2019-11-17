@@ -13,7 +13,7 @@ class Account < ActiveRecord::Base
   attr_accessible :name, :business_id, :currency, :default
 
   def transactions
-    Transaction.where("source_id = ? or target_id = ?", self.id, self.id)
+    Transaction.where("source_id = ? or (type='Transfer' and target_id = ?)", self.id, self.id)
   end
 
   def update_balance
