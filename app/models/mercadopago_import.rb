@@ -17,9 +17,11 @@ class MercadopagoImport < TransactionImport
     backuped_timezone = Time.zone
     Time.zone = business.time_zone
 
+    @quote_char = "|" # MercadoPago export no separa con comillas y no escapa las comillas en descripciones de productos, etc.
     begin
-      CSV.parse(open(path,"r:ISO-8859-1"),
+      CSV.parse(open(path,"r:ISO-8859-1"), 
                 col_sep: ";",
+                quote_char: @quote_char,
                 headers: true,
                ) do |row|
         columns = row.size
@@ -39,6 +41,25 @@ class MercadopagoImport < TransactionImport
         rescue => e
           errs << [row, e.to_s ].flatten
         end
+      end
+    rescue CSV::MalformedCSVError => e
+      # MercadoPago export no separa con comillas y no escapa las comillas en descripciones de productos, etc.
+      if e.message.match(/Illegal quoting in line/)
+        if @quote_char == "|"
+
+          # remove imported records
+          imported_records.destroy_all
+          # change quote_char
+          @quote_char = "~"
+          # and retry
+          retry
+        else
+          errs << [_("El archivo tiene un formato inválido"), e.message ]
+          raise e
+        end
+      else
+        errs << [_("El archivo tiene un formato inválido"), e.message ]
+        raise e
       end
     rescue => e
       raise e
