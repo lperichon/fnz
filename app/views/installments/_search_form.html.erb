@@ -34,7 +34,7 @@
   <div>
     <%= f.input :payment_type_id,
                 as: :select,
-                collection: @business.payment_types.collect {|pt| [pt.name,pt.id]}+["All","all"],
+                collection: @business.payment_types.collect {|pt| [pt.name,pt.id]}+[["All","all"]],
                 input_html: { class: 'chosen', multiple: true} %>
   </div>
 <% end %>
