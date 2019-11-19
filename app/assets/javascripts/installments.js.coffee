@@ -22,15 +22,10 @@ $(document).ready ->
   $("#installment_search_status").chosen
     allow_single_deselect: true
 
-  $("#installment_search_status").change ->
+  $("#installment_search_status,#installment_search_agent_id,#installment_search_payment_type_id").change ->
     $(this).addClass('btn-primary')
     $('#update-installment-filter').addClass('btn-success')
     $('#update-installment-filter').show()
 
   $("#installment_search_agent_id").chosen
     allow_single_deselect: true
-
-  $("#installment_search_agent_id").change ->
-    $(this).addClass('btn-primary')
-    $('#update-installment-filter').addClass('btn-success')
-    $('#update-installment-filter').show()
