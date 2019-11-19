@@ -1,6 +1,10 @@
 module ApplicationHelper
   include TzMagic::ApplicationHelper
 
+  def css_class_id(obj)
+    "its_#{obj.class.to_s}#{obj.id}"
+  end
+
   def memberships_link_active?
     controller.controller_name == "memberships" && controller.action_name != 'index'
   end

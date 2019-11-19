@@ -25,7 +25,7 @@
   <% acum = 0 %>
   <% installments.each do |installment| %>
       <% membership = installment.membership %>
-      <tr data-amount="<%= installment.value %>">
+      <tr data-amount="<%= installment.value %>" class="<%= css_class_id(installment) %>">
         <% if include_form %>
 	  <td><%= check_box_tag "transaction[installment_ids][]", installment.id %></td>	      
 	<% end %>
@@ -49,7 +49,11 @@
         <td>
         	<%= link_to content_tag(:i, "", :class => "icon-eye-open"), business_membership_installment_path(@business, membership, installment) %>
         	<%= link_to content_tag(:i, "", :class => "icon-edit"), edit_business_membership_installment_path(@business, membership, installment) %>
-  			<%= link_to content_tag(:i, "", :class => "icon-trash"), business_membership_installment_path(@business, membership, installment), :confirm => t('actions.confirm_delete'), :method => 'delete' %>
+          <%= link_to content_tag(:i, "", :class => "icon-trash"),
+                      business_membership_installment_path(@business, membership, installment),
+                      confirm: t('actions.confirm_delete'),
+                      remote: true,
+                      method: 'delete' %>
       </tr>
   <% acum += installment.value %>
   <% end %>

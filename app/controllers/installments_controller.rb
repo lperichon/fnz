@@ -104,6 +104,7 @@ class InstallmentsController < UserApplicationController
 
     respond_to do |format|
       format.html { redirect_to business_membership_url(@business, @membership) }
+      format.js
     end
   end
 
