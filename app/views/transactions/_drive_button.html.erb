@@ -1,0 +1,6 @@
+<% if @download_api_key %>
+  <button type="button" class="btn" data-controller="CopyToClipboard" data-action="CopyToClipboard#copy" data-CopyToClipboard-success-message="<%= _("COPIADA la formula. Ahora copiala en una celda de tu planilla en el Drive.") %>">
+    <%= image_tag("drive-icon.png", id: "drive-icon") %>
+    <input data-target="CopyToClipboard.source" type="text" value="<%= export_to_drive_formula %>" style="display:none"></input>
+  </button>
+<% end %>

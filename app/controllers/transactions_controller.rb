@@ -4,6 +4,9 @@ class TransactionsController < UserApplicationController
 
   PER_PAGE = 200
   def index
+
+    get_download_api_key
+
     @context = @context.order("transaction_at DESC")
     # List transactions on this month or the year/month solicited
     start_date = @start_date = Date.parse(params[:start_date] || Date.today.beginning_of_month.to_s).beginning_of_day
@@ -186,6 +189,27 @@ class TransactionsController < UserApplicationController
     end
 
     @context = @context.api_where(params[:q])
+  end
+
+  def get_download_api_key
+    return if @business.nil?
+
+    if @download_api_key
+      @download_api_key
+    else
+      possible_keys = ApiKey.paginate(where: {
+        account_name: @business.padma_id,
+        access: [:public_downloads, :login_key]
+      })
+      if possible_keys
+        mine = possible_keys.select{|ak| ak.username == current_user.username }.first
+        @download_api_key = if mine
+          mine.try(:key)
+        else
+          possible_keys.last.try(:key)
+        end
+      end
+    end
   end
 
 end
