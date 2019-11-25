@@ -5,6 +5,12 @@
 <% end %>
 :
 <ul class="nav nav-pills nav-stacked">
+  <li>
+    <a title="<%= _("version de prueba - IGNORA DIFERENTES MONEDAS") %>">
+      <%= _("Total") %>
+      <%= number_to_currency( @business.accounts.inject(0){|acum,a| acum + a.balance } , unit: @business.currency_symbol) %>
+    </a>
+  </li>
   <% @business.accounts.order("name").each do |account| %>
   	<% unless account.new_record? %>
       <li class="<%= 'active' if @account.present? && account.id == @account.id %>">
