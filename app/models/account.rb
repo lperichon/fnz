@@ -25,7 +25,14 @@ class Account < ActiveRecord::Base
   end
 
   def currency
-    Currency.find(self[:currency]) || Currency.find(business.currency_code) || Currency.find(:usd)
+    ret = Currency.find(self[:currency])
+    if ret.nil? && business
+      ret = Currency.find(business.currency_code)
+    end
+    if ret.nil?
+      ret = Currency.find(:usd)
+    end
+    ret
   end
 
   def last_balance_check
@@ -44,6 +51,17 @@ class Account < ActiveRecord::Base
     else
       transactions.where(:state => ['created', 'reconciled'])
     end
+  end
+
+
+  def self.calculate_total_balance_per_currency
+    ret = {}
+    self.scoped.includes(:business).group_by(&:currency).each do |cur,accs|
+      ret[cur.id] = accs.inject(0) do |acum, acc|
+        acum + acc.balance
+      end
+    end
+    ret
   end
 
   private
