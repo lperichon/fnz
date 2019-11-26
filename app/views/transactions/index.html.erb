@@ -16,7 +16,9 @@
 <%= form_tag batch_edit_business_transactions_path(@business), method: :get, remote: true, "data-controller" => "filter transactions_table" do %>
 <div class="actions row-fluid">
   <% if can? :create, @business.imports.build %>
-    <%= link_to content_tag(:i, "", :class => "icon-upload") + I18n.t('transactions.index.import'), new_business_import_path(@business), :class => "btn" %>
+    <%= link_to content_tag(:i, "", class: "icon-upload") + I18n.t('transactions.index.import'),
+      new_business_import_path(@business, import: { account_id: @account.try(:id) }),
+                class: "btn" %>
   <% end %>
   <%= submit_tag _("Editar"), class: "btn" %>
   <%= link_to content_tag(:i, "", :class => "icon-bar-chart") + I18n.t('transactions.index.stats'), stats_business_transactions_path(@business, :start_date => @start_date.to_date, :end_date => @end_date.to_date), :remote => true, :class => "btn" %>
