@@ -25,6 +25,22 @@
 
 
 
-<%= link_to t('actions.delete'), business_import_path(@business,@import), confirm: t(".confirm_delete"), method: 'delete' %> |
-<%= link_to t('actions.edit'), edit_business_import_path(@business, @import) %> |
-<%= link_to _("ver importaciones"), business_imports_path(@business) %>
+<p>
+<%= link_to _("Archivar, finalizar importación"),
+  business_import_path(@business,@import, import: { archived: true }, format: :json),
+            confirm: _("finalizar?"),
+            method: 'put',
+            remote: true,
+            id: "archiveAndRedirectBtn",
+            data: { "redirect-to-url" => business_account_transactions_path(@business,@import.account)  },
+            class: "btn btn-primary" %> 
+</p>
+
+<p>
+<%# link_to t('actions.edit'), edit_business_import_path(@business, @import) %>
+<%= link_to _("lista de importaciones"), business_imports_path(@business) %>
+</p>
+
+<p>
+  <%= link_to _("Cancelar la importanción y eliminar todas las transacciones"), business_import_path(@business,@import), confirm: t(".confirm_delete"), method: 'delete', class: "btn btn-danger" %> 
+</p>
