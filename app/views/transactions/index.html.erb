@@ -45,10 +45,13 @@
     <input type="text" id="transactionsFilter" data-target="filter.query" data-action="keyup@window->filter#filterItems"></input>  
   </div>
 </div>
-<%= render :layout => 'transactions_table', :locals => {:transactions => @transactions} do |transaction| %>
-  <% if can? :manage, @business.transactions.build %>
-  <%= link_to content_tag(:i, "", :class => "icon-edit"), edit_business_transaction_path(transaction.business, transaction), :remote => true %>
-  <%= link_to content_tag(:i, "", :class => "icon-trash"), business_transaction_path(transaction.business, transaction), :confirm => I18n.t('actions.confirm_delete'), :method => 'delete' %>
+
+<%= render layout: 'transactions_table', locals: {transactions: @transactions} do |transaction| %>
+  <% if can? :edit, transaction %>
+    <%= link_to content_tag(:i, "", class: "icon-edit"), edit_business_transaction_path(transaction.business, transaction), remote: true %>
+  <% end %>
+  <% if can? :destroy, transaction %>
+    <%= link_to content_tag(:i, "", class: "icon-trash"), business_transaction_path(transaction.business, transaction), confirm: I18n.t('actions.confirm_delete'), method: 'delete' %>
   <% end %>
 <% end %>
 <div id="pagination">
