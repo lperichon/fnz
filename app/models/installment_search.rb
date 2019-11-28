@@ -8,6 +8,9 @@ class InstallmentSearch
 
   def initialize(attributes = {})
     attributes ||= {}
+    if attributes["payment_type_id"] && attributes["payment_type_id"].is_a?(Array)
+      attributes["payment_type_id"].reject!{|i| i.blank? }
+    end
     attributes.each do |name,value|
       send("#{name}=", value)
     end
