@@ -6,8 +6,8 @@ class TransactionsController < UserApplicationController
   def index
     @context = @context.order("transaction_at DESC")
     # List transactions on this month or the year/month solicited
-    start_date = @start_date = Date.parse(params[:start_date] || Date.today.beginning_of_month.to_s).beginning_of_day
-    end_date = @end_date = Date.parse(params[:end_date] || Date.today.end_of_month.to_s).end_of_day
+    start_date = @start_date = Date.parse(params[:start_date] || Time.zone.today.beginning_of_month.to_s).beginning_of_day
+    end_date = @end_date = Date.parse(params[:end_date] || Time.zone.today.end_of_month.to_s).end_of_day
 
     if params[:report_on]
       ref_date = Date.parse( params[:report_on] )
