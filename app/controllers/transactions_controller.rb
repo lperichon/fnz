@@ -4,9 +4,6 @@ class TransactionsController < UserApplicationController
 
   PER_PAGE = 200
   def index
-
-    get_download_api_key
-
     @context = @context.order("transaction_at DESC")
     # List transactions on this month or the year/month solicited
     start_date = @start_date = Date.parse(params[:start_date] || Date.today.beginning_of_month.to_s).beginning_of_day
@@ -25,6 +22,7 @@ class TransactionsController < UserApplicationController
 
     respond_to do |format|
       format.html do
+        get_download_api_key
         @transactions = @transactions.page(params[:page]).per(params[:per_page] || PER_PAGE )
       end
       format.csv do
