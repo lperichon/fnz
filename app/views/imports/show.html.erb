@@ -26,16 +26,25 @@
 
 
 <% if @import.status == "finished" %>
-<p>
-<%= link_to _("Archivar, finalizar importación"),
-  business_import_path(@business,@import, import: { archived: true }, format: :json),
-            confirm: _("finalizar?"),
-            method: 'put',
-            remote: true,
-            id: "archiveAndRedirectBtn",
-            data: { "redirect-to-url" => business_account_transactions_path(@business,@import.account)  },
-            class: "btn btn-primary" %> 
-</p>
+  <% if @import.is_a?(TransactionImport) %>
+    <%= link_to _("Archivar, finalizar importación"),
+                business_import_path(@business,@import, import: { archived: true }),
+                confirm: _("finalizar?"),
+                method: 'put',
+                class: "btn btn-primary" %> 
+    </p>
+  <% else %>
+    <p>
+    <%= link_to _("Archivar, finalizar importación"),
+      business_import_path(@business,@import, import: { archived: true }, format: :json),
+                confirm: _("finalizar?"),
+                method: 'put',
+                remote: true,
+                id: "archiveAndRedirectBtn",
+                data: { "redirect-to-url" => business_account_transactions_path(@business, @import.account)  },
+                class: "btn btn-primary" %> 
+    </p>
+  <% end %>
 <% end %>
 
 <p>
