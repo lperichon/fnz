@@ -1,7 +1,14 @@
 module AdmpartsHelper
 
   def pm(number)
-    number_with_precision number, precision: 2
+    content_tag :span, class: "admpart-value #{number_css_class(number)}" do
+      number_to_currency number
+    end
+  end
+
+  def number_css_class(n)
+    return if n == 0
+    (n>0)? 'positive' : 'negative'
   end
 
   def link_to_tag_detail(tag)

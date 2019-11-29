@@ -1,3 +1,13 @@
+.admpart-value {
+  white-space: nowrap;
+}
+.admpart-value.positive{
+  color: green; 
+}
+.admpart-value.negative{
+  color: red; 
+}
+
 .droppable-hover {
   background-color: blue;
 }
