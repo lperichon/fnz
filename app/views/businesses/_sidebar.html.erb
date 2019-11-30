@@ -8,9 +8,12 @@
   <% @business.accounts.order("name").each do |account| %>
   	<% unless account.new_record? %>
       <li class="<%= 'active' if @account.present? && account.id == @account.id %>">
-        <%= link_to account.name.html_safe + content_tag(:span,
-                                                         number_to_currency(account.balance, unit: account.currency.symbol), class: "balance pull-right account_#{account.id}_balance"),
-                    business_account_transactions_path(@business, account) %>
+        <%= link_to business_account_transactions_path(@business, account) do %>
+          <%= account.name.html_safe %>
+          <%= content_tag(:span, class: "balance pull-right account_#{account.id}_balance") do %>
+            <%= number_to_currency(account.balance, unit: account.currency.symbol) %>
+          <% end %>
+        <% end %>
       </li>
       <% end %>
   <% end %>
