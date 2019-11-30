@@ -10,7 +10,6 @@ class AdmpartsController < UserApplicationController
 
   def show
     if @adm.valid?
-
       unless params[:skip_refresh]
         @adm.queue_refresh_cache
         Appsignal.instrument("waiting") do

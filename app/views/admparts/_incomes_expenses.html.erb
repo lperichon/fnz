@@ -1,22 +1,24 @@
 <!-- incomes n expenses start -->
+<% incomes = @adm.sorted_roots_and_values_for_section("income",inverse: 1) %>
+<% expenses = @adm.sorted_roots_and_values_for_section("expense") %>
 <% i = 0 %>
 <%= loop do %>
-  <% income_tag = @adm.root_tags_for_section("income")[i] %>
-  <% expense_tag = @adm.root_tags_for_section("expense")[i] %>
+  <% income= incomes[i] %>
+  <% expense= expenses[i] %>
   <% i += 1 %>
-  <% break if income_tag.nil? && expense_tag.nil? %>
+  <% break if income.nil? && expense.nil? %>
   <tr>
     <td>
-      <%= link_to_tag_detail(income_tag) if income_tag %>
+      <%= link_to_tag_detail(income[0]) if income %>
     </td>
     <td>
-      <%= pm(@adm.total_for_tag(income_tag)) if income_tag %>
+      <%= pm(income[1]) if income %>
     </td>
     <td>
-      <%= link_to_tag_detail(expense_tag) if expense_tag %>
+      <%= link_to_tag_detail(expense[0]) if expense %>
     </td>
     <td>
-      <%= pm @adm.total_for_tag(expense_tag) if expense_tag %>
+      <%= pm expense[1] if expense %>
     </td>
   </tr>
 <% end %>
