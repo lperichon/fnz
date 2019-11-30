@@ -165,7 +165,7 @@ class Admpart < ActiveRecord::Base
   def sorted_roots_and_values_for_section(section,options={})
     root_tags_for_section(section).map do |t|
       [ t , total_for_tag(t) ]
-    end.sort{|h| ((options[:inverse])? -1 : 1) * h[1] }
+    end.sort_by{|h| ((options[:inverse])? -1 : 1) * h[1] }
   end
 
   def wout_section_root_tags
