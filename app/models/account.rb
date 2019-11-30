@@ -53,6 +53,9 @@ class Account < ActiveRecord::Base
     end
   end
 
+  def current_balance_checked?
+    active_transactions.empty?
+  end
 
   def self.calculate_total_balance_per_currency
     ret = {}

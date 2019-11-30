@@ -10,9 +10,10 @@
       <li class="<%= 'active' if @account.present? && account.id == @account.id %>">
         <%= link_to business_account_transactions_path(@business, account) do %>
           <%= account.name.html_safe %>
-          <%= content_tag(:span, class: "balance pull-right account_#{account.id}_balance") do %>
+          <span class="balance pull-right account_<%= account.id %>_balance">
             <%= number_to_currency(account.balance, unit: account.currency.symbol) %>
-          <% end %>
+            <%= "<i class='icon-ok account_balance_checked'></i>".html_safe if account.current_balance_checked? %>
+          </span>
         <% end %>
       </li>
       <% end %>
