@@ -54,7 +54,9 @@
 
 <p>
 <%# link_to t('actions.edit'), edit_business_import_path(@business, @import) %>
-<%= link_to _("ver transacciones en la cuenta"), business_account_transactions_path(@business,@import.account) %> | 
+<% if @import.respond_to?(:account) %>
+  <%= link_to _("ver transacciones en la cuenta"), business_account_transactions_path(@business,@import.account) %> | 
+<% end %>
 <%= link_to _("volver a lista de importaciones"), business_imports_path(@business) %>
 </p>
 
