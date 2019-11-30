@@ -12,7 +12,12 @@
           <%= account.name.html_safe %>
           <span class="balance pull-right account_<%= account.id %>_balance">
             <%= number_to_currency(account.balance, unit: account.currency.symbol) %>
-            <%= "<i class='icon-ok account_balance_checked'></i>".html_safe if account.current_balance_checked? %>
+            <% if account.current_balance_checked? && account.last_balance_check %>
+              <%= content_tag(:i,
+                              "",
+                              class: "icon-ok account_balance_checked",
+                              title: _("Saldo chequeado el %{date}") % { date: l(account.last_balance_check.checked_at)}).html_safe %>
+            <% end %>
           </span>
         <% end %>
       </li>
