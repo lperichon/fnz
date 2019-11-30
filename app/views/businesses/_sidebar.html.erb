@@ -17,6 +17,8 @@
                               "",
                               class: "icon-ok account_balance_checked",
                               title: _("Saldo chequeado el %{date}") % { date: l(account.last_balance_check.checked_at)}).html_safe %>
+            <% else %>
+              <i class="account_balance_dirty"></i>
             <% end %>
           </span>
         <% end %>
