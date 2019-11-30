@@ -2,4 +2,7 @@
   <div class="alert alert-info">
     <%= _("Estamos recalculando tu administración. Estos datos pueden tener hasta 10 minutos de antigüedad. Refrescá la página para ver los datos actualizados.") %>
   </div>
+  <% content_for :head do %>
+    <meta http-equiv="refresh" content="<%= 10.seconds %>" >
+  <% end %>
 <% end %>
