@@ -309,8 +309,13 @@ class Admpart < ActiveRecord::Base
     contacts_in_attendance_report.each do |contact|
       contact_detail = attendance_report[contact.padma_id] || {}
       distributable_contact_payment = total_for_tag(installments_tag,nil,{contact_id: contact.id}) * (agent_installments_attendance_percentage || 0) / 100
-      per = (contact_detail[agent.padma_id.gsub(".","_")].try(:to_f) || 0)*100
-      acum += per * distributable_contact_payment / 100
+      if contact_detail["total"] > 0
+        per = (contact_detail[agent.padma_id.gsub(".","_")].try(:to_f) || 0)*100
+        acum += per * distributable_contact_payment / 100
+      else
+        # no tiene asistencias, asignarle todo al agente linkeado a los pagos
+        acum += total_for_tag(installments_tag,agent.id,{contact_id: contact.id}) * (agent_installments_attendance_percentage || 0) / 100
+      end
     end
     acum
   end
