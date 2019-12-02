@@ -81,7 +81,7 @@
         <% first_contact_row = false %>
       <% end %>
     <% end %>
-    <tr>
+    <tr data-target="filter.item">
       <th><%= _("Sin instructor") %></th>
       <td></td>
       <td><%= pm @adm.total_for_tag(@adm.installments_tag,nil,{contact_id: ''}) %></td>
@@ -94,7 +94,7 @@
     </tr>
   </tbody>
   <tfoot>
-    <tr>
+    <tr data-target="filter.item">
       <th><%= _("Total por asistencias") %></th>
       <td></td>
       <td></td>
@@ -105,7 +105,7 @@
         <td colspan="2"><%= pm @adm.agent_installments_collection_by_presence_total(tm) %></td>
       <% end %>
     </tr>
-    <tr>
+    <tr data-target="filter.item">
       <th><%= _("Total por vínculo") %></th>
       <td></td>
       <td></td>
@@ -116,7 +116,7 @@
         <td colspan="2"><%= pm @adm.agent_installments_collection_by_link_total(tm) %></td>
       <% end %>
     </tr>
-    <tr>
+    <tr data-target="filter.item">
       <th><%= t("total") %></th>
       <td></td>
       <td><%= pm @adm.total_for_tag(@adm.installments_tag) %></td>
