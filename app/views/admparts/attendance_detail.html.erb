@@ -66,16 +66,32 @@
           <% if first_contact_row %>
             <td rowspan="<%= teachers_with_income_for_this_contact.keys.size %>">
               <%= contact_detail["total"] %>
+              <% if contact_detail["total"] == 0 %>
+                <span title="<%= _("Como no tiene asistencias todo el pago es asignado al instructor vinculado") %>">(!)</span>
+              <% end %>
             </td>
           <% end %>
-        <% @adm.team_members.each do |tm| %>
-          <% per = (contact_detail[tm.padma_id.gsub(".","_")].try(:to_f) || 0)*100 %>
+        <% @adm.team_members.each do |coltm| %>
+          <% per = (contact_detail[coltm.padma_id.gsub(".","_")].try(:to_f) || 0)*100 %>
           <% if first_contact_row %>
             <td rowspan="<%= teachers_with_income_for_this_contact.keys.size %>">
               <%= number_with_precision(per, precision: 2) %>%
             </td>
           <% end %>
-          <td><%= pm income * (@adm.agent_installments_attendance_percentage || 0) * per / 10000 %></td>
+          <td>
+            <% if contact_detail["total"] == 0 %>
+              <% if coltm == tm
+                   num = income * (@adm.agent_installments_attendance_percentage || 0) / 100 %>
+                <span title="<%= _("Como no tiene asistencias todo el pago es asignado al instructor vinculado") %>">
+                  <%= pm num %>
+                </span>
+              <% else %>
+                <%= pm 0 %>
+              <% end %>
+            <% else %>
+              <%= pm income * (@adm.agent_installments_attendance_percentage || 0) * per / 10000 %>
+            <% end %>
+          </td>
         <% end %>
         </tr>
         <% first_contact_row = false %>
