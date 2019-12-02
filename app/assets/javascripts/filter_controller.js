@@ -28,7 +28,7 @@
     }
 
     smartFilter(){
-      if(this.smartColumnIndex()){
+      if(this.smartColumnIndex() !== null){
         this.itemTargets.forEach((el,i) => {
           var content = el.querySelectorAll("td,th")[this.smartColumnIndex()].textContent;
           el.classList.toggle("filter--noMatch", !content.toLowerCase().match(this.smartValue().toLowerCase()));
