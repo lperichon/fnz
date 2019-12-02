@@ -30,7 +30,7 @@
     smartFilter(){
       if(this.smartColumnIndex()){
         this.itemTargets.forEach((el,i) => {
-          var content = el.getElementsByTagName("td")[this.smartColumnIndex()].textContent;
+          var content = el.querySelectorAll("td,th")[this.smartColumnIndex()].textContent;
           el.classList.toggle("filter--noMatch", !content.toLowerCase().match(this.smartValue().toLowerCase()));
         });
       }
@@ -46,7 +46,7 @@
     }
 
     smartColumnIndex(){
-      var tds = this.headerTarget.getElementsByTagName("td");
+      var tds = this.headerTarget.querySelectorAll("td,th");
       var i = 0;
       var columnIndex = null;
       for(i = 0; i < tds.length; i++){
