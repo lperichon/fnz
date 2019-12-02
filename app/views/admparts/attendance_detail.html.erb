@@ -14,15 +14,21 @@
 <%= l(@adm.ref_date, format: :month) %>
 
 
-<table class="table table-striped table-hover table-condensed table-bordered">
+<div data-controller="filter">
+  <input type="text"
+         style="float: right"
+         data-target="filter.query"
+         data-action="keyup@window->filter#filterItems"></input>  
+<table class="table table-striped table-hover table-condensed table-bordered"
+  >
   <thead>
     <tr>
-      <th><%= t(".contact") %></th>
-      <th><%= t(".payment_teacher") %></th>
-      <th><%= t(".paid") %></th>
-      <th><%= @adm.agent_installments_link_percentage %>% <%= t(".payment_teacher_collection") %></th>
-      <th><%= @adm.agent_installments_attendance_percentage%>% <%= t(".to_distribute_by_attendance") %></th>
-      <th><%= t(".total_presence") %></th>
+      <th><%= _("Contacto") %></th>
+      <th><%= _("Instructor vinculado al pago") %></th>
+      <th><%= _("Valor pago") %></th>
+      <th><%= @adm.agent_installments_link_percentage %>% <%= _("al instructor vinculado al pago") %></th>
+      <th><%= @adm.agent_installments_attendance_percentage%>% <%= _("a distribuir por asistencia") %></th>
+      <th><%= _("Asistencias en el mes") %></th>
       <% @adm.team_members.each do |tm| %>
         <th colspan="2"><%= tm.name %></th>
       <% end %>
@@ -45,7 +51,7 @@
            teachers_with_income_for_this_contact[contact.teacher] = 0
          end %>
       <% teachers_with_income_for_this_contact.each_pair do |tm,income| %>
-        <tr>
+        <tr data-target="filter.item">
           <% if first_contact_row %>
             <th rowspan="<%= teachers_with_income_for_this_contact.keys.size %>">
               <%= contact.name %>
@@ -76,7 +82,7 @@
       <% end %>
     <% end %>
     <tr>
-      <th><%= t(".no_teacher") %></th>
+      <th><%= _("Sin instructor") %></th>
       <td></td>
       <td><%= pm @adm.total_for_tag(@adm.installments_tag,nil,{contact_id: ''}) %></td>
       <td></td>
@@ -89,7 +95,7 @@
   </tbody>
   <tfoot>
     <tr>
-      <th><%= t(".total_by_attendance") %></th>
+      <th><%= _("Total por asistencias") %></th>
       <td></td>
       <td></td>
       <td></td>
@@ -100,7 +106,7 @@
       <% end %>
     </tr>
     <tr>
-      <th><%= t(".total_by_link") %></th>
+      <th><%= _("Total por vínculo") %></th>
       <td></td>
       <td></td>
       <td><%= pm (@adm.total_for_tag(@adm.installments_tag) - @adm.total_for_tag(@adm.installments_tag,nil,{contact_id: ''})) * ( @adm.agent_installments_link_percentage ) / 100 %></td>
@@ -124,5 +130,6 @@
   </tfoot>
 
 </table>
+</div>
 
 <%= link_to _("ver el reporte de asistencias en el módulo de clases"), @adm.attendance_detail_url, target: "_blank" %>
