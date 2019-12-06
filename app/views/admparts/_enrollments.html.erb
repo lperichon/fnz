@@ -1,6 +1,8 @@
 <table class="table table-striped table-hover table-condensed table-bordered">
 <tr>
-  <th colspan="6"><%= t(".enrollments") %></th>
+  <th colspan="6">
+    <%= link_to_tag_detail(@adm.enrollments_tag) %>
+  </th>
 </tr>
 <tr>
   <th><%= t(".agent") %></th>

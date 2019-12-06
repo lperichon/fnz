@@ -1,11 +1,13 @@
 <table class="table table-striped table-hover table-condensed table-bordered">
 <tr>
-  <th colspan="4"><%= t(".sales") %></th>
+  <th colspan="4">
+    <%= link_to_tag_detail(@adm.sales_tag) %>
+  </th>
 </tr>
 <tr>
-  <th><%= t(".agent") %></th>
-  <th><%= t(".sales_income") %></th>
-  <th><%= t(".agent_comission") %></th>
+  <th><%= _("Instructor") %></th>
+  <th><%= _("Recaudado por ventas") %></th>
+  <th><%= _("Comisión") %></th>
 </tr>
 <% @adm.team_members.each do |tm| %>
   <tr>
