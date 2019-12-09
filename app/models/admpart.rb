@@ -274,8 +274,16 @@ class Admpart < ActiveRecord::Base
   end
   appsignal_instrument_method :attendance_report
 
+  def contacts_who_paid_installments
+    @contacts_who_paid_installments ||= business.contacts.where(id: transactions_for_tag(installments_tag).pluck(:contact_id))
+  end
+
   def contacts_in_attendance_report
-    @contacts_in_attendance_report ||= business.contacts.where(padma_id: attendance_report.keys)
+    if @contacts_in_attendance_report
+      @contacts_in_attendance_report
+    else
+      @contacts_in_attendance_report = (business.contacts.where(padma_id: attendance_report.keys) | contacts_who_paid_installments)
+    end
   end
 
   def attendance_detail_url
