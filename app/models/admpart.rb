@@ -306,7 +306,6 @@ class Admpart < ActiveRecord::Base
   def agent_installments_collection_by_link_total(agent)
     acum = 0
     contacts_in_attendance_report.each do |contact|
-      contact_detail = attendance_report[contact.padma_id] || {}
       acum += total_for_tag(installments_tag,agent.id,{contact_id: contact.id}) * agent_installments_link_percentage / 100
     end
     acum
