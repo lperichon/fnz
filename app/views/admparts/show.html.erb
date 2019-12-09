@@ -42,12 +42,14 @@
 
 <%= render "total_by_agent" %>
 
-<%= link_to t("actions.edit"), edit_business_admpart_path(@adm.business,@adm) %>
+<div class="no-print">
+  <%= link_to t("actions.edit"), edit_business_admpart_path(@adm.business,@adm) %>
 
-<h4><%= t(".ignored_tags") %></h4>
-<% @adm.wout_section_root_tags.each do |tag| %>
-  <div>
-    <%= link_to tag.name, business_tag_path(business_id: @business.id, id: tag.id) %>
-  </div>
-<% end %>
+  <h4><%= t(".ignored_tags") %></h4>
+  <% @adm.wout_section_root_tags.each do |tag| %>
+    <div>
+      <%= link_to tag.name, business_tag_path(business_id: @business.id, id: tag.id) %>
+    </div>
+  <% end %>
+</div>
 </div>
