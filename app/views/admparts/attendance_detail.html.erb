@@ -36,7 +36,7 @@
   </thead>
   <tbody>
     <% @contacts.each do |contact| %>
-      <% contact_detail = @adm.attendance_report[contact.padma_id] %>
+      <% contact_detail = @adm.attendance_report[contact.padma_id] || {} %>
       <% contact_income = @adm.total_for_tag(@adm.installments_tag,nil,{contact_id: contact.id}) %>
       <% next if @ignore_zero_income && contact_income == 0 %>
       <% first_contact_row = true %>
@@ -65,8 +65,8 @@
           <td><%= pm income * (@adm.agent_installments_attendance_percentage || 0) / 100 %></td>
           <% if first_contact_row %>
             <td rowspan="<%= teachers_with_income_for_this_contact.keys.size %>">
-              <%= contact_detail["total"] if contact_detail %>
-              <% if contact_detail.nil? || (contact_detail["total"] == 0) %>
+              <%= contact_detail["total"] %>
+              <% if contact_detail["total"].nil? || (contact_detail["total"] == 0) %>
                 <span title="<%= _("Como no tiene asistencias todo el pago es asignado al instructor vinculado") %>">(!)</span>
               <% end %>
             </td>
@@ -79,7 +79,7 @@
             </td>
           <% end %>
           <td>
-            <% if contact_detail.nil? || (contact_detail["total"] == 0) %>
+            <% if contact_detail["total"].nil? || (contact_detail["total"] == 0) %>
               <% if coltm == tm
                    num = income * (@adm.agent_installments_attendance_percentage || 0) / 100 %>
                 <span title="<%= _("Como no tiene asistencias todo el pago es asignado al instructor vinculado") %>">
