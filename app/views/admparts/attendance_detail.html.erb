@@ -36,7 +36,7 @@
   </thead>
   <tbody>
     <% @contacts.each do |contact| %>
-      <% contact_detail = @adm.attendance_report[contact.padma_id] || {} %>
+      <% contact_detail = @adm.attendance_report[contact.padma_id] %>
       <% contact_income = @adm.total_for_tag(@adm.installments_tag,nil,{contact_id: contact.id}) %>
       <% next if @ignore_zero_income && contact_income == 0 %>
       <% first_contact_row = true %>
