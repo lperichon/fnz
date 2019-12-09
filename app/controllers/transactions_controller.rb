@@ -21,11 +21,11 @@ class TransactionsController < UserApplicationController
   end
 
   def show
-    @transaction = @context.find(params[:id])
+    @transaction = Transaction.find(params[:id])
   end
 
   def edit
-    @transaction = @context.find(params[:id])
+    @transaction = Transaction.find(params[:id])
   end
 
   def new
@@ -70,7 +70,7 @@ class TransactionsController < UserApplicationController
   # PUT /accounts/1
   # PUT /accounts/1.json
   def update
-    @transaction = @context.find(params[:id])
+    @transaction = Transaction.find(params[:id])
 
     respond_to do |format|
       if @transaction.update_attributes(transaction_attributes_for_update)
@@ -93,7 +93,7 @@ class TransactionsController < UserApplicationController
     end
   end
   def batch_update
-    @transactions = @context.where(id: params[:ids])
+    @transactions = Transaction.where(id: params[:ids])
     @success = true
     @transactions.find_each{|t| @success &&= t.update_attributes(transaction_attributes_for_batch_update) } # trigger callbacks
     respond_to do |format|
@@ -105,7 +105,7 @@ class TransactionsController < UserApplicationController
   # DELETE /accounts/1
   # DELETE /accounts/1.json
   def destroy
-    @transaction = @context.find(params[:id])
+    @transaction = Transaction.find(params[:id])
     @transaction.destroy
 
     respond_to do |format|
