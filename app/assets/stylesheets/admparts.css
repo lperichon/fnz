@@ -23,19 +23,3 @@
   height: 100px;
   vertical-align: center;
 }
-
-@media print {
-  #admpart-team-distribution {
-    page-break-after: always;
-    page-break-inside: avoid;
-  }
-
-  #admpart-total-by-agent {
-    page-break-before: always;
-    page-break-inside: avoid;
-  }
-
-  .no-print {
-    display: none !important;
-  } 
-}

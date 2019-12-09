@@ -10,11 +10,11 @@
 <% end %>
 
 <% content_for :top do %>
-  <button data-action="sidebar#toggleSideBar" data-target="sidebar.toggler" data-show-msg="<%= _("mostrar") %>" data-hide-msg="<%= _("ocultar") %>" class="btn"><span data-target="sidebar.togglerVerb"></span> <%= _("cuentas") %></button>
+  <button data-action="sidebar#toggleSideBar" data-target="sidebar.toggler" data-show-msg="<%= _("mostrar") %>" data-hide-msg="<%= _("ocultar") %>" class="btn hide-in-print"><span data-target="sidebar.togglerVerb"></span> <%= _("cuentas") %></button>
 <% end %>
 
 <%= form_tag batch_edit_business_transactions_path(@business), method: :get, remote: true, "data-controller" => "filter transactions_table" do %>
-<div class="actions row-fluid">
+<div class="actions row-fluid hide-in-print">
   <% if can? :create, @business.imports.build %>
     <%= link_to content_tag(:i, "", class: "icon-upload") + I18n.t('transactions.index.import'),
       new_business_import_path(@business, import: { account_id: @account.try(:id) }),
@@ -39,7 +39,7 @@
   <%= render "balance_title" %>
 </div>
 
-<div class="row-fluid">
+<div class="row-fluid hide-in-print">
   <div class="span10"></div>
   <div id="filterContainer" class="span2">
     <input type="text" id="transactionsFilter" data-target="filter.query" data-action="keyup@window->filter#filterItems"></input>  
@@ -47,12 +47,14 @@
 </div>
 
 <%= render layout: 'transactions_table', locals: {transactions: @transactions} do |transaction| %>
+  <span class="hide-in-print">
   <% if can? :edit, transaction %>
     <%= link_to content_tag(:i, "", class: "icon-edit"), edit_business_transaction_path(transaction.business, transaction), remote: true %>
   <% end %>
   <% if can? :destroy, transaction %>
     <%= link_to content_tag(:i, "", class: "icon-trash"), business_transaction_path(transaction.business, transaction), confirm: I18n.t('actions.confirm_delete'), method: 'delete' %>
   <% end %>
+  </span>
 <% end %>
 <div id="pagination">
 <%= paginate @transactions %>
