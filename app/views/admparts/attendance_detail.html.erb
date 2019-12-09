@@ -54,7 +54,7 @@
         <tr data-target="filter.item">
           <% if first_contact_row %>
             <th rowspan="<%= teachers_with_income_for_this_contact.keys.size %>">
-              <%= contact.name %>
+              <%= link_to contact.name, business_contact_path(@business,contact) %>
             </th>
           <% end %>
           <td>
