@@ -315,7 +315,7 @@ class Admpart < ActiveRecord::Base
   def agent_installments_collection_by_presence_total(agent)
     acum = 0
     contacts_in_attendance_report.each do |contact|
-      contact_detail = attendance_report[contact.padma_id] || {}
+      contact_detail = attendance_report[contact.padma_id]
       distributable_contact_payment = total_for_tag(installments_tag,nil,{contact_id: contact.id}) * (agent_installments_attendance_percentage || 0) / 100
       if contact_detail && contact_detail["total"] > 0
         per = (contact_detail[agent.padma_id.gsub(".","_")].try(:to_f) || 0)*100
