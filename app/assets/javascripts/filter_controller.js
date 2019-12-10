@@ -8,6 +8,14 @@
     }
 
     connect(){
+      if(this.hasQueryTarget){
+        this.queryTarget.disabled = false;
+      }
+    }
+    disconnect(){
+      if(this.hasQueryTarget){
+        this.queryTarget.disabled = true;
+      }
     }
 
     filterItems(event){
