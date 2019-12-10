@@ -81,8 +81,7 @@ class Contact < ActiveRecord::Base
 
     # fetching timezone from business would call accounts-ws 
     # set time zone outside
-    
-    update_attribute :current_membership_id, memberships.open.valid_on(Time.zone.today).first
+    update_attribute(:current_membership_id, memberships.where(closed_on: nil).valid_on(Time.zone.today).first)
   end
 
   private
