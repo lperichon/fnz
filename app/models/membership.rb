@@ -99,11 +99,7 @@ class Membership < ActiveRecord::Base
   end
 
   def update_contacts_current_membership
-  	if closed?
-  		contact.update_attribute(:current_membership_id, nil)
-  	else
-  		contact.update_attribute(:current_membership_id, self.id)
-  	end
+    contact.update_current_membership
   end
 
   private

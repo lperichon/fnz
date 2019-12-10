@@ -77,6 +77,14 @@ class Contact < ActiveRecord::Base
     installments.where("due_on >= '#{date.beginning_of_month}' AND due_on <= '#{date.end_of_month}'").first
   end
 
+  def update_current_membership
+
+    # fetching timezone from business would call accounts-ws 
+    # set time zone outside
+    
+    update_attribute :current_membership_id, memberships.open.valid_on(Time.zone.today).first
+  end
+
   private
   
   def self.get_bussines_from_scope(scope)
