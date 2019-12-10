@@ -7,6 +7,12 @@ class BalanceChecksController < UserApplicationController
     @balance_checks = @account.balance_checks.order("checked_at DESC")
   end
 
+  def show
+    @balance_check = BalanceCheck.find(params[:id])
+    @transactions = @balance_check.transactions
+    render layout: "application_without_sidebar"
+  end
+
   def new
     @balance_check = @account.balance_checks.build(
       checked_at: Time.zone.now

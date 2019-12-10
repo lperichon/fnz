@@ -24,6 +24,29 @@ class BalanceCheck < ActiveRecord::Base
     self.balance_cents = (new_balance.nil?? nil : new_balance.to_f*100)
   end
 
+  def previous
+    @previous ||= account.balance_checks
+                         .where("checked_at < ?", checked_at)
+                         .order(:checked_at).last
+  end
+
+  def transactions
+    if previous
+      from = previous.checked_at
+      account.transactions
+             .where("created_at <= ?",created_at)
+             .where("
+                    ((state = 'created') AND (transaction_at > :from AND transaction_at < :until))
+                    OR
+                    ((state = 'reconciled') AND (reconciled_at > :from AND reconciled_at < :until))",
+                    { from: from, until: checked_at })
+    else
+      account.transactions
+             .where("created_at <= ?",created_at)
+             .where(:state => ['created', 'reconciled'])
+    end
+  end
+
   private 
 
   def create_difference_transaction

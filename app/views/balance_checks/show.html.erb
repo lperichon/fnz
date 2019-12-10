@@ -1,0 +1,11 @@
+
+<%= _("Cierre de caja") %>
+<b><%= number_to_currency @balance_check.balance, unit: @balance_check.account.currency.symbol %> @ <%= l @balance_check.checked_at, format: :short %></b>
+
+<%= render partial: "transactions_table", locals: { transactions: @transactions } %>
+
+<% if @balance_check.previous %>
+  <%= _("Cierre de caja") %>
+  <b><%= number_to_currency @balance_check.previous.balance, unit: @balance_check.previous.account.currency.symbol %> @ <%= l @balance_check.previous.checked_at, format: :short %></b>
+<% end %>
+
