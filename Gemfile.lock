@@ -124,7 +124,7 @@ GEM
     ethon (0.4.2)
       ffi (~> 1.0.11)
       mime-types (~> 1.18)
-    excon (0.38.0)
+    excon (0.71.0)
     execjs (2.7.0)
     factory_girl (4.4.0)
       activesupport (>= 3.0.0)
