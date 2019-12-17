@@ -1,6 +1,6 @@
 <table class="transactions table table-striped table-hover table-condensed table-bordered"
-       data-controller="sum_selected"
-       data-action="listrefreshed@window->sum_selected#showSubtotal"
+       data-controller="sum_selected sum_filtered"
+       data-action="listrefreshed@window->sum_selected#showSubtotal listrefreshed@window->sum_filtered#showSubtotal"
   >
   <%= render :partial => 'transactions_table_header' %>
 
@@ -9,7 +9,7 @@
     <% if params[:admpart_tag_id] || params[:show_subtotal] %>
       <% acum += (transaction.type=="Credit")? transaction.amount : ((transaction.type=="Debit")? -transaction.amount : 0) %>
     <% end %>
-    <tr data-id="<%= transaction.id %>" data-target="filter.item">
+    <tr data-id="<%= transaction.id %>" data-target="filter.item sum_filtered.row">
       <%= render partial: 'transactions_table_item', locals: {transaction: transaction} %>
       <td>
         <%= yield transaction %>
@@ -32,9 +32,16 @@
   <% end %>
   <tfoot class="sum_selected--no-subtotal" data-target="sum_selected.resultContainer">
     <tr>
-      <th colspan="3" data-target="sum_selected.count"></th>
+      <th colspan="3"><span data-target="sum_selected.count"></span> <%= _("seleccionadas") %></th>
       <th data-target="sum_selected.result" class="keep-line sum_selected--subtotal"></th>
-      <th colspan="6"></th>
+      <th colspan="6"><%= _("total ignorando transferencias entre cuentas") %></th>
+    </tr>
+  </tfoot>
+  <tfoot class="sum_filtered--no-subtotal" data-target="sum_filtered.resultContainer">
+    <tr>
+      <th colspan="3"><span data-target="sum_filtered.count"></span> <%= _("visibles") %></th>
+      <th data-target="sum_filtered.result" class="keep-line sum_filtered--subtotal"></th>
+      <th colspan="6"><%= _("total ignorando transferencias entre cuentas") %></th>
     </tr>
   </tfoot>
 </table>

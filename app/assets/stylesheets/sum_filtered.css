@@ -1,0 +1,8 @@
+.sum_filtered--no-subtotal {
+  display: none;
+}
+
+.sum_filtered--subtotal {
+  text-align: right;
+  font-size: 1.3em;
+}
