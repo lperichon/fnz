@@ -40,7 +40,7 @@ class Admpart < ActiveRecord::Base
   attr_accessor :force_refresh
 
 
-  VALID_SECTIONS = %W(income expense ignore director_expenses owners_expenses teams_expenses equal_distribution)
+  VALID_SECTIONS = %W(income expense ignore director_expenses owners_expenses teams_expenses)
 
   before_save :set_defaults
 
@@ -148,10 +148,6 @@ class Admpart < ActiveRecord::Base
   def agent_from_team_final_amount(agent)
     # considering only INSTALLMENTS
     agent_from_team_final_amount_percentage(agent) * teams_final_amount / 100
-  end
-
-  def agent_from_equal_distribution_section # agent not needed, its EQUAL distribution
-    @afeds ||= (section_total("equal_distribution") / team_members.size)
   end
 
   def section_total(section)
@@ -415,7 +411,7 @@ class Admpart < ActiveRecord::Base
   appsignal_instrument_method :enrollments_by_teacher
 
   def agent_total_winnings(agent)
-    agent_from_team_final_amount(agent) + agent_sales_comission(agent) + agent_from_enrollments_total(agent) + agent_from_equal_distribution_section
+    agent_from_team_final_amount(agent) + agent_sales_comission(agent) + agent_from_enrollments_total(agent)
   end
 
   # installments_tag_id, enrollments_tag_id, sales_tag_id getter and setter
