@@ -14,7 +14,7 @@ class TransactionsController < UserApplicationController
         @transactions = @transactions.page(params[:page]).per(params[:per_page] || PER_PAGE )
       end
       format.csv do
-        headers['Content-Disposition'] = "attachment; filename=\"transactions\""
+        headers['Content-Disposition'] = "attachment; filename=\"transactions.csv\""
         headers['Content-Type'] ||= 'text/csv'
       end
     end
