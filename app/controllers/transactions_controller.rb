@@ -8,6 +8,10 @@ class TransactionsController < UserApplicationController
 
     @transactions = @context.includes(:agent, :contact, :tags, :source, :business)
 
+    if @account && @start_date
+      @starting_balance = @account.calculate_balance(@start_date)
+    end
+
     respond_to do |format|
       format.html do
         get_download_api_key
