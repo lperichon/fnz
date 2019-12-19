@@ -67,17 +67,24 @@ class Account < ActiveRecord::Base
     ret
   end
 
-  def calculate_balance(ref_date=nil)
-    base = last_balance_check.nil?? 0 : last_balance_check.balance
+  def calculate_balance(ref_time=nil)
+    base = if ref_time.nil?
+      last_balance_check.nil?? 0 : last_balance_check.balance
+    else
+      bc = balance_checks.order(:checked_at)
+                         .where("checked_at < ?",ref_time)
+                         .last
+      bc.nil?? 0 : bc.balance
+    end
 
-    transactions_scope = if ref_date.nil?
+    transactions_scope = if ref_time.nil?
       active_transactions
     else
       active_transactions.where("
                          ((state = 'created') AND (transaction_at < ?))
                          OR
                          ((state = 'reconciled') AND (reconciled_at < ?))",
-                         ref_date, ref_date)
+                         ref_time, ref_time)
     end
 
     
