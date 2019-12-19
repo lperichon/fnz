@@ -67,17 +67,28 @@ class Account < ActiveRecord::Base
     ret
   end
 
+  def calculate_balance(ref_date=nil)
+    base = last_balance_check.nil?? 0 : last_balance_check.balance
+
+    transactions_scope = if ref_date.nil?
+      active_transactions
+    else
+      active_transactions.where("
+                         ((state = 'created') AND (transaction_at < ?))
+                         OR
+                         ((state = 'reconciled') AND (reconciled_at < ?))",
+                         ref_date, ref_date)
+    end
+
+    
+    transactions_scope.inject(base) do |balance, transaction|
+      balance+transaction.sign(self)*transaction.amount
+    end
+  end
+
   private
 
   def set_defaults
     self.currency = business.currency_code if self.currency.nil?
-  end
-
-  def calculate_balance
-    base = last_balance_check.nil?? 0 : last_balance_check.balance
-    
-    active_transactions.inject(base) do |balance, transaction|
-      balance+transaction.sign(self)*transaction.amount
-    end
   end
 end

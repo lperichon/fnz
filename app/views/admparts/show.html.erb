@@ -2,7 +2,7 @@
   <%= render "warnings" %>
 </div>
 
-<div id="admpart-date-select">
+<div id="admpart-date-select" class="hide-in-print">
   <%= select_tag :ref_date,
                  ref_date_options,
                  data: { action: "redirectOnChange", business_id: @adm.business_id  } %><br/>
@@ -12,10 +12,7 @@
 </div>
 <div id="admpart">
   <%= link_to (content_tag(:i, "", class: "icon-download")+_("Descargar detalle transacciones")).html_safe,
-              business_transactions_path(@business, params.merge({
-                                            format: "csv",
-                                            report_on: @adm.ref_date }
-              )),
+              business_transactions_path(@business, format: "csv", report_on: @adm.ref_date ),
               class: "btn pull-right" %>
 
 <%= render "refreshing" %>
