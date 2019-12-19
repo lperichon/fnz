@@ -12,3 +12,16 @@
     <td></td>
   </tr>
 </thead>
+
+<% if @ending_balance && @account && @end_date  %>
+  <thead class="partial_balance">
+    <tr>
+      <th colspan="2"></th>
+      <td><%= _("Balance al %{ref_date}") % { ref_date: l(@end_date, format: :short)} %></td>
+      <td class="align-left"><%= number_to_currency @ending_balance, unit: @account.currency.symbol, precision: 2 %></td>
+      <td><%= @account.name %></td>
+      <td><%= l(@end_date, format: :short) %></td>
+      <td colspan="4"></td>
+    </tr>
+  </thead>
+<% end %>

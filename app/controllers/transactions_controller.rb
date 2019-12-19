@@ -12,6 +12,13 @@ class TransactionsController < UserApplicationController
       @starting_balance = @account.calculate_balance(@start_date)
     end
 
+    if @account && @end_date && @end_date < Time.zone.today
+      eb = @account.calculate_balance(@end_date)
+      if eb != @account.balance
+        @ending_balance = eb
+      end
+    end
+
     respond_to do |format|
       format.html do
         get_download_api_key

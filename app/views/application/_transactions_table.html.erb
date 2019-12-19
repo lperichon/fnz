@@ -31,11 +31,14 @@
     </tr>
   <% end %>
   <% if @starting_balance && @account && @start_date  %>
-    <tfoot>
+    <tfoot class="partial_balance">
       <tr>
-        <th colspan="3"></th>
-        <th class="align-left"><%= number_to_currency @starting_balance, unit: @account.currency.symbol, precision: 2 %></th>
-        <td colspan="6"><%= _("Balance al %{ref_date}") % { ref_date: l(@start_date, format: :short) } %></td>
+        <th colspan="2"></th>
+        <td><%= _("Balance al %{ref_date}") % { ref_date: l(@start_date, format: :short)} %></td>
+        <td class="align-left"><%= number_to_currency @starting_balance, unit: @account.currency.symbol, precision: 2 %></td>
+        <td><%= @account.name %></td>
+        <td><%= l(@start_date, format: :short) %></td>
+        <td colspan="4"></td>
       </tr>
     </tfoot>
   <% end %>
@@ -44,14 +47,14 @@
     <tr>
       <th colspan="3"><span data-target="sum_selected.count"></span> <%= _("seleccionadas") %></th>
       <th data-target="sum_selected.result" class="keep-line sum_selected--subtotal"></th>
-      <th colspan="6"><%= _("total ignorando transferencias entre cuentas") %></th>
+      <th colspan="6"><%= _("suma total ignorando transferencias entre cuentas") %></th>
     </tr>
   </tfoot>
   <tfoot class="sum_filtered--no-subtotal" data-target="sum_filtered.resultContainer">
     <tr>
       <th colspan="3"><span data-target="sum_filtered.count"></span> <%= _("visibles") %></th>
       <th data-target="sum_filtered.result" class="keep-line sum_filtered--subtotal"></th>
-      <th colspan="6"><%= _("total ignorando transferencias entre cuentas") %></th>
+      <th colspan="6"><%= _("suma total ignorando transferencias entre cuentas") %></th>
     </tr>
   </tfoot>
 </table>
