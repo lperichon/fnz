@@ -1,34 +1,34 @@
 (()=>{
-  stimulusApplication.register("sum_selected", class extends Stimulus.Controller {
+  stimulusApplication.register("sum_filtered", class extends Stimulus.Controller {
     static get targets(){
-      return ["selector","result","resultContainer","count"];
+      return ["row","result","resultContainer","count"];
     }
 
     connect(){
     }
 
     showSubtotal(){
-      this.resultContainerTarget.classList.toggle("sum_selected--no-subtotal",this.getSelectedVisible().length==0);
+      this.resultContainerTarget.classList.toggle("sum_filtered--no-subtotal",this.getVisible().length==0);
       this.showCount();
       this.resultTarget.innerText = this.sum();
     }
 
     showCount(){
-      this.countTarget.innerText = this.getSelectedVisible().length;
+      this.countTarget.innerText = this.getVisible().length;
     }
 
 
     sum(){
       var acum = 0;
-      this.getSelectedVisible().map((el)=>{
+      this.getVisible().map((el)=>{
         acum += this.valueFor(el);
       });
       return acum;
     }
 
-    getSelectedVisible(){
-      return this.selectorTargets.filter((el)=>{
-        return (el.checked && !this.isHidden(el))
+    getVisible(){
+      return this.rowTargets.filter((el)=>{
+        return !this.isHidden(el);
       });
     }
 
@@ -36,19 +36,18 @@
       return (el.offsetParent === null)
     }
 
-    valueFor(selector){
-      var tr = selector.parentElement.parentElement;
-      var amountString = tr.querySelector("td:nth-child(4)").textContent
+    valueFor(row){
+      var amountString = row.querySelector("td:nth-child(4)").textContent
 
       // TODO no contempla euros etc
       amountString = amountString.trim().replace("$","").replace(".","").replace(",",".")
-      return math.evaluate(amountString) * this.signFor(tr);
+      return math.evaluate(amountString) * this.signFor(row);
     }
 
-    signFor(tr){
-      if(tr.querySelector(".icon-credit")){
+    signFor(row){
+      if(row.querySelector(".icon-credit")){
         return 1;
-      } else if(tr.querySelector(".icon-debit")){
+      } else if(row.querySelector(".icon-debit")){
         return -1;
       } else {
         return 0;
