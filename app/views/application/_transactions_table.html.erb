@@ -35,7 +35,7 @@
       <tr>
         <th colspan="2"></th>
         <td><%= _("Balance al %{ref_date}") % { ref_date: l(@start_date, format: :short)} %></td>
-        <td class="align-left"><%= number_to_currency @starting_balance, unit: @account.currency.symbol, precision: 2 %></td>
+        <td class="align-left keep-line"><%= number_to_currency @starting_balance, unit: @account.currency.symbol, precision: 2 %></td>
         <td><%= @account.name %></td>
         <td><%= l(@start_date, format: :short) %></td>
         <td colspan="4"></td>
