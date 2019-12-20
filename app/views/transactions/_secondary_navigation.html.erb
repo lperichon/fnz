@@ -6,6 +6,9 @@
      if @contact
        transaction_params.merge!({contact_id: @contact.id})
      end
+     if params[:admpart_tag_id]
+       transaction_params.merge!({admpart_tag_id: params[:admpart_tag_id]})
+     end
   %>
   <li class="pull-right">
     <%= link_to content_tag(:i, "", :class => "icon-plus") + I18n.t('transactions.secondary_navigation.add_transaction'),
