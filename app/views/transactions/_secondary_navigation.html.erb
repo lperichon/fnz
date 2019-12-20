@@ -7,7 +7,7 @@
        transaction_params.merge!({contact_id: @contact.id})
      end
      if params[:admpart_tag_id]
-       transaction_params.merge!({admpart_tag_id: params[:admpart_tag_id]})
+       transaction_params.merge!({tag_ids: [params[:admpart_tag_id]]})
      end
   %>
   <li class="pull-right">
