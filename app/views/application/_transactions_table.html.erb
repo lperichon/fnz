@@ -30,7 +30,7 @@
       <td></td>
     </tr>
   <% end %>
-  <% if @starting_balance && @account && @start_date  %>
+  <% if @starting_balance && @account && @start_date && !params[:active_only]  %>
     <tfoot class="partial_balance">
       <tr>
         <th colspan="2"></th>
