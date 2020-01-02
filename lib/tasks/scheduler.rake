@@ -32,6 +32,13 @@ task :create_monthly_installments  => :environment do
   end
 end
 
+desc "Recalculates current membership for contacts with a membership starting on current day"
+task :update_current_memberships => :environment do
+  Membership.where(begins_on: Date.today).map(&:contact).uniq.each do |contact|
+    contact.update_current_membership
+  end
+end
+
 desc "This task is called by the Heroku scheduler add-on it broadcasts end of membership 1 month before"
 task :broadcast_end_of_memberships => :environment do
   School.where("padma_id IS NOT NULL").each do |business|
