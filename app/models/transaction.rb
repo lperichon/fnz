@@ -87,15 +87,23 @@ class Transaction < ActiveRecord::Base
 
   def self.api_where(q=nil)
     q = {} if q.nil?
+    base = self
 
-    if q[:admpart_tag_id] && (t = Tag.find(q[:admpart_tag_id]))
-      q[:admpart_tag_id] = t.self_and_descendants.map(&:id)
+    if q[:admpart_tag_id]
+      if q[:admpart_tag_id] == ""
+        q.delete(:admpart_tag_id)
+        base = base.where("admpart_tag_id IS NULL")
+      else
+        if t = Tag.find(q[:admpart_tag_id])
+          q[:admpart_tag_id] = t.self_and_descendants.map(&:id)
+        end
+      end
     end
     if q[:account_id]
       q[:source_id] = q.delete(:account_id)
     end
 
-    self.where(q)
+    base.where(q)
   end
 
   def set_report_at
