@@ -11,8 +11,8 @@
   <%= f.association :source,
     :collection => @business.accounts,
     :prompt => t('transactions.fields.source_prompt'),
-    value: @business.accounts.default.name,
-    selected: @business.accounts.default.id %>
+    value: @business.accounts.default.try(:name),
+    selected: @business.accounts.default.try(:id) %>
 <% end %>
 
 
