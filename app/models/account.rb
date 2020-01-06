@@ -93,6 +93,10 @@ class Account < ActiveRecord::Base
     end
   end
 
+  def self.default
+    where(default: true).first
+  end
+
   private
 
   def set_defaults

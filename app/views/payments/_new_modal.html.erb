@@ -3,6 +3,8 @@
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     <h3><%= t('payments.new_modal.title') %></h3>
   </div>
+  <div class="modal-error alert alert-danger">
+  </div>
 
   <% 
     form_url = if @installment.present? && @installment.new_record?

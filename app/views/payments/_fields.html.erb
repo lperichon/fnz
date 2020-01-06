@@ -8,7 +8,11 @@
 <% if @business.accounts.count == 1 %>
 	<%= f.input :source_id, :as => :hidden, :input_html => { :value => @business.accounts.first.id } %>
 <% else %>
-	<%= f.association :source, :collection => @business.accounts, :prompt => t('transactions.fields.source_prompt') %>
+  <%= f.association :source,
+    :collection => @business.accounts,
+    :prompt => t('transactions.fields.source_prompt'),
+    value: @business.accounts.default.name,
+    selected: @business.accounts.default.id %>
 <% end %>
 
 
