@@ -31,6 +31,8 @@
     
     <%=  f.input :contact_id, as: :select, collection: @business.contacts, input_html: {class: "chosen", 'data-placeholder' => t('transactions.fields.contact_placeholder')} %>
 
+    <%= f.association :source, collection: @business.accounts.order("name"), prompt: "" %>
+
     <div class="modal-footer">
       <%= link_to _("Cerrar"), "#", class: "btn", "data-dismiss" => "modal" %>
       <%= f.button :submit, _("Actualizar transacciones"),  class: "btn btn-primary" %>
