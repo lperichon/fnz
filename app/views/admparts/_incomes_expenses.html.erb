@@ -30,6 +30,11 @@
 </tr>
 <tr>
   <th><%= t(".profit") %></th>
-  <td colspan="3"><%= pm @adm.profit %></td>
+  <td <%= "colspan=3" if @adm.not_tagged_total == 0%>><%= pm @adm.profit %></td>
+  <% if @adm.not_tagged_total != 0 %>
+    <th><%= link_to_not_tagged _("Transacciones ignoradas:") %></th>
+    <td><%= link_to_not_tagged pm(@adm.not_tagged_total) %>
+  <% end %>
+  </td>
 </tr>
 <!-- incomes n expenses end -->

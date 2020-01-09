@@ -224,6 +224,13 @@ class Admpart < ActiveRecord::Base
   end
   appsignal_instrument_method :total_for_tag
 
+  def not_tagged_total
+    scope = business.transactions
+                    .to_report_on_month(ref_date)
+                    .api_where(admpart_tag_id: "")
+    scope.sum("CASE WHEN transactions.type='Credit' THEN transactions.amount WHEN transactions.type='Debit' THEN -1 * transactions.amount ELSE 0 END").to_f # using CASE casts to string ¿?
+  end
+
   ###
   #
   # hash of format:

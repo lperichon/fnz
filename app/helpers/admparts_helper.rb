@@ -18,6 +18,12 @@ module AdmpartsHelper
                                                 )
   end
 
+  def link_to_not_tagged(msg)
+    link_to msg, business_transactions_path(business_id: @adm.business_id,
+                                            q: { admpart_tag_id: "" },
+                                            report_on: @adm.ref_date)
+  end
+
   def ref_date_options
     options = []
     (0..6).each do |i|
