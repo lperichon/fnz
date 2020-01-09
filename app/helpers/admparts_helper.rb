@@ -20,7 +20,10 @@ module AdmpartsHelper
 
   def link_to_not_tagged(msg)
     link_to msg, business_transactions_path(business_id: @adm.business_id,
-                                            q: { admpart_tag_id: "", type: ["Credit","Debit"] },
+                                            q: {
+                                              amount_not_eq: 0,
+                                              admpart_tag_id: "", type: ["Credit","Debit"]
+                                            },
                                             report_on: @adm.ref_date)
   end
 

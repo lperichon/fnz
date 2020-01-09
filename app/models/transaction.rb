@@ -103,6 +103,10 @@ class Transaction < ActiveRecord::Base
       q[:source_id] = q.delete(:account_id)
     end
 
+    if q[:amount_not_eq]
+      base = base.where("amount <> ?", q.delete(:amount_not_eq))
+    end
+
     base.where(q)
   end
 
