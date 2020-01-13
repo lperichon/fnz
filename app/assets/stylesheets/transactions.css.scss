@@ -13,7 +13,13 @@
 }
 
 #transactionsFilter {
-  width: 100%;
+  width: 80%;
+}
+
+#datelessSearch {
+  cursor: pointer;
+  float: right;
+  margin-top: 8px;
 }
 
 #filterContainer {

@@ -111,6 +111,11 @@ class Transaction < ActiveRecord::Base
       base = base.where("description like '%#{q.delete(:description)}%'")
     end
 
+    if q[:smart_query]
+      # [TODO] cory js filter logic
+      base = base.where("description like '%#{q.delete(:smart_query)}%'")
+    end
+
     base.where(q)
   end
 

@@ -72,6 +72,10 @@
     smartValue(){
       return this.queryTarget.value.substring(this.queryTarget.value.match(":").index+1);
     }
+
+    datelessSearch(){
+      window.location=window.location.pathname+"?start_date=0001-01-01&end_date=5000-1-1&q[smart_query]="+this.queryTarget.value;
+    }
   });
 
 })();
