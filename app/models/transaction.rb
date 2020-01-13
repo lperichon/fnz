@@ -107,6 +107,10 @@ class Transaction < ActiveRecord::Base
       base = base.where("amount <> ?", q.delete(:amount_not_eq))
     end
 
+    if q[:description]
+      base = base.where("description like '%#{q.delete(:description)}%'")
+    end
+
     base.where(q)
   end
 
