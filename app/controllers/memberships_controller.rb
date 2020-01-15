@@ -123,21 +123,8 @@ class MembershipsController < UserApplicationController
   def get_context
     business_id = params[:business_id]
     business_id = params[:membership][:business_id] unless business_id || params[:membership].blank?
-    param_is_padma_id = (false if Float(business_id) rescue true)
     
-    if current_user.admin?
-      @business_context = Business
-    else
-      @business_context = current_user.businesses
-    end
-
-    if business_id
-      if param_is_padma_id
-        @business = @business_context.get_by_padma_id(params[:business_id])
-      else
-        @business = @business_context.find(params[:business_id])
-      end
-      @context = @business.memberships
-    end
+    @business = Business.smart_find(business_id)
+    @context = @business.memberships if @business
   end
 end
