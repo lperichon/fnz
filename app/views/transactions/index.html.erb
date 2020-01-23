@@ -53,7 +53,7 @@
     <%= link_to content_tag(:i, "", class: "icon-edit"), edit_business_transaction_path(transaction.business, transaction), remote: true %>
   <% end %>
   <% if can? :destroy, transaction %>
-    <%= link_to content_tag(:i, "", class: "icon-trash"), business_transaction_path(transaction.business, transaction), confirm: I18n.t('actions.confirm_delete'), method: 'delete' %>
+    <%= link_to content_tag(:i, "", class: "icon-trash"), business_transaction_path(transaction.business, transaction), confirm: I18n.t('actions.confirm_delete'), method: 'delete', remote: true %>
   <% end %>
   </span>
 <% end %>

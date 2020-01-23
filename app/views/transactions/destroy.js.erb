@@ -1,0 +1,9 @@
+$(".<%= css_class_id(@transaction) %>").remove();
+
+<% if @transaction.source_id %>
+  <%= render partial: "update_account_balance", locals: { account: @transaction.source } %>
+<% end %>
+
+<% if @transaction.target_id %>
+  <%= render partial: "update_account_balance", locals: { account: @transaction.target } %>
+<% end %>

@@ -9,7 +9,7 @@
     <% if params[:admpart_tag_id] || params[:show_subtotal] %>
       <% acum += (transaction.type=="Credit")? transaction.amount : ((transaction.type=="Debit")? -transaction.amount : 0) %>
     <% end %>
-    <tr data-id="<%= transaction.id %>" data-target="filter.item sum_filtered.row">
+    <tr data-id="<%= transaction.id %>" data-target="filter.item sum_filtered.row" class="<%= css_class_id(transaction) %>">
       <%= render partial: 'transactions_table_item', locals: {transaction: transaction} %>
       <td>
         <%= yield transaction %>
