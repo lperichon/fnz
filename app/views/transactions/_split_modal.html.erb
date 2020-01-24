@@ -7,10 +7,28 @@
                       url: do_split_business_transaction_path(@business, @transaction),
                       method: :put,
                    #   remote: true,
-                      html: {class: 'form-horizontal' }) do |f| %>
+                      html: {
+                        class: 'form-horizontal',
+                        "data-controller" => "split_form",
+                        "data-split_form-original-amount" => @transaction.amount, # dont use data: { split_form... } because underline is lost
+                        "data-split_form-error-message" => (_("La suma de las transacciones debe ser %{total}.") % {total: @transaction.amount})
+                      }) do |f| %>
     <div class="modal-body">
       <%= f.simple_fields_for :targets do |p| %>
-        <%= p.input :amount %>
+
+        <div class="control-group" data-controller="calculator">
+          <label class="control-label"><%= _("Valor") %></label>
+          <div class="controls">
+            <input type="text" data-target="calculator.formula split_form.subFormula"
+                               data-action="keyup@window->calculator#calculateResult keyup@window->split_form#validate"
+                               class="calculatorFormula"
+                               ></input> 
+            =
+            <input type="text" data-target="calculator.result" class="calculatorResult" disabled></input> 
+            <%= p.input :amount, as: :hidden, input_html: { data: { target: "calculator.result calculator.initialValue split_form.subAmount" }} %>
+          </div>
+        </div>
+
         <%= p.input :tag_ids, as: :select, collection: @business.tags, input_html: {class: "chosen", 'data-placeholder' => t('transactions.fields.tags_placeholder')} %>
         <%= p.input :contact_id, as: :select, collection: @business.contacts, input_html: {class: "chosen", 'data-placeholder' => t('transactions.fields.contact_placeholder')} %>
         <hr>
@@ -18,7 +36,8 @@
     </div>
     <div class="modal-footer">
       <%= link_to _("cancelar"), "#", class: "btn", "data-dismiss" => "modal" %>
-      <%= f.button :submit, :class => "btn btn-primary" %>
+      <%= f.button :submit, value: _("Dividir transacción"), :class => "btn btn-primary", "data-target" => "split_form.submit" %>
+      <span data-target="split_form.errorMessage" ></span>
     </div>
   <% end %>
 </div>
