@@ -15,6 +15,7 @@
                       }) do |f| %>
     <div class="modal-body">
       <%= f.simple_fields_for :targets do |p| %>
+        <%= p.input :description %>
 
         <div class="control-group" data-controller="calculator">
           <label class="control-label"><%= _("Valor") %></label>
