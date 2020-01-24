@@ -35,6 +35,10 @@ Fnz::Application.routes.draw do
       resources :balance_checks
     end
     resources :transactions do
+      member do
+        get :split_form
+        put :do_split
+      end
       collection do
         get :batch_edit
         put :batch_update

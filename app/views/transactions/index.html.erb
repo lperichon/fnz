@@ -21,6 +21,7 @@
                 class: "btn" %>
   <% end %>
   <%= submit_tag _("Editar"), class: "btn" %>
+
   <%# link_to content_tag(:i, "", :class => "icon-bar-chart") + I18n.t('transactions.index.stats'), stats_business_transactions_path(@business, :start_date => @start_date.to_date, :end_date => @end_date.to_date), :remote => true, :class => "btn" %>
 
   <div class="pull-right">
@@ -54,6 +55,9 @@
   <% end %>
   <% if can? :destroy, transaction %>
     <%= link_to content_tag(:i, "", class: "icon-trash"), business_transaction_path(transaction.business, transaction), confirm: I18n.t('actions.confirm_delete'), method: 'delete', remote: true %>
+  <% end %>
+  <% if can? :split, transaction %>
+    <%= link_to content_tag(:i, "", class: "icon-list"), split_form_business_transaction_path(transaction.business, transaction), remote: true %>
   <% end %>
   </span>
 <% end %>

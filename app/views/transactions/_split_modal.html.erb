@@ -1,0 +1,24 @@
+<div id="transaction-split-modal" class = "modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3><%= _("Dividir transacción") %></h3>
+  </div>
+  <%= simple_form_for(TransactionSpliter.new(targets: [@transaction,@transaction]),
+                      url: do_split_business_transaction_path(@business, @transaction),
+                      method: :put,
+                   #   remote: true,
+                      html: {class: 'form-horizontal' }) do |f| %>
+    <div class="modal-body">
+      <%= f.simple_fields_for :targets do |p| %>
+        <%= p.input :amount %>
+        <%= p.input :tag_ids, as: :select, collection: @business.tags, input_html: {class: "chosen", 'data-placeholder' => t('transactions.fields.tags_placeholder')} %>
+        <%= p.input :contact_id, as: :select, collection: @business.contacts, input_html: {class: "chosen", 'data-placeholder' => t('transactions.fields.contact_placeholder')} %>
+        <hr>
+      <% end %>
+    </div>
+    <div class="modal-footer">
+      <%= link_to _("cancelar"), "#", class: "btn", "data-dismiss" => "modal" %>
+      <%= f.button :submit, :class => "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

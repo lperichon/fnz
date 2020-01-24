@@ -1,0 +1,7 @@
+$('body').append("<%= escape_javascript(render(:partial => "transactions/split_modal"))%>");
+$('#transaction-split-modal').modal({
+    keyboard: false
+});
+$('#transaction-split-modal').on("hide.bs.modal", function(){
+  $('#transaction-split-modal').remove();
+});
