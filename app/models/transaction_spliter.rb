@@ -27,6 +27,15 @@ class TransactionSpliter
     t
   end
 
+  def do_split!
+    if @source.present? || !@targets.empty?
+      Transaction.transaction do # transaction method call is a DB Transaction
+        @source.destroy!
+        @targets.each {|t| t.save! }
+      end
+    end
+  end
+
   def persisted?
     false
   end
