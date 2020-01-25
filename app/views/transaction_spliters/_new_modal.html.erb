@@ -1,11 +1,10 @@
 <div id="transaction-split-modal" class = "modal hide fade">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3><%= _("Dividir transacción") %></h3>
+    <h3><%= _("Dividir la transacción en dos") %></h3>
   </div>
   <%= simple_form_for(@spliter,
                       url: business_transaction_transaction_spliters_path(@business, @transaction),
-                   #   remote: true,
                       html: {
                         class: 'form-horizontal',
                         "data-controller" => "split_form",
@@ -30,6 +29,7 @@
         </div>
 
         <%= p.input :tag_ids, as: :select, collection: @business.tags, input_html: {class: "chosen", 'data-placeholder' => t('transactions.fields.tags_placeholder')} %>
+        <%= p.input :agent_id, as: :select, collection: @business.agents.enabled, input_html: {class: "chosen", 'data-placeholder' => t('transactions.fields.agent_placeholder')} %>
         <%= p.input :contact_id, as: :select, collection: @business.contacts, input_html: {class: "chosen", 'data-placeholder' => t('transactions.fields.contact_placeholder')} %>
         <hr>
       <% end %>
