@@ -7,11 +7,24 @@ class TransactionSpliter
 
   def initialize(attributes={})
     @source= attributes[:source]
-    @targets= attributes[:targets]
+    if attributes[:targets]
+      @targets= attributes[:targets]
+    elsif attributes[:targets_attributes]
+      self.targets_attributes=attributes[:targets_attributes]
+    end
   end
 
   def targets_attributes=(attrs={})
+    @targets = []
+    attrs.values.each do |v|
+      @targets << build_target(v)
+    end
+  end
 
+  def build_target(atrs={})
+    t = source.dup
+    t.attributes = atrs
+    t
   end
 
   def persisted?

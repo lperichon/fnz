@@ -10,7 +10,8 @@ class TransactionSplitersController < UserApplicationController
   end
 
   def create
-    render text: params.inspect
+    @spliter = TransactionSpliter.new(params[:transaction_spliter].merge({source: @transaction}))
+    render text: @spliter.inspect
   end
 
 
