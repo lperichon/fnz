@@ -3,9 +3,8 @@
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     <h3><%= _("Dividir transacción") %></h3>
   </div>
-  <%= simple_form_for(TransactionSpliter.new(targets: [@transaction,@transaction]),
-                      url: do_split_business_transaction_path(@business, @transaction),
-                      method: :put,
+  <%= simple_form_for(@spliter,
+                      url: business_transaction_transaction_spliters_path(@business, @transaction),
                    #   remote: true,
                       html: {
                         class: 'form-horizontal',

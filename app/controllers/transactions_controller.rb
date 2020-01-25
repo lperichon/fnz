@@ -125,15 +125,6 @@ class TransactionsController < UserApplicationController
     end
   end
 
-  def split_form
-    @transaction = @context.find(params[:id])
-  end
-
-  def do_split
-    @transaction = @context.find(params[:id])
-    render text: params.inspect
-  end
-
   def stats
     @context = @context
     # List transactions on this month or the year/month solicited

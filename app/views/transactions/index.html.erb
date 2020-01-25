@@ -57,7 +57,7 @@
     <%= link_to content_tag(:i, "", class: "icon-trash"), business_transaction_path(transaction.business, transaction), confirm: I18n.t('actions.confirm_delete'), method: 'delete', remote: true %>
   <% end %>
   <% if can? :split, transaction %>
-    <%= link_to content_tag(:i, "", class: "icon-list"), split_form_business_transaction_path(transaction.business, transaction), remote: true %>
+    <%= link_to content_tag(:i, "", class: "icon-list"), new_business_transaction_transaction_spliter_path(transaction.business, transaction), remote: true %>
   <% end %>
   </span>
 <% end %>
