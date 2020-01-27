@@ -2,7 +2,7 @@ $('body').append("<%= escape_javascript(render(:partial => "transactions/new_mod
 $('#new-transaction-modal').modal({
     keyboard: false
 });
-$('#new-transaction-modal').on("hide.bs.modal", function(){
+$('#new-transaction-modal').on("hidden.bs.modal", function(){
   $('#new-transaction-modal').remove();
 });
 $("#new_transaction #transaction_tag_ids").chosen({

@@ -2,6 +2,6 @@ $('body').append("<%= escape_javascript(render(:partial => "transaction_spliters
 $('#transaction-split-modal').modal({
     keyboard: false
 });
-$('#transaction-split-modal').on("hide.bs.modal", function(){
+$('#transaction-split-modal').on("hidden.bs.modal", function(){
   $('#transaction-split-modal').remove();
 });
