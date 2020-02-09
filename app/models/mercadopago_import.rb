@@ -104,8 +104,11 @@ class MercadopagoImport < TransactionImport
   end
 
   def handle_row(business, row)
+    # Find by external_id for update
     t = business.transactions.find_by_external_id(value_for(row,"operation_id").to_s)
+    # or create new transaction
     t = business.transactions.new unless t
+
     t.creator_id = business.owner_id
     t.transaction_at = value_for(row,"date_created")
     t.description = description_for(row)
