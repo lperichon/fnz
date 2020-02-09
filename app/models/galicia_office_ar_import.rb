@@ -1,3 +1,7 @@
+##
+#
+# Importa Export de Galicia OFFICE - ˝csv ampliado"
+#
 class GaliciaOfficeArImport < TransactionImport
   belongs_to :account
   validates :account, presence: true
