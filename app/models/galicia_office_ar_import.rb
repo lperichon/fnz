@@ -1,3 +1,4 @@
+require "digest"
 ##
 #
 # Importa Export de Galicia OFFICE - ˝csv ampliado"
@@ -32,7 +33,7 @@ class GaliciaOfficeArImport < TransactionImport
         begin
           new_record = handle_row(business, row)
           
-          if duplicated_transaction?(business,new_record)
+          if duplicated_transaction?(new_record)
             # this record is already registered
             errs << [row, _("transacción ya registrada")].flatten
             next
@@ -73,38 +74,36 @@ class GaliciaOfficeArImport < TransactionImport
 
   def handle_row(business, row)
     transaction = Transaction.new
-    type = (BigDecimal.new(row[3].gsub(",","."))==0.0)? "Credit" : "Debit"
     transaction.attributes = {
       business_id: business.id,
-      type: type,
+      type: row_type(row),
       source_id: account.id,
       transaction_at: Time.zone.parse(row[0]),
-      amount: BigDecimal.new(row[(type=="Debit")? 3 : 4].gsub(",",".")),
+      amount: row_amount(row),
       description: "#{row[1]} #{row[10]}",
       creator_id: business.owner_id,
       state: 'created'
     }
+    transaction.external_id = generate_external_id(row)
     return transaction
   end
 
-  def duplicated_transaction?(business,new_transaction)
-    scope = account.transactions.where(
-      type: new_transaction.type,
-      transaction_at: new_transaction.transaction_at,
-      amount: new_transaction.amount,
-      description: new_transaction.description
-    )
-    if scope.exists?
-      # found possible duplicate
-      if self.transactions.where(id: scope.first.id).exists?
-        # but its another row from same import, not duplicate
-        false
-      else
-        true
-      end
-    else
-      false
-    end
+  def duplicated_transaction?(new_transaction)
+    account.transactions.where(external_id: new_transaction.external_id).exists?
+  end
+
+  def row_type(row)
+    (BigDecimal.new(row[3].gsub(",","."))==0.0)? "Credit" : "Debit"
+  end
+  def row_amount(row)
+    BigDecimal.new(row[(row_type(row)=="Debit")? 3 : 4].gsub(",","."))
+  end
+
+  def generate_external_id(row)
+    # row incluye el saldo post transaccion,
+    # -> 2 movimientos identicos tendrás saldo posterior diferente
+    # -> con esto cada movimiento, aunque sea igual  a otro tiene un ID unico
+    Digest::SHA2.hexdigest row.to_s
   end
 
 end
