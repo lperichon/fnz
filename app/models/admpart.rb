@@ -65,6 +65,13 @@ class Admpart < ActiveRecord::Base
     attributes.reject{|k| k.in?(IGNORED_ATTRIBUTES_IN_CLONE) }
   end
 
+  def previous_adm
+    business.admparts.for_ref_date(ref_date-1.month).first
+  end
+  def next_adm
+    business.admparts.for_ref_date(ref_date+1.month).first
+  end
+
   # total_income + total_expense
   def profit
     section_total("income") + section_total("expense")
