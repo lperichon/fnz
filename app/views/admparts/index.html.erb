@@ -1,0 +1,35 @@
+<table class="table table-striped table-hover table-condensed table-bordered">
+  <thead>
+    <tr>
+      <td>
+        Tag
+      </td>
+      <% @totals.keys.each do |date| %>
+        <td>
+          <%= l(date, format: :month) %>
+        </td>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% @totals[@start_at].each_pair do |section, tag_h| %>
+      <tr>
+        <th colspan="<%= 1+@totals.keys.size %>">
+          <%= section %>
+        </th>
+      </tr>
+      <% tag_h.keys.each do |tag| %>
+        <tr>
+          <td>
+            <%= tag.name %>
+          </td>
+          <% @totals.keys.each do |date| %>
+            <td>
+              <%= pm @totals[date][section][tag] %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

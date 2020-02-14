@@ -12,6 +12,10 @@ class MonthTagTotal < ActiveRecord::Base
 
   before_save :calculate_total_amount
 
+  def self.on_month(date)
+    self.where(ref_date: cast_date(date))
+  end
+
   def calculate_total_amount
     self.total_amount = tag.tree_transactions
          .to_report_on_month(ref_date)
