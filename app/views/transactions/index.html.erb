@@ -13,6 +13,10 @@
   <button data-action="sidebar#toggleSideBar" data-target="sidebar.toggler" data-show-msg="<%= _("mostrar") %>" data-hide-msg="<%= _("ocultar") %>" class="btn hide-in-print"><span data-target="sidebar.togglerVerb"></span> <%= _("cuentas") %></button>
 <% end %>
 
+<% if @tag and @report_date %>
+  <%= render "tag_summary" %>
+<% end %>
+
 <%= form_tag batch_edit_business_transactions_path(@business), method: :get, remote: true, "data-controller" => "filter transactions_table" do %>
 <div class="actions row-fluid hide-in-print">
   <% if can? :create, @business.imports.build %>

@@ -19,6 +19,11 @@ class TransactionsController < UserApplicationController
       end
     end
 
+    if @tag && @report_date
+      @tree_totals = {}
+      @tag.self_and_descendants.each{|tag| @tree_totals[tag] = tag.month_total(@report_date) }
+    end
+
     respond_to do |format|
       format.html do
         get_download_api_key
