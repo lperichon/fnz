@@ -193,6 +193,10 @@ class Admpart < ActiveRecord::Base
   end
 
   def total_for_tag(tag,agent_id=nil,options={})
+    if agent_id.nil? and options.empty?
+      return tag.month_total(ref_date)
+    end
+
     options_digest = Digest::MD5.hexdigest(options.to_param) 
     cache_key = [id,"total_for_tag",tag.id,options_digest]
     unless agent_id.nil?
