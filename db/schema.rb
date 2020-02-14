@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20191109162116) do
+ActiveRecord::Schema.define(:version => 20200214190122) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name",                                       :default => "",  :null => false
@@ -221,6 +221,14 @@ ActiveRecord::Schema.define(:version => 20191109162116) do
   add_index "memberships", ["business_id"], :name => "index_memberships_on_business_id"
   add_index "memberships", ["contact_id"], :name => "index_memberships_on_contact_id"
   add_index "memberships", ["payment_type_id"], :name => "index_memberships_on_payment_type_id"
+
+  create_table "month_tag_totals", :force => true do |t|
+    t.integer  "tag_id"
+    t.date     "ref_date"
+    t.decimal  "total_amount"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
 
   create_table "payment_types", :force => true do |t|
     t.string   "name"

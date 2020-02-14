@@ -53,6 +53,10 @@ class Tag < ActiveRecord::Base
     Transaction.where(admpart_tag_id: self_and_descendants.map(&:id))
   end
 
+  def month_total(ref_date)
+    MonthTagTotal.get_for(self,ref_date).total_amount
+  end
+
   def self.system_tags_root(system_name)
     self.where(system_name: system_name)
   end
