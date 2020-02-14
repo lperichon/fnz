@@ -191,8 +191,8 @@ class TransactionsController < UserApplicationController
     end_date = @end_date = Date.parse(params[:end_date] || Time.zone.today.end_of_month.to_s).end_of_day
 
     if params[:report_on]
-      ref_date = Date.parse( params[:report_on] )
-      @context = @context.to_report_on_month(ref_date)
+      @report_date = Date.parse( params[:report_on] )
+      @context = @context.to_report_on_month(@report_date)
     else
       # List transactions that ocurred on that month or that are pending and ocurred before or that are reconciled on that month
       @context = @context.where {(transaction_at.gteq start_date.to_time) & (transaction_at.lteq end_date.to_time) |
