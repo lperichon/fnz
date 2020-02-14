@@ -25,7 +25,11 @@
           </td>
           <% @totals.keys.each do |date| %>
             <td>
-              <%= pm @totals[date][section][tag] %>
+              <%= link_to pm(@totals[date][section][tag]), business_transactions_path(
+                business_id: @business.id,
+                admpart_tag_id: tag.id,
+                report_on: date
+              ) %>
             </td>
           <% end %>
         </tr>
