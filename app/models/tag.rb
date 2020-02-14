@@ -48,6 +48,11 @@ class Tag < ActiveRecord::Base
     end.flatten
   end
 
+  # tagged by this tag and its descendants
+  def tree_transactions
+    Transaction.where(admpart_tag_id: self_and_descendants.map(&:id))
+  end
+
   def self.system_tags_root(system_name)
     self.where(system_name: system_name)
   end
