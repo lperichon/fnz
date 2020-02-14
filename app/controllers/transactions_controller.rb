@@ -182,8 +182,8 @@ class TransactionsController < UserApplicationController
     end
 
     if params[:admpart_tag_id]
-      t = Tag.find params[:admpart_tag_id]
-      @context = @business.transactions.where(admpart_tag_id: t.self_and_descendants.map(&:id))
+      @tag = Tag.find params[:admpart_tag_id]
+      @context = @business.transactions.where(admpart_tag_id: @tag.self_and_descendants.map(&:id))
     end
 
     # List transactions on this month or the year/month solicited
