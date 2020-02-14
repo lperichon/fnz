@@ -7,6 +7,8 @@ class Tag < ActiveRecord::Base
   has_many :taggings, :dependent => :destroy
   has_many :transactions, through: :taggings
 
+  has_many :month_tag_totals
+
   validates :name, :presence => true
   validates :business, :presence => true
 

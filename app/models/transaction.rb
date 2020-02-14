@@ -123,12 +123,23 @@ class Transaction < ActiveRecord::Base
     self.report_at = self.transaction_at unless self.report_at.present?
   end
 
+  def cache_tag_total
+    if admpart_tag
+      mtt = MonthTagTotal.get_for(admpart_tag,report_at)
+      mtt.save # triggers calculation
+    end
+  end
+
   def update_balances
     if source_id_was != source_id && source_id_was != target_id
       Account.find(source_id_was).update_balance if source_id_was
     end
     if target_id_was != source_id && target_id_was != source_id
       Account.find(target_id_was).update_balance if target_id_was 
+    end
+
+    if admpart_tag
+      cache_tag_total # for background: delay.cache_tag_total
     end
 
     source.update_balance
@@ -192,7 +203,13 @@ class Transaction < ActiveRecord::Base
     cached_source = source
     cached_target = target
     cached_installments = self.installments.all
+    cached_tag = admpart_tag
+
     yield
+
+    if cached_tag
+      cache_tag_total # for background: delay.cache_tag_total
+    end
     cached_installments.each { |installment| installment.update_balance_and_status } if cached_installments.count > 0
     cached_source.update_balance if cached_source
     cached_target.update_balance if cached_target

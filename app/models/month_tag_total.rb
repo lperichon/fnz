@@ -1,3 +1,7 @@
+##
+#
+# Total on month using transactions report_on date
+#
 class MonthTagTotal < ActiveRecord::Base
   attr_accessible :ref_date, :tag_id
 
