@@ -9,7 +9,7 @@ class AdmpartsController < UserApplicationController
   before_filter :get_admpart, only: [:show, :edit, :update, :attendance_detail]
   
   def index
-    @start_at = Date.civil(2019,12,1)
+    @start_at = Date.civil(2019,11,1)
     end_at = Date.today.end_of_month
 
     @totals = {}
