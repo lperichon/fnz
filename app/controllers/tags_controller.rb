@@ -9,6 +9,15 @@ class TagsController < UserApplicationController
 
   def show
     @tag = @business.tags.find(params[:id])
+
+    @start_at = @tag.tree_transactions.order("report_at").first.report_at
+    end_at = @tag.tree_transactions.order("report_at").last.report_at
+    i = @start_at
+    @totals = []
+    while i < end_at
+      @totals << @tag.month_total(i) 
+      i += 1.month
+    end
   end
 
   def edit
