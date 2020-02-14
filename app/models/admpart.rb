@@ -178,7 +178,7 @@ class Admpart < ActiveRecord::Base
   def transactions_for_tag(tag,options={})
     return [] if tag.nil?
     tags = tag.self_and_descendants
-    scope = tag.tree_transactions.to_report_on_month(ref_date9
+    scope = tag.tree_transactions.to_report_on_month(ref_date)
     if options[:agent_id] == ""
       scope = scope.where(agent_id: nil)
     elsif options[:agent_id]
