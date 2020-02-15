@@ -35,7 +35,7 @@ class AdmpartsController < UserApplicationController
       unless params[:skip_refresh]
         @adm.queue_refresh_cache
         Appsignal.instrument("waiting") do
-          sleep(2) # wait 2 seconds, usually enough for webservices to be cached
+          sleep(1) # wait 1 seconds, usually enough for webservices to be cached
         end
         params.delete(:action)
         if params[:year]
