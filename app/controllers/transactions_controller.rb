@@ -21,7 +21,7 @@ class TransactionsController < UserApplicationController
 
     if @tag && @report_date
       @tree_totals = {}
-      [@tag,@tag.children].flatten.each{|tag| @tree_totals[tag] = tag.month_total(@report_date) }
+      @tag.children.each{|tag| @tree_totals[tag] = tag.month_total(@report_date) }
     end
 
     respond_to do |format|
