@@ -25,7 +25,7 @@ class MonthTagTotal < ActiveRecord::Base
   def self.get_for(tag, ref_date)
     ret = self.where(tag_id: tag.id, ref_date: cast_date(ref_date)).first
     if ret.nil?
-      create!(
+      create(
         ref_date: cast_date(ref_date),
         tag_id: tag.id
       )
