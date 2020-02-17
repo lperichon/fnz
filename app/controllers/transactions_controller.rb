@@ -20,8 +20,16 @@ class TransactionsController < UserApplicationController
     end
 
     if @tag && @report_date
-      @tree_totals = {}
-      @tag.children.each{|tag| @tree_totals[tag] = tag.month_total(@report_date) }
+      @dates = []
+      @tree_totals = { }
+      (0...3).each do |i|
+        rd = @report_date-i.months
+        @dates << rd
+        [@tag,@tag.children].flatten.each do |tag|
+          @tree_totals[tag] = {} if @tree_totals[tag].nil?
+          @tree_totals[tag][rd] = tag.month_total(rd)
+        end
+      end
     end
 
     respond_to do |format|
@@ -92,7 +100,9 @@ class TransactionsController < UserApplicationController
       if @transaction.update_attributes(transaction_attributes_for_update)
         format.html { redirect_to business_transaction_path(@business, @transaction), notice: _("Movimiento actualizado") }
         format.js {}
-        format.json { respond_with_bip(@transaction.becomes(Transaction)) }
+        format.json do
+          respond_with_bip(@transaction.becomes(Transaction))
+        end
       else
         format.html { render action: "edit" }
         format.js {}
