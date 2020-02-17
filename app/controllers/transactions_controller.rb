@@ -22,13 +22,21 @@ class TransactionsController < UserApplicationController
     if @tag && @report_date
       @dates = []
       @tree_totals = { }
-      (0...3).each do |i|
-        rd = @report_date-i.months
+
+      last_date = if @report_date < Date.today.beginning_of_month
+        Date.today.beginning_of_month
+      else
+        @report_date
+      end
+
+      rd = last_date
+      while rd > @report_date-3.months
         @dates << rd
         [@tag,@tag.children].flatten.each do |tag|
           @tree_totals[tag] = {} if @tree_totals[tag].nil?
           @tree_totals[tag][rd] = tag.month_total(rd)
         end
+        rd = rd-1.month
       end
     end
 

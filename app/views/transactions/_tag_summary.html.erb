@@ -3,12 +3,12 @@
     <%= @tag.name %> @ <%= l(@report_date, format: :month) %>
   </h1>
 
-  <table  class="table-striped table-hover table-condensed table-bordered">
+  <table class="table-striped table-hover table-condensed table-bordered">
     <thead>
       <tr>
         <th><%= @tag.name %></th>
         <% @dates.reverse.each do |date| %>
-          <th><%= l(date, format: :month) %></th>
+          <th class="<%= "current_date" if date == @report_date %>"><%= l(date, format: :month) %></th>
         <% end %>
       </tr>
     </thead>
@@ -20,7 +20,7 @@
 
           </td>
           <% @dates.reverse.each do |date| %>
-            <td>
+            <td class="<%= "current_date" if date == @report_date %>">
               <%= link_to pm(@tree_totals[tag][date]),
                           business_transactions_path(
                             business_id: @business.id,
