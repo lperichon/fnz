@@ -34,9 +34,6 @@ class AdmpartsController < UserApplicationController
     if @adm.valid?
       unless params[:skip_refresh]
         @adm.queue_refresh_cache
-        Appsignal.instrument("waiting") do
-          sleep(1) # wait 1 seconds, usually enough for webservices to be cached
-        end
         params.delete(:action)
         if params[:year]
           redirect_to dated_admpart_business_admparts_path(params.merge(skip_refresh: true))
