@@ -89,6 +89,7 @@ Fnz::Application.routes.draw do
   resources :debits, :controller => 'transactions', :except => [:index]
   resources :credits, :controller => 'transactions', :except => [:index]
   resources :transfers, :controller => 'transactions', :except => [:index]
+  resources :custom_prizes
 
   match 'messages', to: 'messages#catch_message'
   match 'sns', to: 'messages#sns'

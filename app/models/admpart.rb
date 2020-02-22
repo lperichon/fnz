@@ -15,6 +15,8 @@ class Admpart < ActiveRecord::Base
                   :sales_tag_id,
                   :ref_date
 
+  has_many :custom_prizes
+
   belongs_to :business
 
   [:owners_percentage,
@@ -193,7 +195,7 @@ class Admpart < ActiveRecord::Base
   end
 
   def total_for_tag(tag,agent_id=nil,options={})
-    if agent_id.nil? and options.empty?
+    if agent_id.nil? and options.empty? and !tag.is_system_tag?
       return tag.month_total(ref_date)
     end
 
@@ -306,6 +308,10 @@ class Admpart < ActiveRecord::Base
     business.tags.get_system_tag(name)
   end
 
+  def custom_prize_for(tag,agent)
+    custom_prizes.get_for(tag,agent)
+  end
+
   def installments_tag
     @installments_tag ||= system_tag("installment")
   end
@@ -373,7 +379,7 @@ class Admpart < ActiveRecord::Base
   end
 
   def agent_from_enrollments_total(agent)
-    agent_enrollments_comission(agent) + agent_enrollments_prize(agent)
+    agent_enrollments_comission(agent) + agent_enrollments_prize(agent) + custom_prize_for(enrollments_tag,agent).amount
   end
 
   def enrollments_total_discount

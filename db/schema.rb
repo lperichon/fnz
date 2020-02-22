@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20200214190122) do
+ActiveRecord::Schema.define(:version => 20200222220041) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name",                                       :default => "",  :null => false
@@ -94,6 +94,15 @@ ActiveRecord::Schema.define(:version => 20200214190122) do
 
   add_index "contacts", ["business_id", "padma_id"], :name => "index_contacts_on_business_id_and_padma_id"
   add_index "contacts", ["current_membership_id"], :name => "index_contacts_on_current_membership_id"
+
+  create_table "custom_prizes", :force => true do |t|
+    t.integer  "admpart_id"
+    t.integer  "agent_id"
+    t.integer  "tag_id"
+    t.decimal  "amount"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0, :null => false

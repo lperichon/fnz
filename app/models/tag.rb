@@ -90,6 +90,10 @@ class Tag < ActiveRecord::Base
     end
   end
 
+  def is_system_tag?
+    system_name.in?(VALID_SYSTEM_NAMES)
+  end
+
   def update_month_totals
     if parent_id_changed?
       Tag.find(parent_id_was).update_month_totals
@@ -108,19 +112,19 @@ class Tag < ActiveRecord::Base
   end
 
   def systags_must_be_root
-    if self.system_name.in?(VALID_SYSTEM_NAMES) && !self.parent_id.nil?
+    if is_system_tag? && !self.parent_id.nil?
       self.errors.add(:parent_id, _("etiqueta de sistema tiene que ser raiz, no puede estar bajo otra"))
     end
   end
 
   def valid_system_name_and_section
-    if self.system_name.in?(VALID_SYSTEM_NAMES) && self.admpart_section != "income"
+    if is_system_tag? && self.admpart_section != "income"
       self.errors.add(:admpart_section, _("tiene que estar en 'income'"))
     end
   end
 
   def ensure_system_sections
-    if self.system_name.in?(VALID_SYSTEM_NAMES)
+    if is_system_tag?
       self.admpart_section = "income"
     end
   end

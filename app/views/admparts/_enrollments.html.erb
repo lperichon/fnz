@@ -18,7 +18,14 @@
     <td><%= pm @adm.total_for_tag(@adm.enrollments_tag, tm.id) %></td>
     <td><%= pm @adm.agent_enrollments_comission(tm) %></td>
     <td><%= @adm.enrollments_by_teacher[tm.padma_id] %></td>
-    <td><%= pm @adm.agent_enrollments_prize(tm) %></td>
+    <td>
+      <% if @adm.agent_enrollments_prize(tm) != 0 %>
+        <%= pm @adm.agent_enrollments_prize(tm) %>
+        +
+      <% end %>
+      <%= best_in_place @adm.custom_prize_for(@adm.enrollments_tag,tm), :amount, url: custom_prize_path(@adm.custom_prize_for(@adm.enrollments_tag,tm)), display_with: :number_to_currency,
+          helper_options: { unit: @business.currency_symbol } %>
+    </td>
     <td><%= pm @adm.agent_from_enrollments_total(tm) %></td>
   </tr>
 <% end %>
