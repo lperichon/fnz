@@ -33,6 +33,7 @@ class AdmpartsController < UserApplicationController
   def show
     if @adm.valid?
       unless params[:skip_refresh]
+        Rails.cache.clear # HACK [TODO] remove this and ensure refresh is correctly done
         @adm.queue_refresh_cache
         params.delete(:action)
         if params[:year]
