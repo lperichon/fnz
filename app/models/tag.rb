@@ -8,6 +8,7 @@ class Tag < ActiveRecord::Base
   has_many :transactions, through: :taggings
 
   has_many :month_tag_totals
+  after_update :update_month_totals
 
   validates :name, :presence => true
   validates :business, :presence => true
@@ -56,6 +57,7 @@ class Tag < ActiveRecord::Base
   end
 
   def month_total(ref_date)
+
     MonthTagTotal.get_for(self,ref_date).total_amount
   end
 
@@ -88,6 +90,15 @@ class Tag < ActiveRecord::Base
     end
   end
 
+  def update_month_totals
+    if parent_id_changed?
+      Tag.find(parent_id_was).update_month_totals
+    end
+    if parent
+      parent.update_month_totals
+    end
+    month_tag_totals.each &:refresh
+  end
   private
 
   def cancel_if_system_tag
