@@ -3,6 +3,20 @@ class TagsController < UserApplicationController
 
   before_filter :get_business
 
+  rescue_from NoMethodError do |exception|
+    if params[:action] == "rebuild"
+      # HACK 
+      # the_sortable_tree BUGFIX
+      #   despues de hacer el cambio pincha en algo dentro de la gem
+      #   lo rescato aca.
+      Tag.find(params[:id]).update_month_totals
+      head :no_content 
+    else 
+      # not know bug, re raise exception
+      raise exception
+    end
+  end
+
   def index
     @tags = @business.tags.nested_set
   end
