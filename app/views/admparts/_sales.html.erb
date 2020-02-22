@@ -1,6 +1,6 @@
 <table class="table table-striped table-hover table-condensed table-bordered">
 <tr>
-  <th colspan="4">
+  <th colspan="5">
     <%= link_to_tag_detail(@adm.sales_tag) %>
   </th>
 </tr>
@@ -8,13 +8,25 @@
   <th><%= _("Instructor") %></th>
   <th><%= _("Recaudado por ventas") %></th>
   <th><%= _("Comisión") %></th>
+  <th><%= _("Premio") %></th>
+  <th><%= _("Queda para el instructor") %></th>
 </tr>
 <% @adm.team_members.each do |tm| %>
   <tr>
     <th><%= tm.name %></th>
     <td><%= pm @adm.total_for_tag(@adm.sales_tag, tm.id) %></td>
     <td>
-      <%= pm @adm.total_for_tag(@adm.sales_tag, tm.id) * (@adm.agent_sale_percentage || 0) / 100 %>
+      <%= pm @adm.agent_sales_comission(tm) %>
+    </td>
+    <td>
+      <%= best_in_place @adm.custom_prize_for(@adm.sales_tag,tm),
+                        :amount,
+                        url: custom_prize_path(@adm.custom_prize_for(@adm.sales_tag,tm)),
+                        display_with: :number_to_currency,
+                        helper_options: { unit: @business.currency_symbol } %>
+    </td>
+    <td>
+      <%= pm @adm.agent_from_sales_total(tm) %>
     </td>
   </tr>
 <% end %>
@@ -22,10 +34,14 @@
   <th><%= t(".no_teacher") %></th>
   <td><%= pm @adm.total_for_tag(@adm.sales_tag, "") %></td>
   <td></td>
+  <td></td>
+  <td></td>
 </tr>
 <tr>
   <th></th>
   <th><%= pm @adm.total_for_tag(@adm.sales_tag, nil, ignore_discounts: true) %></th>
+  <th></th>
+  <th></th>
   <th><%= pm @adm.sales_total_discount %></th>
 </tr>
 </table>
