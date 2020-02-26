@@ -24,8 +24,7 @@
         +
       <% end %>
       <% cp = @adm.custom_prize_for("enrollment",tm) %>
-      <%= best_in_place cp, :amount, url: custom_prize_path(cp), display_with: :number_to_currency,
-          helper_options: { unit: @business.currency_symbol } %>
+      <%= best_in_place cp, :amount, url: custom_prize_path(cp), display_with: lambda{|amount| pm(amount) } %>
     </td>
     <td><%= pm @adm.agent_from_enrollments_total(tm) %></td>
   </tr>

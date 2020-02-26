@@ -23,8 +23,7 @@
       <%= best_in_place cp,
                         :amount,
                         url: custom_prize_path(cp),
-                        display_with: :number_to_currency,
-                        helper_options: { unit: @business.currency_symbol } %>
+                        display_with: lambda{|amount| pm(amount) } %>
     </td>
     <td>
       <%= pm @adm.agent_from_sales_total(tm) %>
