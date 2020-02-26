@@ -38,10 +38,14 @@
   <td></td>
 </tr>
 <tr>
-  <th></th>
+  <th class="align-right" ><%= _("Total recaudado:") %></th>
   <th><%= pm @adm.total_for_tag(@adm.sales_tag, nil, ignore_discounts: true) %></th>
-  <th></th>
-  <th></th>
+  <th colspan="2" class="align-right"><%= _("Total que queda para instructores:") %></th>
   <th><%= pm @adm.sales_total_discount %></th>
+</tr>
+<tr>
+  <th colspan="3"></th>
+  <th class="align-right"><%= _("Total a Administración") %></th>
+  <th><%= pm @adm.total_for_tag(@adm.sales_tag) %></th>
 </tr>
 </table>

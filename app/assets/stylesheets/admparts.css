@@ -23,3 +23,11 @@
   height: 100px;
   vertical-align: center;
 }
+
+.align-right {
+  text-align: right !important;
+}
+
+.align-left {
+  text-align: left !important;
+}
