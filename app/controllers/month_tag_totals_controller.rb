@@ -24,6 +24,13 @@ class MonthTagTotalsController < UserApplicationController
       i += 1.month
     end
 
+    respond_to do |format|
+      format.html
+      format.csv do 
+        headers['Content-Disposition'] = "attachment; filename=\"month_tag_totals.csv\""
+        headers['Content-Type'] ||= 'text/csv'
+      end
+    end
   end
 
   private

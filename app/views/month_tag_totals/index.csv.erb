@@ -1,0 +1,10 @@
+<%= CSV.generate_line ['Tag', @totals.keys.map{|date| l(date, format: :month)}].flatten %>
+<%- @totals[@start_at].each_pair do |section,tag_h| -%>
+  <%= CSV.generate_line [section, @totals.keys.map{|d| nil }].flatten %>
+  <% tag_h.keys.each do |tag| %>
+    <%= CSV.generate_line([
+      tag.name,
+      @totals.keys.map{|date| @totals[date][section][tag]  }
+    ].flatten).html_safe -%>
+  <%- end -%>
+<%- end -%>
