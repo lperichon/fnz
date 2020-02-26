@@ -436,7 +436,7 @@ class Admpart < ActiveRecord::Base
   appsignal_instrument_method :enrollments_by_teacher
 
   def agent_total_winnings(agent)
-    agent_from_team_final_amount(agent) + agent_from_sales_total(agent) + agent_from_enrollments_total(agent) + custom_prize_for("general",agent).amount
+    agent_from_team_final_amount(agent) + agent_from_sales_total(agent) + agent_from_enrollments_total(agent)
   end
 
   # installments_tag_id, enrollments_tag_id, sales_tag_id getter and setter
