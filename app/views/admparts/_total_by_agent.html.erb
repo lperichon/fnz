@@ -7,6 +7,7 @@
   <th><%= _("Distribución del lucro") %></th>
   <th><%= _("Ventas") %></th>
   <th><%= _("Matrículas") %></th>
+  <th><%= _("Otros premios") %></th>
   <th><%= _("Total a retirar") %></th>
 </tr>
 <% @adm.team_members.each do |tm| %>
@@ -15,6 +16,10 @@
     <td><%= pm @adm.agent_from_team_final_amount(tm) %></td>
     <td><%= pm @adm.agent_from_sales_total(tm) %></td>
     <td><%= pm @adm.agent_from_enrollments_total(tm) %></td>
+    <td>
+      <% cp = @adm.custom_prize_for("general",tm) %>
+      <%= best_in_place cp, :amount, url: custom_prize_path(cp), display_with: :number_to_currency, helper_options: { unit: @business.currency_symbol } %>
+    </td>
     <td><%= pm @adm.agent_total_winnings(tm) %></td>
   </tr>
 <% end %>

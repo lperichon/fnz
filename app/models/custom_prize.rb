@@ -4,7 +4,7 @@ class CustomPrize < ActiveRecord::Base
   belongs_to :admpart
   belongs_to :agent
 
-  SECTIONS = %W(enrollment sale)
+  SECTIONS = %W(enrollment sale general)
 
   validates :admpart_section, inclusion: SECTIONS
 
