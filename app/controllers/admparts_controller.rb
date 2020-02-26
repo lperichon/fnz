@@ -8,28 +8,6 @@ class AdmpartsController < UserApplicationController
   before_filter :get_context
   before_filter :get_admpart, only: [:show, :edit, :update, :attendance_detail]
   
-  def index
-    @start_at = Date.civil(2019,11,1)
-    end_at = Date.today.end_of_month
-
-    @totals = {}
-    i = @start_at
-    while i < end_at
-      @totals[i] = {}
-      Admpart::VALID_SECTIONS.each do |section|
-        @totals[i][section] = {}
-        aux = Admpart.new
-        aux.business = @business
-        aux.root_tags_for_section(section).each do |tag|
-          @totals[i][section][tag] = tag.month_total(i)
-        end
-      end
-
-      i += 1.month
-    end
-
-  end
-
   def show
     if @adm.valid?
       unless params[:skip_refresh]

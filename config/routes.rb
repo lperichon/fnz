@@ -13,7 +13,8 @@ Fnz::Application.routes.draw do
 
   resources :user_businesses
   resources :businesses do
-    resources :admparts do
+    resources :month_tag_totals, only: [:index]
+    resources :admparts, except: [:index] do
       match "/ym/:year/:month", to: "admparts#show", as: :dated_admpart, on: :collection
       member do
         get :attendance_detail
