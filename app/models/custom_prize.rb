@@ -3,7 +3,6 @@ class CustomPrize < ActiveRecord::Base
 
   belongs_to :admpart
   belongs_to :agent
-  belongs_to :tag
 
   SECTIONS = %W(enrollment sale)
 
