@@ -1,17 +1,20 @@
 class CustomPrize < ActiveRecord::Base
-  attr_accessible :tag_id, :agent_id, :amount
+  attr_accessible :admpart_section, :agent_id, :amount
 
   belongs_to :admpart
   belongs_to :agent
-  belongs_to :tag
+
+  SECTIONS = %W(enrollment sale)
+
+  validates :admpart_section, inclusion: SECTIONS
 
   before_validation :set_default_amount
   validates :amount, :presence => true, :numericality => {:greater_than_or_equal_to => 0}
 
-  def self.get_for(tag,agent)
-    cp = self.where(tag_id: tag.id, agent_id: agent.id).first
+  def self.get_for(section_name,agent)
+    cp = self.where(admpart_section: section_name, agent_id: agent.id).first
     if cp.nil?
-      cp = self.create!(tag_id: tag.id, agent_id: agent.id)
+      cp = self.create!(admpart_section: section_name, agent_id: agent.id)
     end
     cp
   end

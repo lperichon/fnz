@@ -308,8 +308,8 @@ class Admpart < ActiveRecord::Base
     business.tags.get_system_tag(name)
   end
 
-  def custom_prize_for(tag,agent)
-    custom_prizes.get_for(tag,agent)
+  def custom_prize_for(section_name,agent)
+    custom_prizes.get_for(section_name,agent)
   end
 
   def installments_tag
@@ -358,7 +358,7 @@ class Admpart < ActiveRecord::Base
   end
 
   def agent_from_sales_total(agent)
-    agent_sales_comission(agent) + custom_prize_for(sales_tag,agent).amount
+    agent_sales_comission(agent) + custom_prize_for("sale",agent).amount
   end
 
   def sales_total_discount
@@ -383,7 +383,7 @@ class Admpart < ActiveRecord::Base
   end
 
   def agent_from_enrollments_total(agent)
-    agent_enrollments_comission(agent) + agent_enrollments_prize(agent) + custom_prize_for(enrollments_tag,agent).amount
+    agent_enrollments_comission(agent) + agent_enrollments_prize(agent) + custom_prize_for("enrollment",agent).amount
   end
 
   def enrollments_total_discount

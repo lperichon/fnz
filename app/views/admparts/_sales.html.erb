@@ -19,9 +19,9 @@
       <%= pm @adm.agent_sales_comission(tm) %>
     </td>
     <td>
-      <%= best_in_place @adm.custom_prize_for(@adm.sales_tag,tm),
+      <%= best_in_place @adm.custom_prize_for("sale",tm),
                         :amount,
-                        url: custom_prize_path(@adm.custom_prize_for(@adm.sales_tag,tm)),
+                        url: custom_prize_path(@adm.custom_prize_for("sale",tm)),
                         display_with: :number_to_currency,
                         helper_options: { unit: @business.currency_symbol } %>
     </td>
