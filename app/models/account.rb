@@ -67,6 +67,19 @@ class Account < ActiveRecord::Base
     ret
   end
 
+  def self.calculate_pending_balance_per_currency
+    ret = {}
+    self.scoped.includes(:business).group_by(&:currency).each do |cur,accs|
+      ret[cur.id] = accs.inject(0) do |acum, acc|
+        acc_bal = acc.transactions.where(state: "pending").inject(0) do |bal,t|
+          bal+t.amount*t.sign(acc)
+        end
+        acum + acc_bal
+      end
+    end
+    ret
+  end
+
   def calculate_balance(ref_time=nil)
     base = if ref_time.nil?
       last_balance_check.nil?? 0 : last_balance_check.balance

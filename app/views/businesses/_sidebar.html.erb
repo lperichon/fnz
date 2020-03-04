@@ -34,6 +34,15 @@
       </a>
     </li>
   <% end %>
+  <li><a></a></li>
+  <% @business.accounts.calculate_pending_balance_per_currency.each do |cur,balance| %>
+    <li>
+      <a>
+        <%= _("Total %{cur} pendientes") % {cur: cur} %>:
+        <%= number_to_currency( balance , unit: Currency.find(cur).symbol ) %>
+      </a>
+    </li>
+  <% end %>
 </ul>
 </p>
 <% end %>
