@@ -9,7 +9,7 @@ class TagsController < UserApplicationController
       # the_sortable_tree BUGFIX
       #   despues de hacer el cambio pincha en algo dentro de la gem
       #   lo rescato aca.
-      Tag.find(params[:id]).update_month_totals
+      Tag.find(params[:id]).update_all_month_totals
       head :no_content 
     else 
       # not know bug, re raise exception
