@@ -8,15 +8,15 @@
     rel: "popover",
     class: "#{'current' if(date == Date.today)} #{installment.try(:status)} cell installment-value" do %>
   <div>
-		<% if installment && membership %>
+		<% if installment %>
       <div class="<%= 'old' if installment.membership != membership %>">
         <%= best_in_place installment, :value,
-          url: business_membership_installment_path(@business,membership,installment),
+          url: business_membership_installment_path(@business,installment.membership,installment),
           display_with: :number_to_currency,
           helper_options: { unit: @business.currency_symbol }
         %>
         <div class="installment-observations">
-          <%= best_in_place installment, :observations, url: business_membership_installment_path(@business,membership,installment) %>
+          <%= best_in_place installment, :observations, url: business_membership_installment_path(@business,installment.membership,installment) %>
         </div>
 		  </div>
       <%= content_tag(:i, "", :class => "icon-installment-#{installment.status}") %>
