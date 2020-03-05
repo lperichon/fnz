@@ -125,16 +125,16 @@ class Transaction < ActiveRecord::Base
 
   def cache_tag_total
     if report_at_changed? and report_at_was and admpart_tag
-      mtt = MonthTagTotal.get_for(admpart_tag,report_at_was)
-      mtt.save # triggers calculation
+      admpart_tag.update_month_total(report_at_was)
     end
     if admpart_tag_id_changed? and admpart_tag_id_was
-      mtt = MonthTagTotal.get_for(Tag.find(admpart_tag_id_was),report_at)
-      mtt.save # triggers calculation
+      t = Tag.find(admpart_tag_id_was)
+      if t
+        t.update_month_total(report_at)
+      end
     end
     if admpart_tag
-      mtt = MonthTagTotal.get_for(admpart_tag,report_at)
-      mtt.save # triggers calculation
+      admpart_tag.update_month_total(report_at)
     end
   end
 

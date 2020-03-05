@@ -103,6 +103,14 @@ class Tag < ActiveRecord::Base
     end
     month_tag_totals.each &:refresh
   end
+
+  def update_month_total(ref_date)
+    if parent
+      parent.update_month_total(ref_date)
+    end
+    MonthTagTotal.get_for(self,ref_date).refresh # updates or creates
+  end
+
   private
 
   def cancel_if_system_tag
