@@ -1,5 +1,12 @@
 <div id="tagSummary" class="row-fluid">
   <h1>
+    <% if @tag.parent %>
+      <%= link_to @tag.parent.name, business_transactions_path(
+                            business_id: @business.id,
+                            admpart_tag_id: @tag.parent_id,
+                            report_on: @report_date
+                          ) %> > 
+    <% end %>
     <%= @tag.name %> @ <%= l(@report_date, format: :month) %>
   </h1>
 
