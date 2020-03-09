@@ -7,7 +7,7 @@ class Tag < ActiveRecord::Base
   has_many :taggings, :dependent => :destroy
   has_many :transactions, through: :taggings
 
-  has_many :month_tag_totals
+  has_many :month_tag_totals, dependent: :destroy
   after_update :update_all_month_totals
 
   validates :name, :presence => true
