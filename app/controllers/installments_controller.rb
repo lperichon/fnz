@@ -19,7 +19,12 @@ class InstallmentsController < UserApplicationController
   	date = @installment.due_on
 
     # transactions available to link to installment
-  	@transactions = @business.transactions.credits.where {(transaction_at.gteq(date - 1.month)) & (transaction_at.lteq(date + 1.month))}.order("transaction_at DESC")
+    @transactions = @business.transactions
+                             .joins(:admpart_tag)
+                             .where( tags: { system_name: "installment"  })
+                             .where( contact_id: @installment.membership.contact_id )
+                             .where(report_at: (date.beginning_of_month...date.end_of_month))
+                             .order("transaction_at DESC")
   end
 
   def new
