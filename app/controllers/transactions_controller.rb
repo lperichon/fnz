@@ -103,9 +103,9 @@ class TransactionsController < UserApplicationController
   # PUT /accounts/1.json
   def update
     @transaction = Transaction.find(params[:id])
-    if transaction_attributes_for_update[:transaction][:type].in?(%W(Transfer Debit Credit))
+    if transaction_attributes_for_update[:type].in?(%W(Transfer Debit Credit))
       # This will make validations of the new desired type to be run on update_attributes
-      @transaction = @transaction.becomes(transaction_attributes_for_update[:transaction][:type].constantize)
+      @transaction = @transaction.becomes(transaction_attributes_for_update[:type].constantize)
     end
 
     respond_to do |format|
