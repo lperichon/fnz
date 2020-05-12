@@ -225,6 +225,7 @@ class Transaction < ActiveRecord::Base
 
   def unset_target
     if type_changed? && type_was == "Transfer"
+      # [TODO] should target.update_balance but at this point i'm still accountable on target. queue it for affter save?
       self.target_id = nil
       self.target = nil
     end
