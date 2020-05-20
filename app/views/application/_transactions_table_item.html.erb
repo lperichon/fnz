@@ -50,6 +50,6 @@
       <%= bip_tag_id(transaction.becomes(Transaction)) %>
     <% end %>
   </td>
-  <td><%= best_in_place transaction.becomes(Transaction), :agent_id, as: :select, collection: agent_options_for_select, url: business_transaction_path(@business, transaction) %></td>
+  <td><%= best_in_place transaction.becomes(Transaction), :agent_id, as: :select, collection: agent_options_for_select(transaction), url: business_transaction_path(@business, transaction) %></td>
   <td class="select2"><%= best_in_place transaction.becomes(Transaction), :contact_id, as: :select, collection: contact_options_for_select, url: business_transaction_path(@business, transaction) %></td>
 <% end %>

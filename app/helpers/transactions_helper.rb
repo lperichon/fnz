@@ -12,8 +12,16 @@ module TransactionsHelper
     @tag_options_for_select ||= @business.tags.order(:name).map{|t| [t.id, t.name]}
   end
 
-  def agent_options_for_select
+  def agent_options_for_select(transaction=nil)
     @agent_options_for_select ||= [["",""]]+@business.agents.enabled.map { |i| [i.id, i.name] }
+    if transaction && !transaction.agent_id.in?(@agent_options_for_select.map{|a| a[0] })
+      @agent_options_for_select << if transaction.agent
+        [transaction.agent.id,transaction.agent.name]
+      else
+        [transaction.agent_id,"??????"]
+      end
+    end
+    @agent_options_for_select
   end
   
   def contact_options_for_select
