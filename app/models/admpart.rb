@@ -140,6 +140,7 @@ class Admpart < ActiveRecord::Base
                                                 .to_report_on_month(ref_date)
                                                 .select("DISTINCT agent_id")
                                                 .map(&:agent)
+                                                .compact
       @team_members = enabled_agents | agents_with_transactions_linked
     end
   end
