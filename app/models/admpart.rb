@@ -135,7 +135,12 @@ class Admpart < ActiveRecord::Base
     if @team_members
       @team_members
     else
-      @team_members ||= business.agents.enabled.select{|a| !a.padma_id.blank? }
+      enabled_agents = business.agents.enabled.select{|a| !a.padma_id.blank? }
+      agents_with_transactions_linked = business.transactions
+                                                .to_report_on_month(ref_date)
+                                                .select("DISTINCT agent_id")
+                                                .map(&:agent)
+      @team_members = enabled_agents | agents_with_transactions_linked
     end
   end
 
