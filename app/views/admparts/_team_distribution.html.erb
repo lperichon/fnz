@@ -1,12 +1,12 @@
 <table class="table table-striped table-hover table-condensed table-bordered" id="admpart-team-distribution">
 <tr>
-  <th colspan="4"><%= t(".team_distribution") %></th>
+  <th colspan="4"><%= _("Recaudación por mensualidades y % de administración.") %></th>
 </tr>
 <tr>
-  <th><%= t(".agent") %></th>
-  <th><%= t(".installment_collection") %></th>
-  <th><%= t(".percentage_from_total") %></th>
-  <th><%= t(".takes_from_team") %></th>
+  <th><%= _("Instructor") %></th>
+  <th><%= _("Recaudado por mensualidades") %></th>
+  <th><%= _("Porcentaje del total") %></th>
+  <th><%= _("Retira del lucro del equipo") %></th>
 </tr>
 <% team_winnings = @adm.teams_final_amount %>
 <% acum = 0 %>
@@ -20,20 +20,20 @@
   </tr>
 <% end %>
   <tr>
-    <th><%= t(".no_teacher") %></th>
+    <th><%= _("Sin instructor asociado") %></th>
     <td><%= pm (@adm.total_for_tag(@adm.installments_tag)-acum) %></td>
     <td></td>
     <td></td>
   </tr>
   <tr>
-    <th><%= t("total") %></th>
+    <th><%= _("Total") %></th>
     <td><%= pm @adm.total_for_tag(@adm.installments_tag) %></td>
     <td></td>
     <td></td>
   </tr>
 <tr>
   <td colspan="4">
-    <%= link_to t(".attendance_detail"), attendance_detail_business_admpart_path(@adm.business, @adm) %>
+    <%= link_to _("Detalle de la distribución de mensualidades por asistencias"), attendance_detail_business_admpart_path(@adm.business, @adm) %>
   </td>
 </tr>
 </table>
