@@ -23,13 +23,13 @@
   </tr>
 <% end %>
 <tr>
-  <th><%= t(".total_income") %></th>
+  <th><%= _("Total ingresos") %></th>
   <td><%= pm @adm.section_total("income") %></td>
-  <th><%= t(".total_expense") %></th>
+  <th><%= _("Total gastos") %></th>
   <td><%= pm @adm.section_total("expense") %></td>
 </tr>
 <tr>
-  <th><%= t(".profit") %></th>
+  <th><%= _("Lucro") %></th>
   <td <%= "colspan=3" if @adm.not_tagged_total == 0%>><%= pm @adm.profit %></td>
   <% if @adm.not_tagged_total != 0 %>
     <th><%= link_to_not_tagged _("Transacciones ignoradas:") %></th>
