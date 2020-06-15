@@ -1,7 +1,7 @@
 <tr>
-  <th><%= @adm.owners_percentage %>% <%= t(".owners_winnings") %></th>
+  <th><%= @adm.owners_percentage %>% <%= _("Lucro para inversores") %></th>
   <td><%= pm @adm.owners_pre_expenses_amount %></td>
-  <th><%= @adm.teams_percentage %>% <%= t(".team_winnings") %></th>
+  <th><%= @adm.teams_percentage %>% <%= _("Lucro para el equipo") %></th>
   <td><%= pm @adm.teams_pre_expenses_amount %></td>
 </tr>
 
@@ -30,13 +30,13 @@
 <% unless @adm.root_tags_for_section("owners_expenses").empty? && @adm.root_tags_for_section("teams_expenses").empty?%>
   <tr>
     <th>
-      <%= t(".owners_winnings") %>
+      <%= _("Lucro para inversores") %>
     </th>
     <td>
       <%= pm @adm.owners_aft_expenses_amount %>
     </td>
     <th>
-      <%= t(".team_winnings") %>
+      <%= _("Lucro para el equipo") %>
     </th>
     <td><%= pm @adm.teams_final_amount %></td>
   </tr>
@@ -44,7 +44,7 @@
 <% unless @adm.dir_from_owners_aft_expses_percentage.blank? %>
   <tr>
     <th>
-      <%= @adm.dir_from_owners_aft_expses_percentage %>% <%= t(".director_winnings") %>
+      <%= @adm.dir_from_owners_aft_expses_percentage %>% <%= _("Lucro para el director") %>
     </th>
     <td>
       <%= pm @adm.director_from_owners_amount %>
@@ -53,7 +53,7 @@
   </tr>
   <tr>
     <th>
-      <%= t(".owners_winnings") %>
+      <%= _("Lucro para inversores") %>
     </th>
     <td>
       <%= pm @adm.owners_final_amount %>
