@@ -13,7 +13,7 @@
 <div id="admpart">
   <%= link_to (content_tag(:i, "", class: "icon-download")+_("Descargar detalle transacciones")).html_safe,
               business_transactions_path(@business, format: "csv", report_on: @adm.ref_date ),
-              class: "btn pull-right" %>
+              class: "btn pull-right hide-in-print" %>
 
 <%= render "refreshing" %>
 
