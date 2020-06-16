@@ -45,6 +45,7 @@ class TransactionRule < ActiveRecord::Base
     end
     if transaction.admpart_tag_id.blank? and !admpart_tag_id.blank?
       transaction.admpart_tag_id = admpart_tag_id
+      transaction.tag_id = admpart_tag_id
     end
   end
 
