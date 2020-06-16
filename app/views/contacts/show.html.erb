@@ -13,6 +13,27 @@
   </div>
 <% end %>
 
+<% if @business.transactions_enabled? %>
+  <%= content_for :secondary_navigation do %>
+    <%= render partial: 'transactions/secondary_navigation' %>
+  <% end %>
+  <h3><%= _("Todas las transacciones") %></h3>
+  <%= render layout: 'transactions_table', locals: {transactions: @transactions} do |transaction| %>
+    <span class="hide-in-print">
+    <% if can? :edit, transaction %>
+      <%= link_to content_tag(:i, "", class: "icon-edit"), edit_business_transaction_path(transaction.business, transaction), remote: true %>
+    <% end %>
+    <% if can? :destroy, transaction %>
+      <%= link_to content_tag(:i, "", class: "icon-trash"), business_transaction_path(transaction.business, transaction), confirm: I18n.t('actions.confirm_delete'), method: 'delete', remote: true %>
+    <% end %>
+    <% if can? :split, transaction %>
+      <%= link_to content_tag(:i, "", class: "icon-cut"), new_business_transaction_transaction_spliter_path(transaction.business, transaction), remote: true %>
+    <% end %>
+    </span>
+  <% end %>
+<% end %>
+
+
 <h3><%= Contact.human_attribute_name(:memberships) %></h3>
 <table class="contact-memberships table table-striped table-hover table-condensed table-bordered">
   <thead>
@@ -79,11 +100,3 @@
     </th>
   </tfoot>
 </table>
-
-<% if @business.transactions_enabled? %>
-  <%= content_for :secondary_navigation do %>
-    <%= render partial: 'transactions/secondary_navigation' %>
-  <% end %>
-  <h3><%= _("Todas las transacciones") %></h3>
-  <%= render partial: "transactions_table", locals: { transactions: @transactions } %>
-<% end %>
