@@ -1,6 +1,6 @@
 <%= simple_form_for(@transaction_rule, :validate => true, :url => form_url, :html => {:class => "form-horizontal"}) do |f| %>
 
-  <%= f.input :operator, as: :select, collection: TransactionRule::VALID_OPERATORS %>
+  <%= f.input :operator, as: :select, collection: TransactionRule::VALID_OPERATORS, include_blank: false %>
   <%= f.input :value %>
 
   <%=  f.input :admpart_tag_id, :as => :select, :collection => @business.tags, :input_html => {:class => "chosen", 'data-placeholder' => t('transactions.fields.tags_placeholder')} %>
