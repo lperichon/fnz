@@ -321,10 +321,16 @@ class Transaction < ActiveRecord::Base
   def apply_automation_rules
     return nil if business.nil?
 
-    business.transaction_rules.each do |rule|
+    get_automation_rules.each do |rule|
       if rule.matches?(self)
         rule.set_values(self)
       end
+    end
+  end
+
+  def get_automation_rules
+    @automation_rules ||= Rails.cache.fetch("automation_rules#{business.id}", expires_in: 1.minute) do
+      business.transaction_rules
     end
   end
 end
