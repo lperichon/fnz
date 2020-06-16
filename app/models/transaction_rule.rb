@@ -37,9 +37,15 @@ class TransactionRule < ActiveRecord::Base
   end
 
   def set_values(transaction)
-    transaction.contact_id = contact_id unless contact_id.blank?
-    transaction.agent_id = agent_id unless agent_id.blank?
-    transaction.admpart_tag_id = admpart_tag_id unless admpart_tag_id.blank?
+    if transaction.contact_id.blank? and !contact_id.blank?
+      transaction.contact_id = contact_id
+    end
+    if transaction.agent_id.blank? and !agent_id.blank?
+      transaction.agent_id = agent_id
+    end
+    if transaction.admpart_tag_id.blank? and !admpart_tag_id.blank?
+      transaction.admpart_tag_id = admpart_tag_id
+    end
   end
 
   private
