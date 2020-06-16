@@ -19,6 +19,19 @@ describe Transaction do
     User.current_user = @account.business.owner
   end
 
+  describe "transaction rules" do
+    let!(:rule){ FactoryGirl.create(:transaction_rule, operator: "contains", value: "hola", contact: FactoryGirl.create(:contact))}
+    it "are applied con create, not update" do
+      t = FactoryGirl.build(:transaction, description: "hola como te va", business: rule.business, contact_id: nil)
+      t.save
+      expect(t.reload.contact_id).not_to be_nil
+      expect(t.reload.contact_id).to eq rule.contact_id
+      t.contact_id = nil
+      t.save
+      expect(t.reload.contact_id).to be_nil
+    end
+  end
+
   it "unsets target when changing FROM transfer" do
     t = FactoryGirl.create(:transaction, type: "Transfer", target: @account)
     expect(t.target).to eq @account

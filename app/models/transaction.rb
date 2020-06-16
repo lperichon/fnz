@@ -6,6 +6,8 @@ class Transaction < ActiveRecord::Base
   before_validation :set_report_at
   before_validation :unset_target
 
+  before_create :apply_automation_rules
+
   attr_accessor :skip_update_balances
   after_save :update_balances, unless: :skip_update_balances
   around_destroy :update_balances_around_destroy
@@ -314,5 +316,15 @@ class Transaction < ActiveRecord::Base
 
   def self.last_updated_at
     self.select("max(transactions.updated_at) as last_update")[0].last_update
+  end
+
+  def apply_automation_rules
+    return nil if business.nil?
+
+    business.transaction_rules.each do |rule|
+      if rule.matches?(self)
+        rule.set_values(self)
+      end
+    end
   end
 end

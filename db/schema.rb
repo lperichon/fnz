@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20200226190210) do
+ActiveRecord::Schema.define(:version => 20200616151138) do
 
   create_table "accounts", :force => true do |t|
     t.string   "name",                                       :default => "",  :null => false
@@ -311,6 +311,17 @@ ActiveRecord::Schema.define(:version => 20200226190210) do
     t.integer "children_count"
     t.string  "admpart_section"
     t.string  "system_name"
+  end
+
+  create_table "transaction_rules", :force => true do |t|
+    t.string   "operator"
+    t.string   "value"
+    t.integer  "contact_id"
+    t.integer  "agent_id"
+    t.integer  "admpart_tag_id"
+    t.integer  "business_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "transactions", :force => true do |t|
