@@ -330,7 +330,7 @@ class Transaction < ActiveRecord::Base
 
   def get_automation_rules
     @automation_rules ||= Rails.cache.fetch("automation_rules#{business.id}", expires_in: 1.minute) do
-      business.transaction_rules
+      business.transaction_rules.to_a
     end
   end
 end
