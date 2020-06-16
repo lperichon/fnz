@@ -1,4 +1,10 @@
 class TransactionRule < ActiveRecord::Base
+  attr_accessible :admpart_tag_id,
+                  :agent_id,
+                  :contact_id,
+                  :operator,
+                  :value
+
 
   VALID_OPERATORS = %W(contains regex)
   validates :operator, inclusion: { in: VALID_OPERATORS }
@@ -10,6 +16,8 @@ class TransactionRule < ActiveRecord::Base
   belongs_to :contact
   belongs_to :agent
   belongs_to :admpart_tag, class_name: "Tag"
+
+  validate :at_least_one_assignment
 
 
   # @return Array [TransactionRule]
@@ -32,6 +40,16 @@ class TransactionRule < ActiveRecord::Base
     transaction.contact_id = contact_id unless contact_id.blank?
     transaction.agent_id = agent_id unless agent_id.blank?
     transaction.admpart_tag_id = admpart_tag_id unless admpart_tag_id.blank?
+  end
+
+  private
+
+  def at_least_one_assignment
+    if agent_id.blank? && contact_id.blank? && admpart_tag_id.blank?
+      errors.add(:agent_id, _("Elija por lo menos un valor a asignar"))
+      errors.add(:contact_id, _("Elija por lo menos un valor a asignar"))
+      errors.add(:admpart_tag_id, _("Elija por lo menos un valor a asignar"))
+    end
   end
 
 end

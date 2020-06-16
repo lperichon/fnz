@@ -1,0 +1,17 @@
+<%= render 'content_for_layout' %>
+
+<ul class="transaction_rules">
+  <% @transaction_rules.each do |rule| %>
+    <li>
+      <%= "#{rule.operator} #{rule.value}" %> --> <%= [rule.contact.try(:name),rule.agent.try(:name),rule.admpart_tag.try(:name)].compact.join(",") %>
+      <% if can?(:edit,rule) %>
+        <%= link_to content_tag(:i, "", class: "icon-edit"),
+                    edit_business_transaction_rule_path(rule.business, rule) %>
+      <% end %>
+      <% if can?(:destroy,rule) %>
+        <%= link_to content_tag(:i, "", class: "icon-trash"),
+                    business_transaction_rule_path(rule.business, rule), confirm: _("¿seguro?"), method: 'delete' %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

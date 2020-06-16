@@ -1,0 +1,5 @@
+<%= render 'content_for_layout' %>
+
+<h2><%= _("Editar regla") %></h2>
+
+<%= render :partial => 'form', :locals => {:form_url => business_transaction_rule_path(@business,@transaction_rule)} %>

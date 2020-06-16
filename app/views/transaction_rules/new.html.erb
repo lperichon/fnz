@@ -1,0 +1,5 @@
+<%= render 'content_for_layout' %>
+
+<h2><%= _("Nueva regla") %></h2>
+
+<%= render :partial => 'form', :locals => {:form_url => business_transaction_rules_path(@business)} %>
