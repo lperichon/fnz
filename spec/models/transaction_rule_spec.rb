@@ -7,7 +7,7 @@ RSpec.describe TransactionRule, :type => :model do
   let(:tag){ FactoryGirl.create(:tag) }
 
   describe "matches?" do
-    let(:rule){ FactoryGirl.create(:transaction_rule, operator: operator, value: value) }
+    let(:rule){ FactoryGirl.create(:transaction_rule, operator: operator, value: value, contact: FactoryGirl.create(:contact)) }
     describe "with 'regex' operator" do
       let(:operator){ "regex" }
       let(:value){ ".uck"}
