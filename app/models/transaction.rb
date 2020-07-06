@@ -146,7 +146,7 @@ class Transaction < ActiveRecord::Base
       Account.find(source_id_was).update_balance if source_id_was
     end
     if target_id_was != source_id && target_id_was != source_id
-      Account.find(target_id_was).update_balance if target_id_was 
+      Account.find(target_id_was).update_balance if target_id_was
     end
 
     if admpart_tag
@@ -163,11 +163,11 @@ class Transaction < ActiveRecord::Base
   def infer_associations
     return if business_id.nil?
     if admpart_tag
-      # tagged 
-      
+      # tagged
+
       if !contact_id.blank? && admpart_tag.in?(Tag.system_tags_tree(business_id,"installment"))
         # with installments
-        
+
         if installments.empty?
           # but no installments
           # find installments and link
@@ -178,7 +178,7 @@ class Transaction < ActiveRecord::Base
           if installment
             if agent_id.blank? && installment.agent_id
               update_attribute(:agent_id, installment.agent_id)
-              # TODO if installment.agent_id is NULL get contact.padma_teacher 
+              # TODO if installment.agent_id is NULL get contact.padma_teacher
             end
             # to ensure callbacks that calculate balances, etc.
             InstallmentTransaction.create(
@@ -228,7 +228,7 @@ class Transaction < ActiveRecord::Base
 
   def unset_target
     if type_changed? && type_was == "Transfer"
-      # [TODO] should target.update_balance but at this point i'm still accountable on target. queue it for affter save?
+      # [TODO] should target.update_balance but at this point i'm still accountable on target. queue it for after save?
       self.target_id = nil
       self.target = nil
     end
