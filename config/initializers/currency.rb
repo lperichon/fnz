@@ -1,2 +1,2 @@
 CurrencyLoader.load_currencies
-SUPPORTED_CURRENCIES = [:usd, :brl, :eur, :ars].map {|code| Currency.find(code)}
+SUPPORTED_CURRENCIES = [:usd, :brl, :eur, :ars, :dai].map {|code| Currency.find(code)}

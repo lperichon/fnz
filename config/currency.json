@@ -467,6 +467,19 @@
         "thousands_separator": ".",
         "iso_numeric": "203"
     },
+    "dai": {
+        "priority": 100,
+        "iso_code": "DAI",
+        "name": "DAI",
+        "symbol": "DAI",
+        "subunit": "Centime",
+        "subunit_to_unit": 100,
+        "symbol_first": true,
+        "html_entity": "",
+        "decimal_mark": ".",
+        "thousands_separator": ",",
+        "iso_numeric": null
+    },
     "djf": {
         "priority": 100,
         "iso_code": "DJF",
