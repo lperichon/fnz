@@ -21,6 +21,15 @@
                       display_with: :number_to_currency,
                       class: "keep-line",
                       helper_options: {unit:  transaction.source.currency.symbol} if transaction.source %>
+    <% if @account && transaction.is_a?(Transfer) && transaction.sign(@account)!=-1 && transaction.sign(@account)!=1.0 %>
+      (
+        <span class="keep-line">x <%= transaction.sign(@account) %></span>
+        <span class="keep-line">
+          = <%= number_to_currency transaction.amount*transaction.sign(@account),
+                                   unit: transaction.target.currency.symbol %>
+        </span>
+      )
+    <% end %>
   </td>
   <td>
     <%= best_in_place transaction.becomes(Transaction), :source_id, :as => :select, :collection => @business.accounts.order("name").map { |i| [i.id, i.name] } , :url => business_transaction_path(@business, transaction) %>
