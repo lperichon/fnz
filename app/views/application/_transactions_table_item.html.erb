@@ -21,11 +21,11 @@
                       display_with: :number_to_currency,
                       class: "keep-line",
                       helper_options: {unit:  transaction.source.currency.symbol} if transaction.source %>
-    <% if @account && transaction.is_a?(Transfer) && transaction.sign(@account)!=-1 && transaction.sign(@account)!=1.0 %>
+    <% if transaction.is_a?(Transfer) && transaction.sign(transaction.target).to_f.abs!=1.0 %>
       (
-        <span class="keep-line">x <%= transaction.sign(@account) %></span>
+        <span class="keep-line">x <%= transaction.sign(transaction.target) %></span>
         <span class="keep-line">
-          = <%= number_to_currency transaction.amount*transaction.sign(@account),
+          = <%= number_to_currency transaction.amount*transaction.sign(transaction.target),
                                    unit: transaction.target.currency.symbol %>
         </span>
       )
