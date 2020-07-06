@@ -48,7 +48,7 @@ class Transaction < ActiveRecord::Base
   has_many :tags, :through => :taggings
 
   belongs_to :admpart_tag, class_name: "Tag"
-  before_save :set_admpart_tag
+  before_validation :set_admpart_tag
 
   has_and_belongs_to_many :sales
   has_and_belongs_to_many :enrollments
