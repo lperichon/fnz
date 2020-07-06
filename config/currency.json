@@ -471,7 +471,7 @@
         "priority": 100,
         "iso_code": "DAI",
         "name": "DAI",
-        "symbol": "DAI",
+        "symbol": "DAI ",
         "subunit": "Centime",
         "subunit_to_unit": 100,
         "symbol_first": true,
