@@ -5,6 +5,7 @@ class Transaction < ActiveRecord::Base
   before_validation :set_business
   before_validation :set_report_at
   before_validation :unset_target
+  before_validation :unset_tag, if: ->{ type == "Transfer" }
 
   before_create :apply_automation_rules
 
@@ -230,6 +231,13 @@ class Transaction < ActiveRecord::Base
       # [TODO] should target.update_balance but at this point i'm still accountable on target. queue it for affter save?
       self.target_id = nil
       self.target = nil
+    end
+  end
+
+  def unset_tag
+    if type_changed? && type == "Transfer"
+      # [TODO] should update tag's total but at this point i'm still accountable on it. queue it for after save?
+      self.tag_id = nil
     end
   end
 
