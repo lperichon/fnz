@@ -139,7 +139,8 @@ class Installment < ActiveRecord::Base
   private
 
   def calculate_balance
-    transactions.where(:state => ['created', 'reconciled']).inject(0) {|balance, transaction| balance+transaction.sign(self)*transaction.amount}
+    # transactions should all be Debit or Credit so account is not needed for sign
+    transactions.where(:state => ['created', 'reconciled']).inject(0) {|balance, transaction| balance+transaction.sign(nil)*transaction.amount}
   end
 
   def calculate_status
