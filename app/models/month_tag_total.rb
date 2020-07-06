@@ -7,6 +7,7 @@ class MonthTagTotal < ActiveRecord::Base
 
   belongs_to :tag
 
+  before_validation :set_default_currency
   before_validation :force_ref_date_to_first_day_of_month
   validates :ref_date, presence: true
 
@@ -43,6 +44,10 @@ class MonthTagTotal < ActiveRecord::Base
   end
 
   private
+
+  def set_default_currency
+    self.currency = tag.business.currency_code
+  end
 
   def force_ref_date_to_first_day_of_month
     if ref_date && ref_date.day != 1
