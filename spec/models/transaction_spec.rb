@@ -19,6 +19,28 @@ describe Transaction do
     User.current_user = @account.business.owner
   end
 
+  describe "currencies" do
+    let(:business){ FactoryGirl.create(:business, currency_code: "ars") }
+    let(:acc){ FactoryGirl.create(:account, currency: "ars", business: business) }
+    let(:other_currency_account){ FactoryGirl.create(:account, currency: "usd", business: business) }
+    it "allows tranaction on account on businessses currency" do
+      t = FactoryGirl.build(:transaction, source: acc)
+      expect(t).to be_valid
+    end
+    it "allow TAGGED transaction on businesses currency" do
+      t = FactoryGirl.build(:transaction, source: acc, admpart_tag: FactoryGirl.create(:tag, business: business))
+      expect(t).to be_valid
+    end
+    it "allows not-tagged transactions on other currencies" do
+      t = FactoryGirl.build(:transaction, source: other_currency_account)
+      expect(t).to be_valid
+    end
+    it "wont allow to TAG Debit or Credit not in Business currency" do
+      t = FactoryGirl.build(:transaction, source: other_currency_account, admpart_tag: FactoryGirl.create(:tag, business: business))
+      expect(t).not_to be_valid
+    end
+  end
+
   describe "transaction rules" do
     let!(:rule){ FactoryGirl.create(:transaction_rule, operator: "contains", value: "hola", contact: FactoryGirl.create(:contact))}
     it "are applied con create, not update" do

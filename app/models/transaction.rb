@@ -63,6 +63,8 @@ class Transaction < ActiveRecord::Base
   validates :transaction_at, :presence => true
   validates :report_at, :presence => true
 
+  validate :in_business_currency, if: ->{ type!="Transfer" && !admpart_tag_id.nil? }
+
   # Setup accessible (or protected) attributes for your model
   attr_accessible :tag_id, :tag_ids, :description, :business_id, :source_id, :amount, :type, :transaction_at, :target_id, :conversion_rate, :state, :reconciled_at, :sale_ids, :installment_ids, :enrollment_ids, :creator_id, :report_at, :report_at_option, :inscription_ids, :contact_id, :agent_id, :admpart_tag_id 
 
@@ -339,6 +341,12 @@ class Transaction < ActiveRecord::Base
   def get_automation_rules
     @automation_rules ||= Rails.cache.fetch("automation_rules#{business.id}", expires_in: 1.minute) do
       business.transaction_rules.to_a
+    end
+  end
+
+  def in_business_currency
+    if source && source.currency.iso_code.downcase!=source.business.currency_code.downcase
+      errors.add(:admpart_tag_id, _("No podemos etiquetar gastos que no estén en la moneda de la escuela"))
     end
   end
 end
