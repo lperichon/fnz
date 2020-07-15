@@ -2,9 +2,13 @@
     <%= render :partial => 'businesses/edit_sidebar' %>
 <% end %>
 
-<h2><%=  %></h2>
+<h2><%= _("Editar cuenta") %></h2>
 
 <%= render :partial => 'form', :locals => {:form_url => business_account_path(@business, @account)} %>
+
+<p>
+  <%= link_to(_("Habilitar cambio de moneda"), edit_business_account_path(@business,@account, change_currency: 1)) %>. <%= _("Esto modificará la moneda de TODOS los movimientos realizados en esta cuenta.") %>
+</p>
 
 <%= link_to t('actions.show'), business_account_path(@business,@account) %> |
 <%= link_to t('actions.back'), business_accounts_path(@business) %>
