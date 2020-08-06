@@ -2,7 +2,11 @@ class ImportsController < UserApplicationController
   before_filter :get_business
 
   def index
-    @imports = @business.imports.where("not archived OR archived is null").order("created_at desc")
+    @imports = if params[:archived]
+      @business.imports.order("created_at desc")  
+    else
+      @business.imports.where("not archived OR archived is null").order("created_at desc")  
+    end
   end
 
   def show
