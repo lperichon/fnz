@@ -85,6 +85,18 @@ class Transaction < ActiveRecord::Base
     self.tags.first
   end
 
+  # Es el momento en el que cambia el balance en las cuentas asociadas.
+  # @return [DateTime/NilClass]
+  def balance_changed_at
+    if pending?
+      nil
+    elsif reconciled?
+      reconciled_at
+    elseif created?
+      transaction_at
+    end
+  end
+
   def self.to_report_on_month(ref_date)
     ref_date = Time.zone.today.to_date if ref_date.nil?
     self.where("report_at >= ? AND report_at <= ?", ref_date.beginning_of_month, ref_date.end_of_month)
