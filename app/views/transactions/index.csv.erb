@@ -1,4 +1,4 @@
-<%- headers = ['Type', 'Status', 'Description', 'Amount', 'Source', 'Target', 'Transaction at', 'Category','Agent','Contact','ExchangeRate'] -%>
+<%- headers = ['Type', 'Status', 'Description', 'Amount', 'Source', 'Target', 'Transaction at', 'Category','Agent','Contact','ExchangeRate','Reconciled at'] -%>
 <%= CSV.generate_line headers %>
 <%- @transactions.each do |t| -%>
   <%= CSV.generate_line([
@@ -12,6 +12,7 @@
     t.tags.join(","),
     t.agent.try(:name),
     t.contact.try(:name),
-    number_with_precision(t.conversion_rate, precision: 4)
+    number_with_precision(t.conversion_rate, precision: 4),
+    t.reconciled_at
   ]).html_safe -%>
 <%- end -%>
