@@ -1,4 +1,11 @@
-<% page_title _("Transacciones") %>
+<%
+  title = _("Transacciones")
+  if @account
+    title += " "
+    title += @account.name
+  end
+%>
+<% page_title title %>
 
 <% content_for :head do %>
   <meta http-equiv="refresh" content="<%= 15.minutes %>" >
