@@ -1,6 +1,10 @@
 module ApplicationHelper
   include TzMagic::ApplicationHelper
 
+  def page_title(title)
+    content_for(:title){ title }
+  end
+
   def css_class_id(obj)
     "its_#{obj.class.to_s}#{obj.id}"
   end
