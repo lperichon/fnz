@@ -35,6 +35,10 @@ $(document).ready ->
       "Last Month": [
         moment().subtract("month", 1).startOf("month")
         moment().subtract("month", 1).endOf("month")
+      ],
+      "Month before last": [
+        moment().subtract("month", 2).startOf("month")
+        moment().subtract("month", 2).endOf("month")
       ]
     , (start, end) ->
       window.location = "?start_date=" + start.format("YYYY-M-D") + "&end_date=" + end.format("YYYY-M-D")
