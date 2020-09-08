@@ -1,7 +1,11 @@
 <%
   title = _("Transacciones")
-  if @account
+  if @tag
     title += " "
+    title += @tag.name
+  end
+  if @account
+    title += " @"
     title += @account.name
   end
 %>
