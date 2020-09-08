@@ -1,12 +1,10 @@
 <%
-  title = _("Transacciones")
-  if @tag
-    title += " "
-    title += @tag.name
-  end
-  if @account
-    title += " @"
-    title += @account.name
+  title = if @tag
+    @tag.name
+  elsif @account
+    @account.name
+  else
+    _("Transacciones")
   end
 %>
 <% page_title title %>
