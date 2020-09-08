@@ -60,5 +60,8 @@
     <% end %>
   </td>
   <td><%= best_in_place transaction.becomes(Transaction), :agent_id, as: :select, collection: agent_options_for_select(transaction), url: business_transaction_path(@business, transaction) %></td>
-  <td class="select2"><%= best_in_place transaction.becomes(Transaction), :contact_id, as: :select, collection: contact_options_for_select, url: business_transaction_path(@business, transaction) %></td>
+  <td class="select2">
+    <%= best_in_place transaction.becomes(Transaction), :contact_id, as: :select, collection: contact_options_for_select, url: business_transaction_path(@business, transaction) %>
+    <%= link_to("<i class='icon-eye-open'></i>".html_safe, business_contact_path(@business,transaction.contact), class: "contact-detail", target: :_blank).html_safe if transaction.contact %>
+  </td>
 <% end %>

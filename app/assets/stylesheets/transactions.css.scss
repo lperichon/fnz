@@ -30,6 +30,13 @@
   width: 100% !important;
 }
 
+.transactions.table td .contact-detail {
+  display: none;
+}
+.transactions.table td:hover .contact-detail {
+  display: inline;
+}
+
 .keep-line {
   white-space: nowrap;
 }
