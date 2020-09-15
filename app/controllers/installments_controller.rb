@@ -23,7 +23,7 @@ class InstallmentsController < UserApplicationController
                              .joins(:admpart_tag)
                              .where( tags: { system_name: "installment"  })
                              .where( contact_id: @installment.membership.contact_id )
-                             .where(report_at: (date.beginning_of_month...date.end_of_month))
+                             .to_report_on_month(date)
                              .order("transaction_at DESC")
   end
 
