@@ -7,6 +7,8 @@ class Transaction < ActiveRecord::Base
   before_validation :unset_target
   before_validation :unset_tag, if: ->{ type == "Transfer" }
 
+  before_save :set_order_stamp
+
   before_create :apply_automation_rules
 
   attr_accessor :skip_update_balances
@@ -348,6 +350,15 @@ class Transaction < ActiveRecord::Base
         rule.set_values(self)
       end
     end
+  end
+
+  def set_order_stamp
+    self.order_stamp = (reconciled?)? reconciled_at : transaction_at
+  end
+
+  def self.update_all_order_stamps
+    self.where(state: :reconciled).update_all("order_stamp = reconciled_at")
+    self.where("state <> 'reconciled'").update_all("order_stamp = transaction_at")
   end
 
   def get_automation_rules

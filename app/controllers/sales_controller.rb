@@ -19,13 +19,13 @@ class SalesController < UserApplicationController
     @sale = @context.find(params[:id])
     @business = @sale.business
     date = @sale.sold_on
-    @transactions = @business.transactions.credits.where {(transaction_at.gteq(date - 1.month)) & (transaction_at.lteq(date + 1.month))}.order("transaction_at DESC")
+    @transactions = @business.transactions.credits.where {(transaction_at.gteq(date - 1.month)) & (transaction_at.lteq(date + 1.month))}.order("order_stamp DESC")
   end
 
   def new
     @sale = @context.new(params[:sale])
     date = Date.today
-    @transactions = @business.transactions.credits.where {(transaction_at.gteq(date - 1.month)) & (transaction_at.lteq(date + 1.month))}.order("transaction_at DESC")
+    @transactions = @business.transactions.credits.where {(transaction_at.gteq(date - 1.month)) & (transaction_at.lteq(date + 1.month))}.order("order_stamp DESC")
   end
 
   # POST /accounts

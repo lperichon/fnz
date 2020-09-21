@@ -4,7 +4,7 @@ class TransactionsController < UserApplicationController
 
   PER_PAGE = 200
   def index
-    @context = @context.order("transaction_at DESC")
+    @context = @context.order("order_stamp DESC")
 
     @transactions = @context.includes(:agent, :contact, :tags, :source, :business)
 

@@ -14,7 +14,7 @@ class ContactsController < UserApplicationController
     end
     @memberships = @contact.memberships.where(business_id: @business.id)
     if @business.transactions_enabled?
-      @transactions = @business.transactions.where(contact_id: @contact.id).order("transaction_at DESC")
+      @transactions = @business.transactions.where(contact_id: @contact.id).order("order_stamp DESC")
     end
   end
 

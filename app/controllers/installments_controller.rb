@@ -24,7 +24,7 @@ class InstallmentsController < UserApplicationController
                              .where( tags: { system_name: "installment"  })
                              .where( contact_id: @installment.membership.contact_id )
                              .to_report_on_month(date)
-                             .order("transaction_at DESC")
+                             .order("order_stamp DESC")
   end
 
   def new
@@ -39,7 +39,7 @@ class InstallmentsController < UserApplicationController
     @installment = @context.new((params[:installment]||{}).reverse_merge(defaults))
 
   	date = Date.today
-  	@transactions = @business.transactions.credits.where {(transaction_at.gteq(date - 1.month)) & (transaction_at.lteq(date + 1.month))}.order("transaction_at DESC")
+  	@transactions = @business.transactions.credits.where {(transaction_at.gteq(date - 1.month)) & (transaction_at.lteq(date + 1.month))}.order("order_stamp DESC")
     # la linea de arriba retorna nil a veces. ver:
     # https://appsignal.com/padma/sites/5c463bba74782025e5d6f521/exceptions/incidents/111?timestamp=2019-03-20T16%3A22%3A03Z
     if @transactions.nil?

@@ -15,12 +15,12 @@ class InscriptionsController < UserApplicationController
 
   def edit
     @inscription = @context.find(params[:id])
-  	@transactions = @business.transactions.credits.order("transaction_at DESC")
+  	@transactions = @business.transactions.credits.order("order_stamp DESC")
   end
 
   def new
     @inscription = @context.new(params[:inscription])
-  	@transactions = @business.transactions.credits.order("transaction_at DESC")
+  	@transactions = @business.transactions.credits.order("order_stamp DESC")
   end
 
   # POST /accounts
