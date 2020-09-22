@@ -357,7 +357,7 @@ class Transaction < ActiveRecord::Base
   end
 
   def self.update_all_order_stamps
-    self.where(state: :reconciled).update_all("order_stamp = reconciled_at")
+    self.where("state = 'reconciled'").update_all("order_stamp = reconciled_at")
     self.where("state <> 'reconciled'").update_all("order_stamp = transaction_at")
   end
 
