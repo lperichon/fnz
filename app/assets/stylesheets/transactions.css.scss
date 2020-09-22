@@ -30,6 +30,12 @@
   width: 100% !important;
 }
 
+.transactions.table td .tag-detail {
+  display: none;
+}
+.transactions.table td:hover .tag-detail {
+  display: inline;
+}
 .transactions.table td .contact-detail {
   display: none;
 }

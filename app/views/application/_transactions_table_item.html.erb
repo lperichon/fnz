@@ -58,6 +58,14 @@
     <% rescue %>
       <%= bip_tag_id(transaction.becomes(Transaction)) %>
     <% end %>
+    <%= link_to("<i class='icon-eye-open'></i>".html_safe,
+                business_transactions_path(
+                    business_id: @business.id,
+                    admpart_tag_id: transaction.tag.id,
+                    report_on: transaction.report_at
+                ),
+                class: "tag-detail",
+                target: :_blank).html_safe if transaction.tag %>
   </td>
   <td><%= best_in_place transaction.becomes(Transaction), :agent_id, as: :select, collection: agent_options_for_select(transaction), url: business_transaction_path(@business, transaction) %></td>
   <td class="select2">
