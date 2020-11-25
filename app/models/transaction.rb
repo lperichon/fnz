@@ -68,7 +68,7 @@ class Transaction < ActiveRecord::Base
   validate :in_business_currency, if: ->{ type!="Transfer" && !admpart_tag_id.nil? }
 
   # Setup accessible (or protected) attributes for your model
-  #attr_accessible :tag_id, :tag_ids, :description, :business_id, :source_id, :amount, :type, :transaction_at, :target_id, :conversion_rate, :state, :reconciled_at, :sale_ids, :installment_ids, :enrollment_ids, :creator_id, :report_at, :report_at_option, :inscription_ids, :contact_id, :agent_id, :admpart_tag_id 
+  #attr_accessible :tag_id, :tag_ids, :description, :business_id, :source_id, :amount, :type, :transaction_at, :target_id, :conversion_rate, :state, :reconciled_at, :sale_ids, :installment_ids, :enrollment_ids, :creator_id, :report_at, :report_at_option, :inscription_ids, :contact_id, :agent_id, :admpart_tag_id
 
   scope :untagged, includes(:taggings).where("taggings.tag_id is null")
 
@@ -290,7 +290,7 @@ class Transaction < ActiveRecord::Base
     transaction.attributes = {
         :business_id => business.id,
         :type => type,
-        :source_id => business.accounts.find_or_create_by_name(row[0]).id,
+        :source_id => business.accounts.find_or_create_by(name: row[0]).id,
         :transaction_at => row[1],
         :amount => amount.abs(),
         :description => row[3],
@@ -319,7 +319,7 @@ class Transaction < ActiveRecord::Base
     tags_str = row[4]
     unless tags_str.blank?
       tags_str.split(';').each do |tag_name|
-        tag = Tag.find_or_create_by_business_id_and_name(business_id: business.id, name: tag_name)
+        tag = Tag.find_or_create_by(business_id: business.id, name: tag_name)
         transaction.tags << tag
       end
     end

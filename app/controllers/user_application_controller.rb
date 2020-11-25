@@ -45,7 +45,7 @@ class UserApplicationController < ApplicationController
         if apikey.access == 'login_key'
           user = nil
           if apikey.username
-            user = User.find_or_create_by_drc_uid(apikey.username)
+            user = User.find_or_create_by(drc_uid: apikey.username)
           end
           sign_in(user)
         end
