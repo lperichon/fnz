@@ -13,7 +13,7 @@ class Business < ActiveRecord::Base
   has_many :membership_imports
   has_many :installment_imports
   has_many :payment_types
-  has_and_belongs_to_many :users
+  has_and_belongs_to_many :users, join_table: 'businesses_users'
 
   validates :name, :presence => true
   validates :owner, :presence => true

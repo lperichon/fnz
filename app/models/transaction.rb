@@ -52,10 +52,10 @@ class Transaction < ActiveRecord::Base
   belongs_to :admpart_tag, class_name: "Tag"
   before_validation :set_admpart_tag
 
-  has_and_belongs_to_many :sales
-  has_and_belongs_to_many :enrollments
-  has_and_belongs_to_many :installments
-  has_and_belongs_to_many :inscriptions
+  has_and_belongs_to_many :sales, join_table: 'sales_transactions'
+  has_and_belongs_to_many :enrollments, join_table: 'enrollments_transactions'
+  has_and_belongs_to_many :installments, join_table: 'installments_transactions'
+  has_and_belongs_to_many :inscriptions, join_table: 'inscriptions_transactions'
 
   validates :description, :presence => true
   validates :business, :presence => true
