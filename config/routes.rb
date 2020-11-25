@@ -25,7 +25,7 @@ Fnz::Application.routes.draw do
     end
     resources :accounts do
       member do
-        put :update_balance
+        patch :update_balance
       end
       resources :transactions, :only => [:index] do
         get :stats, :on => :collection
@@ -39,7 +39,7 @@ Fnz::Application.routes.draw do
       resources :transaction_spliters, only: [:new, :create]
       collection do
         get :batch_edit
-        put :batch_update
+        patch :batch_update
         get :stats
       end
     end
@@ -79,7 +79,7 @@ Fnz::Application.routes.draw do
       resources :transactions
     end
     resources :imports do
-      put :process_csv, :on => :member
+      patch :process_csv, :on => :member
       get :errors, :on => :member
     end
     resources :users
