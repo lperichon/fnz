@@ -1,8 +1,8 @@
 module BelongsToPadmaContact #:nodoc:
   extend ActiveSupport::Concern
-  
+
   included do
-    attr_accessible :padma_contact_id
+    #attr_accessible :padma_contact_id
 
     def padma_contact_id= padma_contact_id
     	return if padma_contact_id.blank?

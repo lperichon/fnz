@@ -3,5 +3,5 @@ class UserBusiness < ActiveRecord::Base
   belongs_to :user
   belongs_to :business
 
-  attr_accessible :user_id, :business_id, :show_on_menu
+  #attr_accessible :user_id, :business_id, :show_on_menu
 end

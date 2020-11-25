@@ -12,14 +12,14 @@ class Installment < ActiveRecord::Base
   validates_datetime :due_on, :after => Date.parse("0001-01-01")
   validates :value, :presence => true
 
-  scope :due, where("due_on BETWEEN '#{Date.today}' AND '#{Date.today.end_of_month}'")
-  scope :overdue, where("due_on < '#{Date.today}'")
-  scope :incomplete, where(:status => :incomplete)
+  scope :due, -> { where("due_on BETWEEN '#{Date.today}' AND '#{Date.today.end_of_month}'") }
+  scope :overdue, -> { where("due_on < '#{Date.today}'") }
+  scope :incomplete, -> { where(:status => :incomplete) }
 
   default_scope order("due_on DESC")
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :membership_id, :agent_id, :due_on, :value, :transactions_attributes, :installment_transactions_attributes, :external_id, :observations, :status, :balance, :installments_count, :agent_padma_id, :transaction_ids
+  #attr_accessible :membership_id, :agent_id, :due_on, :value, :transactions_attributes, :installment_transactions_attributes, :external_id, :observations, :status, :balance, :installments_count, :agent_padma_id, :transaction_ids
   accepts_nested_attributes_for :transactions, allow_destroy: true
   accepts_nested_attributes_for :installment_transactions, :reject_if => proc { |s| s['transaction_id'].blank? }
 
@@ -51,7 +51,7 @@ class Installment < ActiveRecord::Base
   def self.last_updated_at(business_id)
     Installment.unscoped.joins(:membership).where(memberships: { business_id: business_id }).select("max(installments.updated_at) as last_update").group("memberships.business_id").order("last_update asc").last.last_update
   end
-  
+
   def set_agent
     self.agent = self.membership.business.agents.find_by_padma_id(self.agent_padma_id) if self.agent_padma_id.present?
   end
@@ -73,7 +73,7 @@ class Installment < ActiveRecord::Base
     status = calculate_status
   end
 
-  def update_balance_and_status 
+  def update_balance_and_status
     self.balance = calculate_balance
     self.status = calculate_status
     save
@@ -126,8 +126,8 @@ class Installment < ActiveRecord::Base
       	}
 
       	installment_attributes[:transactions_attributes] = [transaction_attrs]
-    end	
-    
+    end
+
     installment = Installment.new(installment_attributes)
     return installment
   end

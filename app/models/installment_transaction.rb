@@ -4,7 +4,7 @@ class InstallmentTransaction < ActiveRecord::Base
   belongs_to :installment
   belongs_to :transaction
 
-  attr_accessible :transaction_id, :installment_id
+  #attr_accessible :transaction_id, :installment_id
 
   validates :transaction_id, uniqueness: { scope: :installment_id }
 

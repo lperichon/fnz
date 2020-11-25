@@ -16,7 +16,7 @@ class Tag < ActiveRecord::Base
   default_scope order('name ASC')
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :business_id, :admpart_section, :system_name
+  #attr_accessible :name, :business_id, :admpart_section, :system_name
 
   validates_uniqueness_of :name, :scope => :business_id
   validates_length_of :name, :maximum => 255
@@ -79,7 +79,7 @@ class Tag < ActiveRecord::Base
         name: I18n.t("tag.system_names.#{sysname}"),
         admpart_section: "income",
         system_name: sysname
-      ) 
+      )
     end
     t
   end

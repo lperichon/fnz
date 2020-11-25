@@ -2,7 +2,7 @@ class Inscription < ActiveRecord::Base
   belongs_to :business
   belongs_to :contact, :touch => true
   belongs_to :payment_type
-  
+
   has_many :inscription_transactions
   has_many :transactions, :through => :inscription_transactions
 
@@ -11,8 +11,8 @@ class Inscription < ActiveRecord::Base
   validates :contact, :presence => true
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :contact_id, :business_id, :payment_type_id, :value, :external_id, :transactions_attributes, :inscription_transactions_attributes, :observations, :balance, :padma_account, :contact_attributes
- 
+  #attr_accessible :contact_id, :business_id, :payment_type_id, :value, :external_id, :transactions_attributes, :inscription_transactions_attributes, :observations, :balance, :padma_account, :contact_attributes
+
   include BelongsToPadmaContact
 
   accepts_nested_attributes_for :transactions, allow_destroy: true

@@ -68,7 +68,7 @@ class Transaction < ActiveRecord::Base
   validate :in_business_currency, if: ->{ type!="Transfer" && !admpart_tag_id.nil? }
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :tag_id, :tag_ids, :description, :business_id, :source_id, :amount, :type, :transaction_at, :target_id, :conversion_rate, :state, :reconciled_at, :sale_ids, :installment_ids, :enrollment_ids, :creator_id, :report_at, :report_at_option, :inscription_ids, :contact_id, :agent_id, :admpart_tag_id 
+  #attr_accessible :tag_id, :tag_ids, :description, :business_id, :source_id, :amount, :type, :transaction_at, :target_id, :conversion_rate, :state, :reconciled_at, :sale_ids, :installment_ids, :enrollment_ids, :creator_id, :report_at, :report_at_option, :inscription_ids, :contact_id, :agent_id, :admpart_tag_id 
 
   scope :untagged, includes(:taggings).where("taggings.tag_id is null")
 

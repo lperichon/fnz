@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   end
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :email, :remember_me, :time_zone, :drc_uid
+  #attr_accessible :name, :email, :remember_me, :time_zone, :drc_uid
 
   has_many :owned_businesses, :foreign_key => :owner_id, :class_name => 'Business'
   has_many :user_businesses
@@ -78,5 +78,5 @@ class User < ActiveRecord::Base
     end
     lu
   end
-  
+
 end

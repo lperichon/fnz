@@ -1,5 +1,5 @@
 class PaymentType < ActiveRecord::Base
-  attr_accessible :name, :description
+  #attr_accessible :name, :description
 
   has_many :memberships
 

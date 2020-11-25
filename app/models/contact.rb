@@ -12,14 +12,14 @@ class Contact < ActiveRecord::Base
 
   has_many :sales
 
-  scope :students, joins(:memberships).where('memberships.closed_on' => nil).where("padma_status != 'former_student' OR padma_status IS NULL").uniq
-  scope :students_without_membership, joins("left outer join memberships on contacts.id = memberships.contact_id").where(:padma_status => 'student').where('memberships.id' => nil)
-  scope :former_students_with_open_membership, joins(:memberships).where('memberships.closed_on' => nil).where(:padma_status => 'former_student')
+  scope :students, -> { joins(:memberships).where('memberships.closed_on' => nil).where("padma_status != 'former_student' OR padma_status IS NULL").uniq }
+  scope :students_without_membership, -> { joins("left outer join memberships on contacts.id = memberships.contact_id").where(:padma_status => 'student').where('memberships.id' => nil) }
+  scope :former_students_with_open_membership, -> { joins(:memberships).where('memberships.closed_on' => nil).where(:padma_status => 'former_student') }
 
   default_scope order('contacts.name ASC')
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :business_id, :padma_id, :padma_status, :padma_teacher
+  #attr_accessible :name, :business_id, :padma_id, :padma_status, :padma_teacher
 
   # finds contact by padma_id
   # if it doesnt exist it creates
@@ -33,7 +33,7 @@ class Contact < ActiveRecord::Base
         padma_contact = PadmaContact.find(padma_id,
                           select: [:id, :full_name, :local_status, :local_teacher],
                           account_name: b.padma_id
-                         ) 
+                         )
         if padma_contact
           c = b.contacts.create(
             :name => "#{padma_contact.first_name} #{padma_contact.last_name}".strip,
@@ -48,7 +48,7 @@ class Contact < ActiveRecord::Base
 
   def self.all_students
     scope = self.joins("left outer join memberships on contacts.id = memberships.contact_id")
-    scope = scope.includes(:business).includes(:current_membership).uniq 
+    scope = scope.includes(:business).includes(:current_membership).uniq
   end
 
   def old_membership
@@ -67,7 +67,7 @@ class Contact < ActiveRecord::Base
   def padma
     PadmaContact.find(padma_id, select: [:email]) if padma_id
   end
-  
+
   # TODO: cache email
   def email
     padma.email
@@ -79,13 +79,13 @@ class Contact < ActiveRecord::Base
 
   def update_current_membership
 
-    # fetching timezone from business would call accounts-ws 
+    # fetching timezone from business would call accounts-ws
     # set time zone outside
     update_attribute(:current_membership_id, memberships.where(closed_on: nil).valid_on(Time.zone.today).first.try(:id))
   end
 
   private
-  
+
   def self.get_bussines_from_scope(scope)
     scope = scope.scoped
     res = scope.to_sql.match(/business_id\" \= (\d+)/)

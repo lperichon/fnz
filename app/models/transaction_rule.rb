@@ -1,9 +1,9 @@
 class TransactionRule < ActiveRecord::Base
-  attr_accessible :admpart_tag_id,
-                  :agent_id,
-                  :contact_id,
-                  :operator,
-                  :value
+  #attr_accessible :admpart_tag_id,
+  #                :agent_id,
+  #                :contact_id,
+  #                :operator,
+  #                :value
 
 
   VALID_OPERATORS = %W(contains regex)

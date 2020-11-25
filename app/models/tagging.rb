@@ -11,14 +11,14 @@ class Tagging < ActiveRecord::Base
   after_save :set_transaction_admpart_tag
   after_destroy :unset_transaction_admpart_tag
 
-  attr_accessible :tag_id, :transaction_id
+  #attr_accessible :tag_id, :transaction_id
 
   private
 
   def set_transaction_admpart_tag
     transaction.update_attribute(:admpart_tag_id, tag_id)
   end
-  
+
   def unset_transaction_admpart_tag
     transaction.update_attribute(:admpart_tag_id, nil)
   end

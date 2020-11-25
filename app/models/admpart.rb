@@ -2,18 +2,18 @@ require 'appsignal'
 require 'appsignal/integrations/object'
 
 class Admpart < ActiveRecord::Base
-  
-  attr_accessible :director_from_profit_percentage,          # % del lucro para director 
-                  :owners_percentage,                        # % para inversores
-                  :dir_from_owners_aft_expses_percentage,    # % de inversores para director
-                  :agent_sale_percentage,                    # % de la venta para instructor
-                  :agent_enrollment_income_percentage,       # % de recaudación x matrículas para instructor
-                  :agent_enrollment_quantity_fixed_amount,   # valor fijo x matricula para instructor
-                  :agent_installments_attendance_percentage, # % de recaudación x alumno que va segun presencia, el resto va x vinculo transaccion-agente
-                  :installments_tag_id,
-                  :enrollments_tag_id,
-                  :sales_tag_id,
-                  :ref_date
+
+  #attr_accessible :director_from_profit_percentage,          # % del lucro para director
+  #                :owners_percentage,                        # % para inversores
+  #                :dir_from_owners_aft_expses_percentage,    # % de inversores para director
+  #                :agent_sale_percentage,                    # % de la venta para instructor
+  #                :agent_enrollment_income_percentage,       # % de recaudación x matrículas para instructor
+  #                :agent_enrollment_quantity_fixed_amount,   # valor fijo x matricula para instructor
+  #                :agent_installments_attendance_percentage, # % de recaudación x alumno que va segun presencia, el resto va x vinculo transaccion-agente
+  #                :installments_tag_id,
+  #                :enrollments_tag_id,
+  #                :sales_tag_id,
+  #                :ref_date
 
   has_many :custom_prizes
 
@@ -36,7 +36,7 @@ class Admpart < ActiveRecord::Base
   end
 
   before_validation :force_ref_date_to_first_day_of_month
-  validates :ref_date, presence: true, uniqueness: { scope: :business_id } 
+  validates :ref_date, presence: true, uniqueness: { scope: :business_id }
   validate :ref_date_first_day_of_month
 
   attr_accessor :force_refresh
@@ -100,7 +100,7 @@ class Admpart < ActiveRecord::Base
   def owners_pre_expenses_amount
     total_before_owner - teams_pre_expenses_amount # substract in case profit < 0 and teams_pre_expenses_amount was forced to 0
   end
-  
+
   def owners_aft_expenses_amount
     owners_pre_expenses_amount + section_total("owners_expenses")
   end
@@ -205,7 +205,7 @@ class Admpart < ActiveRecord::Base
       return tag.month_total(ref_date)
     end
 
-    options_digest = Digest::MD5.hexdigest(options.to_param) 
+    options_digest = Digest::MD5.hexdigest(options.to_param)
     cache_key = [id,"total_for_tag",tag.id,options_digest]
     unless agent_id.nil?
       cache_key << "agent:#{agent_id}"
@@ -219,7 +219,7 @@ class Admpart < ActiveRecord::Base
 
       # TODO consider currencies
       # TODO consider state of transaction. maybe no need?
-      
+
       scope = transactions_for_tag(tag, options.merge({ agent_id: agent_id }))
       total = scope.sum("CASE WHEN transactions.type='Credit' THEN transactions.amount WHEN transactions.type='Debit' THEN -1 * transactions.amount ELSE 0 END").to_f # using CASE casts to string ¿?
       #total += scope.credits.sum(:amount)
@@ -227,7 +227,7 @@ class Admpart < ActiveRecord::Base
 
       if agent_id.nil? && !options[:ignore_discounts]
         case tag.system_name
-        when "sale" 
+        when "sale"
           total -= sales_total_discount
         when "enrollment"
           total -= enrollments_total_discount
@@ -350,7 +350,7 @@ class Admpart < ActiveRecord::Base
     acum
   end
   appsignal_instrument_method :agent_installments_collection_by_presence_total
-  
+
   def agent_installments_collection_total(agent)
     agent_installments_collection_by_presence_total(agent) + agent_installments_collection_by_link_total(agent)
   end
@@ -372,7 +372,7 @@ class Admpart < ActiveRecord::Base
     team_members.each do |tm|
       acum += agent_from_sales_total(tm)
     end
-    acum 
+    acum
   end
 
   def enrollments_tag
@@ -423,7 +423,7 @@ class Admpart < ActiveRecord::Base
             account_name: business.padma_id,
             name: 'enrollments'
           }
-        }) 
+        })
         if response.code == 200
           report = {}
           response.parsed_response["collection"].each do |stat|
@@ -474,12 +474,12 @@ class Admpart < ActiveRecord::Base
     enrollments_by_teacher
 
     # DB queries
-    VALID_SECTIONS.each{|s| section_total(s) }    
+    VALID_SECTIONS.each{|s| section_total(s) }
     team_members.each{|tm| agent_total_winnings(tm) }
 
     self.force_refresh = bckup
   end
-  
+
   private
 
   def attendance_report_query

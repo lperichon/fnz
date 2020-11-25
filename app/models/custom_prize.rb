@@ -1,5 +1,5 @@
 class CustomPrize < ActiveRecord::Base
-  attr_accessible :admpart_section, :agent_id, :amount
+  #attr_accessible :admpart_section, :agent_id, :amount
 
   belongs_to :admpart
   belongs_to :agent
@@ -26,5 +26,5 @@ class CustomPrize < ActiveRecord::Base
       self.amount = 0
     end
   end
-  
+
 end

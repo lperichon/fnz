@@ -1,5 +1,5 @@
 class BalanceCheck < ActiveRecord::Base
-  attr_accessible :account_id, :balance_cents, :checked_at, :balance
+  #attr_accessible :account_id, :balance_cents, :checked_at, :balance
 
   belongs_to :account
   belongs_to :creator, :class_name => "User"
@@ -47,11 +47,11 @@ class BalanceCheck < ActiveRecord::Base
     end
   end
 
-  private 
+  private
 
   def create_difference_transaction
     if balance && account
-      diff = balance - account.balance    
+      diff = balance - account.balance
       self.difference_transaction = Transaction.create!(
         type: (diff > 0)? "Credit" : "Debit",
         amount: diff.abs,
@@ -80,5 +80,5 @@ class BalanceCheck < ActiveRecord::Base
     yield
     cached_account.update_balance if cached_account
   end
-  
+
 end

@@ -12,11 +12,11 @@ class Sale < ActiveRecord::Base
   validates :sold_on, :presence => true
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :contact_id, :business_id, :agent_id, :product_id, :transactions_attributes, :sale_transactions_attributes, :sold_on, :external_id
+  #attr_accessible :contact_id, :business_id, :agent_id, :product_id, :transactions_attributes, :sale_transactions_attributes, :sold_on, :external_id
   accepts_nested_attributes_for :transactions, allow_destroy: true
   accepts_nested_attributes_for :sale_transactions, :reject_if => proc { |s| s['transaction_id'].blank? }
 
-  scope :this_month, where {(sold_on.gteq Date.today.beginning_of_month.beginning_of_day) & (sold_on.lteq Date.today.end_of_month.end_of_day)}
+  scope :this_month, -> { where {(sold_on.gteq Date.today.beginning_of_month.beginning_of_day) & (sold_on.lteq Date.today.end_of_month.end_of_day)} }
   default_scope order("sold_on DESC")
 
   include BelongsToPadmaContact

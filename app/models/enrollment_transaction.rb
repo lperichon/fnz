@@ -4,5 +4,5 @@ class EnrollmentTransaction < ActiveRecord::Base
   belongs_to :enrollment
   belongs_to :transaction
 
-  attr_accessible :transaction_id
+  #attr_accessible :transaction_id
 end

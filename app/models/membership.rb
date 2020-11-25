@@ -17,21 +17,21 @@ class Membership < ActiveRecord::Base
   validate  :avoid_overlapping
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :contact_id, :business_id, :payment_type_id, :begins_on, :ends_on, :value, :closed_on, :vip, :external_id, :monthly_due_day, :name, :create_monthly_installments
+  #attr_accessible :contact_id, :business_id, :payment_type_id, :begins_on, :ends_on, :value, :closed_on, :vip, :external_id, :monthly_due_day, :name, :create_monthly_installments
 
   after_save :update_contacts_current_membership
 
   after_save :create_the_monthly_installments, if: :create_monthly_installments
 
   after_initialize :init
- 
+
   include BelongsToPadmaContact
 
   default_scope order('begins_on DESC')
 
-  scope :current, where(:closed_on => nil).select("DISTINCT ON(contact_id) *").order("contact_id, begins_on DESC")
-  scope :wout_installments, joins("left outer join installments on memberships.id = installments.membership_id").where('installments.id' => nil)
-  scope :open, where(closed_on: nil)
+  scope :current, -> { where(:closed_on => nil).select("DISTINCT ON(contact_id) *").order("contact_id, begins_on DESC") }
+  scope :wout_installments, -> { joins("left outer join installments on memberships.id = installments.membership_id").where('installments.id' => nil) }
+  scope :open, -> { where(closed_on: nil) }
   scope :valid_on, ->(ref_date){ open.where("begins_on <= :rd and ends_on >= :rd", rd: ref_date) }
 
   def self.wout_installments_due_on_month(ref_date)
@@ -126,13 +126,13 @@ class Membership < ActiveRecord::Base
       installment_date = Date.civil(begins_on.year,begins_on.month,monthly_due_day) + i.months
 
       if installment_date >= begins_on.to_date && installment_date <= ends_on.to_date
-        self.installments.create(value: value, due_on: installment_date) 
+        self.installments.create(value: value, due_on: installment_date)
       end
 
       i += 1
     end until installment_date > ends_on.to_date
   end
-  
+
   def init
     if self.new_record? && self.monthly_due_day.nil?
       self.monthly_due_day = 10

@@ -10,7 +10,7 @@ class Account < ActiveRecord::Base
   has_many :balance_checks
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :business_id, :currency, :default
+  #attr_accessible :name, :business_id, :currency, :default
 
   def transactions
     Transaction.where("source_id = ? or (type='Transfer' and target_id = ?)", self.id, self.id)
@@ -100,7 +100,7 @@ class Account < ActiveRecord::Base
                          ref_time, ref_time)
     end
 
-    
+
     transactions_scope.inject(base) do |balance, transaction|
       balance+transaction.sign(self)*transaction.amount
     end

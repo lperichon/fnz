@@ -8,7 +8,7 @@ class Import < ActiveRecord::Base
   validates :business, :presence => true
   validates_attachment :upload, :presence => true
 
-  attr_accessible :upload, :business_id, :status, :type, :account_id, :description, :archived
+  #attr_accessible :upload, :business_id, :status, :type, :account_id, :description, :archived
 
   before_create :set_defaults
 
@@ -76,12 +76,12 @@ class Import < ActiveRecord::Base
 
   def record_errors(record)
     if record
-      record.errors.messages.to_a.map{|m| m.join(" ") }.join(" - ") 
+      record.errors.messages.to_a.map{|m| m.join(" ") }.join(" - ")
     else
       "couldnt process"
     end
   end
-  
+
   # Override this on child class
   # @param [Business]
   # @param [CSV::Row]

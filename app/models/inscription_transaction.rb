@@ -4,7 +4,7 @@ class InscriptionTransaction < ActiveRecord::Base
   belongs_to :inscription
   belongs_to :transaction
 
-  attr_accessible :transaction_id
+  #attr_accessible :transaction_id
 
   after_save :update_inscription
   after_destroy :update_inscription
