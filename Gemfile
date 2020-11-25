@@ -1,43 +1,30 @@
 source 'https://rubygems.org'
-ruby '2.0'
-gem 'rails', '3.2.13'
-gem 'sqlite3', :group => [:development, :test]
-gem 'pg', :group => [:staging, :production]
-group :assets do
-  gem "sass", "~> 3.2.19"
-  gem 'sass-rails',   '~> 3.2.6'
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'uglifier', '~> 3.2'
-end
+ruby '2.3.8'
+gem 'rails', '4.0.0'
+##gem "sass", "~> 3.2.19"
+gem 'sass-rails', '~> 5.0.7'
+gem 'coffee-rails', '~> 4.2.2'
+gem 'uglifier', '~> 3.2'
 gem 'jquery-rails'
-gem "rspec-rails", ">= 2.11.0", :group => [:development, :test]
-gem "shoulda-matchers", :group => [:development, :test]
-#gem "capybara", ">= 1.1.2", :group => :test
-gem "email_spec", ">= 1.2.1", :group => :test
-gem 'rspec-collection_matchers', :group => [:development, :test]
-#gem "cucumber-rails", ">= 1.3.0", :group => :test, :require => false
-gem "database_cleaner", ">= 0.8.0", :group => :test
-gem "launchy", ">= 2.1.2", :group => :test
-gem "factory_girl_rails", ">= 4.0.0", :group => [:development, :test]
 gem "bootstrap-sass", "2.0.4.0"
 gem "devise", ">= 2.1.2"
 gem "cancan", ">= 1.6.8"
 gem "rolify", ">= 3.2.0"
-gem "hub", ">= 1.10.2", :require => nil, :group => [:development]
 gem "transitions", :require => ["transitions", "active_model/transitions"]
 gem "awesome_nested_fields", "0.6.0"
-gem "simple_form", "2.0.2"
+gem "simple_form", '~> 3.2.0'
 gem "client_side_validations"
-gem 'client_side_validations-simple_form', '2.0.0.beta.2'
+gem 'client_side_validations-simple_form', '~> 3.2.4'
 gem 'bootstrap-datepicker-rails', "~> 1.1.1.11"
 gem 'validates_timeliness', '~> 3.0'
 gem "paperclip", "~> 3.0"
 gem 'aws-sdk'
-gem 'tz_magic', '0.0.1'
-gem "squeel", '1.0.14'
+#gem 'tz_magic'
+gem "squeel", '~> 1.2.3'
+gem 'logical_model', '~> 0.6.6'
 gem 'accounts_client', '0.2.38'
 gem 'contacts_client', '~> 0.0.47'
-gem 'messaging_client','~> 0.1'
+gem 'messaging_client','~> 0.2'
 gem 'unicorn'
 gem 'resque'
 gem 'execjs', '2.7.0'
@@ -47,16 +34,13 @@ gem 'momentjs-rails'
 gem 'bootstrap-daterangepicker-rails'
 gem 'delayed_job_active_record' # must be declared after 'protected_attributes' gem
 gem "workless", "~> 1.1.3"
-gem "kaminari"
+gem "kaminari", '~> 0.13.0'
 gem 'bootstrap-kaminari-views'
-gem 'daemons', :group => [:development]
 gem 'mandrill_mailer', :git => "git://github.com/lperichon/mandrill_mailer.git"
 gem 'httparty'
-gem 'quiet_assets', :group => :development
 gem "active_model_serializers"
 gem "byebug"
 gem 'airbrake'
-gem 'rails_12factor', :group => [:staging, :production]
 gem 'jquery-ui-rails'
 gem 'awesome_nested_set' # or any similar gem (gem 'nested_set')
 gem "the_sortable_tree", "~> 2.5.0"
@@ -65,11 +49,37 @@ gem "cache_digests"
 gem "wkhtmltopdf-heroku"
 gem "pdfkit"
 gem "paranoia", "~> 1.0"
-gem 'rake', '< 11.0'
+##gem 'rake', '< 11.0'
 gem "roo"
 gem "roo-xls"
 gem 'best_in_place', '~> 3.1.1'
 gem "appsignal"
 gem "translation"
 
-gem 'dalli', '2.6.4', group: [:development, :test]
+group :staging, :production do
+  gem 'pg'
+  gem 'rails_12factor'
+end
+
+group :development do
+  gem "hub", ">= 1.10.2", :require => nil
+  gem 'daemons'
+  gem 'quiet_assets'
+end
+
+group :development, :test do
+  gem 'dalli', '2.6.4'
+  gem 'rspec-collection_matchers'
+  gem 'sqlite3'
+  gem "factory_girl_rails", ">= 4.0.0"
+  gem "rspec-rails", '~> 1.3.4'
+  gem "shoulda-matchers"
+end
+
+group :test do
+  gem "capybara", ">= 1.1.2"
+  gem "email_spec", ">= 1.2.1"
+  #gem "cucumber-rails", ">= 1.3.0", :require => false
+  gem "database_cleaner", ">= 0.8.0"
+  gem "launchy", ">= 2.1.2"
+end
