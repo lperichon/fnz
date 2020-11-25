@@ -24,7 +24,7 @@
       <%= link_to content_tag(:i, "", class: "icon-edit"), edit_business_transaction_path(transaction.business, transaction), remote: true %>
     <% end %>
     <% if can? :destroy, transaction %>
-      <%= link_to content_tag(:i, "", class: "icon-trash"), business_transaction_path(transaction.business, transaction), confirm: I18n.t('actions.confirm_delete'), method: 'delete', remote: true %>
+      <%= link_to content_tag(:i, "", class: "icon-trash"), business_transaction_path(transaction.business, transaction), data: {confirm: I18n.t('actions.confirm_delete')}, method: 'delete', remote: true %>
     <% end %>
     <% if can? :split, transaction %>
       <%= link_to content_tag(:i, "", class: "icon-cut"), new_business_transaction_transaction_spliter_path(transaction.business, transaction), remote: true %>
@@ -58,7 +58,7 @@
    			<%= link_to content_tag(:i, "", :class => "icon-eye-open"), business_membership_path(@business, membership) %>
         	<%= link_to content_tag(:i, "", :class => "icon-edit"), edit_business_membership_path(@business, membership) %>
           <%= link_to content_tag(:i, "", :class => "icon-copy"), new_business_membership_path(@business, membership: attributes_for_duplicate(membership)) %>
-  			<%= link_to content_tag(:i, "", :class => "icon-trash"), business_membership_path(@business, membership), :confirm => t('actions.confirm_delete'), :method => 'delete' %>
+  			<%= link_to content_tag(:i, "", :class => "icon-trash"), business_membership_path(@business, membership), data: {:confirm => t('actions.confirm_delete')}, :method => 'delete' %>
   		</td>
    	</tr>
   <% end %>
@@ -89,7 +89,7 @@
       <td>
       	<%= link_to content_tag(:i, "", :class => "icon-eye-open"), business_sale_path(@business, sale) %>
       	<%= link_to content_tag(:i, "", :class => "icon-edit"), edit_business_sale_path(@business, sale) %>
-        <%= link_to content_tag(:i, "", :class => "icon-trash"), business_sale_path(@business, sale), :confirm => t('actions.confirm_delete'), :method => 'delete' %>
+        <%= link_to content_tag(:i, "", :class => "icon-trash"), business_sale_path(@business, sale), data: {:confirm => t('actions.confirm_delete')}, :method => 'delete' %>
       </td>
     </tr>
   <% end %>

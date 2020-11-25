@@ -26,7 +26,7 @@
         <%= link_to content_tag(:i, "", :class => "icon-undo"), update_balance_business_account_path(@business,account), method: 'PUT', class: "refreshOnResponse", remote: true %>
       </td>
       <td>
-        <%= link_to content_tag(:i, "", :class => "icon-#{account.deleted? ? 'undo' : 'trash'}"), business_account_path(@business,account), :confirm => (_("¿Seguro que querés %{action} esta cuenta?") % { action: (account.deleted?? _("restaurar") : _("eliminar") ) }), :method => 'delete' %>
+        <%= link_to content_tag(:i, "", :class => "icon-#{account.deleted? ? 'undo' : 'trash'}"), business_account_path(@business,account), data: {:confirm => (_("¿Seguro que querés %{action} esta cuenta?") % { action: (account.deleted?? _("restaurar") : _("eliminar") )} )}, :method => 'delete' %>
       </td>
     </tr>
     <% end %>

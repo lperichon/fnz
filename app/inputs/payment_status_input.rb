@@ -5,7 +5,7 @@ class PaymentStatusInput < SimpleForm::Inputs::Base
     business = options[:business]
     out << template.content_tag(:span, value, :class => "label label-#{value}")
     if !object.new_record? && !business.transactions_enabled? && object.complete?
-    	 out << template.link_to(template.content_tag(:i, "", :class => "icon-trash"), template.business_transaction_path(business, object.transactions.first), :confirm => template.t('actions.confirm_delete'), :method => 'delete')
+    	 out << template.link_to(template.content_tag(:i, "", :class => "icon-trash"), template.business_transaction_path(business, object.transactions.first), data: {:confirm => template.t('actions.confirm_delete')}, :method => 'delete')
     end
     out.html_safe
   end

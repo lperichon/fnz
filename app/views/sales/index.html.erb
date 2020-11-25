@@ -32,7 +32,7 @@
       <td>
       	<%= link_to content_tag(:i, "", :class => "icon-eye-open"), business_sale_path(@business, sale) %>
       	<%= link_to content_tag(:i, "", :class => "icon-edit"), edit_business_sale_path(@business, sale) %>
-  		<%= link_to content_tag(:i, "", :class => "icon-trash"), business_sale_path(@business, sale), :confirm => t('actions.confirm_delete'), :method => 'delete' %>
+  		<%= link_to content_tag(:i, "", :class => "icon-trash"), business_sale_path(@business, sale), data: {:confirm => t('actions.confirm_delete')}, :method => 'delete' %>
       </td>
     </tr>
   <% end %>

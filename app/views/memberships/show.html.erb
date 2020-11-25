@@ -28,7 +28,7 @@
   <%= render :partial => 'enrollments/enrollment', :locals => {:enrollment => @membership.enrollment} %>
     <%= link_to t('actions.show'), business_membership_enrollment_path(@business, @membership) %> |
     <%= link_to t('actions.edit'), edit_business_membership_enrollment_path(@business, @membership) %> |
-    <%= link_to t('actions.delete'), business_membership_enrollment_path(@business, @membership), :confirm => t('actions.confirm_delete'), :method => 'delete' %>
+    <%= link_to t('actions.delete'), business_membership_enrollment_path(@business, @membership), data: {:confirm => t('actions.confirm_delete')}, :method => 'delete' %>
 <% else %>
 <p class="btn-group">
   <%= link_to t('memberships.show.create_enrollment'), new_business_membership_enrollment_path(@business, @membership), :class => "btn btn-sm btn-default" %>

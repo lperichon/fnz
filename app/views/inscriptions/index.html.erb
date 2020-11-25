@@ -31,7 +31,7 @@
       <td><%= number_to_currency(inscription.balance) %></td>
       <td>
         <%= link_to content_tag(:i, "", :class => "icon-edit"), edit_business_inscription_path(inscription.business,inscription) %>
-        <%= link_to content_tag(:i, "", :class => "icon-trash"), business_inscription_path(inscription.business,inscription), :confirm => 'Are you sure you want to delete this item?', :method => 'delete' %>
+        <%= link_to content_tag(:i, "", :class => "icon-trash"), business_inscription_path(inscription.business,inscription), data: {:confirm => 'Are you sure you want to delete this item?'}, :method => 'delete' %>
       </td>
     </tr>
   <% end -%>

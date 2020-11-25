@@ -10,7 +10,7 @@
       <% end %>
       <% if can?(:destroy,rule) %>
         <%= link_to content_tag(:i, "", class: "icon-trash"),
-                    business_transaction_rule_path(rule.business, rule), confirm: _("¿seguro?"), method: 'delete' %>
+                    business_transaction_rule_path(rule.business, rule), data: {confirm: _("¿seguro?")}, method: 'delete' %>
       <% end %>
     </li>
   <% end %>

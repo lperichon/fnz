@@ -12,7 +12,7 @@
 	<%if !@installment.complete?  %>
         <%= link_to t('actions.mark_as_paid'), new_business_membership_installment_payment_path(@business, @installment.membership, @installment), :remote => true %>
     <% elsif @installment.complete? && !@business.transactions_enabled? %>
-    	 <%= link_to content_tag(:i, "", :class => "icon-trash"), business_transaction_path(@business, @installment.transactions.first), :confirm => t('actions.confirm_delete'), :method => 'delete' %>
+    	 <%= link_to content_tag(:i, "", :class => "icon-trash"), business_transaction_path(@business, @installment.transactions.first), data: {:confirm => t('actions.confirm_delete')}, :method => 'delete' %>
     <% end %>
 	</p>
 <% end %>

@@ -4,11 +4,11 @@
 <% end %>
 
 <% if installment && installment.status.in?([:pending, :overdue, :incomplete]) %>
-    <li><%= link_to t('actions.mark_as_paid'), 
+    <li><%= link_to t('actions.mark_as_paid'),
               new_business_membership_installment_payment_path(
-                :business_id => @business.id, 
-                :membership_id => installment.membership.id, 
-                :installment_id => installment.id, 
+                :business_id => @business.id,
+                :membership_id => installment.membership.id,
+                :installment_id => installment.id,
                 :transaction => { :transaction_at => Time.zone.now } ),
                 :remote => true,
                 :class => "btn btn-primary mark_as_paid_link" %></li>
@@ -25,10 +25,10 @@
                   }),
                   class: "btn" %>
     </li>
-    <li><%= link_to t('actions.mark_as_paid'), 
+    <li><%= link_to t('actions.mark_as_paid'),
               new_business_membership_installment_payment_path(
-                :business_id => @business.id, 
-                :membership_id => membership.id, 
+                :business_id => @business.id,
+                :membership_id => membership.id,
                 :installment_id => :create,
                 :installment => {
                  :due_on => date.end_of_month.to_date,
@@ -49,7 +49,7 @@
                   },
                   return_to: request.url
                 ),
-                confirm: _("seguro?"),
+                data: {confirm: _("seguro?")},
                 method: :put,
                 class: "btn"
                   %>

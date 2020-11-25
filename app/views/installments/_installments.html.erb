@@ -6,7 +6,7 @@
   <thead>
     <% if include_form %>
       <td></td>
-    <% end %>	    
+    <% end %>
     <% if include_contact_column %>
     <td><%= Installment.human_attribute_name(:contact) %></td>
     <% end %>
@@ -27,7 +27,7 @@
       <% membership = installment.membership %>
       <tr data-amount="<%= installment.value %>" class="<%= css_class_id(installment) %>">
         <% if include_form %>
-	  <td><%= check_box_tag "transaction[installment_ids][]", installment.id %></td>	      
+	  <td><%= check_box_tag "transaction[installment_ids][]", installment.id %></td>
 	<% end %>
         <% if include_contact_column %>
         <% contact = membership.contact %>
@@ -40,9 +40,9 @@
 	  <td><%= l(installment.due_on, format: "%d %B") %> - <%= l(installment.due_on + 1.month - 1.day, format: "%d %B") %></td>
 	<% end %>
         <% if installment.observations.blank? -%>
-          <td class="amount"><%= number_to_currency(installment.value, unit: @business.currency_symbol)%></td> 
+          <td class="amount"><%= number_to_currency(installment.value, unit: @business.currency_symbol)%></td>
         <% else -%>
-          <td class="amount" data-toggle="tooltip" title="<%= installment.observations %>"><%= number_to_currency(installment.value, unit: @business.currency_symbol)%></td> 
+          <td class="amount" data-toggle="tooltip" title="<%= installment.observations %>"><%= number_to_currency(installment.value, unit: @business.currency_symbol)%></td>
         <% end -%>
         <td><%= membership.try(:payment_type).try(:name) %></td>
         <td class="status"><%= content_tag(:i, "", :class => "icon-installment-#{installment.status}") %></td>
@@ -51,7 +51,7 @@
         	<%= link_to content_tag(:i, "", :class => "icon-edit"), edit_business_membership_installment_path(@business, membership, installment) %>
           <%= link_to content_tag(:i, "", :class => "icon-trash"),
                       business_membership_installment_path(@business, membership, installment),
-                      confirm: t('actions.confirm_delete'),
+                      data: {confirm: t('actions.confirm_delete')},
                       remote: true,
                       method: 'delete' %>
       </tr>

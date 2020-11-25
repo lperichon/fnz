@@ -10,7 +10,7 @@
         <%= link_to content_tag(:id,"",class: "icon-trash"),
                     business_account_balance_check_path(@business,@account,bc),
                     method: :delete,
-                    confirm: _("¿seguro?"),
+                    data: {confirm: _("¿seguro?")},
                     remote: true %>
       </td>
     </tr>

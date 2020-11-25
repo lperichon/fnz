@@ -21,7 +21,7 @@
       <td>
       	<%= link_to content_tag(:i, "", :class => "icon-eye-open"), business_product_path(@business, product) %>
       	<%= link_to content_tag(:i, "", :class => "icon-edit"), edit_business_product_path(@business, product) %>
-  		<%= link_to content_tag(:i, "", :class => "icon-trash"), business_product_path(@business, product), :confirm => t('actions.confirm_delete'), :method => 'delete' %>
+  		<%= link_to content_tag(:i, "", :class => "icon-trash"), business_product_path(@business, product), data: {:confirm => t('actions.confirm_delete')}, :method => 'delete' %>
       </td>
     </tr>
   <% end %>

@@ -18,7 +18,7 @@
       <td><%= link_to user_business.business.name, business_path(user_business.business) %></td>
       <td>
         <%= link_to content_tag(:i, "", :class => "icon-eye-#{user_business.show_on_menu? ? 'open' : 'close'}"), user_business_path(user_business, :user_business => {:show_on_menu => !user_business.show_on_menu}), :method => 'put' %>
-        <%= link_to content_tag(:i, "", :class => "icon-trash"), business_path(user_business.business), :confirm => 'Are you sure you want to delete this item?', :method => 'delete' %>
+        <%= link_to content_tag(:i, "", :class => "icon-trash"), business_path(user_business.business), data: {:confirm => 'Are you sure you want to delete this item?'}, :method => 'delete' %>
       </td>
     </tr>
   <% end -%>

@@ -11,7 +11,7 @@
 <ul class="users">
   <% @users.each do |user| %>
     <li>
-      <%= user.name %> (<%= user.email %>) <%= link_to content_tag(:i, '', :class => "icon-remove"), business_user_path(@business, user), :method => :delete, :confirm => t('actions.confirm_delete') %>
+      <%= user.name %> (<%= user.email %>) <%= link_to content_tag(:i, '', :class => "icon-remove"), business_user_path(@business, user), :method => :delete, data: {:confirm => t('actions.confirm_delete')} %>
     </li>
   <% end %>
 </ul>

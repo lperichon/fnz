@@ -9,7 +9,7 @@
 <% end %>
 
 <h3><%= _("Importaciones") %></h3>
-<table class="table table-striped table-hover table-condensed table-bordered" 
+<table class="table table-striped table-hover table-condensed table-bordered"
        data-controller="imports_table">
   <thead>
     <tr>
@@ -35,9 +35,9 @@
       </td>
       <td>
         <% if import.archived? %>
-          <%= link_to _("recuperar"), business_import_path(@business,import, import: { archived: false }, format: :json), method: :put, confirm: _("¿seguro?"), remote: true, "data-target" => "imports_table.recoverBtn" %>
+          <%= link_to _("recuperar"), business_import_path(@business,import, import: { archived: false }, format: :json), method: :put, data: {confirm: _("¿seguro?")}, remote: true, "data-target" => "imports_table.recoverBtn" %>
         <% else %>
-          <%= link_to _("archivar"), business_import_path(@business,import, import: { archived: true }, format: :json), method: :put, confirm: _("¿seguro?"), remote: true, "data-target" => "imports_table.archiveBtn" %>
+          <%= link_to _("archivar"), business_import_path(@business,import, import: { archived: true }, format: :json), method: :put, data: {confirm: _("¿seguro?")}, remote: true, "data-target" => "imports_table.archiveBtn" %>
         <% end %>
       </td>
     </tr>
@@ -47,4 +47,3 @@
 </table>
 
 <br />
-
