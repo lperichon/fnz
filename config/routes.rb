@@ -6,8 +6,8 @@ Fnz::Application.routes.draw do
   end
   root :to => "home#index"
 
-  match "/login",  to: "sso_sessions#show"
-  match '/logout', to: "sso_sessions#destroy"
+  get "/login",  to: "sso_sessions#show"
+  match '/logout', to: "sso_sessions#destroy", via: [:get, :delete]
   devise_for :users, :controllers => { :registrations => "registrations"}
   resource :sso_session
 
@@ -15,7 +15,7 @@ Fnz::Application.routes.draw do
   resources :businesses do
     resources :month_tag_totals, only: [:index]
     resources :admparts, except: [:index] do
-      match "/ym/:year/:month", to: "admparts#show", as: :dated_admpart, on: :collection
+      get "/ym/:year/:month", to: "admparts#show", as: :dated_admpart, on: :collection
       member do
         get :attendance_detail
       end
@@ -93,8 +93,8 @@ Fnz::Application.routes.draw do
   resources :transfers, :controller => 'transactions', :except => [:index]
   resources :custom_prizes
 
-  match 'messages', to: 'messages#catch_message'
-  match 'sns', to: 'messages#sns'
+  get 'messages', to: 'messages#catch_message'
+  get 'sns', to: 'messages#sns'
 
   namespace 'admin' do
     resources :businesses, only: [:index, :show, :edit, :update, :destroy]
@@ -111,7 +111,7 @@ Fnz::Application.routes.draw do
         resources :contacts do
           resource :current_membership
         end
-	      match 'current_memberships', to: "current_memberships#index"
+	      get 'current_memberships', to: "current_memberships#index"
       end
       resources :merges, only: [:create]
       resources :inscriptions, only: [:create]
