@@ -7,7 +7,7 @@ gem 'coffee-rails', '~> 4.2.2'
 gem 'uglifier', '~> 3.2'
 gem 'jquery-rails'
 gem "bootstrap-sass", "2.0.4.0"
-gem "devise", ">= 2.1.2"
+gem "devise", "~> 3.4.1"
 gem "cancan", ">= 1.6.8"
 gem "rolify", ">= 3.2.0"
 gem "transitions", :require => ["transitions", "active_model/transitions"]
@@ -55,6 +55,7 @@ gem "roo-xls"
 gem 'best_in_place', '~> 3.1.1'
 gem "appsignal"
 gem "translation"
+gem "activeresource"
 
 group :staging, :production do
   gem 'pg'
@@ -70,9 +71,9 @@ end
 group :development, :test do
   gem 'dalli', '2.6.4'
   gem 'rspec-collection_matchers'
-  gem 'sqlite3'
-  gem "factory_girl_rails", ">= 4.0.0"
-  gem "rspec-rails", '~> 1.3.4'
+  gem 'sqlite3', '~> 1.3.6'
+  gem "factory_bot_rails"
+  gem "rspec-rails", '~> 3.9.1'
   gem "shoulda-matchers"
 end
 
