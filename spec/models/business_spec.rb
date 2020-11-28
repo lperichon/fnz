@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Business do
   
   before(:each) do
-    @user = FactoryGirl.create(:user)
+    @user = FactoryBot.create(:user)
     @attr = { 
       :name => "Example Business",
       :owner_id => @user.id

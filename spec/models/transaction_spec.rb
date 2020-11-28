@@ -7,7 +7,7 @@ describe Transaction do
 
     end
 
-    @account = FactoryGirl.create(:account)
+    @account = FactoryBot.create(:account)
     @attr = {
       :description => "Example Transaction",
       :business_id => @account.business.id,
@@ -20,31 +20,31 @@ describe Transaction do
   end
 
   describe "currencies" do
-    let(:business){ FactoryGirl.create(:business, currency_code: "ars") }
-    let(:acc){ FactoryGirl.create(:account, currency: "ars", business: business) }
-    let(:other_currency_account){ FactoryGirl.create(:account, currency: "usd", business: business) }
+    let(:business){ FactoryBot.create(:business, currency_code: "ars") }
+    let(:acc){ FactoryBot.create(:account, currency: "ars", business: business) }
+    let(:other_currency_account){ FactoryBot.create(:account, currency: "usd", business: business) }
     it "allows tranaction on account on businessses currency" do
-      t = FactoryGirl.build(:transaction, source: acc)
+      t = FactoryBot.build(:transaction, source: acc)
       expect(t).to be_valid
     end
     it "allow TAGGED transaction on businesses currency" do
-      t = FactoryGirl.build(:transaction, source: acc, admpart_tag: FactoryGirl.create(:tag, business: business))
+      t = FactoryBot.build(:transaction, source: acc, admpart_tag: FactoryBot.create(:tag, business: business))
       expect(t).to be_valid
     end
     it "allows not-tagged transactions on other currencies" do
-      t = FactoryGirl.build(:transaction, source: other_currency_account)
+      t = FactoryBot.build(:transaction, source: other_currency_account)
       expect(t).to be_valid
     end
     it "wont allow to TAG Debit or Credit not in Business currency" do
-      t = FactoryGirl.build(:transaction, source: other_currency_account, admpart_tag: FactoryGirl.create(:tag, business: business))
+      t = FactoryBot.build(:transaction, source: other_currency_account, admpart_tag: FactoryBot.create(:tag, business: business))
       expect(t).not_to be_valid
     end
   end
 
   describe "transaction rules" do
-    let!(:rule){ FactoryGirl.create(:transaction_rule, operator: "contains", value: "hola", contact: FactoryGirl.create(:contact))}
+    let!(:rule){ FactoryBot.create(:transaction_rule, operator: "contains", value: "hola", contact: FactoryBot.create(:contact))}
     it "are applied con create, not update" do
-      t = FactoryGirl.build(:transaction, description: "hola como te va", business: rule.business, contact_id: nil)
+      t = FactoryBot.build(:transaction, description: "hola como te va", business: rule.business, contact_id: nil)
       t.save
       expect(t.reload.contact_id).not_to be_nil
       expect(t.reload.contact_id).to eq rule.contact_id
@@ -55,14 +55,14 @@ describe Transaction do
   end
 
   it "unsets target when changing FROM transfer" do
-    t = FactoryGirl.create(:transaction, type: "Transfer", target: @account)
+    t = FactoryBot.create(:transaction, type: "Transfer", target: @account)
     expect(t.target).to eq @account
     t.type = "Debit"
     t.save
     expect(t.target).to be_nil
     expect(Transaction.find(t.id).target).to be_nil
 
-    t = FactoryGirl.create(:transaction, type: "Transfer", target: @account)
+    t = FactoryBot.create(:transaction, type: "Transfer", target: @account)
     expect(t.target).to eq @account
     t.amount = 10
     t.save
@@ -105,20 +105,20 @@ describe Transaction do
   end
 
   it "should import from complete csv row" do
-    FactoryGirl.create(:agent, business_id: @account.business.id)
-    FactoryGirl.create(:contact, business_id: @account.business.id)
+    FactoryBot.create(:agent, business_id: @account.business.id)
+    FactoryBot.create(:contact, business_id: @account.business.id)
 
     transaction = Transaction.build_from_csv(@account.business, [@account.name, Date.today, "2.1", "Test import transaction", @account.business.agents.enabled.first.name, @account.business.contacts.first.name])
     transaction.should be_valid
   end
 
   describe "installments automagick" do
-    let(:transaction){ FactoryGirl.build(:transaction, contact_id: nil, agent_id: nil) }
-    let(:contact){ FactoryGirl.create(:contact, business_id: transaction.business_id) }
-    let(:admpart_tag){ FactoryGirl.create(:tag, business_id: transaction.business_id, system_name: "installment") }
+    let(:transaction){ FactoryBot.build(:transaction, contact_id: nil, agent_id: nil) }
+    let(:contact){ FactoryBot.create(:contact, business_id: transaction.business_id) }
+    let(:admpart_tag){ FactoryBot.create(:tag, business_id: transaction.business_id, system_name: "installment") }
 
     describe "linked to an installment" do
-      let(:installment){ FactoryGirl.create(:installment, membership: FactoryGirl.create(:membership, business_id: transaction.business_id, contact_id: contact.id ) ) }
+      let(:installment){ FactoryBot.create(:installment, membership: FactoryBot.create(:membership, business_id: transaction.business_id, contact_id: contact.id ) ) }
       before do
         transaction.installments << installment
         transaction.save
@@ -158,7 +158,7 @@ describe Transaction do
 
   context "updating an existing transaction to a transfer" do
     before(:each) do
-      @target = FactoryGirl.create(:account, :business => @account.business)
+      @target = FactoryBot.create(:account, :business => @account.business)
       @credit = Credit.create!(@attr)
     end
 
@@ -180,7 +180,7 @@ describe Transaction do
 
   context "#build_from_csv" do
   	before do
-  		@business = FactoryGirl.create(:business)
+  		@business = FactoryBot.create(:business)
   	end
   	it "should consider status column" do
   		new_transaction = Transaction.build_from_csv(@business, ['test','1983-03-03', '2.3', 'Testing', 'tag', nil, nil, 'pending'])

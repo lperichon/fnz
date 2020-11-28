@@ -1,9 +1,9 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :balance_check do
     checked_at { Time.now }
-    creator { FactoryGirl.create(:user) }
+    creator { FactoryBot.create(:user) }
     account
   end
 end

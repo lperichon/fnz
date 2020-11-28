@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe Tagging do
-  let(:tag){ FactoryGirl.create(:tag) }
-  let(:transaction){ FactoryGirl.create(:transaction, business_id: tag.business_id) }
+  let(:tag){ FactoryBot.create(:tag) }
+  let(:transaction){ FactoryBot.create(:transaction, business_id: tag.business_id) }
 
   describe "when created" do
     it "sets transaction admpart_tag_id" do

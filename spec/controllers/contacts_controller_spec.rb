@@ -12,7 +12,7 @@ describe ContactsController, :type => :controller do
   end
 
   before(:each) do
-    @business = FactoryGirl.create(:business)
+    @business = FactoryBot.create(:business)
     sign_in @business.owner
   end
 

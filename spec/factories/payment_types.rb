@@ -1,13 +1,13 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
-FactoryGirl.define do
+FactoryBot.define do
   sequence :name do |n|
     "name#{n}"
   end
 
   factory :payment_type do
     name
-    description "asdf"
+    description {"asdf"}
     business
   end
 end

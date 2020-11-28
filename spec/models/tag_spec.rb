@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Tag do
   
-  let(:business){ FactoryGirl.create(:business) }
+  let(:business){ FactoryBot.create(:business) }
 
   before(:each) do
     @attr = { 
@@ -27,7 +27,7 @@ describe Tag do
 
   describe ".get_installments_tag" do
     describe "if installment_tag exists" do
-      let!(:itag){ FactoryGirl.create(:tag, system_name: "installment", business_id: business.id) }
+      let!(:itag){ FactoryBot.create(:tag, system_name: "installment", business_id: business.id) }
       it "returns scope's installment tag" do
         expect(business.tags.get_installments_tag).to eq itag
       end

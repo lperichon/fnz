@@ -3,7 +3,7 @@ require 'spec_helper'
 describe MembershipImport do
   
   before(:each) do
-    @business = FactoryGirl.create(:business)
+    @business = FactoryBot.create(:business)
     @attr = {
       :upload => Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/belgrano_plans.csv'), 'text/csv'),
       :business_id => @business.id

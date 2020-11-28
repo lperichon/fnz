@@ -5,7 +5,7 @@ describe Event do
 
   # describe "#create with derose_events_id" do
   # 	before do
-  # 		@user = FactoryGirl.create(:user)
+  # 		@user = FactoryBot.create(:user)
   # 		@event = Event.create(derose_events_id: "test", owner_id: @user.id, name: "Test")
   # 	end
 
@@ -16,7 +16,7 @@ describe Event do
 
   describe "#create" do
 	before do
-  		@user = FactoryGirl.create(:user)
+  		@user = FactoryBot.create(:user)
   		@event = Event.create(owner_id: @user.id, name: "Test")
   	end
 

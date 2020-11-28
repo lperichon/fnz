@@ -2,13 +2,13 @@ require 'spec_helper'
 
 RSpec.describe ContactsMerger, :type => :model do
   describe "#merge" do
-    let!(:b){FactoryGirl.create(:business)}
-    let!(:father){FactoryGirl.create(:contact, padma_id: 'father', business_id: b.id)}
-    let!(:son){FactoryGirl.create(:contact, padma_id: 'son', business_id: b.id)}
-    let!(:father_membership){FactoryGirl.create(:membership, contact_id: father.id, business_id: b.id)}
-    let!(:son_membership){FactoryGirl.create(:membership, contact_id: son.id, business_id: b.id)}
-    let!(:father_sale){FactoryGirl.create(:sale, contact_id: father.id, business_id: b.id)}
-    let!(:son_sale){FactoryGirl.create(:sale, contact_id: son.id, business_id: b.id)}
+    let!(:b){FactoryBot.create(:business)}
+    let!(:father){FactoryBot.create(:contact, padma_id: 'father', business_id: b.id)}
+    let!(:son){FactoryBot.create(:contact, padma_id: 'son', business_id: b.id)}
+    let!(:father_membership){FactoryBot.create(:membership, contact_id: father.id, business_id: b.id)}
+    let!(:son_membership){FactoryBot.create(:membership, contact_id: son.id, business_id: b.id)}
+    let!(:father_sale){FactoryBot.create(:sale, contact_id: father.id, business_id: b.id)}
+    let!(:son_sale){FactoryBot.create(:sale, contact_id: son.id, business_id: b.id)}
     before do
       @son_id = son.id
       ContactsMerger.new('son','father').merge

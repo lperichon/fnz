@@ -15,9 +15,9 @@ describe SalesController, :type => :controller do
   end
 
   before(:each) do
-    @business = FactoryGirl.create(:school)
-    @contact = FactoryGirl.create(:contact, :business => @business)
-    @agent = FactoryGirl.create(:agent, :business => @business)
+    @business = FactoryBot.create(:school)
+    @contact = FactoryBot.create(:contact, :business => @business)
+    @agent = FactoryBot.create(:agent, :business => @business)
     @user = @business.owner
     sign_in @user
   end

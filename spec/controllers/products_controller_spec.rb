@@ -16,13 +16,13 @@ describe ProductsController, :type => :controller do
   end
 
   before(:each) do
-    @business = FactoryGirl.create(:business)
+    @business = FactoryBot.create(:business)
     sign_in @business.owner
   end
 
   describe "GET index" do
     it "assigns all products as @products" do
-      product = @business.products.create! FactoryGirl.attributes_for(:product)
+      product = @business.products.create! FactoryBot.attributes_for(:product)
       get :index, {:business_id => @business.to_param}
       assigns(:products).should eq([product])
     end
@@ -30,13 +30,13 @@ describe ProductsController, :type => :controller do
 
   describe "GET show" do
     it "should be successful" do
-      product = @business.products.create! FactoryGirl.attributes_for(:product)
+      product = @business.products.create! FactoryBot.attributes_for(:product)
       get :show, :business_id => @business.to_param, :id => product.to_param
       response.should be_success
     end
 
     it "assigns the requested business as @business" do
-      product = @business.products.create! FactoryGirl.attributes_for(:product)
+      product = @business.products.create! FactoryBot.attributes_for(:product)
       get :show, {:business_id => @business.to_param, :id => product.to_param}
       assigns(:product).should == product
     end
@@ -51,7 +51,7 @@ describe ProductsController, :type => :controller do
 
   describe "GET edit" do
     it "assigns the requested business as @business" do
-      product = @business.products.create! FactoryGirl.attributes_for(:product)
+      product = @business.products.create! FactoryBot.attributes_for(:product)
       get :edit, {:business_id => @business.to_param, :id => product.to_param}
       assigns(:product).should eq(product)
     end
@@ -61,18 +61,18 @@ describe ProductsController, :type => :controller do
     describe "with valid params" do
       it "creates a new Product" do
         expect {
-          post :create, {:business_id => @business.to_param, :product => FactoryGirl.attributes_for(:product)}
+          post :create, {:business_id => @business.to_param, :product => FactoryBot.attributes_for(:product)}
         }.to change(Product, :count).by(1)
       end
 
       it "assigns a newly created product as @products" do
-        post :create, {:business_id => @business.to_param, :product => FactoryGirl.attributes_for(:product)}
+        post :create, {:business_id => @business.to_param, :product => FactoryBot.attributes_for(:product)}
         assigns(:product).should be_a(Product)
         assigns(:product).should be_persisted
       end
 
       it "redirects to the created product" do
-        post :create, {:business_id => @business.to_param, :product => FactoryGirl.attributes_for(:product)}
+        post :create, {:business_id => @business.to_param, :product => FactoryBot.attributes_for(:product)}
         response.should redirect_to(business_product_url(@business,Product.last))
       end
     end
@@ -97,7 +97,7 @@ describe ProductsController, :type => :controller do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested product" do
-        product = @business.products.create! FactoryGirl.attributes_for(:product)
+        product = @business.products.create! FactoryBot.attributes_for(:product)
         # Assuming there are no other businesses in the database, this
         # specifies that the Business created on the previous line
         # receives the :update_attributes message with whatever params are
@@ -107,21 +107,21 @@ describe ProductsController, :type => :controller do
       end
 
       it "assigns the requested product as @product" do
-        product = @business.products.create! FactoryGirl.attributes_for(:product)
-        put :update, {:business_id => @business.to_param, :id => product.to_param, :product => FactoryGirl.attributes_for(:product)}
+        product = @business.products.create! FactoryBot.attributes_for(:product)
+        put :update, {:business_id => @business.to_param, :id => product.to_param, :product => FactoryBot.attributes_for(:product)}
         assigns(:product).should eq(product)
       end
 
       it "redirects to the product" do
-        product = @business.products.create! FactoryGirl.attributes_for(:product)
-        put :update, {:business_id => @business.to_param, :id => product.to_param, :product => FactoryGirl.attributes_for(:product)}
+        product = @business.products.create! FactoryBot.attributes_for(:product)
+        put :update, {:business_id => @business.to_param, :id => product.to_param, :product => FactoryBot.attributes_for(:product)}
         response.should redirect_to(business_product_url(@business, product))
       end
     end
 
     describe "with invalid params" do
       it "assigns the business as @business" do
-        product = @business.products.create! FactoryGirl.attributes_for(:product)
+        product = @business.products.create! FactoryBot.attributes_for(:product)
         # Trigger the behavior that occurs when invalid params are submitted
         Product.any_instance.stub(:save).and_return(false)
         put :update, {:business_id => @business.to_param, :id => product.to_param, :product => {}}
@@ -129,7 +129,7 @@ describe ProductsController, :type => :controller do
       end
 
       it "re-renders the 'edit' template" do
-        product = @business.products.create! FactoryGirl.attributes_for(:product)
+        product = @business.products.create! FactoryBot.attributes_for(:product)
         # Trigger the behavior that occurs when invalid params are submitted
         Product.any_instance.stub(:save).and_return(false)
         put :update, {:business_id => @business.to_param, :id => product.to_param, :product => {}}
@@ -140,14 +140,14 @@ describe ProductsController, :type => :controller do
 
   describe "DELETE destroy" do
     it "destroys the requested business" do
-      product = @business.products.create! FactoryGirl.attributes_for(:product)
+      product = @business.products.create! FactoryBot.attributes_for(:product)
       expect {
         delete :destroy, {:business_id => @business.to_param, :id => product.to_param}
       }.to change(Product, :count).by(-1)
     end
 
     it "redirects to the businesses list" do
-      product = @business.products.create! FactoryGirl.attributes_for(:product)
+      product = @business.products.create! FactoryBot.attributes_for(:product)
       delete :destroy, {:business_id => @business.to_param, :id => product.to_param}
       response.should redirect_to(business_products_url(@business))
     end

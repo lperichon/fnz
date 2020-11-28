@@ -3,7 +3,7 @@ require 'spec_helper'
 describe SantanderRioArImport do
   
   before(:each) do
-    @business = FactoryGirl.create(:school)
+    @business = FactoryBot.create(:school)
     @attr = {
       :upload => Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/santander.xls'), 'application/xls'),
       :business_id => @business.id,

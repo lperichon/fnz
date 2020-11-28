@@ -3,8 +3,8 @@ require 'spec_helper'
 describe Enrollment do
   
   before(:each) do
-    @membership = FactoryGirl.create(:membership)
-    @agent = FactoryGirl.create(:agent, :business => @membership.business)
+    @membership = FactoryBot.create(:membership)
+    @agent = FactoryBot.create(:agent, :business => @membership.business)
 
     @attr = {
       :membership_id => @membership.id,

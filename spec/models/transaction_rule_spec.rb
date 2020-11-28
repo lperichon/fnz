@@ -2,21 +2,21 @@ require 'spec_helper'
 
 RSpec.describe TransactionRule, :type => :model do
 
-  let(:contact){ FactoryGirl.create(:contact) }
-  let(:agent){ FactoryGirl.create(:agent) }
-  let(:tag){ FactoryGirl.create(:tag) }
+  let(:contact){ FactoryBot.create(:contact) }
+  let(:agent){ FactoryBot.create(:agent) }
+  let(:tag){ FactoryBot.create(:tag) }
 
   describe "matches?" do
-    let(:rule){ FactoryGirl.create(:transaction_rule, operator: operator, value: value, contact: FactoryGirl.create(:contact)) }
+    let(:rule){ FactoryBot.create(:transaction_rule, operator: operator, value: value, contact: FactoryBot.create(:contact)) }
     describe "with 'regex' operator" do
       let(:operator){ "regex" }
       let(:value){ ".uck"}
       it "returns true if description matches rule's value" do
         expect(
-            rule.matches?(FactoryGirl.build(:transaction, description: 'es un duck amarillo'))
+            rule.matches?(FactoryBot.build(:transaction, description: 'es un duck amarillo'))
         ).to be_truthy
         expect(
-            rule.matches?(FactoryGirl.build(:transaction, description: 'fuck this shit'))
+            rule.matches?(FactoryBot.build(:transaction, description: 'fuck this shit'))
         ).to be_truthy
       end
     end
@@ -25,13 +25,13 @@ RSpec.describe TransactionRule, :type => :model do
       let(:value){ ".uck"}
       it "returns true if description matches rule's value" do
         expect(
-            rule.matches?(FactoryGirl.build(:transaction, description: 'es un duck amarillo'))
+            rule.matches?(FactoryBot.build(:transaction, description: 'es un duck amarillo'))
         ).to be_falsey
         expect(
-            rule.matches?(FactoryGirl.build(:transaction, description: 'fuck this shit'))
+            rule.matches?(FactoryBot.build(:transaction, description: 'fuck this shit'))
         ).to be_falsey
         expect(
-            rule.matches?(FactoryGirl.build(:transaction, description: '.uck this shit'))
+            rule.matches?(FactoryBot.build(:transaction, description: '.uck this shit'))
         ).to be_truthy
       end
     end

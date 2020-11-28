@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Contact do
   
   before(:each) do
-    @business = FactoryGirl.create(:business)
+    @business = FactoryBot.create(:business)
     @attr = { 
       :name => "Example Contact",
       :business_id => @business.id
@@ -26,10 +26,10 @@ describe Contact do
 
   describe "get_by_padma_id" do
     context "scoped to business" do
-      let(:business){FactoryGirl.create(:business, padma_id: 'nunez')}
+      let(:business){FactoryBot.create(:business, padma_id: 'nunez')}
       let(:pid){'contact-id'}
       context "if contact exists" do
-        let!(:contact){FactoryGirl.create(:contact, padma_id: pid, business_id: business.id)}
+        let!(:contact){FactoryBot.create(:contact, padma_id: pid, business_id: business.id)}
         it "returns it" do
           expect(business.contacts.get_by_padma_id(pid)).to eq contact
         end

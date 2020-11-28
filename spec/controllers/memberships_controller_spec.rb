@@ -29,9 +29,9 @@ describe MembershipsController, :type => :controller do
       PadmaContact.new(first_name: 'blah', last_name: 'balh', global_teacher_username: 'luis.perichon', status: 'student')
     )
 
-    @business = FactoryGirl.create(:school)
-    @contact = FactoryGirl.create(:contact, :business => @business)
-    @agent = FactoryGirl.create(:agent, :business => @business)
+    @business = FactoryBot.create(:school)
+    @contact = FactoryBot.create(:contact, :business => @business)
+    @agent = FactoryBot.create(:agent, :business => @business)
     @user = @business.owner
     sign_in @user
   end
@@ -84,8 +84,8 @@ describe MembershipsController, :type => :controller do
       describe "if 2 contacts exist in different business" do
         before do
           pcid = attributes_with_padma_contact_id[:padma_contact_id]
-          @other_contact = FactoryGirl.create(:contact, padma_id: pcid)
-          @my_contact = FactoryGirl.create(:contact,
+          @other_contact = FactoryBot.create(:contact, padma_id: pcid)
+          @my_contact = FactoryBot.create(:contact,
                                            padma_id: pcid,
                                            :business => @business)
         end

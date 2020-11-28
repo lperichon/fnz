@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
 
   sequence :tag_name do |n|
     "tag #{n}"
@@ -6,6 +6,6 @@ FactoryGirl.define do
 
   factory :tag do |f|
     business
-    name  { FactoryGirl.generate :tag_name }
+    name  { FactoryBot.generate :tag_name }
   end
 end

@@ -11,7 +11,7 @@ describe School do
 
   describe "#create with padma_id" do
   	before do
-  		@user = FactoryGirl.create(:user)
+  		@user = FactoryBot.create(:user)
   		@school = School.create(padma_id: "test", owner_id: @user.id, name: "Test")
   	end
 
@@ -26,7 +26,7 @@ describe School do
 
   describe "#create" do
 	before do
-  		@user = FactoryGirl.create(:user)
+  		@user = FactoryBot.create(:user)
   		@school = School.create(owner_id: @user.id, name: "Test")
   	end
 

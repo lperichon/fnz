@@ -3,7 +3,7 @@ require 'spec_helper'
 describe HomeController, :type => :controller do
 
   before(:each) do
-    @school = FactoryGirl.create(:school)
+    @school = FactoryBot.create(:school)
     sign_in @school.owner
   end
 

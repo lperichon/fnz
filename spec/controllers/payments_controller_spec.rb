@@ -15,10 +15,10 @@ describe PaymentsController, :type => :controller do
   before(:each) do
   	class Credit < Transaction
     end
-    @business = FactoryGirl.create(:school)
-    @account =  FactoryGirl.create(:account, :business => @business)
-    @membership = FactoryGirl.create(:membership, :business => @business)
-    @installment = FactoryGirl.create(:installment, :membership => @membership)
+    @business = FactoryBot.create(:school)
+    @account =  FactoryBot.create(:account, :business => @business)
+    @membership = FactoryBot.create(:membership, :business => @business)
+    @installment = FactoryBot.create(:installment, :membership => @membership)
     @user = @business.owner
     sign_in @user
   end

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe GaliciaOfficeArImport do
   
   before(:each) do
-    @business = FactoryGirl.create(:school)
+    @business = FactoryBot.create(:school)
     @attr = {
       :upload => Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/galicia_office_export.csv'), 'application/csv'),
       :business_id => @business.id,

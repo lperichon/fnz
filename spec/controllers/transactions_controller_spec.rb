@@ -20,7 +20,7 @@ describe TransactionsController, :type => :controller do
   before(:each) do
     class Debit < Transaction
     end
-    @account =  FactoryGirl.create(:account)
+    @account =  FactoryBot.create(:account)
     @business = @account.business
     @user = @account.business.owner
     sign_in @user

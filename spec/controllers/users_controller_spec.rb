@@ -3,7 +3,7 @@ require 'spec_helper'
 describe UsersController, :type => :controller do
 
   before (:each) do
-    @business = FactoryGirl.create(:business)
+    @business = FactoryBot.create(:business)
     sign_in @business.owner
   end
 
@@ -18,7 +18,7 @@ describe UsersController, :type => :controller do
 
   describe "POST 'create'" do
     before do
-      @user2 = FactoryGirl.create(:user, :email => 'example2@example.com')
+      @user2 = FactoryBot.create(:user, :email => 'example2@example.com')
     end
 
     it "should be successful" do
@@ -36,7 +36,7 @@ describe UsersController, :type => :controller do
 
   describe "DELETE 'delete'" do
     before do
-      @user2 = FactoryGirl.create(:user, :email => 'example2@example.com')
+      @user2 = FactoryBot.create(:user, :email => 'example2@example.com')
       @business.users << @user2
     end
 

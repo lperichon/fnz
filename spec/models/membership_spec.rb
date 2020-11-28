@@ -3,8 +3,8 @@ require 'spec_helper'
 describe Membership do
   
   before(:each) do
-    @business = FactoryGirl.create(:business)
-    @contact = FactoryGirl.create(:contact, :business => @business)
+    @business = FactoryBot.create(:business)
+    @contact = FactoryBot.create(:contact, :business => @business)
     @attr = {
       :contact_id => @contact.id,
       :business_id => @business.id,
@@ -19,13 +19,13 @@ describe Membership do
 
   describe "creating without :create_monthly_installments" do
     it "wont create installments" do
-      m = FactoryGirl.build(:membership)
+      m = FactoryBot.build(:membership)
       expect{ m.save }.not_to change{ Installment.count }
     end
   end
   describe "creating with :create_monthly_installments flag" do
     it "creates monthly installments of membership value" do
-      m = FactoryGirl.build(:membership,
+      m = FactoryBot.build(:membership,
                             create_monthly_installments: true,
                             begins_on: Date.today.beginning_of_month,
                             ends_on:   11.months.from_now.end_of_month
@@ -37,8 +37,8 @@ describe Membership do
   describe "has a payment type" do
     it {should belong_to :payment_type }
     it "nullify association if payment is destroyed" do
-      pt = FactoryGirl.create(:payment_type, business: @business)
-      membership = FactoryGirl.create(:membership, business: @business, payment_type: pt)
+      pt = FactoryBot.create(:payment_type, business: @business)
+      membership = FactoryBot.create(:membership, business: @business, payment_type: pt)
       membership.payment_type.should == pt
       pt.destroy
       membership.reload.payment_type.should be_nil

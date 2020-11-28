@@ -11,7 +11,7 @@ describe BusinessesController, :type => :controller do
   end
 
   before(:each) do
-    @user = FactoryGirl.create(:user)
+    @user = FactoryBot.create(:user)
     sign_in @user
   end
 

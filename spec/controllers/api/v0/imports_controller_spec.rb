@@ -14,7 +14,7 @@ describe Api::V0::ImportsController, :type => :controller do
 
   describe "#show" do
     before do
-      i = FactoryGirl.create(:product_import, :upload => fixture_file_upload('/belgrano_productos.csv', 'text/csv'))
+      i = FactoryBot.create(:product_import, :upload => fixture_file_upload('/belgrano_productos.csv', 'text/csv'))
       @import_id = i.id
     end
 
@@ -45,7 +45,7 @@ describe Api::V0::ImportsController, :type => :controller do
   describe "with an existing business" do
     before do
       unless @belgrano = Business.find_by_name('belgrano')
-        @belgrano = FactoryGirl.create(:business, name: 'Belgrano', padma_id: 'belgrano')
+        @belgrano = FactoryBot.create(:business, name: 'Belgrano', padma_id: 'belgrano')
       end
     end
 

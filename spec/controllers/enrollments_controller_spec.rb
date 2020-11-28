@@ -15,9 +15,9 @@ describe EnrollmentsController, :type => :controller do
   end
 
   before(:each) do
-    @business = FactoryGirl.create(:school)
-    @membership = FactoryGirl.create(:membership, :business => @business)
-    @agent = FactoryGirl.create(:agent, :business => @business)
+    @business = FactoryBot.create(:school)
+    @membership = FactoryBot.create(:membership, :business => @business)
+    @agent = FactoryBot.create(:agent, :business => @business)
 
     @user = @business.owner
     sign_in @user

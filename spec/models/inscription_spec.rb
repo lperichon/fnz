@@ -3,8 +3,8 @@ require 'spec_helper'
 describe Inscription do
   
   before(:each) do
-    @business = FactoryGirl.create(:event)
-    @contact = FactoryGirl.create(:contact, :business => @business)
+    @business = FactoryBot.create(:event)
+    @contact = FactoryBot.create(:contact, :business => @business)
     @attr = {
       :contact_id => @contact.id,
       :business_id => @business.id,
@@ -15,8 +15,8 @@ describe Inscription do
   describe "has a payment type" do
     it {should belong_to :payment_type }
     it "nullify association if payment is destroyed" do
-      pt = FactoryGirl.create(:payment_type, business: @business)
-      membership = FactoryGirl.create(:membership, business: @business, payment_type: pt)
+      pt = FactoryBot.create(:payment_type, business: @business)
+      membership = FactoryBot.create(:membership, business: @business, payment_type: pt)
       membership.payment_type.should == pt
       pt.destroy
       membership.reload.payment_type.should be_nil
@@ -39,7 +39,7 @@ describe Inscription do
 
   describe "#balance" do
     before do
-      @inscription = FactoryGirl.create(:inscription, :business => @business)
+      @inscription = FactoryBot.create(:inscription, :business => @business)
     end
     
     it "should be 0 to begin" do
@@ -48,8 +48,8 @@ describe Inscription do
 
     describe "when there is one completed transaction" do
       before do
-        source_account = FactoryGirl.create(:account, :business => @business)
-        @transaction = FactoryGirl.create(:transaction, :type => "Credit", :business => @business, :source => source_account, :creator => @business.owner, :transaction_at => Date.today)
+        source_account = FactoryBot.create(:account, :business => @business)
+        @transaction = FactoryBot.create(:transaction, :type => "Credit", :business => @business, :source => source_account, :creator => @business.owner, :transaction_at => Date.today)
         @inscription.transactions << @transaction
         @inscription.reload
       end

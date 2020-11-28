@@ -2,19 +2,19 @@ require 'spec_helper'
 
 describe PaymentType do
 
-  let(:business){FactoryGirl.create(:business)}
-  let(:other_business){FactoryGirl.create(:business)}
-  let(:payment_type){FactoryGirl.create(:payment_type, business: business)}
+  let(:business){FactoryBot.create(:business)}
+  let(:other_business){FactoryBot.create(:business)}
+  let(:payment_type){FactoryBot.create(:payment_type, business: business)}
 
   describe "has many memberships and" do
     it { should have_many :memberships }
     it "accepts memberships from it's same business" do
-      membership = FactoryGirl.create(:membership, business: business)
+      membership = FactoryBot.create(:membership, business: business)
       payment_type.memberships = [membership]
       payment_type.should be_valid
     end
     it "rejects memberships from other businesses" do
-      membership = FactoryGirl.create(:membership, business: other_business)
+      membership = FactoryBot.create(:membership, business: other_business)
       payment_type.memberships = [membership]
       payment_type.should be_invalid
     end

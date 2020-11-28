@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Agent do
   
   before(:each) do
-    @business = FactoryGirl.create(:business)
+    @business = FactoryBot.create(:business)
     @attr = { 
       :name => "Example Agent",
       :business_id => @business.id

@@ -3,8 +3,8 @@ require 'spec_helper'
 describe Transfer do
   
   before(:each) do
-    @account = FactoryGirl.create(:account)
-    @account2 = FactoryGirl.create(:account, :business => @account.business)
+    @account = FactoryBot.create(:account)
+    @account2 = FactoryBot.create(:account, :business => @account.business)
     @attr = {
       :description => "Example Transaction",
       :business_id => @account.business.id,

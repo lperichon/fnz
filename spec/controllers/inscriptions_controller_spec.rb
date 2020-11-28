@@ -14,8 +14,8 @@ describe InscriptionsController, :type => :controller do
   end
 
   before(:each) do
-    @business = FactoryGirl.create(:event)
-    @contact = FactoryGirl.create(:contact, :business => @business)
+    @business = FactoryBot.create(:event)
+    @contact = FactoryBot.create(:contact, :business => @business)
     @user = @business.owner
     sign_in @user
   end

@@ -13,8 +13,8 @@ describe InstallmentSearch do
     let(:is_att){{status: status}}
     let(:is){InstallmentSearch.new(is_att)}
 
-    let(:my_inst){FactoryGirl.create(:installment, status: status)}
-    let(:other_inst){FactoryGirl.create(:installment)}
+    let(:my_inst){FactoryBot.create(:installment, status: status)}
+    let(:other_inst){FactoryBot.create(:installment)}
 
     it "includes installment in given status" do
       expect(is.results).to include my_inst
@@ -29,9 +29,9 @@ describe InstallmentSearch do
     let(:is){InstallmentSearch.new(is_attributes)}
 
     describe "#results" do
-      let!(:yes){FactoryGirl.create(:installment,
+      let!(:yes){FactoryBot.create(:installment,
                                     due_on: Date.civil(2014,2,1))}
-      let!(:no){FactoryGirl.create(:installment,
+      let!(:no){FactoryBot.create(:installment,
                                    due_on: Date.civil(2013,2,1))}
       it "includes installment due on 2014-2-1" do
         expect(is.results).to include yes
@@ -47,8 +47,8 @@ describe InstallmentSearch do
     let(:is_att){{agent_id: agent_id}}
     let(:is){InstallmentSearch.new(is_att)}
 
-    let(:my_inst){FactoryGirl.create(:installment, agent_id: agent_id)}
-    let(:other_inst){FactoryGirl.create(:installment)}
+    let(:my_inst){FactoryBot.create(:installment, agent_id: agent_id)}
+    let(:other_inst){FactoryBot.create(:installment)}
 
     it "includes installment of given agent" do
       expect(is.results).to include my_inst
@@ -62,8 +62,8 @@ describe InstallmentSearch do
     subject{ is.results }
     let(:is_att){{payment_type_id: payment_type_id}}
     let(:is){InstallmentSearch.new(is_att)}
-    let!(:xx_installment){FactoryGirl.create(:installment, membership: FactoryGirl.create(:membership, payment_type: FactoryGirl.create(:payment_type, name: 'xx')))}
-    let!(:yy_installment){FactoryGirl.create(:installment, membership: FactoryGirl.create(:membership, payment_type: FactoryGirl.create(:payment_type, name: 'yy')))}
+    let!(:xx_installment){FactoryBot.create(:installment, membership: FactoryBot.create(:membership, payment_type: FactoryBot.create(:payment_type, name: 'xx')))}
+    let!(:yy_installment){FactoryBot.create(:installment, membership: FactoryBot.create(:membership, payment_type: FactoryBot.create(:payment_type, name: 'yy')))}
     describe "nil" do
       let(:payment_type_id){ nil }
       it "includes all installments" do
@@ -103,8 +103,8 @@ describe InstallmentSearch do
     let(:is_att){{agent_id: agent_id}}
     let(:is){InstallmentSearch.new(is_att)}
 
-    let(:my_inst){FactoryGirl.create(:installment, agent_id: 'agent_1')}
-    let(:other_inst){FactoryGirl.create(:installment, agent_id: 'agent_2')}
+    let(:my_inst){FactoryBot.create(:installment, agent_id: 'agent_1')}
+    let(:other_inst){FactoryBot.create(:installment, agent_id: 'agent_2')}
 
     it "includes installment of all agents" do
       expect(is.results).to include my_inst

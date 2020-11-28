@@ -9,12 +9,12 @@ describe ContactSearch do
   end
 
   context "with business_id" do
-    let(:business){FactoryGirl.create(:business)}
+    let(:business){FactoryBot.create(:business)}
     let(:cs_att){{business_id: business.id}}
     let(:cs){ContactSearch.new(cs_att)}
 
-    let(:my_contact){FactoryGirl.create(:contact, business: business)}
-    let(:other_contact){FactoryGirl.create(:contact)}
+    let(:my_contact){FactoryBot.create(:contact, business: business)}
+    let(:other_contact){FactoryBot.create(:contact)}
 
     it "includes contact of business" do
       expect(cs.results).to include my_contact
@@ -27,8 +27,8 @@ describe ContactSearch do
   context "with membership_payment_type_id" do
     let(:payment_type_id){'payment_type_id'}
     let(:cs){ContactSearch.new(cs_att)}
-    let!(:my_mem){FactoryGirl.create(:membership, payment_type_id: 'payment_type_id')}
-    let!(:other_mem){FactoryGirl.create(:membership)}
+    let!(:my_mem){FactoryBot.create(:membership, payment_type_id: 'payment_type_id')}
+    let!(:other_mem){FactoryBot.create(:membership)}
     describe "string" do
       let(:cs_att){{membership_payment_type_id: payment_type_id}}
 
@@ -66,8 +66,8 @@ describe ContactSearch do
     let(:cs_att){{membership_payment_type_id: payment_type}}
     let(:cs){ContactSearch.new(cs_att)}
 
-    let(:my_mem){FactoryGirl.create(:membership, payment_type_id: 'payment_type_1')}
-    let(:other_mem){FactoryGirl.create(:membership, payment_type_id: 'payment_type_2')}
+    let(:my_mem){FactoryBot.create(:membership, payment_type_id: 'payment_type_1')}
+    let(:other_mem){FactoryBot.create(:membership, payment_type_id: 'payment_type_2')}
 
     it "includes membreship of all payment type" do
       expect(cs.results).to include my_mem.contact
@@ -80,16 +80,16 @@ describe ContactSearch do
     let(:cs){ContactSearch.new(cs_attributes)}
 
     describe "#results" do
-      let!(:yes){FactoryGirl.create(:membership,
+      let!(:yes){FactoryBot.create(:membership,
                                     begins_on: 6.months.ago.beginning_of_month,
                                     ends_on: Date.today.end_of_month)}
-      let!(:no_active){FactoryGirl.create(:membership,
+      let!(:no_active){FactoryBot.create(:membership,
                                    begins_on: 5.months.ago.beginning_of_month,
                                    ends_on: 1.month.from_now.end_of_month)}
-      let!(:no_overdue){FactoryGirl.create(:membership,
+      let!(:no_overdue){FactoryBot.create(:membership,
                                    begins_on: 7.months.ago.beginning_of_month,
                                    ends_on: 1.month.ago.end_of_month)}
-      let!(:no_closed){FactoryGirl.create(:membership,
+      let!(:no_closed){FactoryBot.create(:membership,
                                     begins_on: 6.months.ago.beginning_of_month,
                                     ends_on: Date.today.end_of_month,
                                     closed_on: 1.month.ago.end_of_month)}
@@ -113,8 +113,8 @@ describe ContactSearch do
     let(:cs){ContactSearch.new(cs_attributes)}
 
     describe "#results" do
-      let!(:bart){FactoryGirl.create(:contact, :name => "Bartholomew Simpson")}
-      let!(:homer){FactoryGirl.create(:contact, :name => "Homer Simpson")}
+      let!(:bart){FactoryBot.create(:contact, :name => "Bartholomew Simpson")}
+      let!(:homer){FactoryBot.create(:contact, :name => "Homer Simpson")}
       it "includes bart" do
         expect(cs.results).to include bart
       end
@@ -129,8 +129,8 @@ describe ContactSearch do
     let(:cs){ContactSearch.new(cs_attributes)}
 
     describe "#results" do
-      let!(:bart){FactoryGirl.create(:contact, :padma_teacher => "luis.perichon")}
-      let!(:homer){FactoryGirl.create(:contact, :padma_teacher => "natalia.sanmartin")}
+      let!(:bart){FactoryBot.create(:contact, :padma_teacher => "luis.perichon")}
+      let!(:homer){FactoryBot.create(:contact, :padma_teacher => "natalia.sanmartin")}
       it "includes bart's membership" do
         expect(cs.results).to include bart
       end
@@ -145,18 +145,18 @@ describe ContactSearch do
     let(:cs){ContactSearch.new(cs_attributes)}
 
     describe "#results" do
-      let!(:student){FactoryGirl.create(:contact, :padma_status => "student")}
-      let!(:another_student){FactoryGirl.create(:contact, :padma_status => nil)}
-      let!(:yet_another_student){FactoryGirl.create(:contact, :padma_status => "student")}
-      let!(:former_student){FactoryGirl.create(:contact, :padma_status => "former_student")}
-      let!(:another_former_student){FactoryGirl.create(:contact, :padma_status => "former_student")}
-      let!(:yes){FactoryGirl.create(:membership,
+      let!(:student){FactoryBot.create(:contact, :padma_status => "student")}
+      let!(:another_student){FactoryBot.create(:contact, :padma_status => nil)}
+      let!(:yet_another_student){FactoryBot.create(:contact, :padma_status => "student")}
+      let!(:former_student){FactoryBot.create(:contact, :padma_status => "former_student")}
+      let!(:another_former_student){FactoryBot.create(:contact, :padma_status => "former_student")}
+      let!(:yes){FactoryBot.create(:membership,
                                     contact: student)}
-      let!(:yes_local){FactoryGirl.create(:membership,
+      let!(:yes_local){FactoryBot.create(:membership,
                                     contact: another_student)}
-      let!(:yes_former){FactoryGirl.create(:membership,
+      let!(:yes_former){FactoryBot.create(:membership,
                                     contact: former_student)}
-      let!(:no){FactoryGirl.create(:membership,
+      let!(:no){FactoryBot.create(:membership,
                                     closed_on: 1.month.ago,
                                     contact: another_former_student)}
       it "includes a padma student with membership" do

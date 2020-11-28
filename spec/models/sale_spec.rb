@@ -5,9 +5,9 @@ describe Sale do
   before(:each) do
     PadmaContact.stub(:find).and_return(PadmaContact.new(:first_name => "Homer", :last_name => "Simpson"))
     Contact.any_instance.stub(:padma).and_return([PadmaContact.new(:first_name => "Homer", :last_name => "Simpson")])
-    @business = FactoryGirl.create(:business)
-    @contact = FactoryGirl.create(:contact, :business => @business)
-    @agent = FactoryGirl.create(:agent, :business => @business)
+    @business = FactoryBot.create(:business)
+    @contact = FactoryBot.create(:contact, :business => @business)
+    @agent = FactoryBot.create(:agent, :business => @business)
     @attr = {
       :contact_id => @contact.id,
       :business_id => @business.id,
@@ -36,8 +36,8 @@ describe Sale do
   	describe "with a paid sale" do
   		before do
   			row = ['50025','50015','juan.abraham','50182','','2008-11-03','2008-11-03 20:19:46 UTC','2010-03-12 03:33:32 UTC','2700','2008-11-03','true','1','ARS','']
-  			@business = FactoryGirl.create(:school)
-  			@product = FactoryGirl.create(:product, :business => @business, :external_id => row[1].to_i)
+  			@business = FactoryBot.create(:school)
+  			@product = FactoryBot.create(:product, :business => @business, :external_id => row[1].to_i)
   			@sale = Sale.build_from_csv(@business, row)
   		end
 
@@ -55,8 +55,8 @@ describe Sale do
   	describe "with an unpaid sale" do
   		before do
   			row = ['50014','50015','guido.morando','50002','','2008-10-27','2008-10-27 18:13:42 UTC','2010-03-12 03:33:32 UTC','2700','','false','1','ARS','']
-  			@business = FactoryGirl.create(:school)
-  			@product = FactoryGirl.create(:product, :business => @business, :external_id => row[1].to_i)
+  			@business = FactoryBot.create(:school)
+  			@product = FactoryBot.create(:product, :business => @business, :external_id => row[1].to_i)
   			@sale = Sale.build_from_csv(@business, row)
   		end
 
