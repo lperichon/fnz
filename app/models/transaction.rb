@@ -70,10 +70,10 @@ class Transaction < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   #attr_accessible :tag_id, :tag_ids, :description, :business_id, :source_id, :amount, :type, :transaction_at, :target_id, :conversion_rate, :state, :reconciled_at, :sale_ids, :installment_ids, :enrollment_ids, :creator_id, :report_at, :report_at_option, :inscription_ids, :contact_id, :agent_id, :admpart_tag_id
 
-  scope :untagged, includes(:taggings).where("taggings.tag_id is null")
+  scope :untagged, -> { includes(:taggings).where("taggings.tag_id is null") }
 
-  scope :credits, where(:type => "Credit")
-  scope :debits, where(:type => "Debit")
+  scope :credits, -> { where(:type => "Credit") }
+  scope :debits, -> { where(:type => "Debit") }
 
   def tag_id= id
     self.tag_ids = [id]
@@ -138,8 +138,12 @@ class Transaction < ActiveRecord::Base
     base.where(q)
   end
 
+  # as this is a before_validation, if report_at is present this returns nil
+  # Rails then compares it with false and it throws an error
+  # return true to avoid that error
   def set_report_at
     self.report_at = self.transaction_at unless self.report_at.present?
+    true
   end
 
   def cache_tag_total

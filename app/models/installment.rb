@@ -16,7 +16,7 @@ class Installment < ActiveRecord::Base
   scope :overdue, -> { where("due_on < '#{Date.today}'") }
   scope :incomplete, -> { where(:status => :incomplete) }
 
-  default_scope order("due_on DESC")
+  default_scope { order("due_on DESC") }
 
   # Setup accessible (or protected) attributes for your model
   #attr_accessible :membership_id, :agent_id, :due_on, :value, :transactions_attributes, :installment_transactions_attributes, :external_id, :observations, :status, :balance, :installments_count, :agent_padma_id, :transaction_ids
