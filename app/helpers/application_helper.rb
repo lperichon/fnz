@@ -1,5 +1,5 @@
 module ApplicationHelper
-  include TzMagic::ApplicationHelper
+  #include TzMagic::ApplicationHelper
 
   def page_title(title)
     content_for(:title){ title }

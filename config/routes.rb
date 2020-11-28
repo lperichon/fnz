@@ -1,9 +1,9 @@
 Fnz::Application.routes.draw do
-  mount TzMagic::Engine => "/tz_magic"
+  #mount TzMagic::Engine => "/tz_magic"
 
-  authenticated :user do
-    root :to => 'home#index'
-  end
+  #authenticated :user do
+  #  root :to => 'home#index'
+  #end
   root :to => "home#index"
 
   get "/login",  to: "sso_sessions#show"
