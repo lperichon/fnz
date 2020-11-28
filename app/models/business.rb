@@ -26,7 +26,7 @@ class Business < ActiveRecord::Base
 
   def link_to_owner
     unless(self.owner.business_ids.include?(self.id))
-      self.owner.businesses << self
+      self.owner.business_ids << self.id
     end
   end
 
