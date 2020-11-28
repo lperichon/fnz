@@ -59,6 +59,7 @@ class BalanceCheck < ActiveRecord::Base
         transaction_at: checked_at,
         source_id: account_id,
         business_id: account.business_id,
+        creator: creator,
         description: _("Diferencia de caja (balance: %{balance})") % { balance: balance }
       )
     end
