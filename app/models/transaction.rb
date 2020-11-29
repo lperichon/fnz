@@ -358,6 +358,7 @@ class Transaction < ActiveRecord::Base
 
   def set_order_stamp
     self.order_stamp = (reconciled?)? reconciled_at : transaction_at
+    true
   end
 
   def self.update_all_order_stamps
