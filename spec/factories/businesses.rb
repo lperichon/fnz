@@ -4,6 +4,7 @@ FactoryBot.define do
   factory :business do
     name {'Test Business'}
     owner { FactoryBot.create(:user) }
+    currency_code { 'usd' }
   end
 
   factory :school do
