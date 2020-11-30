@@ -76,7 +76,8 @@ class Transaction < ActiveRecord::Base
   scope :debits, -> { where(:type => "Debit") }
 
   def tag_id= id
-    self.tag_ids = [id]
+    self.tag_ids.clear
+    self.tag_ids << id
   end
 
   def tag_id
