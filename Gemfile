@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 ruby '2.3.8'
-gem 'rails', '4.0.0'
+gem 'rails', '4.1.2'
 ##gem "sass", "~> 3.2.19"
 gem 'sass-rails', '~> 5.0.7'
 gem 'coffee-rails', '~> 4.2.2'
