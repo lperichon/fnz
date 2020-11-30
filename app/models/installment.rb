@@ -2,7 +2,8 @@ class Installment < ActiveRecord::Base
   belongs_to :membership, :touch => true
   belongs_to :agent
   has_many :installment_transactions
-  has_many :transactions, :through => :installment_transactions
+  has_many :trans, foreign_key: 'transaction_id', class_name: "Transaction", :through => :installment_transactions
+  alias_method :transactions, :trans
 
   attr_accessor :installments_count
   attr_accessor :agent_padma_id
@@ -20,7 +21,7 @@ class Installment < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   #attr_accessible :membership_id, :agent_id, :due_on, :value, :transactions_attributes, :installment_transactions_attributes, :external_id, :observations, :status, :balance, :installments_count, :agent_padma_id, :transaction_ids
-  accepts_nested_attributes_for :transactions, allow_destroy: true
+  accepts_nested_attributes_for :trans, allow_destroy: true
   accepts_nested_attributes_for :installment_transactions, :reject_if => proc { |s| s['transaction_id'].blank? }
 
   before_save :refresh_status

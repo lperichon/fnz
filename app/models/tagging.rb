@@ -1,6 +1,7 @@
 class Tagging < ActiveRecord::Base
   belongs_to :tag
-  belongs_to :transaction
+  belongs_to :trans, foreign_key: 'transaction_id', class_name: "Transaction"#:transaction
+  alias_method :transactions, :trans
 
   validates_presence_of :tag_id
 

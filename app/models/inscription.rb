@@ -4,7 +4,8 @@ class Inscription < ActiveRecord::Base
   belongs_to :payment_type
 
   has_many :inscription_transactions
-  has_many :transactions, :through => :inscription_transactions
+  has_many :trans, foreign_key: 'transaction_id', class_name: "Transaction", :through => :inscription_transactions
+  alias_method :transactions, :trans
 
   validates :value, :numericality =>  {:greater_than_or_equal => 0}
   validates :business, :presence => true
@@ -15,7 +16,7 @@ class Inscription < ActiveRecord::Base
 
   include BelongsToPadmaContact
 
-  accepts_nested_attributes_for :transactions, allow_destroy: true
+  accepts_nested_attributes_for :trans, allow_destroy: true
   accepts_nested_attributes_for :inscription_transactions, :reject_if => proc { |s| s['transaction_id'].blank? }
   accepts_nested_attributes_for :contact, allow_destroy: true
 

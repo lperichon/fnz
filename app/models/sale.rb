@@ -5,7 +5,7 @@ class Sale < ActiveRecord::Base
   belongs_to :product
 
   has_many :sale_transactions
-  has_many :transactions, :through => :sale_transactions
+  has_many :trans, foreign_key: 'transaction_id', class_name: "Transaction", :through => :sale_transactions
 
   validates :business, :presence => true
   validates :agent, :presence => true
@@ -13,8 +13,9 @@ class Sale < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   #attr_accessible :contact_id, :business_id, :agent_id, :product_id, :transactions_attributes, :sale_transactions_attributes, :sold_on, :external_id
-  accepts_nested_attributes_for :transactions, allow_destroy: true
+  accepts_nested_attributes_for :trans, allow_destroy: true
   accepts_nested_attributes_for :sale_transactions, :reject_if => proc { |s| s['transaction_id'].blank? }
+  alias_method :transactions, :trans
 
   scope :this_month, -> { where {(sold_on.gteq Date.today.beginning_of_month.beginning_of_day) & (sold_on.lteq Date.today.end_of_month.end_of_day)} }
   default_scope { order("sold_on DESC") }

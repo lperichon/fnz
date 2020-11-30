@@ -1,8 +1,9 @@
 class TransactionImport < Import
-  has_and_belongs_to_many :transactions,
+  has_and_belongs_to_many :trans,
                           join_table: "imports_transactions",
                           foreign_key: "import_id"
-  alias_method :imported_records, :transactions
+  alias_method :transactions, :trans
+  alias_method :imported_records, :trans
 
   validates_attachment :upload, :presence => true, :content_type => { :content_type => "text/csv" }
 
