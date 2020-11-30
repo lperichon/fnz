@@ -48,7 +48,7 @@ gem "intercom-rails"
 gem "cache_digests"
 gem "wkhtmltopdf-heroku"
 gem "pdfkit"
-gem "paranoia", "~> 1.0"
+gem "paranoia", "~> 2.1.5"
 ##gem 'rake', '< 11.0'
 gem "roo"
 gem "roo-xls"
