@@ -6,19 +6,19 @@ class EnrollmentsController < UserApplicationController
 
   def edit
   	date = @enrollment.enrolled_on || Date.today
-  	@transactions = @business.transactions.credits.where {(transaction_at.gteq date - 1.month) & (transaction_at.lteq  date + 1.month)}
+  	@transactions = @business.trans.credits.where {(transaction_at.gteq date - 1.month) & (transaction_at.lteq  date + 1.month)}
   end
 
   def new
-    @enrollment = @membership.build_enrollment(params[:enrollment])
+    @enrollment = @membership.build_enrollment(enrollment_params)
   	date = @enrollment.enrolled_on || Date.today
-  	@transactions = @business.transactions.credits.where {(transaction_at.gteq date - 1.month) & (transaction_at.lteq  date + 1.month)}
+  	@transactions = @business.trans.credits.where {(transaction_at.gteq date - 1.month) & (transaction_at.lteq  date + 1.month)}
   end
 
   # POST /enrollments
   # POST /enrollments.json
   def create
-    @enrollment = @membership.build_enrollment(params[:enrollment])
+    @enrollment = @membership.build_enrollment(enrollment_params)
 
     respond_to do |format|
       if @enrollment.save
@@ -33,7 +33,7 @@ class EnrollmentsController < UserApplicationController
   # PUT /enrollments/1.json
   def update
     respond_to do |format|
-      if @enrollment.update_attributes(params[:enrollment])
+      if @enrollment.update_attributes(enrollment_params || {})
         format.html { redirect_to business_membership_enrollment_path(@business, @membership, @enrollment), notice: 'Enrollment was successfully updated.' }
       else
         format.html { render action: "edit" }
@@ -63,5 +63,16 @@ class EnrollmentsController < UserApplicationController
     @business = @context.find(params[:business_id])
     @membership = @business.memberships.find(params[:membership_id])
     @enrollment = @membership.enrollment
+  end
+
+  def enrollment_params
+    params.require(:enrollment).permit(
+      :membership_id,
+      :agent_id,
+      :value,
+      :enrolled_on,
+      :transactions_attributes,
+      :enrollment_transactions_attributes
+    ) if params[:enrollment].present?
   end
 end

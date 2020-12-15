@@ -22,16 +22,16 @@ class MembershipsController < UserApplicationController
   end
 
   def new
-    @membership = @context.new(params[:membership])
+    @membership = @context.new(membership_params)
   end
 
   # POST /accounts
   # POST /accounts.json
   def create
-    
     padma_contact_id = params[:membership].delete(:padma_contact_id)
-    params[:membership][:create_monthly_installments] = params[:membership][:create_monthly_installments]=="1"
-    @membership = @context.new(params[:membership])
+    permitted_params = membership_params.to_h
+    permitted_params[:create_monthly_installments] = params[:membership][:create_monthly_installments]=="1"
+    @membership = @context.new(permitted_params)
     @membership.padma_contact_id = padma_contact_id # set contact after initialization to ensure business has been setted
     @business = @membership.business
 
@@ -51,7 +51,7 @@ class MembershipsController < UserApplicationController
     @business = @membership.business
 
     respond_to do |format|
-      if @membership.update_attributes(params[:membership])
+      if @membership.update_attributes(membership_params || {})
         format.html do
           redirect_back_or_default_to(business_membership_path(@business, @membership),
                                       notice: _('Membresía actualizada'))
@@ -126,5 +126,22 @@ class MembershipsController < UserApplicationController
     
     @business = Business.smart_find(business_id)
     @context = @business.memberships if @business
+  end
+
+  def membership_params
+    params.require(:membership).permit(
+      :contact_id,
+      :business_id,
+      :payment_type_id,
+      :begins_on,
+      :ends_on,
+      :value,
+      :closed_on,
+      :vip,
+      :external_id,
+      :monthly_due_day,
+      :name,
+      :create_monthly_installments
+    ) if params[:membership].present?
   end
 end

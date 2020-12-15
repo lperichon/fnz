@@ -14,13 +14,13 @@ class AccountsController < UserApplicationController
   end
 
   def new
-    @account = @business.accounts.new(params[:account])
+    @account = @business.accounts.new(account_params)
   end
 
   # POST /accounts
   # POST /accounts.json
   def create
-    @account = @business.accounts.new(params[:account])
+    @account = @business.accounts.new(account_params)
 
     respond_to do |format|
       if @account.save
@@ -39,7 +39,7 @@ class AccountsController < UserApplicationController
     @account = @business.accounts.with_deleted.find(params[:id])
 
     respond_to do |format|
-      if @account.update_attributes(params[:account])
+      if @account.update_attributes(account_params || {})
         format.html { redirect_to business_account_path(@business, @account), notice: 'Account was successfully updated.' }
         format.json { head :no_content }
       else
@@ -87,4 +87,12 @@ class AccountsController < UserApplicationController
     @context
   end
 
+  def account_params
+    params.require(:account).permit(
+      :name,
+      :business_id,
+      :currency,
+      :default
+    ) if params[:account].present?
+  end
 end

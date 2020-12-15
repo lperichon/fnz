@@ -14,13 +14,13 @@ class ProductsController < UserApplicationController
   end
 
   def new
-    @product = @business.products.new(params[:product])
+    @product = @business.products.new(product_params)
   end
 
   # POST /products
   # POST /products.json
   def create
-    @product = @business.products.new(params[:product])
+    @product = @business.products.new(product_params)
 
     respond_to do |format|
       if @product.save
@@ -39,7 +39,7 @@ class ProductsController < UserApplicationController
     @product = @business.products.find(params[:id])
 
     respond_to do |format|
-      if @product.update_attributes(params[:product])
+      if @product.update_attributes(product_params || {})
         format.html { redirect_to business_product_path(@business, @product), notice: 'Product was successfully updated.' }
         format.json { head :no_content }
       else
@@ -77,4 +77,17 @@ class ProductsController < UserApplicationController
     @context
   end
 
+  def product_params
+    params.require(:product).permit(
+      :name,
+      :business_id,
+      :price,
+      :price_currency,
+      :cost,
+      :cost_currency,
+      :stock,
+      :hidden,
+      :external_id
+    ) if params[:product].present?
+  end
 end

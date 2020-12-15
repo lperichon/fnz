@@ -39,13 +39,13 @@ class TagsController < UserApplicationController
   end
 
   def new
-    @tag = @business.tags.new(params[:tag])
+    @tag = @business.tags.new(tag_params)
   end
 
   # POST /tags
   # POST /tags.json
   def create
-    @tag = @business.tags.new(params[:tag])
+    @tag = @business.tags.new(tag_params)
 
     respond_to do |format|
       if @tag.save
@@ -64,7 +64,7 @@ class TagsController < UserApplicationController
     @tag = @business.tags.find(params[:id])
 
     respond_to do |format|
-      if @tag.update_attributes(params[:tag])
+      if @tag.update_attributes(tag_params || {})
         format.html { redirect_to business_tag_path(@business, @tag), notice: 'Tag was successfully updated.' }
         format.json { head :no_content }
       else
@@ -102,4 +102,12 @@ class TagsController < UserApplicationController
     @context
   end
 
+  def tag_params
+    params.require(:tag).permit(
+      :name,
+      :business_id,
+      :admpart_section,
+      :system_name
+    ) if params[:tag].present?
+  end
 end

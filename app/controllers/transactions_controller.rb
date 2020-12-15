@@ -61,7 +61,7 @@ class TransactionsController < UserApplicationController
   end
 
   def new
-    attrs = ( params[:transaction] || {}).reverse_merge({
+    attrs = ( transaction_params || {}).reverse_merge({
       type: 'Debit',
       transaction_at: Time.zone.now
     })
@@ -79,7 +79,7 @@ class TransactionsController < UserApplicationController
   # POST /accounts
   # POST /accounts.json
   def create
-    @transaction = @context.new(params[:transaction])
+    @transaction = @context.new(transaction_params)
 
     respond_to do |format|
       if @transaction.save
@@ -105,7 +105,7 @@ class TransactionsController < UserApplicationController
     @transaction = Transaction.find(params[:id])
 
     respond_to do |format|
-      if @transaction.update_attributes(transaction_attributes_for_update)
+      if @transaction.update_attributes(transaction_attributes_for_update || {})
         format.html { redirect_to business_transaction_path(@business, @transaction), notice: _("Movimiento actualizado") }
         format.js {}
         format.json do
@@ -166,13 +166,14 @@ class TransactionsController < UserApplicationController
   private
 
   def transaction_attributes_for_update
+    permitted_params = transaction_params.to_h
     if params[:credit]
-      params[:transaction] = params.delete(:credit)
+      permitted_params = params.delete(:credit)
     end
     if params[:debit]
-      params[:transaction] = params.delete(:debit)
+      permitted_params = params.delete(:debit)
     end
-    params[:transaction]
+    permitted_params
   end
 
   def transaction_attributes_for_batch_update
@@ -193,20 +194,20 @@ class TransactionsController < UserApplicationController
     @context = Transaction
     if business_id
       @business = @business_context.find(business_id)
-      @context = @business.transactions
+      @context = @business.trans
       if source_id
         @account = @business.accounts.find(source_id)
         if params[:active_only]
           @context = @account.active_transactions
         else
-          @context = @account.transactions
+          @context = @account.trans
         end
       end
     end
 
     if params[:admpart_tag_id]
       @tag = Tag.find params[:admpart_tag_id]
-      @context = @business.transactions.where(admpart_tag_id: @tag.self_and_descendants.map(&:id))
+      @context = @business.trans.where(admpart_tag_id: @tag.self_and_descendants.map(&:id))
     end
 
     # List transactions on this month or the year/month solicited
@@ -247,4 +248,30 @@ class TransactionsController < UserApplicationController
     end
   end
 
+  def transaction_params
+    params.require(:transaction).permit(
+      :tag_id,
+      :description,
+      :business_id,
+      :source_id,
+      :amount,
+      :type,
+      :transaction_at,
+      :target_id,
+      :conversion_rate,
+      :state,
+      :reconciled_at,
+      :sale_ids,
+      :installment_ids,
+      :enrollment_ids,
+      :creator_id,
+      :report_at,
+      :report_at_option,
+      :inscription_ids,
+      :contact_id,
+      :agent_id,
+      :admpart_tag_id,
+      tag_ids: []
+    ) if params[:transaction].present?
+  end
 end

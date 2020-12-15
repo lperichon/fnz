@@ -10,13 +10,13 @@ class TransactionRulesController < UserApplicationController
   end
 
   def new
-    @transaction_rule = @business.transaction_rules.new(params[:transaction_rule])
+    @transaction_rule = @business.transaction_rules.new(transaction_rule_params)
   end
 
   # POST /transaction_rules
   # POST /transaction_rules.json
   def create
-    @transaction_rule = @business.transaction_rules.new(params[:transaction_rule])
+    @transaction_rule = @business.transaction_rules.new(transaction_rule_params)
 
     respond_to do |format|
       if @transaction_rule.save
@@ -37,7 +37,7 @@ class TransactionRulesController < UserApplicationController
     @transaction_rule = @business.transaction_rules.find(params[:id])
 
     respond_to do |format|
-      if @transaction_rule.update_attributes(params[:transaction_rule])
+      if @transaction_rule.update_attributes(transaction_rule_params || {})
         format.html { redirect_to business_transaction_rules_path(@business), notice: _("Regla actualizada") }
         format.json { head :no_content }
       else
@@ -63,5 +63,11 @@ class TransactionRulesController < UserApplicationController
 
   def get_business
     @business = Business.find(params[:business_id])
+  end
+
+  def transaction_rule_params
+    params.require(:transaction_rule).permit(
+
+    ) if params[:transaction_rule].present?
   end
 end

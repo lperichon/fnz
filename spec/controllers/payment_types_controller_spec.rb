@@ -99,8 +99,8 @@ describe PaymentTypesController, :type => :controller do
         # specifies that the Business created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        PaymentType.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:business_id => @business.to_param, :id => payment_type.to_param, :payment_type => {'these' => 'params'}}
+        PaymentType.any_instance.should_receive(:update_attributes).with({'name' => 'params'})
+        put :update, {:business_id => @business.to_param, :id => payment_type.to_param, :payment_type => {'name' => 'params'}}
       end
 
       it "assigns the requested payment_type as @payment_type" do

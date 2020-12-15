@@ -103,8 +103,8 @@ describe InstallmentsController, :type => :controller do
         # specifies that the Business created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Installment.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:business_id => @business.to_param, :membership_id => @membership.to_param, :id => installment.to_param, :installment => {'these' => 'params'}}
+        Installment.any_instance.should_receive(:update_attributes).with({'value' => 'params'})
+        put :update, {:business_id => @business.to_param, :membership_id => @membership.to_param, :id => installment.to_param, :installment => {'value' => 'params'}}
       end
 
       it "assigns the requested installment as @installment" do

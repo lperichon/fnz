@@ -12,13 +12,13 @@ class BusinessesController < UserApplicationController
   end
 
   def new
-    @business = current_user.owned_businesses.new(params[:business])
+    @business = current_user.owned_businesses.new(business_params)
   end
 
   # POST /businesses
   # POST /businesses.json
   def create
-    @business = current_user.owned_businesses.new(params[:business])
+      @business = current_user.owned_businesses.new(business_params)
 
     respond_to do |format|
       if @business.save
@@ -37,7 +37,7 @@ class BusinessesController < UserApplicationController
     @business = current_user.owned_businesses.find(params[:id])
 
     respond_to do |format|
-      if @business.update_attributes(params[:business])
+      if @business.update_attributes(business_params || {})
         format.html { redirect_to business_path(@business), notice: 'Business was successfully updated.' }
         format.json { head :no_content }
       else
@@ -59,4 +59,20 @@ class BusinessesController < UserApplicationController
     end
   end
 
+  private
+
+  def business_params
+    params.require(:business).permit(
+      :type,
+      :name,
+      :owner_id,
+      :padma_id,
+      :synchronzied_at,
+      :send_weekly_reports,
+      :transactions_enabled,
+      :share_enabled,
+      :use_calendar_installments,
+      :currency_code
+    ) if params[:business].present?
+  end
 end

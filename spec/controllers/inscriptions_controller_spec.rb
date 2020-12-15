@@ -102,8 +102,8 @@ describe InscriptionsController, :type => :controller do
         # specifies that the Business created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Inscription.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:business_id => @business.to_param, :id => inscription.to_param, :inscription => {'these' => 'params'}}
+        Inscription.any_instance.should_receive(:update_attributes).with({'value' => 'params'})
+        put :update, {:business_id => @business.to_param, :id => inscription.to_param, :inscription => {'value' => 'params'}}
       end
 
       it "assigns the requested inscription as @inscription" do

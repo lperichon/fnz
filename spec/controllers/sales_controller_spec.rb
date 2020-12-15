@@ -108,8 +108,8 @@ describe SalesController, :type => :controller do
         # specifies that the Business created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Sale.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:business_id => @business.to_param, :id => sale.to_param, :sale => {'these' => 'params'}}
+        Sale.any_instance.should_receive(:update_attributes).with({'contact_id' => 'params'})
+        put :update, {:business_id => @business.to_param, :id => sale.to_param, :sale => {'contact_id' => 'params'}}
       end
 
       it "assigns the requested sale as @sale" do

@@ -18,13 +18,13 @@ class ImportsController < UserApplicationController
   end
 
   def new
-    @import = @business.imports.new(params[:import])
+    @import = @business.imports.new(import_params)
   end
 
   # POST /imports
   # POST /imports.json
   def create
-    @import = @business.imports.new(params[:import])
+    @import = @business.imports.new(import_params)
     
     respond_to do |format|
       if @import.save
@@ -43,7 +43,7 @@ class ImportsController < UserApplicationController
     @import = @business.imports.find(params[:id])
 
     respond_to do |format|
-      if @import.update_attributes(params[:import])
+      if @import.update_attributes(import_params || {})
         format.html { redirect_to business_import_path(@business, @import), notice: 'Import was successfully updated.' }
         format.json { head :no_content }
       else
@@ -106,4 +106,15 @@ class ImportsController < UserApplicationController
     @context
   end
 
+  def import_params
+    params.require(:import).permit(
+      :upload,
+      :business_id,
+      :status,
+      :type,
+      :account_id,
+      :description,
+      :archived
+    ) if params[:import].present?
+  end
 end

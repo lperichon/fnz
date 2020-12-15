@@ -19,7 +19,7 @@ class InstallmentsController < UserApplicationController
   	date = @installment.due_on
 
     # transactions available to link to installment
-    @transactions = @business.transactions
+    @transactions = @business.trans
                              .joins(:admpart_tag)
                              .where( tags: { system_name: "installment"  })
                              .where( contact_id: @installment.membership.contact_id )
@@ -36,10 +36,10 @@ class InstallmentsController < UserApplicationController
       end
     end
 
-    @installment = @context.new((params[:installment]||{}).reverse_merge(defaults))
+    @installment = @context.new((installment_params||{}).reverse_merge(defaults))
 
   	date = Date.today
-  	@transactions = @business.transactions.credits.where {(transaction_at.gteq(date - 1.month)) & (transaction_at.lteq(date + 1.month))}.order("order_stamp DESC")
+  	@transactions = @business.trans.credits.where {(transaction_at.gteq(date - 1.month)) & (transaction_at.lteq(date + 1.month))}.order("order_stamp DESC")
     # la linea de arriba retorna nil a veces. ver:
     # https://appsignal.com/padma/sites/5c463bba74782025e5d6f521/exceptions/incidents/111?timestamp=2019-03-20T16%3A22%3A03Z
     if @transactions.nil?
@@ -52,11 +52,11 @@ class InstallmentsController < UserApplicationController
   def create
     if params["multiple_submit"].present?
       count = params["installments_count"].to_i
-      @installment = @context.new(params[:installment])
+      @installment = @context.new(installment_params)
       respond_to do |format|
         if @installment.save
           (1...count).each do |i|
-            installment = @context.new(params[:installment])
+            installment = @context.new(installment_params)
             installment.due_on = installment.due_on + i.months
             installment.save
           end
@@ -68,7 +68,7 @@ class InstallmentsController < UserApplicationController
         end
       end
     else
-      @installment = @context.new(params[:installment])
+      @installment = @context.new(installment_params)
       respond_to do |format|
         if @installment.save
           format.html do
@@ -89,7 +89,7 @@ class InstallmentsController < UserApplicationController
     @installment = @context.readonly(false).find(params[:id]) # readonly for nested_attributes changes to work. eg. unlinking installment
 
     respond_to do |format|
-      if @installment.update_attributes(params[:installment])
+      if @installment.update_attributes(installment_params || {})
         format.html { redirect_to business_installment_path(@business, @installment), notice: _("Cuota actualizada") }
         format.js {}
         format.json { respond_with_bip(@installment) }
@@ -142,4 +142,21 @@ class InstallmentsController < UserApplicationController
     end
   end
 
+  def installment_params
+    params.require(:installment).permit(
+      :membership_id,
+      :agent_id,
+      :due_on,
+      :value,
+      :transactions_attributes,
+      :installment_transactions_attributes,
+      :external_id,
+      :observations,
+      :status,
+      :balance,
+      :installments_count,
+      :agent_padma_id,
+      :transaction_ids
+    ) if params[:installment].present?
+  end
 end

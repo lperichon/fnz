@@ -98,8 +98,8 @@ describe ContactsController, :type => :controller do
         # specifies that the Business created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Contact.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:business_id => @business.to_param, :id => contact.to_param, :contact => {'these' => 'params'}}
+        Contact.any_instance.should_receive(:update_attributes).with({'name' => 'params'})
+        put :update, {:business_id => @business.to_param, :id => contact.to_param, :contact => {'name' => 'params'}}
       end
 
       it "assigns the requested contact as @contact" do

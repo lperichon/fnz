@@ -19,20 +19,20 @@ class SalesController < UserApplicationController
     @sale = @context.find(params[:id])
     @business = @sale.business
     date = @sale.sold_on
-    @transactions = @business.transactions.credits.where {(transaction_at.gteq(date - 1.month)) & (transaction_at.lteq(date + 1.month))}.order("order_stamp DESC")
+    @transactions = @business.trans.credits.where {(transaction_at.gteq(date - 1.month)) & (transaction_at.lteq(date + 1.month))}.order("order_stamp DESC")
   end
 
   def new
-    @sale = @context.new(params[:sale])
+    @sale = @context.new(sale_params)
     date = Date.today
-    @transactions = @business.transactions.credits.where {(transaction_at.gteq(date - 1.month)) & (transaction_at.lteq(date + 1.month))}.order("order_stamp DESC")
+    @transactions = @business.trans.credits.where {(transaction_at.gteq(date - 1.month)) & (transaction_at.lteq(date + 1.month))}.order("order_stamp DESC")
   end
 
   # POST /accounts
   # POST /accounts.json
   def create
     padma_contact_id = params[:sale].delete(:padma_contact_id)
-    @sale = @context.new(params[:sale])
+    @sale = @context.new(sale_params)
     @business = @sale.business
 
     # Setting padma_contact_id is performed last as it depends on business_id being already set
@@ -54,7 +54,7 @@ class SalesController < UserApplicationController
     @business = @sale.business
 
     respond_to do |format|
-      if @sale.update_attributes(params[:sale])
+      if @sale.update_attributes(sale_params || {})
         format.html { redirect_to business_sale_path(@business, @sale), notice: 'Sale was successfully updated.' }
       else
         format.html { render action: "edit" }
@@ -96,4 +96,16 @@ class SalesController < UserApplicationController
     end
   end
 
+  def sale_params
+    params.require(:sale).permit(
+      :contact_id,
+      :business_id,
+      :agent_id,
+      :product_id,
+      :sold_on,
+      :external_id,
+      :transactions_attributes,
+      :sale_transactions_attributes
+    ) if params[:sale].present?
+  end
 end

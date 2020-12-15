@@ -19,14 +19,14 @@ class InscriptionsController < UserApplicationController
   end
 
   def new
-    @inscription = @context.new(params[:inscription])
+    @inscription = @context.new(inscription_params)
   	@transactions = @business.transactions.credits.order("order_stamp DESC")
   end
 
   # POST /accounts
   # POST /accounts.json
   def create
-    @inscription = @context.new(params[:inscription])
+    @inscription = @context.new(inscription_params)
     respond_to do |format|
       if @inscription.save
         format.html do
@@ -44,7 +44,7 @@ class InscriptionsController < UserApplicationController
     @inscription = @context.find(params[:id])
 
     respond_to do |format|
-      if @inscription.update_attributes(params[:inscription])
+      if @inscription.update_attributes(inscription_params || {})
         format.html { redirect_to edit_business_inscription_path(@business, @inscription), notice: 'Inscription was successfully updated.' }
       else
         format.html { render action: "edit" }
@@ -94,4 +94,19 @@ class InscriptionsController < UserApplicationController
 
   end
 
+  def inscription_params
+    params.require(:inscription).permit(
+      :contact_id,
+      :business_id,
+      :payment_type_id,
+      :value,
+      :external_id,
+      :transactions_attributes,
+      :inscription_transactions_attributes,
+      :observations,
+      :balance,
+      :padma_account,
+      :contact_attributes
+    ) if params[:inscription].present?
+  end
 end

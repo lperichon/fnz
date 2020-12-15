@@ -146,8 +146,8 @@ describe MembershipsController, :type => :controller do
         # specifies that the Business created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Membership.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:business_id => @business.to_param, :id => membership.to_param, :membership => {'these' => 'params'}}
+        Membership.any_instance.should_receive(:update_attributes).with({'value' => 'params'})
+        put :update, {:business_id => @business.to_param, :id => membership.to_param, :membership => {'value' => 'params'}}
       end
 
       it "assigns the requested membership as @membership" do

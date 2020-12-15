@@ -98,8 +98,8 @@ describe AccountsController, :type => :controller do
         # specifies that the Business created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Account.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:business_id => @business.to_param, :id => account.to_param, :account => {'these' => 'params'}}
+        Account.any_instance.should_receive(:update_attributes).with({'name' => 'params'})
+        put :update, {:business_id => @business.to_param, :id => account.to_param, :account => {'name' => 'params'}}
       end
 
       it "assigns the requested account as @account" do

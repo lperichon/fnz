@@ -20,7 +20,7 @@ class BalanceChecksController < UserApplicationController
   end
 
   def create
-    @balance_check = @account.balance_checks.create(params[:balance_check])
+    @balance_check = @account.balance_checks.create(balance_check_params)
     @account.reload
   end
 
@@ -38,4 +38,12 @@ class BalanceChecksController < UserApplicationController
     @account = @business.accounts.find(params[:account_id])
   end
   
+  def balance_check_params
+    params.require(:balance_check).permit(
+      :account_id,
+      :balance_cents,
+      :checked_at,
+      :balance
+    ) if params[:balance_check].present?
+  end
 end

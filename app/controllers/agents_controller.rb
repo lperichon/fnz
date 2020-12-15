@@ -15,14 +15,14 @@ class AgentsController < UserApplicationController
   end
 
   def new
-    @agent = @business.agents.new(params[:agent])
+    @agent = @business.agents.new(agent_params)
     @padma_users = @business.try(:padma).try(:users) || []
   end
 
   # POST /agents
   # POST /agents.json
   def create
-    @agent = @business.agents.new(params[:agent])
+    @agent = @business.agents.new(agent_params)
 
     respond_to do |format|
       if @agent.save
@@ -44,7 +44,7 @@ class AgentsController < UserApplicationController
     @agent = @business.agents.find(params[:id])
 
     respond_to do |format|
-      if @agent.update_attributes(params[:agent])
+      if @agent.update_attributes(agent_params || {})
         format.html { redirect_to business_agent_path(@business, @agent), notice: 'Agent was successfully updated.' }
         format.json { head :no_content }
       else
@@ -82,4 +82,11 @@ class AgentsController < UserApplicationController
     @context
   end
 
+  def agent_params
+    params.require(:agent).permit(
+      :name,
+      :business_id,
+      :padma_id
+    ) if params[:agent].present?
+  end
 end

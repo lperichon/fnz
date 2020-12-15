@@ -14,7 +14,7 @@ class ContactsController < UserApplicationController
     end
     @memberships = @contact.memberships.where(business_id: @business.id)
     if @business.transactions_enabled?
-      @transactions = @business.transactions.where(contact_id: @contact.id).order("order_stamp DESC")
+      @transactions = @business.trans.where(contact_id: @contact.id).order("order_stamp DESC")
     end
   end
 
@@ -23,13 +23,13 @@ class ContactsController < UserApplicationController
   end
 
   def new
-    @contact = @business.contacts.new(params[:contact])
+    @contact = @business.contacts.new(contact_params)
   end
 
   # POST /contacts
   # POST /contacts.json
   def create
-    @contact = @business.contacts.new(params[:contact])
+    @contact = @business.contacts.new(contact_params)
 
     respond_to do |format|
       if @contact.save
@@ -48,7 +48,7 @@ class ContactsController < UserApplicationController
     @contact = @business.contacts.find(params[:id])
 
     respond_to do |format|
-      if @contact.update_attributes(params[:contact])
+      if @contact.update_attributes(contact_params || {})
         format.html { redirect_to business_contact_path(@business, @contact), notice: 'Contact was successfully updated.' }
         format.json { head :no_content }
       else
@@ -91,4 +91,13 @@ class ContactsController < UserApplicationController
     @context
   end
 
+  def contact_params
+    params.require(:contact).permit(
+      :name,
+      :business_id,
+      :padma_id,
+      :padma_status,
+      :padma_teacher
+    ) if params[:contact].present?
+  end
 end

@@ -28,7 +28,7 @@ describe TransactionsController, :type => :controller do
 
   describe "GET business transactions index" do
     it "assigns all transactions as @transactions" do
-      transaction = @business.transactions.create! valid_attributes
+      transaction = @business.trans.create! valid_attributes
       transaction = Transaction.last
       get :index, {:business_id => @business.to_param}
       assigns(:transactions).should eq([transaction])
@@ -37,13 +37,13 @@ describe TransactionsController, :type => :controller do
 
   describe "GET show" do
     it "should be successful" do
-      transaction = @business.transactions.create! valid_attributes
+      transaction = @business.trans.create! valid_attributes
       get :show, :business_id => @business.to_param, :id => transaction.to_param
       response.should be_success
     end
 
     it "assigns the requested transaction as @transaction" do
-      @business.transactions.create! valid_attributes
+      @business.trans.create! valid_attributes
       transaction = Transaction.last
       get :show, :business_id => @business.to_param, :id => transaction.to_param
       assigns(:transaction).should == transaction
@@ -59,7 +59,7 @@ describe TransactionsController, :type => :controller do
 
   describe "GET edit" do
     it "assigns the requested transaction as @transaction" do
-      @business.transactions.create! valid_attributes
+      @business.trans.create! valid_attributes
       transaction = Transaction.last
       get :edit, :business_id => @business.to_param, :id => transaction.to_param
       assigns(:transaction).should eq(transaction)
@@ -111,24 +111,24 @@ describe TransactionsController, :type => :controller do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested transaction" do
-        transaction = @business.transactions.create! valid_attributes
+        transaction = @business.trans.create! valid_attributes
         # Assuming there are no other businesses in the database, this
         # specifies that the Business created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Transaction.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:business_id => @business.to_param, :id => transaction.to_param, :transaction => {'these' => 'params'}}
+        Transaction.any_instance.should_receive(:update_attributes).with({'description' => 'params'})
+        put :update, {:business_id => @business.to_param, :id => transaction.to_param, :transaction => {'description' => 'params'}}
       end
 
       it "assigns the requested transaction as @transaction" do
-        @business.transactions.create! valid_attributes
+        @business.trans.create! valid_attributes
         transaction = Transaction.last
         put :update, {:business_id => @business.to_param, :id => transaction.to_param, :transaction => valid_attributes}
         assigns(:transaction).should eq(transaction)
       end
 
       it "redirects to the transaction" do
-        transaction = @business.transactions.create! valid_attributes
+        transaction = @business.trans.create! valid_attributes
         put :update, {:business_id => @business.to_param, :id => transaction.to_param, :transaction => valid_attributes}
         response.should redirect_to(business_transaction_url(@business, transaction))
       end
@@ -136,7 +136,7 @@ describe TransactionsController, :type => :controller do
 
     describe "with invalid params" do
       it "assigns the transaction as @transaction" do
-        @business.transactions.create! valid_attributes
+        @business.trans.create! valid_attributes
         transaction = Transaction.last
         # Trigger the behavior that occurs when invalid params are submitted
         Transaction.any_instance.stub(:save).and_return(false)
@@ -145,7 +145,7 @@ describe TransactionsController, :type => :controller do
       end
 
       it "re-renders the 'edit' template" do
-        transaction = @business.transactions.create! valid_attributes
+        transaction = @business.trans.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Transaction.any_instance.stub(:save).and_return(false)
         put :update, {:business_id => @business.to_param, :id => transaction.to_param, :transaction => {}}
@@ -160,14 +160,14 @@ describe TransactionsController, :type => :controller do
     end
 
     it "destroys the requested transaction" do
-      transaction = @business.transactions.create! valid_attributes
+      transaction = @business.trans.create! valid_attributes
       expect {
         delete :destroy, {:business_id => @business.to_param, :id => transaction.to_param}
       }.to change(Transaction, :count).by(-1)
     end
 
     it "redirects to the businesses list" do
-      transaction = @business.transactions.create! valid_attributes
+      transaction = @business.trans.create! valid_attributes
       delete :destroy, {:business_id => @business.to_param, :id => transaction.to_param}
       response.should redirect_to(business_transactions_url(@business))
     end

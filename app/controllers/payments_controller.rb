@@ -6,18 +6,19 @@ class PaymentsController < UserApplicationController
 
   def new
     if params[:installment]
-      @installment = @membership.installments.new(params[:installment])
+      @installment = @membership.installments.new(installment_params)
     elsif params[:installment_id]
       @installment = @membership.installments.find(params[:installment_id]) 
     end
     
     if params[:transaction].present? and params[:transaction][:description].present? and @membership.blank?
-      params[:transaction][:description] = "Multiple Installment Payment"
+      permitted_trans_params = transaction_param.to_h
+      permitted_trans_params[:description] = "Multiple Installment Payment"
     end
 
     @enrollment = @membership.enrollment if request.path.include?("enrollment")
     @sale = @business.sales.find(params[:sale_id]) if params[:sale_id]
-    @transaction = @business.transactions.new(params[:transaction])
+    @transaction = @business.trans.new(permitted_trans_params)
 
     # defaults
     @transaction.transaction_at = Time.zone.now if @transaction.transaction_at.nil?
@@ -30,7 +31,7 @@ class PaymentsController < UserApplicationController
     default_payment_attributes = {}
 
     if params[:installment]
-      @installment = @membership.installments.create(params[:installment])
+      @installment = @membership.installments.create(installment_params)
     end
 
     if @installment || params[:transaction][:installment_ids] || (params[:installment_id] && @installment = @membership.installments.find(params[:installment_id]))
@@ -81,7 +82,7 @@ class PaymentsController < UserApplicationController
       @redirect_url = business_sale_path(@business, @sale)
     end
 
-    @transaction = @business.transactions.new(params[:transaction].reverse_merge!(default_payment_attributes))
+    @transaction = @business.trans.new((transaction_params || {}).reverse_merge!(default_payment_attributes))
     @transaction.save
   end
 
@@ -98,4 +99,48 @@ class PaymentsController < UserApplicationController
     @membership = @business.memberships.find(params[:membership_id]) if params[:membership_id]
   end
 
+  def installment_params
+    params.require(:installment).permit(
+      :membership_id,
+      :agent_id,
+      :due_on,
+      :value,
+      :transactions_attributes,
+      :installment_transactions_attributes,
+      :external_id,
+      :observations,
+      :status,
+      :balance,
+      :installments_count,
+      :agent_padma_id,
+      :transaction_ids
+    ) if params[:installment].present?
+  end
+
+  def transaction_params
+    params.require(:transaction).permit(
+      :tag_id,
+      :description,
+      :business_id,
+      :source_id,
+      :amount,
+      :type,
+      :transaction_at,
+      :target_id,
+      :conversion_rate,
+      :state,
+      :reconciled_at,
+      :sale_ids,
+      :installment_ids,
+      :enrollment_ids,
+      :creator_id,
+      :report_at,
+      :report_at_option,
+      :inscription_ids,
+      :contact_id,
+      :agent_id,
+      :admpart_tag_id,
+      tag_ids: []
+    ) if params[:transaction].present?
+  end
 end

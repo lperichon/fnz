@@ -14,13 +14,13 @@ class PaymentTypesController < UserApplicationController
   end
   
   def new
-    @payment_type = @business.payment_types.new(params[:payment_type])
+    @payment_type = @business.payment_types.new(payment_type_params)
   end
 
   # POST /payment_types
   # POST /payment_types.json
   def create
-    @payment_type = @business.payment_types.new(params[:payment_type])
+    @payment_type = @business.payment_types.new(payment_type_params)
 
     respond_to do |format|
       if @payment_type.save
@@ -39,7 +39,7 @@ class PaymentTypesController < UserApplicationController
     @payment_type = @business.payment_types.find(params[:id])
 
     respond_to do |format|
-      if @payment_type.update_attributes(params[:payment_type])
+      if @payment_type.update_attributes(payment_type_params || {})
         format.html { redirect_to business_payment_types_path(@business), notice: 'Payment type was successfully updated.' }
         format.json { head :no_content }
       else
@@ -75,5 +75,12 @@ class PaymentTypesController < UserApplicationController
       @context = current_user.businesses
     end
     @context
+  end
+
+  def payment_type_params
+    params.require(:payment_type).permit(
+      :name,
+      :description
+    ) if params[:payment_type].present?
   end
 end

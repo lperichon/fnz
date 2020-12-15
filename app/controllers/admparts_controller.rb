@@ -44,7 +44,7 @@ class AdmpartsController < UserApplicationController
   end
 
   def update
-    if @adm.update_attributes(params[:admpart])
+    if @adm.update_attributes(admpart_params)
       redirect_to business_admpart_path(@business, @adm)
     else
       render :edit
@@ -88,5 +88,21 @@ class AdmpartsController < UserApplicationController
         @business = @business_context.find(params[:business_id])
       end
     end
+  end
+
+  def admpart_params
+    params.require(:admpart).permit(
+      :director_from_profit_percentage,
+      :owners_percentage,
+      :dir_from_owners_aft_expses_percentage,
+      :agent_sale_percentage,
+      :agent_enrollment_income_percentage,
+      :agent_enrollment_quantity_fixed_amount,
+      :agent_installments_attendance_percentage,
+      :installments_tag_id,
+      :enrollments_tag_id,
+      :sales_tag_id,
+      :ref_date
+    )
   end
 end

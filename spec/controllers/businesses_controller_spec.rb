@@ -102,8 +102,8 @@ describe BusinessesController, :type => :controller do
         # specifies that the Business created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Business.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:id => business.to_param, :business => {'these' => 'params'}}
+        Business.any_instance.should_receive(:update_attributes).with({'name' => 'params'})
+        put :update, {:id => business.to_param, :business => {'name' => 'params'}}
       end
 
       it "assigns the requested business as @business" do
