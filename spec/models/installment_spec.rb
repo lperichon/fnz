@@ -69,7 +69,7 @@ describe Installment do
       before do
         source_account = FactoryBot.create(:account, :business => @membership.business)
         @transaction = FactoryBot.create(:transaction, :type => "Credit", :business => @membership.business, :source => source_account, :creator => @membership.business.owner, :transaction_at => @installment.due_on.beginning_of_day)
-        @installment.transactions << @transaction
+        @installment.trans << @transaction
         @installment.reload
       end
 

@@ -21,7 +21,7 @@ describe MembershipStats do
       memb = FactoryBot.create(:membership, :business => business)
       @paid_inst = FactoryBot.create(:installment, :membership => memb, :due_on => Date.today)
       tr = FactoryBot.create(:transaction, :type => "Credit", :transaction_at => Date.today, :business => business, :creator => business.owner)
-      @paid_inst.transactions << tr
+      @paid_inst.trans << tr
       
       memb = FactoryBot.create(:membership, :business => business)
       @unpaid_inst = FactoryBot.create(:installment, :membership => memb, :due_on => Date.today)
@@ -41,7 +41,7 @@ describe MembershipStats do
         @membership = FactoryBot.create(:membership, :business => business, :payment_type_id => nil)
         @installment = FactoryBot.create(:installment, :membership => @membership, :due_on => Date.today)
         @transaction = FactoryBot.create(:transaction, :type => "Credit", :transaction_at => Date.today, :business => business, :creator => business.owner)
-        @installment.transactions << @transaction
+        @installment.trans << @transaction
       end
       it "will only consider installmets of memberships matching filter" do
         @membership_stats.paid_installments.first.sum.should be_nil
@@ -54,7 +54,7 @@ describe MembershipStats do
         @membership = FactoryBot.create(:membership, :business => business)
         @installment = FactoryBot.create(:installment, :membership => @membership, :due_on => Date.today)
         @transaction = FactoryBot.create(:transaction, :type => "Credit", :transaction_at => Date.today, :business => business, :creator => business.owner)
-        @installment.transactions << @transaction
+        @installment.trans << @transaction
       end
 
       it "should return installments" do

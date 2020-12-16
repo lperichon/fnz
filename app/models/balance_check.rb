@@ -30,10 +30,10 @@ class BalanceCheck < ActiveRecord::Base
                          .order(:checked_at).last
   end
 
-  def transactions
+  def trans
     if previous
       from = previous.checked_at
-      account.transactions
+      account.trans
              .where("created_at <= ?",created_at)
              .where("
                     ((state = 'created') AND (transaction_at > :from AND transaction_at < :until))
@@ -41,7 +41,7 @@ class BalanceCheck < ActiveRecord::Base
                     ((state = 'reconciled') AND (reconciled_at > :from AND reconciled_at < :until))",
                     { from: from, until: checked_at })
     else
-      account.transactions
+      account.trans
              .where("created_at <= ?",created_at)
              .where(:state => ['created', 'reconciled'])
     end

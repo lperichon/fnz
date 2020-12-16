@@ -136,7 +136,7 @@ class Admpart < ActiveRecord::Base
       @team_members
     else
       enabled_agents = business.agents.enabled.select{|a| !a.padma_id.blank? }
-      agents_with_transactions_linked = business.transactions
+      agents_with_transactions_linked = business.trans
                                                 .to_report_on_month(ref_date)
                                                 .select("DISTINCT agent_id")
                                                 .map(&:agent)
@@ -166,7 +166,8 @@ class Admpart < ActiveRecord::Base
   end
 
   def section_total(section)
-    root_tags_for_section(section).sum{|t| total_for_tag(t) }
+    #root_tags_for_section(section).sum{|t| total_for_tag(t) }
+    root_tags_for_section(section).inject(0) {|res, t| res + total_for_tag(t)}
   end
 
   def root_tags_for_section(section)
@@ -241,7 +242,7 @@ class Admpart < ActiveRecord::Base
   appsignal_instrument_method :total_for_tag
 
   def not_tagged_total
-    scope = business.transactions
+    scope = business.trans
                     .to_report_on_month(ref_date)
                     .api_where(admpart_tag_id: "")
     scope.sum("CASE WHEN transactions.type='Credit' THEN transactions.amount WHEN transactions.type='Debit' THEN -1 * transactions.amount ELSE 0 END").to_f # using CASE casts to string ¿?

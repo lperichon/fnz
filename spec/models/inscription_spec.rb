@@ -50,7 +50,7 @@ describe Inscription do
       before do
         source_account = FactoryBot.create(:account, :business => @business)
         @transaction = FactoryBot.create(:transaction, :type => "Credit", :business => @business, :source => source_account, :creator => @business.owner, :transaction_at => Date.today)
-        @inscription.transactions << @transaction
+        @inscription.trans << @transaction
         @inscription.reload
       end
 

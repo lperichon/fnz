@@ -95,7 +95,7 @@ class Transaction < ActiveRecord::Base
       nil
     elsif reconciled?
       reconciled_at
-    elseif created?
+    elsif created?
       transaction_at
     end
   end
@@ -283,7 +283,7 @@ class Transaction < ActiveRecord::Base
   end
 
   def self.build_from_csv(business, row)
-    transaction = Transaction.new
+    tran = Transaction.new
     amount = BigDecimal.new(row[2])
     type = amount > 0 ? "Credit" : "Debit"
 
@@ -292,7 +292,7 @@ class Transaction < ActiveRecord::Base
     	state = state.downcase
     end
 
-    transaction.attributes = {
+    tran.attributes = {
         :business_id => business.id,
         :type => type,
         :source_id => business.accounts.find_or_create_by(name: row[0]).id,
@@ -305,17 +305,17 @@ class Transaction < ActiveRecord::Base
 
     # Agent
     unless row[5].blank?
-      transaction.agent_id = business.agents.enabled.where(padma_id: row[5]).first
+      tran.agent_id = business.agents.enabled.where(padma_id: row[5]).first
     end
 
     # Contact
     unless row[6].blank?
       # by name
-      transaction.contact_id = business.contacts.where(name: row[6].strip).first.try(:id)
-      if transaction.contact_id.nil?
+      tran.contact_id = business.contacts.where(name: row[6].strip).first.try(:id)
+      if tran.contact_id.nil?
         # by id
-        transaction.contact_id = business.contacts.get_by_padma_id(row[6].strip).try(:id)
-        if transaction.contact_id.nil?
+        tran.contact_id = business.contacts.get_by_padma_id(row[6].strip).try(:id)
+        if tran.contact_id.nil?
           raise "couldnt find contact"
         end
       end
@@ -325,10 +325,10 @@ class Transaction < ActiveRecord::Base
     unless tags_str.blank?
       tags_str.split(';').each do |tag_name|
         tag = Tag.find_or_create_by(business_id: business.id, name: tag_name)
-        transaction.tags << tag
+        tran.tags << tag
       end
     end
-    return transaction
+    return tran
   end
 
   def self.csv_header

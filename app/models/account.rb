@@ -12,7 +12,7 @@ class Account < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   #attr_accessible :name, :business_id, :currency, :default
 
-  def transactions
+  def trans
     Transaction.where("source_id = ? or (type='Transfer' and target_id = ?)", self.id, self.id)
   end
 
@@ -43,13 +43,13 @@ class Account < ActiveRecord::Base
   def active_transactions
     if last_balance_check
       from = last_balance_check.checked_at
-      transactions.where("
+      trans.where("
                          ((state = 'created') AND (transaction_at > ?))
                          OR
                          ((state = 'reconciled') AND (reconciled_at > ?))",
                          from, from)
     else
-      transactions.where(:state => ['created', 'reconciled'])
+      trans.where(:state => ['created', 'reconciled'])
     end
   end
 
@@ -71,7 +71,7 @@ class Account < ActiveRecord::Base
     ret = {}
     self.scoped.includes(:business).group_by(&:currency).each do |cur,accs|
       ret[cur.id] = accs.inject(0) do |acum, acc|
-        acc_bal = acc.transactions.where(state: "pending").inject(0) do |bal,t|
+        acc_bal = acc.trans.where(state: "pending").inject(0) do |bal,t|
           bal+t.amount*t.sign(acc)
         end
         acum + acc_bal

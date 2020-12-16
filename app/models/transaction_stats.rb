@@ -17,7 +17,7 @@ class TransactionStats
     end_date = Date.new(year.present? ? year : Date.today.year, month.present? ? month : (year.present? ? 12 : Date.today.month), 28).end_of_month.end_of_day
 
     # List transactions that ocurred on that month or that are pending and ocurred before or that are reconciled on that month
-    @context = business.transactions.where {(transaction_at.gteq start_date) & (transaction_at.lteq end_date)}
+    @context = business.trans.where {(transaction_at.gteq start_date) & (transaction_at.lteq end_date)}
   end
 
   def persisted?
@@ -28,14 +28,14 @@ class TransactionStats
     context.where(:type => "Debit").joins(:tags).group('tags.name').sum(:amount)
   end
 
-  def untagged_debits  
+  def untagged_debits
     context.where(:type => "Debit").untagged.sum(:amount)
   end
 
   def credits
     context.where(:type => "Credit").joins(:tags).group('tags.name').sum(:amount)
   end
-  
+
   def untagged_credits
     context.where(:type => "Credit").untagged.sum(:amount)
   end

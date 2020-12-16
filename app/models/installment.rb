@@ -3,7 +3,6 @@ class Installment < ActiveRecord::Base
   belongs_to :agent
   has_many :installment_transactions
   has_many :trans, foreign_key: 'transaction_id', class_name: "Transaction", :through => :installment_transactions
-  alias_method :transactions, :trans
 
   attr_accessor :installments_count
   attr_accessor :agent_padma_id
@@ -126,7 +125,7 @@ class Installment < ActiveRecord::Base
       		:creator_id => business.owner_id
       	}
 
-      	installment_attributes[:transactions_attributes] = [transaction_attrs]
+      	installment_attributes[:trans_attributes] = [transaction_attrs]
     end
 
     installment = Installment.new(installment_attributes)
@@ -141,7 +140,7 @@ class Installment < ActiveRecord::Base
 
   def calculate_balance
     # transactions should all be Debit or Credit so account is not needed for sign
-    transactions.where(:state => ['created', 'reconciled']).inject(0) {|balance, transaction| balance+transaction.sign(nil)*transaction.amount}
+    trans.where(:state => ['created', 'reconciled']).inject(0) {|balance, tran| balance+tran.sign(nil)*tran.amount}
   end
 
   def calculate_status
@@ -157,7 +156,7 @@ class Installment < ActiveRecord::Base
   end
 
   def calculate_pending
-    !transactions.empty? && transactions.any? { |t| t.pending? }
+    !trans.empty? && trans.any? { |t| t.pending? }
   end
 
   def calculate_complete

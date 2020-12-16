@@ -15,7 +15,6 @@ class Sale < ActiveRecord::Base
   #attr_accessible :contact_id, :business_id, :agent_id, :product_id, :transactions_attributes, :sale_transactions_attributes, :sold_on, :external_id
   accepts_nested_attributes_for :trans, allow_destroy: true
   accepts_nested_attributes_for :sale_transactions, :reject_if => proc { |s| s['transaction_id'].blank? }
-  alias_method :transactions, :trans
 
   scope :this_month, -> { where {(sold_on.gteq Date.today.beginning_of_month.beginning_of_day) & (sold_on.lteq Date.today.end_of_month.end_of_day)} }
   default_scope { order("sold_on DESC") }
@@ -74,7 +73,7 @@ class Sale < ActiveRecord::Base
       		:creator_id => business.owner_id
       	}
 
-      	sale_attributes[:transactions_attributes] = [transaction_attrs]
+      	sale_attributes[:trans_attributes] = [transaction_attrs]
     end
 
     sale = Sale.new(sale_attributes)
@@ -87,11 +86,11 @@ class Sale < ActiveRecord::Base
   end
 
   def pending?
-    !transactions.empty? && transactions.any? { |t| t.pending? }
+    !trans.empty? && trans.any? { |t| t.pending? }
   end
 
   def complete?
-    !transactions.empty? && transactions.all? { |t| t.created? || t.reconciled? }
+    !trans.empty? && trans.all? { |t| t.created? || t.reconciled? }
   end
 
   def status

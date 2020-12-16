@@ -8,7 +8,6 @@ class Enrollment < ActiveRecord::Base
   validates :agent, :presence => true
   validates :value, :presence => true
   validates :enrolled_on, :presence => true
-  alias_method :transactions, :trans
 
   # Setup accessible (or protected) attributes for your model
   #attr_accessible :membership_id, :agent_id, :value, :enrolled_on, :transactions_attributes, :enrollment_transactions_attributes
@@ -18,11 +17,11 @@ class Enrollment < ActiveRecord::Base
   scope :this_month, -> { where {(enrolled_on.gteq Date.today.beginning_of_month.beginning_of_day) & (enrolled_on.lteq Date.today.end_of_month.end_of_day)} }
 
   def pending?
-    !transactions.empty? && transactions.any? { |t| t.pending? }
+    !trans.empty? && trans.any? { |t| t.pending? }
   end
 
   def complete?
-    !transactions.empty? && transactions.all? { |t| t.created? || t.reconciled? }
+    !trans.empty? && trans.all? { |t| t.created? || t.reconciled? }
   end
 
   def status

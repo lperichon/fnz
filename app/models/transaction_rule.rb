@@ -21,31 +21,31 @@ class TransactionRule < ActiveRecord::Base
 
 
   # @return Array [TransactionRule]
-  def self.select_matching(transaction)
-    self.select{|rule| rule.matches?(transaction) }
+  def self.select_matching(tran)
+    self.select{|rule| rule.matches?(tran) }
   end
 
-  def matches?(transaction)
-    return nil if transaction.try(:description).blank?
+  def matches?(tran)
+    return nil if tran.try(:description).blank?
 
     case operator
     when 'contains'
-      transaction.description.downcase.include?(value.downcase)
+      tran.description.downcase.include?(value.downcase)
     when 'regex'
-      !!transaction.description.match(value)
+      !!tran.description.match(value)
     end
   end
 
-  def set_values(transaction)
-    if transaction.contact_id.blank? and !contact_id.blank?
-      transaction.contact_id = contact_id
+  def set_values(tran)
+    if tran.contact_id.blank? and !contact_id.blank?
+      tran.contact_id = contact_id
     end
-    if transaction.agent_id.blank? and !agent_id.blank?
-      transaction.agent_id = agent_id
+    if tran.agent_id.blank? and !agent_id.blank?
+      tran.agent_id = agent_id
     end
-    if transaction.admpart_tag_id.blank? and !admpart_tag_id.blank?
-      transaction.admpart_tag_id = admpart_tag_id
-      transaction.tag_id = admpart_tag_id
+    if tran.admpart_tag_id.blank? and !admpart_tag_id.blank?
+      tran.admpart_tag_id = admpart_tag_id
+      tran.tag_id = admpart_tag_id
     end
   end
 

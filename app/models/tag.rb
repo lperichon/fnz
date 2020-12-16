@@ -6,7 +6,6 @@ class Tag < ActiveRecord::Base
 
   has_many :taggings, :dependent => :destroy
   has_many :trans, foreign_key: 'transaction_id', class_name: "Transaction", through: :taggings
-  alias_method :transactions, :trans
 
   has_many :month_tag_totals, dependent: :destroy
   after_update :update_all_month_totals

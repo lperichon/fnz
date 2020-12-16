@@ -32,7 +32,7 @@ class GaliciaOfficeArImport < TransactionImport
         new_record = nil
         begin
           new_record = handle_row(business, row)
-          
+
           if duplicated_transaction?(new_record)
             # this record is already registered
             errs << [row, _("transacción ya registrada")].flatten
@@ -73,8 +73,8 @@ class GaliciaOfficeArImport < TransactionImport
   end
 
   def handle_row(business, row)
-    transaction = Transaction.new
-    transaction.attributes = {
+    tran = Transaction.new
+    tran.attributes = {
       business_id: business.id,
       type: row_type(row),
       source_id: account.id,
@@ -84,12 +84,12 @@ class GaliciaOfficeArImport < TransactionImport
       creator_id: business.owner_id,
       state: 'created'
     }
-    transaction.external_id = generate_external_id(row)
-    return transaction
+    tran.external_id = generate_external_id(row)
+    return tran
   end
 
   def duplicated_transaction?(new_transaction)
-    account.transactions.where(external_id: new_transaction.external_id).exists?
+    account.trans.where(external_id: new_transaction.external_id).exists?
   end
 
   def row_type(row)

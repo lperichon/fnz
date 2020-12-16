@@ -1,7 +1,6 @@
 class Tagging < ActiveRecord::Base
   belongs_to :tag
-  belongs_to :trans, foreign_key: 'transaction_id', class_name: "Transaction"#:transaction
-  alias_method :transactions, :trans
+  belongs_to :tran, class_name: "Transaction", foreign_key: "transaction_id"#:transaction
 
   validates_presence_of :tag_id
 
@@ -17,11 +16,11 @@ class Tagging < ActiveRecord::Base
   private
 
   def set_transaction_admpart_tag
-    transaction.update_attribute(:admpart_tag_id, tag_id)
+    tran.update_attribute(:admpart_tag_id, tag_id)
   end
 
   def unset_transaction_admpart_tag
-    transaction.update_attribute(:admpart_tag_id, nil)
+    tran.update_attribute(:admpart_tag_id, nil)
   end
 
   def remove_unused_tags

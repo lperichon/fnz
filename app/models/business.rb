@@ -1,7 +1,7 @@
 class Business < ActiveRecord::Base
   belongs_to :owner, :class_name => "User"
   has_many :accounts
-  has_many :trans, foreign_key: 'transaction_id', class_name: "Transaction"
+  has_many :trans, class_name: "Transaction"
   has_many :transaction_rules
   has_many :tags
   has_many :contacts
@@ -17,8 +17,7 @@ class Business < ActiveRecord::Base
 
   validates :name, :presence => true
   validates :owner, :presence => true
-  alias_method :transactions, :trans
-
+  
   # Setup accessible (or protected) attributes for your model
   #attr_accessible :type, :name, :owner_id, :padma_id, :synchronized_at, :send_weekly_reports, :transactions_enabled, :share_enabled, :use_calendar_installments, :currency_code
 
@@ -27,7 +26,7 @@ class Business < ActiveRecord::Base
 
   def link_to_owner
     unless(self.owner.business_ids.include?(self.id))
-      self.owner.business_ids << self.id
+      self.owner.businesses << self
     end
   end
 

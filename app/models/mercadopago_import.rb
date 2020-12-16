@@ -19,7 +19,7 @@ class MercadopagoImport < TransactionImport
 
     @quote_char = "|" # MercadoPago export no separa con comillas y no escapa las comillas en descripciones de productos, etc.
     begin
-      CSV.parse(open(path,"r:ISO-8859-1"), 
+      CSV.parse(open(path,"r:ISO-8859-1"),
                 col_sep: ";",
                 quote_char: @quote_char,
                 headers: true,
@@ -30,7 +30,7 @@ class MercadopagoImport < TransactionImport
         new_record = nil
         begin
           new_record = handle_row(business, row)
-          
+
           # Save upon valid
           # otherwise collect error records to export
           if new_record && new_record.save
@@ -105,9 +105,9 @@ class MercadopagoImport < TransactionImport
 
   def handle_row(business, row)
     # Find by external_id for update
-    t = business.transactions.find_by_external_id(value_for(row,"operation_id").to_s)
+    t = business.trans.find_by_external_id(value_for(row,"operation_id").to_s)
     # or create new transaction
-    t = business.transactions.new unless t
+    t = business.trans.new unless t
 
     t.creator_id = business.owner_id
     t.transaction_at = value_for(row,"date_created")
@@ -122,7 +122,7 @@ class MercadopagoImport < TransactionImport
       "pending"
     when "in_process"
       "pending"
-    else 
+    else
       "pending"
     end
     t.source = account

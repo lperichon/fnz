@@ -5,7 +5,6 @@ class Inscription < ActiveRecord::Base
 
   has_many :inscription_transactions
   has_many :trans, foreign_key: 'transaction_id', class_name: "Transaction", :through => :inscription_transactions
-  alias_method :transactions, :trans
 
   validates :value, :numericality =>  {:greater_than_or_equal => 0}
   validates :business, :presence => true
@@ -29,7 +28,7 @@ class Inscription < ActiveRecord::Base
   end
 
   def calculate_balance
-    transactions.where(:state => ['created', 'reconciled']).inject(0) {|balance, transaction| balance+transaction.sign(self)*transaction.amount}
+    trans.where(:state => ['created', 'reconciled']).inject(0) {|balance, tran| balance+tran.sign(self)*tran.amount}
   end
 
   def balance
