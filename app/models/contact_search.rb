@@ -22,9 +22,9 @@ class ContactSearch
   end
 
   def results
-    scope = Contact.scoped
+    scope = Contact.where(nil)
     
-    scope = scope.includes(:current_membership)
+    scope = scope.includes(:current_membership).references(:current_membership)
 
     scope = scope.where(business_id: @business_id) unless @business_id.nil?
     
