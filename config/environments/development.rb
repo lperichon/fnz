@@ -7,6 +7,9 @@ Fnz::Application.configure do
   config.threadsafe!
   config.cache_classes = false
 
+  # set eager load
+  config.eager_load = false
+
   # Log error messages when you accidentally call methods on nil.
   config.whiny_nils = true
 
