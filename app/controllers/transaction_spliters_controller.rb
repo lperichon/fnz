@@ -24,6 +24,6 @@ class TransactionSplitersController < UserApplicationController
   end
 
   def get_transaction
-    @transaction = @business.transactions.find(params[:transaction_id])
+    @transaction = @business.trans.find(params[:transaction_id])
   end
 end

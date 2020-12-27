@@ -7,7 +7,7 @@
 
 <% if @business.transactions_enabled? %>
 <h3><%= Enrollment.human_attribute_name(:transactions) %></h3>
-<%= render :layout => 'transactions_table', :locals => {:transactions => @enrollment.transactions} do |transaction| %>
+<%= render :layout => 'transactions_table', :locals => {:transactions => @enrollment.trans} do |transaction| %>
     <%= link_to content_tag(:i, "", :class => "icon-edit"), edit_business_transaction_path(transaction.business, transaction), :remote => true %>
     <%= link_to content_tag(:i, "", :class => "icon-trash"), business_transaction_path(transaction.business, transaction), data: {:confirm => t('actions.confirm_delete')}, :method => 'delete' %>
 <% end %>

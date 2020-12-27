@@ -1,4 +1,4 @@
-<% if can? :create, @business.transactions.build %>
+<% if can? :create, @business.trans.build %>
   <% transaction_params = {}
      if @account
        transaction_params.merge!({source_id: @account.id})

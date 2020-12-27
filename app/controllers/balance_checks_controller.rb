@@ -9,7 +9,7 @@ class BalanceChecksController < UserApplicationController
 
   def show
     @balance_check = BalanceCheck.find(params[:id])
-    @transactions = @balance_check.transactions
+    @transactions = @balance_check.trans
     render layout: "application_without_sidebar"
   end
 
@@ -37,7 +37,7 @@ class BalanceChecksController < UserApplicationController
   def get_account
     @account = @business.accounts.find(params[:account_id])
   end
-  
+
   def balance_check_params
     params.require(:balance_check).permit(
       :account_id,

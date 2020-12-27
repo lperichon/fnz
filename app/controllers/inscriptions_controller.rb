@@ -15,12 +15,12 @@ class InscriptionsController < UserApplicationController
 
   def edit
     @inscription = @context.find(params[:id])
-  	@transactions = @business.transactions.credits.order("order_stamp DESC")
+  	@transactions = @business.trans.credits.order("order_stamp DESC")
   end
 
   def new
     @inscription = @context.new(inscription_params)
-  	@transactions = @business.transactions.credits.order("order_stamp DESC")
+  	@transactions = @business.trans.credits.order("order_stamp DESC")
   end
 
   # POST /accounts
@@ -64,8 +64,8 @@ class InscriptionsController < UserApplicationController
   end
 
   def stats
-    @credits = @business.transactions.credits
-    @debits = @business.transactions.debits
+    @credits = @business.trans.credits
+    @debits = @business.trans.debits
     @inscriptions_by_padma_account = @context.group_by(:padma_account)
   end
 
@@ -75,7 +75,7 @@ class InscriptionsController < UserApplicationController
     business_id = params[:business_id]
     business_id = params[:inscription][:business_id] unless business_id || params[:inscription].blank?
     param_is_padma_id = (false if Float(business_id) rescue true)
-    
+
     if current_user.admin?
       @business_context = Business
     else

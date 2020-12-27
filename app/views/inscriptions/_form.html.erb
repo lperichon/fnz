@@ -1,14 +1,14 @@
 <%= simple_form_for(@inscription, :url => form_url, :validate => true, :html => {:class => "form-horizontal"}) do |f| %>
     <% if @business.derose_events_id.blank? %>
-    	<%= f.association :contact, 
+    	<%= f.association :contact,
                         as: :select,
-                        id: 'inscription_contact_id', 
-                        collection: @business.contacts, 
+                        id: 'inscription_contact_id',
+                        collection: @business.contacts,
                         input_html: {
-                            'data-business-id' => @business.id, 
-                            'data-placeholder' => t('memberships.form.contact_placeholder'), 
+                            'data-business-id' => @business.id,
+                            'data-placeholder' => t('memberships.form.contact_placeholder'),
                             class: 'chosen'
-                        } 
+                        }
         %>
     <% else %>
         <%= f.input :external_id, :as => :derose_events_contact %>
@@ -27,12 +27,12 @@
     %>
 
     <%= f.input :value %>
-    
+
     <%= f.input :observations, :as => :text, :input_html => {:rows => 3} %>
 
     <% if @business.transactions_enabled? %>
-    <h3><%= Inscription.human_attribute_name(:transactions) %></h3>
-    <%= render :partial => 'nested_transactions_table', :locals => {:f => f, :transactions => @business.transactions.all} %>
+    <h3><%= Inscription.human_attribute_name(:trans) %></h3>
+    <%= render :partial => 'nested_transactions_table', :locals => {:f => f, :transactions => @business.trans.all} %>
     <% end %>
 
     <%= f.button :submit, :class => "btn btn-primary" %>

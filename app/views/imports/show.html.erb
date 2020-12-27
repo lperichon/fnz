@@ -12,9 +12,9 @@
   <% end %>
 <% end %>
 
-<% unless @import.transactions.empty? %>
+<% unless @import.trans.empty? %>
 <h3><%= @import.transactions.count %> <%= _("Transacciones") %></h3>
-<%= render :partial => 'transactions_table', :locals => {:transactions => @import.transactions} %>
+<%= render :partial => 'transactions_table', :locals => {:transactions => @import.trans} %>
 <% end %>
 
 <% if @import.errors_csv.present? && !@import.errors_csv.empty? %>
