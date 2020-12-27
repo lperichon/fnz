@@ -378,4 +378,23 @@ class Transaction < ActiveRecord::Base
       errors.add(:admpart_tag_id, _("No podemos etiquetar gastos que no estén en la moneda de la escuela"))
     end
   end
+
+  def sign account
+    case type
+    when "Debit"
+      return -1
+    when "Credit"
+      return 1
+    when "Transfer"
+      sign = 0
+      if self.source == account
+        sign = -1
+      elsif self.target == account
+        sign = conversion_rate
+      end
+      return sign
+    else
+      raise "sign method should only be called for classes inheriting from Transfer"
+    end
+  end
 end
