@@ -16,12 +16,12 @@ describe Business do
   
   it "should require a name" do
     no_name_business = Business.new(@attr.merge(:name => ""))
-    no_name_business.should_not be_valid
+    expect(no_name_business).not_to be_valid
   end
 
   it "should require an owner" do
     no_owner_business = Business.new(@attr.merge(:owner_id => nil))
-    no_owner_business.should_not be_valid
+    expect(no_owner_business).not_to be_valid
   end
 
   describe "has payment types" do

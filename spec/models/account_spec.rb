@@ -17,12 +17,12 @@ describe Account do
   
   it "should require a name" do
     no_name_account = Account.new(@attr.merge(:name => ""))
-    no_name_account.should_not be_valid
+    expect(no_name_account).not_to be_valid
   end
 
   it "should require a business" do
     no_business_account = Account.new(@attr.merge(:business_id => nil))
-    no_business_account.should_not be_valid
+    expect(no_business_account).not_to be_valid
   end
 
   it "defaults currency to business's currency" do

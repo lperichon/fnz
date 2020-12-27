@@ -49,12 +49,19 @@ RSpec.configure do |config|
   config.include Paperclip::Shoulda::Matchers
 
   config.before(:each) do
-    User.any_instance.stub(:padma).and_return(PadmaUser.new)
-    PadmaContact.stub(:find_by_kshema_id).and_return(PadmaContact.new(:id => "123", :first_name => "Bart", :last_name => "Simpson"))
-    PadmaAccount.stub(:find).and_return(PadmaAccount.new(:name => "test"))
-    PadmaAccount.any_instance.stub(:admin).and_return(PadmaUser.new(:username => "homer.simpson", :id => "homer.simpson", :email => "homer@simpsons.com"))
-    PadmaAccount.any_instance.stub(:users).and_return([PadmaUser.new(:id => "bart.simpson", :email => "bart@simpsons.com"), PadmaUser.new(:id => "lisa.simpson", :email => "lisa@simpsons.com") ])
-    PadmaUser.any_instance.stub(:enabled_accounts).and_return([PadmaAccount.new(:name => "test")])
-    PadmaUser.any_instance.stub(:current_account_name).and_return("test")
+    allow_any_instance_of(User).to receive(:padma).and_return(PadmaUser.new)
+    allow(PadmaContact).to receive(:find_by_kshema_id).and_return(PadmaContact.new(:id => "123", :first_name => "Bart", :last_name => "Simpson"))
+    allow(PadmaAccount).to receive(:find).and_return(PadmaAccount.new(:name => "test"))
+    allow_any_instance_of(PadmaAccount).to receive(:admin).and_return(PadmaUser.new(:username => "homer.simpson", :id => "homer.simpson", :email => "homer@simpsons.com"))
+    allow_any_instance_of(PadmaAccount).to receive(:users).and_return([PadmaUser.new(:id => "bart.simpson", :email => "bart@simpsons.com"), PadmaUser.new(:id => "lisa.simpson", :email => "lisa@simpsons.com") ])
+    allow_any_instance_of(PadmaUser).to receive(:enabled_accounts).and_return([PadmaAccount.new(:name => "test")])
+    allow_any_instance_of(PadmaUser).to receive(:current_account_name).and_return("test")
+  end
+end
+
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
   end
 end

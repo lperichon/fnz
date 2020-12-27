@@ -16,12 +16,12 @@ describe Agent do
   
   it "should require a name" do
     no_name_agent = Agent.new(@attr.merge(:name => ""))
-    no_name_agent.should_not be_valid
+    expect(no_name_agent).not_to be_valid
   end
 
   it "should require a business" do
     no_business_agent = Agent.new(@attr.merge(:business_id => nil))
-    no_business_agent.should_not be_valid
+    expect(no_business_agent).not_to be_valid
   end
 
 end
