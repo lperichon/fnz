@@ -220,10 +220,9 @@ class Transaction < ActiveRecord::Base
       }
 
       if t = Tag.where(business_id: business_id, system_name: "installment").first
-        new_attrs.merge!({
-          tag_id: t.id,
-          admpart_tag_id: t.id
-        })
+        # add tag without saving
+        # when tag is added, it will update admpart_tag too
+        self.association(:tags).add_to_target(t)
       end
 
       self.skip_infer_associations = true
