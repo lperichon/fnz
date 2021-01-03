@@ -28,7 +28,8 @@ describe Transaction do
       expect(t).to be_valid
     end
     it "allow TAGGED transaction on businesses currency" do
-      t = FactoryBot.build(:transaction, source: acc, admpart_tag: FactoryBot.create(:tag, business: business))
+      t = FactoryBot.create(:transaction, source: acc)
+      t.tags << FactoryBot.create(:tag, business: business)
       expect(t).to be_valid
     end
     it "allows not-tagged transactions on other currencies" do
@@ -36,7 +37,8 @@ describe Transaction do
       expect(t).to be_valid
     end
     it "wont allow to TAG Debit or Credit not in Business currency" do
-      t = FactoryBot.build(:transaction, source: other_currency_account, admpart_tag: FactoryBot.create(:tag, business: business))
+      t = FactoryBot.create(:transaction, source: other_currency_account)
+      t.tags << FactoryBot.create(:tag, business: business)
       expect(t).not_to be_valid
     end
   end
@@ -44,6 +46,7 @@ describe Transaction do
   describe "transaction rules" do
     let!(:rule){ FactoryBot.create(:transaction_rule, operator: "contains", value: "hola", contact: FactoryBot.create(:contact))}
     it "are applied con create, not update" do
+      rule.should be_valid
       t = FactoryBot.build(:transaction, description: "hola como te va", business: rule.business, contact_id: nil)
       t.save
       expect(t.reload.contact_id).not_to be_nil
@@ -120,6 +123,10 @@ describe Transaction do
     describe "linked to an installment" do
       let(:installment){ FactoryBot.create(:installment, membership: FactoryBot.create(:membership, business_id: transaction.business_id, contact_id: contact.id ) ) }
       before do
+        # invoke admpart_tag for it to be available
+        # I tried putting let!(:admpart_tag) for it to be invoked, but it did not work
+        # If this is not done admpart_id will not exist until admpart_tag.id is called
+        admpart_tag
         transaction.installments << installment
         transaction.save
       end
@@ -194,7 +201,7 @@ describe Transaction do
     end
 
     it "should default to transaction_at value" do
-      @transaction.report_at.should eq(@transaction.transaction_at)
+      @transaction.report_at.to_date.should eq(@transaction.transaction_at.to_date)
     end
   end
 end
