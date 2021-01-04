@@ -46,7 +46,7 @@ describe Transaction do
   describe "transaction rules" do
     let!(:rule){ FactoryBot.create(:transaction_rule, operator: "contains", value: "hola", contact: FactoryBot.create(:contact))}
     it "are applied con create, not update" do
-      rule.should be_valid
+      expect(rule).to be_valid
       t = FactoryBot.build(:transaction, description: "hola como te va", business: rule.business, contact_id: nil)
       t.save
       expect(t.reload.contact_id).not_to be_nil
@@ -79,32 +79,32 @@ describe Transaction do
   
   it "should require a description" do
     no_desc_transaction = Transaction.new(@attr.merge(:description => ""))
-    no_desc_transaction.should_not be_valid
+    expect(no_desc_transaction).not_to be_valid
   end
 
   it "should require an amount" do
     no_amount_transaction = Transaction.new(@attr.merge(:amount => ""))
-    no_amount_transaction.should_not be_valid
+    expect(no_amount_transaction).not_to be_valid
   end
 
   it "should require a positive amount" do
     negative_amount_transaction = Transaction.new(@attr.merge(:amount => -10.5))
-    negative_amount_transaction.should_not be_valid
+    expect(negative_amount_transaction).not_to be_valid
   end
 
   it "should set the business based on the source account" do
     no_business_transaction = Transaction.new(@attr.merge(:business_id => nil))
-    no_business_transaction.should be_valid
+    expect(no_business_transaction).to be_valid
   end
 
   it "should require a source account" do
     no_source_transaction = Transaction.new(@attr.merge(:source_id => nil))
-    no_source_transaction.should_not be_valid
+    expect(no_source_transaction).not_to be_valid
   end
 
   it "should import from uncomplete csv row" do
     transaction = Transaction.build_from_csv(@account.business, [@account.name, Date.today, "2.1", "Test import transaction"])
-    transaction.should be_valid
+    expect(transaction).to be_valid
   end
 
   it "should import from complete csv row" do
@@ -112,7 +112,7 @@ describe Transaction do
     FactoryBot.create(:contact, business_id: @account.business.id)
 
     transaction = Transaction.build_from_csv(@account.business, [@account.name, Date.today, "2.1", "Test import transaction", @account.business.agents.enabled.first.name, @account.business.contacts.first.name])
-    transaction.should be_valid
+    expect(transaction).to be_valid
   end
 
   describe "installments automagick" do
@@ -152,14 +152,14 @@ describe Transaction do
 
     it "should calculate account balance on create" do
       @account.reload
-      @account.balance.should eq(@credit.amount)
+      expect(@account.balance).to eq(@credit.amount)
     end
 
     it "should re calculate account balances on update" do
       @credit.amount = 5
       @credit.save
       @account.reload
-      @account.balance.should eq(@credit.amount)
+      expect(@account.balance).to eq(@credit.amount)
     end
   end
 
@@ -172,7 +172,7 @@ describe Transaction do
     it "should re calculate account balances on update" do
       @credit.update_attributes(type: "Transfer", target_id: @target.id)
       @target.reload
-      @target.balance.should eq(@credit.amount)
+      expect(@target.balance).to eq(@credit.amount)
     end
   end
 
@@ -181,7 +181,7 @@ describe Transaction do
       @untagged_credit = Credit.create!(@attr)
     end
     it "should scope untagged transactions" do
-      Credit.untagged.count.should == 1
+      expect(Credit.untagged.count).to eq 1
     end
   end
 
@@ -191,7 +191,7 @@ describe Transaction do
   	end
   	it "should consider status column" do
   		new_transaction = Transaction.build_from_csv(@business, ['test','1983-03-03', '2.3', 'Testing', 'tag', nil, nil, 'pending'])
-  		new_transaction.state.should eq("pending")
+  expect(		new_transaction.state).to eq("pending")
   	end
   end
 
@@ -201,7 +201,7 @@ describe Transaction do
     end
 
     it "should default to transaction_at value" do
-      @transaction.report_at.to_date.should eq(@transaction.transaction_at.to_date)
+      expect(@transaction.report_at.to_date).to eq(@transaction.transaction_at.to_date)
     end
   end
 end
