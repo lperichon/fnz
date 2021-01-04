@@ -16,16 +16,16 @@ describe Transfer do
 
   it "should require a conversion rate" do
     no_conversion_rate_transaction = Transfer.new(@attr.merge(:conversion_rate => ""))
-    no_conversion_rate_transaction.should_not be_valid
+    expect(no_conversion_rate_transaction).not_to be_valid
   end
 
   it "should require a positive conversion_rate" do
     negative_conversion_rate_transaction = Transfer.new(@attr.merge(:conversion_rate => -1.5))
-    negative_conversion_rate_transaction.should_not be_valid
+    expect(negative_conversion_rate_transaction).not_to be_valid
   end
 
   it "should require a target account" do
     no_target_transaction = Transfer.new(@attr.merge(:target_id => nil))
-    no_target_transaction.should_not be_valid
+    expect(no_target_transaction).not_to be_valid
   end
 end
