@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Api::V0::CurrentMembershipsController, type: :controller do
   let(:business){ FactoryBot.create(:school, padma_id: 'test') }

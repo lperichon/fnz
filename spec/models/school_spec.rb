@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe School do
   describe "has payment types" do

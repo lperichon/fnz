@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Api::V0::ImportsController, :type => :controller do
   def valid_attributes
