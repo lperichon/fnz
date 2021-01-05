@@ -21,7 +21,7 @@ class InstallmentSearch
   end
 
   def results
-    scope = Installment.scoped
+    scope = Installment.where(nil)
 
     scope = scope.joins(:membership) if @business_id || @payment_type_id
 
@@ -30,7 +30,7 @@ class InstallmentSearch
     scope = scope.where("due_on <= ?", @due_before) unless @due_before.nil?
     scope = scope.where(:status => @status) unless @status.nil?
     scope = scope.where(:agent_id => @agent_id) unless @agent_id.nil? || @agent_id.include?('all')
-    scope = scope.where(memberships: { payment_type_id: payment_type_id }) unless @payment_type_id.blank? || @payment_type_id.include?("all")
+    scope = scope.where(memberships: { payment_type_id: payment_type_id }) unless @payment_type_id.blank? || (@payment_type_id.class == "Array" && @payment_type_id.include?("all"))
 
     scope
   end
