@@ -79,7 +79,7 @@ class MembershipStats
 
   def paid_installments_scope
     memberships.joins(:installments)
-               .joins(:installments => :transactions)
+               .joins(:installments => :trans)
                .where("transactions.report_at >= '#{ref_date.to_date.beginning_of_month}' AND transactions.report_at <= '#{ref_date.end_of_month}'")
   end
 
@@ -95,7 +95,7 @@ class MembershipStats
     else
       scope = Membership.unscoped.where(business_id: business.id)
       if @membership_filter.nil?
-        scope = if @only_current
+        if @only_current
           scope = scope.joins("contacts ON contacts.current_membership_id=memberships.id")
         end
         @memberships = scope
