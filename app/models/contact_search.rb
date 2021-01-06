@@ -45,7 +45,7 @@ class ContactSearch
     ## FILTER BY membership payment_type_id
     if @membership_payment_type_id
       @membership_payment_type_id = [@membership_payment_type_id] unless @membership_payment_type_id.is_a?(Array)
-      @membership_payment_type_id.reject!(&:empty?)
+      @membership_payment_type_id.reject!(&:blank?)
       scope = scope.where(:current_membership => {payment_type_id: @membership_payment_type_id}) unless @membership_payment_type_id.empty? || @membership_payment_type_id.include?('all')
     end
 
