@@ -25,7 +25,7 @@ describe InstallmentsController, :type => :controller do
     it "assigns all installments as @installments" do
       installment = @membership.installments.create! valid_attributes
       get :index, {:business_id => @business.to_param}
-      assigns(:installments).should eq([installment])
+      expect(assigns(:installments)).to eq([installment])
     end
   end
 
@@ -33,20 +33,20 @@ describe InstallmentsController, :type => :controller do
     it "should be successful" do
       installment = @membership.installments.create! valid_attributes
       get :show, :business_id => @business.to_param, :membership_id => @membership.to_param, :id => installment.to_param
-      response.should be_success
+      expect(response).to be_success
     end
 
     it "assigns the requested installment as @installment" do
       installment = @membership.installments.create! valid_attributes
       get :show, :business_id => @business.to_param, :membership_id => @membership.to_param, :id => installment.to_param
-      assigns(:installment).should == installment
+      expect(assigns(:installment)).to eq installment
     end
   end
 
   describe "GET new" do
     it "assigns a new installment as @installment" do
       get :new, :business_id => @business.to_param, :membership_id => @membership.to_param
-      assigns(:installment).should be_a_new(Installment)
+      expect(assigns(:installment)).to be_a_new(Installment)
     end
   end
 
@@ -54,7 +54,7 @@ describe InstallmentsController, :type => :controller do
     it "assigns the requested installment as @installment" do
       installment = @membership.installments.create! valid_attributes
       get :edit, :business_id => @business.to_param, :membership_id => @membership.to_param, :id => installment.id
-      assigns(:installment).should eq(installment)
+      expect(assigns(:installment)).to eq(installment)
     end
   end
 
@@ -68,29 +68,29 @@ describe InstallmentsController, :type => :controller do
 
       it "assigns a newly created installment as @installment" do
         post :create, {:business_id => @business.to_param, :membership_id => @membership.to_param, :installment => valid_attributes}
-        assigns(:installment).should be_a(Installment)
-        assigns(:installment).should be_persisted
+        expect(assigns(:installment)).to be_a(Installment)
+        expect(assigns(:installment)).to be_persisted
       end
 
       it "redirects to overview" do
         post :create, {:business_id => @business.to_param, :membership_id => @membership.to_param, :installment => valid_attributes}
-        response.should redirect_to(overview_business_memberships_url(@business))
+        expect(response).to redirect_to(overview_business_memberships_url(@business))
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved installment as @installment" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Installment.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Installment).to receive(:save).and_return(false)
         post :create, {:business_id => @business.to_param, :membership_id => @membership.to_param, :installment => {}}
-        assigns(:installment).should be_a_new(Installment)
+        expect(assigns(:installment)).to be_a_new(Installment)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Installment.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Installment).to receive(:save).and_return(false)
         post :create, {:business_id => @business.to_param, :membership_id => @membership.to_param, :installment => {}}
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
     end
   end
@@ -103,20 +103,20 @@ describe InstallmentsController, :type => :controller do
         # specifies that the Business created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Installment.any_instance.should_receive(:update_attributes).with({'value' => 'params'})
+        expect_any_instance_of(Installment).to receive(:update_attributes).with({'value' => 'params'})
         put :update, {:business_id => @business.to_param, :membership_id => @membership.to_param, :id => installment.to_param, :installment => {'value' => 'params'}}
       end
 
       it "assigns the requested installment as @installment" do
         installment = @membership.installments.create! valid_attributes
         put :update, {:business_id => @business.to_param, :membership_id => @membership.to_param, :id => installment.to_param, :installment => valid_attributes}
-        assigns(:installment).should eq(installment)
+        expect(assigns(:installment)).to eq(installment)
       end
 
       it "redirects to the installment" do
         installment = @membership.installments.create! valid_attributes
         put :update, {:business_id => @business.to_param, :membership_id => @membership.to_param, :id => installment.to_param, :installment => valid_attributes}
-        response.should redirect_to(business_membership_installment_url(@business, @membership, installment))
+        expect(response).to redirect_to(business_membership_installment_url(@business, @membership, installment))
       end
     end
 
@@ -124,17 +124,17 @@ describe InstallmentsController, :type => :controller do
       it "assigns the installment as @installment" do
         installment = @membership.installments.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Installment.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Installment).to receive(:save).and_return(false)
         put :update, {:business_id => @business.to_param, :membership_id => @membership.to_param, :id => installment.to_param, :installment => {}}
-        assigns(:installment).should eq(installment)
+        expect(assigns(:installment)).to eq(installment)
       end
 
       it "re-renders the 'edit' template" do
         installment = @membership.installments.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Installment.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Installment).to receive(:save).and_return(false)
         put :update, {:business_id => @business.to_param, :membership_id => @membership.to_param, :id => installment.to_param, :installment => {}}
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -150,7 +150,7 @@ describe InstallmentsController, :type => :controller do
     it "redirects to the membership page" do
       installment = @membership.installments.create! valid_attributes
       delete :destroy, {:business_id => @business.to_param, :membership_id => @membership.to_param, :id => installment.to_param}
-      response.should redirect_to(business_membership_url(@business, @membership))
+      expect(response).to redirect_to(business_membership_url(@business, @membership))
     end
   end
 end

@@ -18,38 +18,38 @@ describe Product do
   
   it "should require a name" do
     no_name_product = Product.new(FactoryBot.attributes_for(:product, :business_id => @business.id, :name => ""))
-    no_name_product.should_not be_valid
+    expect(no_name_product).not_to be_valid
   end
 
   it "should require a business" do
     no_business_product = Product.new(FactoryBot.attributes_for(:product, :business_id => nil))
-    no_business_product.should_not be_valid
+    expect(no_business_product).not_to be_valid
   end
 
 
   it "should require a price" do
     no_price_product = Product.new(FactoryBot.attributes_for(:product, :business_id => @business.id, :price => nil))
-    no_price_product.should_not be_valid
+    expect(no_price_product).not_to be_valid
   end
 
   it "should require a cost" do
     no_cost_product = Product.new(FactoryBot.attributes_for(:product, :business_id => @business.id, :cost => nil))
-    no_cost_product.should_not be_valid
+    expect(no_cost_product).not_to be_valid
   end
 
   it "should require a positive stock" do
     no_stock_product = Product.new(FactoryBot.attributes_for(:product, :business_id => @business.id, :stock => -1))
-    no_stock_product.should_not be_valid
+    expect(no_stock_product).not_to be_valid
   end
 
   it "should allow stock to reach 0" do
     no_stock_product = Product.new(FactoryBot.attributes_for(:product, :business_id => @business.id, :stock => 0))
-    no_stock_product.should be_valid
+    expect(no_stock_product).to be_valid
   end
 
   it "should scope hidden products" do
     FactoryBot.create(:product, :business_id => @business.id, :hidden => true)
-    Product.hidden.count.should equal(1)
+    expect(Product.hidden.count).to equal(1)
   end
 
 end

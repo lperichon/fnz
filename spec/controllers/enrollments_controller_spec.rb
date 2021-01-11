@@ -27,20 +27,20 @@ describe EnrollmentsController, :type => :controller do
     it "should be successful" do
       enrollment = @membership.create_enrollment! valid_attributes
       get :show, :business_id => @business.to_param, :membership_id => @membership.to_param
-      response.should be_success
+      expect(response).to be_success
     end
 
     it "assigns the requested enrollment as @enrollment" do
       enrollment = @membership.create_enrollment! valid_attributes
       get :show, :business_id => @business.to_param, :membership_id => @membership.to_param
-      assigns(:enrollment).should == enrollment
+      expect(assigns(:enrollment)).to eq enrollment
     end
   end
 
   describe "GET new" do
     it "assigns a new enrollment as @enrollment" do
       get :new, :business_id => @business.to_param, :membership_id => @membership.to_param
-      assigns(:enrollment).should be_a_new(Enrollment)
+      expect(assigns(:enrollment)).to be_a_new(Enrollment)
     end
   end
 
@@ -48,7 +48,7 @@ describe EnrollmentsController, :type => :controller do
     it "assigns the requested enrollment as @enrollment" do
       enrollment = @membership.create_enrollment! valid_attributes
       get :edit, :business_id => @business.to_param, :membership_id => @membership.to_param
-      assigns(:enrollment).should eq(enrollment)
+      expect(assigns(:enrollment)).to eq(enrollment)
     end
   end
 
@@ -62,29 +62,29 @@ describe EnrollmentsController, :type => :controller do
 
       it "assigns a newly created enrollment as @enrollment" do
         post :create, {:business_id => @business.to_param, :membership_id => @membership.to_param, :enrollment => valid_attributes}
-        assigns(:enrollment).should be_a(Enrollment)
-        assigns(:enrollment).should be_persisted
+        expect(assigns(:enrollment)).to be_a(Enrollment)
+        expect(assigns(:enrollment)).to be_persisted
       end
 
       it "redirects to the created enrollment" do
         post :create, {:business_id => @business.to_param, :membership_id => @membership.to_param, :enrollment => valid_attributes}
-        response.should redirect_to(business_membership_enrollment_url(@business, @membership, Enrollment.last))
+        expect(response).to redirect_to(business_membership_enrollment_url(@business, @membership, Enrollment.last))
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved enrollment as @enrollment" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Enrollment.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Enrollment).to receive(:save).and_return(false)
         post :create, {:business_id => @business.to_param, :membership_id => @membership.to_param, :enrollment => {}}
-        assigns(:enrollment).should be_a_new(Enrollment)
+        expect(assigns(:enrollment)).to be_a_new(Enrollment)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Enrollment.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Enrollment).to receive(:save).and_return(false)
         post :create, {:business_id => @business.to_param, :membership_id => @membership.to_param, :enrollment => {}}
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
     end
   end
@@ -97,20 +97,20 @@ describe EnrollmentsController, :type => :controller do
         # specifies that the Business created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Enrollment.any_instance.should_receive(:update_attributes).with({'value' => 'params'})
+        expect_any_instance_of(Enrollment).to receive(:update_attributes).with({'value' => 'params'})
         put :update, {:business_id => @business.to_param, :membership_id => @membership.to_param, :enrollment => {'value' => 'params'}}
       end
 
       it "assigns the requested enrollment as @enrollment" do
         enrollment = @membership.create_enrollment! valid_attributes
         put :update, {:business_id => @business.to_param, :membership_id => @membership.to_param, :enrollment => valid_attributes}
-        assigns(:enrollment).should eq(enrollment)
+        expect(assigns(:enrollment)).to eq(enrollment)
       end
 
       it "redirects to the enrollment" do
         enrollment = @membership.create_enrollment! valid_attributes
         put :update, {:business_id => @business.to_param, :membership_id => @membership.to_param, :enrollment => valid_attributes}
-        response.should redirect_to(business_membership_enrollment_url(@business, @membership, enrollment))
+        expect(response).to redirect_to(business_membership_enrollment_url(@business, @membership, enrollment))
       end
     end
 
@@ -118,17 +118,17 @@ describe EnrollmentsController, :type => :controller do
       it "assigns the enrollment as @enrollment" do
         enrollment = @membership.create_enrollment! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Enrollment.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Enrollment).to receive(:save).and_return(false)
         put :update, {:business_id => @business.to_param, :membership_id => @membership.to_param, :enrollment => {}}
-        assigns(:enrollment).should eq(enrollment)
+        expect(assigns(:enrollment)).to eq(enrollment)
       end
 
       it "re-renders the 'edit' template" do
         enrollment = @membership.create_enrollment! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Enrollment.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Enrollment).to receive(:save).and_return(false)
         put :update, {:business_id => @business.to_param, :membership_id => @membership.to_param, :enrollment => {}}
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -144,7 +144,7 @@ describe EnrollmentsController, :type => :controller do
     it "redirects to the enrollments list" do
       enrollment = @membership.create_enrollment! valid_attributes
       delete :destroy, {:business_id => @business.to_param, :membership_id => @membership.to_param, :id => enrollment.to_param}
-      response.should redirect_to(business_membership_url(@business, @membership))
+      expect(response).to redirect_to(business_membership_url(@business, @membership))
     end
   end
 end

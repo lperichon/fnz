@@ -11,12 +11,12 @@ describe PaymentType do
     it "accepts memberships from it's same business" do
       membership = FactoryBot.create(:membership, business: business)
       payment_type.memberships = [membership]
-      payment_type.should be_valid
+      expect(payment_type).to be_valid
     end
     it "rejects memberships from other businesses" do
       membership = FactoryBot.create(:membership, business: other_business)
       payment_type.memberships = [membership]
-      payment_type.should be_invalid
+      expect(payment_type).to be_invalid
     end
   end
 

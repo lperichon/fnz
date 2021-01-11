@@ -17,7 +17,7 @@ describe Import do
     expect {
       import.process
     }.to change(Product, :count).by(154)
-    import.status.should == :finished
+    expect(import.status).to eq :finished
   end
 
 

@@ -85,7 +85,6 @@ describe User do
     end
 
     it "should have UTC as default" do
-      debugger
       expect(@user.time_zone).to eq("UTC")
     end
   end

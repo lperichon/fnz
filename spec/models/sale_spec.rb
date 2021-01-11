@@ -3,8 +3,8 @@ require 'rails_helper'
 describe Sale do
   
   before(:each) do
-    PadmaContact.stub(:find).and_return(PadmaContact.new(:first_name => "Homer", :last_name => "Simpson"))
-    Contact.any_instance.stub(:padma).and_return([PadmaContact.new(:first_name => "Homer", :last_name => "Simpson")])
+    allow(PadmaContact).to receive(:find).and_return(PadmaContact.new(:first_name => "Homer", :last_name => "Simpson"))
+    allow_any_instance_of(Contact).to receive(:padma).and_return([PadmaContact.new(:first_name => "Homer", :last_name => "Simpson")])
     @business = FactoryBot.create(:business)
     @contact = FactoryBot.create(:contact, :business => @business)
     @agent = FactoryBot.create(:agent, :business => @business)
@@ -23,12 +23,12 @@ describe Sale do
 
   it "should require a business" do
     no_business_sale = Sale.new(@attr.merge(:business_id => nil))
-    no_business_sale.should_not be_valid
+    expect(no_business_sale).not_to be_valid
   end
 
   it "should create a new contact if necessary" do
     sale_with_padma_contact = Sale.create!(@attr.merge(:contact_id => nil, :padma_contact_id => "1234"))
-    sale_with_padma_contact.contact.should_not be_nil
+    expect(sale_with_padma_contact.contact).not_to be_nil
   end
 
 
@@ -42,7 +42,7 @@ describe Sale do
   		end
 
   		it "should create a valid sale" do
-  			@sale.should be_valid
+        expect(@sale).to be_valid
   		end
 
   		it "should create a payment transaction" do
@@ -61,7 +61,7 @@ describe Sale do
   		end
 
   		it "should create a valid sale" do
-  			@sale.should be_valid
+        expect(@sale).to be_valid
   		end
 
   		it "should not create a payment transaction" do

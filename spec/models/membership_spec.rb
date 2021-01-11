@@ -39,9 +39,9 @@ describe Membership do
     it "nullify association if payment is destroyed" do
       pt = FactoryBot.create(:payment_type, business: @business)
       membership = FactoryBot.create(:membership, business: @business, payment_type: pt)
-      membership.payment_type.should == pt
+      expect(membership.payment_type).to eq pt
       pt.destroy
-      membership.reload.payment_type.should be_nil
+      expect(membership.reload.payment_type).to be_nil
     end
   end
 
@@ -52,34 +52,34 @@ describe Membership do
 
   it "should require a business" do
     no_business_membership = Membership.new(@attr.merge(:business_id => nil))
-    no_business_membership.should_not be_valid
+    expect(no_business_membership).not_to be_valid
   end
 
 
   it "should require a contact" do
     no_contact_membership = Membership.new(@attr.merge(:contact_id => nil))
-    no_contact_membership.should_not be_valid
+    expect(no_contact_membership).not_to be_valid
   end
 
   it "should require a starting date" do
     no_start_membership = Membership.new(@attr.merge(:begins_on => nil))
-    no_start_membership.should_not be_valid
+    expect(no_start_membership).not_to be_valid
   end
 
   it "should require an ending date" do
     no_end_membership = Membership.new(@attr.merge(:ends_on => nil))
-    no_end_membership.should_not be_valid
+    expect(no_end_membership).not_to be_valid
   end
 
   it "should require an ending date after the starting date" do
     date_conflict_membership = Membership.new(@attr.merge(:ends_on => 10.years.ago))
-    date_conflict_membership.should_not be_valid
+    expect(date_conflict_membership).not_to be_valid
   end
 
   it "should set the contacts current_membership after create" do
   	@membership = Membership.create(@attr)
   	@contact.reload
-  	@contact.current_membership.should eq(@membership)
+  expect(	@contact.current_membership).to eq(@membership)
   end
 
 
@@ -92,7 +92,7 @@ describe Membership do
   	end
 
   	it "should set the contacts current_membership to nil" do
-  		@contact.current_membership.should be_nil
+      expect(@contact.current_membership).to be_nil
   	end
   end
 end

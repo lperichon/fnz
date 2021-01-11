@@ -20,16 +20,16 @@ describe Enrollment do
 
   it "should require a membership" do
     no_membership_enrollment = Enrollment.new(@attr.merge(:membership_id => nil))
-    no_membership_enrollment.should_not be_valid
+    expect(no_membership_enrollment).not_to be_valid
   end
 
   it "should require an agent" do
     no_agent_enrollment = Enrollment.new(@attr.merge(:agent_id => nil))
-    no_agent_enrollment.should_not be_valid
+    expect(no_agent_enrollment).not_to be_valid
   end
 
   it "should require a value" do
     no_value_enrollment = Enrollment.new(@attr.merge(:value => nil))
-    no_value_enrollment.should_not be_valid
+    expect(no_value_enrollment).not_to be_valid
   end
 end

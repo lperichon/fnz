@@ -18,7 +18,7 @@ describe SaleImport do
     expect {
       import.process
     }.to change(Sale, :count).by(198)
-    import.status.should == :finished
+    expect(import.status).to eq :finished
   end
 
 

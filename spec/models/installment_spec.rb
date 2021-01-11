@@ -20,22 +20,22 @@ describe Installment do
 
   it "should require a membership" do
     no_membership_installment = Installment.new(@attr.merge(:membership_id => nil))
-    no_membership_installment.should_not be_valid
+    expect(no_membership_installment).not_to be_valid
   end
 
   it "should NOT require an agent" do
     no_agent_installment = Installment.new(@attr.merge(:agent_id => nil))
-    no_agent_installment.should be_valid
+    expect(no_agent_installment).to be_valid
   end
 
   it "should require a due date" do
     no_due_installment = Installment.new(@attr.merge(:due_on => nil))
-    no_due_installment.should_not be_valid
+    expect(no_due_installment).not_to be_valid
   end
 
   it "should require a value" do
     no_value_installment = Installment.new(@attr.merge(:value => nil))
-    no_value_installment.should_not be_valid
+    expect(no_value_installment).not_to be_valid
   end
 
 
@@ -44,7 +44,7 @@ describe Installment do
       @installment = FactoryBot.create(:installment, :membership => @membership, :agent => @agent, :due_on => Date.today.end_of_month)
     end
     it "should be due" do
-      Installment.due.should include(@installment)
+      expect(Installment.due).to include(@installment)
     end
   end
 
@@ -53,7 +53,7 @@ describe Installment do
       @installment = FactoryBot.create(:installment, :membership => @membership, :agent => @agent, :due_on => 1.month.ago)
     end
     it "should be overdue" do
-      Installment.overdue.should include(@installment)
+      expect(Installment.overdue).to include(@installment)
     end
   end
 
@@ -62,7 +62,7 @@ describe Installment do
       @installment = FactoryBot.create(:installment, :membership => @membership, :agent => @agent)
     end
     it "should be 0 to begin" do
-      @installment.balance.should eq(0)
+      expect(@installment.balance).to eq(0)
     end
 
     describe "when there is one comple@ted transaction" do
@@ -74,7 +74,7 @@ describe Installment do
       end
 
       it "should calculate the balance" do
-        @installment.balance.should eq(@transaction.amount)
+        expect(@installment.balance).to eq(@transaction.amount)
       end
 
       describe "and it is updated" do
@@ -85,7 +85,7 @@ describe Installment do
         end
 
         it "should recalculate the installment's balance" do
-          @installment.balance.should eq(@transaction.amount)
+          expect(@installment.balance).to eq(@transaction.amount)
         end
       end
     end
@@ -101,7 +101,7 @@ describe Installment do
   		end
 
   		it "should create a valid installment" do
-  			@installment.should be_valid
+        expect(@installment).to be_valid
   		end
 
   		it "should create a payment transaction" do
@@ -120,7 +120,7 @@ describe Installment do
   		end
 
   		it "should create a valid installment" do
-  			@installment.should be_valid
+  expect(			@installment).to be_valid
   		end
 
   		it "should not create a payment transaction" do

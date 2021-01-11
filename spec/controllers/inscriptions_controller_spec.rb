@@ -24,7 +24,7 @@ describe InscriptionsController, :type => :controller do
     it "assigns all memberships as @memberships" do
       inscription = @business.inscriptions.create! valid_attributes
       get :index, {:business_id => @business.to_param}
-      assigns(:inscriptions).should include inscription
+      expect(assigns(:inscriptions)).to include inscription
     end
   end
 
@@ -32,20 +32,20 @@ describe InscriptionsController, :type => :controller do
     it "should be successful" do
       inscription = @business.inscriptions.create! valid_attributes
       get :show, :business_id => @business.to_param, :id => inscription.to_param
-      response.should be_success
+      expect(response).to be_success
     end
 
     it "assigns the requested inscription as @inscription" do
       inscription = @business.inscriptions.create! valid_attributes
       get :show, :business_id => @business.to_param, :id => inscription.to_param
-      assigns(:inscription).should == inscription
+      expect(assigns(:inscription)).to eq inscription
     end
   end
 
   describe "GET new" do
     it "assigns a new inscription as @inscription" do
       get :new, :business_id => @business.to_param
-      assigns(:inscription).should be_a_new(Inscription)
+      expect(assigns(:inscription)).to be_a_new(Inscription)
     end
   end
 
@@ -53,7 +53,7 @@ describe InscriptionsController, :type => :controller do
     it "assigns the requested inscription as @inscription" do
       inscription = @business.inscriptions.create! valid_attributes
       get :edit, :business_id => @business.to_param, :id => inscription.to_param
-      assigns(:inscription).should eq(inscription)
+      expect(assigns(:inscription)).to eq(inscription)
     end
   end
 
@@ -67,29 +67,29 @@ describe InscriptionsController, :type => :controller do
 
       it "assigns a newly created inscription as @inscription" do
         post :create, {:business_id => @business.to_param, :inscription => valid_attributes}
-        assigns(:inscription).should be_a(Inscription)
-        assigns(:inscription).should be_persisted
+        expect(assigns(:inscription)).to be_a(Inscription)
+        expect(assigns(:inscription)).to be_persisted
       end
 
       it "redirects to the inscriptions list" do
         post :create, {:business_id => @business.to_param, :inscription => valid_attributes}
-        response.should redirect_to(business_inscriptions_url(@business))
+        expect(response).to redirect_to(business_inscriptions_url(@business))
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved inscription as @inscription" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Inscription.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Inscription).to receive(:save).and_return(false)
         post :create, {:business_id => @business.to_param, :inscription => {}}
-        assigns(:inscription).should be_a_new(Inscription)
+        expect(assigns(:inscription)).to be_a_new(Inscription)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Inscription.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Inscription).to receive(:save).and_return(false)
         post :create, {:business_id => @business.to_param, :inscription => {}}
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
     end
   end
@@ -102,20 +102,20 @@ describe InscriptionsController, :type => :controller do
         # specifies that the Business created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Inscription.any_instance.should_receive(:update_attributes).with({'value' => 'params'})
+        expect_any_instance_of(Inscription).to receive(:update_attributes).with({'value' => 'params'})
         put :update, {:business_id => @business.to_param, :id => inscription.to_param, :inscription => {'value' => 'params'}}
       end
 
       it "assigns the requested inscription as @inscription" do
         inscription = @business.inscriptions.create! valid_attributes
         put :update, {:business_id => @business.to_param, :id => inscription.to_param, :inscription => valid_attributes}
-        assigns(:inscription).should eq(inscription)
+        expect(assigns(:inscription)).to eq(inscription)
       end
 
       it "redirects to the inscription" do
         inscription = @business.inscriptions.create! valid_attributes
         put :update, {:business_id => @business.to_param, :id => inscription.to_param, :inscription => valid_attributes}
-        response.should redirect_to(edit_business_inscription_url(@business, inscription))
+        expect(response).to redirect_to(edit_business_inscription_url(@business, inscription))
       end
     end
 
@@ -123,17 +123,17 @@ describe InscriptionsController, :type => :controller do
       it "assigns the inscription as @inscription" do
         inscription = @business.inscriptions.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Inscription.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Inscription).to receive(:save).and_return(false)
         put :update, {:business_id => @business.to_param, :id => inscription.to_param, :inscription => {}}
-        assigns(:inscription).should eq(inscription)
+        expect(assigns(:inscription)).to eq(inscription)
       end
 
       it "re-renders the 'edit' template" do
         inscription = @business.inscriptions.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Inscription.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Inscription).to receive(:save).and_return(false)
         put :update, {:business_id => @business.to_param, :id => inscription.to_param, :inscription => {}}
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -149,7 +149,7 @@ describe InscriptionsController, :type => :controller do
     it "redirects to the businesses list" do
       inscription = @business.inscriptions.create! valid_attributes
       delete :destroy, {:business_id => @business.to_param, :id => inscription.to_param}
-      response.should redirect_to(business_inscriptions_url(@business))
+      expect(response).to redirect_to(business_inscriptions_url(@business))
     end
   end
 

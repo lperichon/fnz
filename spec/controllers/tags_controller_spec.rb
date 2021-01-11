@@ -20,7 +20,7 @@ describe TagsController, :type => :controller do
     it "assigns all tags as @tags" do
       tag = @business.tags.create! valid_attributes
       get :index, {:business_id => @business.to_param}
-      assigns(:tags).should eq([tag])
+      expect(assigns(:tags)).to eq([tag])
     end
   end
 
@@ -28,20 +28,20 @@ describe TagsController, :type => :controller do
     it "should be successful" do
       tag = @business.tags.create! valid_attributes
       get :show, :business_id => @business.to_param, :id => tag.to_param
-      response.should be_success
+      expect(response).to be_success
     end
 
     it "assigns the requested business as @business" do
       tag = @business.tags.create! valid_attributes
       get :show, {:business_id => @business.to_param, :id => tag.to_param}
-      assigns(:tag).should == tag
+      expect(assigns(:tag)).to eq tag
     end
   end
 
   describe "GET new" do
     it "assigns a new business as @business" do
       get :new, {:business_id => @business.to_param}
-      assigns(:tag).should be_a_new(Tag)
+      expect(assigns(:tag)).to be_a_new(Tag)
     end
   end
 
@@ -49,7 +49,7 @@ describe TagsController, :type => :controller do
     it "assigns the requested business as @business" do
       tag = @business.tags.create! valid_attributes
       get :edit, {:business_id => @business.to_param, :id => tag.to_param}
-      assigns(:tag).should eq(tag)
+      expect(assigns(:tag)).to eq(tag)
     end
   end
 
@@ -63,29 +63,29 @@ describe TagsController, :type => :controller do
 
       it "assigns a newly created tag as @tags" do
         post :create, {:business_id => @business.to_param, :tag => valid_attributes}
-        assigns(:tag).should be_a(Tag)
-        assigns(:tag).should be_persisted
+        expect(assigns(:tag)).to be_a(Tag)
+        expect(assigns(:tag)).to be_persisted
       end
 
       it "redirects to the created tag" do
         post :create, {:business_id => @business.to_param, :tag => valid_attributes}
-        response.should redirect_to(business_tag_url(@business,Tag.last))
+        expect(response).to redirect_to(business_tag_url(@business,Tag.last))
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved tag as @tag" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Tag.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Tag).to receive(:save).and_return(false)
         post :create, {:business_id => @business.to_param, :tag => {}}
-        assigns(:tag).should be_a_new(Tag)
+        expect(assigns(:tag)).to be_a_new(Tag)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Tag.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Tag).to receive(:save).and_return(false)
         post :create, {:business_id => @business.to_param, :tag => {}}
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
     end
   end
@@ -98,20 +98,20 @@ describe TagsController, :type => :controller do
         # specifies that the Business created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Tag.any_instance.should_receive(:update_attributes).with({'name' => 'params'})
+        expect_any_instance_of(Tag).to receive(:update_attributes).with({'name' => 'params'})
         put :update, {:business_id => @business.to_param, :id => tag.to_param, :tag => {'name' => 'params'}}
       end
 
       it "assigns the requested tag as @tag" do
         tag = @business.tags.create! valid_attributes
         put :update, {:business_id => @business.to_param, :id => tag.to_param, :tag => valid_attributes}
-        assigns(:tag).should eq(tag)
+        expect(assigns(:tag)).to eq(tag)
       end
 
       it "redirects to the tag" do
         tag = @business.tags.create! valid_attributes
         put :update, {:business_id => @business.to_param, :id => tag.to_param, :tag => valid_attributes}
-        response.should redirect_to(business_tag_url(@business, tag))
+        expect(response).to redirect_to(business_tag_url(@business, tag))
       end
     end
 
@@ -119,17 +119,17 @@ describe TagsController, :type => :controller do
       it "assigns the business as @business" do
         tag = @business.tags.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Tag.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Tag).to receive(:save).and_return(false)
         put :update, {:business_id => @business.to_param, :id => tag.to_param, :tag => {}}
-        assigns(:tag).should eq(tag)
+        expect(assigns(:tag)).to eq(tag)
       end
 
       it "re-renders the 'edit' template" do
         tag = @business.tags.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Tag.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Tag).to receive(:save).and_return(false)
         put :update, {:business_id => @business.to_param, :id => tag.to_param, :tag => {}}
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -145,7 +145,7 @@ describe TagsController, :type => :controller do
     it "redirects to the businesses list" do
       tag = @business.tags.create! valid_attributes
       delete :destroy, {:business_id => @business.to_param, :id => tag.to_param}
-      response.should redirect_to(business_tags_url(@business))
+      expect(response).to redirect_to(business_tags_url(@business))
     end
   end
 

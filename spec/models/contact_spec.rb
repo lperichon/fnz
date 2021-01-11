@@ -16,12 +16,12 @@ describe Contact do
   
   it "should require a name" do
     no_name_contact = Contact.new(@attr.merge(:name => ""))
-    no_name_contact.should_not be_valid
+    expect(no_name_contact).not_to be_valid
   end
 
   it "should require a business" do
     no_business_contact = Contact.new(@attr.merge(:business_id => nil))
-    no_business_contact.should_not be_valid
+    expect(no_business_contact).not_to be_valid
   end
 
   describe "get_by_padma_id" do
@@ -39,7 +39,7 @@ describe Contact do
       end
       context "if contact doesnt exist" do
         before do
-          PadmaContact.stub(:find).and_return(PadmaContact.new(id: pid,
+          allow(PadmaContact).to receive(:find).and_return(PadmaContact.new(id: pid,
                                                                first_name: 'Dwayne',
                                                                last_name: 'macgowan',
                                                                local_status: 'student',

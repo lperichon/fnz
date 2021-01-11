@@ -17,9 +17,9 @@ describe Inscription do
     it "nullify association if payment is destroyed" do
       pt = FactoryBot.create(:payment_type, business: @business)
       membership = FactoryBot.create(:membership, business: @business, payment_type: pt)
-      membership.payment_type.should == pt
+      expect(membership.payment_type).to eq pt
       pt.destroy
-      membership.reload.payment_type.should be_nil
+      expect(membership.reload.payment_type).to be_nil
     end
   end
 
@@ -29,12 +29,12 @@ describe Inscription do
   
   it "should require a business" do
     no_business_inscription = Inscription.new(@attr.merge(:business_id => nil))
-    no_business_inscription.should_not be_valid
+    expect(no_business_inscription).not_to be_valid
   end
 
   it "should require a contact" do
     no_contact_inscription = Inscription.new(@attr.merge(:contact_id => nil))
-    no_contact_inscription.should_not be_valid
+    expect(no_contact_inscription).not_to be_valid
   end
 
   describe "#balance" do
@@ -43,7 +43,7 @@ describe Inscription do
     end
     
     it "should be 0 to begin" do
-      @inscription.balance.should eq(0)
+      expect(@inscription.balance).to eq(0)
     end
 
     describe "when there is one completed transaction" do
@@ -55,7 +55,7 @@ describe Inscription do
       end
 
       it "should calculate the balance" do
-        @inscription.balance.should eq(@transaction.amount)
+        expect(@inscription.balance).to eq(@transaction.amount)
       end
 
       describe "and it is updated" do
@@ -66,7 +66,7 @@ describe Inscription do
         end
 
         it "should recalculate the inscriptions's balance" do
-          @inscription.balance.should eq(@transaction.amount)
+          expect(@inscription.balance).to eq(@transaction.amount)
         end
       end
     end

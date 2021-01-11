@@ -10,7 +10,7 @@ describe Event do
   # 	end
 
   # 	it "should be shared to padma users after create" do
-  # 		@school.should have(3).users
+  #     expect(@school).to have(3).users
   # 	end
   # end
 
@@ -21,7 +21,7 @@ describe Event do
   	end
 
   	it "should create a default account" do
-  		@event.should have(1).account
+      expect(@event).to have(1).account
   	end  
   end
 end

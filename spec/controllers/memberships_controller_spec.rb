@@ -40,7 +40,7 @@ describe MembershipsController, :type => :controller do
     it "assigns all memberships as @memberships" do
       membership = @business.memberships.create! valid_attributes
       get :index, {:business_id => @business.to_param}
-      assigns(:memberships).should include membership
+      expect(assigns(:memberships)).to include membership
     end
   end
 
@@ -48,20 +48,20 @@ describe MembershipsController, :type => :controller do
     it "should be successful" do
       membership = @business.memberships.create! valid_attributes
       get :show, :business_id => @business.to_param, :id => membership.to_param
-      response.should be_success
+      expect(response).to be_success
     end
 
     it "assigns the requested membership as @membership" do
       membership = @business.memberships.create! valid_attributes
       get :show, :business_id => @business.to_param, :id => membership.to_param
-      assigns(:membership).should == membership
+      expect(assigns(:membership)).to eq membership
     end
   end
 
   describe "GET new" do
     it "assigns a new membership as @membership" do
       get :new, :business_id => @business.to_param
-      assigns(:membership).should be_a_new(Membership)
+      expect(assigns(:membership)).to be_a_new(Membership)
     end
   end
 
@@ -69,7 +69,7 @@ describe MembershipsController, :type => :controller do
     it "assigns the requested membership as @membership" do
       membership = @business.memberships.create! valid_attributes
       get :edit, :business_id => @business.to_param, :id => membership.to_param
-      assigns(:membership).should eq(membership)
+      expect(assigns(:membership)).to eq(membership)
     end
   end
 
@@ -107,8 +107,8 @@ describe MembershipsController, :type => :controller do
 
       it "assigns a newly created membership as @membership" do
         post :create, {:business_id => @business.to_param, :membership => valid_attributes}
-        assigns(:membership).should be_a(Membership)
-        assigns(:membership).should be_persisted
+        expect(assigns(:membership)).to be_a(Membership)
+        expect(assigns(:membership)).to be_persisted
       end
 
       it "assigns the current user to the created membership as creator" do
@@ -117,23 +117,23 @@ describe MembershipsController, :type => :controller do
 
       it "redirects to the created membership" do
         post :create, {:business_id => @business.to_param, :membership => valid_attributes}
-        response.should redirect_to(business_membership_url(@business, Membership.last))
+        expect(response).to redirect_to(business_membership_url(@business, Membership.last))
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved membership as @membership" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Membership.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Membership).to receive(:save).and_return(false)
         post :create, {:business_id => @business.to_param, :membership => {}}
-        assigns(:membership).should be_a_new(Membership)
+        expect(assigns(:membership)).to be_a_new(Membership)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Membership.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Membership).to receive(:save).and_return(false)
         post :create, {:business_id => @business.to_param, :membership => {}}
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
     end
   end
@@ -146,20 +146,20 @@ describe MembershipsController, :type => :controller do
         # specifies that the Business created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Membership.any_instance.should_receive(:update_attributes).with({'value' => 'params'})
+        expect_any_instance_of(Membership).to receive(:update_attributes).with({'value' => 'params'})
         put :update, {:business_id => @business.to_param, :id => membership.to_param, :membership => {'value' => 'params'}}
       end
 
       it "assigns the requested membership as @membership" do
         membership = @business.memberships.create! valid_attributes
         put :update, {:business_id => @business.to_param, :id => membership.to_param, :membership => valid_attributes}
-        assigns(:membership).should eq(membership)
+        expect(assigns(:membership)).to eq(membership)
       end
 
       it "redirects to the membership" do
         membership = @business.memberships.create! valid_attributes
         put :update, {:business_id => @business.to_param, :id => membership.to_param, :membership => valid_attributes}
-        response.should redirect_to(business_membership_url(@business, membership))
+        expect(response).to redirect_to(business_membership_url(@business, membership))
       end
     end
 
@@ -167,17 +167,17 @@ describe MembershipsController, :type => :controller do
       it "assigns the membership as @membership" do
         membership = @business.memberships.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Membership.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Membership).to receive(:save).and_return(false)
         put :update, {:business_id => @business.to_param, :id => membership.to_param, :membership => {}}
-        assigns(:membership).should eq(membership)
+        expect(assigns(:membership)).to eq(membership)
       end
 
       it "re-renders the 'edit' template" do
         membership = @business.memberships.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Membership.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Membership).to receive(:save).and_return(false)
         put :update, {:business_id => @business.to_param, :id => membership.to_param, :membership => {}}
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -193,7 +193,7 @@ describe MembershipsController, :type => :controller do
     it "redirects to the businesses list" do
       membership = @business.memberships.create! valid_attributes
       delete :destroy, {:business_id => @business.to_param, :id => membership.to_param}
-      response.should redirect_to(business_memberships_url(@business))
+      expect(response).to redirect_to(business_memberships_url(@business))
     end
   end
 

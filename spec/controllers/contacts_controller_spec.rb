@@ -20,7 +20,7 @@ describe ContactsController, :type => :controller do
     it "assigns all contacts as @contacts" do
       contact = @business.contacts.create! valid_attributes
       get :index, {:business_id => @business.to_param}
-      assigns(:contacts).should eq([contact])
+      expect(assigns(:contacts)).to eq([contact])
     end
   end
 
@@ -28,20 +28,20 @@ describe ContactsController, :type => :controller do
     it "should be successful" do
       contact = @business.contacts.create! valid_attributes
       get :show, :business_id => @business.to_param, :id => contact.to_param
-      response.should be_success
+      expect(response).to be_success
     end
 
     it "assigns the requested business as @business" do
       contact = @business.contacts.create! valid_attributes
       get :show, {:business_id => @business.to_param, :id => contact.to_param}
-      assigns(:contact).should == contact
+      expect(assigns(:contact)).to eq contact
     end
   end
 
   describe "GET new" do
     it "assigns a new business as @business" do
       get :new, {:business_id => @business.to_param}
-      assigns(:contact).should be_a_new(Contact)
+      expect(assigns(:contact)).to be_a_new(Contact)
     end
   end
 
@@ -49,7 +49,7 @@ describe ContactsController, :type => :controller do
     it "assigns the requested business as @business" do
       contact = @business.contacts.create! valid_attributes
       get :edit, {:business_id => @business.to_param, :id => contact.to_param}
-      assigns(:contact).should eq(contact)
+      expect(assigns(:contact)).to eq(contact)
     end
   end
 
@@ -63,29 +63,29 @@ describe ContactsController, :type => :controller do
 
       it "assigns a newly created contact as @contacts" do
         post :create, {:business_id => @business.to_param, :contact => valid_attributes}
-        assigns(:contact).should be_a(Contact)
-        assigns(:contact).should be_persisted
+        expect(assigns(:contact)).to be_a(Contact)
+        expect(assigns(:contact)).to be_persisted
       end
 
       it "redirects to the created contact" do
         post :create, {:business_id => @business.to_param, :contact => valid_attributes}
-        response.should redirect_to(business_contact_url(@business,Contact.last))
+        expect(response).to redirect_to(business_contact_url(@business,Contact.last))
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved contact as @contact" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Contact.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Contact).to receive(:save).and_return(false)
         post :create, {:business_id => @business.to_param, :contact => {}}
-        assigns(:contact).should be_a_new(Contact)
+        expect(assigns(:contact)).to be_a_new(Contact)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Contact.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Contact).to receive(:save).and_return(false)
         post :create, {:business_id => @business.to_param, :contact => {}}
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
     end
   end
@@ -98,20 +98,20 @@ describe ContactsController, :type => :controller do
         # specifies that the Business created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Contact.any_instance.should_receive(:update_attributes).with({'name' => 'params'})
+        expect_any_instance_of(Contact).to receive(:update_attributes).with({'name' => 'params'})
         put :update, {:business_id => @business.to_param, :id => contact.to_param, :contact => {'name' => 'params'}}
       end
 
       it "assigns the requested contact as @contact" do
         contact = @business.contacts.create! valid_attributes
         put :update, {:business_id => @business.to_param, :id => contact.to_param, :contact => valid_attributes}
-        assigns(:contact).should eq(contact)
+        expect(assigns(:contact)).to eq(contact)
       end
 
       it "redirects to the contact" do
         contact = @business.contacts.create! valid_attributes
         put :update, {:business_id => @business.to_param, :id => contact.to_param, :contact => valid_attributes}
-        response.should redirect_to(business_contact_url(@business, contact))
+        expect(response).to redirect_to(business_contact_url(@business, contact))
       end
     end
 
@@ -119,17 +119,17 @@ describe ContactsController, :type => :controller do
       it "assigns the business as @business" do
         contact = @business.contacts.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Contact.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Contact).to receive(:save).and_return(false)
         put :update, {:business_id => @business.to_param, :id => contact.to_param, :contact => {}}
-        assigns(:contact).should eq(contact)
+        expect(assigns(:contact)).to eq(contact)
       end
 
       it "re-renders the 'edit' template" do
         contact = @business.contacts.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Contact.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Contact).to receive(:save).and_return(false)
         put :update, {:business_id => @business.to_param, :id => contact.to_param, :contact => {}}
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -145,7 +145,7 @@ describe ContactsController, :type => :controller do
     it "redirects to the businesses list" do
       contact = @business.contacts.create! valid_attributes
       delete :destroy, {:business_id => @business.to_param, :id => contact.to_param}
-      response.should redirect_to(business_contacts_url(@business))
+      expect(response).to redirect_to(business_contacts_url(@business))
     end
   end
 

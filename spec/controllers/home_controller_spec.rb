@@ -10,7 +10,7 @@ describe HomeController, :type => :controller do
   describe "GET 'index'" do
     it "should be successful" do
       get 'index'
-      response.should redirect_to(overview_business_memberships_path(:business_id => "test"))
+      expect(response).to redirect_to(overview_business_memberships_path(:business_id => "test"))
     end
   end
 

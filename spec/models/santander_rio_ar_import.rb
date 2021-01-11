@@ -19,7 +19,7 @@ describe SantanderRioArImport do
     expect {
       import.process
     }.to change(Transaction, :count).by(3)
-    import.status.should == :finished
+    expect(import.status).to eq :finished
   end
 
 
@@ -29,7 +29,7 @@ describe SantanderRioArImport do
     expect {
       import.process
     }.not_to change(Transaction, :count)
-    import.status.should == :finished
+    expect(import.status).to eq :finished
   end
 
 end

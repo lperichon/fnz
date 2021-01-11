@@ -16,11 +16,11 @@ describe School do
   	end
 
   	it "should be shared to padma users after create" do
-  		@school.should have(3).users
+      expect(@school).to have(3).users
   	end
 
   	it "should create agents for the padma users" do
-  		@school.should have(3).agents
+      expect(@school).to have(3).agents
   	end
   end
 
@@ -31,7 +31,7 @@ describe School do
   	end
 
   	it "should create a default account" do
-  		@school.should have(1).account
+      expect(@school).to have(1).account
   	end  
   end
 end

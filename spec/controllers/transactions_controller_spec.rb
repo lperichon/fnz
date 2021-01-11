@@ -31,7 +31,7 @@ describe TransactionsController, :type => :controller do
       transaction = @business.trans.create! valid_attributes
       transaction = Transaction.last
       get :index, {:business_id => @business.to_param}
-      assigns(:transactions).should eq([transaction])
+      expect(assigns(:transactions)).to eq([transaction])
     end
   end
 
@@ -39,21 +39,21 @@ describe TransactionsController, :type => :controller do
     it "should be successful" do
       transaction = @business.trans.create! valid_attributes
       get :show, :business_id => @business.to_param, :id => transaction.to_param
-      response.should be_success
+      expect(response).to be_success
     end
 
     it "assigns the requested transaction as @transaction" do
       @business.trans.create! valid_attributes
       transaction = Transaction.last
       get :show, :business_id => @business.to_param, :id => transaction.to_param
-      assigns(:transaction).should == transaction
+      expect(assigns(:transaction)).to eq transaction
     end
   end
 
   describe "GET new" do
     it "assigns a new transaction as @transaction" do
       get :new, :business_id => @business.to_param
-          assigns(:transaction).should be_a_new(Transaction)
+          expect(assigns(:transaction)).to be_a_new(Transaction)
     end
   end
 
@@ -62,7 +62,7 @@ describe TransactionsController, :type => :controller do
       @business.trans.create! valid_attributes
       transaction = Transaction.last
       get :edit, :business_id => @business.to_param, :id => transaction.to_param
-      assigns(:transaction).should eq(transaction)
+      expect(assigns(:transaction)).to eq(transaction)
     end
   end
 
@@ -76,34 +76,34 @@ describe TransactionsController, :type => :controller do
 
       it "assigns a newly created transaction as @transaction" do
         post :create, {:business_id => @business.to_param, :transaction => valid_attributes}
-        assigns(:transaction).should be_a(Transaction)
-        assigns(:transaction).should be_persisted
+        expect(assigns(:transaction)).to be_a(Transaction)
+        expect(assigns(:transaction)).to be_persisted
       end
 
       it "assigns the current user to the created transaction as creator" do
         post :create, {:business_id => @business.to_param, :transaction => valid_attributes}
-        assigns(:transaction).creator.should eq(@account.business.owner)
+        expect(assigns(:transaction).creator).to eq(@account.business.owner)
       end
 
       it "redirects to the created transaction" do
         post :create, {:business_id => @business.to_param, :transaction => valid_attributes}
-        response.should redirect_to(business_transaction_url(@business, Transaction.last))
+        expect(response).to redirect_to(business_transaction_url(@business, Transaction.last))
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved transaction as @transaction" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Transaction.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Transaction).to receive(:save).and_return(false)
         post :create, {:business_id => @business.to_param, :transaction => {}}
-        assigns(:transaction).should be_a_new(Transaction)
+        expect(assigns(:transaction)).to be_a_new(Transaction)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Transaction.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Transaction).to receive(:save).and_return(false)
         post :create, {:business_id => @business.to_param, :transaction => {}}
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
     end
   end
@@ -116,7 +116,7 @@ describe TransactionsController, :type => :controller do
         # specifies that the Business created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Transaction.any_instance.should_receive(:update_attributes).with({'description' => 'params'})
+        expect_any_instance_of(Transaction).to receive(:update_attributes).with({'description' => 'params'})
         put :update, {:business_id => @business.to_param, :id => transaction.to_param, :transaction => {'description' => 'params'}}
       end
 
@@ -124,13 +124,13 @@ describe TransactionsController, :type => :controller do
         @business.trans.create! valid_attributes
         transaction = Transaction.last
         put :update, {:business_id => @business.to_param, :id => transaction.to_param, :transaction => valid_attributes}
-        assigns(:transaction).should eq(transaction)
+        expect(assigns(:transaction)).to eq(transaction)
       end
 
       it "redirects to the transaction" do
         transaction = @business.trans.create! valid_attributes
         put :update, {:business_id => @business.to_param, :id => transaction.to_param, :transaction => valid_attributes}
-        response.should redirect_to(business_transaction_url(@business, transaction))
+        expect(response).to redirect_to(business_transaction_url(@business, transaction))
       end
     end
 
@@ -139,17 +139,17 @@ describe TransactionsController, :type => :controller do
         @business.trans.create! valid_attributes
         transaction = Transaction.last
         # Trigger the behavior that occurs when invalid params are submitted
-        Transaction.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Transaction).to receive(:save).and_return(false)
         put :update, {:business_id => @business.to_param, :id => transaction.to_param, :transaction => {}}
-        assigns(:transaction).should eq(transaction)
+        expect(assigns(:transaction)).to eq(transaction)
       end
 
       it "re-renders the 'edit' template" do
         transaction = @business.trans.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Transaction.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Transaction).to receive(:save).and_return(false)
         put :update, {:business_id => @business.to_param, :id => transaction.to_param, :transaction => {}}
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -169,7 +169,7 @@ describe TransactionsController, :type => :controller do
     it "redirects to the businesses list" do
       transaction = @business.trans.create! valid_attributes
       delete :destroy, {:business_id => @business.to_param, :id => transaction.to_param}
-      response.should redirect_to(business_transactions_url(@business))
+      expect(response).to redirect_to(business_transactions_url(@business))
     end
   end
 

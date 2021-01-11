@@ -20,7 +20,7 @@ describe AccountsController, :type => :controller do
     it "assigns all accounts as @accounts" do
       account = @business.accounts.create! valid_attributes
       get :index, {:business_id => @business.to_param}
-      assigns(:accounts).should eq([account])
+      expect(assigns(:accounts)).to eq([account])
     end
   end
 
@@ -28,20 +28,20 @@ describe AccountsController, :type => :controller do
     it "should be successful" do
       account = @business.accounts.create! valid_attributes
       get :show, :business_id => @business.to_param, :id => account.to_param
-      response.should be_success
+      expect(response).to be_success
     end
 
     it "assigns the requested business as @business" do
       account = @business.accounts.create! valid_attributes
       get :show, {:business_id => @business.to_param, :id => account.to_param}
-      assigns(:account).should == account
+      expect(assigns(:account)).to eq account
     end
   end
 
   describe "GET new" do
     it "assigns a new business as @business" do
       get :new, {:business_id => @business.to_param}
-      assigns(:account).should be_a_new(Account)
+      expect(assigns(:account)).to be_a_new(Account)
     end
   end
 
@@ -49,7 +49,7 @@ describe AccountsController, :type => :controller do
     it "assigns the requested business as @business" do
       account = @business.accounts.create! valid_attributes
       get :edit, {:business_id => @business.to_param, :id => account.to_param}
-      assigns(:account).should eq(account)
+      expect(assigns(:account)).to eq(account)
     end
   end
 
@@ -63,29 +63,29 @@ describe AccountsController, :type => :controller do
 
       it "assigns a newly created account as @accounts" do
         post :create, {:business_id => @business.to_param, :account => valid_attributes}
-        assigns(:account).should be_a(Account)
-        assigns(:account).should be_persisted
+        expect(assigns(:account)).to be_a(Account)
+        expect(assigns(:account)).to be_persisted
       end
 
       it "redirects to the created account" do
         post :create, {:business_id => @business.to_param, :account => valid_attributes}
-        response.should redirect_to(business_account_url(@business,Account.last))
+        expect(response).to redirect_to(business_account_url(@business,Account.last))
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved account as @account" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Account.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Account).to receive(:save).and_return(false)
         post :create, {:business_id => @business.to_param, :account => {}}
-        assigns(:account).should be_a_new(Account)
+        expect(assigns(:account)).to be_a_new(Account)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Account.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Account).to receive(:save).and_return(false)
         post :create, {:business_id => @business.to_param, :account => {}}
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
     end
   end
@@ -98,20 +98,20 @@ describe AccountsController, :type => :controller do
         # specifies that the Business created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Account.any_instance.should_receive(:update_attributes).with({'name' => 'params'})
+        expect_any_instance_of(Account).to receive(:update_attributes).with({'name' => 'params'})
         put :update, {:business_id => @business.to_param, :id => account.to_param, :account => {'name' => 'params'}}
       end
 
       it "assigns the requested account as @account" do
         account = @business.accounts.create! valid_attributes
         put :update, {:business_id => @business.to_param, :id => account.to_param, :account => valid_attributes}
-        assigns(:account).should eq(account)
+        expect(assigns(:account)).to eq(account)
       end
 
       it "redirects to the account" do
         account = @business.accounts.create! valid_attributes
         put :update, {:business_id => @business.to_param, :id => account.to_param, :account => valid_attributes}
-        response.should redirect_to(business_account_url(@business, account))
+        expect(response).to redirect_to(business_account_url(@business, account))
       end
     end
 
@@ -119,17 +119,17 @@ describe AccountsController, :type => :controller do
       it "assigns the business as @business" do
         account = @business.accounts.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Account.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Account).to receive(:save).and_return(false)
         put :update, {:business_id => @business.to_param, :id => account.to_param, :account => {}}
-        assigns(:account).should eq(account)
+        expect(assigns(:account)).to eq(account)
       end
 
       it "re-renders the 'edit' template" do
         account = @business.accounts.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Account.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Account).to receive(:save).and_return(false)
         put :update, {:business_id => @business.to_param, :id => account.to_param, :account => {}}
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -145,7 +145,7 @@ describe AccountsController, :type => :controller do
     it "redirects to the businesses list" do
       account = @business.accounts.create! valid_attributes
       delete :destroy, {:business_id => @business.to_param, :id => account.to_param}
-      response.should redirect_to(business_accounts_url(@business))
+      expect(response).to redirect_to(business_accounts_url(@business))
     end
   end
 

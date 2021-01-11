@@ -24,7 +24,7 @@ describe ProductsController, :type => :controller do
     it "assigns all products as @products" do
       product = @business.products.create! FactoryBot.attributes_for(:product)
       get :index, {:business_id => @business.to_param}
-      assigns(:products).should eq([product])
+      expect(assigns(:products)).to eq([product])
     end
   end
 
@@ -32,20 +32,20 @@ describe ProductsController, :type => :controller do
     it "should be successful" do
       product = @business.products.create! FactoryBot.attributes_for(:product)
       get :show, :business_id => @business.to_param, :id => product.to_param
-      response.should be_success
+      expect(response).to be_success
     end
 
     it "assigns the requested business as @business" do
       product = @business.products.create! FactoryBot.attributes_for(:product)
       get :show, {:business_id => @business.to_param, :id => product.to_param}
-      assigns(:product).should == product
+      expect(assigns(:product)).to eq product
     end
   end
 
   describe "GET new" do
     it "assigns a new business as @business" do
       get :new, {:business_id => @business.to_param}
-      assigns(:product).should be_a_new(Product)
+      expect(assigns(:product)).to be_a_new(Product)
     end
   end
 
@@ -53,7 +53,7 @@ describe ProductsController, :type => :controller do
     it "assigns the requested business as @business" do
       product = @business.products.create! FactoryBot.attributes_for(:product)
       get :edit, {:business_id => @business.to_param, :id => product.to_param}
-      assigns(:product).should eq(product)
+      expect(assigns(:product)).to eq(product)
     end
   end
 
@@ -67,29 +67,29 @@ describe ProductsController, :type => :controller do
 
       it "assigns a newly created product as @products" do
         post :create, {:business_id => @business.to_param, :product => FactoryBot.attributes_for(:product)}
-        assigns(:product).should be_a(Product)
-        assigns(:product).should be_persisted
+        expect(assigns(:product)).to be_a(Product)
+        expect(assigns(:product)).to be_persisted
       end
 
       it "redirects to the created product" do
         post :create, {:business_id => @business.to_param, :product => FactoryBot.attributes_for(:product)}
-        response.should redirect_to(business_product_url(@business,Product.last))
+        expect(response).to redirect_to(business_product_url(@business,Product.last))
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved product as @product" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Product.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Product).to receive(:save).and_return(false)
         post :create, {:business_id => @business.to_param, :product => {}}
-        assigns(:product).should be_a_new(Product)
+        expect(assigns(:product)).to be_a_new(Product)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Product.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Product).to receive(:save).and_return(false)
         post :create, {:business_id => @business.to_param, :product => {}}
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
     end
   end
@@ -102,20 +102,20 @@ describe ProductsController, :type => :controller do
         # specifies that the Business created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Product.any_instance.should_receive(:update_attributes).with({'name' => 'params'})
+        expect_any_instance_of(Product).to receive(:update_attributes).with({'name' => 'params'})
         put :update, {:business_id => @business.to_param, :id => product.to_param, :product => {'name' => 'params'}}
       end
 
       it "assigns the requested product as @product" do
         product = @business.products.create! FactoryBot.attributes_for(:product)
         put :update, {:business_id => @business.to_param, :id => product.to_param, :product => FactoryBot.attributes_for(:product)}
-        assigns(:product).should eq(product)
+        expect(assigns(:product)).to eq(product)
       end
 
       it "redirects to the product" do
         product = @business.products.create! FactoryBot.attributes_for(:product)
         put :update, {:business_id => @business.to_param, :id => product.to_param, :product => FactoryBot.attributes_for(:product)}
-        response.should redirect_to(business_product_url(@business, product))
+        expect(response).to redirect_to(business_product_url(@business, product))
       end
     end
 
@@ -123,17 +123,17 @@ describe ProductsController, :type => :controller do
       it "assigns the business as @business" do
         product = @business.products.create! FactoryBot.attributes_for(:product)
         # Trigger the behavior that occurs when invalid params are submitted
-        Product.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Product).to receive(:save).and_return(false)
         put :update, {:business_id => @business.to_param, :id => product.to_param, :product => {}}
-        assigns(:product).should eq(product)
+        expect(assigns(:product)).to eq(product)
       end
 
       it "re-renders the 'edit' template" do
         product = @business.products.create! FactoryBot.attributes_for(:product)
         # Trigger the behavior that occurs when invalid params are submitted
-        Product.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Product).to receive(:save).and_return(false)
         put :update, {:business_id => @business.to_param, :id => product.to_param, :product => {}}
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -149,7 +149,7 @@ describe ProductsController, :type => :controller do
     it "redirects to the businesses list" do
       product = @business.products.create! FactoryBot.attributes_for(:product)
       delete :destroy, {:business_id => @business.to_param, :id => product.to_param}
-      response.should redirect_to(business_products_url(@business))
+      expect(response).to redirect_to(business_products_url(@business))
     end
   end
 

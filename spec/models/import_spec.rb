@@ -18,7 +18,7 @@ describe Import do
 
   it "should require a business" do
     no_business_import = Import.new(@attr.merge(:business_id => nil))
-    no_business_import.should_not be_valid
+    expect(no_business_import).not_to be_valid
   end
 
   it { should have_attached_file(:upload) }
@@ -29,16 +29,16 @@ describe Import do
 
   it "should process a csv file" do
     import = TransactionImport.create(@attr)
-    import.upload.stub(:path).and_return("#{Rails.root}/spec/fixtures/transactions.csv")
+    allow(import.upload).to receive(:path).and_return("#{Rails.root}/spec/fixtures/transactions.csv")
     expect {
       import.process
     }.to change(Transaction, :count).by(1)
-    import.status.should == :finished
+    expect(import.status).to eq :finished
   end
 
   it "defaults status to ready" do
     i = Import.create(@attr.merge(:status => nil))
-    i.status.should == :ready
+    expect(i.status).to eq :ready
   end
 
 

@@ -5,11 +5,11 @@ describe MembershipStats do
   let(:business){FactoryBot.create(:business)}
   
   it "should create a new instance given valid attributes" do
-    FactoryBot.build(:membership_stats).should be_valid
+    expect(FactoryBot.build(:membership_stats)).to be_valid
   end
 
   it "should require a business" do
-  	FactoryBot.build(:membership_stats, :business => nil).should_not be_valid
+  expect(	FactoryBot.build(:membership_stats, :business => nil)).not_to be_valid
   end
 
   describe "#all_installments" do
@@ -44,7 +44,7 @@ describe MembershipStats do
         @installment.trans << @transaction
       end
       it "will only consider installmets of memberships matching filter" do
-        @membership_stats.paid_installments.first.sum.should be_nil
+        expect(@membership_stats.paid_installments.first.sum).to be_nil
       end
     end
 
@@ -58,7 +58,7 @@ describe MembershipStats do
       end
 
       it "should return installments" do
-        @membership_stats.paid_installments.first.sum.should_not be_nil
+        expect(@membership_stats.paid_installments.first.sum).not_to be_nil
       end
     end
 

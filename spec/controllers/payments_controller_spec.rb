@@ -28,7 +28,7 @@ describe PaymentsController, :type => :controller do
       xhr :get, :new, :business_id => @business.to_param, 
       	:membership_id => @membership.to_param, 
       	:installment_id => @installment.to_param
-      assigns(:transaction).should be_a_new(Transaction)
+      expect(assigns(:transaction)).to be_a_new(Transaction)
     end
   end
 
@@ -52,8 +52,8 @@ describe PaymentsController, :type => :controller do
           	:installment_id => @installment.to_param,
            	:transaction => valid_attributes
         }
-        assigns(:transaction).should be_a(Transaction)
-        assigns(:transaction).should be_persisted
+        expect(assigns(:transaction)).to be_a(Transaction)
+        expect(assigns(:transaction)).to be_persisted
       end
 
       it "assigns the current user to the created transaction as creator" do
@@ -63,7 +63,7 @@ describe PaymentsController, :type => :controller do
           	:installment_id => @installment.to_param,
            	:transaction => valid_attributes
           }
-        assigns(:transaction).creator.should eq(@account.business.owner)
+        expect(assigns(:transaction).creator).to eq(@account.business.owner)
       end
 
       it "links the new transaction with the installment" do
@@ -73,21 +73,21 @@ describe PaymentsController, :type => :controller do
           	:installment_id => @installment.to_param,
            	:transaction => valid_attributes
           }
-        assigns(:transaction).installments.first.should eq(@installment)
+        expect(assigns(:transaction).installments.first).to eq(@installment)
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved transaction as @transaction" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Transaction.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Transaction).to receive(:save).and_return(false)
         xhr :post, :create, {
           	:business_id => @business.to_param, 
           	:membership_id => @membership.to_param,
           	:installment_id => @installment.to_param,
            	:transaction => {}
           }
-        assigns(:transaction).should be_a_new(Transaction)
+        expect(assigns(:transaction)).to be_a_new(Transaction)
       end
     end
   end

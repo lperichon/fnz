@@ -17,7 +17,7 @@ describe MembershipImport do
     expect {
       import.process
     }.to change(Membership, :count).by(1129)
-    import.status.should == :finished
+    expect(import.status).to eq :finished
   end
 
 

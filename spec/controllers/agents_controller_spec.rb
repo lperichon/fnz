@@ -20,7 +20,7 @@ describe AgentsController, :type => :controller do
     it "assigns all agents as @agents" do
       agent = @business.agents.create! valid_attributes
       get :index, {:business_id => @business.to_param}
-      assigns(:agents).should eq([agent])
+      expect(assigns(:agents)).to eq([agent])
     end
   end
 
@@ -28,20 +28,20 @@ describe AgentsController, :type => :controller do
     it "should be successful" do
       agent = @business.agents.create! valid_attributes
       get :show, :business_id => @business.to_param, :id => agent.to_param
-      response.should be_success
+      expect(response).to be_success
     end
 
     it "assigns the requested business as @business" do
       agent = @business.agents.create! valid_attributes
       get :show, {:business_id => @business.to_param, :id => agent.to_param}
-      assigns(:agent).should == agent
+      expect(assigns(:agent)).to eq agent
     end
   end
 
   describe "GET new" do
     it "assigns a new business as @business" do
       get :new, {:business_id => @business.to_param}
-      assigns(:agent).should be_a_new(Agent)
+      expect(assigns(:agent)).to be_a_new(Agent)
     end
   end
 
@@ -49,7 +49,7 @@ describe AgentsController, :type => :controller do
     it "assigns the requested business as @business" do
       agent = @business.agents.create! valid_attributes
       get :edit, {:business_id => @business.to_param, :id => agent.to_param}
-      assigns(:agent).should eq(agent)
+      expect(assigns(:agent)).to eq(agent)
     end
   end
 
@@ -63,29 +63,29 @@ describe AgentsController, :type => :controller do
 
       it "assigns a newly created agent as @agents" do
         post :create, {:business_id => @business.to_param, :agent => valid_attributes}
-        assigns(:agent).should be_a(Agent)
-        assigns(:agent).should be_persisted
+        expect(assigns(:agent)).to be_a(Agent)
+        expect(assigns(:agent)).to be_persisted
       end
 
       it "redirects to the created agent" do
         post :create, {:business_id => @business.to_param, :agent => valid_attributes}
-        response.should redirect_to(business_agent_url(@business,Agent.last))
+        expect(response).to redirect_to(business_agent_url(@business,Agent.last))
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved agent as @agent" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Agent.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Agent).to receive(:save).and_return(false)
         post :create, {:business_id => @business.to_param, :agent => {}}
-        assigns(:agent).should be_a_new(Agent)
+        expect(assigns(:agent)).to be_a_new(Agent)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Agent.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Agent).to receive(:save).and_return(false)
         post :create, {:business_id => @business.to_param, :agent => {}}
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
     end
   end
@@ -98,20 +98,20 @@ describe AgentsController, :type => :controller do
         # specifies that the Business created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Agent.any_instance.should_receive(:update_attributes).with({'name' => 'params'})
+        expect_any_instance_of(Agent).to receive(:update_attributes).with({'name' => 'params'})
         put :update, {:business_id => @business.to_param, :id => agent.to_param, :agent => {'name' => 'params'}}
       end
 
       it "assigns the requested agent as @agent" do
         agent = @business.agents.create! valid_attributes
         put :update, {:business_id => @business.to_param, :id => agent.to_param, :agent => valid_attributes}
-        assigns(:agent).should eq(agent)
+        expect(assigns(:agent)).to eq(agent)
       end
 
       it "redirects to the agent" do
         agent = @business.agents.create! valid_attributes
         put :update, {:business_id => @business.to_param, :id => agent.to_param, :agent => valid_attributes}
-        response.should redirect_to(business_agent_url(@business, agent))
+        expect(response).to redirect_to(business_agent_url(@business, agent))
       end
     end
 
@@ -119,17 +119,17 @@ describe AgentsController, :type => :controller do
       it "assigns the business as @business" do
         agent = @business.agents.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Agent.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Agent).to receive(:save).and_return(false)
         put :update, {:business_id => @business.to_param, :id => agent.to_param, :agent => {}}
-        assigns(:agent).should eq(agent)
+        expect(assigns(:agent)).to eq(agent)
       end
 
       it "re-renders the 'edit' template" do
         agent = @business.agents.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Agent.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Agent).to receive(:save).and_return(false)
         put :update, {:business_id => @business.to_param, :id => agent.to_param, :agent => {}}
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -145,7 +145,7 @@ describe AgentsController, :type => :controller do
     it "redirects to the businesses list" do
       agent = @business.agents.create! valid_attributes
       delete :destroy, {:business_id => @business.to_param, :id => agent.to_param}
-      response.should redirect_to(business_agents_url(@business))
+      expect(response).to redirect_to(business_agents_url(@business))
     end
   end
 

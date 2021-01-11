@@ -20,7 +20,7 @@ describe ImportsController, :type => :controller do
     it "assigns all imports as @imports" do
       import = @business.imports.create! valid_attributes
       get :index, {:business_id => @business.to_param}
-      assigns(:imports).should eq([import])
+      expect(assigns(:imports)).to eq([import])
     end
   end
 
@@ -28,20 +28,20 @@ describe ImportsController, :type => :controller do
     it "should be successful" do
       import = @business.imports.create! valid_attributes
       get :show, :business_id => @business.to_param, :id => import.to_param
-      response.should be_success
+      expect(response).to be_success
     end
 
     it "assigns the requested business as @business" do
       import = @business.imports.create! valid_attributes
       get :show, {:business_id => @business.to_param, :id => import.to_param}
-      assigns(:import).should == import
+      expect(assigns(:import)).to eq import
     end
   end
 
   describe "GET new" do
     it "assigns a new business as @business" do
       get :new, {:business_id => @business.to_param}
-      assigns(:import).should be_a_new(Import)
+      expect(assigns(:import)).to be_a_new(Import)
     end
   end
 
@@ -49,7 +49,7 @@ describe ImportsController, :type => :controller do
     it "assigns the requested business as @business" do
       import = @business.imports.create! valid_attributes
       get :edit, {:business_id => @business.to_param, :id => import.to_param}
-      assigns(:import).should eq(import)
+      expect(assigns(:import)).to eq(import)
     end
   end
 
@@ -63,29 +63,29 @@ describe ImportsController, :type => :controller do
 
       it "assigns a newly created import as @imports" do
         post :create, {:business_id => @business.to_param, :import => valid_attributes}
-        assigns(:import).should be_a(Import)
-        assigns(:import).should be_persisted
+        expect(assigns(:import)).to be_a(Import)
+        expect(assigns(:import)).to be_persisted
       end
 
       it "redirects to the created import" do
         post :create, {:business_id => @business.to_param, :import => valid_attributes}
-        response.should redirect_to(business_import_url(@business,Import.last))
+        expect(response).to redirect_to(business_import_url(@business,Import.last))
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved import as @import" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Import.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Import).to receive(:save).and_return(false)
         post :create, {:business_id => @business.to_param, :import => {}}
-        assigns(:import).should be_a_new(Import)
+        expect(assigns(:import)).to be_a_new(Import)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        Import.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Import).to receive(:save).and_return(false)
         post :create, {:business_id => @business.to_param, :import => {}}
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
     end
   end
@@ -98,20 +98,20 @@ describe ImportsController, :type => :controller do
         # specifies that the Business created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Import.any_instance.should_receive(:update_attributes).with({'description' => 'params'})
+        expect_any_instance_of(Import).to receive(:update_attributes).with({'description' => 'params'})
         put :update, {:business_id => @business.to_param, :id => import.to_param, :import => {'description' => 'params'}}
       end
 
       it "assigns the requested import as @import" do
         import = @business.imports.create! valid_attributes
         put :update, {:business_id => @business.to_param, :id => import.to_param, :import => valid_attributes}
-        assigns(:import).should eq(import)
+        expect(assigns(:import)).to eq(import)
       end
 
       it "redirects to the import" do
         import = @business.imports.create! valid_attributes
         put :update, {:business_id => @business.to_param, :id => import.to_param, :import => valid_attributes}
-        response.should redirect_to(business_import_url(@business, import))
+        expect(response).to redirect_to(business_import_url(@business, import))
       end
     end
 
@@ -119,17 +119,17 @@ describe ImportsController, :type => :controller do
       it "assigns the business as @business" do
         import = @business.imports.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Import.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Import).to receive(:save).and_return(false)
         put :update, {:business_id => @business.to_param, :id => import.to_param, :import => {}}
-        assigns(:import).should eq(import)
+        expect(assigns(:import)).to eq(import)
       end
 
       it "re-renders the 'edit' template" do
         import = @business.imports.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        Import.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(Import).to receive(:save).and_return(false)
         put :update, {:business_id => @business.to_param, :id => import.to_param, :import => {}}
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -145,7 +145,7 @@ describe ImportsController, :type => :controller do
     it "redirects to the businesses list" do
       import = @business.imports.create! valid_attributes
       delete :destroy, {:business_id => @business.to_param, :id => import.to_param}
-      response.should redirect_to(business_imports_url(@business))
+      expect(response).to redirect_to(business_imports_url(@business))
     end
   end
 
