@@ -27,7 +27,7 @@ class Contact < ActiveRecord::Base
   def self.get_by_padma_id(padma_id)
     c = self.find_by_padma_id(padma_id)
     if c.nil?
-      business_id = get_bussines_from_scope(self)
+      business_id = get_business_from_scope(self)
       if business_id
         b = Business.find(business_id)
         padma_contact = PadmaContact.find(padma_id,
@@ -86,8 +86,8 @@ class Contact < ActiveRecord::Base
 
   private
 
-  def self.get_bussines_from_scope(scope)
-    scope = scope.scoped
+  def self.get_business_from_scope(scope)
+    scope = scope.where(nil)
     res = scope.to_sql.match(/business_id\" \= (\d+)/)
     (res)? res[1].to_i : nil
   end
