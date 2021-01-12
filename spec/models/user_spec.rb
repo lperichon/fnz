@@ -77,7 +77,7 @@ describe User do
 
     before(:each) do
       @user = FactoryBot.create(:user, @attr)
-      @user.businesses << FactoryBot.create(:business)
+      @user.businesses << FactoryBot.create(:business, padma_id: 1)
     end
 
     it "should have a time_zone" do
