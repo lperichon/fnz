@@ -17,7 +17,7 @@ class InscriptionSearch
   end
 
   def results
-    scope = Inscription.scoped
+    scope = Inscription.where(nil)
 
     scope = scope.where(:business_id => @business_id) unless @business_id.nil?
     scope = scope.includes("contact").references("contact").where("contacts.name LIKE ?", "%#{@contact_name}%") if @contact_name.present?
