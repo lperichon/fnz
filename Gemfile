@@ -1,6 +1,11 @@
 source 'https://rubygems.org'
+
 ruby '2.3.8'
 gem 'rails', '4.1.2'
+
+gem 'puma'
+
+
 ##gem "sass", "~> 3.2.19"
 gem 'sass-rails', '~> 5.0.7'
 gem 'coffee-rails', '~> 4.2.2'
@@ -25,7 +30,6 @@ gem 'logical_model', '~> 0.6.6'
 gem 'accounts_client', '0.2.38'
 gem 'contacts_client', '~> 0.0.47'
 gem 'messaging_client','~> 0.2'
-gem 'unicorn'
 gem 'resque'
 gem 'execjs', '2.7.0'
 gem 'therubyracer'
