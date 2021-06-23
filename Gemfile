@@ -40,7 +40,6 @@ gem 'mandrill_mailer', :git => "git://github.com/lperichon/mandrill_mailer.git"
 gem 'httparty'
 gem "active_model_serializers"
 gem "byebug"
-gem 'airbrake'
 gem 'jquery-ui-rails'
 gem 'awesome_nested_set' # or any similar gem (gem 'nested_set')
 gem "the_sortable_tree", "~> 2.5.0"
