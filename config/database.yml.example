@@ -1,0 +1,13 @@
+development:
+  adapter: postgresql
+  database: fnz_development
+  pool: 5
+  timeout: 5000
+  port: 5433 # Postgres 11
+
+test:
+  adapter: postgresql
+  database: fnz_test
+  pool: 5
+  timeout: 5000
+  port: 5433 # Postgres 11
