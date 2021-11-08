@@ -109,7 +109,7 @@ class TransactionsController < UserApplicationController
         format.html { redirect_to business_transaction_path(@business, @transaction), notice: _("Movimiento actualizado") }
         format.js {}
         format.json do
-          respond_with_bip(@transaction.becomes(Transaction), param: "debit")
+          respond_with_bip(@transaction.becomes(Transaction), param: transaction_param_key)
         end
       else
         format.html { render action: "edit" }
