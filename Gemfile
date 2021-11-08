@@ -1,6 +1,11 @@
 source 'https://rubygems.org'
-ruby '2.3.8'
-gem 'rails', '4.1.2'
+
+ruby '2.6.8'
+gem 'rails', '~> 4.2'
+
+gem 'puma'
+
+
 ##gem "sass", "~> 3.2.19"
 gem 'sass-rails', '~> 5.0.7'
 gem 'coffee-rails', '~> 4.2.2'
@@ -25,7 +30,6 @@ gem 'logical_model', '~> 0.6.6'
 gem 'accounts_client', '0.2.38'
 gem 'contacts_client', '~> 0.0.47'
 gem 'messaging_client','~> 0.2'
-gem 'unicorn'
 gem 'resque'
 gem 'execjs', '2.7.0'
 gem 'therubyracer'
@@ -40,7 +44,6 @@ gem 'mandrill_mailer', :git => "git://github.com/lperichon/mandrill_mailer.git"
 gem 'httparty'
 gem "active_model_serializers"
 gem "byebug"
-gem 'airbrake'
 gem 'jquery-ui-rails'
 gem 'awesome_nested_set', '3.3.1' # or any similar gem (gem 'nested_set')
 gem "the_sortable_tree", "~> 2.5.0"
@@ -57,8 +60,9 @@ gem "appsignal"
 gem "translation"
 gem "activeresource"
 
+gem "pg", '0.21'
+
 group :staging, :production do
-  gem 'pg'
   gem 'rails_12factor'
 end
 
@@ -71,7 +75,6 @@ end
 group :development, :test do
   gem 'dalli', '2.6.4'
   gem 'rspec-collection_matchers'
-  gem 'sqlite3', '~> 1.3.6'
   gem "factory_bot_rails"
   gem "rspec-rails", '~> 3.9.1'
   gem "shoulda-matchers"
