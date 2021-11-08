@@ -114,7 +114,7 @@ class TransactionsController < UserApplicationController
       else
         format.html { render action: "edit" }
         format.js {}
-        format.json { respond_with_bip(@transaction.becomes(Transaction)) }
+        format.json { respond_with_bip(@transaction.becomes(Transaction), param: transaction_param_key) }
       end
     end
   end
