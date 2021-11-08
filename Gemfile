@@ -12,7 +12,7 @@ gem 'coffee-rails', '~> 4.2.2'
 gem 'uglifier', '~> 3.2'
 gem 'jquery-rails'
 gem "bootstrap-sass", "~> 2.1" #"2.0.4.0"
-gem "devise", "~> 3.4.1"
+gem 'devise', '4.4.0' # "~> 3.4.1"
 gem "cancan", ">= 1.6.8"
 gem "rolify", ">= 3.2.0"
 gem "transitions", :require => ["transitions", "active_model/transitions"]
@@ -43,7 +43,6 @@ gem 'bootstrap-kaminari-views'
 gem 'mandrill_mailer', :git => "git://github.com/lperichon/mandrill_mailer.git"
 gem 'httparty'
 gem "active_model_serializers"
-gem "byebug"
 gem 'jquery-ui-rails'
 gem 'awesome_nested_set', '3.3.1' # or any similar gem (gem 'nested_set')
 gem "the_sortable_tree", "~> 2.5.0"
@@ -78,6 +77,7 @@ group :development, :test do
   gem "factory_bot_rails"
   gem "rspec-rails", '~> 3.9.1'
   gem "shoulda-matchers"
+  gem "byebug"
 end
 
 group :test do

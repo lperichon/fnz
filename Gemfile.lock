@@ -1279,12 +1279,11 @@ GEM
     delayed_job_active_record (4.1.6)
       activerecord (>= 3.0, < 6.2)
       delayed_job (>= 3.0, < 5)
-    devise (3.4.1)
+    devise (4.4.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
-      railties (>= 3.2.6, < 5)
+      railties (>= 4.1.0, < 5.2)
       responders
-      thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.4.4)
     email_spec (2.2.0)
@@ -1569,7 +1568,7 @@ DEPENDENCIES
   dalli (= 2.6.4)
   database_cleaner (>= 0.8.0)
   delayed_job_active_record
-  devise (~> 3.4.1)
+  devise (= 4.4.0)
   email_spec (>= 1.2.1)
   execjs (= 2.7.0)
   factory_bot_rails
