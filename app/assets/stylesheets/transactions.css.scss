@@ -100,3 +100,8 @@
   font-size: 1.3em;
   font-weight: bold;
 }
+
+// no deberia ser necesario pero en update a rails 4.2 se desordenó algo del css del datepicker
+.daterangepicker {
+  display: none;
+}
