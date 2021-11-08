@@ -116,7 +116,7 @@ describe InstallmentsController, :type => :controller do
       it "redirects to the installment" do
         installment = @membership.installments.create! valid_attributes
         put :update, {:business_id => @business.to_param, :membership_id => @membership.to_param, :id => installment.to_param, :installment => valid_attributes}
-        expect(response).to redirect_to(business_membership_installment_url(@business, @membership, installment))
+        expect(response).to redirect_to(business_installment_url(@business, installment))
       end
     end
 
