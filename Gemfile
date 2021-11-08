@@ -11,7 +11,7 @@ gem 'sass-rails', '~> 5.0.7'
 gem 'coffee-rails', '~> 4.2.2'
 gem 'uglifier', '~> 3.2'
 gem 'jquery-rails'
-gem "bootstrap-sass", "2.0.4.0"
+gem "bootstrap-sass", "~> 2.1" #"2.0.4.0"
 gem "devise", "~> 3.4.1"
 gem "cancan", ">= 1.6.8"
 gem "rolify", ">= 3.2.0"

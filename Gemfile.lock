@@ -1235,7 +1235,8 @@ GEM
     bootstrap-kaminari-views (0.0.5)
       kaminari (>= 0.13)
       rails (>= 3.1)
-    bootstrap-sass (2.0.4.0)
+    bootstrap-sass (2.3.2.2)
+      sass (~> 3.2)
     builder (3.2.4)
     byebug (11.1.3)
     cache_digests (0.3.1)
@@ -1559,7 +1560,7 @@ DEPENDENCIES
   bootstrap-datepicker-rails (~> 1.1.1.11)
   bootstrap-daterangepicker-rails
   bootstrap-kaminari-views
-  bootstrap-sass (= 2.0.4.0)
+  bootstrap-sass (~> 2.1)
   byebug
   cache_digests
   cancan (>= 1.6.8)
