@@ -48,7 +48,7 @@ gem 'jquery-ui-rails'
 gem 'awesome_nested_set', '3.3.1' # or any similar gem (gem 'nested_set')
 gem "the_sortable_tree", "~> 2.5.0"
 gem "intercom-rails"
-gem "cache_digests"
+#gem "cache_digests"
 gem "wkhtmltopdf-heroku"
 gem "pdfkit"
 gem "paranoia", "~> 2.1.5"
