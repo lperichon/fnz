@@ -212,6 +212,9 @@ class TransactionsController < UserApplicationController
 
     # List transactions on this month or the year/month solicited
     start_date = @start_date = Date.parse(params[:start_date] || Time.zone.today.beginning_of_month.to_s).beginning_of_day
+    if params[:end_date] == "Invalid date"
+      params[:end_date] = nil
+    end
     end_date = @end_date = Date.parse(params[:end_date] || Time.zone.today.end_of_month.to_s).end_of_day
 
     if params[:report_on]
