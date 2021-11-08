@@ -109,7 +109,7 @@ class TransactionsController < UserApplicationController
         format.html { redirect_to business_transaction_path(@business, @transaction), notice: _("Movimiento actualizado") }
         format.js {}
         format.json do
-          respond_with_bip(@transaction.becomes(Transaction))
+          respond_with_bip(@transaction.becomes(Transaction), param: "debit")
         end
       else
         format.html { render action: "edit" }
@@ -165,15 +165,18 @@ class TransactionsController < UserApplicationController
 
   private
 
-  def transaction_attributes_for_update
-    permitted_params = transaction_params.to_h
+  def transaction_param_key
     if params[:credit]
-      permitted_params = params.delete(:credit)
+      :credit
+    elsif params[:debit]
+      :debit
+    else
+      :transaction
     end
-    if params[:debit]
-      permitted_params = params.delete(:debit)
-    end
-    permitted_params
+  end
+
+  def transaction_attributes_for_update
+    transaction_params
   end
 
   def transaction_attributes_for_batch_update
@@ -251,8 +254,8 @@ class TransactionsController < UserApplicationController
     end
   end
 
-  def transaction_params
-    params.require(:transaction).permit(
+  def transaction_param
+    params.require(transaction_param_key).permit(
       :tag_id,
       :description,
       :business_id,
@@ -275,6 +278,6 @@ class TransactionsController < UserApplicationController
       :agent_id,
       :admpart_tag_id,
       tag_ids: []
-    ) if params[:transaction].present?
+    ) if params[transaction_param_key].present?
   end
 end
