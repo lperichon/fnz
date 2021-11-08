@@ -25,14 +25,16 @@ describe TagsController, :type => :controller do
   end
 
   describe "GET show" do
+    let(:tag){@business.tags.create! valid_attributes}
+    before do
+      FactoryBot.create(:transaction, tag_ids: [tag.id])
+    end
     it "should be successful" do
-      tag = @business.tags.create! valid_attributes
       get :show, :business_id => @business.to_param, :id => tag.to_param
       expect(response).to be_success
     end
 
     it "assigns the requested business as @business" do
-      tag = @business.tags.create! valid_attributes
       get :show, {:business_id => @business.to_param, :id => tag.to_param}
       expect(assigns(:tag)).to eq tag
     end
@@ -69,7 +71,7 @@ describe TagsController, :type => :controller do
 
       it "redirects to the created tag" do
         post :create, {:business_id => @business.to_param, :tag => valid_attributes}
-        expect(response).to redirect_to(business_tag_url(@business,Tag.last))
+        expect(response).to redirect_to(business_tags_url(@business))
       end
     end
 
