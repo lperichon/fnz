@@ -12,14 +12,14 @@
 //
 //= require initialize_stimulus_app
 //= require jquery
-//= require jquery.ui.all
+//= require jquery-ui
 //= require jquery_ujs
 //= require bootstrap
 //= require bootstrap-datepicker
 //= require jquery.nested-fields
 //= require rails.validations
 //= require rails.validations.simple_form
-//= require tz_magic/application
+// require tz_magic/application
 //= require select2
 //= require moment
 //= require daterangepicker
