@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-ruby '2.3.8'
-gem 'rails', '4.1.2'
+ruby '2.6.8'
+gem 'rails', '~> 4.2'
 
 gem 'puma'
 
@@ -60,7 +60,7 @@ gem "appsignal"
 gem "translation"
 gem "activeresource"
 
-gem 'pg', '~> 0.20'
+gem "pg", '0.21'
 
 group :staging, :production do
   gem 'rails_12factor'
