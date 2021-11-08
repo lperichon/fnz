@@ -5,7 +5,7 @@ class TransactionStats
 
   attr_accessor :business, :month, :year, :context
 
-  validate :business, :month, :year, :presence => true
+  validates :business, :month, :year, :presence => true
 
   def initialize(attributes = {})
     attributes.each do |name, value|

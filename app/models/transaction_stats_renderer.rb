@@ -5,7 +5,7 @@ class TransactionStatsRenderer
 
   attr_accessor :transaction_stats
 
-  validate :transaction_stats, :presence => true
+  validates :transaction_stats, :presence => true
 
   def initialize(attributes = {})
     attributes.each do |name, value|

@@ -8,8 +8,8 @@ class BalanceCheck < ActiveRecord::Base
 
   before_validation :set_creator
 
-  validate :balance, presence: true
-  validate :account, presence: true
+  validates :balance, presence: true
+  validates :account, presence: true
 
   before_create :create_difference_transaction
 
