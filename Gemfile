@@ -16,7 +16,11 @@ gem 'devise', '4.4.0' # "~> 3.4.1"
 gem "cancan", ">= 1.6.8"
 gem "rolify", ">= 3.2.0"
 gem "transitions", :require => ["transitions", "active_model/transitions"]
+
 gem "awesome_nested_fields", "0.6.0"
+gem 'awesome_nested_set', '3.3.1' # or any similar gem (gem 'nested_set')
+gem "the_sortable_tree", "~> 2.5.0"
+
 gem "simple_form", '~> 3.2.0'
 gem "client_side_validations"
 gem 'client_side_validations-simple_form', '~> 3.2.4'
@@ -44,8 +48,6 @@ gem 'mandrill_mailer', :git => "git://github.com/lperichon/mandrill_mailer.git"
 gem 'httparty'
 gem "active_model_serializers"
 gem 'jquery-ui-rails'
-gem 'awesome_nested_set', '3.3.1' # or any similar gem (gem 'nested_set')
-gem "the_sortable_tree", "~> 2.5.0"
 gem "intercom-rails"
 #gem "cache_digests"
 gem "wkhtmltopdf-heroku"
