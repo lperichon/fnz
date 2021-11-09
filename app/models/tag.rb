@@ -1,6 +1,9 @@
 class Tag < ActiveRecord::Base
   acts_as_nested_set
   include TheSortableTree::Scopes
+  # si el arbol parece roto correr lo siguiente para recalcular lft y rgt
+  #     Tag.reset_column_information
+  #     Tag.rebuild!
 
   belongs_to :business
 
