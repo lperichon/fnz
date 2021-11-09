@@ -79,7 +79,7 @@ Fnz::Application.routes.draw do
       resources :transactions
     end
     resources :imports do
-      patch :process_csv, :on => :member
+      put :process_csv, :on => :member
       get :errors, :on => :member
     end
     resources :users
