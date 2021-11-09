@@ -63,6 +63,8 @@ gem "activeresource"
 
 gem "pg", '0.21'
 
+gem 'dalli', '2.6.4'
+
 group :staging, :production do
   gem 'rails_12factor'
 end
@@ -74,7 +76,6 @@ group :development do
 end
 
 group :development, :test do
-  gem 'dalli', '2.6.4'
   gem 'rspec-collection_matchers'
   gem "factory_bot_rails"
   gem "rspec-rails", '~> 3.9.1'
