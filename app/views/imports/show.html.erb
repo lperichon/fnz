@@ -13,7 +13,7 @@
 <% end %>
 
 <% unless @import.trans.empty? %>
-<h3><%= @import.transactions.count %> <%= _("Transacciones") %></h3>
+<h3><%= @import.trans.count %> <%= _("Transacciones") %></h3>
 <%= render :partial => 'transactions_table', :locals => {:transactions => @import.trans} %>
 <% end %>
 
