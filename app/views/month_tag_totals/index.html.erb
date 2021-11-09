@@ -22,6 +22,7 @@
   </thead>
   <tbody>
     <% @totals[@start_at].each_pair do |section, tag_h| %>
+      <% section_totals = Hash.new(0) %>
       <tr>
         <th colspan="<%= 1+@totals.keys.size %>">
           <%= section %>
@@ -33,6 +34,7 @@
             <%= tag.name %>
           </td>
           <% @totals.keys.each do |date| %>
+            <% section_totals[date] += @totals[date][section][tag] %>
             <td>
               <%= link_to pm(@totals[date][section][tag]), business_transactions_path(
                 business_id: @business.id,
@@ -43,6 +45,14 @@
           <% end %>
         </tr>
       <% end %>
+      <tr>
+        <th></th>
+        <% section_totals.keys.each do |date| %>
+          <th>
+            <%= pm section_totals[date] %>
+          </th>
+        <% end %>
+      </tr>
     <% end %>
   </tbody>
 </table>
