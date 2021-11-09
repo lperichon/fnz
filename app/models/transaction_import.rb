@@ -5,7 +5,8 @@ class TransactionImport < Import
                           foreign_key: "import_id"
   alias_method :imported_records, :trans
 
-  validates_attachment :upload, :presence => true, :content_type => { :content_type => "text/csv" }
+  validates_attachment :upload, :presence => true
+  validates_attachment_content_type :upload, content_type: %W(text/plain text/csv)
 
   before_destroy :destroy_transactions
 
