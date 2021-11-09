@@ -13,7 +13,7 @@ class Tag < ActiveRecord::Base
   validates :name, :presence => true
   validates :business, :presence => true
 
-  default_scope { order('name ASC') }
+  default_scope { order('tags.name ASC') }
 
   # Setup accessible (or protected) attributes for your model
   #attr_accessible :name, :business_id, :admpart_section, :system_name
