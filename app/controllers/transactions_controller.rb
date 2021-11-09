@@ -70,7 +70,7 @@ class TransactionsController < UserApplicationController
         source_id: @business.accounts.where(default: true).first.try(:id)
       })
     end
-    @transaction = @context.new(attrs)
+    @transaction = @context.new(attrs.permit!)
     if params[:quick]
       render layout: "quick_mobile"
     end
