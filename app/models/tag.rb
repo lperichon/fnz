@@ -42,35 +42,6 @@ class Tag < ActiveRecord::Base
     name
   end
 
-  # 
-  # descendants seems to be working ok on newer versions of gem
-  # when using this override I have to override a los of methods because an Array
-  # is passed instead of an active record relation
-  #
-  # gem descendants seems buggy
-  # def self_and_descendants
-  #   if children.empty?
-  #     [self]
-  #   else
-  #     [self,children.map(&:self_and_descendants)]
-  #   end.flatten
-  # end
-
-  # override gem descendants method as it throws an error with the above override
-  # def descendants
-  #   without_self self_and_descendants
-  # end
-
-  # override gem without selg method as it throws an error with the override above
-  # def without_self(sc)
-  #   return sc if new_record?
-  #   if sc.class == Array
-  #     sc - [self]
-  #   else
-  #     sc.where(["#{self.class.quoted_table_name}.#{self.class.quoted_primary_column_name} != ?", self.primary_id])
-  #   end
-  # end
-
   # tagged by this tag and its descendants
   def tree_transactions
     Transaction.where(admpart_tag_id: self_and_descendants.map(&:id))
