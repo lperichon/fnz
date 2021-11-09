@@ -16,4 +16,9 @@
     left: 0px;
     background-color: white;
   }
+  tr.subtotals {
+    th:first-child {
+      text-align: right;
+    }
+  }
 }
