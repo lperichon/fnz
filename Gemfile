@@ -26,7 +26,7 @@ gem "client_side_validations"
 gem 'client_side_validations-simple_form', '~> 3.2.4'
 gem 'bootstrap-datepicker-rails', "~> 1.1.1.11"
 gem 'validates_timeliness', '~> 4.0'
-gem "paperclip", "~> 3.0"
+gem "paperclip"#, "~> 3.0"
 gem 'aws-sdk'
 #gem 'tz_magic'
 gem "squeel", '~> 1.2.3'
