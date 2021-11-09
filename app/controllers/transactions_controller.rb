@@ -254,7 +254,7 @@ class TransactionsController < UserApplicationController
     end
   end
 
-  def transaction_param
+  def transaction_params
     params.require(transaction_param_key).permit(
       :tag_id,
       :description,
