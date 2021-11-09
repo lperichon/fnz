@@ -59,12 +59,10 @@ class AdmpartsController < UserApplicationController
     @adm = if id
        if id.to_s == "current"
          @business.current_admpart
+       elsif id.to_i.to_s == id
+         @business.admparts.find id
        else
-         begin
-           @business.admparts.get_for_ref_date(id.to_date)
-         rescue
-           @business.admparts.find id
-         end
+         @business.admparts.get_for_ref_date(id.to_date)
        end
     elsif params[:year] && params[:month]
       @business.admparts.get_for_ref_date(Date.civil(params[:year].to_i,params[:month].to_i,1))
