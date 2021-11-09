@@ -171,7 +171,7 @@ class Admpart < ActiveRecord::Base
   end
 
   def root_tags_for_section(section)
-    business.tags.roots.where(admpart_section: section)
+    Tag.roots.where(business_id: business.id).where(admpart_section: section)
   end
 
   def sorted_roots_and_values_for_section(section,options={})
@@ -181,7 +181,7 @@ class Admpart < ActiveRecord::Base
   end
 
   def wout_section_root_tags
-    business.tags.roots.where("admpart_section is null or admpart_section not in (?)", VALID_SECTIONS)
+    Tag.roots.where(business_id: business.id).where("admpart_section is null or admpart_section not in (?)", VALID_SECTIONS)
   end
 
   def transactions_for_tag(tag,options={})

@@ -1,5 +1,5 @@
 class Tag < ActiveRecord::Base
-  acts_as_nested_set
+  acts_as_nested_set scope: :business_id
   include TheSortableTree::Scopes
 
   belongs_to :business
