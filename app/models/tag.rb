@@ -77,7 +77,6 @@ class Tag < ActiveRecord::Base
   end
 
   def month_total(ref_date)
-
     MonthTagTotal.get_for(self,ref_date).total_amount
   end
 

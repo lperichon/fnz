@@ -277,6 +277,7 @@ class TransactionsController < UserApplicationController
       :contact_id,
       :agent_id,
       :admpart_tag_id,
+      :tag_ids,
       tag_ids: []
     ) if params[transaction_param_key].present?
   end

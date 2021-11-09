@@ -8,6 +8,9 @@
      end
      if params[:admpart_tag_id]
        transaction_params.merge!({tag_ids: [params[:admpart_tag_id]]})
+       if params[:report_on]
+         transaction_params.merge!({report_at: params[:report_on]})
+       end
      end
   %>
   <li class="pull-right">
