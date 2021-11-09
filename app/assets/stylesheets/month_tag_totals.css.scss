@@ -1,3 +1,19 @@
 // Place all the styles related to the month_tag_totals controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.table-sticky-headers {
+  &table {
+    position: relative;
+  }
+  thead th {
+    position: sticky;
+    background-color: white;
+    top: 80px;
+  }
+  tbody th:first-child {
+    position: sticky;
+    left: 0px;
+    background-color: white;
+  }
+}
