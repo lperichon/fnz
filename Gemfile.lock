@@ -1587,7 +1587,7 @@ DEPENDENCIES
   mandrill_mailer!
   messaging_client (~> 0.2)
   momentjs-rails
-  paperclip
+  paperclip (= 6.1)
   paranoia (~> 2.1.5)
   pdfkit
   pg (= 0.21)
