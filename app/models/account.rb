@@ -35,6 +35,14 @@ class Account < ActiveRecord::Base
     ret
   end
 
+  def currency_code=(currency_code)
+    self[:currency] = currency_code
+  end
+
+  def currency_code
+    self[:currency]
+  end
+
   def last_balance_check
     @last_balance_check ||= balance_checks.order(:checked_at).last
   end

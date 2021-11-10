@@ -1,7 +1,9 @@
 <%= simple_form_for(@account, :url => form_url, :validate => true, :html => {:class => "form-horizontal"}) do |f| %>
   <%= f.input :name %>
   <% if !@account.persisted? || params[:change_currency] %>
-    <%= f.input :currency, :as => :select, :collection => SUPPORTED_CURRENCIES %>
+    <%= f.input :currency_code,
+      as: :select,
+      collection: SUPPORTED_CURRENCIES %>
   <% end %>
   <%= f.input :default %>
   <%= f.button :submit, :class => "btn btn-primary" %>
