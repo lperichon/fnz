@@ -6,7 +6,7 @@
     t.state,
     t.description,
     number_with_precision(t.amount, precision: 2),
-    t.source.name,
+    t.source.try(:name),
     t.target.try(:name),
     t.transaction_at.to_s(:short),
     t.tags.join(","),
