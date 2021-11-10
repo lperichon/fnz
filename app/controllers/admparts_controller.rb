@@ -3,7 +3,7 @@ class AdmpartsController < UserApplicationController
   
   layout "application_without_sidebar"
 
-  before_filter :store_location, except: [:edit]
+  before_filter :store_current_location, only: [:show, :attendance_detail]
 
   before_filter :get_context
   before_filter :get_admpart, only: [:show, :edit, :update, :attendance_detail]

@@ -2,7 +2,6 @@ class PaymentsController < UserApplicationController
   include RedirectBackHelper
   
   before_filter :get_context
-  before_filter :store_location, :only => [:create]
 
   def new
     if params[:installment]

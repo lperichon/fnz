@@ -1,6 +1,10 @@
 module RedirectBackHelper
 
-  def store_location
+  def store_current_location
+    session[:return_to] = request.url
+  end
+
+  def store_previous_location
     session[:return_to] = request.referer
   end
 

@@ -3,7 +3,7 @@ class MembershipsController < UserApplicationController
 
   before_filter :get_context
 
-  before_filter :store_location, only: [:index, :show, :overview, :destroy]
+  before_filter :store_current_location, only: [:index, :show, :overview]
 
   def index
     @search = MembershipSearch.new(params[:membership_search])
