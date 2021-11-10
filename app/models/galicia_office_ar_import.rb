@@ -11,18 +11,13 @@ class GaliciaOfficeArImport < TransactionImport
     return unless status.to_sym.in? [:ready, :queued]
     self.update_attribute(:status, :working)
     n, errs = 0, []
-    path = if Rails.env == "development" || Rails.env == "test"
-    	upload.path
-    else
-    	upload.url
-    end
     columns = nil
 
     backuped_timezone = Time.zone
     Time.zone = business.time_zone
 
     begin
-      CSV.parse(open(path,"r:ISO-8859-1"),col_sep: ";") do |row|
+      CSV.parse(Paperclip.io_adapters.for(upload).read,col_sep: ";") do |row|
         columns = row.size
         n += 1
         # SKIP: header, and first row
