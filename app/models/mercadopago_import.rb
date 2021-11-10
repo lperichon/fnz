@@ -7,11 +7,6 @@ class MercadopagoImport < TransactionImport
     return unless status.to_sym.in? [:ready, :queued]
     self.update_attribute(:status, :working)
     n, errs = 0, []
-    path = if Rails.env == "development" || Rails.env == "test"
-    	upload.path
-    else
-    	upload.url
-    end
     columns = nil
 
     backuped_timezone = Time.zone
@@ -19,7 +14,7 @@ class MercadopagoImport < TransactionImport
 
     @quote_char = "|" # MercadoPago export no separa con comillas y no escapa las comillas en descripciones de productos, etc.
     begin
-      CSV.parse(open(path,"r:ISO-8859-1"),
+      CSV.parse(read_uploaded_file,
                 col_sep: ";",
                 quote_char: @quote_char,
                 headers: true,

@@ -13,13 +13,7 @@ class SantanderRioArImport < TransactionImport
     self.update_attribute(:status, :working)
     n, errs = 0, []
 
-    path = if Rails.env == "development" || Rails.env == "test"
-    	upload.path
-    else
-    	upload.url
-    end
-
-    xls = Roo::Spreadsheet.open(path)
+    xls = Roo::Spreadsheet.open(read_uploaded_file)
     sheet = xls.sheet(xls.sheets[0])
     last_row = sheet.last_row
 

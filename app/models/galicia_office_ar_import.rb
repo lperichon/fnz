@@ -17,7 +17,7 @@ class GaliciaOfficeArImport < TransactionImport
     Time.zone = business.time_zone
 
     begin
-      CSV.parse(Paperclip.io_adapters.for(upload).read,col_sep: ";") do |row|
+      CSV.parse(read_uploaded_file,col_sep: ";") do |row|
         columns = row.size
         n += 1
         # SKIP: header, and first row

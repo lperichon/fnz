@@ -19,18 +19,12 @@ class Import < ActiveRecord::Base
     self.update_attribute(:status, :working)
     n, errs = 0, []
 
-    path = if Rails.env == "development" || Rails.env == "test"
-    	upload.path
-    else
-    	upload.url
-    end
-
     backuped_timezone = Time.zone
     Time.zone = business.time_zone
 
     columns = nil
     begin
-      CSV.parse(open(path)) do |row|
+      CSV.parse(read_uploaded_file) do |row|
         columns = row.size
         n += 1
         # SKIP: header i.e. first row OR blank row
@@ -71,6 +65,10 @@ class Import < ActiveRecord::Base
     Time.zone = backuped_timezone
 
     return errs.empty?
+  end
+
+  def read_uploaded_file
+    Paperclip.io_adapters.for(upload).read
   end
 
   def record_errors(record)
