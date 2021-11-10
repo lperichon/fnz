@@ -12,7 +12,7 @@ gem 'coffee-rails', '~> 4.2.2'
 gem 'uglifier', '~> 3.2'
 gem 'jquery-rails'
 gem "bootstrap-sass", "~> 2.1" #"2.0.4.0"
-gem 'devise', '4.4.0'
+gem 'devise', '4.8.0'
 gem "cancan", ">= 1.6.8"
 gem "rolify", ">= 3.2.0"
 gem "transitions", :require => ["transitions", "active_model/transitions"]
