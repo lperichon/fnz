@@ -61,16 +61,7 @@ class TransactionsController < UserApplicationController
   end
 
   def new
-    attrs = ( transaction_params || {}).reverse_merge({
-      type: 'Debit',
-      transaction_at: Time.zone.now
-    })
-    if @business
-      attrs = attrs.reverse_merge({
-        source_id: @business.accounts.where(default: true).first.try(:id)
-      })
-    end
-    @transaction = @context.new(attrs.permit!)
+    @transaction = @context.new(transaction_attributes_for_new)
     if params[:quick]
       render layout: "quick_mobile"
     end
@@ -173,6 +164,19 @@ class TransactionsController < UserApplicationController
     else
       :transaction
     end
+  end
+
+  def transaction_attributes_for_new
+    attrs = ( transaction_params || {}).reverse_merge({
+      type: 'Debit',
+      transaction_at: Time.zone.now
+    })
+    if @business
+      attrs = attrs.reverse_merge({
+        source_id: @business.accounts.where(default: true).first.try(:id)
+      })
+    end
+    attrs.is_a?(ActionController::Parameters) ? attrs.permit! : attrs
   end
 
   def transaction_attributes_for_update
