@@ -6,7 +6,7 @@ class AccountsController < UserApplicationController
   end
 
   def show
-    @account = @business.accounts.with_deleted.find(params[:id])
+    redirect_to business_transactions_path(business_id: @business.id, account_id: params[:id])
   end
 
   def edit
@@ -40,7 +40,7 @@ class AccountsController < UserApplicationController
 
     respond_to do |format|
       if @account.update_attributes(account_params || {})
-        format.html { redirect_to business_account_path(@business, @account), notice: 'Account was successfully updated.' }
+        format.html { redirect_to business_accounts_path(@business), success: 'Account was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

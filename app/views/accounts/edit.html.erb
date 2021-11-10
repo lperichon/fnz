@@ -6,9 +6,11 @@
 
 <%= render :partial => 'form', :locals => {:form_url => business_account_path(@business, @account)} %>
 
-<p>
-  <%= link_to(_("Habilitar cambio de moneda"), edit_business_account_path(@business,@account, change_currency: 1)) %>. <%= _("Esto modificará la moneda de TODOS los movimientos realizados en esta cuenta.") %>
-</p>
+<% unless params[:change_currency] %>
+  <p>
+    <%= link_to(_("Habilitar cambio de moneda"), edit_business_account_path(@business,@account, change_currency: 1)) %>. <%= _("Esto modificará la moneda de TODOS los movimientos realizados en esta cuenta.") %>
+  </p>
+<% end %>
 
 <%= link_to t('actions.show'), business_account_path(@business,@account) %> |
 <%= link_to t('actions.back'), business_accounts_path(@business) %>
