@@ -91,7 +91,7 @@ class AccountsController < UserApplicationController
     params.require(:account).permit(
       :name,
       :business_id,
-      :currency,
+      :currency_code,
       :default
     ) if params[:account].present?
   end
