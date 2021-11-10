@@ -1,6 +1,6 @@
 <ul class="nav nav-pills nav-stacked" id="edit-sidebar">
   <% if @business.is_a?(School) || @business.is_a?(Event) %>
-  <li class="<%= 'active' if controller.controller_name == "agents" %>"><%= link_to content_tag(:i, "", :class => "icon-sitemap") + t("businesses.edit_sidebar.#{@business.type.downcase}.manage_agents"), business_agents_path(@business) %></li>
+  <!--<li class="<%= 'active' if controller.controller_name == "agents" %>"><%= link_to content_tag(:i, "", :class => "icon-sitemap") + t("businesses.edit_sidebar.#{@business.type.downcase}.manage_agents"), business_agents_path(@business) %></li>-->
   <li class="<%= 'active' if controller.controller_name == "payment_types" %>"><%= link_to content_tag(:i, "", :class => "icon-money") + t('businesses.edit_sidebar.manage_payment_types'), business_payment_types_path(@business) %></li>
   <% end -%>
   <% if @business.transactions_enabled? %>
@@ -11,9 +11,9 @@
   <% end %>
   <% if @business.transactions_enabled? %>
     <li class="<%= 'active' if controller.controller_name == "imports" %>"><%= link_to content_tag(:i, "", :class => "icon-upload") + t('businesses.edit_sidebar.manage_imports'), business_imports_path(@business) %></li>
-    <li class="<%= 'active' if controller.controller_name == "transaction_rules" %>"><%= link_to _("Reglas de automatización"), business_transaction_rules_path(@business) %></li>
+    <li class="<%= 'active' if controller.controller_name == "transaction_rules" %>"><%= link_to content_tag(:i, "", :class => "icon-cogs") + _("Reglas de automatización"), business_transaction_rules_path(@business) %></li>
   <% end %>
   <% if @business.share_enabled? %>
-  <li class="<%= 'active' if controller.controller_name == "users" %>"><%= link_to content_tag(:i, "", :class => "icon-globe") + t('businesses.edit_sidebar.manage_users'), business_users_path(@business) %></li>
+    <!-- <li class="<%= 'active' if controller.controller_name == "users" %>"><%= link_to content_tag(:i, "", :class => "icon-globe") + t('businesses.edit_sidebar.manage_users'), business_users_path(@business) %></li> -->
   <% end %>
 </ul>
