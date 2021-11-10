@@ -1,0 +1,41 @@
+<%= link_to "Fnz", root_path, :class => 'brand' %>
+<ul class="nav pull-right">
+  <li>
+      <%= link_to t('layouts.navigation.crm'), Crm::URL %>
+    </li>
+  <% if user_signed_in? %>
+    <li>
+      <%= link_to t('layouts.navigation.businesses'), businesses_path %>
+    </li>
+  <% end %>
+  <% if user_signed_in? %>
+    <li>
+    <%= link_to content_tag(:i, "", :class => "icon-off", :title => t("actions.logout"), :rel => "tooltip"), logout_path, :method=>'delete' %>
+    </li>
+  <% else %>
+    <li>
+    <%= link_to content_tag(:i, "", :class => "icon-signin", :title => t("actions.login"), :rel => "tooltip"), new_user_session_path %>
+    </li>
+  <% end %>
+  <% if user_signed_in? %>
+    <li>
+    <%= link_to content_tag(:i, "", :class => "icon-user"), edit_user_registration_path, :title => t("layouts.navigation.edit_account"), :rel => "tooltip" %>
+    </li>
+    <% if current_user.has_role? :admin %>
+      <li>
+      <%= link_to 'Admin', admin_businesses_path %>
+      </li>
+    <% end %>
+  <% end %>
+</ul>
+<% if user_signed_in? %>
+<ul id="nav-businesses" class="nav">
+  <% current_user.user_businesses.each do |user_business| %>
+    <% business = user_business.business %>
+    <% unless business.new_record? or !user_business.show_on_menu? %>
+      <li class="<%= 'active' if @business.present? && @business.id == business.id %>"><%= link_to business.name, business.is_a?(School) ? overview_business_memberships_path(business) : business_transactions_path(business) %></li>
+    <% end %>
+  <% end %>
+    <li class="action"><a href="<%= new_business_path %>"><i class="icon-plus-sign"></i></a></li>
+</ul>
+<% end %>
