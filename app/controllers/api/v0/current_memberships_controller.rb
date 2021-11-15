@@ -25,7 +25,7 @@ class Api::V0::CurrentMembershipsController < Api::V0::ApiController
 
   def index
     Appsignal.instrument("build_memberships_scope") do
-      @memberships = @business.memberships.current.includes(:contact, :payment_type, :installments)
+      @memberships = @business.memberships.current.includes(:contact, :payment_type, :installments).unscope(:order)
       if params[:padma_contact_ids].present?
         @memberships = @memberships.where(contacts: {
           business_id: @business.id, # for query to use contact's [business_id, padma_id] index
