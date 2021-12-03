@@ -36,7 +36,7 @@ class InstallmentsController < UserApplicationController
       end
     end
 
-    @installment = @context.new((installment_params||{}).reverse_merge(defaults))
+    @installment = @context.new((installment_params||{}).reverse_merge(defaults).permit!)
 
   	date = Date.today
   	@transactions = @business.trans.credits.where {(transaction_at.gteq(date - 1.month)) & (transaction_at.lteq(date + 1.month))}.order("order_stamp DESC")
