@@ -17,8 +17,7 @@ class PadmaContactsSynchronizer
     end
 
     padma_contacts.each do |padma_contact|
-        contact = contacts.detect {|c| c.padma_id == padma_contact.id} 
-        if (contact)
+        if (contact = contacts.detect {|c| c.padma_id == padma_contact.id})
           # If contact existed already update it
           contact.update_attributes(
   	        :name => "#{padma_contact.first_name} #{padma_contact.last_name}".strip,
