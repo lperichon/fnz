@@ -3,8 +3,8 @@ require 'rails_helper'
 describe Sale do
   
   before(:each) do
-    allow(PadmaContact).to receive(:find).and_return(PadmaContact.new(:first_name => "Homer", :last_name => "Simpson"))
-    allow_any_instance_of(Contact).to receive(:padma).and_return([PadmaContact.new(:first_name => "Homer", :last_name => "Simpson")])
+    allow(CrmLegacyContact).to receive(:find).and_return(CrmLegacyContact.new(:first_name => "Homer", :last_name => "Simpson"))
+    allow_any_instance_of(Contact).to receive(:padma).and_return([CrmLegacyContact.new(:first_name => "Homer", :last_name => "Simpson")])
     @business = FactoryBot.create(:business)
     @contact = FactoryBot.create(:contact, :business => @business)
     @agent = FactoryBot.create(:agent, :business => @business)

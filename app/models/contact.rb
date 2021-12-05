@@ -30,7 +30,7 @@ class Contact < ActiveRecord::Base
       business_id = get_business_from_scope(self)
       if business_id
         b = Business.find(business_id)
-        padma_contact = PadmaContact.find(padma_id,
+        padma_contact = CrmLegacyContact.find(padma_id,
                           select: [:id, :full_name, :local_status, :local_teacher],
                           account_name: b.padma_id
                          )
@@ -65,7 +65,7 @@ class Contact < ActiveRecord::Base
   end
 
   def padma
-    PadmaContact.find(padma_id, select: [:email]) if padma_id
+    CrmLegacyContact.find(padma_id, select: [:email]) if padma_id
   end
 
   # TODO: cache email

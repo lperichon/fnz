@@ -38,7 +38,7 @@ RSpec.configure do |config|
 
   config.before(:each) do
     allow_any_instance_of(User).to receive(:padma).and_return(PadmaUser.new)
-    allow(PadmaContact).to receive(:find_by_kshema_id).and_return(PadmaContact.new(:id => "123", :first_name => "Bart", :last_name => "Simpson"))
+    allow(CrmLegacyContact).to receive(:find_by_kshema_id).and_return(CrmLegacyContact.new(:id => "123", :first_name => "Bart", :last_name => "Simpson"))
     allow(PadmaAccount).to receive(:find).and_return(PadmaAccount.new(:name => "test", timezone: "UTC"))
     allow_any_instance_of(PadmaAccount).to receive(:admin).and_return(PadmaUser.new(:username => "homer.simpson", :id => "homer.simpson", :email => "homer@simpsons.com"))
     allow_any_instance_of(PadmaAccount).to receive(:users).and_return([PadmaUser.new(:id => "bart.simpson", :email => "bart@simpsons.com"), PadmaUser.new(:id => "lisa.simpson", :email => "lisa@simpsons.com") ])

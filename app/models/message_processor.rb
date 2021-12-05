@@ -11,7 +11,7 @@ class MessageProcessor
     return if business.nil?
 
     #Create local contact
-    padma_contact = PadmaContact.find(data[:contact_id],
+    padma_contact = CrmLegacyContact.find(data[:contact_id],
                                       :select => [:first_name, :last_name, :status, :global_teacher_username],
                                       :account_name => business.padma_id)
 

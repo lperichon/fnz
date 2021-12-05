@@ -39,7 +39,7 @@ describe Contact do
       end
       context "if contact doesnt exist" do
         before do
-          allow(PadmaContact).to receive(:find).and_return(PadmaContact.new(id: pid,
+          allow(CrmLegacyContact).to receive(:find).and_return(CrmLegacyContact.new(id: pid,
                                                                first_name: 'Dwayne',
                                                                last_name: 'macgowan',
                                                                local_status: 'student',

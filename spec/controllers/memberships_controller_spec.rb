@@ -25,8 +25,8 @@ describe MembershipsController, :type => :controller do
 
   before(:each) do
 
-	  PadmaContact.stub(:find).and_return(
-      PadmaContact.new(first_name: 'blah', last_name: 'balh', global_teacher_username: 'luis.perichon', status: 'student')
+	  CrmLegacyContact.stub(:find).and_return(
+      CrmLegacyContact.new(first_name: 'blah', last_name: 'balh', global_teacher_username: 'luis.perichon', status: 'student')
     )
 
     @business = FactoryBot.create(:school)

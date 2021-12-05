@@ -66,7 +66,7 @@ class Membership < ActiveRecord::Base
   def self.build_from_csv(business, row)
     membership = Membership.new
 
-    padma_contact = PadmaContact.find_by_kshema_id(row[4])
+    padma_contact = CrmLegacyContact.find_by_kshema_id(row[4])
 
     return unless padma_contact
 

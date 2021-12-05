@@ -35,7 +35,7 @@ class Sale < ActiveRecord::Base
     padma_contact = nil
     contact = nil
     unless row[3].blank?
-      padma_contact = PadmaContact.find_by_kshema_id(row[3])
+      padma_contact = CrmLegacyContact.find_by_kshema_id(row[3])
       contact = Contact.find_or_create_by(:padma_id => padma_contact.id,
                                                  :business_id => business.id,
                                                  :name => "#{padma_contact.first_name} #{padma_contact.last_name}".strip,
