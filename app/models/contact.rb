@@ -1,6 +1,8 @@
 # ATENTION - padma_id is not unique
 #                     this model represents padma's account-contact realation
 class Contact < ActiveRecord::Base
+  include GetsByPadmaId
+
   belongs_to :business
 
   validates :name, :presence => true
@@ -21,30 +23,7 @@ class Contact < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   #attr_accessible :name, :business_id, :padma_id, :padma_status, :padma_teacher
 
-  # finds contact by padma_id
-  # if it doesnt exist it creates
-  # BUSINESS should be specified on scope, padma_id is not unique
-  def self.get_by_padma_id(padma_id)
-    c = self.find_by_padma_id(padma_id)
-    if c.nil?
-      business_id = get_business_from_scope(self)
-      if business_id
-        b = Business.find(business_id)
-        padma_contact = CrmLegacyContact.find(padma_id,
-                          select: [:id, :full_name, :local_status, :local_teacher],
-                          account_name: b.padma_id
-                         )
-        if padma_contact
-          c = b.contacts.create(
-            :name => "#{padma_contact.first_name} #{padma_contact.last_name}".strip,
-            :padma_status => padma_contact.local_status,
-            :padma_teacher => padma_contact.local_teacher,
-            :padma_id => padma_contact.id)
-        end
-      end
-    end
-    c
-  end
+
 
   def self.all_students
     scope = self.joins("left outer join memberships on contacts.id = memberships.contact_id")
