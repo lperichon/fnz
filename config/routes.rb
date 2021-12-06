@@ -95,6 +95,7 @@ Fnz::Application.routes.draw do
 
   get 'messages', to: 'messages#catch_message'
   get 'sns', to: 'messages#sns'
+  post 'sns', to: 'messages#sns'
 
   namespace 'admin' do
     resources :businesses, only: [:index, :show, :edit, :update, :destroy]
