@@ -40,8 +40,10 @@ gem 'therubyracer'
 gem "select2-rails"
 gem 'momentjs-rails'
 gem 'bootstrap-daterangepicker-rails'
+
 gem 'delayed_job_active_record' # must be declared after 'protected_attributes' gem
-gem "workless", "~> 1.1.3"
+gem "workless", "~> 2.2.0"
+
 gem "kaminari", '~> 0.13.0'
 gem 'bootstrap-kaminari-views'
 gem 'mandrill_mailer', :git => "git://github.com/lperichon/mandrill_mailer.git"
