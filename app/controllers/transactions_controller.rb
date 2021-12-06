@@ -185,7 +185,7 @@ class TransactionsController < UserApplicationController
 
   def transaction_attributes_for_batch_update
     # TODO remove blanks
-    params.require(:transaction).reject{|k,v| v.blank? }.premit!
+    params.require(:transaction).reject{|k,v| v.blank? }.permit!
   end
 
   def get_context
