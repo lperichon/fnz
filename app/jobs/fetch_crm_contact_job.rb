@@ -21,7 +21,7 @@ class FetchCrmContactJob
   private
 
   def resync_for_business(business)
-    if (contact = business.contact.find_by_padma_id(padma_contact.id))
+    if (contact = business.contacts.find_by_padma_id(padma_contact.id))
       # If contact existed already update it
       contact.update_attributes(
         :name => "#{padma_contact.first_name} #{padma_contact.last_name}".strip,
