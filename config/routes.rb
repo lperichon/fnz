@@ -39,7 +39,7 @@ Fnz::Application.routes.draw do
       resources :transaction_spliters, only: [:new, :create]
       collection do
         get :batch_edit
-        patch :batch_update
+        put :batch_update
         get :stats
       end
     end
