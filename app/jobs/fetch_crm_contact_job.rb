@@ -13,8 +13,10 @@ class FetchCrmContactJob
       ret = resync_for_business(business)
     else
       padma_contact.local_statuses.each do |ls|
-        if (business = Business.find_by_padma_id ls["account_name"])
-          ret = resync_for_business(business)
+        if (pc = get_padma_contact(ls["account_name"]))
+          if (business = Business.find_by_padma_id ls["account_name"])
+            ret = resync_for_business(business, pc)
+          end
         end
       end
     end
@@ -23,16 +25,21 @@ class FetchCrmContactJob
 
   private
 
-  def resync_for_business(business)
-    if (contact = business.contacts.find_by_padma_id(padma_contact.id))
+  def resync_for_business(business, pc = nil)
+    pc = padma_contact if pc.nil?
+    if (contact = business.contacts.find_by_padma_id(pc.id))
       # If contact existed already update it
       contact.update_attributes(
-        :name => "#{padma_contact.first_name} #{padma_contact.last_name}".strip,
-        :padma_status => padma_contact.local_status,
-        :padma_teacher => padma_contact.local_teacher)
+        :name => "#{pc.first_name} #{pc.last_name}".strip,
+        :padma_status => pc.local_status,
+        :padma_teacher => pc.local_teacher)
     else
-      contact = business.contacts.get_by_padma_id(padma_contact.id)
+      contact = business.contacts.get_by_padma_id(pc.id)
     end
+  end
+
+  def get_padma_contact(account_name)
+    CrmLegacyContact.find @attributes[:id], account_name: account_name
   end
 
   def padma_contact
