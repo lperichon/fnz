@@ -1,5 +1,8 @@
 class FetchCrmContactJob
 
+  # @param attributes
+  # @option id REQUIRED padma_id del contacto
+  # @option business_padma_id OPTIONAL account_name de la escuela
   def initialize(attributes = {})
     @attributes = attributes
   end
