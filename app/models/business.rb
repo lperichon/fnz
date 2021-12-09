@@ -1,10 +1,12 @@
 class Business < ActiveRecord::Base
+
+  include Business::HasContacts
+
   belongs_to :owner, :class_name => "User"
   has_many :accounts
   has_many :trans, class_name: "Transaction"
   has_many :transaction_rules
   has_many :tags
-  has_many :contacts
   has_many :agents
   has_many :products
   has_many :imports
