@@ -12,6 +12,10 @@ class ContactsController < UserApplicationController
     else
       @contact = @business.contacts.find(params[:id])
     end
+
+    # Para resolver algunas inconsistencias
+    Delayed::Job.enqueue FetchCrmContactJob.new(id: @contact.padma_id, business_padma_id: @business.padma_id)
+
     @memberships = @contact.memberships.where(business_id: @business.id)
     if @business.transactions_enabled?
       @transactions = @business.trans.where(contact_id: @contact.id).order("order_stamp DESC")
