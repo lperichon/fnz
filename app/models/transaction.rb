@@ -15,9 +15,6 @@ class Transaction < ActiveRecord::Base
   after_save :update_balances, unless: :skip_update_balances
   around_destroy :update_balances_around_destroy
 
-  attr_accessor :skip_infer_associations
-  after_save :infer_associations, unless: :skip_infer_associations
-
   attr_accessor :report_at_option
 
   belongs_to :business
@@ -180,56 +177,6 @@ class Transaction < ActiveRecord::Base
     inscriptions.each { |inscription| inscription.update_balance } if inscriptions.count > 0
   end
 
-  # installments automagic
-  def infer_associations
-    return if business_id.nil?
-    if admpart_tag
-      # tagged
-
-      if !contact_id.blank? && admpart_tag.in?(Tag.system_tags_tree(business_id,"installment"))
-        # with installments
-
-        if installments.empty?
-          # but no installments
-          # find installments and link
-          installment = Installment.for_contact(contact_id)
-                                   .on_business(business_id)
-                                   .on_month(report_at.nil?? transaction_at : report_at ) # fetch installment of report month first, or of transaction month
-                                   .first
-          if installment
-            if agent_id.blank? && installment.agent_id
-              update_attribute(:agent_id, installment.agent_id)
-              # TODO if installment.agent_id is NULL get contact.padma_teacher
-            end
-            # to ensure callbacks that calculate balances, etc.
-            InstallmentTransaction.create(
-              installment_id: installment.id,
-              transaction_id: id
-            )
-          end
-        end
-      end
-    elsif !installments.empty?
-      # not tagged and installments linked
-
-      ref_installment = self.installments.first
-
-      new_attrs = {
-        contact_id: ref_installment.try(:membership).try(:contact_id),
-        agent_id: ref_installment.agent_id
-      }
-
-      if t = Tag.where(business_id: business_id, system_name: "installment").first
-        # add tag without saving
-        # when tag is added, it will update admpart_tag too
-        self.association(:tags).add_to_target(t)
-      end
-
-      self.skip_infer_associations = true
-      update_attributes(new_attrs)
-    end
-  end
-
   def update_balances_around_destroy
     cached_source = source
     cached_target = target
@@ -354,10 +301,6 @@ class Transaction < ActiveRecord::Base
   def self.update_all_order_stamps
     self.where("state = 'reconciled'").update_all("order_stamp = reconciled_at")
     self.where("state <> 'reconciled'").update_all("order_stamp = transaction_at")
-  end
-
-  def get_automation_rules
-    @automation_rules ||= business.transaction_rules.all
   end
 
   def in_business_currency
