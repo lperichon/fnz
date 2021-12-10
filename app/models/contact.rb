@@ -35,6 +35,7 @@ class Contact < ActiveRecord::Base
     membership unless membership.try(:closed_on)
   end
 
+  # @return [Agent]
   def teacher
     if padma_teacher
       Rails.cache.fetch([business_id, "agent_by_username", padma_teacher], expires_in: 5.minutes) do

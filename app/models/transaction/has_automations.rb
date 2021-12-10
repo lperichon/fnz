@@ -60,6 +60,9 @@ module Transaction::HasAutomations
                 installment_id: installment.id,
                 transaction_id: id
               )
+            elsif agent_id.blank? && contact.teacher
+              # installment not found, get agent from contact
+              update_attribute :agent_id, contact.teacher.id
             end
           end
         end
