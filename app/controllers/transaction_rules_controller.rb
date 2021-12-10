@@ -66,8 +66,8 @@ class TransactionRulesController < UserApplicationController
   end
 
   def transaction_rule_params
-    params.require(:transaction_rule).permit(
-
-    ) if params[:transaction_rule].present?
+    if params[:transaction_rule]
+      params.require(:transaction_rule).permit!
+    end
   end
 end
