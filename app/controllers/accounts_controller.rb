@@ -6,7 +6,14 @@ class AccountsController < UserApplicationController
   end
 
   def show
-    redirect_to business_transactions_path(business_id: @business.id, account_id: params[:id])
+    respond_to do |format|
+      format.html { redirect_to business_transactions_path(business_id: @business.id, account_id: params[:id]) }
+      format.json do
+        @account = @business.accounts.find(params[:id])
+        render json: @account.as_json
+      end
+    end
+
   end
 
   def edit
