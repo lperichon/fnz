@@ -1,6 +1,8 @@
 class Transaction < ActiveRecord::Base
   include ActiveModel::Transitions
 
+  include HasAutomations
+
   before_validation :set_creator
   before_validation :set_business
   before_validation :set_report_at
@@ -8,8 +10,6 @@ class Transaction < ActiveRecord::Base
   before_validation :unset_tag, if: ->{ type == "Transfer" }
 
   before_save :set_order_stamp
-
-  before_create :apply_automation_rules
 
   attr_accessor :skip_update_balances
   after_save :update_balances, unless: :skip_update_balances
@@ -344,16 +344,6 @@ class Transaction < ActiveRecord::Base
 
   def self.last_updated_at
     self.select("max(transactions.updated_at) as last_update")[0].last_update
-  end
-
-  def apply_automation_rules
-    return nil if business.nil?
-
-    get_automation_rules.each do |rule|
-      if rule.matches?(self)
-        rule.set_values(self)
-      end
-    end
   end
 
   def set_order_stamp

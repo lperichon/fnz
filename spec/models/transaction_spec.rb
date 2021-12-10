@@ -43,20 +43,6 @@ describe Transaction do
     end
   end
 
-  describe "transaction rules" do
-    let!(:rule){ FactoryBot.create(:transaction_rule, operator: "contains", value: "hola", contact: FactoryBot.create(:contact))}
-    it "are applied con create, not update" do
-      expect(rule).to be_valid
-      t = FactoryBot.build(:transaction, description: "hola como te va", business: rule.business, contact_id: nil)
-      t.save
-      expect(t.reload.contact_id).not_to be_nil
-      expect(t.reload.contact_id).to eq rule.contact_id
-      t.contact_id = nil
-      t.save
-      expect(t.reload.contact_id).to be_nil
-    end
-  end
-
   it "unsets target when changing FROM transfer" do
     t = FactoryBot.create(:transaction, type: "Transfer", target: @account)
     expect(t.target).to eq @account
