@@ -10,7 +10,7 @@ class TransactionSplitersController < UserApplicationController
   end
 
   def create
-    @spliter = TransactionSpliter.new(params[:transaction_spliter].merge({source: @transaction}))
+    @spliter = TransactionSpliter.new(params[:transaction_spliter].merge({source: @transaction}).permit!)
     @spliter.do_split!
     respond_to do |format|
       format.html { redirect_to business_transactions_path(@business) }
