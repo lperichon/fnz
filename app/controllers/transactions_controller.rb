@@ -234,7 +234,7 @@ class TransactionsController < UserApplicationController
                                 ((state.eq 'reconciled') & (reconciled_at.gteq start_date.to_time) & (reconciled_at.lteq end_date.to_time))}
     end
 
-    @context = @context.api_where(params.permit(:q))
+    @context = @context.api_where(params.require(:q).permit!)
   end
 
   def get_download_api_key
