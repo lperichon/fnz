@@ -667,3 +667,6 @@ pt-BR:
       installment: Mensalidade
       enrollment: Matrícula
       sale: Venda
+  transaction_rules:
+    index:
+      contact_names_automated: "O nomes dos contatos já são automatizados. Coloque o nome completo na descrição de uma transação e o contato será vinculado."
