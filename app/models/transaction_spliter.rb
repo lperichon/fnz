@@ -22,9 +22,8 @@ class TransactionSpliter
   end
 
   def build_target(atrs={})
-    t = source.dup
-    t.attributes = atrs
-    t
+    target_attributes = source.attributes.merge(atrs).reject { |k, v| k.to_s.in?(%W(id)) }
+    Transaction.new target_attributes
   end
 
   def do_split!
