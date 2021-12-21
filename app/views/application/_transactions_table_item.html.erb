@@ -15,12 +15,13 @@
     <%= best_in_place transaction.becomes(Transaction), :description, :url => business_transaction_path(@business, transaction) %>
   </td>
   <td>
+    <% symbol = transaction.source.try(:currency).try(:symbol) || @business.currency_symbol %>
     <%= best_in_place transaction.becomes(Transaction),
                       :amount,
                       url: business_transaction_path(@business, transaction),
                       display_with: :number_to_currency,
                       class: "keep-line",
-                      helper_options: {unit:  transaction.source.currency.symbol} if transaction.source %>
+                      helper_options: {unit: symbol } %>
     <% if transaction.is_a?(Transfer) && transaction.sign(transaction.target).to_f.abs!=1.0 %>
       (
         <span class="keep-line">x <%= transaction.sign(transaction.target) %></span>
