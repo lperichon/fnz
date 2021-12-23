@@ -34,7 +34,7 @@ class TransactionImport < Import
   # @param row [CSV::Row] con headers
   def build_trans(row, tran = nil)
     tran = Transaction.new if tran.nil?
-    amount = BigDecimal.new(value_for(row, "amount"))
+    amount = BigDecimal(value_for(row, "amount"))
     type = amount > 0 ? "Credit" : "Debit"
 
     state = value_for(row, "state")
