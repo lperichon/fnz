@@ -81,7 +81,6 @@ class TransactionImport < Import
       tran.agent_id = business.agents.enabled.where(padma_id: value_for(row, "agent_padma_id")).first.try(:id)
     end
 
-
     tags_str = value_for(row, "tag_name")
     unless tags_str.blank?
       tags_str.split(';').each do |tag_name|
@@ -96,9 +95,10 @@ class TransactionImport < Import
   def value_for(row, key)
     val = header(row,key).nil?? nil : row[header(row,key)]
     if val && val.is_a?(String)
-      val = val.force_encoding("UTF-8")
+      val.force_encoding("UTF-8")
+    else
+      val
     end
-    val
   end
 
   def header(row, key)
