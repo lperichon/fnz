@@ -2,6 +2,7 @@
   <%= render :partial => 'transactions_table_header' %>
 
   <%= f.fields_for :transactions do |transaction_f| %>
+    <% next if transaction_f.object.nil? %>
       <tr>
         <%= render :partial => 'transactions_table_item', :locals => {:transaction => transaction_f.object} %>
         <td>
@@ -13,7 +14,7 @@
   <% end %>
   <tfoot>
     <td colspan="9">
-    <% if can? :manage, @business.transactions.build %>
+    <% if can? :manage, @business.trans.build %>
       <%= link_to t('application.nested_transactions_table.actions.add_transaction'),
                   new_business_transaction_path(@business,
                                                 transaction: {
