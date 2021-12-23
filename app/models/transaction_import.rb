@@ -42,13 +42,28 @@ class TransactionImport < Import
       state = state.downcase
     end
 
+    description = value_for(row, "description")
+
+    # Contact
+    if !value_for(row, "contact_padma_id").blank?
+      tran.contact_id = business.contacts.get_by_padma_id(value_for(row, "contact_padma_id").strip).try(:id)
+      if tran.contact_id.nil?
+        description += " | import error: couldnt find contact #{value_for(row, "contact_padma_id")}"
+      end
+    elsif !value_for(row, "contact_full_name").blank?
+      tran.contact_id = business.contacts.where(name: value_for(row, "contact_full_name").strip).first.try(:id)
+      if tran.contact_id.nil?
+        description += " | import error: couldnt find contact #{value_for(row, "contact_full_name")}"
+      end
+    end
+
     tran.attributes = {
       :business_id => business.id,
       :type => type,
       :source_id => business.accounts.find_or_create_by(name: value_for(row, "source_account_name")).id,
       :transaction_at => value_for(row, "transaction_at"),
       :amount => amount.abs(),
-      :description => value_for(row, "description"),
+      :description => description,
       :creator_id => business.owner_id,
       :state => ['created', 'pending', 'reconciled'].include?(state) ? state : 'created'
     }
@@ -62,18 +77,6 @@ class TransactionImport < Import
       tran.agent_id = business.agents.enabled.where(padma_id: value_for(row, "agent_padma_id")).first
     end
 
-    # Contact
-    if !value_for(row, "contact_padma_id").blank?
-      tran.contact_id = business.contacts.get_by_padma_id(value_for(row, "contact_padma_id").strip).try(:id)
-      if tran.contact_id.nil?
-        raise "couldnt find contact"
-      end
-    elsif !value_for(row, "contact_full_name").blank?
-      tran.contact_id = business.contacts.where(name: value_for(row, "contact_full_name").strip).first.try(:id)
-      if tran.contact_id.nil?
-        raise "couldnt find contact"
-      end
-    end
 
     tags_str = value_for(row, "tag_name")
     unless tags_str.blank?
