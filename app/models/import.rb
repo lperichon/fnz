@@ -22,9 +22,11 @@ class Import < ActiveRecord::Base
     backuped_timezone = Time.zone
     Time.zone = business.time_zone
 
+    headers = nil
     columns = nil
     begin
       CSV.parse(read_uploaded_file, headers: true) do |row|
+        headers = row.headers
         columns = row.size
         n += 1
 
@@ -38,10 +40,10 @@ class Import < ActiveRecord::Base
           if new_record && new_record.save
             imported_records << new_record
           else
-            errs << [row, record_errors(new_record) ].flatten
+            errs << [row.fields, record_errors(new_record) ].flatten
           end
         rescue => e
-          errs << [row, e.to_s ].flatten
+          errs << [row.fields, e.to_s ].flatten
         end
       end
     rescue => e
@@ -53,7 +55,12 @@ class Import < ActiveRecord::Base
     if errs.empty?
       self.update_attribute(:errors_csv, nil)
     else
-      errs.insert(0, [Transaction.csv_header[0..columns-1],"error"].flatten )
+      header = if headers.compact.empty?
+        Transaction.csv_header[0..columns-1]
+      else
+        headers
+      end
+      errs.insert(0, [header,"error"].flatten )
       errCSV = CSV.generate do |csv|
         errs.each {|row| csv << row}
       end
