@@ -85,7 +85,7 @@ class TransactionImport < Import
     unless tags_str.blank?
       tags_str.split(';').each do |tag_name|
         tag = Tag.find_or_create_by(business_id: business.id, name: tag_name)
-        tran.tags << tag
+        tran.tags << tag unless tran.tag_ids.include?(tag.id)
       end
     end
 
