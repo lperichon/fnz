@@ -94,7 +94,7 @@ class TransactionImport < Import
 
   def value_for(row, key)
     val = header(row,key).nil?? nil : row[header(row,key)]
-    if val && val.is_a?(String)
+    if val.is_a?(String)
       val.force_encoding("UTF-8")
     else
       val
