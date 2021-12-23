@@ -42,7 +42,11 @@ class TransactionImport < Import
       state = state.downcase
     end
 
-    description = value_for(row, "description")
+    description = if value_for(row, "description").blank?
+      "imported"
+    else
+      value_for(row, "description")
+    end
 
     # Contact
     if !value_for(row, "contact_padma_id").blank?
