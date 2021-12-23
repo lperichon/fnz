@@ -78,7 +78,7 @@ class TransactionImport < Import
 
     # Agent
     unless value_for(row, "agent_padma_id").blank?
-      tran.agent_id = business.agents.enabled.where(padma_id: value_for(row, "agent_padma_id")).first
+      tran.agent_id = business.agents.enabled.where(padma_id: value_for(row, "agent_padma_id")).first.try(:id)
     end
 
 
