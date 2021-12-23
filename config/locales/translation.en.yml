@@ -572,6 +572,9 @@ en:
       agent_padma_id: 'linked user (ej: dwayne.macgowan)'
       contact_name: linked contact's name
       state: state ( created, pending, reconciled )
+      in_order_no_headers: "Columns in order, first row ignored"
+      w_headers: "Headers in first row, order not important"
+      w_headers_explained: "Required headers: %{required_headers}. Optional headers: %{optional_headers}"
   businesses:
     index:
       title: Businesses

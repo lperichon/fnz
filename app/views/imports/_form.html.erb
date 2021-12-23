@@ -2,8 +2,13 @@
 		<%= f.input :type, as: :select, :collection => [["Transactions CSV", "TransactionImport"], ["Santander Rio Argentina", "SantanderRioArImport"], ["Mercadopago Argentina", "MercadopagoImport"], ["Galicia Office Argentina (csv ampliado)","GaliciaOfficeArImport"]], include_blank: false %>
     
     <p class="field transaction">
+      <b>(A) <%= t(".in_order_no_headers") %></b><br/>
       <%= t(".transaction_csv_columns") %>:<br/>
       <%= t(".account_name") %>,<%= t(".date") %>, <%= t(".amount") %>, <%= _("descripción") %>, <%= t(".category") %>, <%= t(".agent_padma_id") %>, <%= t(".contact_name") %>, <%= t(".state") %>
+      <br/><b>(B) "<%= t(".w_headers") %></b><br/>
+      <%= t(".w_headers_explained",
+        required_headers: TransactionImport::REQUIRED_HEADERS.to_sentence,
+        optional_headers: TransactionImport::OPTIONAL_HEADERS.to_sentence) %>
     </p>
 
     <%= f.input :description %>

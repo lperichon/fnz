@@ -572,6 +572,9 @@ pt-BR:
       agent_padma_id: 'usuario vinculado (ej: dwayne.macgowan)'
       contact_name: nome do contato vinculado
       state: estado ( created, pending, reconciled )
+      in_order_no_headers: "Colunas em orden, primeira fila ignorada"
+      w_headers: "Primeira fila de cabeçalho, não importa a ordem"
+      w_headers_explained: "A primiera fila deve ter pelo menos: %{required_headers}. Tambem pode ter: %{optional_headers}"
   businesses:
     index:
       title: Negócios

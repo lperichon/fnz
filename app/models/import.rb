@@ -24,11 +24,9 @@ class Import < ActiveRecord::Base
 
     columns = nil
     begin
-      CSV.parse(read_uploaded_file) do |row|
+      CSV.parse(read_uploaded_file, headers: true) do |row|
         columns = row.size
         n += 1
-        # SKIP: header i.e. first row OR blank row
-        next if n == 1 or row.join.blank?
 
         # build_from_csv method will map attributes &
         # build new record
