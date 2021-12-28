@@ -10,13 +10,17 @@ module Transaction::HasAutomations
     after_save :infer_associations, unless: :skip_infer_associations
 
     def assign_contact_from_description
-      if business && contact_id.nil?
-        business.contacts.each do |c|
-          if description.match(c.name.strip)
-            self.contact = c
-            break
+      begin
+        if business && contact_id.nil?
+          business.contacts.each do |c|
+            if description.match(c.name.strip)
+              self.contact = c
+              break
+            end
           end
         end
+      rescue => e
+        Rails.logger.warn "[automation skipped] #{e.message}"
       end
     end
 
