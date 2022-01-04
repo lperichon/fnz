@@ -50,7 +50,6 @@ gem 'mandrill_mailer', :git => "git://github.com/lperichon/mandrill_mailer.git"
 gem 'httparty'
 gem "active_model_serializers"
 gem 'jquery-ui-rails'
-gem "intercom-rails"
 #gem "cache_digests"
 gem "wkhtmltopdf-heroku"
 gem "pdfkit"
