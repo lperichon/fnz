@@ -130,7 +130,7 @@ class Transaction < ActiveRecord::Base
 
     if q[:smart_query]
       # [TODO] cory js filter logic
-      base = base.where("description like '%#{q.delete(:smart_query)}%'")
+      base = base.where("LOWER(description) like '%#{q.delete(:smart_query).downcase}%'")
     end
 
     base.where(q)
