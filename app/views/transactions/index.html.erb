@@ -29,7 +29,7 @@
 <% end %>
 
 <div class="row-fluid hide-in-print">
-  <%= render 'search_form' %>
+  <%# render 'search_form' %>
 </div>
 
 <%= form_tag batch_edit_business_transactions_path(@business), method: :get, remote: true, "data-controller" => "filter transactions_table" do %>
