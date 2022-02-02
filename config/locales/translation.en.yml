@@ -676,3 +676,4 @@ en:
   transaction_rules:
     index:
       contact_names_automated: "Contact names are already automated. Use full name on transaction's description and contact will be linked to it"
+  search: "Search"

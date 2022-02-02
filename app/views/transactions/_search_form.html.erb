@@ -1,8 +1,69 @@
-<%= form_tag business_transactions_path(business_id: @business.id), method: :get, data: {controller: "transactions_search"} do |f| %>
-  <%= select_tag "meta_period", options_for_select({
-    t(".current_month") => "current_month",
-    t(".previous_month") => "previous_month",
-    t(".month_before_last") => "month_before_last",
-    t(".other_period") => "other_period"
-  }) %>
+<%= simple_form_for @transaction_search,
+  method: :get,
+  url: business_transactions_path(business_id: @business.id),
+  data: {
+    controller: "transactions_search",
+    target: "transactions_search.form"
+  } do |f| %>
+  <div class="fieldsContainter" data-target="transactions_search.fieldsContainer">
+    <div class="control-group">
+      <div class="controls">
+        <%= f.input :description %>
+      </div>
+    </div>
+    <div class="control-group">
+      <div class="controls">
+        <%= f.input :amount_gte %>
+      </div>
+      <div class="controls">
+        <%= f.input :amount_lte %>
+      </div>
+    </div>
+    <div class="control-group">
+      <div class="controls">
+        <%= f.input :transacted_at_meta_period, collection: {
+          t(".current_month") => "current_month",
+          t(".previous_month") => "previous_month",
+          t(".month_before_last") => "month_before_last",
+          t(".other_period") => "other_period"
+        } %>
+      </div>
+      <div class="controls">
+        <%= f.input :reconciled_at_meta_period, collection: {
+          t(".current_month") => "current_month",
+          t(".previous_month") => "previous_month",
+          t(".month_before_last") => "month_before_last",
+          t(".other_period") => "other_period"
+        } %>
+      </div>
+      <div class="controls">
+        <%= f.input :report_on_meta_period, collection: {
+          t(".current_month") => "current_month",
+          t(".previous_month") => "previous_month",
+          t(".month_before_last") => "month_before_last",
+          t(".other_period") => "other_period"
+        } %>
+      </div>
+    </div>
+    <div class="control-group">
+      <div class="controls">
+        <%= f.input :type, collection: Transaction::TYPES %>
+      </div>
+    </div>
+    <div class="control-group">
+      <div class="controls">
+        <%= f.input :state, collection: Transaction::STATES %>
+      </div>
+    </div>
+    <div class="control-group">
+      <div class="controls">
+        <%= f.input :account_id, collection: @business.accounts.order("name") %>
+      </div>
+    </div>
+    <%= f.submit t("search") %>
+  </div>
+  <div class="row-fluid">
+    <button class="pull-right" data-action="transactions_search#toggleFields"><span class="icon-search"></span></button>
+  </div>
+
 <% end %>

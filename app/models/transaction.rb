@@ -3,6 +3,9 @@ class Transaction < ActiveRecord::Base
 
   include HasAutomations
 
+  STATES = %W(pending created reconciled)
+  TYPES = %W(Debit Credit Transfer)
+
   before_validation :set_creator
   before_validation :set_business
   before_validation :set_report_at

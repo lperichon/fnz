@@ -199,6 +199,8 @@ class TransactionsController < UserApplicationController
       @business_context = current_user.businesses
     end
 
+
+
     @context = Transaction
     if business_id
       @business = @business_context.find(business_id)
@@ -212,6 +214,14 @@ class TransactionsController < UserApplicationController
         end
       end
     end
+
+    if params[:transaction_search]
+      @transaction_search = TransactionSearch.new({base_scope: @context, business_id: @business.id}.merge(params[:transaction_search]))
+      @context = @transaction_search.results
+    else
+      @transaction_search = TransactionSearch.new(base_scope: @context)
+    end
+
 
     if params[:admpart_tag_id]
       @tag = Tag.find params[:admpart_tag_id]

@@ -1103,3 +1103,4 @@ es:
   transaction_rules:
     index:
       contact_names_automated: "Los nombres de los contactos ya son automatizados. Usá el nombre completo en la descripción y la transacción se asigna al contacto."
+  search: "Buscar"
