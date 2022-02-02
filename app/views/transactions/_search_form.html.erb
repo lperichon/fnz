@@ -1,0 +1,8 @@
+<%= form_tag business_transactions_path(business_id: @business.id), method: :get, data: {controller: "transactions_search"} do |f| %>
+  <%= select_tag "meta_period", options_for_select({
+    t(".current_month") => "current_month",
+    t(".previous_month") => "previous_month",
+    t(".month_before_last") => "month_before_last",
+    t(".other_period") => "other_period"
+  }) %>
+<% end %>

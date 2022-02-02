@@ -28,6 +28,10 @@
   <%= render "tag_summary" %>
 <% end %>
 
+<div class="row-fluid hide-in-print">
+  <%= render 'search_form' %>
+</div>
+
 <%= form_tag batch_edit_business_transactions_path(@business), method: :get, remote: true, "data-controller" => "filter transactions_table" do %>
 <div class="actions row-fluid hide-in-print">
   <% if can? :create, @business.imports.build %>
@@ -43,11 +47,16 @@
     <%= link_to content_tag(:i, "", class: "icon-download"), business_transactions_path(@business, params.merge({format: "csv"})), class: "btn" %>
     <%= render partial: "drive_button" %>
   </div>
-  <span class="control-group pull-right">
+  <span class="control-group pull-right" data-controller="quick_meta_filter">
     <span class="controls">
       <span class="input-prepend">
     	<span class="add-on icon-calendar"></span>
-    	<input type="text" class="daterange form-control" id="transaction_search_daterange" value='<%= "#{I18n.l(@start_date.to_date)} - #{I18n.l(@end_date.to_date)}" %>'/>
+        <%= select_tag "quick_meta_period", options_for_select({
+          "" => nil,
+          t(".current_month") => "current_month",
+          t(".previous_month") => "previous_month",
+          t(".month_before_last") => "month_before_last"
+        }, @meta_period), data: {target: "quick_meta_filter.selector" , action: "quick_meta_filter#goToPeriod"} %>
   	  </span>
     </span>
   </span>

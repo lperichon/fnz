@@ -6,6 +6,7 @@ class TransactionsController < UserApplicationController
   def index
     @context = @context.order("order_stamp DESC")
 
+
     @transactions = @context.includes(:agent, :contact, :tags, :source, :business)
 
     if @account && @start_date
@@ -218,6 +219,7 @@ class TransactionsController < UserApplicationController
     end
 
     # List transactions on this month or the year/month solicited
+    @meta_period = params[:meta_period] || "current_month"
     start_date = @start_date = Date.parse(params[:start_date] || Time.zone.today.beginning_of_month.to_s).beginning_of_day
     if params[:end_date] == "Invalid date"
       params[:end_date] = nil

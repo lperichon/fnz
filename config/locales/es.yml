@@ -968,6 +968,9 @@ es:
       import: Importar CSV
       stats: Estadísticas
       title: Transacciones
+      current_month: "mes actual"
+      previous_month: "Mes pasado"
+      month_before_last: "Hace 2 meses"
   sales:
     index:
       view_month_stats: Ver las estadísticas de %{month}

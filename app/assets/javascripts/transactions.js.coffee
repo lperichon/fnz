@@ -17,31 +17,4 @@ $(document).ready ->
     tr.children('td:last').html('<a href="#" class="remove-unsaved-nested-transaction"><i class="icon-remove"></i></a><input id="' + parent_type + '_transactions_attributes_' + random + '_transaction_id" name="' + parent_type + '[' + parent_type + '_transactions_attributes][' + random + '][transaction_id]" value="' + id + '" type="hidden">')
     $(".nested.transactions.table").append(tr)
 
-  $("#transaction_search_daterange").daterangepicker
-    opens: "left",
-    ranges:
-      "Today": [
-        moment()
-        moment()
-      ]
-      "This Week": [
-        moment().startOf("week")
-        moment()
-      ]
-      "This Month": [
-        moment().startOf("month")
-        moment().endOf("month")
-      ]
-      "Last Month": [
-        moment().subtract(1, "month").startOf("month")
-        moment().subtract(1, "month").endOf("month")
-      ],
-      "Month before last": [
-        moment().subtract(2, "month").startOf("month")
-        moment().subtract(2, "month").endOf("month")
-      ]
-    , (start, end) ->
-      window.location = "?start_date=" + start.format("YYYY-M-D") + "&end_date=" + end.format("YYYY-M-D")
-
-
   jQuery(".best_in_place").best_in_place();

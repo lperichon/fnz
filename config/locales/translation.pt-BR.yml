@@ -537,6 +537,9 @@ pt-BR:
       import: Importação
       stats: Estatística
       title: Transações
+      current_month: "mês atual"
+      previous_month: "Mês anterior"
+      month_before_last: "2 mêses atras"
   sales:
     index:
       view_month_stats: Ver estatísticas de %{month}

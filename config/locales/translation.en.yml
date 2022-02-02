@@ -537,6 +537,9 @@ en:
       import: Import CSV
       stats: Statistics
       title: Transactions
+      current_month: "current month"
+      previous_month: "Previous month"
+      month_before_last: "Month before last"
   sales:
     index:
       view_month_stats: View %{month} stats
