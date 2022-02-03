@@ -1,0 +1,11 @@
+#new_transaction_search {
+  .chosen-container {
+    width: 30% !important;
+    .search-field {
+      width: 100% !important;
+      input {
+        width: inherit !important;
+      }
+    }
+  }
+}
