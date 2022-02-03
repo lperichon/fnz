@@ -58,10 +58,11 @@ class TransactionSearch
 
   def scope_to_meta_period(field, meta_period, scope)
     if meta_period.present?
-      case meta_period
+      scope = case meta_period
         when "current_month"
           scope.where(field => Time.zone.today.beginning_of_month.beginning_of_day..Time.zone.today.end_of_month.end_of_day)
       end
     end
+    scope
   end
 end
