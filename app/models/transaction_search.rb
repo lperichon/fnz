@@ -33,8 +33,8 @@ class TransactionSearch
     scope = @base_scope.where(business_id: business_id)
 
     scope = scope_to_meta_period(:transacted_at, transacted_at_meta_period, scope) if  transacted_at_meta_period.present?
-    scope = scope_to_meta_period(:reconciled_at, reconciled_at_meta_period, scope) if  transacted_at_meta_period.present?
-    scope = scope_to_meta_period(:report_on, report_on_meta_period, scope) if  transacted_at_meta_period.present?
+    scope = scope_to_meta_period(:reconciled_at, reconciled_at_meta_period, scope) if  reconciled_at_meta_period.present?
+    scope = scope_to_meta_period(:report_on, report_on_meta_period, scope) if report_on_meta_period.present?
     scope = scope.where("description like ?", "%#{description}%") if description.present?
     scope = scope_to_accounts(scope)
     scope = scope.where(type: type) if type.present?
