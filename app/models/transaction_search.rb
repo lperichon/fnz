@@ -7,7 +7,7 @@ class TransactionSearch
     :transacted_at_meta_period,
     :reconciled_at_meta_period,
     :report_on_meta_period,
-    :account_id,
+    :source_account_id,
     :type,
     :description,
     :amount_gte,
@@ -46,11 +46,11 @@ class TransactionSearch
   end
 
   def scope_to_accounts(scope)
-    if account_id.present?
-      if account_id.is_a?(Array)
-        scope.where(account_id: account_id.reject{|aid| aid.blank?})
+    if source_account_id.present?
+      if source_account_id.is_a?(Array)
+        scope.where(source_id: source_account_id.reject{|aid| aid.blank?})
       else
-        scope.where(account_id: account_id)
+        scope.where(source_id: source_account_id)
       end
     end
   end

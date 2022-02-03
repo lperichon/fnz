@@ -27,7 +27,7 @@
       t(".month_before_last") => "month_before_last",
       t(".other_period") => "other_period"
     }, input_html: {class: "chosen"} %>
-    <%= f.input :account_id, collection: @business.accounts.order("name"), input_html: {class: "chosen", multiple: true} %>
+    <%= f.input :source_account_id, collection: @business.accounts.order("name"), input_html: {class: "chosen", multiple: true} %>
     <%= f.input :type, collection: Transaction::TYPES, input_html: {class: "chosen", multiple: true} %>
     <%= f.submit t("search") %>
   </div>
