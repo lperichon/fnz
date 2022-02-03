@@ -47,12 +47,13 @@ class TransactionSearch
 
   def scope_to_accounts(scope)
     if source_account_id.present?
-      if source_account_id.is_a?(Array)
+      scope = if source_account_id.is_a?(Array)
         scope.where(source_id: source_account_id.reject{|aid| aid.blank?})
       else
         scope.where(source_id: source_account_id)
       end
     end
+    scope
   end
 
   def scope_to_meta_period(field, meta_period, scope)
