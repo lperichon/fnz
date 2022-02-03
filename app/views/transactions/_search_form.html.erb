@@ -9,6 +9,12 @@
     <%= f.input :description %>
     <%= f.input :amount_gte, input_html: {class: ""} %>
     <%= f.input :amount_lte %>
+    <%= f.input :smart_meta_period, collection: {
+      t(".current_month") => "current_month",
+      t(".previous_month") => "previous_month",
+      t(".month_before_last") => "month_before_last",
+      t(".other_period") => "other_period"
+    }, input_html: {class: "chosen"} %>
     <%= f.input :transacted_at_meta_period, collection: {
       t(".current_month") => "current_month",
       t(".previous_month") => "previous_month",

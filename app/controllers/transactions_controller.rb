@@ -229,7 +229,7 @@ class TransactionsController < UserApplicationController
     end
 
     # List transactions on this month or the year/month solicited
-    @meta_period = params[:meta_period] || "current_month"
+    @meta_period = params[:meta_period] || @transaction_search.try(:smart_meta_period) || "current_month"
     start_date = @start_date = Date.parse(params[:start_date] || Time.zone.today.beginning_of_month.to_s).beginning_of_day
     if params[:end_date] == "Invalid date"
       params[:end_date] = nil
