@@ -36,13 +36,23 @@ class TransactionSearch
     scope = scope_to_meta_period(:reconciled_at, reconciled_at_meta_period, scope) if  transacted_at_meta_period.present?
     scope = scope_to_meta_period(:report_on, report_on_meta_period, scope) if  transacted_at_meta_period.present?
     scope = scope.where("description like ?", "%#{description}%") if description.present?
-    scope = scope.where(account_id: account_id) if account_id.present?
+    scope = scope_to_accounts(scope)
     scope = scope.where(type: type) if type.present?
     scope = scope.where(state: state) if state.present?
     scope = scope.where("amount >= ?", amount_gte) if amount_gte.present?
     scope = scope.where("amount <= ?", amount_lte) if amount_lte.present?
 
     scope
+  end
+
+  def scope_to_accounts(scope)
+    if account_id.present?
+      if account_id.is_a?(Array)
+        scope.where(account_id: account_id.reject{|aid| aid.blank?})
+      else
+        scope.where(account_id: account_id)
+      end
+    end
   end
 
   def scope_to_meta_period(field, meta_period, scope)
