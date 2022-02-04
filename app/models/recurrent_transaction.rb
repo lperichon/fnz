@@ -11,6 +11,8 @@ class RecurrentTransaction < ActiveRecord::Base
 
   belongs_to :admpart_tag, class_name: "Tag"
 
+  before_validation :set_defaults
+
   validates :amount, presence: true, numericality: {greater_than_or_equal_to: 0}
 
   after_save :create_for_current_month
@@ -39,7 +41,7 @@ class RecurrentTransaction < ActiveRecord::Base
           tag_id: admpart_tag_id,
           admpart_tag_id: admpart_tag_id,
 
-          state: "pending",
+          state: state.presence || "pending",
 
           creator: business.users.first,
 
@@ -61,6 +63,10 @@ class RecurrentTransaction < ActiveRecord::Base
     RecurrentTransaction.all.each do |rt|
       rt.create_for_current_month
     end
+  end
+
+  def set_defaults
+    self.state = "pending" if state.blank?
   end
 
 end

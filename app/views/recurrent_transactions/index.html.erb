@@ -32,6 +32,7 @@
       <td>
         <%= content_tag(:i, "", class: "pull-right icon-" + t.transaction_type.downcase, title: t.transaction_type) %>
         <%= best_in_place t, :type, url: business_recurrent_transaction_path(@business, t), as: :select, collection: {RecurrentDebit: "RecurrentDebit", RecurrentCredit: "RecurrentCredit"}  %>
+        (<%= best_in_place t, :state, url: business_recurrent_transaction_path(@business, t), as: :select, collection: {pending: "pending", created: "created"}  %>)
       </td>
       <td>
         <%= best_in_place t.becomes(RecurrentTransaction), :description, :url => business_recurrent_transaction_path(@business, t) %>
