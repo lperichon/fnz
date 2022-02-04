@@ -69,3 +69,7 @@ task :sync_with_padma_accounts => :environment do
     puts "done."
   end  
 end
+
+task create_recurrent_transactions: :environment do
+  RecurrentTransaction.daily_create_transactions
+end
