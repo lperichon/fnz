@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20211109145131) do
+ActiveRecord::Schema.define(version: 20220204154354) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -268,6 +268,20 @@ ActiveRecord::Schema.define(version: 20211109145131) do
     t.integer "external_id"
   end
 
+  create_table "recurrent_transactions", force: :cascade do |t|
+    t.integer  "business_id"
+    t.integer  "source_id"
+    t.integer  "target_id"
+    t.string   "description"
+    t.string   "type"
+    t.decimal  "amount"
+    t.integer  "contact_id"
+    t.integer  "agent_id"
+    t.integer  "admpart_tag_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string   "name",          limit: 255
     t.integer  "resource_id"
@@ -334,25 +348,26 @@ ActiveRecord::Schema.define(version: 20211109145131) do
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.string   "type",            limit: 255,                                       null: false
-    t.string   "description",     limit: 255,                         default: "",  null: false
+    t.string   "type",                     limit: 255,                                       null: false
+    t.string   "description",              limit: 255,                         default: "",  null: false
     t.integer  "business_id"
-    t.integer  "source_id",                                                         null: false
-    t.decimal  "amount",                      precision: 8, scale: 2,               null: false
+    t.integer  "source_id",                                                                  null: false
+    t.decimal  "amount",                               precision: 8, scale: 2,               null: false
     t.datetime "transaction_at"
     t.integer  "creator_id"
     t.integer  "target_id"
-    t.decimal  "conversion_rate",             precision: 8, scale: 5, default: 1.0, null: false
-    t.string   "state",           limit: 255
+    t.decimal  "conversion_rate",                      precision: 8, scale: 5, default: 1.0, null: false
+    t.string   "state",                    limit: 255
     t.datetime "reconciled_at"
     t.date     "report_at"
-    t.string   "external_id",     limit: 255
+    t.string   "external_id",              limit: 255
     t.integer  "contact_id"
     t.integer  "agent_id"
     t.integer  "admpart_tag_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "order_stamp"
+    t.integer  "recurrent_transaction_id"
   end
 
   add_index "transactions", ["business_id", "admpart_tag_id", "report_at"], name: "tag_transactions_index", using: :btree

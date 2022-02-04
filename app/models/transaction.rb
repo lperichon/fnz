@@ -20,6 +20,8 @@ class Transaction < ActiveRecord::Base
 
   attr_accessor :report_at_option
 
+  belongs_to :recurrent_transaction
+
   belongs_to :business
   belongs_to :source, :class_name => "Account"
   belongs_to :target, :class_name => "Account"
