@@ -2,6 +2,7 @@
   <thead>
   <tr data-target="filter.header">
     <td><%= Transaction.human_attribute_name(:type) %></td>
+    <td><%= Transaction.human_attribute_name(:state) %></td>
     <td><%= Transaction.human_attribute_name(:description) %></td>
     <td><%= Transaction.human_attribute_name(:amount) %></td>
     <td><%= _("Cuenta") %></td>
@@ -16,6 +17,7 @@
     <% if can? :create, (rt = @business.recurrent_transactions.new) %>
     <%= simple_form_for rt, url: business_recurrent_transactions_path do |f| %>
         <td><%= f.input :type, as: :select, collection: {RecurrentDebit: "RecurrentDebit", RecurrentCredit: "RecurrentCredit"}, allow_blank: false  %></td>
+        <td><%= f.input :state, as: :select, collection: {pending: "pending", created: "created"}, allow_blank: false  %></td>
         <td><%= f.input :description %></td>
         <td><%= f.input :amount %></td>
         <td><%= f.input :source_id, as: :select, collection: @business.accounts.order("name") %></td>
@@ -32,8 +34,8 @@
       <td>
         <%= content_tag(:i, "", class: "pull-right icon-" + t.transaction_type.downcase, title: t.transaction_type) %>
         <%= best_in_place t, :type, url: business_recurrent_transaction_path(@business, t), as: :select, collection: {RecurrentDebit: "RecurrentDebit", RecurrentCredit: "RecurrentCredit"}  %>
-        (<%= best_in_place t, :state, url: business_recurrent_transaction_path(@business, t), as: :select, collection: {pending: "pending", created: "created"}  %>)
       </td>
+      <td><%= best_in_place t, :state, url: business_recurrent_transaction_path(@business, t), as: :select, collection: {pending: "pending", created: "created"}  %></td>
       <td>
         <%= best_in_place t.becomes(RecurrentTransaction), :description, :url => business_recurrent_transaction_path(@business, t) %>
       </td>
