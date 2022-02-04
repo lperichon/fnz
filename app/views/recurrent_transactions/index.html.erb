@@ -1,12 +1,12 @@
-<table class="transactions table table-stripe table-hover table-condensed table-bordered" style="margin-left: -33%">
+<table class="transactions recurrent-transactions table table-stripe table-hover table-condensed table-bordered" style="margin-left: -33%">
   <thead>
   <tr data-target="filter.header">
-    <td><%= Transaction.human_attribute_name(:type) %></td>
-    <td><%= Transaction.human_attribute_name(:state) %></td>
+    <td class="type-column"><%= Transaction.human_attribute_name(:type) %></td>
+    <td class="state-column"><%= Transaction.human_attribute_name(:state) %></td>
     <td><%= Transaction.human_attribute_name(:description) %></td>
-    <td><%= Transaction.human_attribute_name(:amount) %></td>
-    <td><%= _("Cuenta") %></td>
-    <td><%= Transaction.human_attribute_name(:tags) %></td>
+    <td class="amount-column"><%= Transaction.human_attribute_name(:amount) %></td>
+    <td class="accounts-column"><%= _("Cuenta") %></td>
+    <td class="tag-column"><%= Transaction.human_attribute_name(:tags) %></td>
     <td><%= Transaction.human_attribute_name(:agent) %></td>
     <td><%= Transaction.human_attribute_name(:contact) %></td>
     <td></td>
@@ -16,12 +16,12 @@
   <tr>
     <% if can? :create, (rt = @business.recurrent_transactions.new) %>
     <%= simple_form_for rt, url: business_recurrent_transactions_path do |f| %>
-        <td><%= f.input :type, as: :select, collection: {RecurrentDebit: "RecurrentDebit", RecurrentCredit: "RecurrentCredit"}, allow_blank: false  %></td>
-        <td><%= f.input :state, as: :select, collection: {pending: "pending", created: "created"}, allow_blank: false  %></td>
+        <td class="type-column"><%= f.input :type, as: :select, collection: {RecurrentDebit: "RecurrentDebit", RecurrentCredit: "RecurrentCredit"}, allow_blank: false  %></td>
+        <td class="state-column"><%= f.input :state, as: :select, collection: {pending: "pending", created: "created"}, allow_blank: false  %></td>
         <td><%= f.input :description %></td>
-        <td><%= f.input :amount %></td>
-        <td><%= f.input :source_id, as: :select, collection: @business.accounts.order("name") %></td>
-        <td><%= f.input :admpart_tag_id, as: :select, collection: tag_options_for_select.map{|o| [o[1],o[0]]} %></td>
+        <td class="amount-column"><%= f.input :amount %></td>
+        <td class="accounts-column"><%= f.input :source_id, as: :select, collection: @business.accounts.order("name") %></td>
+        <td class="tag-column"><%= f.input :admpart_tag_id, as: :select, collection: tag_options_for_select.map{|o| [o[1],o[0]]} %></td>
         <td><%= f.input :agent_id, as: :select, collection: agent_options_for_select.map{|o| [o[1],o[0]]} %></td>
         <td><%= f.input :contact_id, as: :select, collection: contact_options_for_select.map{|o| [o[1],o[0]]} %></td>
         <td><%= f.button :submit, class: "btn-primary btn-sm" %></td>

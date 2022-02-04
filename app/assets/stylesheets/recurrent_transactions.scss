@@ -1,3 +1,34 @@
-// Place all the styles related to the recurrent_transactions controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.recurrent-transactions {
+  .type-column {
+    max-width: 150px;
+    .select {
+      max-width: 130px;
+    }
+  }
+  .state-column {
+    max-width: 120px;
+    .select {
+      max-width: 100px;
+    }
+  }
+  .accounts-column {
+    max-width: 150px;
+    .select {
+      max-width: 130px;
+    }
+  }
+  .tag-column {
+    max-width: 150px;
+    .select {
+      max-width: 130px;
+    }
+  }
+  .amount-column {
+    max-width: 150px;
+    input {
+      max-width: 130px;
+    }
+  }
+
+
+}
