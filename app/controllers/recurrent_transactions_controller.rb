@@ -38,6 +38,12 @@ class RecurrentTransactionsController < UserApplicationController
     end
   end
 
+  def destroy
+    @recurrent_transaction = @business.recurrent_transactions.find(params[:id])
+    @recurrent_transaction.destroy
+    redirect_to business_recurrent_transactions_path(business_id: @business.id)
+  end
+
   private
 
   def get_business

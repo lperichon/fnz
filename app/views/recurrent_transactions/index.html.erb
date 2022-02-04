@@ -75,7 +75,10 @@
       <td class="select2">
         <%= best_in_place t.becomes(RecurrentTransaction), :contact_id, as: :select, collection: contact_options_for_select, url: business_recurrent_transaction_path(@business, t) %>
       </td>
-      <td><%= link_to "ver", business_transactions_path(business_id: @business.id, transaction_search: {recurrent_transaction_id: t.id}) %></td>
+      <td>
+        <%# link_to "ver", business_transactions_path(business_id: @business.id, transaction_search: {recurrent_transaction_id: t.id}) %>
+        <%= link_to "eliminar", business_recurrent_transaction_path(business_id: @business.id, id: t.id), method: :delete, data: {confirm: "seguro?"} %>
+      </td>
     </tr>
   <% end %>
   </tbody>
