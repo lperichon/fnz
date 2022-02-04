@@ -5,6 +5,9 @@
     <% if @business.transactions_enabled? %>
       <li class="<%= 'active' if controller.controller_name == "transactions" %>"><%= link_to t('layouts.secondary_navigation.manage_transactions'), business_transactions_path(@business) %></li>
     <% end %>
+    <% if can?(:mange, RecurrentTransaction.new(business: @business)) %>
+      <li class="<%= 'active' if controller.controller_name == "recurrent_transactions" %>"><%= link_to t('layouts.secondary_navigation.manage_recurrent_transactions'), business_recurrent_transactions_path(@business) %></li>
+    <% end %>
     <% if @business.is_a? School %>
       <li class="<%= 'active' if memberships_link_active?  %>"><%= link_to t('layouts.secondary_navigation.manage_memberships'), overview_business_memberships_path(@business) %></li>
       <li class="dropdown <%= 'active' if reports_active?  %>">

@@ -35,6 +35,7 @@ Fnz::Application.routes.draw do
       resources :transfers, :controller => 'transactions', :only => [:index]
       resources :balance_checks
     end
+    resources :recurrent_transactions
     resources :transactions do
       resources :transaction_spliters, only: [:new, :create]
       collection do

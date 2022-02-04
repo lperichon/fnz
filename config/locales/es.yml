@@ -484,6 +484,7 @@ es:
       manage_memberships: Membresías
       manage_sales: Ventas
       manage_transactions: Transacciones
+      manage_recurrent_transactions: Transacciones Recurrentes
       reports: Reportes
       manage_inscriptions: Inscripciones
       manage_event_closure: Reporte de cierre

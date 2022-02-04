@@ -379,6 +379,7 @@ en:
       manage_memberships: Memberships
       manage_sales: Sales
       manage_transactions: Transactions
+      manage_recurrent_transactions: Recurrent Transactions
       reports: Reports
       manage_inscriptions: Inscriptions
       manage_event_closure: Manage event closure

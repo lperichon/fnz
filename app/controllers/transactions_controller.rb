@@ -6,7 +6,6 @@ class TransactionsController < UserApplicationController
   def index
     @context = @context.order("order_stamp DESC")
 
-
     @transactions = @context.includes(:agent, :contact, :tags, :source, :business)
 
     if @account && @start_date
@@ -198,8 +197,6 @@ class TransactionsController < UserApplicationController
     else
       @business_context = current_user.businesses
     end
-
-
 
     @context = Transaction
     if business_id

@@ -23,10 +23,10 @@ class RecurrentTransaction < ActiveRecord::Base
     unless Transaction.where(recurrent_transaction_id: self)
       .where("transaction_at >= ? AND transaction_at <= ?", ref_date.beginning_of_month, ref_date.end_of_month)
       .exists?
-        Transaction.create!(
+        t = Transaction.create!(
           recurrent_transaction: self,
 
-          type: type,
+          type: transaction_type,
           description: description,
           amount: amount,
 
@@ -36,6 +36,7 @@ class RecurrentTransaction < ActiveRecord::Base
 
           contact: contact,
           agent: agent,
+          tag_id: admpart_tag.id,
           admpart_tag: admpart_tag,
 
           state: "pending",
@@ -46,6 +47,10 @@ class RecurrentTransaction < ActiveRecord::Base
           report_at: ref_date.beginning_of_month.to_time
         )
     end
+  end
+
+  def transaction_type
+    type.gsub("Recurrent","")
   end
 
   def self.daily_create_transactions

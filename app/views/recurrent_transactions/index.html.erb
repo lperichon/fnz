@@ -1,0 +1,74 @@
+<table class="transactions table table-stripe table-hover table-condensed table-bordered">
+  <thead>
+  <tr data-target="filter.header">
+    <td><%= Transaction.human_attribute_name(:type) %></td>
+    <td><%= Transaction.human_attribute_name(:description) %></td>
+    <td><%= Transaction.human_attribute_name(:amount) %></td>
+    <td><%= _("Cuenta") %></td>
+    <td><%= Transaction.human_attribute_name(:tags) %></td>
+    <td><%= Transaction.human_attribute_name(:agent) %></td>
+    <td><%= Transaction.human_attribute_name(:contact) %></td>
+  </tr>
+  </thead>
+  <tbody>
+  <% @recurrent_transactions.each do |t| %>
+    <tr>
+      <td>
+        <%= best_in_place t, :type, url: business_recurrent_transaction_path(@business, t), as: :select, collection: {RecurrentDebit: "RecurrentDebit", RecurrentCredit: "RecurrentCredit"}  %>
+        <%= content_tag(:i, "", class: "pull-right icon-" + t.transaction_type.downcase, title: t.type) %>
+      </td>
+      <td>
+        <%= best_in_place t.becomes(RecurrentTransaction), :description, :url => business_recurrent_transaction_path(@business, t) %>
+      </td>
+    <td>
+      <% symbol = t.source.try(:currency).try(:symbol) || @business.currency_symbol %>
+      <%= best_in_place t.becomes(RecurrentTransaction),
+        :amount,
+        url: business_recurrent_transaction_path(@business, t),
+        display_with: :number_to_currency,
+        class: "keep-line",
+        helper_options: {unit: symbol } %>
+      <% if t.is_a?(RecurrentTransfer) && t.sign(t.target).to_f.abs!=1.0 %>
+        (
+        <span class="keep-line">x <%= t.sign(t.target) %></span>
+        <span class="keep-line">
+          = <%= number_to_currency t.amount*t.sign(t.target),
+          unit: t.target.currency.symbol %>
+        </span>
+        )
+      <% end %>
+    </td>
+      <td>
+        <%= best_in_place t.becomes(RecurrentTransaction), :source_id, :as => :select, :collection => @business.accounts.order("name").map { |i| [i.id, i.name] } , :url => business_recurrent_transaction_path(@business, t) %>
+        <% if t.is_a?(RecurrentTransfer) %>
+          <br/>-><br/>
+          <%= best_in_place_if t.is_a?(RecurrentTransfer), t.becomes(RecurrentTransaction), :target_id, :as => :select, :collection => @business.accounts.order("name").map { |i| [i.id, i.name] } , :url => business_recurrent_transaction_path(@business, t)%>
+        <% end %>
+      </td>
+      <td class="select2">
+        <% begin %>
+          <%# avoiding becomes call keeps included tags avoiding call to DB.  %>
+          <%= best_in_place t,
+            :admpart_tag_id,
+            as: :select,
+            collection: tag_options_for_select,
+            url: business_recurrent_transaction_path(@business, t) %>
+        <% end %>
+        <%= link_to("<i class='icon-eye-open'></i>".html_safe,
+          business_transactions_path(
+            business_id: @business.id,
+            admpart_tag_id: t.admpart_tag.id,
+            report_on: t.report_at
+          ),
+          class: "tag-detail",
+          target: :_blank).html_safe if t.admpart_tag %>
+      </td>
+      <td><%= best_in_place t.becomes(RecurrentTransaction), :agent_id, as: :select, collection: agent_options_for_select(t), url: business_recurrent_transaction_path(@business, t) %></td>
+      <td class="select2">
+        <%= best_in_place t.becomes(RecurrentTransaction), :contact_id, as: :select, collection: contact_options_for_select, url: business_recurrent_transaction_path(@business, t) %>
+        <%= link_to("<i class='icon-eye-open'></i>".html_safe, business_contact_path(@business,t.contact), class: "contact-detail", target: :_blank).html_safe if t.contact %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

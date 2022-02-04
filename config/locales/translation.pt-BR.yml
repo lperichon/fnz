@@ -379,6 +379,7 @@ pt-BR:
       manage_memberships: Planos
       manage_sales: Vendas
       manage_transactions: Transações
+      manage_recurrent_transactions: Transações Recorrentes
       reports: Reportes
       manage_inscriptions: Inscrições
       manage_event_closure: Reporte de fechamento
