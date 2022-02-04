@@ -6,6 +6,20 @@ class RecurrentTransactionsController < UserApplicationController
     @recurrent_transactions = @business.recurrent_transactions
   end
 
+  def create
+    @recurrent_transaction = @business.recurrent_transactions.new(recurrent_transaction_params)
+
+    respond_to do |format|
+      if @recurrent_transaction.save!
+        format.html { redirect_to business_recurrent_transactions_path(business_id: @business), notice: _('Movimiento creado') }
+        format.json { render json: @recurrent_transaction, status: :created, location: business_recurrent_transaction_path(@business, @recurrent_transactions) }
+      else
+        format.html { redirect_to business_recurrent_transactions_path(business_id: @business), alert: @recurrent_transaction.errors.full_messages.to_sentence }
+        format.json { render json: @recurrent_transaction.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   def update
     @recurrent_transaction = @business.recurrent_transactions.find(params[:id])
 

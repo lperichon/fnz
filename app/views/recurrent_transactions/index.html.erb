@@ -8,10 +8,26 @@
     <td><%= Transaction.human_attribute_name(:tags) %></td>
     <td><%= Transaction.human_attribute_name(:agent) %></td>
     <td><%= Transaction.human_attribute_name(:contact) %></td>
+    <td></td>
   </tr>
   </thead>
   <tbody>
+  <tr>
+    <% if can? :create, (rt = @business.recurrent_transactions.new) %>
+    <%= simple_form_for rt, url: business_recurrent_transactions_path do |f| %>
+        <td><%= f.input :type, as: :select, collection: {RecurrentDebit: "RecurrentDebit", RecurrentCredit: "RecurrentCredit"}, allow_blank: false  %></td>
+        <td><%= f.input :description %></td>
+        <td><%= f.input :amount %></td>
+        <td><%= f.input :source_id, as: :select, collection: @business.accounts.order("name") %></td>
+        <td><%= f.input :admpart_tag_id, as: :select, collection: tag_options_for_select.map{|o| [o[1],o[0]]} %></td>
+        <td><%= f.input :agent_id, as: :select, collection: agent_options_for_select.map{|o| [o[1],o[0]]} %></td>
+        <td><%= f.input :contact_id, as: :select, collection: contact_options_for_select.map{|o| [o[1],o[0]]} %></td>
+        <td><%= f.button :submit, class: "btn-primary btn-sm" %></td>
+    <% end %>
+    <% end %>
+  </tr>
   <% @recurrent_transactions.each do |t| %>
+  <% next if t.id.blank? %>
     <tr>
       <td>
         <%= content_tag(:i, "", class: "pull-right icon-" + t.transaction_type.downcase, title: t.transaction_type) %>
@@ -59,6 +75,7 @@
       <td class="select2">
         <%= best_in_place t.becomes(RecurrentTransaction), :contact_id, as: :select, collection: contact_options_for_select, url: business_recurrent_transaction_path(@business, t) %>
       </td>
+      <td><%= link_to "ver", business_transactions_path(business_id: @business.id, transaction_search: {recurrent_transaction_id: t.id}) %></td>
     </tr>
   <% end %>
   </tbody>

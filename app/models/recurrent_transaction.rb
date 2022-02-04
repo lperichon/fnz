@@ -30,14 +30,14 @@ class RecurrentTransaction < ActiveRecord::Base
           description: description,
           amount: amount,
 
-          business: business,
-          source: source,
-          target: target,
+          business_id: business_id,
+          source_id: source_id,
+          target_id: target_id,
 
-          contact: contact,
-          agent: agent,
-          tag_id: admpart_tag.id,
-          admpart_tag: admpart_tag,
+          contact_id: contact_id,
+          agent_id: agent_id,
+          tag_id: admpart_tag_id,
+          admpart_tag_id: admpart_tag_id,
 
           state: "pending",
 
@@ -50,7 +50,11 @@ class RecurrentTransaction < ActiveRecord::Base
   end
 
   def transaction_type
-    type.gsub("Recurrent","")
+    if type.present?
+      type.gsub("Recurrent","")
+    else
+      "RecurrentDebit"
+    end
   end
 
   def self.daily_create_transactions
