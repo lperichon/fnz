@@ -123,6 +123,7 @@ pt-BR:
       business:
         type: Tipo
         name: Nome
+        block_transactions_before: "Bloquiear anteriores ao"
       agent:
         name: Nome
       product:

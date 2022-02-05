@@ -44,5 +44,14 @@
     </li>
   <% end %>
 </ul>
+
+  <% if can?(:update, @business) %>
+  <ul>
+    <li>
+      <%= t("activerecord.attributes.business.block_transactions_before") %>
+      <%= best_in_place @business.becomes(Business), :block_transactions_before, display_with: lambda { |d| d.to_s(:short) } %>
+    </li>
+  </ul>
+    <% end %>
 </p>
 <% end %>

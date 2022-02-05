@@ -149,7 +149,8 @@ es:
       business:
         type: Tipo
         name: Nombre
-        owner: 
+        owner:
+        block_transactions_before: "Bloquear anteriores a"
       agent:
         business: 
         name: Nombre

@@ -123,6 +123,7 @@ en:
       business:
         type: Type
         name: Name
+        block_transactions_before: "Block before"
       agent:
         name: Name
       product:
