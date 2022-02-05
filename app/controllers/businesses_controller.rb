@@ -34,15 +34,20 @@ class BusinessesController < UserApplicationController
   # PUT /businesses/1
   # PUT /businesses/1.json
   def update
-    @business = current_user.owned_businesses.find(params[:id])
+    @business = Business.find(params[:id])
+    authorize! :update, @business
 
     respond_to do |format|
       if @business.update_attributes(business_params || {})
         format.html { redirect_to business_path(@business), notice: 'Business was successfully updated.' }
-        format.json { head :no_content }
+        format.json do
+          respond_with_bip(@business.becomes(Business), param: param_key)
+        end
       else
         format.html { render action: "edit" }
-        format.json { render json: @business.errors, status: :unprocessable_entity }
+        format.json do
+          respond_with_bip(@business.becomes(Business), param: param_key)
+        end
       end
     end
   end
@@ -72,7 +77,16 @@ class BusinessesController < UserApplicationController
       :transactions_enabled,
       :share_enabled,
       :use_calendar_installments,
-      :currency_code
+      :currency_code,
+      :block_transactions_before
     ) if params[:business].present?
+  end
+
+  def param_key
+    if params[:school]
+      :school
+    else
+      :business
+    end
   end
 end

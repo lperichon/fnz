@@ -7,6 +7,7 @@ class Ability
       can :manage, :all
     end
 
+    can :manage, Business, id: user.owned_businesses.pluck(:id)
     can :manage, RecurrentTransaction, business: {transactions_enabled: true, id: user.business_ids}
 
     can :manage, Admpart, :business => {:transactions_enabled => true}
