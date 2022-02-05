@@ -45,8 +45,8 @@ class RecurrentTransaction < ActiveRecord::Base
 
           creator: business.users.first,
 
-          transaction_at: ref_date.beginning_of_month.to_time,
-          report_at: ref_date.beginning_of_month.to_time
+          transaction_at: ref_date.beginning_of_month.to_time+10.hours,
+          report_at: ref_date.beginning_of_month.to_time+10.hours
         )
     end
   end
