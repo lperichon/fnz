@@ -94,6 +94,7 @@ class TransactionsController < UserApplicationController
   # PUT /accounts/1.json
   def update
     @transaction = Transaction.find(params[:id])
+    authorize! :update, @transaction
 
     respond_to do |format|
       if @transaction.update_attributes(transaction_attributes_for_update || {})
@@ -119,6 +120,7 @@ class TransactionsController < UserApplicationController
   end
   def batch_update
     @transactions = Transaction.where(id: params[:ids])
+    @transactions.each { |t| authorize! :update, t }
     @success = true
     @transactions.find_each{|t| @success &&= t.update_attributes(transaction_attributes_for_batch_update) } # trigger callbacks
     respond_to do |format|
@@ -131,6 +133,8 @@ class TransactionsController < UserApplicationController
   # DELETE /accounts/1.json
   def destroy
     @transaction = Transaction.find(params[:id])
+    authorize! :destroy, @transaction
+
     @transaction.destroy
 
     respond_to do |format|

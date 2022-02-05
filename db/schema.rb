@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20220204193347) do
+ActiveRecord::Schema.define(version: 20220205231435) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 20220204193347) do
     t.boolean  "use_calendar_installments",             default: true
     t.integer  "derose_events_id"
     t.string   "currency_code",             limit: 255
+    t.datetime "block_transactions_before"
   end
 
   create_table "businesses_users", force: :cascade do |t|

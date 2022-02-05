@@ -1,3 +1,4 @@
+<% if can?(:update, transaction) %>
 <% cache transaction do %>
   <td>
     <%= check_box_tag "ids[]",
@@ -74,3 +75,66 @@
     <%= link_to("<i class='icon-eye-open'></i>".html_safe, business_contact_path(@business,transaction.contact), class: "contact-detail", target: :_blank).html_safe if transaction.contact %>
   </td>
 <% end %>
+<% else %>
+  <td>
+    x
+  </td>
+  <td>
+    <%= content_tag(:i, "", class: "pull-left icon-" + transaction.state, title: transaction.state.titleize) if transaction.state != "created" %>
+    <%= content_tag(:i, "", class: "pull-right icon-" + transaction.type.downcase, title: transaction.type) %>
+  </td>
+  <td>
+    <%= transaction.description %>
+  </td>
+  <td>
+    <% symbol = transaction.source.try(:currency).try(:symbol) || @business.currency_symbol %>
+    <span class="keep-line"><%= number_to_currency transaction.amount, unit: symbol %></span>
+    <% if transaction.is_a?(Transfer) && transaction.sign(transaction.target).to_f.abs!=1.0 %>
+      (
+      <span class="keep-line">x <%= transaction.sign(transaction.target) %></span>
+      <span class="keep-line">
+          = <%= number_to_currency transaction.amount*transaction.sign(transaction.target),
+        unit: transaction.target.currency.symbol %>
+        </span>
+      )
+    <% end %>
+  </td>
+  <td>
+    <%= transaction.source.name %>
+    <% if transaction.is_a?(Transfer) %>
+      <br/>-><br/>
+      <%= transaction.target.name %>
+    <% end %>
+  </td>
+  <td>
+    <%= transaction.transaction_at.to_s(:short) %>
+    <% if transaction.report_at && transaction.report_at.end_of_month!=transaction.transaction_at.to_date.end_of_month %>
+      <p>
+        (<%= _("a admin %{month}") % {month: l(transaction.report_at, format: :month)} %>)
+      </p>
+    <% end %>
+    <% if transaction.reconciled_at %>
+      <p>
+        (<%= _("saldó el %{rd}") % {rd: l(transaction.reconciled_at, format: :short)} %>)
+      </p>
+    <% end %>
+  </td>
+  <td class="select2">
+    <%= transaction.tag.try(:name) %>
+    <%= link_to("<i class='icon-eye-open'></i>".html_safe,
+      business_transactions_path(
+        business_id: @business.id,
+        admpart_tag_id: transaction.tag.id,
+        report_on: transaction.report_at
+      ),
+      class: "tag-detail",
+      target: :_blank).html_safe if transaction.tag %>
+  </td>
+  <td>
+    <%= transaction.agent.try(:name) %>
+  <td class="select2">
+    <%= transaction.contact.try(:name) %>
+    <%= link_to("<i class='icon-eye-open'></i>".html_safe, business_contact_path(@business,transaction.contact), class: "contact-detail", target: :_blank).html_safe if transaction.contact %>
+  </td>
+<% end %>
+

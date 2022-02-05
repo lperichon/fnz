@@ -11,6 +11,11 @@ class Ability
 
     can :manage, Admpart, :business => {:transactions_enabled => true}
     can :manage, Transaction, :business => {:transactions_enabled => true}
+    cannot [:create, :update, :split, :destroy], Transaction do |t|
+      if t.report_at && t.business.block_transactions_before
+        t.report_at <= t.business.block_transactions_before
+      end
+    end
     can :manage, Account, :business => {:transactions_enabled => true}
     can :manage, BalanceCheck
 
