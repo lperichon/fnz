@@ -1,6 +1,9 @@
 class BalanceCheck < ActiveRecord::Base
   #attr_accessible :account_id, :balance_cents, :checked_at, :balance
 
+  include Shared::HasCents
+  has_cents_for(:balance)
+
   belongs_to :account
   belongs_to :creator, :class_name => "User"
 
@@ -15,14 +18,6 @@ class BalanceCheck < ActiveRecord::Base
 
   after_save :set_accounts_balance
   around_destroy :set_accounts_balance_around_destroy
-
-  def balance
-    balance_cents.nil?? nil : balance_cents/100.0
-  end
-
-  def balance=(new_balance)
-    self.balance_cents = (new_balance.nil?? nil : new_balance.to_f*100)
-  end
 
   def previous
     @previous ||= account.balance_checks

@@ -11,18 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20220205231435) do
+ActiveRecord::Schema.define(version: 20220206230032) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "accounts", force: :cascade do |t|
-    t.string   "name",        limit: 255,                          default: "",  null: false
+    t.string   "name",          limit: 255,                          default: "",  null: false
     t.integer  "business_id"
-    t.decimal  "balance",                 precision: 12, scale: 2, default: 0.0, null: false
-    t.string   "currency",    limit: 255
+    t.decimal  "old_balance",               precision: 12, scale: 2, default: 0.0, null: false
+    t.string   "currency",      limit: 255
     t.datetime "deleted_at"
     t.boolean  "default"
+    t.integer  "balance_cents"
   end
 
   add_index "accounts", ["deleted_at"], name: "index_accounts_on_deleted_at", using: :btree
@@ -188,14 +189,16 @@ ActiveRecord::Schema.define(version: 20220205231435) do
   create_table "installments", force: :cascade do |t|
     t.integer  "membership_id"
     t.date     "due_on"
-    t.decimal  "value",                     precision: 8, scale: 2, default: 0.0, null: false
+    t.decimal  "old_value",                 precision: 8, scale: 2, default: 0.0, null: false
     t.integer  "agent_id"
-    t.decimal  "balance",                   precision: 8, scale: 2, default: 0.0, null: false
+    t.decimal  "old_balance",               precision: 8, scale: 2, default: 0.0, null: false
     t.integer  "external_id"
     t.string   "observations",  limit: 255
     t.string   "status",        limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "value_cents"
+    t.integer  "balance_cents"
   end
 
   add_index "installments", ["agent_id"], name: "index_installments_on_agent_id", using: :btree
@@ -219,7 +222,7 @@ ActiveRecord::Schema.define(version: 20220205231435) do
     t.integer  "contact_id"
     t.date     "begins_on"
     t.date     "ends_on"
-    t.decimal  "value",                       precision: 8, scale: 2, default: 0.0, null: false
+    t.decimal  "old_value",                   precision: 8, scale: 2, default: 0.0, null: false
     t.date     "closed_on"
     t.integer  "payment_type_id"
     t.boolean  "vip"
@@ -228,6 +231,7 @@ ActiveRecord::Schema.define(version: 20220205231435) do
     t.string   "name",            limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "value_cents"
   end
 
   add_index "memberships", ["business_id", "payment_type_id"], name: "index_memberships_on_business_id_and_payment_type_id", using: :btree
@@ -238,10 +242,11 @@ ActiveRecord::Schema.define(version: 20220205231435) do
   create_table "month_tag_totals", force: :cascade do |t|
     t.integer  "tag_id"
     t.date     "ref_date"
-    t.decimal  "total_amount"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.string   "currency",     limit: 255
+    t.decimal  "old_total_amount"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.string   "currency",           limit: 255
+    t.integer  "total_amount_cents"
   end
 
   create_table "payment_types", force: :cascade do |t|
@@ -275,13 +280,14 @@ ActiveRecord::Schema.define(version: 20220205231435) do
     t.integer  "target_id"
     t.string   "description"
     t.string   "type"
-    t.decimal  "amount"
+    t.decimal  "old_amount"
     t.integer  "contact_id"
     t.integer  "agent_id"
     t.integer  "admpart_tag_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.string   "state"
+    t.integer  "amount_cents"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -354,7 +360,7 @@ ActiveRecord::Schema.define(version: 20220205231435) do
     t.string   "description",              limit: 255,                         default: "",  null: false
     t.integer  "business_id"
     t.integer  "source_id",                                                                  null: false
-    t.decimal  "amount",                               precision: 8, scale: 2,               null: false
+    t.decimal  "old_amount",                           precision: 8, scale: 2,               null: false
     t.datetime "transaction_at"
     t.integer  "creator_id"
     t.integer  "target_id"
@@ -370,6 +376,7 @@ ActiveRecord::Schema.define(version: 20220205231435) do
     t.datetime "updated_at"
     t.datetime "order_stamp"
     t.integer  "recurrent_transaction_id"
+    t.integer  "amount_cents"
   end
 
   add_index "transactions", ["business_id", "admpart_tag_id", "report_at"], name: "tag_transactions_index", using: :btree
