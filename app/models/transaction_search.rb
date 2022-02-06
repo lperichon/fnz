@@ -101,4 +101,9 @@ class TransactionSearch
         2.month.ago.end_of_month.end_of_day
     end
   end
+
+  def period_filter?
+    smart_meta_period || transacted_at_meta_period || reconciled_at_meta_period || report_on_meta_period
+  end
+
 end
