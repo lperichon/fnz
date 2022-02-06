@@ -10,7 +10,7 @@ class AdmpartsController < UserApplicationController
   
   def show
     if @adm.valid?
-      unless params[:skip_refresh]
+      unless params[:skip_refresh] || (@business.block_transactions_before && @adm.ref_date.end_of_month.to_time.end_of_day < @business.block_transactions_before)
         Rails.cache.clear # HACK [TODO] remove this and ensure refresh is correctly done
         @adm.queue_refresh_cache
         params.delete(:action)
