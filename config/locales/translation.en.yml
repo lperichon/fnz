@@ -586,6 +586,7 @@ en:
     sidebar:
       title: Accounts
       manage: set up
+      prevents_transactions_before_this_date: "Transactions with reports before this time can be created, deleted o updated."
     edit:
       title: Edit Business
     edit_sidebar:

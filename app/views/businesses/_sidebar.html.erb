@@ -50,6 +50,8 @@
     <li>
       <%= t("activerecord.attributes.business.block_transactions_before") %>
       <%= best_in_place @business.becomes(Business), :block_transactions_before, display_with: lambda { |d| d.to_s(:short) } %>
+      <br>
+      <small><%= t(".prevents_transactions_before_this_date") %></small>
     </li>
   </ul>
     <% end %>

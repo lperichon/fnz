@@ -1018,6 +1018,7 @@ es:
     sidebar:
       title: Cuentas
       manage: configurar
+      prevents_transactions_before_this_date: "No se puede crear, eliminar o modificar transacciones con fecha de reporte anterior a esta."
     edit:
       title: Editar
     edit_sidebar:

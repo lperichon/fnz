@@ -586,6 +586,7 @@ pt-BR:
     sidebar:
       title: Contas
       manage: editar
+      prevents_transactions_before_this_date: "Alterações anteriores a esta data são bloqueiadas"
     edit:
       title: Editar
     edit_sidebar:
