@@ -70,9 +70,7 @@ class TransactionSearch
   def scope_to_smart_meta_period(meta_period, scope)
     left = period_left(meta_period)
     right = period_right(meta_period)
-    scope.where {(transaction_at.gteq left.to_time) & (transaction_at.lteq right.to_time) |
-      ((state.eq 'pending') & (transaction_at.lt left)) |
-      ((state.eq 'reconciled') & (reconciled_at.gteq left.to_time) & (reconciled_at.lteq right.to_time))}
+    scope.where("(transaction_at >= :start AND transaction_at <= :end) OR (state = 'pending' AND transaction_at <= :start) OR (state = 'reconciled' AND reconciled_at >= :start AND reconciled_at <= :end)", {start: left.to_time, end: right.to_time})
   end
 
   def scope_to_meta_period(field, meta_period, scope)
