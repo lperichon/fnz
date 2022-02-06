@@ -387,6 +387,7 @@ en:
   contacts:
     show:
       see_in_crm: See this contact in CRM
+      last_transactions: "Last transactions"
   memberships:
     membership_filter:
       filter: Filter

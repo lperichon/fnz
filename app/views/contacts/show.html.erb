@@ -17,7 +17,7 @@
   <%= content_for :secondary_navigation do %>
     <%= render partial: 'transactions/secondary_navigation' %>
   <% end %>
-  <h3><%= _("Todas las transacciones") %></h3>
+  <h3><%= t(".last_transactions") %></h3>
   <%= render layout: 'transactions_table', locals: {transactions: @transactions} do |transaction| %>
     <span class="hide-in-print">
     <% if can? :edit, transaction %>

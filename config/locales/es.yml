@@ -492,6 +492,7 @@ es:
   contacts:
     show:
       see_in_crm: Ver este contacto en CRM
+      last_transactions: "Últimas transacciones"
   memberships:
     membership_filter:
       filter: Filtrar
