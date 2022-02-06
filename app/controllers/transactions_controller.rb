@@ -218,33 +218,31 @@ class TransactionsController < UserApplicationController
 
     if params[:transaction_search]
       @transaction_search = TransactionSearch.new({base_scope: @context, business_id: @business.id}.merge(params[:transaction_search]))
+      if @transaction_search.period_filter?
+        @meta_period = @transaction_search.smart_meta_period
+      end
       @context = @transaction_search.results
     else
       @transaction_search = TransactionSearch.new(base_scope: @context)
-    end
+      @meta_period = params[:meta_period] || "current_month"
+      @start_date = Date.parse(params[:start_date] || Time.zone.today.beginning_of_month.to_s).beginning_of_day
+      if params[:end_date] == "Invalid date"
+        params[:end_date] = nil
+      end
+      @end_date = Date.parse(params[:end_date] || Time.zone.today.end_of_month.to_s).end_of_day
 
+      if params[:report_on]
+        @report_date = Date.parse( params[:report_on] )
+        @context = @context.to_report_on_month(@report_date)
+      else
+        # List transactions that ocurred on that month or that are pending and ocurred before or that are reconciled on that month
+        @context = @context.where("(transaction_at >= :start AND transaction_at <= :end) OR (state = 'pending' AND transaction_at <= :start) OR (state = 'reconciled' AND reconciled_at >= :start AND reconciled_at <= :end)", {start: @start_date.to_time, end: @end_date.to_time})
+      end
+    end
 
     if params[:admpart_tag_id]
       @tag = Tag.find params[:admpart_tag_id]
-      @context = @business.trans.where(admpart_tag_id: @tag.self_and_descendants.map(&:id))
-    end
-
-    # List transactions on this month or the year/month solicited
-    @meta_period = params[:meta_period] || @transaction_search.try(:smart_meta_period) || "current_month"
-    start_date = @start_date = Date.parse(params[:start_date] || Time.zone.today.beginning_of_month.to_s).beginning_of_day
-    if params[:end_date] == "Invalid date"
-      params[:end_date] = nil
-    end
-    end_date = @end_date = Date.parse(params[:end_date] || Time.zone.today.end_of_month.to_s).end_of_day
-
-    if params[:report_on]
-      @report_date = Date.parse( params[:report_on] )
-      @context = @context.to_report_on_month(@report_date)
-    else
-      # List transactions that ocurred on that month or that are pending and ocurred before or that are reconciled on that month
-      @context = @context.where {(transaction_at.gteq start_date.to_time) & (transaction_at.lteq end_date.to_time) |
-                                ((state.eq 'pending') & (transaction_at.lt start_date)) |
-                                ((state.eq 'reconciled') & (reconciled_at.gteq start_date.to_time) & (reconciled_at.lteq end_date.to_time))}
+      @context = @context.where(admpart_tag_id: @tag.self_and_descendants.map(&:id))
     end
 
     @context = @context.api_where(filter_params)

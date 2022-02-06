@@ -21,6 +21,9 @@ class TransactionSearch
 
   def initialize(attributes = {})
     attributes.each do |name,value|
+      if value.is_a?(Array)
+        value = value.reject(&:blank?)
+      end
       send("#{name}=", value)
     end
   end
