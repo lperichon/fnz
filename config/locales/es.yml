@@ -493,6 +493,7 @@ es:
     show:
       see_in_crm: Ver este contacto en CRM
       last_transactions: "Últimas transacciones"
+      all_transactions: "Ver todas las transacciones"
   memberships:
     membership_filter:
       filter: Filtrar

@@ -14,6 +14,7 @@ class TransactionSearch
     :amount_gte,
     :amount_lte,
     :state,
+    :contact_id,
     :base_scope,
     :recurrent_transaction_id
 
@@ -45,6 +46,8 @@ class TransactionSearch
     scope = scope.where(state: state) if state.present?
     scope = scope.where("amount >= ?", amount_gte) if amount_gte.present?
     scope = scope.where("amount <= ?", amount_lte) if amount_lte.present?
+
+    scope = scope.where(contact_id: contact_id) if contact_id.present?
 
     scope = scope.where(recurrent_transaction_id: recurrent_transaction_id) if recurrent_transaction_id.present?
 

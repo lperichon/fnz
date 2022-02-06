@@ -388,6 +388,7 @@ pt-BR:
     show:
       see_in_crm: Ver este contato no CRM
       last_transactions: "Ultimos movimentos"
+      all_transactions: "Ver todos os movimentos"
   memberships:
     membership_filter:
       filter: Filtrar

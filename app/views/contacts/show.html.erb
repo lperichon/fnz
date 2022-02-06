@@ -31,6 +31,7 @@
     <% end %>
     </span>
   <% end %>
+	<%= link_to t(".all_transactions"), business_transactions_path(business_id: @business.id, transaction_search: {contact_id: @contact.id}) %>
 <% end %>
 
 
