@@ -5,6 +5,10 @@
 class MonthTagTotal < ActiveRecord::Base
   #attr_accessible :ref_date, :tag_id
 
+  include Shared::HasCents
+  has_cents_for :total_amount
+
+
   belongs_to :tag
 
   before_validation :set_default_currency
@@ -22,9 +26,9 @@ class MonthTagTotal < ActiveRecord::Base
   end
 
   def calculate_total_amount
-    self.total_amount = tag.tree_transactions
+    self.total_amount_cents = tag.tree_transactions
          .to_report_on_month(ref_date)
-         .sum("CASE WHEN transactions.type='Credit' THEN transactions.amount WHEN transactions.type='Debit' THEN -1 * transactions.amount ELSE 0 END").to_f # using CASE casts to string ¿?
+         .sum("CASE WHEN transactions.type='Credit' THEN transactions.amount_cents WHEN transactions.type='Debit' THEN -1 * transactions.amount_cents ELSE 0 END")
   end
 
   def self.get_for(tag, ref_date)
