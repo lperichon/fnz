@@ -12,7 +12,7 @@ module Shared::HasCents
     #
     def self.has_cents_for(varname)
       define_method("#{varname}=") do |new_value|
-        self.send("#{varname}_cents=", new_value.nil? ? nil : (new_value * 100).round.to_i )
+        self.send("#{varname}_cents=", new_value.nil? ? nil : (new_value.to_f * 100).round.to_i )
       end
 
       define_method(varname) do
