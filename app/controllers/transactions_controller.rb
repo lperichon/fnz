@@ -9,11 +9,11 @@ class TransactionsController < UserApplicationController
     @transactions = @context.includes(:agent, :contact, :tags, :source, :business)
 
     if @account && @start_date
-      @starting_balance = @account.calculate_balance_cents(@start_date)
+      @starting_balance = @account.calculate_balance_cents(@start_date) / 100.0
     end
 
     if @account && @end_date && @end_date < Time.zone.today
-      eb = @account.calculate_balance_cents(@end_date)
+      eb = @account.calculate_balance_cents(@end_date) / 100.0
       if eb != @account.balance
         @ending_balance = eb
       end
