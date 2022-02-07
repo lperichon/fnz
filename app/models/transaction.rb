@@ -1,4 +1,8 @@
 class Transaction < ActiveRecord::Base
+
+  include Shared::HasCents
+  has_cents_for :amount
+
   include ActiveModel::Transitions
 
   include HasAutomations
@@ -62,7 +66,7 @@ class Transaction < ActiveRecord::Base
   validates :description, :presence => true
   validates :business, :presence => true
   validates :source, :presence => true
-  validates :amount, :presence => true, :numericality => {:greater_than_or_equal_to => 0}
+  validates :amount_cents, :presence => true, :numericality => {:greater_than_or_equal_to => 0}
   validates :creator, :presence => true
   validates :transaction_at, :presence => true
   validates :report_at, :presence => true
@@ -70,7 +74,7 @@ class Transaction < ActiveRecord::Base
   validate :in_business_currency, if: ->{ type!="Transfer" && !admpart_tag_id.nil? }
 
   # Setup accessible (or protected) attributes for your model
-  #attr_accessible :tag_id, :tag_ids, :description, :business_id, :source_id, :amount, :type, :transaction_at, :target_id, :conversion_rate, :state, :reconciled_at, :sale_ids, :installment_ids, :enrollment_ids, :creator_id, :report_at, :report_at_option, :inscription_ids, :contact_id, :agent_id, :admpart_tag_id
+  #attr_accessible :tag_id, :tag_ids, :description, :business_id, :source_id, :amount_cents, :type, :transaction_at, :target_id, :conversion_rate, :state, :reconciled_at, :sale_ids, :installment_ids, :enrollment_ids, :creator_id, :report_at, :report_at_option, :inscription_ids, :contact_id, :agent_id, :admpart_tag_id
 
   scope :untagged, -> { includes(:taggings).where(taggings: { tag_id: nil }) }
 
@@ -126,7 +130,7 @@ class Transaction < ActiveRecord::Base
     end
 
     if q[:amount_not_eq]
-      base = base.where("amount <> ?", q.delete(:amount_not_eq))
+      base = base.where("amount_cents <> ?", (q.delete(:amount_not_eq).to_f*100).to_i)
     end
 
     if q[:description]
