@@ -3,6 +3,13 @@ module Shared::HasCents
 
   included do
 
+    # @param varname nombre para el attributo virtual.
+    # Define setter y getter.
+    #
+    # @example
+    #   has_cents_for(:amount)
+    #   # defines virtual amount and amount= proxying to amount_cents
+    #
     def self.has_cents_for(varname)
       define_method("#{varname}=") do |new_value|
         self.send("#{varname}_cents=", new_value.nil? ? nil : (new_value * 100).round.to_i )
