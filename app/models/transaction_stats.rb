@@ -25,19 +25,19 @@ class TransactionStats
   end
 
   def debits
-    context.where(:type => "Debit").joins(:tags).group('tags.name').sum(:amount)
+    context.where(:type => "Debit").joins(:tags).group('tags.name').sum(:amount_cents).each{|k,v| r[k] = v/100.0 }
   end
 
   def untagged_debits
-    context.where(:type => "Debit").untagged.sum(:amount)
+    context.where(:type => "Debit").untagged.sum(:amount_cents) / 100.0
   end
 
   def credits
-    context.where(:type => "Credit").joins(:tags).group('tags.name').sum(:amount)
+    context.where(:type => "Credit").joins(:tags).group('tags.name').sum(:amount_cents).each{|k,v| r[k] = v/100.0 }
   end
 
   def untagged_credits
-    context.where(:type => "Credit").untagged.sum(:amount)
+    context.where(:type => "Credit").untagged.sum(:amount_cents) / 100.0
   end
 
 end

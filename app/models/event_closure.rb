@@ -12,11 +12,11 @@ class EventClosure
   def other_credits_per_category
     business.trans.credits
         .joins("LEFT JOIN inscriptions_transactions ON transactions.id = inscriptions_transactions.transaction_id").joins(:tags)
-        .where("inscriptions_transactions.inscription_id IS NULL").group('tags.name').sum(:amount)
+        .where("inscriptions_transactions.inscription_id IS NULL").group('tags.name').sum(:amount_cents).each{|k,v| r[k] = v/100.0 }
   end
 
   def debits_per_category
-    business.trans.debits.joins(:tags).group('tags.name').sum(:amount)
+    business.trans.debits.joins(:tags).group('tags.name').sum(:amount_cents).each{|k,v| r[k] = v/100.0 }
   end
 
   def commissions_per_padma_account

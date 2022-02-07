@@ -48,7 +48,7 @@ describe Admpart, :type => :model do
                                type: "Credit", amount: 10,
                                tag_id: tag.id, admpart_tag_id: tag.id,
                                report_at: Date.today)
-            expect( admpart.transactions_for_tag(tag).sum(:amount) ).to eq pre+10
+            expect( admpart.transactions_for_tag(tag).sum(:amount_cents)/100.0 ).to eq pre+10
             expect( admpart.total_for_tag(tag) ).to eq pre
 
             FactoryBot.create(:transaction, business_id: b.id,

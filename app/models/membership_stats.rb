@@ -35,7 +35,7 @@ class MembershipStats
   def all_including_projections(agent=nil)
     is = is_scope(agent)
     ms = ms_scope(agent)
-    total_sum = is.sum("installments.value") + ms.sum("memberships.value")
+    total_sum = (is.sum("installments.value_cents") + ms.sum("memberships.value_cents")) / 100.0
     total_avg = total_sum / (is.count + ms.count)
 
     { sum: total_sum, avg: total_avg }
