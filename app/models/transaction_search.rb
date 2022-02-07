@@ -7,7 +7,7 @@ class TransactionSearch
     :smart_meta_period,
     :transacted_at_meta_period,
     :reconciled_at_meta_period,
-    :report_on_meta_period,
+    :report_at_meta_period,
     :source_account_id,
     :type,
     :description,
@@ -42,7 +42,7 @@ class TransactionSearch
     scope = scope_to_smart_meta_period(smart_meta_period, scope) if smart_meta_period.present?
     scope = scope_to_meta_period(:transaction_at, transacted_at_meta_period, scope) if  transacted_at_meta_period.present?
     scope = scope_to_meta_period(:reconciled_at, reconciled_at_meta_period, scope) if  reconciled_at_meta_period.present?
-    scope = scope_to_meta_period(:report_on, report_on_meta_period, scope) if report_on_meta_period.present?
+    scope = scope_to_meta_period(:report_at, report_at_meta_period, scope) if report_at_meta_period.present?
 
     scope = scope.where("description like ?", "%#{description}%") if description.present?
     scope = scope_to_accounts(scope)
@@ -106,7 +106,7 @@ class TransactionSearch
   end
 
   def period_filter?
-    smart_meta_period || transacted_at_meta_period || reconciled_at_meta_period || report_on_meta_period
+    smart_meta_period || transacted_at_meta_period || reconciled_at_meta_period || report_at_meta_period
   end
 
 end
