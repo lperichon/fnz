@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20220206230032) do
+ActiveRecord::Schema.define(version: 20220207002650) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20220206230032) do
   create_table "accounts", force: :cascade do |t|
     t.string   "name",          limit: 255,                          default: "",  null: false
     t.integer  "business_id"
-    t.decimal  "old_balance",               precision: 12, scale: 2, default: 0.0, null: false
+    t.decimal  "old_balance",               precision: 12, scale: 2, default: 0.0
     t.string   "currency",      limit: 255
     t.datetime "deleted_at"
     t.boolean  "default"
@@ -189,9 +189,9 @@ ActiveRecord::Schema.define(version: 20220206230032) do
   create_table "installments", force: :cascade do |t|
     t.integer  "membership_id"
     t.date     "due_on"
-    t.decimal  "old_value",                 precision: 8, scale: 2, default: 0.0, null: false
+    t.decimal  "old_value",                 precision: 8, scale: 2, default: 0.0
     t.integer  "agent_id"
-    t.decimal  "old_balance",               precision: 8, scale: 2, default: 0.0, null: false
+    t.decimal  "old_balance",               precision: 8, scale: 2, default: 0.0
     t.integer  "external_id"
     t.string   "observations",  limit: 255
     t.string   "status",        limit: 255
@@ -222,7 +222,7 @@ ActiveRecord::Schema.define(version: 20220206230032) do
     t.integer  "contact_id"
     t.date     "begins_on"
     t.date     "ends_on"
-    t.decimal  "old_value",                   precision: 8, scale: 2, default: 0.0, null: false
+    t.decimal  "old_value",                   precision: 8, scale: 2, default: 0.0
     t.date     "closed_on"
     t.integer  "payment_type_id"
     t.boolean  "vip"
@@ -360,7 +360,7 @@ ActiveRecord::Schema.define(version: 20220206230032) do
     t.string   "description",              limit: 255,                         default: "",  null: false
     t.integer  "business_id"
     t.integer  "source_id",                                                                  null: false
-    t.decimal  "old_amount",                           precision: 8, scale: 2,               null: false
+    t.decimal  "old_amount",                           precision: 8, scale: 2
     t.datetime "transaction_at"
     t.integer  "creator_id"
     t.integer  "target_id"
