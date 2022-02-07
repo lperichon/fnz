@@ -1,4 +1,8 @@
 class Account < ActiveRecord::Base
+
+  include Shared::HasCents
+  has_cents_for(:balance)
+
   acts_as_paranoid
   belongs_to :business
 
@@ -17,7 +21,7 @@ class Account < ActiveRecord::Base
   end
 
   def update_balance
-    self.update_attribute(:balance, calculate_balance)
+    self.update_attribute(:balance_cents, calculate_balance_cents)
   end
 
   def currency=(currency_code)
@@ -88,14 +92,14 @@ class Account < ActiveRecord::Base
     ret
   end
 
-  def calculate_balance(ref_time=nil)
+  def calculate_balance_cents(ref_time=nil)
     base = if ref_time.nil?
-      last_balance_check.nil?? 0 : last_balance_check.balance
+      last_balance_check.nil?? 0 : last_balance_check.balance_cents
     else
       bc = balance_checks.order(:checked_at)
                          .where("checked_at < ?",ref_time)
                          .last
-      bc.nil?? 0 : bc.balance
+      bc.nil?? 0 : bc.balance_cents
     end
 
     transactions_scope = if ref_time.nil?
@@ -110,7 +114,7 @@ class Account < ActiveRecord::Base
 
 
     transactions_scope.inject(base) do |balance, transaction|
-      balance+transaction.sign(self)*transaction.amount
+      balance+transaction.sign(self)*transaction.amount_cents
     end
   end
 
