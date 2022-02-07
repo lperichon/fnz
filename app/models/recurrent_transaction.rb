@@ -1,6 +1,9 @@
 # Recurrencia MENSUAL
 class RecurrentTransaction < ActiveRecord::Base
 
+  include Shared::HasCents
+  has_cents_for :amount
+
   belongs_to :business
 
   belongs_to :source, class_name: "Account"
@@ -13,7 +16,7 @@ class RecurrentTransaction < ActiveRecord::Base
 
   before_validation :set_defaults
 
-  validates :amount, presence: true, numericality: {greater_than_or_equal_to: 0}
+  validates :amount_cents, presence: true, numericality: {greater_than_or_equal_to: 0}
 
   after_save :create_for_current_month
 
@@ -30,7 +33,7 @@ class RecurrentTransaction < ActiveRecord::Base
 
           type: transaction_type,
           description: description,
-          amount: amount,
+          amount_cents: amount_cents,
 
           business_id: business_id,
           source_id: source_id,
