@@ -1,4 +1,8 @@
 class Membership < ActiveRecord::Base
+
+  include Shared::HasCents
+  has_cents_for :value
+
   attr_accessor :create_monthly_installments
 
   belongs_to :business
@@ -7,7 +11,7 @@ class Membership < ActiveRecord::Base
   has_many :installments
   has_one :enrollment
 
-  validates :value, :numericality =>  {:greater_than_or_equal => 0}
+  validates :value_cents, :numericality =>  {:greater_than_or_equal => 0}
   validates :business, :presence => true
   validates :contact, :presence => true
   validates :begins_on, :presence => true
@@ -17,7 +21,7 @@ class Membership < ActiveRecord::Base
   validate  :avoid_overlapping
 
   # Setup accessible (or protected) attributes for your model
-  #attr_accessible :contact_id, :business_id, :payment_type_id, :begins_on, :ends_on, :value, :closed_on, :vip, :external_id, :monthly_due_day, :name, :create_monthly_installments
+  #attr_accessible :contact_id, :business_id, :payment_type_id, :begins_on, :ends_on, :value_cents, :closed_on, :vip, :external_id, :monthly_due_day, :name, :create_monthly_installments
 
   after_save :update_contacts_current_membership
 
