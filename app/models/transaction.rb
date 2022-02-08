@@ -71,6 +71,8 @@ class Transaction < ActiveRecord::Base
   validates :transaction_at, :presence => true
   validates :report_at, :presence => true
 
+  validate :wont_violate_block
+
   validate :in_business_currency, if: ->{ type!="Transfer" && !admpart_tag_id.nil? }
 
   # Setup accessible (or protected) attributes for your model
@@ -334,6 +336,26 @@ class Transaction < ActiveRecord::Base
       return sign
     else
       raise "sign method should only be called for classes inheriting from Transfer"
+    end
+  end
+
+  def wont_violate_block
+    if business.block_transactions_before
+      if report_at_changed?
+        if report_at < business.block_transactions_before
+          errors.add(:report_at, t("transactions.you_blocked_all_before", date: business.block_transactions_before))
+        end
+      end
+      if transaction_at_changed?
+        if transaction_at < business.block_transactions_before
+          errors.add(:transaction_at, t("transactions.you_blocked_all_before", date: business.block_transactions_before))
+        end
+      end
+      if reconciled_at_changed?
+        if reconciled_at < business.block_transactions_before
+          errors.add(:reconciled_at, t("transactions.you_blocked_all_before", date: business.block_transactions_before))
+        end
+      end
     end
   end
 end

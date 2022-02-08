@@ -544,6 +544,7 @@ pt-BR:
       current_month: "mês atual"
       previous_month: "Mês anterior"
       month_before_last: "2 mêses atras"
+    you_blocked_all_before: "Bloqueadas todos os movimentos anteriores a %{date}."
   sales:
     index:
       view_month_stats: Ver estatísticas de %{month}

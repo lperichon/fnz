@@ -975,6 +975,7 @@ es:
       current_month: "mes actual"
       previous_month: "Mes pasado"
       month_before_last: "Hace 2 meses"
+    you_blocked_all_before: "Bloqueadas todas las transacciones anteriores a %{date}."
   sales:
     index:
       view_month_stats: Ver las estadísticas de %{month}

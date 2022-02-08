@@ -544,6 +544,7 @@ en:
       current_month: "current month"
       previous_month: "Previous month"
       month_before_last: "Month before last"
+    you_blocked_all_before: "Transactions before %{date} are blocked"
   sales:
     index:
       view_month_stats: View %{month} stats
