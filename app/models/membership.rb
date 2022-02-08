@@ -7,6 +7,7 @@ class Membership < ActiveRecord::Base
 
   belongs_to :business
   belongs_to :contact, :touch => true
+  has_one :current_of_contact, inverse_of: :current_membership, class_name: "Contact", foreign_key: "current_membership_id"
   belongs_to :payment_type
   has_many :installments
   has_one :enrollment
@@ -33,7 +34,7 @@ class Membership < ActiveRecord::Base
 
   default_scope { order('begins_on DESC') }
 
-  scope :current, -> { where(:closed_on => nil).select("DISTINCT ON(contact_id) *").order("contact_id, begins_on DESC") }
+  scope :current, -> { joins(:current_of_contact).open }
   scope :wout_installments, -> { joins("left outer join installments on memberships.id = installments.membership_id").where('installments.id' => nil) }
   scope :open, -> { where(closed_on: nil) }
   scope :valid_on, ->(ref_date){ open.where("begins_on <= :rd and ends_on >= :rd", rd: ref_date) }
