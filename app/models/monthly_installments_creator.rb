@@ -5,6 +5,7 @@ class MonthlyInstallmentsCreator
     @business = business
   end
 
+  # Crea installments para los CURRENT memberships
   def run
     business.contacts.students.each do |student|
       current_membership = student.current_membership
