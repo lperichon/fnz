@@ -3,6 +3,10 @@
     display: none;
   }
 
+  a:after {
+    display: none !important;
+  }
+
   #admpart-date-select {
     display: none;
   }
