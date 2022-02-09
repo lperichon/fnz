@@ -2,10 +2,38 @@
   <%= render "warnings" %>
 </div>
 
+<% content_for :top do %>
+  <button data-action="sidebar#toggleSideBar"
+          data-target="sidebar.toggler"
+          data-show-msg="<%= _("mostrar") %>"
+          data-hide-msg="<%= _("ocultar") %>"
+          class="btn hide-in-print">
+    <span data-target="sidebar.togglerVerb"></span>
+  </button>
+<% end %>
+
+<% content_for :sidebar do %>
+  <div class="hide-in-print">
+    <ul class="nav nav-pills nav-stacked">
+      <% @sidebar_adms.each do |adm| %>
+        <li class="<%= "active" if adm == @adm %>">
+          <%= link_to dated_admpart_business_admparts_path(
+            business_id: @business.id,
+            year: adm.ref_date.year,
+            month: adm.ref_date.month,
+            skip_refresh: (adm.ref_date != Time.zone.today.beginning_of_month)) do %>
+            <%= l(adm.ref_date, format: :month) %>
+            <span class="pull-right">
+              <%= pm adm.profit %>
+            </span>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <div id="admpart-date-select" class="hide-in-print">
-  <%= select_tag :ref_date,
-                 ref_date_options,
-                 data: { action: "redirectOnChange", business_id: @adm.business_id  } %><br/>
   <% if @adm.queued_refresh.nil? %>
     <%= link_to _("Recalcular administración ahora"), business_admpart_path(@adm.business,@adm), class: "hide-in-print" %>
   <% end %>
