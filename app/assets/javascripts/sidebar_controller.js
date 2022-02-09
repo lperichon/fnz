@@ -16,8 +16,12 @@
       }
     }
 
+    sideBarIsHidden(){
+      return this.sidebarTarget.style.display=="none";
+    }
+
     toggleSideBar(){
-      if(this.sidebarTarget.style.display=="none"){
+      if(this.sideBarIsHidden()){
         this.showSideBar();
       } else {
         this.hideSideBar();
