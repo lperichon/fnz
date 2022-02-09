@@ -1,13 +1,18 @@
 class AdmpartsController < UserApplicationController
   include RedirectBackHelper
   
-  layout "application_without_sidebar"
+  #layout "application_without_sidebar"
 
   before_filter :store_current_location, only: [:show, :attendance_detail]
 
   before_filter :get_context
   before_filter :get_admpart, only: [:show, :edit, :update, :attendance_detail]
-  
+
+  def index
+    @adms = (0..6).map { |i| @business.admparts.get_for_ref_date(i.months.ago.beginning_of_month.to_date) }
+    render layout: "application_without_sidebar"
+  end
+
   def show
     if @adm.valid?
       unless params[:skip_refresh] || (@business.block_transactions_before && @adm.ref_date.end_of_month.to_time.end_of_day < @business.block_transactions_before)
@@ -20,6 +25,8 @@ class AdmpartsController < UserApplicationController
           redirect_to business_admpart_path(params.merge({skip_refresh: true}))
         end
       end
+
+      @sidebar_adms = (0..6).map { |i| @business.admparts.get_for_ref_date(i.months.ago.beginning_of_month.to_date) }
 
     else
       redirect_to edit_business_admpart_path(@business, id: @adm.try(:ref_date) || Date.today)

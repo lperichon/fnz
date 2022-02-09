@@ -1,0 +1,40 @@
+<% page_title t(".admparts") %>
+
+<table class="table table-striped table-hover table-bordered">
+  <thead>
+  <tr>
+    <th></th>
+    <th><%= _("Total ingresos") %></th>
+    <th><%= _("Total gastos") %></th>
+    <th><%= _("Lucro") %></th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @adms.each do |adm| %>
+    <tr>
+      <td>
+        <%= l(adm.ref_date, format: :month) %>
+      </td>
+      <td>
+        <%= pm adm.section_total("income") %>
+      </td>
+      <td>
+        <%= pm adm.section_total("expense") %>
+      </td>
+      <td>
+        <%= pm adm.profit %>
+      </td>
+      <td>
+        <%= link_to content_tag(:i, "", :class => "icon-eye-open"),
+          dated_admpart_business_admparts_path(
+          business_id: @business.id,
+          year: adm.ref_date.year,
+          month: adm.ref_date.month,
+          skip_refresh: (adm.ref_date != Time.zone.today.beginning_of_month)) %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+
+</table>
