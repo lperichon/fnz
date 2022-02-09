@@ -7,6 +7,15 @@
 .admpart-value.negative{
   color: red; 
 }
+.active { /* en barra lateral de navegación */
+  .admpart-value.positive {
+    color: #79fa79;
+  }
+  .admpart-value.negative {
+    color: #ff9a9a;
+  }
+}
+
 
 .droppable-hover {
   background-color: blue;
