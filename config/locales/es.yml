@@ -229,6 +229,8 @@ es:
     secondary_navigation:
       administration: Administración participativa
       attendance_detail: Detalle x asistencia
+    index:
+      admparts: "Administraciones Participativas"
   date:
     abbr_day_names:
     - dom

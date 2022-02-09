@@ -176,6 +176,8 @@ en:
       total_income: Total income
       total_expense: Total expenditures
       this_is_section: This is the section '%{section_name}'
+    index:
+      admparts: "Participatory Administrations"
   date:
     abbr_day_names:
     - Sun
