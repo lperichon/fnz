@@ -50,6 +50,18 @@ class Tag < ActiveRecord::Base
     Transaction.where(admpart_tag_id: self_and_descendants.map(&:id))
   end
 
+  def my_root
+    if @my_root
+      @my_root
+    else
+      @my_root = self
+      until @my_root.parent.nil? do
+        @my_root = @my_root.parent
+      end
+      @my_root
+    end
+  end
+
   def month_total(ref_date)
     MonthTagTotal.get_for(self,ref_date).total_amount
   end

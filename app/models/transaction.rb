@@ -296,6 +296,12 @@ class Transaction < ActiveRecord::Base
     self.admpart_tag_id = self.tag_id
   end
 
+  def root_admpart_tag
+    if admpart_tag
+      admpart_tag.my_root
+    end
+  end
+
   def self.update_each_admpart_tag
     self.all.each{|t| t.update_column(:admpart_tag_id, t.taggings.first.try(:tag_id)) }
   end
