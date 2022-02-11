@@ -1,91 +1,91 @@
 <% page_title _("Membresías") %>
 <% content_for :sidebar do %>
-    <%= render :partial => 'sidebar' %>
+  <%= render :partial => 'sidebar' %>
 <% end %>
 
 <% content_for :secondary_navigation do %>
-    <%= render :partial => 'secondary_navigation' %>
+  <%= render :partial => 'secondary_navigation' %>
 <% end %>
 
 <% content_for :top do %>
   <%= render :partial => 'membership_filter' %>
-    <%= paginate @contacts, :theme => 'twitter-bootstrap' %>
+  <%= paginate @contacts, :theme => 'twitter-bootstrap' %>
 <% end %>
 <% if current_user.overview_mode == 'table' %>
   <!--              -->
   <!--  TABLE VIEW  -->
   <!--              -->
-<table class="memberships table table-striped table-hover table-condensed table-bordered">
-  <thead>
-  <tr>
-    <td class="name-column"></td>
-    <%= render :partial => 'table_header' %>
-  </tr>
-  </thead>
-  <tbody>
-  <% @contacts.each do |contact| %>
-    <tr class="<%=contact.padma_status%>" data-contact-id=<%= contact.id %>>
-      <td class="name-column">
-        <%= sidebar_contact_membership_link(@business, contact, contact.current_membership) %>
-      </td>
-      <% membership = contact.current_membership %>
-      <% cache ["#{@business.padma_id}-overview-table-contact-#{contact.id}", contact.updated_at.to_i] do %>
-        <% monthly_iterator = [] %>
-        <% (1..5).each do |n| %>
-          <% date = (6-n).months.ago %>
-          <% installment = installment_for(date , contact.installments) %>
-          <% monthly_iterator << {:date => date, :installment => installment } %>
-        <% end %>
-        <% date = Date.today %>
-        <% installment = installment_for(date, contact.installments) %>
-        <% monthly_iterator << {:date => date, :installment => installment } %>
-        <% (1..6).each do |n| %>
-          <% date = n.months.from_now %>
-            <% installment = installment_for(date , contact.installments) %>
-            <% monthly_iterator << {:date => date, :installment => installment } %>
-        <% end %>
-
-        <% monthly_iterator.each do |monthly_values| %>
-          <% installment = monthly_values[:installment] %>
-          <% date = monthly_values[:date] %>
-          <%= render :partial => 'table_cell', :locals => {:contact => contact, :membership => membership, :installment => installment, :date => date} %>
-        <% end %>
-      <% end %>
+  <table class="memberships table table-striped table-hover table-condensed table-bordered">
+    <thead>
+    <tr>
+      <td class="name-column"></td>
+      <%= render :partial => 'table_header' %>
     </tr>
-  <% end %>
-  </tbody>
-  <tfoot>
-    <td class="name-column"></td>
-    <%= render :partial => 'table_header' %>
-  </tfoot>
-</table>
+    </thead>
+    <tbody>
+    <% @contacts.each do |contact| %>
+      <tr class="<%= contact.padma_status %>" data-contact-id=<%= contact.id %>>
+        <td class="name-column">
+          <%= sidebar_contact_membership_link(@business, contact, contact.current_membership) %>
+        </td>
+        <% membership = contact.current_membership %>
+        <% cache ["#{@business.padma_id}-overview-table-contact-#{contact.id}", contact.updated_at.to_i] do %>
+          <% monthly_iterator = [] %>
+          <% (1..5).each do |n| %>
+            <% date = (6 - n).months.ago %>
+            <% installment = installment_for(date, contact.installments) %>
+            <% monthly_iterator << {:date => date, :installment => installment} %>
+          <% end %>
+          <% date = Date.today %>
+          <% installment = installment_for(date, contact.installments) %>
+          <% monthly_iterator << {:date => date, :installment => installment} %>
+          <% (1..6).each do |n| %>
+            <% date = n.months.from_now %>
+            <% installment = installment_for(date, contact.installments) %>
+            <% monthly_iterator << {:date => date, :installment => installment} %>
+          <% end %>
+
+          <% monthly_iterator.each do |monthly_values| %>
+            <% installment = monthly_values[:installment] %>
+            <% date = monthly_values[:date] %>
+            <%= render :partial => 'table_cell', :locals => {:contact => contact, :membership => membership, :installment => installment, :date => date} %>
+          <% end %>
+        <% end %>
+      </tr>
+    <% end %>
+    </tbody>
+    <tfoot>
+      <td class="name-column"></td>
+      <%= render :partial => 'table_header' %>
+    </tfoot>
+  </table>
 <% else %>
   <!--             -->
   <!--  LIST VIEW  -->
   <!--             -->
-<table class="memberships table list-mode table-striped table-hover table-condensed table-bordered">
-<thead>	
-  <tr>
-    <td></td>
-    <th><%= t('memberships.maturity_report.membership') %></th>
-    <th><%= t('memberships.maturity_report.period') %></th>
-    <th style="width: 70px;"><%= Membership.human_attribute_name(:monthly_due_day) %></th>
-    <th style="width: 40px;"><%= t('memberships.maturity_report.value') %></th>
-    <th><%= Membership.human_attribute_name(:payment_type) %></th>
-  </tr>
-</thead>
-<tbody>
-  <% @contacts.each do |contact| %>
-    <% membership = contact.current_membership %>
+  <table class="memberships table list-mode table-striped table-hover table-condensed table-bordered">
+    <thead>
     <tr>
-      <td><%= sidebar_contact_membership_link(@business, contact, contact.current_membership) %></td>
-      <td><%= membership.try(:name) %></td>
-      <td><%= membership.try(:begins_on) %> - <%= membership.try(:ends_on) %></td>
-      <td><%= membership.try(:monthly_due_day) %></td>
-      <td><%= membership.try(:value) %></td>
-      <td><%= memberships_payment_type_name(membership) if membership.present? %></td>
+      <td></td>
+      <th><%= t('memberships.maturity_report.membership') %></th>
+      <th><%= t('memberships.maturity_report.period') %></th>
+      <th style="width: 70px;"><%= Membership.human_attribute_name(:monthly_due_day) %></th>
+      <th style="width: 40px;"><%= t('memberships.maturity_report.value') %></th>
+      <th><%= Membership.human_attribute_name(:payment_type) %></th>
     </tr>
-  <% end -%>
-</tbody>
-</table>
+    </thead>
+    <tbody>
+    <% @contacts.each do |contact| %>
+      <% membership = contact.current_membership %>
+      <tr>
+        <td><%= sidebar_contact_membership_link(@business, contact, contact.current_membership) %></td>
+        <td><%= membership.try(:name) %></td>
+        <td><%= membership.try(:begins_on) %> - <%= membership.try(:ends_on) %></td>
+        <td><%= membership.try(:monthly_due_day) %></td>
+        <td><%= membership.try(:value) %></td>
+        <td><%= memberships_payment_type_name(membership) if membership.present? %></td>
+      </tr>
+    <% end -%>
+    </tbody>
+  </table>
 <% end %>
