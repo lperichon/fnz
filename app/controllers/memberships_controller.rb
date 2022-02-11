@@ -92,6 +92,8 @@ class MembershipsController < UserApplicationController
       per_page ||= 50
       @contacts = @membership_filter.results.includes(current_membership: :payment_type).page(params[:page]).per(per_page)
     end
+
+    render layout: "application_without_sidebar"
   end
 
   def stats
