@@ -9,7 +9,7 @@ class AdmpartsController < UserApplicationController
   before_filter :get_admpart, only: [:show, :edit, :update, :attendance_detail]
 
   def index
-    @adms = @business.admparts.order("ref_date DESC").limit(12)
+    @adms = @business.admparts.order("ref_date DESC").limit(24)
     render layout: "application_without_sidebar"
   end
 
