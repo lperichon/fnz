@@ -53,7 +53,8 @@
 
   <%= f.input :report_at, :as => :date_picker %>
 
-  <%=  f.input :tag_ids, :as => :select, :collection => @business.tags, :input_html => {:class => "chosen", 'data-placeholder' => t('transactions.fields.tags_placeholder')} %>
+  <%# Chosen no me muestra el blank si no lo agrego a la colección %>
+  <%=  f.input :tag_ids, as: :select, collection: [['-',nil]]+@business.tags.map { |t| [t.name, t.id] }, input_html:{class: "chosen", 'data-placeholder' => t('transactions.fields.tags_placeholder')} %>
 
   <%=  f.input :agent_id, :as => :select, :collection => @business.agents.enabled, :input_html => {:class => "chosen", 'data-placeholder' => t('transactions.fields.agent_placeholder')} %>
 
