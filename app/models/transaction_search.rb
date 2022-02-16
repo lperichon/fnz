@@ -44,7 +44,7 @@ class TransactionSearch
     scope = scope_to_meta_period(:reconciled_at, reconciled_at_meta_period, scope) if  reconciled_at_meta_period.present?
     scope = scope_to_meta_period(:report_at, report_at_meta_period, scope) if report_at_meta_period.present?
 
-    scope = scope.where("description like ?", "%#{description}%") if description.present?
+    scope = scope.where("LOWER(description) like ?", "%#{description.downcase}%") if description.present?
     scope = scope_to_accounts(scope)
     scope = scope.where(type: type) if type.present?
     scope = scope.where(state: state) if state.present?
