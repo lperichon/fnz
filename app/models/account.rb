@@ -73,7 +73,7 @@ class Account < ActiveRecord::Base
     ret = {}
     self.where(nil).includes(:business).group_by(&:currency).each do |cur,accs|
       ret[cur.id] = accs.inject(0) do |acum, acc|
-        acum + acc.balance
+        acum + (acc.balance || 0)
       end
     end
     ret
