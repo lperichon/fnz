@@ -12,18 +12,26 @@ class FetchCrmContactJob
     if business
       ret = resync_for_business(business)
     else
-      padma_contact.local_statuses.each do |ls|
-        if (pc = get_padma_contact(ls["account_name"]))
-          if (business = Business.find_by_padma_id ls["account_name"])
-            ret = resync_for_business(business, pc)
+      if padma_contact
+        padma_contact.local_statuses.each do |ls|
+          if (pc = get_padma_contact(ls["account_name"]))
+            if (business = Business.find_by_padma_id ls["account_name"])
+              ret = resync_for_business(business, pc)
+            end
           end
         end
+      else
+        retry_this
       end
     end
     ret
   end
 
   private
+
+  def retry_this
+    raise "retry this job"
+  end
 
   def resync_for_business(business, pc = nil)
     pc = padma_contact if pc.nil?
