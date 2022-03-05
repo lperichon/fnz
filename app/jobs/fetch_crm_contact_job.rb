@@ -42,7 +42,7 @@ class FetchCrmContactJob
         padma_status: pc.local_status,
         padma_teacher: pc.local_teacher)
     else
-      contact = business.contacts.get_by_padma_id(pc.id)
+      business.contacts.get_by_padma_id(pc.id)
     end
   end
 
