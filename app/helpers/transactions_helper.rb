@@ -8,6 +8,10 @@ module TransactionsHelper
                   url: business_transaction_path(@business, transaction)
   end
 
+  def accounts_options_for_select
+    @accounts_options_for_select ||= @business.accounts.order("name").map {|i| [i.id, i.name]}
+  end
+
   def tag_options_for_select
     @tag_options_for_select ||= @business.tags.order(:name).map{|t| [t.id, t.name]}
   end
