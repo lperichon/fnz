@@ -30,7 +30,9 @@ class User < ActiveRecord::Base
       Thread.current[:current_user]
     end
 
+    # @deprecate
     def find_for_cas_oauth(access_token, signed_in_resource=nil)
+      raise "DEPRECATED"
       data = access_token.extra
 
       if signed_in_resource
