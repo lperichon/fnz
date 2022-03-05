@@ -11,8 +11,8 @@
           <% end %>
       <% end %>
       <div class="modal-footer" data-target="transaction_form.colorSignal">
-        <%= link_to t('actions.close'), "#", :class => "btn", "data-dismiss" => "modal" %>
-        <%= f.button :submit, :class => "btn btn-primary", id: "submitTransaction" %>
+        <%= link_to t('actions.close'), "#", class: "btn", "data-dismiss" => "modal" %>
+        <%= f.button :submit, t("actions.create"), class: "btn btn-primary", id: "submitTransaction" %>
       </div>
   <% end %>
 </div>
