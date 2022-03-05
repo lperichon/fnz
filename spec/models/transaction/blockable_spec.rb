@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Transaction::MayBeBlocked' do
+describe 'Transaction::Blockable' do
   let(:block_since) { Date.civil(2020,1,1) }
   let(:business) { FactoryBot.create(:business, block_transactions_before: block_since) }
 

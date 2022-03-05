@@ -1,6 +1,6 @@
 class Transaction < ActiveRecord::Base
 
-  include MayBeBlocked
+  include Blockable
 
   include Shared::HasCents
   has_cents_for :amount

@@ -1,4 +1,4 @@
-module Transaction::MayBeBlocked
+module Transaction::Blockable
   extend ActiveSupport::Concern
 
   included do
