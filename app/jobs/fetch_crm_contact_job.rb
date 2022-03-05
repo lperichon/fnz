@@ -38,9 +38,9 @@ class FetchCrmContactJob
     if (contact = business.contacts.find_by_padma_id(pc.id))
       # If contact existed already update it
       contact.update_attributes(
-        :name => "#{pc.first_name} #{pc.last_name}".strip,
-        :padma_status => pc.local_status,
-        :padma_teacher => pc.local_teacher)
+        name: "#{pc.first_name} #{pc.last_name}".strip,
+        padma_status: pc.local_status,
+        padma_teacher: pc.local_teacher)
     else
       contact = business.contacts.get_by_padma_id(pc.id)
     end
