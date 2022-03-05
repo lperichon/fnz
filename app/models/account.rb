@@ -125,6 +125,7 @@ class Account < ActiveRecord::Base
   private
 
   def set_defaults
+    self.balance_cents = 0 if self.balance_cents.nil?
     self.currency = business.currency_code if self.currency.nil?
   end
 end
