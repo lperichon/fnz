@@ -100,10 +100,10 @@
     <% end %>
   </td>
   <td>
-    <%= transaction.source.name %>
+    <%= transaction.source.try(:name) %>
     <% if transaction.is_a?(Transfer) %>
       <br/>-><br/>
-      <%= transaction.target.name %>
+      <%= transaction.target.try(:name) %>
     <% end %>
   </td>
   <td>
