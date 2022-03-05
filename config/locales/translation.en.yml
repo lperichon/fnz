@@ -96,7 +96,7 @@ en:
         state: Status
         tag_ids: Category
         transaction_at: Date
-        report_at: Report Date
+        report_at: Report Month
         report_at_option: Report Date
         type: Type
         date: Fecha

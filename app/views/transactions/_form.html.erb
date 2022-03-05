@@ -4,8 +4,12 @@
                     url: form_url,
                     validate: true,
                     html: {
+                      class: "transactionFields",
                       data: {
-                        controller: "transaction_form" }}) do |f| %>
+                        controller: "transaction_form"
+                      }
+                    }
+    ) do |f| %>
     <div id="colorSignal" data-target="transaction_form.colorSignal"></div>
       <input type="hidden" name="quick" value="1"></input>
 

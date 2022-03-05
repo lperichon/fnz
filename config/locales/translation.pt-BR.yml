@@ -96,7 +96,7 @@ pt-BR:
         state: Estado
         tag_ids: Categoria
         transaction_at: Data
-        report_at: Data de reporte
+        report_at: Mês de reporte
         report_at_option: Data de reporte
         type: Tipo
         date: Data

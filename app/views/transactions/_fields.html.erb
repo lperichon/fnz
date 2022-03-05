@@ -2,8 +2,12 @@
             collection: [[Debit.model_name.human, "Debit"], [Credit.model_name.human, "Credit"], [Transfer.model_name.human, "Transfer"]],
             as: :radio_buttons,
             item_wrapper_class: 'inline',
-            input_html: { data: { target: "transaction_form.transactionTypeOption",
-                                  action: "change->transaction_form#updateFormFields change->transaction_form#updateColor" }} %>
+            input_html: {
+              data: {
+                target: "transaction_form.transactionTypeOption",
+                action: "change->transaction_form#updateFormFields change->transaction_form#updateColor"
+              }
+            } %>
 
 <%= f.input :description %>
 
@@ -51,7 +55,7 @@
     <%= f.input :reconciled_at, :as => :date_time_picker %>
   </span>
 
-  <%= f.input :report_at, :as => :date_picker %>
+  <%= f.input :report_at, as: :date, discard_day: true %>
 
   <%# Chosen no me muestra el blank si no lo agrego a la colección %>
   <%=  f.input :tag_ids, as: :select, collection: [['-',nil]]+@business.tags.map { |t| [t.name, t.id] }, input_html:{class: "chosen", 'data-placeholder' => t('transactions.fields.tags_placeholder')} %>

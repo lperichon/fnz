@@ -100,7 +100,7 @@ es:
         state: Estado
         tag_ids: Categoría
         transaction_at: Fecha de registro
-        report_at: Fecha de reporte
+        report_at: Mes Reporte
         report_at_option: Fecha de reporte
         conversion_rate: Tasa conversión
         reconciled_at: Fecha en que fue saldado

@@ -104,3 +104,12 @@
 .daterangepicker {
   display: none;
 }
+
+.transactionFields {
+  #transaction_report_at_2i { // month
+    max-width: 32%;
+  }
+  #transaction_report_at_1i { // year
+    max-width: 17%;
+  }
+}

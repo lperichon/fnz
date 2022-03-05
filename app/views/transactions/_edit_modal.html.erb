@@ -3,7 +3,7 @@
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     <h3><%= _("Editar transacción") %></h3>
   </div>
-  <%= simple_form_for(@transaction, :as => :transaction, :url => business_transaction_path(@business, @transaction), :validate => true, :remote => true, :html => {:class => 'form-horizontal', :data => { :controller => "transaction_form" } }) do |f| %>
+  <%= simple_form_for(@transaction, :as => :transaction, :url => business_transaction_path(@business, @transaction), :validate => true, :remote => true, :html => {:class => 'form-horizontal transactionFields', :data => { :controller => "transaction_form" } }) do |f| %>
       <%= render :partial => 'transactions/fields', :locals => {:f => f} %>
 
       <% %w(sale installment enrollment).each do |nested_resource_type| %>
