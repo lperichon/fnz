@@ -1,3 +1,4 @@
+# Blockea transacciones en funcion de su *report_at*
 module Transaction::Blockable
   extend ActiveSupport::Concern
 
@@ -5,13 +6,19 @@ module Transaction::Blockable
 
     validate :wont_violate_block
 
+    # @return [Boolean]
     def blocked?
       if business.block_transactions_before && report_at
         report_at <= business.block_transactions_before
       end
     end
 
-    def wont_violate_block
+    # @return [Boolean]
+    def change_allowed?(attr)
+      blocked? ? attr.in?(%W(state reconciled_at)) : true
+    end
+
+    def wont_violate_bloc
       if blocked?
         unless changed.all? { |attr| change_allowed?(attr) }
           errors.add(:report_at,
@@ -29,11 +36,6 @@ module Transaction::Blockable
       end
     end
 
-    private
-
-    def change_allowed?(attr)
-      attr.in?(%W(state reconciled_at))
-    end
 
   end
 end
