@@ -13,7 +13,7 @@ class Ability
     can :manage, Admpart, :business => {:transactions_enabled => true}
     can :manage, Transaction, :business => {:transactions_enabled => true}
     cannot [:create, :update, :split, :destroy], Transaction do |t|
-      t.blocked?
+      t.blocked? && t.state != "pending"
     end
     can :manage, Account, :business => {:transactions_enabled => true}
     can :manage, BalanceCheck
