@@ -17,4 +17,19 @@ describe 'Transaction::Blockable' do
     end
 
   end
+
+  it "cant add transaction before block" do
+    t = FactoryBot.build(:transaction, business: business, report_at: block_since-1.day)
+    expect(t).not_to be_valid
+  end
+  it "cant update transaction reporting it before block" do
+    t = FactoryBot.create(:transaction, business: business, report_at: block_since+1.day)
+    expect(t).to be_valid
+
+    expect( t.update_attributes(report_at: block_since-1.day) ).to be_falsey
+
+    t.report_at = block_since-1.day
+    expect(t).not_to be_valid
+  end
+
 end
