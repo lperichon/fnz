@@ -18,7 +18,7 @@ module Transaction::Blockable
       blocked? ? attr.in?(%W(state reconciled_at)) : true
     end
 
-    def wont_violate_bloc
+    def wont_violate_block
       if blocked?
         unless changed.all? { |attr| change_allowed?(attr) }
           errors.add(:report_at,
