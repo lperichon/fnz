@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20220209125007) do
+ActiveRecord::Schema.define(version: 20220311193152) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -226,7 +226,7 @@ ActiveRecord::Schema.define(version: 20220209125007) do
     t.date     "closed_on"
     t.integer  "payment_type_id"
     t.boolean  "vip"
-    t.integer  "external_id"
+    t.string   "external_id"
     t.integer  "monthly_due_day"
     t.string   "name",            limit: 255
     t.datetime "created_at"

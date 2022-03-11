@@ -89,7 +89,7 @@ class Membership < ActiveRecord::Base
         :ends_on => Date.parse(row[3]),
         :vip => row[5] == 'true',
         :contact_id => fnz_contact.id,
-        :external_id => row[0].to_i,
+        :external_id => row[0],
         :monthly_due_day => 10,
         :value => 0 # Kshêma doesnt store plan value
     }

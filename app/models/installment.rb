@@ -96,7 +96,7 @@ class Installment < ActiveRecord::Base
 
     return if Installment.find_by_external_id(row[0].to_i)
 
-    membership = business.memberships.find_by_external_id(row[4].to_i)
+    membership = business.memberships.find_by_external_id(row[4])
 
     return unless membership
 
