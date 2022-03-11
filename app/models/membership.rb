@@ -12,6 +12,8 @@ class Membership < ActiveRecord::Base
   has_many :installments
   has_one :enrollment
 
+  before_validation :set_defaults
+
   validates :value_cents, :numericality =>  {:greater_than_or_equal => 0}
   validates :business, :presence => true
   validates :contact, :presence => true
@@ -142,6 +144,10 @@ class Membership < ActiveRecord::Base
     if self.new_record? && self.monthly_due_day.nil?
       self.monthly_due_day = 10
     end
+  end
+
+  def set_defaults
+    self.ends_on = self.begins_on + 6.months if ends_on.nil? && begins_on.present?
   end
 
 end
