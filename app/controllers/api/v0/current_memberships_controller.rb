@@ -30,25 +30,33 @@ class Api::V0::CurrentMembershipsController < Api::V0::ApiController
   # @url /v0/businesses/:business_id/contacts/:contact_id/current_membership
   # @action PUT
   #
+  # @required [Hash] membership
+  # @required [String] membership[external_id]
+  # @required [String] membership[name]
+  # @required [Integer] membership[value_cents]
+  # @required [Date] membership[begins_on]
+  # @optional [Date] membership[ends_on]
+  # @required [Date] membership[payment_type_name]
+  #
   # @required [String] app_key
   # @required [String] business_id padma account id
   # @required [String] contact_id contact padma id
   def update
     @contact = @business.contacts.find_by_padma_id(params[:contact_id]) if params[:business_id].present?
 
-    if (@membership = @contact.try(:current_membership))
+    if (@membership = (@contact.try(:current_membership) || @contact.memberships.where(external_id: membership_params["external_id"]).first ) )
       if @membership.external_id == membership_params[:external_id]
         # update
         @success = @membership.update(membership_params)
       else
         # close and create new
         @membership.update(closed_on: membership_params[:starts_on])
-        @membership = Membership.create(membership_params.merge({business_id: @business.id, contact_id: @contact.id}))
+        @membership = Membership.create(membership_params.merge({business: @business, contact_id: @contact.id}))
         @success = @membership.persisted?
       end
     else
       # create
-      @membership = Membership.create(membership_params.merge({business_id: @business.id, contact_id: @contact.id}))
+      @membership = Membership.create(membership_params.merge({business: @business, contact_id: @contact.id}))
       @success = @membership.persisted?
     end
 
