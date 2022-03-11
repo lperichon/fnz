@@ -10,7 +10,7 @@ module Membership::HasPaymentType
         pt = if (pt = business.payment_types.where(name: pt_name).first)
           pt
         else
-          business.payment_types.create(name: pt_name)
+          business.payment_types.create!(name: pt_name)
         end
         self.payment_type = pt
       end

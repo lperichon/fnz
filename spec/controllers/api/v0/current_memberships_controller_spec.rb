@@ -28,4 +28,25 @@ describe Api::V0::CurrentMembershipsController, type: :controller do
       ].to_json
     end
   end
+
+  describe "PUT update" do
+    describe "when contact has no membership" do
+      describe "if payment_type doesnt exist" do
+        let(:payment_type_name) { "a-new-payment-type" }
+        it "creates membership and payment_type" do
+          expect(PaymentType.where(name: payment_type_name)).to be_empty
+          put :update, app_key: ENV["app_key"],
+            business_id: business.padma_id,
+            contact_id: contacts.last.padma_id,
+            membership: {
+              name: "test",
+              value_cents: "10000",
+              begins_on: Date.today.to_s,
+              payment_type_name: payment_type_name
+            }
+          expect(PaymentType.where(name: payment_type_name)).not_to be_empty
+        end
+      end
+    end
+  end
 end

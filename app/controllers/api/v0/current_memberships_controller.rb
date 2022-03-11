@@ -51,13 +51,22 @@ class Api::V0::CurrentMembershipsController < Api::V0::ApiController
       else
         # close and create new
         @membership.update(closed_on: membership_params[:starts_on])
-        @membership = Membership.create(membership_params.merge({business: @business, contact_id: @contact.id}))
-        @success = @membership.persisted?
+
+        @membership = Membership.new(membership_params.merge({business: @business, contact_id: @contact.id}))
+        if membership_params[:payment_type_name]
+          # requires for business to already be set
+          @membership.payment_type_name = membership_params[:payment_type_name]
+        end
+        @success = @membership.save
       end
     else
       # create
-      @membership = Membership.create(membership_params.merge({business: @business, contact_id: @contact.id}))
-      @success = @membership.persisted?
+      @membership = Membership.new(membership_params.merge({business: @business, contact_id: @contact.id}))
+      if membership_params[:payment_type_name]
+        # requires for business to already be set
+        @membership.payment_type_name = membership_params[:payment_type_name]
+      end
+      @success = @membership.save
     end
 
     if @success && @membership
