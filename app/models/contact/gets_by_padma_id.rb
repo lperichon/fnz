@@ -20,10 +20,10 @@ class Contact
               if (c = get_by_crm_padma_id(padma_contact))
               else
                 c = b.contacts.create(
-                  :name => "#{padma_contact.first_name} #{padma_contact.last_name}".strip,
-                  :padma_status => padma_contact.local_status,
-                  :padma_teacher => padma_contact.local_teacher,
-                  :padma_id => padma_contact.id)
+                  name: "#{padma_contact.first_name} #{padma_contact.last_name}".strip,
+                  padma_status: padma_contact.local_status,
+                  padma_teacher: padma_contact.local_teacher,
+                  padma_id: padma_contact.id)
               end
             end
           end
