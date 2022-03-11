@@ -1,5 +1,6 @@
 class Membership < ActiveRecord::Base
 
+  include HasPaymentType
   include Shared::HasCents
   has_cents_for :value
 
@@ -8,7 +9,6 @@ class Membership < ActiveRecord::Base
   belongs_to :business
   belongs_to :contact, :touch => true
   has_one :current_of_contact, inverse_of: :current_membership, class_name: "Contact", foreign_key: "current_membership_id"
-  belongs_to :payment_type
   has_many :installments
   has_one :enrollment
 
