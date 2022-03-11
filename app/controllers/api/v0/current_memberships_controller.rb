@@ -1,6 +1,8 @@
 # @restful_api v0
 class Api::V0::CurrentMembershipsController < Api::V0::ApiController
   before_filter :get_business
+
+  skip_before_action :verify_authenticity_token
   
   ##
   # Returns current membership
@@ -21,6 +23,40 @@ class Api::V0::CurrentMembershipsController < Api::V0::ApiController
     @contact = @business.contacts.find_by_padma_id(params[:contact_id]) if params[:business_id].present?
     @membership = @contact.try(:current_membership)
     render json: @membership, root: false
+  end
+
+  ##
+  # Updates current membership
+  # @url /v0/businesses/:business_id/contacts/:contact_id/current_membership
+  # @action PUT
+  #
+  # @required [String] app_key
+  # @required [String] business_id padma account id
+  # @required [String] contact_id contact padma id
+  def update
+    @contact = @business.contacts.find_by_padma_id(params[:contact_id]) if params[:business_id].present?
+
+    if (@membership = @contact.try(:current_membership))
+      if @membership.external_id == membership_params[:external_id]
+        # update
+        @success = @membership.update(membership_params)
+      else
+        # close and create new
+        @membership.update(closed_on: membership_params[:starts_on])
+        @membership = Membership.create(membership_params.merge({business_id: @business.id, contact_id: @contact.id}))
+        @success = @membership.persisted?
+      end
+    else
+      # create
+      @membership = Membership.create(membership_params.merge({business_id: @business.id, contact_id: @contact.id}))
+      @success = @membership.persisted?
+    end
+
+    if @success && @membership
+      render json: @membership, root: false, status: 201
+    else
+      render json: {message: @membership.errors}, status: 400
+    end
   end
 
   def index
@@ -50,6 +86,17 @@ class Api::V0::CurrentMembershipsController < Api::V0::ApiController
   end
 
   private
+
+  def membership_params
+    params.require(:membership).permit(
+      :external_id,
+      :name,
+      :begins_on,
+      :ends_on,
+      :value_cents,
+      :payment_type_name
+    )
+  end
 
   def get_business
     Appsignal.instrument("get_business") do
