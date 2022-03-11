@@ -24,6 +24,7 @@ class CrmLegacyContact < LogicalModel
   attribute :crm_padma_id
   attribute :first_name
   attribute :last_name
+  attribute :friendly_name
   attribute :gender
   attribute :estimated_age
   attribute :estimated_age_on

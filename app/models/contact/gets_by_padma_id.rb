@@ -20,7 +20,7 @@ class Contact
               if (c = get_by_crm_padma_id(padma_contact))
               else
                 c = b.contacts.create(
-                  name: "#{padma_contact.first_name} #{padma_contact.last_name}".strip,
+                  name: padma_name(padma_contact).strip,
                   padma_status: padma_contact.local_status,
                   padma_teacher: padma_contact.local_teacher,
                   padma_id: padma_contact.id)
@@ -31,6 +31,13 @@ class Contact
         c
       end
 
+      def self.padma_name(pc)
+        if pc.friendly_name.present?
+          "#{pc.friendly_name} #{pc.last_name}"
+        else
+          "#{pc.first_name} #{pc.last_name}"
+        end
+      end
 
       private
 

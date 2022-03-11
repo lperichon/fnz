@@ -57,4 +57,19 @@ describe Contact do
       end
     end
   end
+
+  describe "padma_name" do
+    describe "if padma_contact has friendly_name" do
+      let(:pc) { CrmLegacyContact.new(friendly_name: "Dwayne", first_name: "Alejandro", last_name: "Macgowan") }
+      it "uses it" do
+        expect(Contact.padma_name(pc)).to eq "Dwayne Macgowan"
+      end
+    end
+    describe "if padma_contact has NO friendly_name" do
+      let(:pc) { CrmLegacyContact.new(first_name: "Alejandro", last_name: "Macgowan") }
+      it "uses it" do
+        expect(Contact.padma_name(pc)).to eq "Alejandro Macgowan"
+      end
+    end
+  end
 end
