@@ -7,20 +7,20 @@ class Membership < ActiveRecord::Base
   attr_accessor :create_monthly_installments
 
   belongs_to :business
-  belongs_to :contact, :touch => true
+  belongs_to :contact, touch: true
   has_one :current_of_contact, inverse_of: :current_membership, class_name: "Contact", foreign_key: "current_membership_id"
   has_many :installments
   has_one :enrollment
 
   before_validation :set_defaults
 
-  validates :value_cents, :numericality =>  {:greater_than_or_equal => 0}
-  validates :business, :presence => true
-  validates :contact, :presence => true
-  validates :begins_on, :presence => true
-  validates :ends_on, :presence => true
-  validates_datetime :ends_on, :after => :begins_on
-  validates :monthly_due_day, :numericality =>  {:greater_than => 0, :less_than => 29}
+  validates :value_cents, numericality: {greater_than_or_equal: 0}
+  validates :business, presence: true
+  validates :contact, presence: true
+  validates :begins_on, presence: true
+  validates :ends_on, presence: true
+  validates_datetime :ends_on, after: :begins_on
+  validates :monthly_due_day, numericality: {greater_than: 0, less_than: 29}
   validate  :avoid_overlapping
 
   # Setup accessible (or protected) attributes for your model
