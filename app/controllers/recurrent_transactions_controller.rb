@@ -6,6 +6,10 @@ class RecurrentTransactionsController < UserApplicationController
     @recurrent_transactions = @business.recurrent_transactions
   end
 
+  def new
+
+  end
+
   def create
     @recurrent_transaction = @business.recurrent_transactions.new(recurrent_transaction_params)
 

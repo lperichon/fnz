@@ -1,0 +1,7 @@
+$('body').append("<%= escape_javascript(render(partial: "recurrent_transactions/new_modal"))%>");
+$('#new-recurrent-transaction-modal').modal({
+  keyboard: false
+});
+$('#new-recurrent-transaction-modal').on("hidden.bs.modal", function(){
+  $('#new-recurrent-transaction-modal').remove();
+});

@@ -1,3 +1,13 @@
+<% if can? :create, (rt = @business.recurrent_transactions.new) %>
+  <%= content_for :secondary_navigation do %>
+    <li class="pull-right">
+      <%= link_to content_tag(:i, "", class: "icon-plus") + t("recurrent_transactions.new_modal.new_recurrent_transaction"),
+        new_business_recurrent_transaction_path(@business),
+        remote: true %>
+    </li>
+  <% end %>
+<% end %>
+
 <table class="transactions recurrent-transactions table table-stripe table-hover table-condensed table-bordered" style="margin-left: -33%">
   <thead>
   <tr data-target="filter.header">
@@ -13,21 +23,6 @@
   </tr>
   </thead>
   <tbody>
-  <tr>
-    <% if can? :create, (rt = @business.recurrent_transactions.new) %>
-    <%= simple_form_for rt, url: business_recurrent_transactions_path do |f| %>
-        <td class="type-column"><%= f.input :type, as: :select, collection: {RecurrentDebit: "RecurrentDebit", RecurrentCredit: "RecurrentCredit"}, allow_blank: false  %></td>
-        <td class="state-column"><%= f.input :state, as: :select, collection: {pending: "pending", created: "created"}, allow_blank: false  %></td>
-        <td><%= f.input :description %></td>
-        <td class="amount-column"><%= f.input :amount %></td>
-        <td class="accounts-column"><%= f.input :source_id, as: :select, collection: @business.accounts.order("name") %></td>
-        <td class="tag-column"><%= f.input :admpart_tag_id, as: :select, collection: tag_options_for_select.map{|o| [o[1],o[0]]} %></td>
-        <td><%= f.input :agent_id, as: :select, collection: agent_options_for_select.map{|o| [o[1],o[0]]} %></td>
-        <td><%= f.input :contact_id, as: :select, collection: contact_options_for_select.map{|o| [o[1],o[0]]} %></td>
-        <td><%= f.button :submit, class: "btn-primary btn-sm" %></td>
-    <% end %>
-    <% end %>
-  </tr>
   <% @recurrent_transactions.each do |t| %>
   <% next if t.id.blank? %>
     <tr>

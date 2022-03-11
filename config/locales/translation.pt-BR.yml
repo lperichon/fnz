@@ -685,3 +685,6 @@ pt-BR:
     index:
       contact_names_automated: "O nomes dos contatos já são automatizados. Coloque o nome completo na descrição de uma transação e o contato será vinculado."
   search: "Buscar"
+  recurrent_transactions:
+    new_modal:
+      new_recurrent_transaction: "Novo movimento recorrente"

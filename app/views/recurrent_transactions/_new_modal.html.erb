@@ -1,0 +1,21 @@
+<div id="new-recurrent-transaction-modal" class = "modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3><%= t(".new_recurrent_transaction") %></h3>
+  </div>
+  <%= simple_form_for @business.recurrent_transactions.new,
+    url: business_recurrent_transactions_path,
+    html: {class: "form-horizontal"} do |f| %>
+    <%= f.input :type, as: :select, collection: {RecurrentDebit: "RecurrentDebit", RecurrentCredit: "RecurrentCredit"}, allow_blank: false  %>
+    <%= f.input :state, as: :select, collection: {pending: "pending", created: "created"}, allow_blank: false  %>
+    <%= f.input :description %>
+    <%= f.input :amount %>
+    <%= f.input :source_id, as: :select, collection: @business.accounts.order("name") %>
+    <%= f.input :admpart_tag_id, as: :select, collection: tag_options_for_select.map{|o| [o[1],o[0]]} %>
+    <%= f.input :agent_id, as: :select, collection: agent_options_for_select.map{|o| [o[1],o[0]]} %>
+    <%= f.input :contact_id, as: :select, collection: contact_options_for_select.map{|o| [o[1],o[0]]} %>
+    <div class="modal-footer">
+      <%= f.button :submit, class: "btn-primary btn-sm" %>
+    </div>
+  <% end %>
+</div>

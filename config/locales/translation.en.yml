@@ -685,3 +685,6 @@ en:
     index:
       contact_names_automated: "Contact names are already automated. Use full name on transaction's description and contact will be linked to it"
   search: "Search"
+  recurrent_transactions:
+    new_modal:
+      new_recurrent_transaction: "New recurring transaction"
