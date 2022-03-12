@@ -27,6 +27,11 @@ class Api::V0::CurrentMembershipsController < Api::V0::ApiController
 
   ##
   # Updates current membership
+  # * if current_membership exists AND external_id matches, attributes are updated
+  # * if current_membership exists AND external_id DOESNT match, closes previous and creates new
+  # * else creates new
+  #
+  #
   # @url /v0/businesses/:business_id/contacts/:contact_id/current_membership
   # @action PUT
   #
