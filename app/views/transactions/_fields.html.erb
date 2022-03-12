@@ -18,7 +18,7 @@
     <input type="text" data-target="calculator.formula"
            data-action="keyup@window->calculator#calculateResult"
            class="calculatorFormula"
-           disabled="<%= !@transaction.change_allowed?(:amount) %>"
+           <%= "disabled" if !@transaction.change_allowed?(:amount) %>
       />
     =
     <input type="text" data-target="calculator.result" class="calculatorResult" disabled/>
