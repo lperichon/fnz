@@ -71,7 +71,7 @@
   </tfoot>
 </table>
 
-<% unless @business.sales.where("sold_on >= ?", 1.year.ago).empty? %>
+<% unless @business.sales.where("sold_on >= ?", 4.months.ago).empty? %>
 	<%# DEPRECATION - si no tienen ventas hace 1 año, ya ni muestro esta sección %>
 <h3><%= Contact.human_attribute_name(:sales) %></h3>
 <table class="sales table table-striped table-hover table-condensed table-bordered">
