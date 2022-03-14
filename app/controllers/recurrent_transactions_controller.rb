@@ -3,7 +3,7 @@ class RecurrentTransactionsController < UserApplicationController
   before_filter :get_business
 
   def index
-    @recurrent_transactions = @business.recurrent_transactions
+    @recurrent_transactions = @business.recurrent_transactions.order("created_at")
   end
 
   def new
