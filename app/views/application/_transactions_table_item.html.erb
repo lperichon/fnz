@@ -13,11 +13,11 @@
     <%= content_tag(:i, "", class: "pull-right icon-" + transaction.type.downcase, title: transaction.type) %>
   </td>
   <td>
-    <%= best_in_place transaction.becomes(Transaction), :description, url: business_transaction_path(@business, transaction) %>
+    <%= best_in_place transaction, :description, url: business_transaction_path(@business, transaction) %>
   </td>
   <td>
     <% symbol = transaction.source.try(:currency).try(:symbol) || @business.currency_symbol %>
-    <%= best_in_place transaction.becomes(Transaction),
+    <%= best_in_place transaction,
                       :amount,
                       url: business_transaction_path(@business, transaction),
                       display_with: :number_to_currency,
@@ -34,14 +34,14 @@
     <% end %>
   </td>
   <td>
-    <%= best_in_place transaction.becomes(Transaction), :source_id, as: :select, collection: accounts_options_for_select, url: business_transaction_path(@business, transaction) %>
+    <%= best_in_place transaction, :source_id, as: :select, collection: accounts_options_for_select, url: business_transaction_path(@business, transaction) %>
     <% if transaction.is_a?(Transfer) %>
       <br/>-><br/> 
-      <%= best_in_place_if transaction.is_a?(Transfer), transaction.becomes(Transaction), :target_id, as: :select, collection: accounts_options_for_select, url: business_transaction_path(@business, transaction)%>
+      <%= best_in_place_if transaction.is_a?(Transfer), transaction, :target_id, as: :select, collection: accounts_options_for_select, url: business_transaction_path(@business, transaction)%>
     <% end %>
   </td>
   <td>
-    <%= best_in_place transaction.becomes(Transaction), :transaction_at, url: business_transaction_path(@business, transaction), display_with: lambda {|d| d.to_s(:short)} %>
+    <%= best_in_place transaction, :transaction_at, url: business_transaction_path(@business, transaction), display_with: lambda {|d| d.to_s(:short)} %>
     <% if transaction.report_at && transaction.report_at.end_of_month!=transaction.transaction_at.to_date.end_of_month %>
       <p>
         (<%= _("a admin %{month}") % {month: l(transaction.report_at, format: :month)} %>)
@@ -54,12 +54,7 @@
     <% end %>
   </td>
   <td class="select2">
-    <% begin %>
-      <%# avoiding becomes call keeps included tags avoiding call to DB.  %>
-      <%= bip_tag_id(transaction) %>
-    <% rescue %>
-      <%= bip_tag_id(transaction.becomes(Transaction)) %>
-    <% end %>
+    <%= bip_tag_id(transaction) %>
     <%= link_to("<i class='icon-eye-open'></i>".html_safe,
                 business_transactions_path(
                     business_id: @business.id,
@@ -69,9 +64,9 @@
                 class: "tag-detail",
                 target: :_blank).html_safe if transaction.tag %>
   </td>
-  <td><%= best_in_place transaction.becomes(Transaction), :agent_id, as: :select, collection: agent_options_for_select(transaction), url: business_transaction_path(@business, transaction) %></td>
+  <td><%= best_in_place transaction, :agent_id, as: :select, collection: agent_options_for_select(transaction), url: business_transaction_path(@business, transaction) %></td>
   <td class="select2">
-    <%= best_in_place transaction.becomes(Transaction), :contact_id, as: :select, collection: contact_options_for_select, url: business_transaction_path(@business, transaction) %>
+    <%= best_in_place transaction, :contact_id, as: :select, collection: contact_options_for_select, url: business_transaction_path(@business, transaction) %>
     <%= link_to("<i class='icon-eye-open'></i>".html_safe, business_contact_path(@business,transaction.contact), class: "contact-detail", target: :_blank).html_safe if transaction.contact %>
   </td>
 <% end %>
