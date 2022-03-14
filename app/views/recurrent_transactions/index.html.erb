@@ -32,11 +32,11 @@
       </td>
       <td><%= best_in_place t, :state, url: business_recurrent_transaction_path(@business, t), as: :select, collection: {pending: "pending", created: "created"}  %></td>
       <td>
-        <%= best_in_place t.becomes(RecurrentTransaction), :description, :url => business_recurrent_transaction_path(@business, t) %>
+        <%= best_in_place t, :description, url: business_recurrent_transaction_path(@business, t) %>
       </td>
     <td>
       <% symbol = t.source.try(:currency).try(:symbol) || @business.currency_symbol %>
-      <%= best_in_place t.becomes(RecurrentTransaction),
+      <%= best_in_place t,
         :amount,
         url: business_recurrent_transaction_path(@business, t),
         display_with: :number_to_currency,
@@ -53,10 +53,10 @@
       <% end %>
     </td>
       <td>
-        <%= best_in_place t.becomes(RecurrentTransaction), :source_id, :as => :select, :collection => @business.accounts.order("name").map { |i| [i.id, i.name] } , :url => business_recurrent_transaction_path(@business, t) %>
+        <%= best_in_place t, :source_id, :as => :select, :collection => @business.accounts.order("name").map { |i| [i.id, i.name] } , :url => business_recurrent_transaction_path(@business, t) %>
         <% if t.is_a?(RecurrentTransfer) %>
           <br/>-><br/>
-          <%= best_in_place_if t.is_a?(RecurrentTransfer), t.becomes(RecurrentTransaction), :target_id, :as => :select, :collection => @business.accounts.order("name").map { |i| [i.id, i.name] } , :url => business_recurrent_transaction_path(@business, t)%>
+          <%= best_in_place_if t.is_a?(RecurrentTransfer), t, :target_id, :as => :select, :collection => @business.accounts.order("name").map { |i| [i.id, i.name] } , :url => business_recurrent_transaction_path(@business, t)%>
         <% end %>
       </td>
       <td class="select2">
@@ -69,9 +69,9 @@
             url: business_recurrent_transaction_path(@business, t) %>
         <% end %>
       </td>
-      <td><%= best_in_place t.becomes(RecurrentTransaction), :agent_id, as: :select, collection: agent_options_for_select(t), url: business_recurrent_transaction_path(@business, t) %></td>
+      <td><%= best_in_place t, :agent_id, as: :select, collection: agent_options_for_select(t), url: business_recurrent_transaction_path(@business, t) %></td>
       <td class="select2">
-        <%= best_in_place t.becomes(RecurrentTransaction), :contact_id, as: :select, collection: contact_options_for_select, url: business_recurrent_transaction_path(@business, t) %>
+        <%= best_in_place t, :contact_id, as: :select, collection: contact_options_for_select, url: business_recurrent_transaction_path(@business, t) %>
       </td>
       <td>
         <%# link_to "ver", business_transactions_path(business_id: @business.id, transaction_search: {recurrent_transaction_id: t.id}) %>
