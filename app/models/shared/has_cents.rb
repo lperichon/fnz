@@ -6,6 +6,8 @@ module Shared::HasCents
     # @param varname nombre para el attributo virtual.
     # Define setter y getter.
     #
+    # Requires baseclass to respond to {vaname}_cents and {varname}_cents=
+    #
     # @example
     #   has_cents_for(:amount)
     #   # defines virtual amount and amount= proxying to amount_cents
