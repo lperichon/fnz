@@ -1,5 +1,6 @@
 class Account < ActiveRecord::Base
 
+  include HasCurrency
   include Shared::HasCents
   has_cents_for(:balance)
 
@@ -24,28 +25,6 @@ class Account < ActiveRecord::Base
     self.update_attribute(:balance_cents, calculate_balance_cents)
   end
 
-  def currency=(currency_code)
-    self[:currency] = currency_code
-  end
-
-  def currency
-    ret = Currency.find(self[:currency])
-    if ret.nil? && business
-      ret = Currency.find(business.currency_code)
-    end
-    if ret.nil?
-      ret = Currency.find(:usd)
-    end
-    ret
-  end
-
-  def currency_code=(currency_code)
-    self[:currency] = currency_code
-  end
-
-  def currency_code
-    self[:currency]
-  end
 
   def last_balance_check
     @last_balance_check ||= balance_checks.order(:checked_at).last
