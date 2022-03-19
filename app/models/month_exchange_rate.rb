@@ -6,8 +6,8 @@ class MonthExchangeRate < ActiveRecord::Base
 
   belongs_to :business
 
-  validates :source_currency_code, presence: true, inclusion: {in: SUPPORTED_CURRENCIES}
-  validates :target_currency_code, presence: true, inclusion: {in: SUPPORTED_CURRENCIES}
+  validates :source_currency_code, presence: true, inclusion: {in: SUPPORTED_CURRENCIES.map(&:iso_code)}
+  validates :target_currency_code, presence: true, inclusion: {in: SUPPORTED_CURRENCIES.map(&:iso_code)}
 
   validates :conversion_rate, presence: true
 
