@@ -5,6 +5,12 @@ class MonthExchangeRatesController < UserApplicationController
     @month_exchange_rates = @business.month_exchange_rates.order("ref_date DESC")
   end
 
+  def get_rate
+    render json: {
+      rate: @business.month_exchange_rates.conversion_rate(params[:from], params[:to], params[:ref_date])
+    }, code: 200
+  end
+
   def new
     @month_exchange_rate = @business.month_exchange_rates.new
   end

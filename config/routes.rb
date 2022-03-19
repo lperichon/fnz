@@ -53,7 +53,11 @@ Fnz::Application.routes.draw do
         post :rebuild
       end
     end
-    resources :month_exchange_rates
+    resources :month_exchange_rates do
+      collection do
+        get :get_rate
+      end
+    end
     resources :transaction_rules
     resources :contacts
     resources :agents
