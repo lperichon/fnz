@@ -216,9 +216,7 @@ class Admpart < ActiveRecord::Base
       # TODO consider state of transaction. maybe no need?
 
       scope = transactions_for_tag(tag, options.merge({ agent_id: agent_id }))
-      total = scope.sum("CASE WHEN transactions.type='Credit' THEN transactions.amount_cents WHEN transactions.type='Debit' THEN -1 * transactions.amount_cents ELSE 0 END") / 100.0
-      #total += scope.credits.sum(:amount_cents) / 100.0
-      #total -= scope.debits.sum(:amount_cents) / 100.0
+      total = scope.sum_w_rates(business, ref_date) / 100.0
 
       if agent_id.nil? && !options[:ignore_discounts]
         case tag.system_name
@@ -239,7 +237,7 @@ class Admpart < ActiveRecord::Base
     scope = business.trans
                     .to_report_on_month(ref_date)
                     .api_where(admpart_tag_id: "")
-    scope.sum("CASE WHEN transactions.type='Credit' THEN transactions.amount_cents WHEN transactions.type='Debit' THEN -1 * transactions.amount_cents ELSE 0 END") / 100.0
+    scope.sum_w_rates(business, ref_date) / 100.0
   end
 
   ###
