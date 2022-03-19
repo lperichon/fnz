@@ -26,10 +26,13 @@ class TransactionSpliter
     Transaction.new target_attributes
   end
 
+  # destroys sources and saves targets
+  # blanks external_id
   def do_split!
     if @source.present? || !@targets.empty?
       Transaction.transaction do # transaction method call is a DB Transaction
         @source.destroy!
+        @targets.each {|t| t.external_id = nil }
         @targets.each {|t| t.save! }
       end
     end
