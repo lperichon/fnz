@@ -1118,3 +1118,6 @@ es:
   month_exchange_rates:
     content_for_layout:
       new_exchange_rate: "Nueva taza de cambio"
+  month_exchange_rate:
+    errors:
+      currencies_must_be_different: "Deben ser monedas diferentes"

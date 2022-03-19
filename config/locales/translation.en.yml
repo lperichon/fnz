@@ -691,3 +691,6 @@ en:
   month_exchange_rates:
     content_for_layout:
       new_exchange_rate: "New exchange rate"
+  month_exchange_rate:
+    errors:
+      currencies_must_be_different: "Must be different currencies"
