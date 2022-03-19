@@ -3,6 +3,8 @@ require 'appsignal/integrations/object'
 
 class Admpart < ActiveRecord::Base
 
+  include Shared::MonthRefDate
+
   #attr_accessible :director_from_profit_percentage,          # % del lucro para director
   #                :owners_percentage,                        # % para inversores
   #                :dir_from_owners_aft_expses_percentage,    # % de inversores para director
@@ -35,26 +37,19 @@ class Admpart < ActiveRecord::Base
               }
   end
 
-  before_validation :force_ref_date_to_first_day_of_month
-  validates :ref_date, presence: true, uniqueness: { scope: :business_id }
-  validate :ref_date_first_day_of_month
+  validates :ref_date, uniqueness: { scope: :business_id }
 
   attr_accessor :force_refresh
-
 
   VALID_SECTIONS = %W(income expense ignore director_expenses owners_expenses teams_expenses)
 
   before_save :set_defaults
 
-  def self.for_ref_date(rd)
-    self.where(ref_date: rd.to_date.beginning_of_month)
-  end
-
   IGNORED_ATTRIBUTES_IN_CLONE = %W(id ref_date business_id created_at updated_at)
   def self.get_for_ref_date(rd)
-    ret = self.for_ref_date(rd).first
+    ret = self.on_month(rd).first
     if ret.nil?
-      clone_ref = self.for_ref_date(rd-1.month).first || self.for_ref_date(rd+1.month).first || self.first
+      clone_ref = self.on_month(rd-1.month).first || self.on_month(rd+1.month).first || self.first
       ret = if clone_ref
         self.create( clone_ref.attributes_for_clone.merge( ref_date: rd ) )
       else
@@ -68,10 +63,10 @@ class Admpart < ActiveRecord::Base
   end
 
   def previous_adm
-    business.admparts.for_ref_date(ref_date-1.month).first
+    business.admparts.on_month(ref_date-1.month).first
   end
   def next_adm
-    business.admparts.for_ref_date(ref_date+1.month).first
+    business.admparts.on_month(ref_date+1.month).first
   end
 
   # total_income + total_expense
@@ -497,18 +492,6 @@ class Admpart < ActiveRecord::Base
   def set_defaults
     self.ref_date = Time.zone.today.beginning_of_month.to_date if self.ref_date.nil?
     self.owners_percentage = 50 if self.owners_percentage.nil?
-  end
-
-  def ref_date_first_day_of_month
-    if ref_date && ref_date.day != 1
-      errors.add(:ref_date, "must be first day of month")
-    end
-  end
-
-  def force_ref_date_to_first_day_of_month
-    if ref_date && ref_date.day != 1
-      self.ref_date= ref_date.beginning_of_month
-    end
   end
 
 end

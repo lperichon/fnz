@@ -5,21 +5,15 @@
 class MonthTagTotal < ActiveRecord::Base
   #attr_accessible :ref_date, :tag_id
 
+  include Shared::MonthRefDate
   include Shared::HasCents
   has_cents_for :total_amount
-
 
   belongs_to :tag
 
   before_validation :set_default_currency
-  before_validation :force_ref_date_to_first_day_of_month
-  validates :ref_date, presence: true
 
   before_save :calculate_total_amount
-
-  def self.on_month(date)
-    self.where(ref_date: cast_date(date))
-  end
 
   def refresh
     save # triggers calculation but better readibility and refactorable
@@ -43,19 +37,10 @@ class MonthTagTotal < ActiveRecord::Base
     end
   end
 
-  def self.cast_date(date)
-    date.beginning_of_month
-  end
-
   private
 
   def set_default_currency
     self.currency = tag.business.currency_code
   end
 
-  def force_ref_date_to_first_day_of_month
-    if ref_date && ref_date.day != 1
-      self.ref_date= MonthTagTotal.cast_date(ref_date)
-    end
-  end
 end
