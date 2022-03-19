@@ -4,7 +4,7 @@
   <% @month_exchange_rates.group_by(&:ref_date).each_pair do |ref_date, ers| %>
 
     <tr>
-      <th colspan="4"><%= l(ref_date, format: :month) %></th>
+      <th colspan="5"><%= l(ref_date, format: :month) %></th>
     </tr>
 
     <% ers.each do |er| %>
@@ -13,6 +13,9 @@
           <td><%= best_in_place er, :conversion_rate, url: business_month_exchange_rate_path(@business, er)  %></td>
           <td><%= er.target_currency_code %> -> <%= er.source_currency_code %></td>
           <td><%= er.inverse_conversion_rate  %></td>
+          <td>
+            <%= link_to t("actions.delete"), business_month_exchange_rate_path(business_id: @business.id, id: er.id), method: :delete, data: {confirm: t("actions.confirm_delete")} %>
+          </td>
         </tr>
     <% end %>
   <% end %>
