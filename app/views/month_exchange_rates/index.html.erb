@@ -14,7 +14,9 @@
           <td><%= er.target_currency_code %> -> <%= er.source_currency_code %></td>
           <td><%= er.inverse_conversion_rate  %></td>
           <td>
-            <%= link_to t("actions.delete"), business_month_exchange_rate_path(business_id: @business.id, id: er.id), method: :delete, data: {confirm: t("actions.confirm_delete")} %>
+            <% unless er.blocked? %>
+              <%= link_to t("actions.delete"), business_month_exchange_rate_path(business_id: @business.id, id: er.id), method: :delete, data: {confirm: t("actions.confirm_delete")} %>
+            <% end %>
           </td>
         </tr>
     <% end %>

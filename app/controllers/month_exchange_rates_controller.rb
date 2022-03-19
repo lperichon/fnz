@@ -44,6 +44,12 @@ class MonthExchangeRatesController < UserApplicationController
     end
   end
 
+  def destroy
+    @month_exchange_rate = @business.month_exchange_rates.find(params[:id])
+    @month_exchange_rate.destroy
+    redirect_to business_month_exchange_rates_path(business_id: @business.id)
+  end
+
   private
 
   def param_key
