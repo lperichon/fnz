@@ -1,0 +1,19 @@
+<%= render 'content_for_layout' %>
+
+<table class="table table-striped table-hover table-condensed table-bordered">
+  <% @month_exchange_rates.group_by(&:ref_date).each_pair do |ref_date, ers| %>
+
+    <tr>
+      <th colspan="4"><%= l(ref_date, format: :month) %></th>
+    </tr>
+
+    <% ers.each do |er| %>
+        <tr>
+          <td><%= er.source_currency_code %> -> <%= er.target_currency_code %></td>
+          <td><%= best_in_place er, :conversion_rate, url: business_month_exchange_rate_path(@business, er)  %></td>
+          <td><%= er.target_currency_code %> -> <%= er.source_currency_code %></td>
+          <td><%= er.inverse_conversion_rate  %></td>
+        </tr>
+    <% end %>
+  <% end %>
+</table>

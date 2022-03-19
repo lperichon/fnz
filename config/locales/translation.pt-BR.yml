@@ -688,3 +688,6 @@ pt-BR:
   recurrent_transactions:
     new_modal:
       new_recurrent_transaction: "Novo movimento recorrente"
+  month_exchange_rates:
+    content_for_layout:
+      new_exchange_rate: "Nova cotação"

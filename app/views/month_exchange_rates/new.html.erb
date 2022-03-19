@@ -1,0 +1,5 @@
+<%= render 'content_for_layout' %>
+
+<h2><%= t("month_exchange_rates.content_for_layout.new_exchange_rate") %></h2>
+
+<%= render partial: 'form', locals: {form_url: business_month_exchange_rates_path(@business)} %>

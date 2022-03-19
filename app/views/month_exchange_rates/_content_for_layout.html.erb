@@ -1,0 +1,10 @@
+<% content_for :sidebar do %>
+  <%= render :partial => 'businesses/edit_sidebar' %>
+<% end %>
+
+<% content_for :secondary_navigation do %>
+  <li class="pull-right">
+    <%= link_to content_tag(:i, "", :class => "icon-plus") + t(".new_exchange_rate"),
+                new_business_month_exchange_rate_path(@business) %>
+  </li>
+<% end %>

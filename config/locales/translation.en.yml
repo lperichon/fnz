@@ -688,3 +688,6 @@ en:
   recurrent_transactions:
     new_modal:
       new_recurrent_transaction: "New recurring transaction"
+  month_exchange_rates:
+    content_for_layout:
+      new_exchange_rate: "New exchange rate"

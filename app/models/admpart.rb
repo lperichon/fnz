@@ -45,7 +45,6 @@ class Admpart < ActiveRecord::Base
 
   before_save :set_defaults
 
-  IGNORED_ATTRIBUTES_IN_CLONE = %W(id ref_date business_id created_at updated_at)
   def self.get_for_ref_date(rd)
     ret = self.on_month(rd).first
     if ret.nil?

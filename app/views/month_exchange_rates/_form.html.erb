@@ -1,0 +1,21 @@
+<%= simple_form_for(@month_exchange_rate,
+      validate: true,
+      url: form_url,
+      html: {class: "form-horizontal"}
+    ) do |f| %>
+
+  <%= f.input :ref_date,
+    as: :date,
+    discard_day: true,
+    input_html: {
+      disabled: !@month_exchange_rate.change_allowed?(:report_at)
+    }  %>
+
+  <%= f.input :source_currency_code, as: :select, collection: SUPPORTED_CURRENCIES %>
+  <%= f.input :target_currency_code, as: :select, collection: SUPPORTED_CURRENCIES %>
+
+  <%= f.input :conversion_rate %>
+
+
+  <%= f.button :submit, class: "btn btn-primary" %>
+<% end %>

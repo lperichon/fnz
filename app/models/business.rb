@@ -18,6 +18,8 @@ class Business < ActiveRecord::Base
   has_many :payment_types
   has_and_belongs_to_many :users, join_table: 'businesses_users'
 
+  has_many :month_exchange_rates
+
   validates :name, :presence => true
   validates :owner, :presence => true
   

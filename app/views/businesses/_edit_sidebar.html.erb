@@ -12,6 +12,7 @@
   <% if @business.transactions_enabled? %>
     <li class="<%= 'active' if controller.controller_name == "imports" %>"><%= link_to content_tag(:i, "", :class => "icon-upload") + t('businesses.edit_sidebar.manage_imports'), business_imports_path(@business) %></li>
     <li class="<%= 'active' if controller.controller_name == "transaction_rules" %>"><%= link_to content_tag(:i, "", :class => "icon-cogs") + _("Reglas de automatización"), business_transaction_rules_path(@business) %></li>
+    <li class="<%= 'active' if controller.controller_name == "month_exchange_rates" %>"><%= link_to content_tag(:i, "", :class => "icon-money") + t(".exchange_rates"), business_month_exchange_rates_path(@business) %></li>
   <% end %>
   <% if @business.share_enabled? %>
     <!-- <li class="<%= 'active' if controller.controller_name == "users" %>"><%= link_to content_tag(:i, "", :class => "icon-globe") + t('businesses.edit_sidebar.manage_users'), business_users_path(@business) %></li> -->
