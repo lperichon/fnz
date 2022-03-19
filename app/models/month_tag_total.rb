@@ -15,6 +15,8 @@ class MonthTagTotal < ActiveRecord::Base
 
   before_save :calculate_total_amount
 
+  validates :ref_date, uniqueness: { scope: [:business_id, :tag_id] }
+
   def refresh
     save # triggers calculation but better readibility and refactorable
   end
