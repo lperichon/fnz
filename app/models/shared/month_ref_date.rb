@@ -17,6 +17,24 @@ module Shared::MonthRefDate
       date.to_date.beginning_of_month
     end
 
+    RANGE = 3
+    def self.find_closest_to(rd)
+      ret = nil
+      i = 1
+      loop do
+        ret = on_month(rd-i.month).first || on_month(rd+i.month).first
+        if ret.nil? && i < RANGE
+          i += 1
+        else
+          break
+        end
+      end
+      if ret.nil? # no encontré en +/- RANGE meses
+        ret = last
+      end
+      ret
+    end
+
     private
 
     def force_ref_date_to_first_day_of_month
@@ -24,7 +42,6 @@ module Shared::MonthRefDate
         self.ref_date= self.class.cast_date(ref_date)
       end
     end
-
 
     def ref_date_first_day_of_month
       if ref_date && ref_date.day != 1

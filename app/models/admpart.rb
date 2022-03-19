@@ -49,7 +49,7 @@ class Admpart < ActiveRecord::Base
   def self.get_for_ref_date(rd)
     ret = self.on_month(rd).first
     if ret.nil?
-      clone_ref = self.on_month(rd-1.month).first || self.on_month(rd+1.month).first || self.first
+      clone_ref = find_closest_to(rd)
       ret = if clone_ref
         self.create( clone_ref.attributes_for_clone.merge( ref_date: rd ) )
       else
