@@ -342,7 +342,7 @@ class Transaction < ActiveRecord::Base
     end
   end
 
-  # Suma las transacciones del scope considerando el exchange rate de ref_date
+  # Suma las Debits y Credits del scope considerando el exchange rate de ref_date. Ignora Transfers
   # @param business [Business]
   # @param ref_date [Date] reference for Exchange Rates
   # @return [Integer] cents
