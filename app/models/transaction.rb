@@ -73,8 +73,6 @@ class Transaction < ActiveRecord::Base
   validates :transaction_at, :presence => true
   validates :report_at, :presence => true
 
-  validate :in_business_currency, if: ->{ type!="Transfer" && !admpart_tag_id.nil? }
-
   # Setup accessible (or protected) attributes for your model
   #attr_accessible :tag_id, :tag_ids, :description, :business_id, :source_id, :amount_cents, :type, :transaction_at, :target_id, :conversion_rate, :state, :reconciled_at, :sale_ids, :installment_ids, :enrollment_ids, :creator_id, :report_at, :report_at_option, :inscription_ids, :contact_id, :agent_id, :admpart_tag_id
 
@@ -94,6 +92,11 @@ class Transaction < ActiveRecord::Base
 
   def tag
     self.tags.first
+  end
+
+  def tag=(new_tag)
+    self.tag_ids.clear
+    self.tag_ids = [new_tag.id]
   end
 
   # Es el momento en el que cambia el balance en las cuentas asociadas.
@@ -318,12 +321,6 @@ class Transaction < ActiveRecord::Base
   def self.update_all_order_stamps
     self.where("state = 'reconciled'").update_all("order_stamp = reconciled_at")
     self.where("state <> 'reconciled'").update_all("order_stamp = transaction_at")
-  end
-
-  def in_business_currency
-    if source && source.currency.iso_code.downcase!=source.business.currency_code.downcase
-      errors.add(:admpart_tag_id, _("No podemos etiquetar gastos que no estén en la moneda de la escuela"))
-    end
   end
 
   def sign account

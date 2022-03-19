@@ -12,3 +12,6 @@ require 'spec_helper'
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
+RSpec.configure do |config|
+  config.include FactoryBot::Syntax::Methods
+end
