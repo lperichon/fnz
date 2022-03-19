@@ -3,6 +3,8 @@ module Account::HasCurrency
 
   included do
 
+    validates :currency, presence: true
+
     def currency=(currency_code)
       self[:currency] = currency_code
     end

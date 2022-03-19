@@ -4,5 +4,6 @@ FactoryBot.define do
   factory :account, :aliases => [:source] do
     name {'Test Account'}
     business { FactoryBot.create(:business) }
+    currency { business.currency_code }
   end
 end
