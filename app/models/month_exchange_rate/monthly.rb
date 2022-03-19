@@ -21,7 +21,7 @@ module MonthExchangeRate::Monthly
         if clone_ref
           ret = MonthExchangeRate.create(clone_ref.attributes_for_clone.merge({ref_date: rd}))
         else
-          business = Business.find(get_business_from_scope(self)) # will fail if no business in scope
+          business = get_business_from_scope(self) # will fail if no business in scope
           if (ref_transfer = get_ref_transfer(from_cur, to_cur, business))
             ret = self.create(
               source_currency_code: from_cur,
@@ -49,9 +49,7 @@ module MonthExchangeRate::Monthly
     end
 
     def self.get_business_from_scope(scope)
-      scope = scope.where(nil)
-      res = scope.to_sql.match(/business_id\" \= (\d+)/)
-      (res)? res[1].to_i : nil
+      Business.get_from_scope(scope)
     end
 
   end

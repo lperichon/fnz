@@ -22,19 +22,9 @@ class MonthTagTotal < ActiveRecord::Base
   end
 
   def calculate_total_amount
-    totals_by_currency = tag.tree_transactions
-     .to_report_on_month(ref_date)
-     .joins(:source)
-     .group("accounts.currency")
-     .sum("CASE WHEN transactions.type='Credit' THEN transactions.amount_cents WHEN transactions.type='Debit' THEN -1 * transactions.amount_cents ELSE 0 END")
-    total = totals_by_currency.sum do |currency, total|
-      if (rate = tag.business.month_exchange_rates.conversion_rate(currency, tag.business.currency_code, ref_date))
-        total * rate
-      else
-        raise "MonthExchangeRate not found"
-      end
-    end
-    self.total_amount_cents = total
+    self.total_amount_cents = tag.tree_transactions
+                                 .to_report_on_month(ref_date)
+                                 .sum_w_rates(tag.business, ref_date)
   end
 
   def self.get_for(tag, ref_date)

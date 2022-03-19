@@ -68,6 +68,12 @@ class Business < ActiveRecord::Base
     end
   end
 
+  def self.get_from_scope(scope)
+    scope = scope.where(nil)
+    res = scope.to_sql.match(/business_id\" \= (\d+)/)
+    (res)? find(res[1].to_i) : nil
+  end
+
   def self.get_by_padma_id(padma_id)
     b = self.find_by_padma_id(padma_id)
     if b.nil?

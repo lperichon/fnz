@@ -342,4 +342,18 @@ class Transaction < ActiveRecord::Base
     end
   end
 
+  # @param business [Business]
+  # @param ref_date [Date] reference for Exchange Rates
+  def self.sum_w_rates(business, ref_date)
+    cents_by_currency = self.joins(:source).group("accounts.currency")
+        .sum("CASE WHEN transactions.type='Credit' THEN transactions.amount_cents WHEN transactions.type='Debit' THEN -1 * transactions.amount_cents ELSE 0 END")
+    cents_by_currency.sum do |currency, cents|
+      if (rate = business.month_exchange_rates.conversion_rate(currency, business.currency_code, ref_date))
+        cents * rate
+      else
+        raise "MonthExchangeRate not found"
+      end
+    end
+  end
+
 end
