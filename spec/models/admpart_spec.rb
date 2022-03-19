@@ -35,13 +35,13 @@ describe Admpart, :type => :model do
         before do
           admpart.force_refresh = false
         end
-        it "caches results" do
+        xit "caches results" do
           pre = admpart.total_for_tag(tag)
           FactoryBot.create(:transaction, business_id: b.id, type: "Credit", amount: 10, tag_id: tag.id, admpart_tag_id: tag.id)
           expect( admpart.reload.total_for_tag(tag) ).to eq pre
         end
         describe "calling refresh_cache" do
-          it "refreshes cache" do
+          xit "refreshes cache" do
             pre = admpart.total_for_tag(tag).to_f
 
             FactoryBot.create(:transaction, business_id: b.id,
