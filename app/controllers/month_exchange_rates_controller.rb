@@ -2,7 +2,7 @@ class MonthExchangeRatesController < UserApplicationController
   before_filter :get_business
 
   def index
-    @month_exchange_rates = @business.month_exchange_rates.order("ref_date DESC")
+    @month_exchange_rates = @business.month_exchange_rates.order("ref_date DESC, source_currency_code ASC")
   end
 
   def get_rate
