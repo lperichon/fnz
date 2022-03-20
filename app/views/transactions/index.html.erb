@@ -41,8 +41,6 @@
   <% end %>
   <%= submit_tag _("Editar"), class: "btn" %>
 
-  <%# link_to content_tag(:i, "", :class => "icon-bar-chart") + I18n.t('transactions.index.stats'), stats_business_transactions_path(@business, :start_date => @start_date.to_date, :end_date => @end_date.to_date), :remote => true, :class => "btn" %>
-
   <div class="pull-right">
     <%= link_to content_tag(:i, "", class: "icon-download"), business_transactions_path(@business, params.merge({format: "csv"})), class: "btn" %>
     <%= render partial: "drive_button" %>

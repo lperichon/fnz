@@ -143,21 +143,6 @@ class TransactionsController < UserApplicationController
     end
   end
 
-  def stats
-    @context = @context
-    # List transactions on this month or the year/month solicited
-    start_date = @start_date = Date.parse(params[:start_date] || Date.today.beginning_of_month.to_s).beginning_of_day
-    end_date = @end_date = Date.parse(params[:end_date] || Date.today.end_of_month.to_s).end_of_day
-
-    # List transactions that ocurred on that month or that are pending and ocurred before or that are reconciled on that month
-    @context = @context.where {(transaction_at.gteq start_date) & (transaction_at.lteq end_date)}
-
-    @debits = @context.where(:type => "Debit").joins(:tags).includes(:source).group("concat(tags.name, '-', accounts.currency)").sum(:amount_cents).each{|k,v| r[k] = v/100.0 }
-    @untagged_debits = @context.where(:type => "Debit").untagged.sum(:amount_cents) / 100.0
-    @credits = @context.where(:type => "Credit").joins(:tags).includes(:source).group("concat(tags.name, '-', accounts.currency)").sum(:amount_cents).each{|k,v| r[k] = v/100.0 }
-    @untagged_credits = @context.where(:type => "Credit").untagged.sum(:amount_cents) / 100.0
-  end
-
   private
 
   def transaction_param_key
