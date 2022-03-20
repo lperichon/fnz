@@ -31,6 +31,7 @@ module Account::HasCurrency
 
     def update_calculations
       if currency_changed?
+        business.month_exchange_rates.for_currency(currency_was).each &:update_calculations
         business.month_exchange_rates.for_currency(currency_code).each &:update_calculations
       end
     end
