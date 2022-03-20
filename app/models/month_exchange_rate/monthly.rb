@@ -13,6 +13,7 @@ module MonthExchangeRate::Monthly
     end
 
     # busca y si no encuentra crea
+    # TODO en lugar de ir duplicando el mes anterior tratar de ir acompañando el cambio de OpenExchangeRates
     # @return [MonthExchangeRate]
     def self.get_for_month(from_cur, to_cur, rd)
       rd = rd.to_date unless rd.is_a?(Date)
