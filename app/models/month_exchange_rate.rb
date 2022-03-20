@@ -43,15 +43,17 @@ class MonthExchangeRate < ActiveRecord::Base
 
   def dont_duplicate
     if source_currency_code && target_currency_code
-      if business.month_exchange_rates
-                 .where(
+      scope = business.month_exchange_rates.where(ref_date: ref_date)
+      if persisted?
+        scope = scope.where.not(id: id)
+      end
+      if scope.where(
                    source_currency_code: source_currency_code.upcase,
                    target_currency_code: target_currency_code.upcase,
-                   ref_date: ref_date)
-                 .exists? || business.month_exchange_rates.where(
+                   )
+                 .exists? || scope.where(
         source_currency_code: target_currency_code.upcase,
         target_currency_code: source_currency_code.upcase,
-        ref_date: ref_date
         ).exists?
         errors.add(:source_currency_code, "duplicate")
         errors.add(:target_currency_code, "duplicate")
