@@ -8,6 +8,20 @@ class OpenExchangeRatesClient
     end
   end
 
+  def latest
+    response = Typhoeus.get(url("api/latest.json"),{
+      params: {
+        app_id: app_id,
+        base: @base_cur,
+        symbols: @symbols
+      }
+    })
+    if response.success?
+      json = JSON.parse response.body
+      json["rates"][@symbols]
+    end
+  end
+
   def historical(ref_date)
     response = Typhoeus.get(url("api/historical/#{ref_date.to_date.iso8601}.json"),{
       params: {
