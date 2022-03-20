@@ -22,14 +22,22 @@ module MonthExchangeRate::Monthly
         if clone_ref
           ret = MonthExchangeRate.create(clone_ref.attributes_for_clone.merge({ref_date: rd}))
         else
-          business = get_business_from_scope(self) # will fail if no business in scope
-          if (ref_transfer = get_ref_transfer(from_cur, to_cur, business))
+          if (business = get_business_from_scope(self)) && (ref_transfer = get_ref_transfer(from_cur, to_cur, business))
             ret = self.create(
               from_currency_id: from_cur,
               to_currency_id: to_cur,
               ref_date: rd,
               conversion_rate: (ref_transfer.source.currency_code == from_cur)? ref_transfer.conversion_rate : 1 / ref_transfer.conversion_rate
             )
+          else
+            if (rate = get_rate_from_3rd_party(from_cur, to_cur, rd))
+              ret = self.create(
+                from_currency_id: from_cur,
+                to_currency_id: to_cur,
+                ref_date: rd,
+                conversion_rate: rate
+              )
+            end
           end
         end
       end

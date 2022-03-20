@@ -31,7 +31,7 @@ class OpenExchangeRatesClient
   end
 
   def app_id
-    ENV["app_id"]
+    ENV["OPEN_EXCHANGE_RATES_API_KEY"]
   end
 
 end

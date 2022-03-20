@@ -4,6 +4,7 @@ class MonthExchangeRate < ActiveRecord::Base
   include Monthly # Depends on Shared::MonthRefDate
   include Blockable
   include InverseConversion
+  include ThirdParty
 
   scope :for_currency, ->(cur_id){ where("from_currency_id = :cur OR to_currency_id = :cur", cur: cur_id)}
 
@@ -28,6 +29,8 @@ class MonthExchangeRate < ActiveRecord::Base
       ex_rate.conversion_rate
     elsif (ex_rate = get_for_month(to_cur, from_cur, ref_date))
       ex_rate.inverse_conversion_rate
+    else
+      get_rate_from_3rd_party(from_cur, to_cur, ref_date)
     end
   end
 
