@@ -9,8 +9,8 @@ class MonthExchangeRate < ActiveRecord::Base
 
   before_validation :downcase_currency_codes
 
-  validates :from_currency_id, presence: true, inclusion: {in: SUPPORTED_CURRENCIES}
-  validates :to_currency_id, presence: true, inclusion: {in: SUPPORTED_CURRENCIES}
+  validates :from_currency_id, presence: true, inclusion: {in: SUPPORTED_CURRENCY_IDS}
+  validates :to_currency_id, presence: true, inclusion: {in: SUPPORTED_CURRENCY_IDS}
 
   validate :dont_duplicate
   validate :different_currencies
