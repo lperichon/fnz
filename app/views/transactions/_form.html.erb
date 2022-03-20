@@ -6,11 +6,11 @@
                     html: {
                       class: "transactionFields",
                       data: {
-                        controller: "transaction_form"
+                        controller: "transaction-form"
                       }
                     }
     ) do |f| %>
-    <div id="colorSignal" data-target="transaction_form.colorSignal"></div>
+    <div id="colorSignal" data-target="transaction-form.colorSignal"></div>
       <input type="hidden" name="quick" value="1"></input>
 
       <%= render :partial => 'fields', :locals => {:f => f} %>

@@ -15,6 +15,7 @@ module MonthExchangeRate::Monthly
     # busca y si no encuentra crea
     # @return [MonthExchangeRate]
     def self.get_for_month(from_cur, to_cur, rd)
+      rd = rd.to_date unless rd.is_a?(Date)
       cur_scope = where(source_currency_code: from_cur.upcase, target_currency_code: to_cur.upcase)
       unless (ret = cur_scope.on_month(rd).first)
         clone_ref = cur_scope.find_closest_to(rd)
@@ -27,7 +28,7 @@ module MonthExchangeRate::Monthly
               source_currency_code: from_cur,
               target_currency_code: to_cur,
               ref_date: rd,
-              conversion_rate: (ref_transfer.source.currency == from_cur)? ref_transfer.conversion_rate : 1 / ref_transfer.conversion_rate
+              conversion_rate: (ref_transfer.source.currency_code == from_cur)? ref_transfer.conversion_rate : 1 / ref_transfer.conversion_rate
             )
           end
         end

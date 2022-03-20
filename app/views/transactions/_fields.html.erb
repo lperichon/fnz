@@ -5,8 +5,8 @@
             input_html: {
               disabled: !@transaction.change_allowed?(:type),
               data: {
-                target: "transaction_form.transactionTypeOption",
-                action: "change->transaction_form#updateFormFields change->transaction_form#updateColor"
+                target: "transaction-form.transactionTypeOption",
+                action: "change->transaction-form#updateFormFields change->transaction-form#updateColor",
               }
             } %>
 
@@ -26,25 +26,50 @@
   </div>
 </div>
 
-<%= f.association :source, collection: @business.accounts.order("name"), prompt: t('transactions.fields.source_prompt'), input_html: {disabled: !@transaction.change_allowed?(:source_id)} %>
+<%= f.association :source,
+  collection: @business.accounts.order("name").map{|a| [a.name, a.id, {data: {currency: a.currency_code}}]},
+  prompt: t('transactions.fields.source_prompt'),
+  input_html: {
+    data: {
+      target: "transaction-form.sourceAccount",
+      action: "transaction-form#updateConversionRate"
+    },
+    disabled: !@transaction.change_allowed?(:source_id)
+  } %>
 
-<span class="transfer_field" style="display:none;" data-target="transaction_form.transferField">
-  <%= f.input :target_id, as: :select, collection: @business.accounts.order("name"), prompt: t('transactions.fields.target_prompt'), input_html: {disabled: !@transaction.change_allowed?(:target_id)} %>
+<span class="transfer_field" style="display:none;" data-target="transaction-form.transferField">
+  <%= f.input :target_id,
+    as: :select,
+    collection: @business.accounts.order("name").map{|a| [a.name, a.id, {data: {currency: a.currency_code}}]},
+    prompt: t('transactions.fields.target_prompt'),
+    input_html: {
+      data: {
+        target: "transaction-form.targetAccount",
+        action: "transaction-form#updateConversionRate"
+      },
+      disabled: !@transaction.change_allowed?(:target_id)
+    } %>
 </span>
 
 <div class="control-group controls">
-  <a href="#" data-action="transaction_form#toggleExtraOptions">
-  <span data-target="transaction_form.toggleButtonVerb" data-show-msg="<%= _("mostrar") %>" data-hide-msg="<%= _("ocultar") %>"></span> 
+  <a href="#" data-action="transaction-form#toggleExtraOptions">
+  <span data-target="transaction-form.toggleButtonVerb" data-show-msg="<%= _("mostrar") %>" data-hide-msg="<%= _("ocultar") %>"></span>
     <%= _("más opciones") %>
   </a>
 </div>
 
-<div data-target="transaction_form.extraFieldsContainer">
+<div data-target="transaction-form.extraFieldsContainer">
 
   <%= f.input :transaction_at, as: :date_time_picker, input_html: {disabled: !@transaction.change_allowed?(:transaction_at)} %>
 
-  <span class="transfer_field" style="display:none;" data-target="transaction_form.transferField">
-    <%= f.input :conversion_rate, input_html: {disabled: !@transaction.change_allowed?(:conversion_rate)} %>
+  <span class="transfer_field" style="display:none;" data-target="transaction-form.transferField">
+    <%= f.input :conversion_rate,
+      input_html: {
+        disabled: !@transaction.change_allowed?(:conversion_rate),
+        data: {
+          target: "transaction-form.conversionRateField"
+        }
+      } %>
   </span>
 
   <%= f.input :state,
@@ -53,15 +78,20 @@
               input_html: {
                 disabled: !@transaction.change_allowed?(:state),
                 data: {
-                  target: "transaction_form.stateField",
-                  action: "transaction_form#updateFormFields" }
+                  target: "transaction-form.stateField",
+                  action: "transaction-form#updateFormFields" }
               } %>
 
   <span class="pending_field" style="display:none;">
     <%= f.input :reconciled_at, as: :date_time_picker, input_html: {disabled: !@transaction.change_allowed?(:reconciled_at)} %>
   </span>
 
-  <%= f.input :report_at, as: :date, discard_day: true, input_html: {disabled: !@transaction.change_allowed?(:report_at)} %>
+  <%= f.input :report_at,
+    as: :date,
+    discard_day: true,
+    input_html: {
+      disabled: !@transaction.change_allowed?(:report_at)
+    } %>
 
   <%# Chosen no me muestra el blank si no lo agrego a la colección %>
   <%=  f.input :tag_ids,

@@ -27,7 +27,7 @@ class MonthExchangeRate < ActiveRecord::Base
 
   def inverse_conversion_rate
     if conversion_rate
-      1 / conversion_rate
+      1.0 / conversion_rate
     end
   end
 

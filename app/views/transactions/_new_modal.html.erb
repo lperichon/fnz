@@ -3,14 +3,25 @@
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     <h3><%= _("Registrar transacción") %></h3>
   </div>
-  <%= simple_form_for(@transaction, as: :transaction, url: business_transactions_path(@business), validate: true, remote: true, html: {class: 'form-horizontal transactionFields', data: {controller: "transaction_form"}}) do |f| %>
+  <%= simple_form_for(@transaction,
+    as: :transaction,
+    url: business_transactions_path(@business),
+    validate: true,
+    remote: true,
+    html: {
+      class: 'form-horizontal transactionFields',
+      data: {
+        controller: "transaction-form",
+        "transaction-form-rates-url": get_rate_business_month_exchange_rates_path(@business),
+    }
+      }) do |f| %>
       <%= render partial: 'transactions/fields', locals: {:f => f} %>
       <% %w(sale installment enrollment inscription).each do |nested_resource_type| %>
           <% f.object.send("#{nested_resource_type}_ids").each_with_index do |nested_resource_id, index| %>
             <%= f.input "#{nested_resource_type}_ids", as: :hidden, input_html: {id: "#{nested_resource_type}_ids_#{index}", name: "transaction[#{nested_resource_type}_ids][]", value: nested_resource_id} %>
           <% end %>
       <% end %>
-      <div class="modal-footer" data-target="transaction_form.colorSignal">
+      <div class="modal-footer" data-target="transaction-form.colorSignal">
         <%= link_to t('actions.close'), "#", class: "btn", "data-dismiss" => "modal" %>
         <%= f.button :submit, t("actions.create"), class: "btn btn-primary", id: "submitTransaction" %>
       </div>

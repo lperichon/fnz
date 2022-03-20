@@ -1,7 +1,17 @@
 (()=>{
-  stimulusApplication.register("transaction_form", class extends Stimulus.Controller {
+  stimulusApplication.register("transaction-form", class extends Stimulus.Controller {
     static get targets(){
-      return ["transactionTypeOption","transferField", "stateField","colorSignal","extraFieldsContainer","toggleButtonVerb"];
+      return [
+        "transactionTypeOption",
+        "transferField",
+        "stateField",
+        "colorSignal",
+        "extraFieldsContainer",
+        "toggleButtonVerb",
+        "sourceAccount",
+        "targetAccount",
+        "conversionRateField"
+      ];
     }
 
     initialize(){
@@ -90,5 +100,39 @@
         $("#submitTransaction").attr("disabled","disabled");
       });
     }
+
+    updateConversionRate(){
+      this.log("updating conversion rate")
+      let fromCur = this.sourceAccountTarget.selectedOptions[0].dataset.currency
+      let toCur = this.targetAccountTarget.selectedOptions[0].dataset.currency
+      let refDate = this.selectedReportAt()
+      if (fromCur && toCur && refDate) {
+        fetch(this.data.get("ratesUrl")+"?from="+fromCur+"&to="+toCur+"&ref_date="+refDate, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+          }
+        }).then(response => response.json())
+          .then(data => {
+            let rate = data["rate"]
+            this.conversionRateFieldTarget.value = rate
+          }
+        )
+      }
+    }
+
+    selectedReportAt(){
+      let day = $("#transaction_report_at_3i").val()
+      let month = $("#transaction_report_at_2i").val()
+      let year = $("#transaction_report_at_1i").val()
+      return year + "-" + month + "-" + day
+    }
+
+    log(msg){
+      console.log("[transaction-form]" + msg)
+    }
+
+
   });
 })();
