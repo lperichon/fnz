@@ -5,6 +5,8 @@ class MonthExchangeRate < ActiveRecord::Base
   include Blockable
   include InverseConversion
 
+  scope :for_currency, ->(cur_id){ where("from_currency_id = :cur OR to_currency_id = :cur", cur: cur_id)}
+
   belongs_to :business
 
   before_validation :downcase_currency_codes

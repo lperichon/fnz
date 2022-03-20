@@ -4,6 +4,7 @@ module Account::HasCurrency
   included do
 
     validates :currency, presence: true
+    after_save :update_calculations
 
     def currency=(currency_code)
       self[:currency] = currency_code
@@ -26,6 +27,12 @@ module Account::HasCurrency
 
     def currency_code
       self[:currency]
+    end
+
+    def update_calculations
+      if currency_changed?
+        business.month_exchange_rates.for_currency(currency_code).each &:update_calculations
+      end
     end
 
   end
