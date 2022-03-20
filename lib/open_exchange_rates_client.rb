@@ -1,38 +1,70 @@
 class OpenExchangeRatesClient
 
+  FREE_BASE_CURRENCY = "USD"
+
   def initialize(attrs = {})
-    @base_cur = attrs[:from_cur]
-    @symbols = attrs[:to_cur]
-    if @base_cur.blank? || @symbols.blank?
+    @from = attrs[:from_cur]
+    @to = attrs[:to_cur]
+    if @from.blank? || @to.blank?
       raise ArgumentError
     end
   end
 
   def latest
-    response = Typhoeus.get(url("api/latest.json"),{
-      params: {
-        app_id: app_id,
-        base: @base_cur,
-        symbols: @symbols
-      }
-    })
-    if response.success?
-      json = JSON.parse response.body
-      json["rates"][@symbols]
+    if @from == "usd"
+      free_latest(@to)
+    elsif @to == "usd"
+      if (t = free_latest(@from))
+        1 / t
+      end
+    else
+      # brl -> ars = usd -> ars / usd -> brl
+      if (base_to_from = free_latest(@from)) && (base_to_to = free_latest(@to))
+        base_to_to / base_to_from
+      end
     end
   end
 
   def historical(ref_date)
-    response = Typhoeus.get(url("api/historical/#{ref_date.to_date.iso8601}.json"),{
+    if @from == "usd"
+      free_historical(@to, ref_date)
+    elsif @to == "usd"
+      if (t = free_historical(@from, ref_date))
+        1 / t
+      end
+    else
+      # brl -> ars = usd -> ars / usd -> brl
+      if (base_to_from = free_historical(@from, ref_date)) && (base_to_to = free_historical(@to, ref_date))
+        base_to_to / base_to_from
+      end
+    end
+  end
+
+  def free_latest(currency)
+    response = Typhoeus.get(url("api/latest.json"),{
       params: {
         app_id: app_id,
-        base: @base_cur,
-        symbols: @symbols
+        base: FREE_BASE_CURRENCY,
+        symbols: Currency.find(currency).iso_code
       }
     })
     if response.success?
       json = JSON.parse response.body
-      json["rates"][@symbols]
+      json["rates"][Currency.find(currency).iso_code]
+    end
+  end
+
+  def free_historical(currency, ref_date)
+    response = Typhoeus.get(url("api/historical/#{ref_date.to_date.iso8601}.json"),{
+      params: {
+        app_id: app_id,
+        base: FREE_BASE_CURRENCY,
+        symbols: Currency.find(currency).iso_code
+      }
+    })
+    if response.success?
+      json = JSON.parse response.body
+      json["rates"][Currency.find(currency).iso_code]
     end
   end
 
