@@ -11,6 +11,12 @@ class MonthExchangeRatesController < UserApplicationController
     }, code: 200
   end
 
+  def refresh_rate
+    @month_exchange_rate = @business.month_exchange_rates.find(params[:id])
+    @month_exchange_rate.update_rate_from_3rd_party
+    redirect_to business_month_exchange_rates_path(@business)
+  end
+
   def new
     @month_exchange_rate = @business.month_exchange_rates.new
   end

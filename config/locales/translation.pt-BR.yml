@@ -24,6 +24,7 @@ pt-BR:
     close: Fechar
     delete: Apagar
     update: Atualizar
+    confirm: "certeza?"
   activemodel:
     attributes:
       membership_search:

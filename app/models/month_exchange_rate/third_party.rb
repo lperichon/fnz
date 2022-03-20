@@ -2,6 +2,13 @@ module MonthExchangeRate::ThirdParty
   extend ActiveSupport::Concern
 
   included do
+
+    def update_rate_from_3rd_party
+      if (new_rate = self.class.get_rate_from_3rd_party(from_currency_id, to_currency_id, ref_date))
+        update(conversion_rate: new_rate)
+      end
+    end
+
     def self.get_rate_from_3rd_party(from_cur, to_cur, ref_date)
       if Rails.env.test?
         100.0

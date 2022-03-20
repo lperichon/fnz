@@ -24,6 +24,7 @@ es:
     close: Cerrar
     delete: Eliminar
     update: Actualizar
+    confirm: "seguro?"
   activemodel:
     attributes:
       membership_search:

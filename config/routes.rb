@@ -57,6 +57,9 @@ Fnz::Application.routes.draw do
       collection do
         get :get_rate
       end
+      member do
+        put :refresh_rate
+      end
     end
     resources :transaction_rules
     resources :contacts

@@ -24,6 +24,7 @@ en:
     close: Close
     delete: Delete
     update: update
+    confirm: "confirm?"
   activemodel:
     attributes:
       membership_search:
