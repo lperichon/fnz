@@ -9,11 +9,9 @@ class Contact
       def self.get_by_padma_id(padma_id)
         c = find_by_padma_id(padma_id)
         if c.nil?
-          business_id = get_business_from_scope(self)
-          if business_id
-            b = Business.find(business_id)
+          if (b = Business.get_from_scope(self))
             padma_contact = CrmLegacyContact.find(padma_id,
-              select: [:id, :full_name, :local_status, :local_teacher],
+              select: [:id, :full_name, :email, :local_status, :local_teacher],
               account_name: b.padma_id
             )
             if padma_contact
@@ -21,6 +19,7 @@ class Contact
               else
                 c = b.contacts.create(
                   name: padma_name(padma_contact).strip,
+                  email: padma_contact.email,
                   padma_status: padma_contact.local_status,
                   padma_teacher: padma_contact.local_teacher,
                   padma_id: padma_contact.id)

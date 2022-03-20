@@ -68,8 +68,6 @@ class Contact < ActiveRecord::Base
   private
 
   def self.get_business_from_scope(scope)
-    scope = scope.where(nil)
-    res = scope.to_sql.match(/business_id\" \= (\d+)/)
-    (res)? res[1].to_i : nil
+    Business.get_from_scope(scope)
   end
 end
