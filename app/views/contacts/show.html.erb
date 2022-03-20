@@ -9,6 +9,7 @@
 <h2 class='title'><%= page_title @contact.name %></h2>
 <% if @contact.padma_id.present? %>
   <div>
+		Email: <%= @contact.email %> <br>
     <%= link_to t('.see_in_crm'), "#{Crm::URL}/contacts/#{@contact.padma_id}" %>
   </div>
 <% end %>
