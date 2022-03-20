@@ -3,6 +3,7 @@ class MonthExchangeRate < ActiveRecord::Base
   include Shared::MonthRefDate
   include Monthly # Depends on Shared::MonthRefDate
   include Blockable
+  include InverseConversion
 
   belongs_to :business
 
@@ -25,12 +26,6 @@ class MonthExchangeRate < ActiveRecord::Base
       ex_rate.conversion_rate
     elsif (ex_rate = get_for_month(to_cur, from_cur, ref_date))
       ex_rate.inverse_conversion_rate
-    end
-  end
-
-  def inverse_conversion_rate
-    if conversion_rate
-      1.0 / conversion_rate
     end
   end
 
