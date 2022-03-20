@@ -17,7 +17,7 @@
     <th><%= tm.name %></th>
     <td><%= pm @adm.total_for_tag(@adm.enrollments_tag, tm.id) %></td>
     <td><%= pm @adm.agent_enrollments_comission(tm) %></td>
-    <td><%= @adm.enrollments_by_teacher[tm.padma_id] %></td>
+    <td><%= @adm.enrollments_by_teacher[tm.padma_id] if @adm.enrollments_by_teacher %></td>
     <td>
       <% if @adm.agent_enrollments_prize(tm) != 0 %>
         <%= pm @adm.agent_enrollments_prize(tm) %>

@@ -294,7 +294,15 @@ class Admpart < ActiveRecord::Base
     if @contacts_in_attendance_report
       @contacts_in_attendance_report
     else
-      @contacts_in_attendance_report = (business.contacts.where(padma_id: attendance_report.keys) | contacts_who_paid_installments)
+      if attendance_report
+        @contacts_in_attendance_report = (business.contacts.where(padma_id: attendance_report.keys) | contacts_who_paid_installments)
+      else
+        if Rails.env.production?
+          raise "no attendance_report"
+        else
+          {}
+        end
+      end
     end
   end
 
@@ -378,7 +386,15 @@ class Admpart < ActiveRecord::Base
   end
 
   def agent_enrollments_prize(agent)
-    (enrollments_by_teacher[agent.padma_id] || 0) * (agent_enrollment_quantity_fixed_amount || 0)
+    if enrollments_by_teacher
+      (enrollments_by_teacher[agent.padma_id] || 0) * (agent_enrollment_quantity_fixed_amount || 0)
+    else
+      if Rails.env.production?
+        raise "no enrollments_by_teacher"
+      else
+        0
+      end
+    end
   end
 
   def agent_from_enrollments_total(agent)
