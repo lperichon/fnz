@@ -1,7 +1,7 @@
 class MonthExchangeRate < ActiveRecord::Base
 
   include Shared::MonthRefDate
-  include Monthly # Depends on Shared::MonthRefDate
+  include MonthlyHistory # Depends on Shared::MonthRefDate
   include Blockable
   include InverseConversion
   include ThirdParty

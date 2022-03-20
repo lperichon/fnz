@@ -1,5 +1,5 @@
 # El modelo se reproduce todos los meses, para todos los meses debe tener algún valor
-module MonthExchangeRate::Monthly
+module MonthExchangeRate::MonthlyHistory
   extend ActiveSupport::Concern
 
   included do
