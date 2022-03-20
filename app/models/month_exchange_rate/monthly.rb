@@ -13,11 +13,13 @@ module MonthExchangeRate::Monthly
     end
 
     # busca y si no encuentra crea
+    #
     # TODO en lugar de ir duplicando el mes anterior tratar de ir acompañando el cambio de OpenExchangeRates
+    #
     # @return [MonthExchangeRate]
     def self.get_for_month(from_cur, to_cur, rd)
       rd = rd.to_date unless rd.is_a?(Date)
-      cur_scope = where(from_currency_id: from_cur.upcase, to_currency_id: to_cur.upcase)
+      cur_scope = where(from_currency_id: from_cur.downcase, to_currency_id: to_cur.downcase)
       unless (ret = cur_scope.on_month(rd).first)
         clone_ref = cur_scope.find_closest_to(rd)
         if clone_ref
