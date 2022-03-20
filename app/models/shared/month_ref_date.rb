@@ -3,7 +3,7 @@
 # expects base_class to have ref_date accessor
 module Shared::MonthRefDate
   extend ActiveSupport::Concern
-
+  RANGE = 3
   included do
 
     before_validation :force_ref_date_to_first_day_of_month
@@ -17,7 +17,6 @@ module Shared::MonthRefDate
       date.to_date.beginning_of_month
     end
 
-    RANGE = 3
     def self.find_closest_to(rd)
       ret = nil
       i = 1
