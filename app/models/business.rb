@@ -1,5 +1,6 @@
 class Business < ActiveRecord::Base
 
+  include HasCurrency
   include Business::HasContacts
 
   belongs_to :owner, :class_name => "User"
@@ -85,14 +86,6 @@ class Business < ActiveRecord::Base
       end
     end
     b
-  end
-
-  def currency_symbol
-    if currency_code
-      Currency.find(currency_code).try(:symbol)
-    else
-      Currency.find("usd").try(:symbol)
-    end
   end
 
   def self.current=(b)
