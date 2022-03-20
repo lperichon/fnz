@@ -116,9 +116,17 @@
         }).then(response => response.json())
           .then(data => {
             let rate = data["rate"]
-            this.conversionRateFieldTarget.value = rate
-          }
-        )
+            if (rate === null) {
+              alert("error getting exchange rate")
+              this.conversionRateFieldTarget.value = 1.0
+            } else {
+              this.conversionRateFieldTarget.value = rate
+            }
+          })
+          .catch((error) => {
+            alert(error)
+            this.conversionRateFieldTarget.value = 1.0
+          })
       }
     }
 

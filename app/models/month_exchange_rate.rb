@@ -11,6 +11,7 @@ class MonthExchangeRate < ActiveRecord::Base
   validates :source_currency_code, presence: true, inclusion: {in: SUPPORTED_CURRENCIES.map(&:iso_code)}
   validates :target_currency_code, presence: true, inclusion: {in: SUPPORTED_CURRENCIES.map(&:iso_code)}
 
+  validate :dont_duplicate
   validate :different_currencies
 
   validates :conversion_rate, presence: true
@@ -37,6 +38,24 @@ class MonthExchangeRate < ActiveRecord::Base
     if source_currency_code == target_currency_code
       errors.add(:source_currency_code, I18n.t("month_exchange_rate.errors.currencies_must_be_different"))
       errors.add(:target_currency_code, I18n.t("month_exchange_rate.errors.currencies_must_be_different"))
+    end
+  end
+
+  def dont_duplicate
+    if source_currency_code && target_currency_code
+      if business.month_exchange_rates
+                 .where(
+                   source_currency_code: source_currency_code.upcase,
+                   target_currency_code: target_currency_code.upcase,
+                   ref_date: ref_date)
+                 .exists? || business.month_exchange_rates.where(
+        source_currency_code: target_currency_code.upcase,
+        target_currency_code: source_currency_code.upcase,
+        ref_date: ref_date
+        ).exists?
+        errors.add(:source_currency_code, "duplicate")
+        errors.add(:target_currency_code, "duplicate")
+      end
     end
   end
 
