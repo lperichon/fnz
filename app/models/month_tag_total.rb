@@ -21,10 +21,12 @@ class MonthTagTotal < ActiveRecord::Base
     save # triggers calculation but better readibility and refactorable
   end
 
+  def transactions
+    tag.tree_transactions.to_report_on_month(ref_date)
+  end
+
   def calculate_total_amount
-    self.total_amount_cents = tag.tree_transactions
-                                 .to_report_on_month(ref_date)
-                                 .sum_w_rates(tag.business, ref_date)
+    self.total_amount_cents = transactions.sum_w_rates(tag.business, ref_date)
   end
 
   def self.get_for(tag, ref_date)
