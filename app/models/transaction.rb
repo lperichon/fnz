@@ -348,10 +348,12 @@ class Transaction < ActiveRecord::Base
   # @return [Integer] cents
   def self.sum_w_rates(business, ref_date)
     sums_by_currency.sum do |currency, cents|
-      if (rate = business.month_exchange_rates.conversion_rate(currency, business.currency_code, ref_date))
+      if currency.blank? || currency == business.currency_code
+        cents
+      elsif (rate = business.month_exchange_rates.conversion_rate(currency, business.currency_code, ref_date))
         cents * rate
       else
-        raise "MonthExchangeRate not found"
+        raise "MonthExchangeRate for #{currency}->#{business.currency_code} not found"
       end
     end.to_i
   end
