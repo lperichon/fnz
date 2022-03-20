@@ -24,3 +24,6 @@ en:
   admparts:
     index:
       admparts: ""
+  month_exchange_rates:
+    index:
+      title: "Exchange rates"

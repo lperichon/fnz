@@ -1117,7 +1117,9 @@ es:
       new_recurrent_transaction: "Nueva transacción recurrente"
   month_exchange_rates:
     content_for_layout:
-      new_exchange_rate: "Nueva taza de cambio"
+      new_exchange_rate: "Nueva tasa de cambio"
+    index:
+      title: "Tasas de cambio"
   month_exchange_rate:
     errors:
       currencies_must_be_different: "Deben ser monedas diferentes"
