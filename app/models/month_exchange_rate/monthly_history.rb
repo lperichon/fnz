@@ -12,33 +12,34 @@ module MonthExchangeRate::MonthlyHistory
       business.month_exchange_rates.on_month(ref_date+1.month).first
     end
 
-    # busca y si no encuentra crea
-    #
-    # TODO en lugar de ir duplicando el mes anterior tratar de ir acompañando el cambio de OpenExchangeRates
+    # * Si ya hay un ExchangeRate para el mes retorna ese.
+    # * Si no busca el rate en un 3rd Party y lo guarda
+    # * Si no clona el más cercano en un rango de 3 meses.
+    # * Si no trata de generar a partir de un Transfer
     #
     # @return [MonthExchangeRate]
     def self.get_for_month(from_cur, to_cur, rd)
       rd = rd.to_date unless rd.is_a?(Date)
       cur_scope = where(from_currency_id: from_cur.downcase, to_currency_id: to_cur.downcase)
       unless (ret = cur_scope.on_month(rd).first)
-        clone_ref = cur_scope.find_closest_to(rd)
-        if clone_ref
-          ret = MonthExchangeRate.create(clone_ref.attributes_for_clone.merge({ref_date: rd}))
+        if (rate = get_rate_from_3rd_party(from_cur, to_cur, rd))
+          ret = self.create(
+            from_currency_id: from_cur,
+            to_currency_id: to_cur,
+            ref_date: rd,
+            conversion_rate: rate
+          )
         else
-          if (business = get_business_from_scope(self)) && (ref_transfer = get_ref_transfer(from_cur, to_cur, business))
-            ret = self.create(
-              from_currency_id: from_cur,
-              to_currency_id: to_cur,
-              ref_date: rd,
-              conversion_rate: (ref_transfer.source.currency_code == from_cur)? ref_transfer.conversion_rate : 1 / ref_transfer.conversion_rate
-            )
+          clone_ref = cur_scope.find_closest_to(rd)
+          if clone_ref
+            ret = MonthExchangeRate.create(clone_ref.attributes_for_clone.merge({ref_date: rd}))
           else
-            if (rate = get_rate_from_3rd_party(from_cur, to_cur, rd))
+            if (business = get_business_from_scope(self)) && (ref_transfer = get_ref_transfer(from_cur, to_cur, business))
               ret = self.create(
                 from_currency_id: from_cur,
                 to_currency_id: to_cur,
                 ref_date: rd,
-                conversion_rate: rate
+                conversion_rate: (ref_transfer.source.currency_code == from_cur)? ref_transfer.conversion_rate : 1 / ref_transfer.conversion_rate
               )
             end
           end
