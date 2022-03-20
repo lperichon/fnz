@@ -20,7 +20,7 @@ module MonthExchangeRate::ThirdParty
             end
           else
             client = OpenExchangeRatesClient.new(from_cur: Currency.find(from_cur).iso_code, to_cur: Currency.find(to_cur).iso_code)
-            client.historical(ref_date)
+            client.historical(ref_date.end_of_month < Time.zone.today ? ref_date.end_of_month : ref_date) # para meses pasados usar el último día del mes.
           end
         end
       end
