@@ -48,6 +48,20 @@ class Account < ActiveRecord::Base
     active_transactions.empty?
   end
 
+  def self.calculate_total_balance
+    if (business = Business.get_from_scope(self))
+      calculate_total_balance_per_currency.sum do |currency, balance|
+        if currency.blank? || currency == business.currency_code
+          balance
+        elsif (rate = business.month_exchange_rates.conversion_rate(currency, business.currency_code, Time.zone.today))
+          balance * rate
+        else
+          raise "MonthExchangeRate for #{currency}->#{business.currency_code} not found"
+        end
+      end
+    end
+  end
+
   def self.calculate_total_balance_per_currency
     ret = {}
     self.where(nil).includes(:business).group_by(&:currency).each do |cur,accs|

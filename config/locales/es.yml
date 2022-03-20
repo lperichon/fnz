@@ -1025,6 +1025,7 @@ es:
       title: Cuentas
       manage: configurar
       prevents_transactions_before_this_date: "No se puede crear, eliminar o modificar transacciones con fecha de reporte anterior a esta."
+      total_balance_in_business_currency: "Total al cambio actual"
     edit:
       title: Editar
     edit_sidebar:

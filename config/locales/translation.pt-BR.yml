@@ -593,6 +593,7 @@ pt-BR:
       title: Contas
       manage: editar
       prevents_transactions_before_this_date: "Alterações anteriores a esta data são bloqueiadas"
+      total_balance_in_business_currency: "Total com cotações atuais"
     edit:
       title: Editar
     edit_sidebar:

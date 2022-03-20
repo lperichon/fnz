@@ -34,6 +34,14 @@
       </a>
     </li>
   <% end %>
+  <li>
+    <a>
+      <b>
+      <%= t(".total_balance_in_business_currency") %>:
+      <%= number_to_currency( @business.accounts.calculate_total_balance , unit: Currency.find(@business.currency_code).symbol ) %>
+      </b>
+    </a>
+  </li>
   <li><a></a></li>
   <% @business.accounts.calculate_pending_balance_per_currency.each do |cur,balance| %>
     <li>

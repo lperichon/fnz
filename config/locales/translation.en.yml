@@ -593,6 +593,7 @@ en:
       title: Accounts
       manage: set up
       prevents_transactions_before_this_date: "Transactions with reports before this time can't be created, deleted o updated."
+      total_balance_in_business_currency: "Total with current rates"
     edit:
       title: Edit Business
     edit_sidebar:
