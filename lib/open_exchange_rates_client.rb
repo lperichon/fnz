@@ -41,30 +41,34 @@ class OpenExchangeRatesClient
   end
 
   def free_latest(currency)
-    response = Typhoeus.get(url("api/latest.json"),{
-      params: {
-        app_id: app_id,
-        base: FREE_BASE_CURRENCY,
-        symbols: Currency.find(currency).iso_code
-      }
-    })
-    if response.success?
-      json = JSON.parse response.body
-      json["rates"][Currency.find(currency).iso_code]
+    Rails.cache.fetch(["OpenExchangeRates","usd","latest",currency], expire_in: 1.day) do
+      response = Typhoeus.get(url("api/latest.json"),{
+        params: {
+          app_id: app_id,
+          base: FREE_BASE_CURRENCY,
+          symbols: Currency.find(currency).iso_code
+        }
+      })
+      if response.success?
+        json = JSON.parse response.body
+        json["rates"][Currency.find(currency).iso_code]
+      end
     end
   end
 
   def free_historical(currency, ref_date)
-    response = Typhoeus.get(url("api/historical/#{ref_date.to_date.iso8601}.json"),{
-      params: {
-        app_id: app_id,
-        base: FREE_BASE_CURRENCY,
-        symbols: Currency.find(currency).iso_code
-      }
-    })
-    if response.success?
-      json = JSON.parse response.body
-      json["rates"][Currency.find(currency).iso_code]
+    Rails.cache.fetch(["OpenExchangeRates","usd","historical",ref_date.to_date.iso8601,currency], expire_in: 1.day) do
+      response = Typhoeus.get(url("api/historical/#{ref_date.to_date.iso8601}.json"),{
+        params: {
+          app_id: app_id,
+          base: FREE_BASE_CURRENCY,
+          symbols: Currency.find(currency).iso_code
+        }
+      })
+      if response.success?
+        json = JSON.parse response.body
+        json["rates"][Currency.find(currency).iso_code]
+      end
     end
   end
 
