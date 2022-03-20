@@ -16,7 +16,7 @@ module MonthExchangeRate::Monthly
     # @return [MonthExchangeRate]
     def self.get_for_month(from_cur, to_cur, rd)
       rd = rd.to_date unless rd.is_a?(Date)
-      cur_scope = where(source_currency_code: from_cur.upcase, target_currency_code: to_cur.upcase)
+      cur_scope = where(from_currency_id: from_cur.upcase, to_currency_id: to_cur.upcase)
       unless (ret = cur_scope.on_month(rd).first)
         clone_ref = cur_scope.find_closest_to(rd)
         if clone_ref
@@ -25,8 +25,8 @@ module MonthExchangeRate::Monthly
           business = get_business_from_scope(self) # will fail if no business in scope
           if (ref_transfer = get_ref_transfer(from_cur, to_cur, business))
             ret = self.create(
-              source_currency_code: from_cur,
-              target_currency_code: to_cur,
+              from_currency_id: from_cur,
+              to_currency_id: to_cur,
               ref_date: rd,
               conversion_rate: (ref_transfer.source.currency_code == from_cur)? ref_transfer.conversion_rate : 1 / ref_transfer.conversion_rate
             )

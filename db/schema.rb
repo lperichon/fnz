@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20220319130945) do
+ActiveRecord::Schema.define(version: 20220320132140) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -240,13 +240,13 @@ ActiveRecord::Schema.define(version: 20220319130945) do
   add_index "memberships", ["payment_type_id"], name: "index_memberships_on_payment_type_id", using: :btree
 
   create_table "month_exchange_rates", force: :cascade do |t|
-    t.integer  "business_id",                                                null: false
-    t.date     "ref_date",                                                   null: false
-    t.string   "source_currency_code",                                       null: false
-    t.string   "target_currency_code",                                       null: false
-    t.decimal  "conversion_rate",      precision: 8, scale: 5, default: 1.0, null: false
-    t.datetime "created_at",                                                 null: false
-    t.datetime "updated_at",                                                 null: false
+    t.integer  "business_id",                                            null: false
+    t.date     "ref_date",                                               null: false
+    t.string   "from_currency_id",                                       null: false
+    t.string   "to_currency_id",                                         null: false
+    t.decimal  "conversion_rate",  precision: 8, scale: 5, default: 1.0, null: false
+    t.datetime "created_at",                                             null: false
+    t.datetime "updated_at",                                             null: false
   end
 
   create_table "month_tag_totals", force: :cascade do |t|

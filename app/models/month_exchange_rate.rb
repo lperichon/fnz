@@ -7,10 +7,10 @@ class MonthExchangeRate < ActiveRecord::Base
 
   belongs_to :business
 
-  before_validation :upcase_currency_codes
+  before_validation :downcase_currency_codes
 
-  validates :source_currency_code, presence: true, inclusion: {in: SUPPORTED_CURRENCIES.map(&:iso_code)}
-  validates :target_currency_code, presence: true, inclusion: {in: SUPPORTED_CURRENCIES.map(&:iso_code)}
+  validates :from_currency_id, presence: true, inclusion: {in: SUPPORTED_CURRENCIES}
+  validates :to_currency_id, presence: true, inclusion: {in: SUPPORTED_CURRENCIES}
 
   validate :dont_duplicate
   validate :different_currencies
@@ -20,7 +20,7 @@ class MonthExchangeRate < ActiveRecord::Base
   after_save :update_calculations
 
   def self.conversion_rate(from_cur, to_cur, ref_date)
-    if from_cur.upcase == to_cur.upcase
+    if from_cur.downcase == to_cur.downcase
       1.0
     elsif (ex_rate = get_for_month(from_cur, to_cur, ref_date))
       ex_rate.conversion_rate
@@ -32,44 +32,44 @@ class MonthExchangeRate < ActiveRecord::Base
   private
 
   def different_currencies
-    if source_currency_code == target_currency_code
-      errors.add(:source_currency_code, I18n.t("month_exchange_rate.errors.currencies_must_be_different"))
-      errors.add(:target_currency_code, I18n.t("month_exchange_rate.errors.currencies_must_be_different"))
+    if from_currency_id == to_currency_id
+      errors.add(:from_currency_id, I18n.t("month_exchange_rate.errors.currencies_must_be_different"))
+      errors.add(:to_currency_id, I18n.t("month_exchange_rate.errors.currencies_must_be_different"))
     end
   end
 
   def dont_duplicate
-    if source_currency_code && target_currency_code
+    if from_currency_id && to_currency_id
       scope = business.month_exchange_rates.where(ref_date: ref_date)
       if persisted?
         scope = scope.where.not(id: id)
       end
       if scope.where(
-                   source_currency_code: source_currency_code.upcase,
-                   target_currency_code: target_currency_code.upcase,
+                   from_currency_id: from_currency_id.downcase,
+                   to_currency_id: to_currency_id.downcase,
                    )
                  .exists? || scope.where(
-        source_currency_code: target_currency_code.upcase,
-        target_currency_code: source_currency_code.upcase,
+        from_currency_id: to_currency_id.downcase,
+        to_currency_id: from_currency_id.downcase,
         ).exists?
-        errors.add(:source_currency_code, "duplicate")
-        errors.add(:target_currency_code, "duplicate")
+        errors.add(:from_currency_id, "duplicate")
+        errors.add(:to_currency_id, "duplicate")
       end
     end
   end
 
-  def upcase_currency_codes
-    if source_currency_code.upcase != source_currency_code
-      self.source_currency_code = source_currency_code.upcase
+  def downcase_currency_codes
+    if from_currency_id.downcase != from_currency_id
+      self.from_currency_id = from_currency_id.downcase
     end
-    if target_currency_code.upcase != target_currency_code
-      self.target_currency_code = target_currency_code.upcase
+    if to_currency_id.downcase != to_currency_id
+      self.to_currency_id = to_currency_id.downcase
     end
   end
 
   def update_calculations
     if conversion_rate_changed?
-      business.accounts.where(currency: [source_currency_code, target_currency_code]).each do |account|
+      business.accounts.where(currency: [from_currency_id, to_currency_id]).each do |account|
         try_with_transfers = true
         # Recalcular reportes. 1 x tag
         Transaction.to_report_on_month(ref_date)

@@ -11,8 +11,8 @@
       disabled: !@month_exchange_rate.change_allowed?(:report_at)
     }  %>
 
-  <%= f.input :source_currency_code, as: :select, collection: SUPPORTED_CURRENCIES.map { |cur| [cur.name, cur.iso_code]} %>
-  <%= f.input :target_currency_code, as: :select, collection: SUPPORTED_CURRENCIES.map { |cur| [cur.name, cur.iso_code]} %>
+  <%= f.input :from_currency_id, as: :select, collection: SUPPORTED_CURRENCIES %>
+  <%= f.input :to_currency_id, as: :select, collection: SUPPORTED_CURRENCIES %>
 
   <%= f.input :conversion_rate %>
 

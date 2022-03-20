@@ -9,9 +9,9 @@
 
     <% ers.each do |er| %>
         <tr>
-          <td><%= er.source_currency_code %> -> <%= er.target_currency_code %></td>
+          <td><%= er.from_currency_id %> -> <%= er.to_currency_id %></td>
           <td><%= best_in_place er, :conversion_rate, url: business_month_exchange_rate_path(@business, er)  %></td>
-          <td><%= er.target_currency_code %> -> <%= er.source_currency_code %></td>
+          <td><%= er.to_currency_id %> -> <%= er.from_currency_id %></td>
           <td><%= er.inverse_conversion_rate  %></td>
           <td>
             <% unless er.blocked? %>

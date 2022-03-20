@@ -2,8 +2,8 @@ FactoryBot.define do
   factory :month_exchange_rate do
     ref_date { Date.today }
     business
-    source_currency_code { "USD" }
-    target_currency_code { "ARS" }
+    from_currency_id { "USD" }
+    to_currency_id { "ARS" }
     conversion_rate { 200 }
   end
 end
