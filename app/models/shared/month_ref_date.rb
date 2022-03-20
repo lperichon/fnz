@@ -13,6 +13,10 @@ module Shared::MonthRefDate
 
     scope :on_month, ->(rd) { where(ref_date: cast_date(rd)) }
 
+    def self.current_month?(date)
+      cast_date(date) == cast_date(Time.zone.today)
+    end
+
     def self.cast_date(date)
       date.to_date.beginning_of_month
     end
