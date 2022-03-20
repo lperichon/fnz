@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20220320132140) do
+ActiveRecord::Schema.define(version: 20220320144751) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -240,13 +240,13 @@ ActiveRecord::Schema.define(version: 20220320132140) do
   add_index "memberships", ["payment_type_id"], name: "index_memberships_on_payment_type_id", using: :btree
 
   create_table "month_exchange_rates", force: :cascade do |t|
-    t.integer  "business_id",                                            null: false
-    t.date     "ref_date",                                               null: false
-    t.string   "from_currency_id",                                       null: false
-    t.string   "to_currency_id",                                         null: false
-    t.decimal  "conversion_rate",  precision: 8, scale: 5, default: 1.0, null: false
-    t.datetime "created_at",                                             null: false
-    t.datetime "updated_at",                                             null: false
+    t.integer  "business_id",                                             null: false
+    t.date     "ref_date",                                                null: false
+    t.string   "from_currency_id",                                        null: false
+    t.string   "to_currency_id",                                          null: false
+    t.decimal  "conversion_rate",  precision: 20, scale: 8, default: 1.0, null: false
+    t.datetime "created_at",                                              null: false
+    t.datetime "updated_at",                                              null: false
   end
 
   create_table "month_tag_totals", force: :cascade do |t|
@@ -366,15 +366,15 @@ ActiveRecord::Schema.define(version: 20220320132140) do
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.string   "type",                     limit: 255,                                       null: false
-    t.string   "description",              limit: 255,                         default: "",  null: false
+    t.string   "type",                     limit: 255,                                        null: false
+    t.string   "description",              limit: 255,                          default: "",  null: false
     t.integer  "business_id"
-    t.integer  "source_id",                                                                  null: false
-    t.decimal  "old_amount",                           precision: 8, scale: 2
+    t.integer  "source_id",                                                                   null: false
+    t.decimal  "old_amount",                           precision: 8,  scale: 2
     t.datetime "transaction_at"
     t.integer  "creator_id"
     t.integer  "target_id"
-    t.decimal  "conversion_rate",                      precision: 8, scale: 5, default: 1.0, null: false
+    t.decimal  "conversion_rate",                      precision: 20, scale: 8, default: 1.0, null: false
     t.string   "state",                    limit: 255
     t.datetime "reconciled_at"
     t.date     "report_at"
