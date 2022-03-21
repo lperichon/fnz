@@ -26,6 +26,12 @@
   </div>
 </div>
 
+<div class="credit_field" style="display:none;">
+  <% unless @transaction.persisted? %>
+    <%= f.input :receipt_on_create, as: :boolean, label: false, inline_label: t(".create_receipt") %>
+  <% end %>
+</div>
+
 <%= f.association :source,
   collection: @business.accounts.order("name").map{|a| [a.name, a.id, {data: {currency: a.currency_code}}]},
   prompt: t('transactions.fields.source_prompt'),

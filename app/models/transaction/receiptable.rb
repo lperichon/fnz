@@ -5,8 +5,8 @@ module Transaction::Receiptable
 
     has_one :receipt
 
-    attr_accessor :send_receipt, :receipt_email
-    after_create :generate_receipt, if: :send_receipt
+    attr_accessor :receipt_on_create, :receipt_email
+    after_create :generate_receipt, if: :receipt_on_create
 
     def can_receipt?
       is_a?(Credit) && state != "pending"

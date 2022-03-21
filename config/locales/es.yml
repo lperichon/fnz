@@ -965,6 +965,7 @@ es:
         created: pago
         pending: pendiente
         reconciled: "saldado (estaba pendiente)"
+      create_receipt: "Crear recibo"
     field:
       tags_placeholder: Seleccione la categoría
     new_modal:

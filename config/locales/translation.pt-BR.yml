@@ -536,6 +536,7 @@ pt-BR:
       tags_placeholder: Por favor, escolha uma categoria
       agent_placeholder: Instrutor vinculado
       contact_placeholder: Contato vinculado
+      create_receipt: "Criar comprovante"
     field:
       tags_placeholder: Por favor, escolha uma categoria
     new_modal:

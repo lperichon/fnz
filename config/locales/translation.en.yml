@@ -536,6 +536,7 @@ en:
       tags_placeholder: Please select a category
       agent_placeholder: Associated teacher
       contact_placeholder: Associated contact
+      create_receipt: "Create Receipt"
     field:
       tags_placeholder: Please select a category
     new_modal:

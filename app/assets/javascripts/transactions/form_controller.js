@@ -10,7 +10,8 @@
         "toggleButtonVerb",
         "sourceAccount",
         "targetAccount",
-        "conversionRateField"
+        "conversionRateField",
+        "receiptFlag"
       ];
     }
 
@@ -31,9 +32,15 @@
         if(so.value=="Transfer"){
           $(".transfer_field").children().removeAttr("disabled");
           $(".transfer_field").show();
+          $(".credit_field").hide();
+        } else if(so.value=="Credit"){
+          $(".transfer_field").children().attr("disabled",true);
+          $(".transfer_field").hide();
+          $(".credit_field").show();
         } else {
           $(".transfer_field").children().attr("disabled",true);
           $(".transfer_field").hide();
+          $(".credit_field").hide();
         }
 
       }

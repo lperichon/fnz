@@ -76,7 +76,11 @@ class TransactionsController < UserApplicationController
     respond_to do |format|
       if @transaction.save
         return_to_url = if params[:quick]
-          new_business_transaction_path(@business, quick: 1)
+          if @transaction.receipt_on_create
+            receipt_business_transaction_path(@business, @transaction)
+          else
+            new_business_transaction_path(@business, quick: 1)
+          end
         else
           business_transaction_path(@business, @transaction)
         end
@@ -294,6 +298,7 @@ class TransactionsController < UserApplicationController
       :agent_id,
       :admpart_tag_id,
       :tag_ids,
+      :receipt_on_create,
       tag_ids: []
     ) if params[transaction_param_key].present?
   end

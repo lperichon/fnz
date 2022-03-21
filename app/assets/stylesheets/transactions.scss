@@ -112,4 +112,12 @@
   #transaction_report_at_1i { // year
     max-width: 17%;
   }
+  div.transaction_receipt_on_create {
+    margin-top: 15px;
+    margin-bottom: 20px;
+    input {
+      width: 25px !important;
+    }
+  }
+
 }
