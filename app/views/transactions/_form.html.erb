@@ -6,7 +6,8 @@
                     html: {
                       class: "transactionFields",
                       data: {
-                        controller: "transaction-form"
+                        controller: "transaction-form",
+                        "transaction-form-rates-url": get_rate_business_month_exchange_rates_path(@business)
                       }
                     }
     ) do |f| %>

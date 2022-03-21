@@ -12,7 +12,7 @@
       class: 'form-horizontal transactionFields',
       data: {
         controller: "transaction-form",
-        "transaction-form-rates-url": get_rate_business_month_exchange_rates_path(@business),
+        "transaction-form-rates-url": get_rate_business_month_exchange_rates_path(@business)
     }
       }) do |f| %>
       <%= render partial: 'transactions/fields', locals: {:f => f} %>
