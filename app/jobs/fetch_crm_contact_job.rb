@@ -39,6 +39,7 @@ class FetchCrmContactJob
       # If contact existed already update it
       contact.update_attributes(
         name: "#{pc.first_name} #{pc.last_name}".strip,
+        email: pc.email,
         padma_status: pc.local_status,
         padma_teacher: pc.local_teacher)
     else
