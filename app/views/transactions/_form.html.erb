@@ -14,7 +14,7 @@
     <div id="colorSignal" data-target="transaction-form.colorSignal"></div>
       <input type="hidden" name="quick" value="1"></input>
 
-      <%= render :partial => 'fields', :locals => {:f => f} %>
+      <%= render partial: 'fields', locals: {:f => f} %>
 
       <%= f.button :submit, t("actions.create"), class: "btn btn-primary" %>
 <% end %>
