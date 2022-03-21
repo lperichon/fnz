@@ -150,8 +150,8 @@ class TransactionsController < UserApplicationController
 
   def receipt
     @transaction = @business.trans.find(params[:id])
-    if (receipt = @transaction.receipt).nil?
-      receipt = @transaction.generate_receipt
+    if (@receipt = @transaction.receipt).nil?
+      @receipt = @transaction.generate_receipt
     end
 
     redirect_to public_receipt_url(receipt)
