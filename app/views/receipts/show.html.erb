@@ -4,7 +4,3 @@
 <p>
   <%= @receipt.description %>
 </p>
-
-<% if current_user %>
-  <%= link_to "transaction##{@receipt.transaction_id}", business_transaction_path(@receipt.business, @receipt.trans) %>
-<% end %>
