@@ -30,6 +30,13 @@
   }
   #receipt-body {
 
+    .share-to-whatsapp {
+      @media print {
+        display: none;
+      }
+      position: relative;
+      bottom: 10px;
+    }
   }
 }
 

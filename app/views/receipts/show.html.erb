@@ -4,3 +4,9 @@
 <p>
   <%= @receipt.description %>
 </p>
+
+<p class="fixed-bottom">
+  <small>
+    <%= link_to t(".share_to_whatsapp"), whatsapp_url(@receipt), target: :_blank %>
+  </small>
+</p>

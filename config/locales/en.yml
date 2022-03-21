@@ -30,3 +30,4 @@ en:
   receipts:
     show:
       receipt: "Receipt"
+      share_to_whatsapp: "Send to whatsapp"

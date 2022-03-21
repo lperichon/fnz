@@ -1129,3 +1129,4 @@ es:
   receipts:
     show:
       receipt: "Recibo"
+      share_to_whatsapp: "Enviar a whatsapp"

@@ -702,3 +702,4 @@ pt-BR:
   receipts:
     show:
       receipt: "Comprovante"
+      share_to_whatsapp: "Enviar a whatsapp"
