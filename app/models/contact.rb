@@ -45,15 +45,6 @@ class Contact < ActiveRecord::Base
     @teacher
   end
 
-  def padma
-    CrmLegacyContact.find(padma_id, select: [:email]) if padma_id
-  end
-
-  # TODO: cache email
-  def email
-    padma.email
-  end
-
   def installment_for(date)
     installments.where("due_on >= '#{date.beginning_of_month}' AND due_on <= '#{date.end_of_month}'").first
   end
