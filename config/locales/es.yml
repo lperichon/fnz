@@ -1125,3 +1125,6 @@ es:
   month_exchange_rate:
     errors:
       currencies_must_be_different: "Deben ser monedas diferentes"
+  receipts:
+    show:
+      receipt: "Recibo"

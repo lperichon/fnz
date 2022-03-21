@@ -1,0 +1,13 @@
+<div class="text-center">
+  <h1><%= page_title "#{t(".receipt")}##{@receipt.id}" %></h1>
+  <h2><%= pm @receipt.amount, unit: @receipt.currency.symbol  %></h2>
+  <h3><%= l(@receipt.ref_date) %></h3>
+  <p>
+    <%= @receipt.description %>
+  </p>
+
+  <% if current_user %>
+    <%= link_to "transaction", business_transaction_path(@receipt.business, @receipt.trans) %>
+  <% end %>
+
+</div>

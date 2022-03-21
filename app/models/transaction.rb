@@ -1,5 +1,6 @@
 class Transaction < ActiveRecord::Base
 
+  include Receiptable
   include Blockable
 
   include Shared::HasCents

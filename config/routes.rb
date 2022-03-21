@@ -38,6 +38,9 @@ Fnz::Application.routes.draw do
     resources :recurrent_transactions
     resources :transactions do
       resources :transaction_spliters, only: [:new, :create]
+      member do
+        get :receipt
+      end
       collection do
         get :batch_edit
         put :batch_update
@@ -101,6 +104,7 @@ Fnz::Application.routes.draw do
   resources :credits, :controller => 'transactions', :except => [:index]
   resources :transfers, :controller => 'transactions', :except => [:index]
   resources :custom_prizes
+  resources :receipts
 
   get 'messages', to: 'messages#catch_message'
   get 'sns', to: 'messages#sns'

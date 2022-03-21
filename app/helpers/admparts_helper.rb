@@ -1,8 +1,8 @@
 module AdmpartsHelper
 
-  def pm(number)
+  def pm(number, options = {})
     content_tag :span, class: "admpart-value #{number_css_class(number)}" do
-      number_to_currency number
+      number_to_currency number, options
     end
   end
 

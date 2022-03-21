@@ -698,3 +698,6 @@ pt-BR:
   month_exchange_rate:
     errors:
       currencies_must_be_different: "Devem ser moedas diferentes"
+  receipts:
+    show:
+      receipt: "Comprovante"

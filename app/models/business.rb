@@ -6,6 +6,7 @@ class Business < ActiveRecord::Base
   belongs_to :owner, :class_name => "User"
   has_many :accounts
   has_many :recurrent_transactions, class_name: "RecurrentTransaction"
+  has_many :receipts
   has_many :trans, class_name: "Transaction"
   has_many :transaction_rules
   has_many :tags

@@ -27,3 +27,6 @@ en:
   month_exchange_rates:
     index:
       title: "Exchange rates"
+  receipts:
+    show:
+      receipt: "Receipt"

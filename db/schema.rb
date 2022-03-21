@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20220320230721) do
+ActiveRecord::Schema.define(version: 20220320232206) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -283,6 +283,20 @@ ActiveRecord::Schema.define(version: 20220320230721) do
     t.integer "stock",                                              default: 0
     t.boolean "hidden",                                             default: false
     t.integer "external_id"
+  end
+
+  create_table "receipts", force: :cascade do |t|
+    t.integer  "business_id"
+    t.integer  "transaction_id"
+    t.integer  "contact_id"
+    t.string   "email"
+    t.string   "description"
+    t.integer  "amount_cents"
+    t.string   "currency_id"
+    t.date     "ref_date"
+    t.string   "url_secret"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "recurrent_transactions", force: :cascade do |t|

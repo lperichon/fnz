@@ -143,6 +143,16 @@ class TransactionsController < UserApplicationController
     end
   end
 
+  def receipt
+    @transaction = @business.trans.find(params[:id])
+    if (receipt = @transaction.receipt).nil?
+      receipt = @transaction.generate_receipt
+    end
+
+    redirect_to receipt_path(receipt, secret: receipt.url_secret)
+
+  end
+
   private
 
   def transaction_param_key

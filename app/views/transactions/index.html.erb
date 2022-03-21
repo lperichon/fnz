@@ -81,6 +81,9 @@
   <% if can? :split, transaction %>
     <%= link_to content_tag(:i, "", class: "icon-cut"), new_business_transaction_transaction_spliter_path(transaction.business, transaction), remote: true %>
   <% end %>
+  <% if transaction.can_receipt? %>
+    <%= link_to content_tag(:i, "", class: "icon-file"), receipt_business_transaction_path(@business, transaction), target: :_blank %>
+  <% end %>
   </span>
 <% end %>
 <div id="pagination">

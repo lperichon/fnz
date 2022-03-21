@@ -30,6 +30,9 @@
     <% if can? :split, transaction %>
       <%= link_to content_tag(:i, "", class: "icon-cut"), new_business_transaction_transaction_spliter_path(transaction.business, transaction), remote: true %>
     <% end %>
+		<% if transaction.can_receipt? %>
+			<%= link_to content_tag(:i, "", class: "icon-file"), receipt_business_transaction_path(@business, transaction), target: :_blank %>
+		<% end %>
     </span>
   <% end %>
 	<%= link_to t(".all_transactions"), business_transactions_path(business_id: @business.id, transaction_search: {contact_id: @contact.id}) %>
