@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20220320232206) do
+ActiveRecord::Schema.define(version: 20220321204548) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20220320232206) do
     t.string   "currency",      limit: 255
     t.datetime "deleted_at"
     t.boolean  "default"
-    t.integer  "balance_cents"
+    t.integer  "balance_cents", limit: 8
   end
 
   add_index "accounts", ["deleted_at"], name: "index_accounts_on_deleted_at", using: :btree
