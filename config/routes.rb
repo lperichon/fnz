@@ -104,8 +104,8 @@ Fnz::Application.routes.draw do
   resources :credits, :controller => 'transactions', :except => [:index]
   resources :transfers, :controller => 'transactions', :except => [:index]
   resources :custom_prizes
-  resources :receipts
 
+  resources :receipts
   get "/:id", to: "receipts#show", constraints: {subdomain: "receipts"}
 
   get 'messages', to: 'messages#catch_message'
