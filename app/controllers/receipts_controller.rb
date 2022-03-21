@@ -12,7 +12,7 @@ class ReceiptsController < ApplicationController
 
   def set_locale
     I18n.locale = if current_user
-      currency_user.locale
+      current_user.locale
     elsif params[:locale]
       params[:locale]
     else
