@@ -1,0 +1,35 @@
+/* line 5, /Users/dwaynemac/GitHub/fnz/app/assets/stylesheets/receipts.scss */
+.admpart-value.positive {
+  color: green;
+}
+
+/* line 8, /Users/dwaynemac/GitHub/fnz/app/assets/stylesheets/receipts.scss */
+.admpart-value.negative {
+  color: red;
+}
+
+/* line 12, /Users/dwaynemac/GitHub/fnz/app/assets/stylesheets/receipts.scss */
+#receipt-container {
+  background-color: rgba(75, 64, 64, 0.09);
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2vh;
+  width: 96vw;
+  height: 80vh;
+}
+/* line 19, /Users/dwaynemac/GitHub/fnz/app/assets/stylesheets/receipts.scss */
+#receipt-container #receipt-header {
+  background-color: #040e85;
+  color: #FFFFFF;
+}
+@media print {
+  /* line 19, /Users/dwaynemac/GitHub/fnz/app/assets/stylesheets/receipts.scss */
+  #receipt-container #receipt-header {
+    display: none;
+  }
+}
+/* line 26, /Users/dwaynemac/GitHub/fnz/app/assets/stylesheets/receipts.scss */
+#receipt-container #receipt-header #logo {
+  max-width: 200px;
+  margin: 20px;
+}
