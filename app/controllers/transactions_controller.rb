@@ -154,7 +154,7 @@ class TransactionsController < UserApplicationController
       @receipt = @transaction.generate_receipt
     end
 
-    redirect_to public_receipt_url(receipt)
+    redirect_to public_receipt_url(@receipt)
   end
 
   private
