@@ -4,7 +4,6 @@ Fnz::Application.routes.draw do
   #authenticated :user do
   #  root :to => 'home#index'
   #end
-  root :to => "home#index"
 
   get "/login",  to: "sso_sessions#show"
   match '/logout', to: "sso_sessions#destroy", via: [:get, :delete]
@@ -106,7 +105,7 @@ Fnz::Application.routes.draw do
   resources :custom_prizes
 
   resources :receipts
-  get "/r/:id", to: "receipts#show", constraints: {subdomain: "receipts"}
+  get "/:id", to: "receipts#show", constraints: {subdomain: "receipts"}
 
   get 'messages', to: 'messages#catch_message'
   get 'sns', to: 'messages#sns'
@@ -136,4 +135,6 @@ Fnz::Application.routes.draw do
       end
     end
   end
+
+  root to: "home#index"
 end
