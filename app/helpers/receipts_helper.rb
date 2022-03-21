@@ -2,7 +2,7 @@ module ReceiptsHelper
 
   def public_receipt_url(receipt)
     if Rails.env.production?
-      receipt_url(id: receipt.id, secret: receipt.url_secret, host: "receipts.derose.app")
+      "https://receipts.derose.app/#{id}?secret=#{receipt.url_secret}"
     else
       receipt_url(id: receipt.id, secret: receipt.url_secret)
     end
