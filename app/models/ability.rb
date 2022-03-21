@@ -18,7 +18,7 @@ class Ability
       t.blocked? && t.state != "pending"
     end
     can :manage, Account, business: {transactions_enabled: true}
-    can = can :manage, BalanceCheck
+    can :manage, BalanceCheck
 
     can :manage, Tag, business: {transactions_enabled: true}
     cannot :destroy, Tag, system_name: Tag::VALID_SYSTEM_NAMES
