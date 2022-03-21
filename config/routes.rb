@@ -106,7 +106,7 @@ Fnz::Application.routes.draw do
   resources :custom_prizes
 
   resources :receipts
-  get "/:id", to: "receipts#show", constraints: {subdomain: "receipts"}
+  get "/r/:id", to: "receipts#show", constraints: {subdomain: "receipts"}
 
   get 'messages', to: 'messages#catch_message'
   get 'sns', to: 'messages#sns'
