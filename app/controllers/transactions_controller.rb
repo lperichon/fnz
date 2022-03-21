@@ -1,4 +1,5 @@
 class TransactionsController < UserApplicationController
+  include ReceiptsHelper
 
   before_filter :get_context
 
@@ -149,8 +150,7 @@ class TransactionsController < UserApplicationController
       receipt = @transaction.generate_receipt
     end
 
-    redirect_to receipt_path(receipt, secret: receipt.url_secret)
-
+    redirect_to public_receipt_url(receipt)
   end
 
   private
