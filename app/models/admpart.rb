@@ -57,6 +57,8 @@ class Admpart < ActiveRecord::Base
     end
     ret
   end
+
+  IGNORED_ATTRIBUTES_IN_CLONE = %W(id ref_date business_id created_at updated_at)
   def attributes_for_clone
     attributes.reject{|k| k.in?(IGNORED_ATTRIBUTES_IN_CLONE) }
   end
