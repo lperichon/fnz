@@ -26,7 +26,7 @@
   </div>
 </div>
 
-<div class="credit_field" style="display:none;">
+<div class="receipt_fields" style="display:none;">
   <% unless @transaction.persisted? %>
     <%= f.input :receipt_on_create, as: :boolean, label: false, inline_label: t(".create_receipt") %>
   <% end %>

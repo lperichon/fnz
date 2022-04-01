@@ -28,7 +28,6 @@
     updateFormFields(){
       var so = this.selectedTransactionOption();
       if(so){
-
         if(so.value=="Transfer"){
           $(".transfer_field").children().removeAttr("disabled");
           $(".transfer_field").show();
@@ -42,7 +41,7 @@
           $(".transfer_field").hide();
           $(".credit_field").hide();
         }
-
+        this.toggleReceiptBool()
       }
 
       var state = this.stateFieldTarget.value;
@@ -93,6 +92,19 @@
       }
     }
 
+    toggleReceiptBool(){
+      this.log("toggleReceiptBool");
+      let so = this.selectedTransactionOption().value;
+      let st = this.stateFieldTarget.value;
+      if(so && st){
+        if(so === "Credit" && (st === "created" || st === "reconciled")){
+          $(".receipt_fields").show();
+        } else {
+          $(".receipt_fields").hide();
+        }
+      }
+    }
+
     selectedTransactionOption(){
       var selectedOptions = this.transactionTypeOptionTargets.filter((i)=>{ return i.checked; });
       if(selectedOptions.length>0){
@@ -101,6 +113,7 @@
         return null;
       }
     }
+
 
     avoidDoubleSubmit(){
       $("#new_transaction").submit(()=>{
