@@ -26,5 +26,11 @@ module Transaction::Receiptable
       )
     end
 
+    private
+
+    def receipt_date
+      (state == "reconciled") ? reconciled_at : transaction_at
+    end
+
   end
 end
