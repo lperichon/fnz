@@ -704,3 +704,4 @@ pt-BR:
       receipt: "Comprovante"
       share_to_whatsapp: "Enviar a whatsapp"
       linked_transactions: "Movimentos asociados"
+      linked_transactions_not_visible_to_guest: "Movimentos asociados não são visíveis para o cliente."

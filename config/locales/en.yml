@@ -32,3 +32,4 @@ en:
       receipt: "Receipt"
       share_to_whatsapp: "Send to whatsapp"
       linked_transactions: "Linked transactions"
+      linked_transactions_not_visible_to_guest: ""

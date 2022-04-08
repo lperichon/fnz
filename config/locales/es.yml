@@ -1131,3 +1131,4 @@ es:
       receipt: "Recibo"
       share_to_whatsapp: "Enviar a whatsapp"
       linked_transactions: "Movimientos asociados"
+      linked_transactions_not_visible_to_guest: "Los movimientos asociados no serán visibles para el cliente."
