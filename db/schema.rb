@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20220320232206) do
+ActiveRecord::Schema.define(version: 20220408145358) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -287,7 +287,6 @@ ActiveRecord::Schema.define(version: 20220320232206) do
 
   create_table "receipts", force: :cascade do |t|
     t.integer  "business_id"
-    t.integer  "transaction_id"
     t.integer  "contact_id"
     t.string   "email"
     t.string   "description"
@@ -295,8 +294,8 @@ ActiveRecord::Schema.define(version: 20220320232206) do
     t.string   "currency_id"
     t.date     "ref_date"
     t.string   "url_secret"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "recurrent_transactions", force: :cascade do |t|
@@ -402,11 +401,13 @@ ActiveRecord::Schema.define(version: 20220320232206) do
     t.datetime "order_stamp"
     t.integer  "recurrent_transaction_id"
     t.integer  "amount_cents"
+    t.integer  "receipt_id"
   end
 
   add_index "transactions", ["business_id", "admpart_tag_id", "report_at"], name: "tag_transactions_index", using: :btree
   add_index "transactions", ["business_id", "updated_at"], name: "index_transactions_on_business_id_and_updated_at", using: :btree
   add_index "transactions", ["business_id"], name: "index_transactions_on_business_id", using: :btree
+  add_index "transactions", ["receipt_id"], name: "index_transactions_on_receipt_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "",      null: false

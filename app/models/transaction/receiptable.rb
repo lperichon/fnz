@@ -3,7 +3,7 @@ module Transaction::Receiptable
 
   included do
 
-    has_one :receipt
+    belongs_to :receipt
 
     attr_accessor :receipt_on_create, :receipt_email
 
