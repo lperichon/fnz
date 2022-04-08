@@ -1130,3 +1130,4 @@ es:
     show:
       receipt: "Recibo"
       share_to_whatsapp: "Enviar a whatsapp"
+      linked_transactions: "Movimientos asociados"

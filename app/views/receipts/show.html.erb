@@ -10,3 +10,16 @@
     <%= link_to t(".share_to_whatsapp"), whatsapp_url(@receipt), target: :_blank %>
   </small>
 </p>
+
+<% if current_user %>
+<div>
+  <b><%= t(".linked_transactions") %>:</b>
+  <ul>
+    <% @receipt.trans.includes(:source).each do |t| %>
+      <li>
+        <%= link_to "#{t.description}: #{pm(t.amount, unit: t.source.currency.symbol)}".html_safe, business_transaction_path(t.business, t), target: :_blank  %>
+      </li>
+    <% end %>
+  </ul>
+</div>
+<% end %>

@@ -703,3 +703,4 @@ pt-BR:
     show:
       receipt: "Comprovante"
       share_to_whatsapp: "Enviar a whatsapp"
+      linked_transactions: "Movimentos asociados"
