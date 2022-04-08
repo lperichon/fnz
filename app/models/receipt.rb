@@ -7,7 +7,7 @@ class Receipt < ActiveRecord::Base
   has_cents_for(:amount)
 
   belongs_to :business
-  belongs_to :trans, class_name: "Transaction", foreign_key: "transaction_id"
+  has_many :trans, class_name: "Transaction"
   belongs_to :contact
 
 

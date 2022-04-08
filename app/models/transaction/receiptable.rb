@@ -13,7 +13,7 @@ module Transaction::Receiptable
 
     # @return [Receipt]
     def generate_receipt
-      business.receipts.create(
+      r = business.receipts.create(
         email: receipt_email,
         contact_id: contact_id,
 
@@ -21,9 +21,9 @@ module Transaction::Receiptable
         amount_cents: amount_cents,
         currency_id: source.currency_code,
         ref_date: transaction_at,
-
-        transaction_id: id
       )
+      self.update_columns(receipt_id: r.id) if r.persisted?
+      r
     end
 
     private
