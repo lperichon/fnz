@@ -76,7 +76,7 @@ class TransactionsController < UserApplicationController
     respond_to do |format|
       if @transaction.save
         return_to_url = if params[:quick]
-          if @transaction.receipt_on_create
+          if @transaction.can_receipt? && @transaction.receipt_on_create
             receipt_business_transaction_path(@business, @transaction)
           else
             new_business_transaction_path(@business, quick: 1)
