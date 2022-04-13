@@ -11,9 +11,9 @@
     <% ers.each do |er| %>
         <tr>
           <td><%= er.from_currency_id %> -> <%= er.to_currency_id %></td>
-          <td><%= best_in_place er, :conversion_rate, url: business_month_exchange_rate_path(@business, er)  %></td>
+          <td><%= best_in_place_if !er.blocked?, er, :conversion_rate, url: business_month_exchange_rate_path(@business, er)  %></td>
           <td><%= er.to_currency_id %> -> <%= er.from_currency_id %></td>
-          <td><%= best_in_place er, :inverse_conversion_rate, url: business_month_exchange_rate_path(@business, er)  %></td>
+          <td><%= best_in_place_if !er.blocked?, er, :inverse_conversion_rate, url: business_month_exchange_rate_path(@business, er)  %></td>
           <td>
             <% unless er.blocked? %>
               <%= link_to t("actions.delete"), business_month_exchange_rate_path(business_id: @business.id, id: er.id), method: :delete, data: {confirm: t("actions.confirm_delete")} %>
