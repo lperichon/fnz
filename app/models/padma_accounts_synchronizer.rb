@@ -10,7 +10,7 @@ class PadmaAccountsSynchronizer
     padma_account = business.padma
     padma_admin = padma_account.admin
     if business.owner.blank? || (padma_admin.present? && (padma_admin.username != business.owner.drc_uid))
-      new_fnz_owner = User.find_or_initialize_by(drc_uid: padma_admin.username, :email => padma_admin.username + "@metododerose.org")
+      new_fnz_owner = User.find_or_initialize_by(drc_uid: padma_admin.username, email: padma_admin.email)
       business.owner = new_fnz_owner
       business.save
     end
