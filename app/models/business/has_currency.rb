@@ -3,7 +3,7 @@ module Business::HasCurrency
 
   included do
 
-    before_save :set_default_currency
+    before_validation :set_default_currency
     validates :currency_code, presence: true
     after_save :update_calculations
 
