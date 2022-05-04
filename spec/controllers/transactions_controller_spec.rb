@@ -67,6 +67,17 @@ describe TransactionsController, :type => :controller do
   end
 
   describe "POST create" do
+    describe "a quick transaction with receipt" do
+      let(:params) { {quick: 1, business_id: @business.to_param, transaction: valid_attributes.merge({receipt_on_create: "0"})} }
+      it "creates a new Transaction" do
+        expect {
+          post :create, params
+        }.to change(Transaction, :count).by(1)
+      end
+      it "to work" do
+        expect{post :create, params}.not_to raise_error
+      end
+    end
     describe "with valid params" do
       it "creates a new Transaction" do
         expect {

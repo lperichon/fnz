@@ -76,7 +76,8 @@ class TransactionsController < UserApplicationController
     respond_to do |format|
       if @transaction.save
         return_to_url = if params[:quick]
-          if @transaction.can_receipt? && ActiveModel::Type::Boolean.new.cast(@transaction.receipt_on_create)
+          # boolean casting is rails 4.2 specific
+          if @transaction.can_receipt? && ActiveRecord::Type::Boolean.new.type_cast_from_database(@transaction.receipt_on_create)
             receipt_business_transaction_path(@business, @transaction)
           else
             new_business_transaction_path(@business, quick: 1)
