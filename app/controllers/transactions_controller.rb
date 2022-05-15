@@ -165,6 +165,8 @@ class TransactionsController < UserApplicationController
       :credit
     elsif params[:debit]
       :debit
+    elsif params[:transfer]
+      :transfer
     else
       :transaction
     end
