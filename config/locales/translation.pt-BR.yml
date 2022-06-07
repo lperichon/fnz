@@ -549,6 +549,8 @@ pt-BR:
       previous_month: "Mês anterior"
       month_before_last: "2 mêses atras"
     you_blocked_all_before: "Bloqueadas todos os movimentos anteriores a %{date}."
+    edit:
+      split_for_report_in_N_months: "Reportar em N meses"
   sales:
     index:
       view_month_stats: Ver estatísticas de %{month}

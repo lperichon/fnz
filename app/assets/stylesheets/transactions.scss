@@ -106,6 +106,9 @@
 }
 
 .transactionFields {
+  .control-group.transaction_report_at {
+    margin-bottom: 0;
+  }
   #transaction_report_at_2i { // month
     max-width: 32%;
   }

@@ -33,3 +33,6 @@ en:
       share_to_whatsapp: "Send to whatsapp"
       linked_transactions: "Linked transactions"
       linked_transactions_not_visible_to_guest: ""
+  transactions:
+    edit:
+      split_for_report_in_N_months: "Report in N months"

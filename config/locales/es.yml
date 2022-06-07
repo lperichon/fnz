@@ -971,7 +971,8 @@ es:
     new_modal:
       title: Crear Transacción
     edit:
-      title: 
+      title:
+      split_for_report_in_N_months: "Reportar en N meses"
     index:
       import: Importar CSV
       stats: Estadísticas
