@@ -17,7 +17,8 @@ class TransactionSearch
     :contact_id,
     :admpart_tag_id,
     :base_scope,
-    :recurrent_transaction_id
+    :recurrent_transaction_id,
+    :ids
 
   def initialize(attributes = {})
     attributes.each do |name,value|
@@ -38,6 +39,8 @@ class TransactionSearch
 
   def results
     scope = @base_scope.where(business_id: business_id)
+
+    scope = scope_by_ids(scope)
 
     scope = scope_to_smart_meta_period(smart_meta_period, scope) if smart_meta_period.present?
     scope = scope_to_meta_period(:transaction_at, transacted_at_meta_period, scope) if  transacted_at_meta_period.present?
@@ -67,6 +70,11 @@ class TransactionSearch
         scope.where(source_id: source_account_id)
       end
     end
+    scope
+  end
+
+  def scope_by_ids(scope)
+    scope = scope.where(id: ids) if ids.present?
     scope
   end
 
