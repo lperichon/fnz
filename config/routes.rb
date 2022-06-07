@@ -36,7 +36,12 @@ Fnz::Application.routes.draw do
     end
     resources :recurrent_transactions
     resources :transactions do
-      resources :transaction_spliters, only: [:new, :create]
+      resources :transaction_spliters, only: [:new, :create] do
+        collection do
+          get :new_n_split
+          post :create_n_split
+        end
+      end
       member do
         get :receipt
       end

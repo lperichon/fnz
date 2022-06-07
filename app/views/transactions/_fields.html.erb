@@ -101,7 +101,7 @@
   <% if @transaction.persisted? && can?(:split, @transaction) %>
     <div class="control-group controls">
       <%= link_to (I18n.t("transactions.edit.split_for_report_in_N_months")+" "+content_tag(:i, "", class: "icon-magic")).html_safe,
-        new_business_transaction_transaction_spliter_path(@transaction.business, @transaction) %>
+        new_n_split_business_transaction_transaction_spliters_path(@transaction.business, @transaction) %>
     </div>
   <% end %>
 

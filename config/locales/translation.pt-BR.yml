@@ -707,3 +707,6 @@ pt-BR:
       share_to_whatsapp: "Enviar a whatsapp"
       linked_transactions: "Movimentos asociados"
       linked_transactions_not_visible_to_guest: "Movimentos asociados não são visíveis para o cliente."
+  transaction_spliters:
+    new_n_split:
+      unreversible: "Uma vez feito o split não poderá ser revertido manualmente."

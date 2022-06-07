@@ -36,3 +36,6 @@ en:
   transactions:
     edit:
       split_for_report_in_N_months: "Report in N months"
+  transaction_spliters:
+    new_n_split:
+      unreversible: "Once split is done it can't be reverted automatically."

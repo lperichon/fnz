@@ -1,0 +1,24 @@
+<% content_for :sidebar do %>
+  <%# render :partial => 'businesses/sidebar' %>
+<% end %>
+<% content_for :secondary_navigation do %>
+  <%# render :partial => 'transactions/secondary_navigation' %>
+<% end %>
+
+<h2><%= t("transactions.edit.split_for_report_in_N_months") %></h2>
+
+<%= simple_form_for(@spliter,
+  url: create_n_split_business_transaction_transaction_spliters_path(@business, @transaction),
+  method: :post,
+  html: {
+    class: 'form-horizontal',
+    "data-controller" => "split_form",
+    "data-split_form-original-amount" => @transaction.amount, # dont use data: { split_form... } because underline is lost
+    "data-split_form-error-message" => (_("La suma de las transacciones debe ser %{total}.") % {total: @transaction.amount})
+  }) do |f| %>
+  <%= f.input :auto_generate_n_targets %>
+  <%= f.submit "split!" %>
+  <p>
+    <%= I18n.t("transaction_spliters.new_n_split.unreversible") %>
+  </p>
+<% end %>
