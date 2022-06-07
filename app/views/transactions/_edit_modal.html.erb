@@ -19,8 +19,9 @@
       <% end %>
 
       <div class="modal-footer">
+
         <%= link_to _("Close"), "#", :class => "btn", "data-dismiss" => "modal" %>
-        <%= f.button :submit, :class => "btn btn-primary" %>
+        <%= f.button :submit, I18n.t("actions.update").capitalize, class: "btn btn-primary" %>
       </div>
   <% end %>
 </div>
