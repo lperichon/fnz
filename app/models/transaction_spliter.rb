@@ -41,21 +41,22 @@ class TransactionSpliter
   end
 
   def do_n_split!
-    if @source.present? && @auto_generate_n_targets.to_i > 0
+    n = @auto_generate_n_targets.to_i
+    if @source.present? && n > 0
       if @source.report_at.nil? || @source.is_a?(Transfer)
         raise ArgumentError, "source transaction must have a report_at date and cant be Transfer"
       end
       Transaction.transaction do # transaction method call is a DB Transaction
         @targets = []
-        @auto_generate_n_targets.to_i.times do |i|
+        n.times do |i|
           t = @source.dup
 
           t.tag_id = @source.tag_id
           t.agent_id = @source.agent_id
           t.contact_id = @source.contact_id
 
-          t.description += " (#{i+1}/#{auto_generate_n_targets})"
-          t.amount_cents = @source.amount_cents / @auto_generate_n_targets.to_i
+          t.description += " (#{i+1}/#{n})"
+          t.amount_cents = (@source.amount_cents / n).to_i
           t.report_at = @source.report_at + i.months
 
           @targets << t
