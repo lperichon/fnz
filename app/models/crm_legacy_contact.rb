@@ -81,6 +81,7 @@ class CrmLegacyContact < LogicalModel
 
   def self.find(id, params = {})
     params[:legacy_format] = true
+    params[:client_name] = "fnz"
     super(id, params)
   end
 
