@@ -49,9 +49,15 @@ class TransactionSpliter
         @targets = []
         @auto_generate_n_targets.to_i.times do |i|
           t = @source.dup
+
+          t.tag_id = @source.tag_id
+          t.agent_id = @source.agent_id
+          t.contact_id = @source.contact_id
+
           t.description += " (#{i+1}/#{auto_generate_n_targets})"
           t.amount_cents = @source.amount_cents / @auto_generate_n_targets.to_i
           t.report_at = @source.report_at + i.months
+
           @targets << t
         end
         if @targets.sum { |t| t.amount_cents } != @source.amount_cents
