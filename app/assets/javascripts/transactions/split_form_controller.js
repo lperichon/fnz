@@ -34,7 +34,7 @@
       this.submitTarget.style = "display: inline";
     }
 
-    updateLastFcrmula(){
+    updateLastFormula(){
       this.log("update")
       if (!this.amountsEqTotal()){
         let originalAmount = parseFloat(this.data.get("originalAmount"))
