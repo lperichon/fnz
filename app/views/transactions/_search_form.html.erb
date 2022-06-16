@@ -35,6 +35,7 @@
     }, input_html: {class: "chosen"} %>
     <%= f.input :source_account_id, collection: @business.accounts.order("name"), input_html: {class: "chosen", multiple: true} %>
     <%= f.input :type, collection: Transaction::TYPES, input_html: {class: "chosen", multiple: true} %>
+    <%= f.input :state, collection: Transaction::STATES, input_html: {class: "chosen", multiple: true} %>
     <%= f.input :contact_id, collection: contact_options_for_select.map{|o| [o[1],o[0]]}, input_html: {class: "chosen", multiple: true} %>
     <%= f.input :admpart_tag_id, collection: tag_options_for_select.map{|o| [o[1],o[0]]}, input_html: {class: "chosen", multiple: true} %>
     <%= f.submit t("search") %>
