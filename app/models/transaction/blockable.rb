@@ -27,7 +27,7 @@ module Transaction::Blockable
         end
       elsif business.block_transactions_before
         if report_at_changed?
-          if report_at < business.block_transactions_before
+          if report_at < business.block_transactions_before.to_date
             errors.add(:report_at,
               I18n.t("transactions.you_blocked_all_before",
                 date: business.block_transactions_before))
