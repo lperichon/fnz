@@ -1,3 +1,4 @@
+<% if @transaction.persisted? %>
 $('#new-transaction-modal').modal('hide').remove();
 
 if ($(".nested.transactions.table tbody").length > 0) {
@@ -14,4 +15,9 @@ if ($(".nested.transactions.table tbody").length > 0) {
 
 <% if @transaction.target_id %>
   <%= render partial: "update_account_balance", locals: { account: @transaction.target } %>
+<% end %>
+<% else %>
+  <%# ERROR creating transaction %>
+  alert("error creating transaction <%= @transaction.errors.full_messages.to_sentence %>");
+  $("#submitTransaction").attr("disabled",false); // re-enable submit button
 <% end %>
