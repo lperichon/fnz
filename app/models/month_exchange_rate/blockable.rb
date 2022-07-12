@@ -8,7 +8,7 @@ module MonthExchangeRate::Blockable
     # @return [Boolean]
     def blocked?
       if business.block_transactions_before && ref_date
-        ref_date <= business.block_transactions_before
+        ref_date <= business.block_transactions_before.to_date
       end
     end
 

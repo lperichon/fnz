@@ -9,7 +9,7 @@ module Transaction::Blockable
     # @return [Boolean]
     def blocked?
       if business.block_transactions_before && report_at
-        report_at <= business.block_transactions_before
+        report_at <= business.block_transactions_before.to_date
       end
     end
 
