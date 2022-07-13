@@ -25,7 +25,7 @@ class TransactionSplitersController < UserApplicationController
     @spliter = TransactionSpliter.new(params[:transaction_spliter].merge({source: @transaction}).permit!)
     @spliter.do_split!
     respond_to do |format|
-      format.html { redirect_to business_transactions_path(@business) }
+      format.html { redirect_to business_transactions_path(@business, transaction_search: {ids: @spliter.targets.map(&:id)}) }
     end
   end
 
