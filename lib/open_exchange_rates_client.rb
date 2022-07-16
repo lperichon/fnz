@@ -2,6 +2,9 @@ class OpenExchangeRatesClient
 
   FREE_BASE_CURRENCY = "USD"
 
+  # @param attrs
+  # @option from_cur [String] FROM currency iso_code
+  # @option to_cur [String] TO currency iso_code
   def initialize(attrs = {})
     @from = attrs[:from_cur]
     @to = attrs[:to_cur]
@@ -10,6 +13,7 @@ class OpenExchangeRatesClient
     end
   end
 
+  # Current (latest) @from -> @to exchange rate
   def latest
     if @from == "usd"
       free_latest(@to)
@@ -25,6 +29,8 @@ class OpenExchangeRatesClient
     end
   end
 
+  # @from -> @to exchange rate at given date
+  # @param ref_date [Date]
   def historical(ref_date)
     if @from == "usd"
       free_historical(@to, ref_date)
@@ -40,6 +46,10 @@ class OpenExchangeRatesClient
     end
   end
 
+  # Free usage for OpenExchangeRates only allows USD exchange rates.
+  # This returns latest usd -> currency
+  #
+  # @param currency [String] iso_code for currency
   def free_latest(currency)
     Rails.cache.fetch(["OpenExchangeRates","usd","latest",currency], expire_in: 1.day) do
       response = Typhoeus.get(url("api/latest.json"),{
@@ -56,6 +66,11 @@ class OpenExchangeRatesClient
     end
   end
 
+  # Free usage for OpenExhangeRates only allows USD exchange rates.
+  # This returns usd -> currency exchange rate at given date
+  #
+  # @param currency [String] iso_code for currency
+  # @param ref_date [Date]
   def free_historical(currency, ref_date)
     Rails.cache.fetch(["OpenExchangeRates","usd","historical",ref_date.to_date.iso8601,currency], expire_in: 1.day) do
       response = Typhoeus.get(url("api/historical/#{ref_date.to_date.iso8601}.json"),{
