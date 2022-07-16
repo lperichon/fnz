@@ -23,7 +23,7 @@
                 :remote => true %>
   </li>
   <li class="pull-right" data-toggle="tooltip" title="<%= _("copiá este link y guardalo en tu celu para agregar fácilmente movimientos.") %>">
-    <%= link_to content_tag(:i, "", class: "icon-bookmark"),
+    <%= link_to content_tag(:i, "", class: "icon-bolt"),
                 new_business_transaction_path(@business,
                                               transaction: transaction_params,
                                               quick: 1)
