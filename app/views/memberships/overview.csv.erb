@@ -57,6 +57,7 @@
 	    <%- line << Membership.human_attribute_name(:monthly_due_day) -%>
 	    <%- line << t('memberships.maturity_report.value') -%>
 	    <%- line << Membership.human_attribute_name(:payment_type) -%>
+	    <%- line << "Duration" -%>
   		<%- csv << line -%>
 	  <%- @contacts.each do |contact| -%>
 	    <%- membership = contact.current_membership -%>
@@ -67,6 +68,7 @@
 	    <%- line << (membership.present? ? membership.monthly_due_day : nil) -%>
 	    <%- line << (membership.present? ? membership.value : nil) -%>
 	    <%- line << (membership.present? ? membership.payment_type.try(:name) : nil) -%>
+	    <%- line << duration_in_words(membership) -%>
 	    <%- csv << line -%>
 	  <%- end -%>
 	<%- end -%>
