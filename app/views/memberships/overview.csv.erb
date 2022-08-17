@@ -68,7 +68,7 @@
 	    <%- line << (membership.present? ? membership.monthly_due_day : nil) -%>
 	    <%- line << (membership.present? ? membership.value : nil) -%>
 	    <%- line << (membership.present? ? membership.payment_type.try(:name) : nil) -%>
-	    <%- line << duration_in_words(membership) -%>
+	    <%- line << (membership.present? ? duration_in_words(membership) : nil) -%>
 	    <%- csv << line -%>
 	  <%- end -%>
 	<%- end -%>
