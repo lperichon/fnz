@@ -51,8 +51,8 @@ class TransactionSearch
     scope = scope_to_accounts(scope)
     scope = scope.where(type: type) if type.present?
     scope = scope.where(state: state) if state.present?
-    scope = scope.where("amount >= ?", amount_gte) if amount_gte.present?
-    scope = scope.where("amount <= ?", amount_lte) if amount_lte.present?
+    scope = scope.where("amount_cents >= ?", (amount_gte.to_f*100).to_i) if amount_gte.present?
+    scope = scope.where("amount_cents <= ?", (amount_lte.to_f*100).to_i) if amount_lte.present?
 
     scope = scope.where(contact_id: contact_id) if contact_id.present?
     scope = scope.where(admpart_tag_id: admpart_tag_id) if admpart_tag_id.present?
