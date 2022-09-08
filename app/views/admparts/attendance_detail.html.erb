@@ -72,7 +72,7 @@
             </td>
           <% end %>
         <% @adm.team_members.each do |coltm| %>
-          <% per = (contact_detail[coltm.padma_id.gsub(".","_")].try(:to_f) || 0)*100 %>
+          <% per = (contact_detail[coltm.padma_id].try(:to_f) || 0)*100 %>
           <% if first_contact_row %>
             <td rowspan="<%= teachers_with_income_for_this_contact.keys.size %>">
               <%= number_with_precision(per, precision: 2) %>%
