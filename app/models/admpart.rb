@@ -426,7 +426,7 @@ class Admpart < ActiveRecord::Base
         key = ENV["crm_key"] || CONFIG["crm_key"]
 
         response = HTTParty.get("#{url}/api/v0/monthly_stats",query: {
-          api_key: key,
+          app_key: key,
           where: {
             type: 'TeacherMonthlyStat',
             year: ref_date.year,
@@ -437,7 +437,7 @@ class Admpart < ActiveRecord::Base
         })
         if response.code == 200
           report = {}
-          response.parsed_response["collection"].each do |stat|
+          response.parsed_response.each do |stat|
             report[stat["teacher_username"]] = stat["value"]
           end
           Rails.cache.write(cache_key,report,expires_in: 1.hour)
