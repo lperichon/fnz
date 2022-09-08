@@ -422,8 +422,8 @@ class Admpart < ActiveRecord::Base
       if report && !force_refresh
         report
       else
-        url = ENV["overmind_url"] || CONFIG["overmind-url"]
-        key = ENV["overmind_key"] || CONFIG["overmind_key"]
+        url = ENV["crm_url"] || CONFIG["crm-url"]
+        key = ENV["crm_key"] || CONFIG["crm_key"]
 
         response = HTTParty.get("#{url}/api/v0/monthly_stats",query: {
           api_key: key,
