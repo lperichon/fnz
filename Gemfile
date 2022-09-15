@@ -30,8 +30,8 @@ gem "paperclip", "6.1"
 gem 'aws-sdk'
 #gem 'tz_magic'
 gem "squeel", '~> 1.2.3'
-gem 'logical_model', '~> 0.6.6'
-gem 'accounts_client', '0.2.38'
+gem 'logical_model', '~> 0.7.1'
+gem 'accounts_client', '0.3.3'
 gem 'contacts_client', '~> 0.0.47'
 gem 'messaging_client','~> 0.2'
 gem 'resque'
@@ -44,7 +44,7 @@ gem 'bootstrap-daterangepicker-rails'
 gem 'delayed_job_active_record' # must be declared after 'protected_attributes' gem
 gem "workless", "~> 2.2.0"
 
-gem "kaminari", '~> 0.13.0'
+gem "kaminari", '~> 1.2.1'
 gem 'bootstrap-kaminari-views'
 gem 'mandrill_mailer', :git => "git://github.com/lperichon/mandrill_mailer.git"
 gem 'httparty'
