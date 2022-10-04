@@ -1389,7 +1389,7 @@ GEM
       terrapin (~> 0.6.0)
     paranoia (2.1.5)
       activerecord (~> 4.0)
-    pdfkit (0.8.5)
+    pdfkit (0.8.7)
     pg (0.21.0)
     platform-api (3.3.0)
       heroics (~> 0.1.1)
