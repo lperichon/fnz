@@ -243,7 +243,7 @@ class Admpart < ActiveRecord::Base
   end
 
   def lessons_report
-    if business.use_learn_checkins?
+    if use_learn_checkins?
       learn_check_ins_report
     else
       attendance_report
@@ -347,7 +347,7 @@ class Admpart < ActiveRecord::Base
   end
 
   def lesson_report_detail_url
-    if business.use_learn_checkins?
+    if use_learn_checkins?
       learn_check_ins_report_detail_url
     else
       attendance_detail_url
@@ -571,6 +571,7 @@ class Admpart < ActiveRecord::Base
   def set_defaults
     self.ref_date = Time.zone.today.beginning_of_month.to_date if self.ref_date.nil?
     self.owners_percentage = 50 if self.owners_percentage.nil?
+    self.use_learn_checkins = business.use_learn_checkins if self.use_learn_checkins.nil?
   end
 
 end

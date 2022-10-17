@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20220527225645) do
+ActiveRecord::Schema.define(version: 20221017190555) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20220527225645) do
     t.integer  "agent_enrollment_quantity_fixed_amount"
     t.integer  "agent_installments_attendance_percentage"
     t.date     "ref_date"
+    t.boolean  "use_learn_checkins"
   end
 
   add_index "admparts", ["business_id"], name: "index_admparts_on_business_id", using: :btree
@@ -78,6 +79,7 @@ ActiveRecord::Schema.define(version: 20220527225645) do
     t.integer  "derose_events_id"
     t.string   "currency_code",             limit: 255
     t.datetime "block_transactions_before"
+    t.boolean  "use_learn_checkins"
   end
 
   create_table "businesses_users", force: :cascade do |t|
