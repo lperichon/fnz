@@ -558,7 +558,8 @@ class Admpart < ActiveRecord::Base
   def learn_attendance_report_query
     {
       q: {
-        only_my_posts: true,
+        only_my_team: true, # solo check-ins con instructor de mi equipo
+        only_my_posts: true, # solo en mis posts
         checked_in_at_gteq_datetime: ref_date.beginning_of_month,
         checked_in_at_lteq_datetime: ref_date.end_of_month,
         post_type_in: %W(Live InPersonLive),
