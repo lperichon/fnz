@@ -548,6 +548,7 @@ class Admpart < ActiveRecord::Base
         only_my_posts: true,
         checked_in_at_gteq_datetime: ref_date.beginning_of_month,
         checked_in_at_lteq_datetime: ref_date.end_of_month,
+        post_type_in: %W(Live InPersonLive),
         account_padma_id: business.padma_id
       }
     }
