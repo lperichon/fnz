@@ -242,6 +242,14 @@ class Admpart < ActiveRecord::Base
     scope.sum_w_rates(business, ref_date) / 100.0
   end
 
+  def lessons_report
+    if business.use_learn_checkins?
+      learn_check_ins_report
+    else
+      attendance_report
+    end
+  end
+
   ###
   #
   # hash of format:
@@ -288,6 +296,36 @@ class Admpart < ActiveRecord::Base
   end
   appsignal_instrument_method :attendance_report
 
+  def learn_check_ins_report
+    if @learn_check_ins_report
+      @learn_check_ins_report
+    else
+      cache_key = [self,ref_date,"learn_check_ins_report"]
+      report = Rails.cache.read(cache_key)
+      if report && !force_refresh
+        report
+      else
+        url = ENV['learn_url']
+        key = ENV['learn_key']
+
+        response = HTTParty.get("#{url}/admin/check_ins_distribution_report/json.json", query: learn_attendance_report_query.merge({
+          api_key: key
+        }))
+        report = if response.code == 200
+          response.parsed_response
+        else
+          # attendance-ws error
+          nil
+        end
+        Rails.cache.write(cache_key, report, expires_in: 1.hour)
+        @learn_check_ins_report = report
+      end
+    end
+  rescue Errno::ECONNREFUSED => e
+    nil
+  end
+  appsignal_instrument_method :learn_check_ins_report
+
   def contacts_who_paid_installments
     @contacts_who_paid_installments ||= business.contacts.where(id: transactions_for_tag(installments_tag).pluck(:contact_id))
   end
@@ -296,8 +334,8 @@ class Admpart < ActiveRecord::Base
     if @contacts_in_attendance_report
       @contacts_in_attendance_report
     else
-      if attendance_report
-        @contacts_in_attendance_report = (business.contacts.where(padma_id: attendance_report.keys) | contacts_who_paid_installments)
+      if lessons_report
+        @contacts_in_attendance_report = (business.contacts.where(padma_id: lessons_report.keys) | contacts_who_paid_installments)
       else
         if Rails.env.production?
           raise "no attendance_report"
@@ -340,7 +378,7 @@ class Admpart < ActiveRecord::Base
   def agent_installments_collection_by_presence_total(agent)
     acum = 0
     contacts_in_attendance_report.each do |contact|
-      contact_detail = attendance_report[contact.padma_id]
+      contact_detail = lessons_report[contact.padma_id]
       distributable_contact_payment = total_for_tag(installments_tag,nil,{contact_id: contact.id}) * (agent_installments_attendance_percentage || 0) / 100
       if contact_detail && contact_detail["total"] > 0
         per = (contact_detail[agent.padma_id].try(:to_f) || 0)*100
@@ -481,7 +519,7 @@ class Admpart < ActiveRecord::Base
     self.force_refresh = true
 
     # webservices calls
-    attendance_report
+    lessons_report
     enrollments_by_teacher
 
     # DB queries
@@ -500,6 +538,17 @@ class Admpart < ActiveRecord::Base
         end_on: ref_date.end_of_month,
         include_former_students: 1,
         include_cultural_activities: 1
+      }
+    }
+  end
+
+  def learn_attendance_report_query
+    {
+      q: {
+        only_my_posts: true,
+        checked_in_at_gteq_datetime: ref_date.beginning_of_month,
+        checked_in_at_lteq_datetime: ref_date.end_of_month,
+        account_padma_id: business.padma_id
       }
     }
   end

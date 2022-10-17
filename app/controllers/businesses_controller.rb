@@ -78,7 +78,8 @@ class BusinessesController < UserApplicationController
       :share_enabled,
       :use_calendar_installments,
       :currency_code,
-      :block_transactions_before
+      :block_transactions_before,
+      :use_learn_checkins
     ) if params[:business].present?
   end
 
