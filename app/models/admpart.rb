@@ -346,6 +346,19 @@ class Admpart < ActiveRecord::Base
     end
   end
 
+  def lesson_report_detail_url
+    if business.use_learn_checkins?
+      learn_check_ins_report_detail_url
+    else
+      attendance_detail_url
+    end
+  end
+
+  def learn_check_ins_report_detail_url
+    url = ENV["learn_url"]
+    "#{url}/admin/check_ins_distribution_report?#{learn_attendance_report_query.to_query}"
+  end
+
   def attendance_detail_url
     url = ENV['attendance_url'] || CONFIG['attendance-url']
     "#{url}/stats?#{attendance_report_query.to_query}&distribution=instructor"
