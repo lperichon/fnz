@@ -335,7 +335,7 @@ class Admpart < ActiveRecord::Base
       @contacts_in_attendance_report
     else
       if lessons_report
-        @contacts_in_attendance_report = (business.contacts.where(padma_id: lessons_report.keys) | contacts_who_paid_installments)
+        @contacts_in_attendance_report = (business.contacts.where(padma_id: lessons_report.keys).order(:name) | contacts_who_paid_installments)
       else
         if Rails.env.production?
           raise "no attendance_report"
