@@ -1377,7 +1377,7 @@ GEM
     multi_json (1.15.0)
     multi_xml (0.6.0)
     nio4r (2.5.8)
-    nokogiri (1.13.8)
+    nokogiri (1.13.10)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
     orm_adapter (0.5.0)
@@ -1402,7 +1402,7 @@ GEM
       nio4r (~> 2.0)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
-    racc (1.6.0)
+    racc (1.6.1)
     rack (1.6.13)
     rack-protection (1.5.5)
       rack
