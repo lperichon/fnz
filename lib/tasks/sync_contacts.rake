@@ -11,7 +11,7 @@ task send_current_memberships: :environment do
   School.all.each do |b|
     if b.padma.try(:enabled?)
       b.contacts.where.not(current_membership_id: nil).includes(:current_membership).each do |c|
-        c.send_to_crm_if_current
+        c.current_membership.send_to_crm_if_current
       end
     end
   end
