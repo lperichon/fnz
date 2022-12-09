@@ -120,6 +120,7 @@ class Membership < ActiveRecord::Base
             name: name,
             begins_on: begins_on,
             ends_on: ends_on,
+            payment_type: payment_type.try(:name),
             value: value,
           }
         },
