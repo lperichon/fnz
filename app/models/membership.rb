@@ -111,7 +111,7 @@ class Membership < ActiveRecord::Base
   end
 
   def send_to_crm_if_current
-    if contact.current_membership_id == id
+    if contact.try(:current_membership_id) == id
       PadmaCrmApi.delay.update_contact(
         contact.padma_id,
         {
