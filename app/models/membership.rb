@@ -27,6 +27,7 @@ class Membership < ActiveRecord::Base
   #attr_accessible :contact_id, :business_id, :payment_type_id, :begins_on, :ends_on, :value_cents, :closed_on, :vip, :external_id, :monthly_due_day, :name, :create_monthly_installments
 
   after_save :update_contacts_current_membership
+  after_save :send_to_crm_if_current
 
   after_save :create_the_monthly_installments, if: :create_monthly_installments
 
@@ -107,6 +108,26 @@ class Membership < ActiveRecord::Base
 
   def update_contacts_current_membership
     contact.update_current_membership
+  end
+
+  def send_to_crm_if_current
+    if contact.current_membership_id == id
+      PadmaCrmApi.delay.update_contact(
+        contact.padma_id,
+        {
+          current_membership: {
+            id: id,
+            name: name,
+            begins_on: begins_on,
+            ends_on: ends_on,
+            value: value,
+          }
+        },
+        {
+          account_name: business.padma_id,
+        }
+      )
+    end
   end
 
   private
