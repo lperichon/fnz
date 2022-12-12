@@ -1,0 +1,7 @@
+providers = ["ruby"]
+
+[phases.install]
+cmds = ["bundle install --without development:test:heroku"]
+
+[phases.build]
+cmds = ["mkdir -p tmp/pids", "bundle exec rake assets:precompile", "bundle exec rake db:migrate"]

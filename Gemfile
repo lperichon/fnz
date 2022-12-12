@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.8'
 gem 'rails', '~> 4.2'
@@ -91,3 +92,5 @@ group :test do
   gem "database_cleaner", ">= 0.8.0"
   gem "launchy", ">= 2.1.2"
 end
+
+gem "clockwork"
