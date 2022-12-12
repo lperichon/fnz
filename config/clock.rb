@@ -1,5 +1,5 @@
-require './config/boot'
-require './config/environment'
+#require './config/boot'
+#require './config/environment'
 
 require 'clockwork'
 require 'active_support/time'
