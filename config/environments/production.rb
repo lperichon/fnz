@@ -55,7 +55,7 @@ Rails.application.configure do
   if ENV["MEMCACHIER_SERVERS"]
     config.cache_store = :dalli_store, ENV["MEMCACHIER_SERVERS"].split(','), { :username => ENV["MEMCACHIER_USERNAME"], :password => ENV["MEMCACHIER_PASSWORD"] }
   elsif ENV["REDIS_URL"]
-    config.cache_store = :redis_cache_store, { url: ENV["REDIS_URL"] }
+    config.cache_store = :redis_store, { url: ENV["REDIS_URL"] }
   end
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.

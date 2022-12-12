@@ -94,3 +94,4 @@ group :test do
 end
 
 gem "clockwork"
+gem 'redis-rails'
