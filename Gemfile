@@ -73,7 +73,6 @@ end
 
 group :development do
   gem "hub", ">= 1.10.2", :require => nil
-  gem 'daemons'
   gem 'quiet_assets'
 end
 
@@ -93,5 +92,6 @@ group :test do
   gem "launchy", ">= 2.1.2"
 end
 
+gem 'daemons'
 gem "clockwork"
 gem 'redis-rails'
