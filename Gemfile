@@ -65,7 +65,7 @@ gem "activeresource"
 
 gem "pg", '0.21'
 
-gem 'dalli', '2.6.4'
+gem 'dalli', '3.2.3'
 
 group :staging, :production do
   gem 'rails_12factor'
