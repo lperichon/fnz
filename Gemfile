@@ -59,7 +59,7 @@ gem "paranoia", "~> 2.1.5"
 gem "roo"
 gem "roo-xls"
 gem 'best_in_place', '~> 3.1.1'
-gem "appsignal", github: "appsignal/appsignal-ruby", branch: "logging"
+gem "appsignal"
 gem "translation"
 gem "activeresource"
 

@@ -1,12 +1,4 @@
 GIT
-  remote: https://github.com/appsignal/appsignal-ruby.git
-  revision: 9f77f6446e2c93ab2b073608fff1135f7229d757
-  branch: logging
-  specs:
-    appsignal (3.1.5)
-      rack
-
-GIT
   remote: https://github.com/lperichon/mandrill_mailer.git
   revision: b54cfb83baf9f113cca28fa59682a0ee9572e9d4
   specs:
@@ -67,6 +59,8 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
+    appsignal (3.0.15)
+      rack
     arel (6.0.4)
     awesome_nested_fields (0.6.0)
       rails (>= 3.0.0)
@@ -1593,7 +1587,7 @@ DEPENDENCIES
   accounts_client (= 0.3.3)
   active_model_serializers
   activeresource
-  appsignal!
+  appsignal
   awesome_nested_fields (= 0.6.0)
   awesome_nested_set (= 3.3.1)
   aws-sdk
