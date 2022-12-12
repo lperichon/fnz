@@ -1,5 +1,9 @@
 providers = ["ruby"]
 
+[phases.setup]
+nixPkgs = ["...", "shared-mime-info"]
+cmds = ["...", "sudo apt-get install -y shared-mime-info"]
+
 [phases.install]
 cmds = ["bundle install --without development:test:heroku"]
 
