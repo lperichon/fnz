@@ -5,7 +5,7 @@ require 'clockwork'
 require 'active_support/time'
 
 module Clockwork
-  configure do
+  configure do |config|
     #config[:logger] = Appsignal::Logger.new("clockwork") if ENV["APPSIGNAL_LOG"].present?
     config[:tz] = "America/Buenos_Aires"
     config[:thread] = true
