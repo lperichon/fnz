@@ -8,4 +8,4 @@ cmds = ["...", "sudo apt-get install -y shared-mime-info"]
 cmds = ["bundle install --without development:test:heroku"]
 
 [phases.build]
-cmds = ["mkdir -p tmp/pids", "bundle exec rake assets:precompile", "bundle exec rake db:migrate"]
+cmds = ["mkdir -p tmp/pids", "bundle exec rake db:migrate"]
