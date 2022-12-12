@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/lperichon/mandrill_mailer.git
+  remote: https://github.com/lperichon/mandrill_mailer.git
   revision: b54cfb83baf9f113cca28fa59682a0ee9572e9d4
   specs:
     mandrill_mailer (0.4.3)

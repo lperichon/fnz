@@ -47,7 +47,7 @@ gem "workless", "~> 2.2.0"
 
 gem "kaminari", '~> 1.2.1'
 gem 'bootstrap-kaminari-views'
-gem 'mandrill_mailer', :git => "git://github.com/lperichon/mandrill_mailer.git"
+gem 'mandrill_mailer', github: "lperichon/mandrill_mailer"
 gem 'httparty'
 gem "active_model_serializers"
 gem 'jquery-ui-rails'
