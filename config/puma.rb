@@ -1,8 +1,15 @@
-workers Integer(ENV['WEB_CONCURRENCY'] || 2)
-threads_count = 1 # Integer(ENV['MAX_THREADS'] || 5)
-threads threads_count, threads_count
+#workers Integer(ENV['WEB_CONCURRENCY'] || 2)
+max_threads_count = ENV.fetch("RAILS_MAX_THREADS") { 5 }
+min_threads_count = ENV.fetch("RAILS_MIN_THREADS") { max_threads_count }
+threads min_threads_count, max_threads_count
 
-preload_app!
+
+# Use the `preload_app!` method when specifying a `workers` number.
+# This directive tells Puma to first boot the application and load code
+# before forking the application. This takes advantage of Copy On Write
+# process behavior so workers use less memory.
+#
+#preload_app!
 
 rackup      DefaultRackup
 port        ENV['PORT']     || 3020
