@@ -5,7 +5,7 @@ class Import < ActiveRecord::Base
   has_attached_file :upload, :url => "/system/imports/:attachment/:id_partition/:style/:filename"
 
   validates :business, :presence => true
-  validates_attachment :upload, :presence => true
+  #validates_attachment :upload, :presence => true
 
   #attr_accessible :upload, :business_id, :status, :type, :account_id, :description, :archived
 
