@@ -36,11 +36,15 @@ class PadmaAccountsSynchronizer
 
     # Add new users / agents
     padma_account.users.each do |padma_user|
-      #initialize users
-      new_user = User.find_or_create_by(drc_uid:padma_user.id, email: padma_user.email)
-      business.users << new_user unless business.users.include?(new_user)
-      #initialize agents
-      business.agents.create(name: padma_user.id.gsub('.',' ').titleize, padma_id: padma_user.id) unless business.agents.collect(&:padma_id).include?(padma_user.id)
+      begin
+        #initialize users
+        new_user = User.find_or_create_by(drc_uid:padma_user.id, email: padma_user.email)
+        business.users << new_user unless business.users.include?(new_user)
+        #initialize agents
+        business.agents.create(name: padma_user.id.gsub('.',' ').titleize, padma_id: padma_user.id) unless business.agents.collect(&:padma_id).include?(padma_user.id)
+      rescue => e
+        Rails.logger.error "Error while synchronizing user #{padma_user.id} for business #{business.id}: #{e.message}"
+      end
     end
 
     # Add owner as agent
