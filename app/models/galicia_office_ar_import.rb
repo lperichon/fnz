@@ -17,11 +17,15 @@ class GaliciaOfficeArImport < TransactionImport
     Time.zone = business.time_zone
 
     begin
-      CSV.parse(read_uploaded_file,col_sep: ";") do |row|
+      CSV.parse(
+        read_uploaded_file,
+        headers: :first_row,
+        liberal_parsing: true, skip_blanks: true,
+        #encoding: "UTF-8",
+        col_sep: ";"
+      ) do |row|
         columns = row.size
         n += 1
-        # SKIP: header, and first row
-        next if n <= 2
 
         # build new record
         new_record = nil
@@ -75,7 +79,7 @@ class GaliciaOfficeArImport < TransactionImport
       source_id: account.id,
       transaction_at: Time.zone.parse(row[0]),
       amount: row_amount(row),
-      description: "#{row[1]} #{row[10]}",
+      description: row_description(row),
       creator_id: business.owner_id,
       state: 'created'
     }
@@ -87,17 +91,35 @@ class GaliciaOfficeArImport < TransactionImport
     account.trans.where(external_id: new_transaction.external_id).exists?
   end
 
+  def string_to_decimal(str)
+    BigDecimal(str.gsub(".","").gsub(",","."))
+  end
+
+  def row_description(row)
+    # Descripción
+    ret = row[1]
+    # Número de Comprobante
+    if row[9].present?
+      ret += " " + "Nro. Comprobante: " + row[9]
+    end
+    # Leyendas Adicionales 1, 2, 3 y 4
+    (10..13).each do |i|
+      ret += " - " + row[i] if row[i].present?
+    end
+    ret
+  end
+
   def row_type(row)
-    (BigDecimal.new(row[3].gsub(",","."))==0.0)? "Credit" : "Debit"
+    (string_to_decimal(row[3])==0.0)? "Credit" : "Debit"
   end
   def row_amount(row)
-    BigDecimal.new(row[(row_type(row)=="Debit")? 3 : 4].gsub(",","."))
+    string_to_decimal(row[(row_type(row)=="Debit")? 3 : 4])
   end
 
   def generate_external_id(row)
     # row incluye el saldo post transaccion,
     # -> 2 movimientos identicos tendrás saldo posterior diferente
-    # -> con esto cada movimiento, aunque sea igual  a otro tiene un ID unico
+    # -> con esto cada movimiento, aunque sea igual a otro tiene un ID unico
     Digest::SHA2.hexdigest row.to_s
   end
 

@@ -1,0 +1,28 @@
+﻿"Fecha";"Descripción";"Origen";"Débitos";"Créditos";"Grupo de Conceptos";"Concepto";"Número de Terminal";"Observaciones Cliente";"Número de Comprobante";"Leyendas Adicionales1";"Leyendas Adicionales2";"Leyendas Adicionales3";"Leyendas Adicionales4";"Tipo de Movimiento";"Saldo"
+
+"2023-01-02";"Comision Mantenimiento Cta. Cte/cce";"";"5.625,00";"0";"000808 - Comisiones";"907315 - COMISION MANTENIMIENTO CTA. CTE/CCE";"";"";"";"Diciembre 2022";"";"";"";"Imputado";"109.132,36";
+"2023-01-02";"Percep. Iva";"";"168,75";"0";"000901 - Impuestos";"907172 - PERCEP. IVA";"";"";"";"";"";"";"";"Imputado";"108.963,61";
+"2023-01-02";"Iva";"";"1.181,25";"0";"000901 - Impuestos";"907171 - IVA";"";"";"";"";"";"";"";"Imputado";"107.782,36";
+"2023-01-02";"Imp. Ing. Brutos";"";"168,75";"0";"000901 - Impuestos";"907174 - IMP. ING. BRUTOS";"";"";"";"Capital Federal";"";"";"";"Imputado";"107.613,61";
+"2023-01-02";"Imp. Deb. Ley 25413 Gral.";"";"42,86";"0";"000901 - Impuestos";"907176 - DEB IMPUESTO  LEY 25413";"";"";"";"";"";"";"";"Imputado";"107.570,75";
+"2023-01-03";"Trf Inmed Proveed";"";"11.229,60";"0";"000907 - Transferencias";"907232 - TRF INMED PROVEED";"";"";"147432419";"MCR CONSULTORES";"33716231459";"0147432419";"FACTURAS";"Imputado";"96.341,15";
+"2023-01-03";"Imp. Deb. Ley 25413 Gral.";"";"67,38";"0";"000901 - Impuestos";"907176 - DEB IMPUESTO  LEY 25413";"";"";"";"";"";"";"";"Imputado";"96.273,77";
+"2023-01-05";"Trf Inmed Proveed";"";"21.417,00";"0";"000907 - Transferencias";"907269 - TRF INMED PROVEED";"";"";"147739933";"QUI ONES ADA CELIA AURORA";"27218884828";"0147739933";"VARIOS";"Imputado";"74.856,77";
+"2023-01-05";"Imp. Deb. Ley 25413 Gral.";"";"128,50";"0";"000901 - Impuestos";"907176 - DEB IMPUESTO  LEY 25413";"";"";"";"";"";"";"";"Imputado";"74.728,27";
+"2023-01-09";"Pago Visa Empresa";"";"25.544,49";"0";"000083 - Pagos";"907154 - PAGO VISA EMPRESA";"";"";"93628";"D.A. AL VTO BUSINESS";"";"";"";"Imputado";"49.183,78";
+"2023-01-09";"Imp. Deb. Ley 25413 Gral.";"";"153,27";"0";"000901 - Impuestos";"907176 - DEB IMPUESTO  LEY 25413";"";"";"";"";"";"";"";"Imputado";"49.030,51";
+"2023-01-16";"Credito Transferencia Coelsa";"";"0";"205.931,93";"000907 - Transferencias";"917312 - TRANSF. CTAS PROPIAS";"";"";"";"Harappa SRL";"30712462856";"MERCADO LIBRE SRL";"";"Imputado";"254.962,44";
+"2023-01-16";"Trf Inmed Proveed";"";"72.600,00";"0";"000907 - Transferencias";"907269 - TRF INMED PROVEED";"";"";"148568615";"ADN DEVELOPERS SRL";"30715403060";"0148568615";"VARIOS";"Imputado";"182.362,44";
+"2023-01-16";"Deb. Autom. De Serv.";"";"5.036,53";"0";"000083 - Pagos";"907213 - DEB. AUTOM. DE SERV.";"";"";"1702579";"TELECOM ARGENTIN";"CONSUMOS";"000000000001891";"6100291220";"Imputado";"177.325,91";
+"2023-01-16";"Imp. Deb. Ley 25413 Gral.";"";"465,82";"0";"000901 - Impuestos";"907176 - DEB IMPUESTO  LEY 25413";"";"";"";"";"";"";"";"Imputado";"176.860,09";
+"2023-01-19";"Acreditamiento Prisma-comercios";"";"0";"33.519,45";"000915 - Depósitos";"917115 - ACREDITAMIENTO PRISMA-COMERCIOS";"";"";"58349";"VISA EST.:0023213135";"";"";"";"Imputado";"210.379,54";
+"2023-01-19";"Imp. Cre. Ley 25413 Gral.";"";"201,12";"0";"000901 - Impuestos";"907176 - DEB IMPUESTO  LEY 25413";"";"";"";"";"";"";"";"Imputado";"210.178,42";
+"2023-02-01";"Comision Mantenimiento Cta. Cte/cce";"";"5.625,00";"0";"000808 - Comisiones";"907315 - COMISION MANTENIMIENTO CTA. CTE/CCE";"";"";"";"Enero 2023";"";"";"";"Imputado";"204.553,42";
+"2023-02-01";"Percep. Iva";"";"168,75";"0";"000901 - Impuestos";"907172 - PERCEP. IVA";"";"";"";"";"";"";"";"Imputado";"204.384,67";
+"2023-02-01";"Iva";"";"1.181,25";"0";"000901 - Impuestos";"907171 - IVA";"";"";"";"";"";"";"";"Imputado";"203.203,42";
+"2023-02-01";Imp. Ing. Brutos;"";"168,75";"0";"000901 - Impuestos";"907174 - IMP. ING. BRUTOS";"";"";"";"Capital Federal";"";"";"";"Imputado";"203.034,67";
+"2023-02-01";"Imp. Deb. Ley 25413 Gral.";"";"42,86";"0";"000901 - Impuestos";"907176 - DEB IMPUESTO  LEY 25413";"";"";"";"";"";"";"";"Imputado";"202.991,81";
+"2023-02-06";"Trf Inmed Proveed";"";"42.178,63";"0";"000907 - Transferencias";"907232 - TRF INMED PROVEED";"";"";"150265789";"MCR CONSULTORES";"33716231459";"0150265789";"FACTURAS";"Imputado";"160.813,18";
+"2023-02-06";"Imp. Deb. Ley 25413 Gral.";"";"253,07";"0";"000901 - Impuestos";"907176 - DEB IMPUESTO  LEY 25413";"";"";"";"";"";"";"";"Imputado";"160.560,11";
+"2023-02-07";"Pago Visa Empresa";"";"28.926,92";"0";"000083 - Pagos";"907154 - PAGO VISA EMPRESA";"";"";"16006";"D.A. AL VTO BUSINESS";"";"";"";"Imputado";"131.633,19";
+"2023-02-07";"Imp. Deb. Ley 25413 Gral.";"";"173,56";"0";"000901 - Impuestos";"907176 - DEB IMPUESTO  LEY 25413";"";"";"";"";"";"";"";"Imputado";"131.459,63";
