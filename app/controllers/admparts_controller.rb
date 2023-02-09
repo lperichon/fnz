@@ -42,7 +42,7 @@ class AdmpartsController < UserApplicationController
 
       @ignore_zero_income = !params[:show_zero_income]
 
-      @contacts = @adm.contacts_in_attendance_report
+      @contacts = @adm.contacts_in_attendance_report.sort_by{|c| c.name.parameterize }
     end
   end
 
