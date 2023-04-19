@@ -10,7 +10,7 @@
     t.target.try(:name),
     t.transaction_at.to_s(:db),
     t.tags.join(","),
-    t.agent.try(:name),
+    t.agent.try(:padma_id),
     t.contact.try(:name),
     number_with_precision(t.conversion_rate, precision: 4),
     t.reconciled_at,
