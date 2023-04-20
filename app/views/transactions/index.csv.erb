@@ -13,7 +13,7 @@
     t.agent.try(:padma_id),
     t.contact.try(:name),
     number_with_precision(t.conversion_rate, precision: 4),
-    t.reconciled_at,
+    t.reconciled_at.present?? t.reconciled_at.to_s(:db) : nil,
     t.source.try(:currency).try(:iso_code),
     t.target.try(:currency).try(:iso_code),
     t.root_admpart_tag.try(:name),
